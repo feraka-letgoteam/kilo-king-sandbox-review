@@ -89,9 +89,10 @@ export interface ReelScene {
   ): void;
   setLocks(reels: number[]): void;
   /**
-   * `landed` stretches every still-unresolved reel once two scatters have
-   * landed in the first four reels. `ordinary` is the purchased-feature reveal:
-   * the feature is guaranteed, so the reels do not tease.
+   * `landed` holds still-spinning reels once two scatters have landed in the
+   * first four. The crawl adds travel; it does not rewind the strip.
+   * `ordinary` is the purchased-feature reveal: the feature is guaranteed,
+   * so the reels do not tease.
    */
   spinTo(
     grid: SplashCell[][],
@@ -401,6 +402,12 @@ export async function presentScript(
   scene.setMood(round.payout > round.cost ? "cheer" : "slump");
   scene.finishPlate(note);
   if (round.payout > round.cost) cue("end");
+  else {
+    // A feature that did not clear the stake still hands the bed back.
+    // No sting — a loss stays quiet.
+    bonusExit();
+    whirStop();
+  }
 }
 
 function snap(scene: ReelScene, round: SplashScript, opts: PresentOpts) {

@@ -1,6 +1,7 @@
 import {
   Application,
   Assets,
+  BlurFilter,
   Container,
   Graphics,
   Sprite,
@@ -18,7 +19,7 @@ import {
 } from "@/lib/kilo/engine";
 import type { ReelScene } from "./director";
 import { collectionShares, winningCells } from "./director";
-import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter } from "@/lib/kilo/sound";
+import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter, setAudioTurbo } from "@/lib/kilo/sound";
 import {
   ART as ART_FILES,
   SOURCE_SLICES,
@@ -95,7 +96,7 @@ function money(n: number) {
 
 function passer(reel: number, index: number): SplashCell {
   // Crowns never ride the blur. A passing scatter would be a fake near-miss.
-  // The only crown is the recorded cell, placed when that reel settles.
+  // The only crown is the recorded cell, revealed as that reel locks.
   const s = PASS[(reel * 3 + index) % PASS.length]!;
   return s === "brick" ? { s, v: [2, 5, 10][index % 3], w: 1, h: 1 } : { s };
 }
@@ -162,21 +163,49 @@ function geomFor(w: number, h: number): Geom {
   };
 }
 
+/**
+ * Premium reel travel. Time is 0–1.
+ * A short spool-up, a long constant cruise, then an ease into a flush lock.
+ * Speed is zero at the line. There is no overshoot.
+ */
 function spinProgress(t: number) {
-  if (t < 0.16) return 0.07 * (t / 0.16) ** 2;
-  if (t < 0.62) return 0.07 + 0.7 * ((t - 0.16) / 0.46);
-  if (t < 0.88) {
-    const u = (t - 0.62) / 0.26;
-    return 0.77 + 0.23 * (1 - (1 - u) ** 3);
-  }
-  return 1;
+  const u = Math.max(0, Math.min(1, t));
+  if (u < 0.1) return 0.069 * (u / 0.1) ** 2;
+  if (u < 0.66) return 0.069 + 0.774 * ((u - 0.1) / 0.56);
+  const s = (u - 0.66) / 0.34;
+  return 0.843 + 0.157 * (1 - (1 - s) ** 3);
 }
 
-/** Held reels stay in motion, then ease out. Used only while a reel is anticipated. */
-function crawlProgress(t: number) {
-  if (t < 0.78) return 0.06 + 0.72 * (t / 0.78);
-  const u = (t - 0.78) / 0.22;
-  return 0.78 + 0.22 * (1 - (1 - u) ** 3);
+/** 1 during the cruise, 0 at the lock. Matches the derivative of spinProgress. */
+function spinSpeed(t: number) {
+  const u = Math.max(0, Math.min(1, t));
+  if (u < 0.1) return u / 0.1;
+  if (u < 0.66) return 1;
+  const s = (u - 0.66) / 0.34;
+  return (1 - s) ** 2;
+}
+
+/**
+ * Anticipation travel. Brake out of the cruise, hold a readable creep,
+ * then ease to the same flush lock. Never reverses.
+ */
+function crawlEase(t: number) {
+  const u = Math.max(0, Math.min(1, t));
+  if (u < 0.08) {
+    const s = u / 0.08;
+    return 0.18 * (1 - (1 - s) ** 2);
+  }
+  if (u < 0.82) return 0.18 + 0.68 * ((u - 0.08) / 0.74);
+  const s = (u - 0.82) / 0.18;
+  return 0.86 + 0.14 * (1 - (1 - s) ** 3);
+}
+
+function crawlSpeed(t: number) {
+  const u = Math.max(0, Math.min(1, t));
+  if (u < 0.08) return 1 - u / 0.08;
+  if (u < 0.82) return 0.42;
+  const s = (u - 0.82) / 0.18;
+  return 0.42 * (1 - s) ** 2;
 }
 
 export async function mountScene(host: HTMLElement): Promise<ReelScene> {
@@ -213,6 +242,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       MOTION_ROOT + "value-plaque.svg",
       ...Object.values(PACKAGE_META).map((meta) => CONTRABAND_ROOT + meta.file),
       CONTRABAND_ROOT + SCATTER_KING.file,
+      "/kilo-ui-v11/banner-entry.webp",
+      "/kilo-ui-v11/banner-upgrade.webp",
     ]),
   ];
   await Promise.all(urls.map((url) => Assets.load(url)));
@@ -225,6 +256,10 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const wellTex = tex("reel-well.png");
   const frameTex = tex("reel-frame.png");
   const modalTex = tex("modal-panel.png");
+  const entryTex =
+    (Assets.get("/kilo-ui-v11/banner-entry.webp") as Texture | undefined) || modalTex;
+  const upgradeTex =
+    (Assets.get("/kilo-ui-v11/banner-upgrade.webp") as Texture | undefined) || modalTex;
   const hookTex = tex(TOOL_PIVOTS.hook.file);
   const dynamiteTex = tex(TOOL_PIVOTS.dynamite.file);
   const bazookaTex = tex(TOOL_PIVOTS.bazooka.file);
@@ -308,10 +343,32 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const root = new Container();
     const mask = new Graphics();
     const strip = new Container();
-    strip.mask = mask;
+    root.mask = mask;
     root.addChild(mask, strip);
     reels.push({ root, strip, mask });
   }
+  const motionBlur = reels.map(() => {
+    const blur = new BlurFilter({ strength: 0, quality: 1 });
+    blur.strengthX = 0;
+    return blur;
+  });
+  const setStreak = (reel: number, amount: number) => {
+    const strip = reels[reel]?.strip;
+    const blur = motionBlur[reel];
+    if (!strip || !blur || strip.destroyed) return;
+    if (amount < 0.4) {
+      if (strip.filters) strip.filters = [];
+      return;
+    }
+    blur.strengthX = 0;
+    blur.strengthY = amount;
+    const current = strip.filters;
+    const first = Array.isArray(current) ? current[0] : current;
+    if (first !== blur) strip.filters = [blur];
+  };
+  const clearStreak = () => {
+    for (let reel = 0; reel < reels.length; reel++) setStreak(reel, 0);
+  };
   const title = new Text({
     text: "Base game",
     style: {
@@ -569,6 +626,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const { cell } = geom;
     for (let reel = 0; reel < 5; reel++) {
       const strip = reels[reel]!.strip;
+      strip.filters = [];
       strip
         .removeChildren()
         .forEach((child) => child.destroy({ children: true }));
@@ -907,21 +965,90 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const { cab } = geom;
     const dim = new Graphics();
     dim.rect(0, 0, geom.dw, geom.dh).fill({ color: 0x02060c, alpha: 0.55 });
-    const modal = new Sprite(modalTex);
-    const sc = Math.min(
-      (cab.w * 0.9) / modalTex.width,
-      (cab.h * 0.92) / modalTex.height,
-    );
+    const skin =
+      phase === "entry" ? entryTex : phase === "upgrade" ? upgradeTex : modalTex;
+    const modal = new Sprite(skin);
+    const sc = Math.min((cab.w * 0.92) / skin.width, (cab.h * 0.72) / skin.height);
     modal.scale.set(sc);
     modal.anchor.set(0);
     modal.position.set(
-      cab.x + (cab.w - modalTex.width * sc) / 2,
-      cab.y + (cab.h - modalTex.height * sc) / 2,
+      cab.x + (cab.w - skin.width * sc) / 2,
+      cab.y + (cab.h - skin.height * sc) / 2,
     );
-    // Lay out text in displayed pixels, not in the 1200px artwork's scale.
-    // The previous phone rendering reduced the modifier copy to about 8px.
-    const panelWidth = modalTex.width * sc;
-    const panelHeight = modalTex.height * sc;
+    const panelWidth = skin.width * sc;
+    const panelHeight = skin.height * sc;
+    const entry = phase === "entry";
+    const portraitBoard = entry && geom.cab.w < 680;
+    if (portraitBoard) {
+      modal.destroy();
+      const parts = [eyebrow, ...value.split(" · "), detail].filter((line) => line.length > 0);
+      const panelW = Math.min(geom.cab.w * 0.9, 320);
+      const wrap = panelW - 28;
+      const sizes = [22, 26, 18, 15];
+      const colors = [0xffe09b, 0xfff6dd, 0xfff6dd, 0xd7ecf2];
+      const nodes = parts.map((text, index) => {
+        const node = new Text({
+          text,
+          style: {
+            fill: colors[index] ?? 0xd7ecf2,
+            fontFamily: index === 0 ? "Arial" : "Avenir Next, Segoe UI, sans-serif",
+            fontSize: sizes[index] ?? 15,
+            fontWeight: index === 0 ? "800" : "700",
+            align: "center",
+            wordWrap: true,
+            wordWrapWidth: wrap,
+          },
+        });
+        node.anchor.set(0.5, 0);
+        return node;
+      });
+      const gap = 6;
+      const contentH =
+        nodes.reduce((sum, item) => sum + item.height, 0) + gap * Math.max(0, nodes.length - 1);
+      const panelH = Math.min(geom.cab.h * 0.92, contentH + 32);
+      const bx = geom.cab.x + (geom.cab.w - panelW) / 2;
+      const by = geom.cab.y + (geom.cab.h - panelH) / 2;
+      const board = new Graphics()
+        .roundRect(bx, by, panelW, panelH, 12)
+        .fill({ color: 0x071820, alpha: 0.94 })
+        .stroke({ color: 0xc9a15a, width: 2 });
+      const content = new Container();
+      let textY = by + Math.max(14, (panelH - contentH) / 2);
+      for (const node of nodes) {
+        node.position.set(bx + panelW / 2, textY);
+        textY += node.height + gap;
+        content.addChild(node);
+      }
+      group.addChild(dim, board, content);
+      title.visible = false;
+      board.alpha = 0;
+      content.alpha = 0;
+      const fadeIn = reduced ? 0 : 220;
+      const fadeOut = reduced ? 0 : 180;
+      await tween(fadeIn, (t) => {
+        if (dim.destroyed) return;
+        dim
+          .clear()
+          .rect(0, 0, geom.dw, geom.dh)
+          .fill({ color: 0x02060c, alpha: 0.35 + 0.25 * t });
+        board.alpha = t;
+        content.alpha = t;
+      });
+      if (!stopped) await holdReadable(Math.max(0, duration - fadeIn - fadeOut));
+      if (!stopped && fadeOut > 0 && !group.destroyed)
+        await tween(fadeOut, (t) => {
+          if (group.destroyed) return;
+          const a = 1 - t;
+          dim.alpha = a;
+          board.alpha = a;
+          content.alpha = a;
+        });
+      title.visible = false;
+      if (!group.destroyed) group.destroy({ children: true });
+      if (mine === job) endMotion();
+      return;
+    }
+    const wrap = panelWidth * (entry ? 0.48 : 0.7);
     const content = new Container();
     content.position.copyFrom(modal.position);
     const label = (text: string, fontSize: number, color: number) => {
@@ -934,7 +1061,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           fontWeight: "700",
           align: "center",
           wordWrap: true,
-          wordWrapWidth: panelWidth * 0.79,
+          wordWrapWidth: wrap,
         },
       });
       node.anchor.set(0.5, 0);
@@ -942,33 +1069,33 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     };
     const headline = label(
       eyebrow,
-      Math.max(13, Math.min(26, panelWidth * 0.045)),
+      Math.max(12, Math.min(entry ? 22 : 26, panelWidth * (entry ? 0.03 : 0.045))),
       0xffe09b,
     );
     const valueText = label(
       value,
-      Math.max(21, Math.min(42, panelWidth * 0.074)),
+      Math.max(16, Math.min(entry ? 30 : 42, panelWidth * (entry ? 0.046 : 0.074))),
       0xfff6dd,
     );
     const detailText = label(
       detail,
-      Math.max(12, Math.min(19, panelWidth * 0.035)),
+      Math.max(11, Math.min(entry ? 16 : 19, panelWidth * (entry ? 0.026 : 0.035))),
       0xd7ecf2,
     );
-    const gap = Math.max(6, Math.min(14, panelHeight * 0.032));
+    const gap = Math.max(4, Math.min(10, panelHeight * (entry ? 0.018 : 0.032)));
     const labels = [headline, valueText, detailText];
-    const wellTop = panelHeight * 0.36;
-    const wellBottom = panelHeight * 0.9;
+    const wellTop = panelHeight * (entry ? 0.36 : 0.34);
+    const wellBottom = panelHeight * (entry ? 0.64 : 0.78);
     const wellH = wellBottom - wellTop;
     let guard = 0;
     while (
       labels.reduce((n, item) => n + item.height, 0) + gap * 2 > wellH &&
-      guard < 6
+      guard < 14
     ) {
       guard += 1;
       for (const item of labels) {
         const size = Number(item.style.fontSize);
-        item.style.fontSize = Math.max(12, size - 1);
+        item.style.fontSize = Math.max(10, size - 1);
       }
     }
     const totalHeight =
@@ -1030,18 +1157,35 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       return;
     }
     const { cell } = geom;
-    // Presentation only. Two scatters in the first four reels hold every reel
-    // that has not landed. The crawl is the same length on a hit or a miss.
-    const anticipate = pace === "landed" && !reduced;
-    const extra = anticipate ? (turbo ? 640 : 1500) : 0;
+    // Presentation only. Two visible scatters in the first four reels extend
+    // every reel that is still spinning. Extra symbols are inserted above the
+    // window so the strip never reverses. A partial respin (locked crowns)
+    // keeps the short cycle and only moves the free reels.
+    const anticipate = pace === "landed" && !reduced && only == null;
     const activeSet = new Set(active);
     let lockedEarly = 0;
     for (let reel = 0; reel < 4; reel++) {
       if (!activeSet.has(reel) && board[reel]?.some((c) => c.s === "bars")) lockedEarly += 1;
     }
-    const openSlow = anticipate && lockedEarly >= 2;
-    const spins = active.map((reel, order) => {
-      const travel = (turbo ? 12 : 18) + order + (openSlow ? 8 : 0);
+    type Spin = {
+      reel: number;
+      strip: Container;
+      pad: number;
+      startY: number;
+      endY: number;
+      delay: number;
+      rate: number;
+      progress: number;
+      phase: "spin" | "crawl" | "done";
+      crawlFrom: number;
+      crawlTo: number;
+      crawlMs: number;
+      crawlT: number;
+      frame: number;
+      noted: boolean;
+    };
+    const spins: Spin[] = active.map((reel, order) => {
+      const travel = (turbo ? 12 : 18) + order;
       const pad = 3;
       const strip = reels[reel]!.strip;
       const seq: SplashCell[] = [];
@@ -1065,8 +1209,6 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const endY = -endIndex * cell;
       strip.position.set(0, startY);
       const ordinary = (turbo ? 340 : 700) + order * (turbo ? 50 : 160);
-      const crawlMs = (turbo ? 720 : 1560) + order * (turbo ? 200 : 380);
-      const duration = openSlow ? crawlMs : ordinary;
       return {
         reel,
         strip,
@@ -1074,23 +1216,27 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         startY,
         endY,
         delay: order * (turbo ? 16 : 36),
-        ordinary,
-        rate: 1 / duration,
+        rate: 1 / ordinary,
         progress: 0,
-        landed: false,
-        slowed: openSlow,
+        phase: "spin",
+        crawlFrom: startY,
+        crawlTo: endY,
+        crawlMs: turbo ? 560 : 1400,
+        crawlT: 0,
+        frame: 0,
+        noted: false,
       };
     });
     const scatterReels: number[] = [];
-    let teaseLive = openSlow;
+    let teaseLive = false;
     const target = phaseTarget();
-    target.dataset.anticipation = openSlow ? "build" : "off";
+    target.dataset.anticipation = "off";
     if (!reduced) whirStart();
-    if (openSlow) teaseBegin();
     let tickAt = 0;
     let tickStep = 0;
     const pulses: { reel: number; at: number; scatter: boolean }[] = [];
     let audioClosed = false;
+    let lockFlash = only ? 1 : 0;
     const earlyCount = () =>
       lockedEarly + scatterReels.filter((reel) => reel < 4).length;
     const closeAudio = () => {
@@ -1103,31 +1249,104 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       }
       whirStop();
     };
+    const placeStrip = (spin: Spin) => {
+      const kids = spin.strip.children;
+      for (let i = 0; i < kids.length; i++) {
+        kids[i]!.position.set(cell / 2, i * cell + cell / 2);
+      }
+    };
+    const armCrawl = (spin: Spin, slot: number) => {
+      const top = -spin.strip.position.y / cell;
+      const cellsLeft = top - spin.pad;
+      const extraCells = turbo ? 6 : 10;
+      const budget = (turbo ? 560 : 1400) + slot * (turbo ? 80 : 150);
+      if (cellsLeft > extraCells * 0.45) {
+        const insertAt = Math.max(spin.pad + 3, Math.floor(top));
+        if (top - insertAt > 0.2) {
+          for (let i = 0; i < extraCells; i++) {
+            const view = cellView(passer(spin.reel, 400 + slot * 16 + i), cell);
+            view.pivot.set(cell / 2, cell / 2);
+            spin.strip.addChildAt(view, insertAt);
+          }
+          placeStrip(spin);
+          spin.strip.position.y -= extraCells * cell;
+          spin.startY = Math.min(spin.startY, spin.strip.position.y);
+        }
+      } else {
+        // Already at the result. Keep scrolling forward through fresh passers,
+        // then land a copy of the same result. Never rewind.
+        const shift = 3 + extraCells;
+        for (let i = 0; i < extraCells; i++) {
+          const view = cellView(passer(spin.reel, 500 + slot * 16 + i), cell);
+          view.pivot.set(cell / 2, cell / 2);
+          spin.strip.addChildAt(view, 0);
+        }
+        const column = grid[spin.reel] ?? [];
+        for (let row = 2; row >= 0; row--) {
+          const view = cellView(column[row] ?? { s: "10" }, cell);
+          view.pivot.set(cell / 2, cell / 2);
+          spin.strip.addChildAt(view, 0);
+        }
+        placeStrip(spin);
+        spin.strip.position.y -= shift * cell;
+        spin.pad = 0;
+        spin.endY = 0;
+        spin.startY = Math.min(spin.startY, spin.strip.position.y);
+      }
+      spin.phase = "crawl";
+      spin.crawlFrom = spin.strip.position.y;
+      spin.crawlTo = spin.endY;
+      spin.crawlMs = budget;
+      spin.crawlT = 0;
+    };
+    const streakMax = Math.min(6.5, cell * (turbo ? 0.055 : 0.042));
+    const noteLand = (spin: Spin, now: number) => {
+      if (spin.noted) return;
+      spin.noted = true;
+      const isScatter = !!grid[spin.reel]?.some((c) => c.s === "bars");
+      if (isScatter) {
+        scatterReels.push(spin.reel);
+        pulses.push({ reel: spin.reel, at: now, scatter: true });
+      }
+      landStop(isScatter);
+      const early = earlyCount();
+      if (isScatter && anticipate && spin.reel < 4 && early === 2 && !teaseLive) {
+        teaseLive = true;
+        target.dataset.anticipation = "build";
+        teaseBegin();
+        let slot = 0;
+        for (const other of spins) {
+          if (other.phase !== "spin") continue;
+          armCrawl(other, slot);
+          slot += 1;
+        }
+      }
+      if (lockedEarly + scatterReels.length >= 3 && teaseLive)
+        target.dataset.anticipation = "hit";
+    };
     await new Promise<void>((resolve) => {
       let raf = 0;
       const finish = () => {
         cancelAnimationFrame(raf);
         waits.delete(finish);
+        clearStreak();
         closeAudio();
         resolve();
       };
       waits.add(finish);
-      const clock = new Map<object, number>();
-      const step = (spin: { rate: number }, now: number) => {
+      const clock = new Map<Spin, number>();
+      const dtOf = (spin: Spin, now: number) => {
         const prev = clock.get(spin) ?? now;
         clock.set(spin, now);
-        return spin.rate * Math.max(0, now - prev);
+        return Math.max(0, now - prev);
       };
-      const popCells = (spin: (typeof spins)[number], t: number) => {
-        const ampT = t < 0.9 ? 0 : Math.sin(((t - 0.9) / 0.1) * Math.PI);
-        for (let row = 0; row < 3; row++) {
-          const view = spin.strip.children[spin.pad + row] as
-            | (Container & { kkSym?: string })
-            | undefined;
-          if (!view || view.destroyed) continue;
-          const amp = view.kkSym === "bars" ? 0.16 : 0.07;
-          view.scale.set(1 + ampT * amp);
-        }
+      let landedNow = false;
+      const lockReel = (spin: Spin, now: number) => {
+        spin.phase = "done";
+        spin.strip.position.y = spin.endY;
+        setStreak(spin.reel, 0);
+        noteLand(spin, now);
+        landedNow = true;
       };
       const t0 = performance.now();
       const run = (now: number) => {
@@ -1137,72 +1356,76 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         }
         let pending = false;
         let building = false;
+        landedNow = false;
+        try {
         for (const spin of spins) {
           if (now < t0 + spin.delay) {
             pending = true;
             continue;
           }
-          if (spin.landed) continue;
-          spin.progress = Math.min(1, spin.progress + step(spin, now));
-          const t = spin.progress;
-          const p = spin.slowed ? crawlProgress(t) : spinProgress(t);
-          const u = t < 0.9 ? 0 : (t - 0.9) / 0.1;
-          const settle = Math.sin(u * Math.PI) * cell * (spin.slowed ? 0.08 : 0.05) * (1 - u);
-          const y = spin.startY + (spin.endY - spin.startY) * p + settle;
-          const limit = spin.endY + cell * 0.35;
-          spin.strip.position.y = Math.min(limit, Math.max(spin.startY - cell, y));
-          popCells(spin, t);
-          if (t < 1) {
-            pending = true;
-            if (spin.slowed) building = true;
+          if (spin.phase === "done") continue;
+          const dt = dtOf(spin, now);
+          if (spin.phase === "spin") {
+            spin.progress = Math.min(1, spin.progress + spin.rate * dt);
+            const p = spinProgress(spin.progress);
+            spin.strip.position.y = spin.startY + (spin.endY - spin.startY) * p;
+            if (spin.progress < 1) {
+              setStreak(spin.reel, spinSpeed(spin.progress) * streakMax);
+              pending = true;
+              continue;
+            }
+            lockReel(spin, now);
+            continue;
+          } else if (spin.phase === "crawl") {
+            spin.crawlT += dt;
+            const u = Math.min(1, spin.crawlT / Math.max(1, spin.crawlMs));
+            spin.strip.position.y =
+              spin.crawlFrom + (spin.crawlTo - spin.crawlFrom) * crawlEase(u);
+            spin.frame = Math.min(1, spin.frame + dt / 120);
+            if (u < 1) {
+              setStreak(spin.reel, crawlSpeed(u) * streakMax * 0.65);
+              pending = true;
+              building = true;
+              continue;
+            }
+            lockReel(spin, now);
             continue;
           }
-          spin.landed = true;
-          popCells(spin, 1);
-          const isScatter = !!grid[spin.reel]?.some((c) => c.s === "bars");
-          if (isScatter) {
-            scatterReels.push(spin.reel);
-            pulses.push({ reel: spin.reel, at: now, scatter: true });
-          }
-          const othersDone = spins.every((other) => other === spin || other.landed);
-          const early = earlyCount();
-          landStop(isScatter, !isScatter && teaseLive && othersDone && early === 2);
-          if (isScatter && anticipate && spin.reel < 4 && early === 2 && !teaseLive) {
-            teaseLive = true;
-            target.dataset.anticipation = "build";
-            teaseBegin();
-            let slot = 0;
-            for (const other of spins) {
-              if (other.landed || other.slowed) continue;
-              const holdAt = 0.46;
-              if (other.progress > holdAt) other.progress = holdAt;
-              const remain = Math.max(0.08, 1 - other.progress);
-              const crawl = extra + slot * (turbo ? 220 : 380);
-              other.rate = remain / crawl;
-              other.slowed = true;
-              slot += 1;
-            }
-          }
-          if (lockedEarly + scatterReels.length >= 3 && teaseLive)
-            target.dataset.anticipation = "hit";
+        }
+        } catch (error) {
+          console.error("spin-loop", error);
+          finish();
+          return;
+        }
+        if (lockFlash > 0) {
+          lockFlash = Math.max(0, lockFlash - 16 / 200);
+          locks.alpha = 0.35 + 0.65 * (1 - lockFlash);
+        }
+        const teasing = spins.some((spin) => spin.phase === "crawl" || spin.frame > 0.02);
+        for (let reel = 0; reel < reels.length; reel++) {
+          const spin = spins.find((item) => item.reel === reel);
+          const scatterHere =
+            !!grid[reel]?.some((c) => c.s === "bars") && !!spin && spin.phase !== "spin" && spin.phase !== "crawl";
+          const bright = !teasing || !spin || spin.phase === "crawl" || spin.frame > 0.2 || scatterHere;
+          reels[reel]!.strip.alpha = bright ? 1 : 0.82;
         }
         fx.clear();
         for (const spin of spins) {
-          if (!spin.slowed || spin.landed) continue;
+          if (spin.frame <= 0.02) continue;
           const reelX = geom.gx + spin.reel * (cell + geom.gap);
           const pulse = 0.55 + 0.4 * Math.sin(now / 80);
           fx.roundRect(reelX - 5, geom.gy - 5, cell + 10, cell * 3 + 10, 12).fill({
             color: 0x12383a,
-            alpha: 0.16,
+            alpha: 0.16 * spin.frame,
           });
           fx.roundRect(reelX - 4, geom.gy - 4, cell + 8, cell * 3 + 8, 10).stroke({
             width: 4,
             color: 0xffd56a,
-            alpha: pulse,
+            alpha: pulse * spin.frame,
           });
         }
         for (const pulse of pulses) {
-          const age = (now - pulse.at) / (pulse.scatter ? 360 : 220);
+          const age = (now - pulse.at) / (pulse.scatter ? 420 : 220);
           if (age >= 1) continue;
           const reelX = geom.gx + pulse.reel * (cell + geom.gap);
           fx.roundRect(reelX - 3, geom.gy - 3, cell + 6, cell * 3 + 6, 8).stroke({
@@ -1211,7 +1434,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             alpha: (1 - age) * (pulse.scatter ? 1 : 0.8),
           });
         }
-        if (building && now - tickAt > (turbo ? 120 : 160)) {
+        if (building && !landedNow && now - tickAt > (turbo ? 120 : 160)) {
           scatterBuild(tickStep);
           tickStep += 1;
           tickAt = now;
@@ -1222,6 +1445,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       raf = requestAnimationFrame(run);
     });
     if (mine !== job) return;
+    for (const reel of reels) reel.strip.alpha = 1;
+    locks.alpha = 1;
     board = grid.map((col) => col.map((cellData) => ({ ...cellData })));
     animating = false;
     if (pendingLayout) layout();
@@ -1303,6 +1528,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     setPace(nextTurbo, nextReduced) {
       turbo = nextTurbo;
       reduced = nextReduced;
+      setAudioTurbo(nextTurbo);
     },
     setMood(next) {
       host.dispatchEvent(
@@ -1333,9 +1559,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const { cell, gap, gx, gy } = geom;
       for (const reel of reelsToLock) {
         const x = gx + reel * (cell + gap);
-        locks
-          .roundRect(x - 3, gy - 3, cell + 6, cell * 3 + 6, 8)
-          .stroke({ width: 3, color: 0x59d8d4 });
+        locks.roundRect(x - 4, gy - 4, cell + 8, cell * 3 + 8, 10).fill({
+          color: 0x59d8d4,
+          alpha: 0.1,
+        });
+        locks.roundRect(x - 4, gy - 4, cell + 8, cell * 3 + 8, 10).stroke({
+          width: 3,
+          color: 0x7ee7ff,
+          alpha: 0.92,
+        });
       }
     },
     async spinTo(grid, only, pace) {
@@ -2278,13 +2510,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         extraSpins: "+2 spins",
         level2: "Starts one level higher",
       };
-      const label =
-        round.mode === "chopper"
-          ? "CHOPPER"
-          : round.mode === "buy"
-            ? "BOUGHT FEATURE"
-            : "FREE SPINS";
-      bonusEnter();
+      const label = round.mode === "chopper" ? "Chopper" : "Free spins";
+      bonusEnter(round.mode);
       if (!reduced && !stopped) {
         const flash = new Graphics();
         transient.addChild(flash);
@@ -2298,7 +2525,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       await ceremony(
         "entry",
         label,
-        `${round.awarded} spins · ×${collectMult(round.banked)}`,
+        `${round.awarded} spins · Starts at ×${collectMult(round.banked)}`,
         round.mods.length
           ? round.mods.map((mod) => names[mod] ?? mod).join(" · ")
           : "No extra modifiers",
@@ -2315,14 +2542,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       transient.addChild(group);
       const gridW = geom.cell * 5 + geom.gap * 4;
       const gridH = geom.cell * 3;
-      const w = Math.min(gridW * 0.79, 510);
-      const h = w * (retriggerTex.height / retriggerTex.width);
+      const skin = upgradeTex;
+      const w = Math.min(gridW * 0.92, 560);
+      const h = w * (skin.height / skin.width);
       const x = geom.gx + (gridW - w) / 2;
       const y = geom.gy + (gridH - h) / 2;
       const dim = new Graphics()
         .rect(geom.gx, geom.gy, gridW, gridH)
         .fill({ color: 0x010c12, alpha: 0.4 });
-      const modal = new Sprite(retriggerTex);
+      const modal = new Sprite(skin);
       modal.width = w;
       modal.height = h;
       modal.position.set(x, y);
