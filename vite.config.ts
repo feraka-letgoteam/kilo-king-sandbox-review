@@ -61,7 +61,9 @@ function zipDownloadPlugin(): Plugin {
         const file = pathOnly.split("/").pop() ?? "";
         if (
           file === "kilo-king-corrected-source.zip" ||
-          file === "kilo-king-verified-recordings.zip"
+          file === "kilo-king-verified-recordings.zip" ||
+          file === "kilo-king-source.zip" ||
+          file === "kilo-source-only.zip"
         ) {
           res.setHeader(
             "Content-Disposition",

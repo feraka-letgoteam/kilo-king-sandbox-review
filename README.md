@@ -1,3 +1,5 @@
 Kilo King sandbox review snapshot. The downloadable source is the latest release asset, not this readme.
 
-Phone layout pass (2026-10-16): purchase rows, compact phone controls, portrait bonus entry, and layout-v6 screenshots. Download `kilo-phone-fit-source.zip` from the release.
+Current sandbox build (2026-10-16): layout-v7 plus the enter screen. The marina fills the viewport, and the logo, status, and Enter sit on that art instead of stacking as two raw images.
+
+Download `kilo-sandbox-source.zip` from the latest release.
