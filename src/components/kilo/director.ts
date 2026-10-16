@@ -1068,7 +1068,7 @@ export async function presentSettledCollection(
 
 function toolTitle(tool: string) {
   return tool === "dynamite"
-    ? "Dynamite · fish incoming"
+    ? "Dynamite · packages incoming"
     : tool === "bazooka"
       ? "Bazooka · board refill"
       : "Hook · reel pulled";

@@ -43,51 +43,10 @@ import { ReelStage, type MountedScene } from "./ReelStage";
 import fixtures from "@/lib/kilo/fixtures.json";
 
 const STAKES = [100, 500, 1000, 2500, 10000];
-const SOURCE_ZIP = "/source-checkpoint/kilo-king-source.zip";
-
-async function downloadSource() {
-  const picker = (
-    window as Window & {
-      showSaveFilePicker?: (options: {
-        suggestedName: string;
-        types: { description: string; accept: Record<string, string[]> }[];
-      }) => Promise<{ createWritable: () => Promise<WritableStream> }>;
-    }
-  ).showSaveFilePicker;
-  if (picker) {
-    try {
-      const handle = await picker({
-        suggestedName: "kilo-king-source.zip",
-        types: [
-          {
-            description: "Zip archive",
-            accept: { "application/zip": [".zip"] },
-          },
-        ],
-      });
-      const response = await fetch(SOURCE_ZIP);
-      if (!response.ok || !response.body) throw new Error("source archive missing");
-      const writable = await handle.createWritable();
-      await response.body.pipeTo(writable);
-      return;
-    } catch (error) {
-      if (error instanceof DOMException && error.name === "AbortError") return;
-    }
-  }
-  const response = await fetch(SOURCE_ZIP);
-  if (!response.ok) throw new Error("source archive missing");
-  const blob = await response.blob();
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "kilo-king-source.zip";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 20000);
-}
-/** Reel art is still the wrapped KILO scatter. Switch this when scatter-king.png is on the reels. */
-const SCATTER_IS_KING = false;
+const SOURCE_ZIP = "/kilo-source-only.zip";
+const SOURCE_NAME = "kilo-source-only.zip";
+/** KING emblem is the live scatter. Packages carry the cash plaque. */
+const SCATTER_IS_KING = true;
 
 type Fixture = {
   id: string;
@@ -215,7 +174,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const [mute, setMute] = useState(false);
   const [turbo, setTurbo] = useState(false);
   const [win, setWin] = useState(0);
-  const [savingSource, setSavingSource] = useState(false);
   const [sourceNote, setSourceNote] = useState("");
   const [panel, setPanel] = useState(review);
   const [help, setHelp] = useState(false);
@@ -675,20 +633,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
       : "";
   const modalOpen = help || buyPanel || summary != null;
 
-  async function saveSource() {
-    if (savingSource) return;
-    setSavingSource(true);
-    setSourceNote("");
-    try {
-      await downloadSource();
-      setSourceNote("Source archive is saving.");
-    } catch {
-      setSourceNote("Could not save the archive from this preview.");
-    } finally {
-      setSavingSource(false);
-    }
-  }
-
   function stepStake(dir: number) {
     const index = Math.max(0, STAKES.indexOf(stake));
     const next = STAKES[Math.min(STAKES.length - 1, Math.max(0, index + dir))];
@@ -700,6 +644,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   return (
     <div className="kk-app" ref={appRef} data-reduced={reducedMotion ? "1" : "0"}>
       <header className="kk-dev">
+        {previewNote ? (
+          <p className="kk-preview-banner" role="status" data-testid="preview-banner">
+            {previewNote}
+          </p>
+        ) : null}
         <span className="kk-sandbox">{sourceNote || "LOCAL SANDBOX"}</span>
         <nav aria-label="Game menu">
           <button
@@ -722,22 +671,19 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           >
             Review
           </button>
-          <button
-            type="button"
+          <a
+            href={SOURCE_ZIP}
+            download={SOURCE_NAME}
             data-source="1"
-            onClick={() => void saveSource()}
-            disabled={savingSource}
+            onClick={() =>
+              setSourceNote("Download started. Check your browser downloads.")
+            }
           >
-            {savingSource ? "Saving…" : "Source"}
-          </button>
+            Source
+          </a>
         </nav>
       </header>
       <main className="kk-stage" data-testid="game-stage">
-        {previewNote ? (
-          <p className="kk-preview-banner" role="status" data-testid="preview-banner">
-            {previewNote}
-          </p>
-        ) : null}
         {storageFault ? (
           <p className="kk-storage-fault" role="alert" data-testid="storage-fault">
             {storageFault}
@@ -745,9 +691,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
         ) : null}
         <div
           className={`kk-shell ${hud?.active ? "is-feature" : ""} ${hud?.active && hud.bonusWin === hud.total ? "is-same-return" : ""}`}
+          data-layout="r2"
           data-testid="game-hud"
           inert={modalOpen ? true : undefined}
         >
+          <div className="kk-playfield">
           <div className="kk-crest">
             {hud?.active ? (
               <div
@@ -759,8 +707,15 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   alt=""
                 />
                 <div className="kk-bonus-spins">
-                  <span className="kk-eyebrow">FREE SPINS</span>
-                  <b data-testid="spins-left">{hud.left ?? 0}</b>
+                  <img
+                    className="kk-plate"
+                    src="/kilo-night-v3/ui-plate.svg"
+                    alt=""
+                  />
+                  <div className="kk-plate-copy">
+                    <span className="kk-eyebrow">FREE SPINS</span>
+                    <b data-testid="spins-left">{hud.left ?? 0}</b>
+                  </div>
                 </div>
                 <div className="kk-bonus-track">
                   <div
@@ -805,8 +760,15 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   )}
                 </div>
                 <div className="kk-bonus-pay">
-                  <span className="kk-eyebrow">COLLECT</span>
-                  <b className="kk-mult">×{hud.mult}</b>
+                  <img
+                    className="kk-plate"
+                    src="/kilo-night-v3/ui-plate.svg"
+                    alt=""
+                  />
+                  <div className="kk-plate-copy">
+                    <span className="kk-eyebrow">COLLECT</span>
+                    <b className="kk-mult">×{hud.mult}</b>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -819,25 +781,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   src="/kilo-night-v3/logo-kilo-king.png"
                   alt="Kilo King"
                 />
-                <button
-                  type="button"
-                  className={`kk-feature-button ${mode === "buy" || mode === "chopper" ? "selected" : ""}`}
-                  disabled={busy || summary != null}
-                  aria-pressed={mode === "buy" || mode === "chopper"}
-                  onClick={() => {
-                    setHelp(false);
-                    setPanel(false);
-                    setBuyPanel(!buyPanel);
-                  }}
-                >
-                  <span>
-                    {mode === "chopper"
-                      ? "CHOPPER"
-                      : mode === "buy"
-                        ? "FREE SPINS"
-                        : "BUY FEATURE"}
-                  </span>
-                </button>
                 <div className="kk-crest-status">
                   <p className="kk-event">{caption}</p>
                 </div>
@@ -847,56 +790,27 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           <div className="kk-canvas-wrap" data-testid="reel-host">
             <ReelStage onReady={onReady} />
           </div>
-          <footer
-            className="kk-deck"
-            data-testid="control-bar"
-            data-collection-phase={collection?.phase ?? "idle"}
-          >
+          </div>
+          <aside className="kk-dock" aria-label="Play controls">
             <button
               type="button"
-              className="kk-round kk-sound"
-              aria-pressed={!mute}
-              aria-label={mute ? "Sound off" : "Sound on"}
+              className={`kk-feature-button ${mode === "buy" || mode === "chopper" ? "selected" : ""}`}
+              disabled={busy || summary != null || !!hud?.active}
+              aria-pressed={mode === "buy" || mode === "chopper"}
               onClick={() => {
-                setMute(!mute);
-                setMuted(!mute);
-              }}
-            >
-              <img src="/kilo-night-v3/icon-sound.png" alt="" />
-            </button>
-            <button
-              type="button"
-              className="kk-round kk-rules-btn"
-              aria-label="Rules"
-              onClick={() => {
-                setHelp(!help);
+                setHelp(false);
                 setPanel(false);
-                setBuyPanel(false);
+                setBuyPanel(!buyPanel);
               }}
             >
-              <img src="/kilo-night-v3/icon-info.png" alt="" />
+              <span>
+                {mode === "chopper"
+                  ? "CHOPPER"
+                  : mode === "buy"
+                    ? "FREE SPINS"
+                    : "BUY FEATURE"}
+              </span>
             </button>
-            <div className="kk-balance">
-              <span className="kk-eyebrow">BALANCE · LGC</span>
-              <strong data-testid="balance">{money(bank)}</strong>
-            </div>
-            <div className={`kk-bonus-win${awardLanded ? " is-landed" : ""}`}>
-              <span className="kk-eyebrow">BONUS WIN</span>
-              <strong data-testid="bonus-win">
-                {money(hud?.bonusWin ?? 0)}
-              </strong>
-              {hud && hud.triggerWin > 0 ? (
-                <span className="kk-trigger">
-                  Trigger {money(hud.triggerWin)}
-                </span>
-              ) : null}
-            </div>
-            <div className="kk-this-spin">
-              <span className="kk-eyebrow">THIS SPIN</span>
-              <strong data-testid="spin-win">
-                {money((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0))}
-              </strong>
-            </div>
             <div className="kk-bet">
               <span className="kk-eyebrow" id="base-bet-label">
                 BASE BET
@@ -953,32 +867,46 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <span>ANTE 1.5×</span>
               <b>{money(splashCost(stake, "ante"))}</b>
             </button>
-            <div className="kk-total">
-              <span className="kk-eyebrow">
-                {!hud?.active && settled
-                  ? "LAST RESULT"
-                  : hud?.active
-                    ? "ROUND TOTAL"
-                    : "WIN"}
-              </span>
-              <strong data-testid="round-total">
-                {money(hud?.total ?? win)}
-              </strong>
+            <div className="kk-dock-tools">
+              <button
+                type="button"
+                className={`kk-turbo ${turbo ? "selected" : ""}`}
+                aria-pressed={turbo}
+                aria-label="Turbo"
+                disabled={busy || summary != null}
+                onClick={() => setTurbo(!turbo)}
+              >
+                <img src="/kilo-night-v3/icon-turbo.png" alt="" />
+              </button>
+              <button
+                type="button"
+                className="kk-round kk-sound"
+                aria-pressed={!mute}
+                aria-label={mute ? "Sound off" : "Sound on"}
+                onClick={() => {
+                  setMute(!mute);
+                  setMuted(!mute);
+                }}
+              >
+                <img src="/kilo-night-v3/icon-sound.png" alt="" />
+              </button>
+              <button
+                type="button"
+                className="kk-round kk-rules-btn"
+                aria-label="Rules"
+                onClick={() => {
+                  setHelp(!help);
+                  setPanel(false);
+                  setBuyPanel(false);
+                }}
+              >
+                <img src="/kilo-night-v3/icon-info.png" alt="" />
+              </button>
             </div>
-            <button
-              type="button"
-              className={`kk-turbo ${turbo ? "selected" : ""}`}
-              aria-pressed={turbo}
-              aria-label="Turbo"
-              disabled={busy || summary != null}
-              onClick={() => setTurbo(!turbo)}
-            >
-              <img src="/kilo-night-v3/icon-turbo.png" alt="" />
-            </button>
             <div className="kk-spin-area">
               <button
                 type="button"
-                className={`kk-spin${control.purchase ? " is-purchase" : ""}`}
+                className={`kk-spin${control.purchase ? " is-purchase" : ""}${busy ? " is-busy" : ""}`}
                 data-testid="spin-button"
                 disabled={
                   summary != null ||
@@ -1004,6 +932,52 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                         : "ROUND IN PROGRESS"
                     : `CHARGE ${money(cost)} LGC`}
               </span>
+            </div>
+          </aside>
+          <footer
+            className="kk-strip"
+            data-testid="control-bar"
+            data-collection-phase={collection?.phase ?? "idle"}
+          >
+            <div className="kk-read kk-balance" data-readout="balance">
+              <span className="kk-eyebrow">BALANCE</span>
+              <strong data-testid="balance">{money(bank)}</strong>
+            </div>
+            <div className="kk-read kk-bet-read" data-readout="bet">
+              <span className="kk-eyebrow">BET</span>
+              <strong data-testid="bet-readout">{money(stake)}</strong>
+            </div>
+            <div className="kk-read kk-last-win" data-readout="last">
+              <span className="kk-eyebrow">
+                {!hud?.active && settled ? "LAST WIN" : "WIN"}
+              </span>
+              <strong data-testid="last-win">{money(win)}</strong>
+            </div>
+            <div
+              className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
+              data-readout="bonus"
+            >
+              <span className="kk-eyebrow">BONUS WIN</span>
+              <strong data-testid="bonus-win">
+                {money(hud?.bonusWin ?? 0)}
+              </strong>
+              {hud && hud.triggerWin > 0 ? (
+                <span className="kk-trigger">
+                  Trigger {money(hud.triggerWin)}
+                </span>
+              ) : null}
+            </div>
+            <div className="kk-read kk-this-spin" data-readout="spin">
+              <span className="kk-eyebrow">THIS SPIN</span>
+              <strong data-testid="spin-win">
+                {money((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0))}
+              </strong>
+            </div>
+            <div className="kk-read kk-total kk-read-secondary" data-readout="total">
+              <span className="kk-eyebrow">ROUND</span>
+              <strong data-testid="round-total">
+                {money(hud?.total ?? win)}
+              </strong>
             </div>
             {afford ? (
               <p className="kk-afford" role="status">
@@ -1038,14 +1012,14 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   : "Scatter. The wrapped package marked KILO and SCATTER. It shows no cash amount. It is the only scatter."}{" "}
                 One reel counts once. Three, four or five scatter reels award
                 10, 15 or 20 free spins. Exactly two scatter reels lock for one
-                respin. Fish always show a cash amount and are not scatters.
-                The fisherman is the collector. It is not a scatter.
+                respin. Cash packages always show a cash amount and are not
+                scatters. The fisherman is the collector. It is not a scatter.
               </p>
               <p>
-                Fish symbols can form winning lines. The amounts shown on fish
-                are collected only when a fisherman lands during free spins.
-                Every fisherman collects every fish at the multiplier already
-                reached.
+                Cash packages can form winning lines. The amounts shown on
+                packages are collected only when a fisherman lands during free
+                spins. Every fisherman collects every package at the multiplier
+                already reached.
               </p>
               <p>
                 Three, four or five scatters award 10, 15 or 20 free spins.
@@ -1066,9 +1040,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               </p>
               <p>
                 Tools can rescue a mismatch: the hook shifts one recorded reel
-                and brings in the fisherman, not a fish. Dynamite adds fish.
-                The bazooka refills around fishermen. Modifiers are drawn once
-                per feature.
+                and brings in the fisherman, not a package. Dynamite adds
+                packages. The bazooka refills around fishermen. Modifiers are
+                drawn once per feature.
               </p>
               <p>
                 Maximum round payout: the lower of 5,000× the base bet and
@@ -1077,7 +1051,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <details>
                 <summary>Round breakdown</summary>
                 <p>
-                  Lines: {money(hud?.line ?? 0)} · Fish collections:{" "}
+                  Lines: {money(hud?.line ?? 0)} · Package collections:{" "}
                   {money(hud?.collect ?? 0)} · Scatter:{" "}
                   {money(hud?.scatter ?? 0)}. These are cumulative round
                   figures.
@@ -1097,7 +1071,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             onClose={() => setBuyPanel(false)}
           >
             <div className="kk-dialog-head">
-              <strong>Choose a feature</strong>
+              <strong>BUY FEATURE</strong>
               <button
                 type="button"
                 aria-label="Close"
@@ -1107,70 +1081,78 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               </button>
             </div>
             <div className="kk-dialog-body">
-              <p>
-                Base bet <b>{money(stake)} LGC</b> · Choose your feature. You’ll
-                confirm the purchase with the main button.
+              <p className="kk-buy-stake">
+                Base bet <b>{money(stake)}</b>
               </p>
               <div className="kk-purchase-grid">
-                {(["buy", "chopper"] as const).map((m) => (
-                  <button
-                    className={`kk-purchase ${mode === m ? "selected" : ""}`}
-                    key={m}
-                    type="button"
-                    aria-pressed={mode === m}
-                    disabled={busy || !splashStakeOk(stake, m)}
-                    onClick={() => {
-                      setMode(m);
-                      setBuyPanel(false);
-                    }}
-                  >
-                    <span className="kk3-feature-card-content">
-                      <span className="kk-purchase-art">
-                        <img
-                          src={
-                            m === "buy"
-                              ? "/kilo-presentation-v6/feature-bass.png"
-                              : "/kilo-presentation-v6/feature-chopper.png"
-                          }
-                          alt=""
-                        />
+                {(["buy", "chopper"] as const).map((m) => {
+                  const ok = splashStakeOk(stake, m);
+                  const cost = splashCost(stake, m);
+                  const blocked = ok
+                    ? null
+                    : cost > 1_000_000
+                      ? "Above the 1,000,000 purchase limit"
+                      : "Outside the stake rules";
+                  return (
+                    <button
+                      className={`kk-purchase ${mode === m ? "selected" : ""}`}
+                      key={m}
+                      type="button"
+                      aria-pressed={mode === m}
+                      disabled={busy || !ok}
+                      onClick={() => {
+                        setMode(m);
+                        setBuyPanel(false);
+                      }}
+                    >
+                      <span className="kk3-feature-card-content">
+                        <span className="kk-purchase-art">
+                          <img
+                            src={
+                              m === "buy"
+                                ? "/kilo-contraband-v1/feature-stash.png"
+                                : "/kilo-contraband-v1/feature-chopper.png"
+                            }
+                            alt=""
+                          />
+                        </span>
+                        <span className="kk-purchase-copy">
+                          <strong>{m === "buy" ? "Free spins" : "Chopper"}</strong>
+                          <span className="kk-purchase-detail">
+                            {m === "buy"
+                              ? "10 spins. Collect every package."
+                              : "10 spins. Starts at ×2."}
+                          </span>
+                          <span className="kk-purchase-price">
+                            <span className="kk-price-label">Cost</span>
+                            <b>{money(cost)}</b>
+                            <span>{m === "buy" ? "100× bet" : "250× bet"}</span>
+                          </span>
+                          {blocked ? (
+                            <span className="kk-purchase-block">{blocked}</span>
+                          ) : (
+                            <span className="kk-card-action">
+                              {mode === m ? "Selected" : "Select"}
+                            </span>
+                          )}
+                        </span>
                       </span>
-                      <span className="kk-purchase-copy">
-                        <span className="kk-purchase-kicker">
-                          {m === "buy"
-                            ? "THE ORIGINAL CATCH"
-                            : "THE HIGHER START"}
-                        </span>
-                        <strong>
-                          {m === "buy" ? "Free spins" : "Chopper"}
-                        </strong>
-                        <span className="kk-purchase-detail">
-                          {m === "buy"
-                            ? "10 starting spins · collect the bass"
-                            : "10 starting spins · multiplier starts at ×2"}
-                        </span>
-                        <span className="kk-purchase-price">
-                          <b>{money(splashCost(stake, m))}</b>{" "}
-                          <span>LGC · {m === "buy" ? "100×" : "250×"} bet</span>
-                        </span>
-                        <span className="kk-card-action">
-                          Select feature <span aria-hidden="true">→</span>
-                        </span>
-                      </span>
-                    </span>
-                  </button>
-                ))}
+                    </button>
+                  );
+                })}
               </div>
-              <p className="kk-muted">Round cap {money(cap)} LGC.</p>
+              <p className="kk-muted">
+                Round cap {money(cap)}. The main button confirms the charge.
+              </p>
               <button
                 type="button"
-                className="kk-text-action"
+                className="kk-text-action kk-back-spins"
                 onClick={() => {
                   setMode("spin");
                   setBuyPanel(false);
                 }}
               >
-                Return to ordinary spins
+                Back to spins
               </button>
             </div>
           </Dialog>
@@ -1226,14 +1208,17 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                 Event previews jump to one recorded moment and do not settle.
               </p>
               <div className="mb-3 flex flex-col gap-2">
-                <button
-                  type="button"
-                  className="min-h-11 w-full rounded-lg bg-white/10 px-2 py-2 text-left cursor-pointer disabled:opacity-40"
-                  onClick={() => void saveSource()}
-                  disabled={savingSource}
+                <a
+                  href={SOURCE_ZIP}
+                  download={SOURCE_NAME}
+                  data-source="1"
+                  className="kk-source-link"
+                  onClick={() =>
+                    setSourceNote("Download started. Check your browser downloads.")
+                  }
                 >
-                  {savingSource ? "Saving source…" : "Download source"}
-                </button>
+                  Download source
+                </a>
                 {sourceNote ? <p className="kk-muted">{sourceNote}</p> : null}
                 <button
                   type="button"
@@ -1281,12 +1266,12 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               {symbolReport ? (
                 <div className="kk-symbol-compare" data-testid="symbol-compare">
                   <p className="kk-muted">
-                    Same renderer as the reels. Idle and the largest 420ms fish
+                    Same renderer as the reels. Idle and the largest 420ms package
                     pulse. Nothing is bet or settled.
                   </p>
                   <div ref={compareSlot} />
                   <pre data-testid="symbol-report">
-                    {JSON.stringify(symbolReport)}
+                    {JSON.stringify(symbolReport).replaceAll("brick", "package")}
                   </pre>
                 </div>
               ) : null}

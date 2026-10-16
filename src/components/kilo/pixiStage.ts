@@ -32,11 +32,14 @@ import {
   reactionIndex,
 } from "./motion-atlas";
 import {
+  CONTRABAND_ROOT,
+  PACKAGE_META,
+  SCATTER_KING,
   V8_META,
   V8_ROOT,
   fishReaction,
   fishTier,
-  type V8Key,
+  type PackageKey,
 } from "./fish-art";
 
 const ART: Record<Sym, string> = {
@@ -96,55 +99,65 @@ function passer(reel: number, index: number): SplashCell {
   return s === "brick" ? { s, v: [2, 5, 10][index % 3], w: 1, h: 1 } : { s };
 }
 
-function frameBorders(cab: { w: number; h: number }) {
-  return {
-    l: Math.min(64, Math.max(14, Math.round(cab.w * 0.048))),
-    r: Math.min(64, Math.max(14, Math.round(cab.w * 0.048))),
-    t: Math.min(52, Math.max(12, Math.round(cab.h * 0.06))),
-    b: Math.min(58, Math.max(16, Math.round(cab.h * 0.078))),
-  };
+function edgeFor(w: number, h: number) {
+  return Math.min(18, Math.max(10, Math.round(Math.min(w, h) * 0.035)));
 }
 
-function fitReels(
-  cab: { x: number; y: number; w: number; h: number },
-  gap: number,
-) {
-  const edge = frameBorders(cab);
-  const cell = Math.floor(
-    Math.min(
-      (cab.w - edge.l - edge.r - gap * 4) / 5,
-      (cab.h - edge.t - edge.b) / 3,
-    ),
+function frameBorders(cab: { w: number; h: number }) {
+  const edge = edgeFor(cab.w, cab.h);
+  return { l: edge, r: edge, t: edge, b: edge };
+}
+
+/** Compact 5×3. Gutters stay bounded. Leftover host space sits outside the cabinet. */
+function fitReels(hostW: number, hostH: number) {
+  const gutter = Math.min(
+    8,
+    Math.max(3, Math.round(Math.min(hostW, hostH) * 0.015)),
   );
-  // Fill the usable width with five evenly spaced reel windows.
-  // Vertical travel remains square-cell based; only inter-reel spacing changes.
-  const spread = Math.max(gap, (cab.w - edge.l - edge.r - cell * 5) / 4);
-  const gridW = cell * 5 + spread * 4;
-  const gridH = cell * 3;
-  const innerW = cab.w - edge.l - edge.r;
-  const innerH = cab.h - edge.t - edge.b;
+  let edge = edgeFor(hostW, hostH);
+  let cell = 24;
+  let cabW = hostW;
+  let cabH = hostH;
+  for (let pass = 0; pass < 3; pass++) {
+    cell = Math.max(
+      24,
+      Math.floor(
+        Math.min(
+          (hostW - edge * 2 - gutter * 4) / 5,
+          (hostH - edge * 2) / 3,
+        ),
+      ),
+    );
+    cabW = cell * 5 + gutter * 4 + edge * 2;
+    cabH = cell * 3 + edge * 2;
+    edge = edgeFor(cabW, cabH);
+  }
+  const cab = {
+    x: Math.round((hostW - cabW) / 2),
+    y: Math.round((hostH - cabH) / 2),
+    w: cabW,
+    h: cabH,
+  };
+  const borders = frameBorders(cab);
   return {
     cell,
-    gap: spread,
-    gx: cab.x + edge.l + (innerW - gridW) / 2,
-    gy: cab.y + edge.t + (innerH - gridH) / 2,
-    statusY: cab.y + cab.h - edge.b / 2,
+    gap: gutter,
+    gx: cab.x + borders.l,
+    gy: cab.y + borders.t,
+    statusY: cab.y + cab.h - borders.b / 2,
+    cab,
+    dw: hostW,
+    dh: hostH,
   };
 }
 function geomFor(w: number, h: number): Geom {
   const dw = Math.max(280, Math.round(w));
   const dh = Math.max(160, Math.round(h));
-  const pad = 1;
-  const cab = { x: pad, y: pad, w: dw - pad * 2, h: dh - pad * 2 };
-  const gap = dw < 520 ? 3 : 5;
   return {
-    dw,
-    dh,
+    ...fitReels(dw, dh),
     bust: false,
-    ...fitReels(cab, gap),
     logo: { x: 0, y: 0, h: 0 },
     face: { x: 0, y: 0, h: 0 },
-    cab,
   };
 }
 
@@ -177,7 +190,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const urls = [
     ...new Set([
       ...Object.entries(ART)
-        .filter(([sym]) => sym !== "brick" && sym !== "splash")
+        .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
         .map(([, url]) => url),
       artUrl("reel-well.png"),
       artUrl("reel-frame.png"),
@@ -190,16 +203,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       MOTION_ROOT + collectorAtlas.image,
       MOTION_ROOT + "retrigger-frame.svg",
       MOTION_ROOT + "value-plaque.svg",
-      ...Object.values(V8_META)
-        .filter((meta) => meta.file.startsWith("fish-"))
-        .map((meta) => V8_ROOT + meta.file),
+      ...Object.values(PACKAGE_META).map((meta) => CONTRABAND_ROOT + meta.file),
+      CONTRABAND_ROOT + SCATTER_KING.file,
     ]),
   ];
   await Promise.all(urls.map((url) => Assets.load(url)));
   const tex = (file: string) => Assets.get<Texture>(artUrl(file));
   const textures = Object.fromEntries(
     Object.entries(ART)
-      .filter(([sym]) => sym !== "brick" && sym !== "splash")
+      .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
       .map(([sym, url]) => [sym, Assets.get<Texture>(url)]),
   ) as Record<Sym, Texture>;
   const wellTex = tex("reel-well.png");
@@ -225,11 +237,13 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     );
   };
   const collectorFrames = framesFrom(collectorAtlas.image, collectorAtlas.frames);
-  const fishTextures = Object.fromEntries(
-    (Object.keys(V8_META) as V8Key[])
-      .filter((key) => key.startsWith("fish-"))
-      .map((key) => [key, Assets.get<Texture>(V8_ROOT + V8_META[key].file)]),
-  ) as Record<"fish-small" | "fish-medium" | "fish-trophy" | "fish-king", Texture>;
+  const packageTextures = Object.fromEntries(
+    (Object.keys(PACKAGE_META) as PackageKey[]).map((key) => [
+      key,
+      Assets.get<Texture>(CONTRABAND_ROOT + PACKAGE_META[key].file),
+    ]),
+  ) as Record<PackageKey, Texture>;
+  const scatterTex = Assets.get<Texture>(CONTRABAND_ROOT + SCATTER_KING.file);
   const retriggerTex = motionTex("retrigger-frame.svg");
   const plaqueTex = motionTex("value-plaque.svg");
 
@@ -328,7 +342,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const waits = new Set<() => void>();
 
   type PlaceMark = {
-    asset: V8Key;
+    asset: PackageKey | "scatter-king" | "sym-reel-v8" | "sym-case-v8";
     size: number;
     boxW: number;
     boxH: number;
@@ -340,14 +354,30 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   function applyPlace(sprite: Sprite, reaction = { scale: 1, rotation: 0 }) {
     const mark = (sprite as Placed).kkPlace;
     if (!mark) return;
-    const meta = V8_META[mark.asset];
+    const asset = mark.asset;
+    const meta =
+      asset === "scatter-king"
+        ? SCATTER_KING
+        : asset === "package-small" ||
+            asset === "package-medium" ||
+            asset === "package-trophy" ||
+            asset === "package-king"
+          ? PACKAGE_META[asset]
+          : V8_META[asset];
     const [x0, y0, x1, y1] = meta.bounds;
     const fit = Math.min(
       (mark.size * mark.boxW) / (x1 - x0),
       (mark.size * mark.boxH) / (y1 - y0),
     );
-    if (mark.asset.startsWith("fish-")) {
-      sprite.texture = fishTextures[mark.asset as keyof typeof fishTextures];
+    if (
+      asset === "package-small" ||
+      asset === "package-medium" ||
+      asset === "package-trophy" ||
+      asset === "package-king"
+    ) {
+      sprite.texture = packageTextures[asset];
+    } else if (asset === "scatter-king") {
+      sprite.texture = scatterTex;
     } else if (mark.asset === "sym-reel-v8") {
       sprite.texture = textures.lamp;
     } else if (mark.asset === "sym-case-v8") {
@@ -361,7 +391,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
 
   function playFishAck(sprite: Sprite | null) {
     const mark = (sprite as Placed | null)?.kkPlace;
-    if (!sprite || !mark?.asset.startsWith("fish-")) return Promise.resolve();
+    if (!sprite || !mark?.asset.startsWith("package-")) return Promise.resolve();
     const ms = reduced ? 0 : turbo ? Math.round(420 * 0.45) : 420;
     return tween(ms, (t) => {
       if (sprite.destroyed) return;
@@ -371,7 +401,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     });
   }
 
-  function cellView(cell: SplashCell, size: number, decor = true) {
+  function cellView(cell: SplashCell, size: number, decor = true, printed?: number) {
     const root = new Container();
     if (cell.s === "brick") {
       const value = cell.v;
@@ -383,10 +413,10 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           console.error(error);
         }
       } else {
-        console.error(`Unknown recorded fish value: ${String(value)}`);
+        console.error(`Unknown recorded package value: ${String(value)}`);
       }
       if (tier) {
-        const sprite = new Sprite(fishTextures[tier.asset]) as Placed;
+        const sprite = new Sprite(packageTextures[tier.asset]) as Placed;
         sprite.kkPlace = {
           asset: tier.asset,
           size,
@@ -398,6 +428,18 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         applyPlace(sprite);
         root.addChild(sprite);
       }
+    } else if (cell.s === "bars") {
+      const sprite = new Sprite(scatterTex) as Placed;
+      sprite.kkPlace = {
+        asset: "scatter-king",
+        size,
+        boxW: SCATTER_KING.boxW,
+        boxH: SCATTER_KING.boxH,
+        cx: SCATTER_KING.cx,
+        cy: SCATTER_KING.cy,
+      };
+      applyPlace(sprite);
+      root.addChild(sprite);
     } else if (cell.s === "lamp" || cell.s === "duffel") {
       const sprite = new Sprite(textures[cell.s]) as Placed;
       sprite.kkPlace = {
@@ -463,7 +505,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     }
     const hasValue = decor && cell.s === "brick" && cell.v != null;
     if (hasValue && cell.v != null) {
-      const text = money(stake * cell.v);
+      const text = money(printed ?? stake * cell.v);
       const maxW = size * 0.84;
       let fontSize = Math.max(8, Math.floor(size * 0.16));
       const label = new Text({
@@ -475,10 +517,11 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           fontWeight: "700",
         },
       });
-      while (label.width > maxW && fontSize > 8) {
+      while (label.width > maxW && fontSize > 7) {
         fontSize -= 1;
         label.style.fontSize = fontSize;
       }
+      if (label.width > maxW) label.scale.set(maxW / label.width);
       const plaque = new Sprite(plaqueTex);
       plaque.anchor.set(0.5, 0);
       plaque.width = size * 0.91;
@@ -1236,10 +1279,11 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             join: "round",
           });
         }
+        const shown = line.s === "brick" ? "package" : line.s;
         const text =
           lines.length > 1
-            ? `Line ${index + 1} of ${lines.length} · ${line.n} × ${line.s} · ${money(line.pay)}`
-            : `${line.n} × ${line.s} · ${money(line.pay)}`;
+            ? `Line ${index + 1} of ${lines.length} · ${line.n} × ${shown} · ${money(line.pay)}`
+            : `${line.n} × ${shown} · ${money(line.pay)}`;
         const label = new Text({
           text,
           style: {
@@ -2101,7 +2145,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     },
     async intro(round) {
       const names: Record<string, string> = {
-        moreFish: "More fish",
+        moreFish: "More packages",
         moreWilds: "More fishermen",
         moreTools: "More tools",
         extraSpins: "+2 spins",
@@ -2208,10 +2252,11 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     },
     symbolCompare() {
       const samples: { name: string; cell: SplashCell; reaction: boolean }[] = [
-        { name: "Small fish", cell: { s: "brick", v: 2, w: 1, h: 1 }, reaction: true },
-        { name: "Medium fish", cell: { s: "brick", v: 25, w: 1, h: 1 }, reaction: true },
-        { name: "Trophy fish", cell: { s: "brick", v: 200, w: 1, h: 1 }, reaction: true },
-        { name: "King fish", cell: { s: "brick", v: 5000, w: 1, h: 1 }, reaction: true },
+        { name: "Small package", cell: { s: "brick", v: 2, w: 1, h: 1 }, reaction: true },
+        { name: "Medium package", cell: { s: "brick", v: 25, w: 1, h: 1 }, reaction: true },
+        { name: "Trophy package", cell: { s: "brick", v: 200, w: 1, h: 1 }, reaction: true },
+        { name: "King package", cell: { s: "brick", v: 5000, w: 1, h: 1 }, reaction: true },
+        { name: "KING scatter", cell: { s: "bars" }, reaction: false },
         { name: "Fisherman", cell: { s: "splash" }, reaction: true },
         { name: "Reel", cell: { s: "lamp" }, reaction: false },
         { name: "Case", cell: { s: "duffel" }, reaction: false },
@@ -2329,7 +2374,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           { size: 158, state: "peak" as const, x: 446 },
         ];
         for (const slot of slots) {
-          const view = cellView(sample.cell, slot.size, true);
+          const view = cellView(
+            sample.cell,
+            slot.size,
+            true,
+            sample.name === "King package" ? 50_000_000 : undefined,
+          );
           const sprite = view.children.find((child) => child instanceof Sprite);
           if (sprite instanceof Sprite && sample.cell.s === "brick" && slot.state === "peak") {
             applyPlace(sprite, fishReaction(210));

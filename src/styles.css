@@ -53,6 +53,34 @@ button {
     url("/kilo-night-v3/bg-marina.png") center top/cover;
   font-variant-numeric: tabular-nums;
 }
+.kk-dev:has(.kk-preview-banner) {
+  flex-wrap: nowrap;
+}
+.kk-dev .kk-preview-banner {
+  position: absolute;
+  left: 108px;
+  right: 148px;
+  top: 50%;
+  z-index: 2;
+  flex: none;
+  order: 0;
+  width: auto;
+  max-width: none;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #14303a;
+  color: #ffe7b0;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: none;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .kk-dev {
   position: relative;
   z-index: 80;
@@ -92,11 +120,31 @@ button {
   color: #ffe7b0;
   padding: 0 6px;
 }
-.kk-dev button[data-source] {
+.kk-dev a[data-source],
+.kk-source-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  min-width: 44px;
   border: 1px solid #d8ad59;
   border-radius: 4px;
   background: #163042;
   color: #ffe7b0;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0 8px;
+  cursor: pointer;
+}
+.kk-source-link {
+  width: 100%;
+  min-height: 44px;
+  justify-content: flex-start;
+  background: rgb(255 255 255 / 10%);
+  border: 0;
+  border-radius: 8px;
+  padding: 8px;
 }
 .kk-stage {
   position: relative;
@@ -1850,9 +1898,10 @@ button {
   width: min(860px, 100%);
 }
 .kk-purchases .kk-dialog-head strong {
-  font-family: Georgia, serif;
-  font-weight: 700;
-  font-size: 30px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 1px;
 }
 .kk-purchases .kk-dialog-body > p:first-child {
   margin: 0 0 18px;
@@ -1926,12 +1975,12 @@ button {
 }
 .kk-purchase strong {
   display: block;
-  font-family: Georgia, serif;
-  font-size: 31px;
+  font-family: inherit;
+  font-size: 22px;
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 800;
   color: #ffe2a6;
-  letter-spacing: 0;
+  letter-spacing: -0.3px;
 }
 .kk-purchase-detail {
   font-size: 12px;
@@ -2511,7 +2560,7 @@ button {
   font-size: 16px;
   color: #d7ebe7;
 }
-.kk-shell.is-same-return .kk-total {
+.kk-shell:not([data-layout="r2"]).is-same-return .kk-total {
   display: none;
 }
 @container stage (min-width: 741px) and (min-height: 521px) {
@@ -2560,8 +2609,7 @@ button {
 .kk-summary.is-neutral .kk-summary-line strong {
   color: #e7e1d4;
 }
-.kk-summary button,
-.kk-purchases .kk-text-action {
+.kk-summary button {
   min-height: 44px;
   min-width: 148px;
   border: 1px solid #ffe2a7;
@@ -3159,64 +3207,208 @@ button {
   }
 }
 
-/* Purchase cards and completion. Text is HTML. Art does not carry the price. */
+/* Purchase options. One set of rules. Art stays intact; copy sits below it. */
+.kk-dialog.kk-purchases {
+  width: min(760px, 100%);
+}
+.kk-dialog.kk-purchases .kk-dialog-head strong {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+.kk-dialog.kk-purchases .kk-buy-stake {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: #c5d7d4;
+}
+.kk-dialog.kk-purchases .kk-buy-stake b {
+  color: #ffe3a6;
+  font-size: 16px;
+  font-weight: 800;
+}
 .kk-dialog.kk-purchases .kk-purchase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 8px;
   align-items: stretch;
 }
-.kk-dialog.kk-purchases .kk-purchase {
+.kk-dialog.kk-purchases .kk-purchase,
+.kk-dialog.kk-purchases .kk-purchase:nth-child(2) {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  outline: none;
+  border: 1px solid #a58143;
+  border-radius: 12px;
+  background: #071820;
+  text-align: left;
+  box-shadow: none;
+  filter: none;
+}
+.kk-dialog.kk-purchases .kk-purchase::before {
+  content: none;
+}
+.kk-dialog.kk-purchases .kk-purchase:hover:not(:disabled) {
+  border-color: #ffe2a7;
+  filter: none;
 }
 .kk-dialog.kk-purchases .kk-purchase.selected {
   outline: none;
-  box-shadow: inset 0 0 0 2px #ffe2a7;
+  border-color: #ffe2a7;
+  box-shadow: inset 0 0 0 1px #ffe2a7;
+}
+.kk-dialog.kk-purchases .kk-purchase:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.kk-dialog.kk-purchases .kk-purchase:disabled .kk-purchase-art {
+  filter: saturate(0.4) brightness(0.75);
+}
+.kk-dialog.kk-purchases .kk3-feature-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 0;
+  text-align: left;
 }
 .kk-dialog.kk-purchases .kk-purchase-art {
-  height: 148px;
+  display: grid;
+  place-items: end center;
+  height: 228px;
   aspect-ratio: auto;
+  margin: 0;
+  padding: 8px 10px 0;
   overflow: hidden;
-  background: #04141c;
+  background: radial-gradient(ellipse at 50% 100%, #163c44, #041018 72%);
+  filter: none;
 }
 .kk-dialog.kk-purchases .kk-purchase-art::after {
   content: none;
 }
-.kk-dialog.kk-purchases .kk-purchase .kk-purchase-art img {
+.kk-dialog.kk-purchases .kk-purchase .kk-purchase-art img,
+.kk-dialog.kk-purchases .kk-purchase:hover:not(:disabled) .kk-purchase-art img {
+  display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: contain;
-  object-position: center;
+  object-position: center bottom;
   transform: none;
 }
 .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
-  margin-top: 0;
-  padding: 12px 14px 14px;
-  gap: 6px;
-}
-.kk-dialog.kk-purchases .kk-purchase-price {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  min-width: 0;
+  align-items: stretch;
+  gap: 4px;
+  margin: 0;
+  padding: 10px 12px 12px;
+  color: #c5d7d4;
+}
+.kk-dialog.kk-purchases .kk-purchase strong {
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.3px;
+  color: #ffe3a6;
+}
+.kk-dialog.kk-purchases .kk-purchase-detail {
+  min-height: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #d5e6e2;
+}
+.kk-dialog.kk-purchases .kk-purchase-price {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 0;
+  align-items: baseline;
+  margin-top: 2px;
+}
+.kk-dialog.kk-purchases .kk-price-label {
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #9fb6b7;
 }
 .kk-dialog.kk-purchases .kk-purchase-price b {
-  white-space: normal;
-  overflow-wrap: anywhere;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.1;
   letter-spacing: 0;
-  font-size: 22px;
+  color: #fff6dd;
+  white-space: nowrap;
+}
+.kk-dialog.kk-purchases .kk-purchase-price > span:last-child {
+  font-size: 12px;
+  line-height: 1.2;
+  color: #9fb6b7;
 }
 .kk-dialog.kk-purchases .kk-purchase .kk-card-action,
 .kk-dialog.kk-purchases .kk-purchase:nth-child(2) .kk-card-action {
-  background: transparent;
-  color: #e5c88f !important;
-  border: 1px solid #ac955a7a;
-  min-height: 36px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 8px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(#f3d7a0, #c49245);
+  color: #17241c !important;
+  font-size: 14px !important;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 .kk-dialog.kk-purchases .kk-purchase.selected .kk-card-action {
-  border-color: #ffe2a7;
-  color: #172a2d !important;
-  background: linear-gradient(#f0d392, #bc8c41);
+  box-shadow: inset 0 0 0 1px #fff6dd;
+}
+.kk-dialog.kk-purchases .kk-purchase-block {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #2a1c12;
+  color: #ffd7a8;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.3;
+}
+.kk-dialog.kk-purchases .kk-muted {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 12px;
+}
+.kk-dialog.kk-purchases .kk-back-spins {
+  display: block;
+  width: auto;
+  min-width: 0;
+  min-height: 36px;
+  margin: 0 auto;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #8ea8a6;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .kk-dialog.kk-summary {
   width: min(440px, 94vw);
@@ -3248,9 +3440,27 @@ button {
 @container stage (max-width: 740px) and (min-height: 521px) {
   .kk-dialog.kk-purchases .kk-purchase-grid {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .kk-dialog.kk-purchases .kk3-feature-card-content {
+    flex-direction: row;
+    align-items: stretch;
   }
   .kk-dialog.kk-purchases .kk-purchase-art {
-    height: 96px;
+    width: 42%;
+    height: auto;
+    min-height: 148px;
+    flex: 0 0 42%;
+    padding: 6px;
+  }
+  .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: center;
+    padding: 8px 10px 10px 4px;
+  }
+  .kk-dialog.kk-purchases .kk-purchase strong {
+    font-size: 18px;
   }
   .kk-dialog.kk-summary {
     width: min(360px, 94vw);
@@ -3259,7 +3469,713 @@ button {
     font-size: 32px;
   }
 }
+@container stage (max-height: 520px) {
+  .kk-dialog.kk-purchases .kk3-feature-card-content {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .kk-dialog.kk-purchases .kk-purchase-art {
+    width: 44%;
+    height: auto;
+    min-height: 132px;
+    flex: 0 0 44%;
+    padding: 6px;
+  }
+  .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 8px 8px 8px 4px;
+  }
+  .kk-dialog.kk-purchases .kk-purchase strong {
+    font-size: 16px;
+  }
+  .kk-dialog.kk-purchases .kk-purchase-detail,
+  .kk-dialog.kk-purchases .kk-purchase-price b {
+    font-size: 12px;
+  }
+  .kk-dialog.kk-purchases .kk-card-action,
+  .kk-dialog.kk-purchases .kk-purchase-block {
+    min-height: 34px;
+  }
+}
 
 
 
+/* Compact shell. These rules own the dock, strip and bonus header.
+   Older deck/readout positions do not apply inside data-layout="r2". */
+.kk-stage .kk-shell[data-layout="r2"] {
+  --plate-well-x: 16.875%;
+  --plate-well-w: 73.4375%;
+  --plate-well-y: 26.67%;
+  --plate-well-h: 46.67%;
+  width: max-content;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: auto 220px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "play dock"
+    "strip strip";
+  gap: 8px;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  filter: drop-shadow(0 16px 24px #0008);
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
+  grid-area: play;
+  width: min(780px, calc(100cqw - 248px), calc((100cqh - 188px) * 1.66));
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 92px auto;
+  justify-items: stretch;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-crest,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
+  height: 92px;
+  min-height: 92px;
+  max-height: 92px;
+  overflow: hidden;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
+  aspect-ratio: 1.66;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-logo {
+  top: 8px;
+  height: 72px;
+  width: min(46%, 420px);
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bust {
+  width: 140px;
+  height: 88px;
+  left: 4px;
+  bottom: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-crest-status {
+  left: auto;
+  right: 8px;
+  bottom: 6px;
+  width: min(46%, 280px);
+  height: auto;
+}
 
+/* Bonus header: plate art and copy share one well. Sockets stay centered. */
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
+  position: absolute;
+  inset: 6px 8px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr) 168px;
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center;
+  column-gap: 8px;
+  height: auto;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-mark {
+  display: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  grid-column: auto;
+  grid-row: auto;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins,
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 78px;
+  max-height: 78px;
+  min-width: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  align-self: center;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins {
+  grid-column: 1;
+  grid-row: 1;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay {
+  grid-column: 3;
+  grid-row: 1;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay::before {
+  display: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins .kk-plate {
+  transform: scaleX(-1);
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-plate-copy {
+  position: absolute;
+  z-index: 1;
+  top: var(--plate-well-y);
+  height: var(--plate-well-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  text-align: center;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins .kk-plate-copy {
+  left: calc(100% - var(--plate-well-x) - var(--plate-well-w));
+  width: var(--plate-well-w);
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-plate-copy {
+  left: var(--plate-well-x);
+  width: var(--plate-well-w);
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-sockets {
+  width: auto;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 6px;
+  grid-column: auto;
+  grid-row: auto;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-next {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-socket {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  flex-basis: 40px;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult {
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow {
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.4px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Compact dock. Controls sit together. Spin is not pushed to the bottom. */
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock {
+  grid-area: dock;
+  align-self: center;
+  justify-self: stretch;
+  height: max-content;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 0;
+  padding: 10px;
+  overflow: visible;
+  box-sizing: border-box;
+  border: 1px solid #8d704088;
+  border-radius: 12px;
+  background: #071820ee;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 40px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid #c9a15a;
+  border-radius: 8px;
+  background: #102830;
+  background-image: none;
+  color: #fff1d2;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  text-shadow: none;
+  box-shadow: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button span {
+  position: static;
+  inset: auto;
+  display: block;
+  width: auto;
+  height: auto;
+  color: inherit;
+  text-shadow: none;
+  line-height: 1;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button.selected {
+  border-color: #ffe2a7;
+  background: linear-gradient(#f3d7a0, #c49245);
+  color: #17241c;
+  filter: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button.selected span {
+  color: #17241c;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button:disabled {
+  opacity: 0.5;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-bet,
+.kk-stage .kk-shell[data-layout="r2"] .kk-ante {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 0 0 auto;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-bet,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-ante {
+  display: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-stepper {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-stepper .kk-round,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 1px solid #a58143;
+  border-radius: 50%;
+  background: #0c222a;
+  background-image: none;
+  box-shadow: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock .kk-turbo.selected,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock .kk-round[aria-pressed="true"] {
+  border-color: #ffe2a7;
+  background: #1b463c;
+  filter: none;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-stepper select {
+  width: auto;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 36px;
+  border: 1px solid #a5814388;
+  border-radius: 8px;
+  background: #0c222a;
+  font-size: 15px;
+  font-weight: 800;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-ante {
+  height: 36px;
+  min-height: 36px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 8px;
+  border: 1px solid #a5814388;
+  border-radius: 8px;
+  background: #0c222a;
+  color: #d5e4df;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-ante.selected {
+  border-color: #ffe2a7;
+  background: #1b463c;
+  color: #ffe7b5;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-spin-area {
+  margin: 0;
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 2px;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-spin {
+  width: 84px;
+  height: 84px;
+  margin: 0;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-spin-area > span {
+  white-space: normal;
+  text-align: center;
+  max-width: 180px;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock button:disabled,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock select:disabled,
+.kk-stage .kk-shell[data-layout="r2"] .kk-spin:disabled {
+  opacity: 0.45;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock button:focus-visible,
+.kk-stage .kk-shell[data-layout="r2"] .kk-spin:focus-visible,
+.kk-stage .kk-shell[data-layout="r2"] .kk-dock select:focus-visible {
+  outline: 2px solid #ffe2a7;
+  outline-offset: 1px;
+}
+
+/* Readouts. Each visible figure has one grid area. Amounts are not stacked. */
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip {
+  grid-area: strip;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.15fr) minmax(96px, 0.7fr);
+  grid-template-areas: "balance bet last total";
+  gap: 8px;
+  align-items: stretch;
+  min-height: 58px;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  border: 1px solid #a58143;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #14303a, #06141e);
+}
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip {
+  grid-template-areas: "balance bonus spin total";
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read {
+  position: static;
+  inset: auto;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  float: none;
+  grid-area: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 44px;
+  height: auto;
+  max-height: none;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  padding: 0 6px;
+  margin: 0;
+  text-align: left;
+  container-type: inline-size;
+  visibility: visible;
+  opacity: 1;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-balance { grid-area: balance; }
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-bet-read { grid-area: bet; }
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-last-win { grid-area: last; }
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-bonus-win { grid-area: bonus; display: none; }
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-this-spin { grid-area: spin; display: none; }
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total {
+  grid-area: total;
+  display: flex;
+  border-left: 1px solid #b58f4844;
+  padding-left: 10px;
+}
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-bet-read,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-last-win,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-bet-read,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-last-win {
+  display: none;
+}
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-balance,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-bonus-win,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-this-spin,
+.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-total,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-balance,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-bonus-win,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-this-spin,
+.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-total {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read .kk-eyebrow,
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read .kk-trigger {
+  display: block;
+  position: static;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  line-height: 1.2;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read strong {
+  display: block;
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+  line-height: 1.1;
+  font-size: clamp(13px, calc(100cqi / 6.6), 22px);
+  color: #ffe3a6;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total strong {
+  font-size: clamp(12px, calc(100cqi / 7.2), 16px);
+  color: #b7cbc8;
+}
+.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-afford {
+  grid-column: 1 / -1;
+  margin: 0;
+  text-align: center;
+}
+
+@container stage (max-width: 740px) and (min-height: 521px) {
+  .kk-stage .kk-shell[data-layout="r2"] {
+    width: min(420px, 100%);
+    height: auto;
+    max-height: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "play"
+      "dock"
+      "strip";
+    align-self: center;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
+    width: 100%;
+    grid-template-rows: 84px auto;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
+    aspect-ratio: 1.66;
+    width: 100%;
+    height: auto;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-crest,
+  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
+    height: 84px;
+    min-height: 84px;
+    max-height: 84px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bust {
+    display: none;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
+    grid-template-columns: 112px minmax(0, 1fr) 112px;
+    column-gap: 4px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay {
+    height: 68px;
+    max-height: 68px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult {
+    font-size: 16px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.2px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-socket {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-next {
+    font-size: 10px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-next-long {
+    display: none;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-next-short {
+    display: inline;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-dock {
+    align-self: stretch;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) auto;
+    grid-template-areas:
+      "buy bet spin"
+      "ante tools spin";
+    align-items: center;
+    justify-content: stretch;
+    column-gap: 8px;
+    row-gap: 6px;
+    height: max-content;
+    padding: 10px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-dock {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "buy spin" "tools spin";
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button { grid-area: buy; width: 100%; height: 42px; }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bet { grid-area: bet; width: 100%; }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-ante { grid-area: ante; width: 100%; height: 40px; }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools { grid-area: tools; width: auto; justify-content: center; }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-spin-area { grid-area: spin; }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-spin {
+    width: 72px;
+    height: 72px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-strip {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "balance bet"
+      "last total";
+    min-height: 0;
+  }
+  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip {
+    grid-template-areas:
+      "balance bonus"
+      "spin total";
+  }
+}
+
+@container stage (max-height: 520px) {
+  .kk-stage .kk-shell[data-layout="r2"] {
+    width: max-content;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    grid-template-columns: auto 188px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "play dock"
+      "strip strip";
+    gap: 6px;
+    align-self: center;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
+    width: min(calc(100cqw - 214px), calc((100cqh - 120px) * 1.66));
+    grid-template-rows: 64px auto;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
+    aspect-ratio: 1.66;
+    width: 100%;
+    height: auto;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-crest,
+  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
+    height: 64px;
+    min-height: 64px;
+    max-height: 64px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bust,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-mark {
+    display: none;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-logo {
+    height: 36px;
+    top: 2px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
+    inset: 2px 4px;
+    grid-template-columns: 118px minmax(0, 1fr) 118px;
+    column-gap: 4px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay {
+    height: 56px;
+    max-height: 56px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult {
+    font-size: 15px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-socket {
+    width: 24px;
+    height: 24px;
+    flex-basis: 24px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-next {
+    font-size: 9px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-dock {
+    align-self: center;
+    padding: 8px;
+    gap: 4px;
+    overflow: visible;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-ante {
+    height: 32px;
+    min-height: 32px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper .kk-round,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
+  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    background-size: 32px 32px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-spin {
+    width: 56px;
+    height: 56px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-strip {
+    min-height: 0;
+    padding: 2px 8px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read {
+    min-height: 34px;
+  }
+  .kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read strong {
+    font-size: clamp(11px, calc(100cqi / 7.4), 15px);
+  }
+}
