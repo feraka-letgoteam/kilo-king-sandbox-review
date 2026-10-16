@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "checkJs": false },
+  "include": ["src/components/kilo", "src/lib/kilo", "src/review-entry.tsx"],
+  "exclude": ["node_modules"]
+}
