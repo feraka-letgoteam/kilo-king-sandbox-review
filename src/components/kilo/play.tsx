@@ -59,6 +59,7 @@ import {
   FeaturesPanel,
   SettingsPanel,
   PanelHeader,
+  PanelDismissContext,
 } from "./control-panels";
 import {
   readPreferences,
@@ -1498,7 +1499,18 @@ function Dialog({
   const ref = useRef<HTMLDivElement>(null);
   const closeRef = useRef(onClose);
   const previousRef = useRef<HTMLElement | null>(null);
+  const closeTimer = useRef<number | null>(null);
+  const [closing, setClosing] = useState(false);
   closeRef.current = onClose;
+  const requestClose = useCallback(() => {
+    if (closeTimer.current !== null) return;
+    if (ref.current?.closest('.kk-app[data-reduced="1"]')) {
+      closeRef.current();
+      return;
+    }
+    setClosing(true);
+    closeTimer.current = window.setTimeout(() => closeRef.current(), 160);
+  }, []);
   if (!previousRef.current && typeof document !== "undefined") {
     const active = document.activeElement;
     if (active instanceof HTMLElement && active !== document.body)
@@ -1522,10 +1534,14 @@ function Dialog({
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        closeRef.current();
+        requestClose();
         return;
       }
       if (!block || event.key !== "Tab") return;
+      if (closeTimer.current !== null) {
+        event.preventDefault();
+        return;
+      }
       const list = nodes();
       if (!list.length) return;
       if (!root.contains(document.activeElement)) {
@@ -1546,6 +1562,7 @@ function Dialog({
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
       const previous = previousRef.current;
       queueMicrotask(() => {
         if (document.querySelector(".kk-modal-root.is-blocking")) return;
@@ -1556,12 +1573,12 @@ function Dialog({
         target?.focus();
       });
     };
-  }, [block]);
+  }, [block, requestClose]);
   return (
-    <div className={`kk-modal-root ${block ? "is-blocking" : "is-clear"}`}>
-      {block ? (
-        <div className="kk-scrim" onClick={() => closeRef.current()} />
-      ) : null}
+    <div
+      className={`kk-modal-root ${block ? "is-blocking" : "is-clear"}${closing ? " is-closing" : ""}`}
+    >
+      {block ? <div className="kk-scrim" onClick={requestClose} /> : null}
       <div
         ref={ref}
         role="dialog"
@@ -1570,8 +1587,11 @@ function Dialog({
         aria-label={label}
         className={className}
         data-testid={testId}
+        inert={closing ? true : undefined}
       >
-        {children}
+        <PanelDismissContext.Provider value={requestClose}>
+          {children}
+        </PanelDismissContext.Provider>
       </div>
     </div>
   );

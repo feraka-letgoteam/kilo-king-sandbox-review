@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   BookOpen,
@@ -18,6 +18,9 @@ import { STAKES, purchaseQuote, type GamePreferences } from "./control-model";
 const amount = (n: number) => Math.round(n).toLocaleString("en-US");
 import { FEATURES, type BonusFeature } from "./feature-catalog";
 
+/** Dialog owns the dismissal timing; panels keep their normal close fallback. */
+export const PanelDismissContext = createContext<(() => void) | null>(null);
+
 export function PanelHeader({
   title,
   onClose,
@@ -27,6 +30,7 @@ export function PanelHeader({
   onClose: () => void;
   onBack?: () => void;
 }) {
+  const dismiss = useContext(PanelDismissContext) ?? onClose;
   return (
     <div className="kk-dialog-head">
       {onBack && (
@@ -44,7 +48,7 @@ export function PanelHeader({
         type="button"
         className="kk-icon-button"
         aria-label="Close"
-        onClick={onClose}
+        onClick={dismiss}
       >
         <X size={21} />
       </button>
@@ -257,6 +261,8 @@ export function FeaturesPanel({
         onBack={choice ? () => setChoice(null) : undefined}
       />
       <div
+        key={choice?.id ?? "gallery"}
+        data-view={choice ? "detail" : "gallery"}
         className={`kk-dialog-body kk-features-body${choice ? " is-detail" : ""}`}
       >
         {choice ? (
@@ -507,7 +513,7 @@ export function FeaturesPanel({
             className="kk-secondary"
             onClick={() => setChoice(null)}
           >
-            Back to features
+            {choice.kind === "purchase" ? "Back" : "Back to features"}
           </button>
           {choice.kind === "purchase" && quote && (
             <button

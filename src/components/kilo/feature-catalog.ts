@@ -36,7 +36,7 @@ export const FEATURES: readonly BonusFeature[] = [
     multiplier: 1,
     art: "/kilo-features-v12/scatter-3.webp",
     detail:
-      "Land 3 scatters to trigger the feature, or buy direct entry. The recorded modifier may add spins or raise the starting multiplier.",
+      "Land 3 scatters to trigger the feature, or buy direct entry. The bonus modifier may add spins or raise the starting multiplier.",
   },
   {
     id: "scatter-4",
@@ -49,7 +49,7 @@ export const FEATURES: readonly BonusFeature[] = [
     multiplier: 1,
     art: "/kilo-features-v12/scatter-4.webp",
     detail:
-      "Land 4 scatters in the base game to start with 15 free spins. The recorded modifier may increase the starting award. Direct purchase is not available.",
+      "Land 4 scatters in the base game to start with 15 free spins. The bonus modifier may increase the starting award. Direct purchase is not available.",
   },
   {
     id: "scatter-5",
@@ -62,7 +62,7 @@ export const FEATURES: readonly BonusFeature[] = [
     multiplier: 1,
     art: "/kilo-features-v12/scatter-5.webp",
     detail:
-      "Land 5 scatters in the base game to start with 20 free spins. The recorded modifier may increase the starting award. Direct purchase is not available.",
+      "Land 5 scatters in the base game to start with 20 free spins. The bonus modifier may increase the starting award. Direct purchase is not available.",
   },
   {
     id: "chopper",
@@ -76,7 +76,7 @@ export const FEATURES: readonly BonusFeature[] = [
     multiplier: 2,
     art: "/kilo-features-v12/chopper.webp",
     detail:
-      "Direct entry with 10 free spins and a ×2 starting multiplier. The recorded modifier may add spins or raise the starting multiplier to ×3.",
+      "Direct entry with 10 free spins and a ×2 starting multiplier. The bonus modifier may add spins or raise the starting multiplier to ×3.",
   },
   {
     id: "mystery",

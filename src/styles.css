@@ -811,6 +811,7 @@ button:not(:disabled):active {
   inset: 0;
   background: #020b13a8;
   backdrop-filter: blur(3px);
+  animation: kk-scrim-in 200ms ease-out both;
 }
 .kk-dialog {
   position: relative;
@@ -830,17 +831,42 @@ button:not(:disabled):active {
     inset 0 1px #f0e6c211;
   color: var(--ink);
   pointer-events: auto;
-  animation: kk-panel-in 180ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  animation: kk-panel-in 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 @keyframes kk-panel-in {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.985);
+    transform: translateY(16px) scale(0.98);
   }
   to {
     opacity: 1;
     transform: none;
   }
+}
+@keyframes kk-scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes kk-panel-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+}
+.kk-modal-root.is-closing .kk-dialog {
+  animation: kk-panel-out 160ms ease-in both;
+  pointer-events: none;
+}
+.kk-modal-root.is-closing .kk-scrim {
+  animation: kk-scrim-in 160ms ease-in reverse both;
 }
 .kk-dialog-head {
   flex-shrink: 0;
@@ -1047,6 +1073,27 @@ button:not(:disabled):active {
 }
 .kk-purchases .kk-features-body {
   padding: 16px 20px 12px;
+  animation: kk-feature-view-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes kk-feature-view-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes kk-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .kk-feature-toolbar {
   display: flex;
@@ -1165,6 +1212,22 @@ button:not(:disabled):active {
   transition:
     border-color 180ms,
     box-shadow 180ms;
+  animation: kk-card-in 300ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+.kk-feature-card:nth-child(2) {
+  animation-delay: 35ms;
+}
+.kk-feature-card:nth-child(3) {
+  animation-delay: 70ms;
+}
+.kk-feature-card:nth-child(4) {
+  animation-delay: 105ms;
+}
+.kk-feature-card:nth-child(5) {
+  animation-delay: 140ms;
+}
+.kk-feature-card:nth-child(6) {
+  animation-delay: 175ms;
 }
 .kk-feature-card:hover,
 .kk-feature-card:focus-within {
@@ -1297,6 +1360,19 @@ button:not(:disabled):active {
   line-height: 1.15;
   text-transform: uppercase;
   letter-spacing: 0.8px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 100ms,
+    background-color 160ms,
+    border-color 160ms,
+    filter 160ms;
+}
+.kk-feature-action:not(:disabled):active {
+  transform: translateY(1px) scale(0.985);
+}
+.kk-feature-action:focus-visible {
+  outline-color: var(--feature-accent);
 }
 .kk-feature-action.is-purchase {
   color: #132329;
@@ -1331,6 +1407,7 @@ button:not(:disabled):active {
 .kk-feature-detail-copy {
   min-width: 0;
   padding-right: 10px;
+  animation: kk-feature-view-in 260ms 70ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .kk-feature-detail-copy h2 {
   font: 600 36px/1.1 var(--display);
@@ -1447,6 +1524,9 @@ button:not(:disabled):active {
 }
 .kk-confirm-actions .kk-primary {
   min-width: 0;
+}
+.kk-confirm-actions {
+  animation: kk-feature-view-in 180ms ease-out both;
 }
 .kk-settings {
   width: min(460px, 100%);
@@ -1995,7 +2075,8 @@ button:not(:disabled):active {
     flex-wrap: wrap;
   }
   .kk-confirm-actions .kk-secondary {
-    flex: 1 1 100%;
+    flex: 0 0 auto;
+    padding-inline: 14px;
   }
 }
 @media (max-width: 700px) {
@@ -2152,6 +2233,8 @@ button:not(:disabled):active {
 .kk-app[data-reduced="1"] *::before,
 .kk-app[data-reduced="1"] *::after {
   scroll-behavior: auto !important;
+  animation-delay: 0ms !important;
   animation-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
   transition-duration: 0.01ms !important;
 }
