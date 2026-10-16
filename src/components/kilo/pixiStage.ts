@@ -13,11 +13,12 @@ import {
   collectMult,
   type SplashScript,
   type SplashCell,
+  type SplashLine,
   type Sym,
 } from "@/lib/kilo/engine";
 import type { ReelScene } from "./director";
 import { collectionShares, winningCells } from "./director";
-import { cue, scatterBuild } from "@/lib/kilo/sound";
+import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter } from "@/lib/kilo/sound";
 import {
   ART as ART_FILES,
   SOURCE_SLICES,
@@ -169,6 +170,13 @@ function spinProgress(t: number) {
     return 0.77 + 0.23 * (1 - (1 - u) ** 3);
   }
   return 1;
+}
+
+/** Held reels stay in motion, then ease out. Used only while a reel is anticipated. */
+function crawlProgress(t: number) {
+  if (t < 0.78) return 0.06 + 0.72 * (t / 0.78);
+  const u = (t - 0.78) / 0.22;
+  return 0.78 + 0.22 * (1 - (1 - u) ** 3);
 }
 
 export async function mountScene(host: HTMLElement): Promise<ReelScene> {
@@ -552,6 +560,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       tag.position.set(size / 2, tagY + tagH / 2);
       root.addChild(back, tag);
     }
+    (root as Container & { kkSym?: string }).kkSym = cell.s;
     return root;
   }
 
@@ -1021,18 +1030,18 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       return;
     }
     const { cell } = geom;
-    // One shared slowdown. It starts from scatters that are already visible,
-    // and it is the same length whether the unresolved reel hits or misses.
+    // Presentation only. Two scatters in the first four reels hold every reel
+    // that has not landed. The crawl is the same length on a hit or a miss.
     const anticipate = pace === "landed" && !reduced;
-    const extra = anticipate ? (turbo ? 280 : 720) : 0;
+    const extra = anticipate ? (turbo ? 640 : 1500) : 0;
     const activeSet = new Set(active);
-    let seen = 0;
-    for (let reel = 0; reel < 5; reel++) {
-      if (!activeSet.has(reel) && board[reel]?.some((c) => c.s === "bars")) seen += 1;
+    let lockedEarly = 0;
+    for (let reel = 0; reel < 4; reel++) {
+      if (!activeSet.has(reel) && board[reel]?.some((c) => c.s === "bars")) lockedEarly += 1;
     }
-    const openSlow = anticipate && seen >= 2;
+    const openSlow = anticipate && lockedEarly >= 2;
     const spins = active.map((reel, order) => {
-      const travel = (turbo ? 12 : 18) + order;
+      const travel = (turbo ? 12 : 18) + order + (openSlow ? 8 : 0);
       const pad = 3;
       const strip = reels[reel]!.strip;
       const seq: SplashCell[] = [];
@@ -1046,7 +1055,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         .forEach((child) => child.destroy({ children: true }));
       seq.forEach((cellData, index) => {
         const view = cellView(cellData, cell);
-        view.y = index * cell;
+        view.pivot.set(cell / 2, cell / 2);
+        view.position.set(cell / 2, index * cell + cell / 2);
         strip.addChild(view);
       });
       const endIndex = pad;
@@ -1055,10 +1065,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const endY = -endIndex * cell;
       strip.position.set(0, startY);
       const ordinary = (turbo ? 340 : 700) + order * (turbo ? 50 : 160);
-      const duration = ordinary + (openSlow ? extra : 0);
+      const crawlMs = (turbo ? 720 : 1560) + order * (turbo ? 200 : 380);
+      const duration = openSlow ? crawlMs : ordinary;
       return {
         reel,
         strip,
+        pad,
         startY,
         endY,
         delay: order * (turbo ? 16 : 36),
@@ -1069,16 +1081,34 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         slowed: openSlow,
       };
     });
+    const scatterReels: number[] = [];
+    let teaseLive = openSlow;
     const target = phaseTarget();
     target.dataset.anticipation = openSlow ? "build" : "off";
+    if (!reduced) whirStart();
+    if (openSlow) teaseBegin();
     let tickAt = 0;
     let tickStep = 0;
-    const pulses: { reel: number; at: number }[] = [];
+    const pulses: { reel: number; at: number; scatter: boolean }[] = [];
+    let audioClosed = false;
+    const earlyCount = () =>
+      lockedEarly + scatterReels.filter((reel) => reel < 4).length;
+    const closeAudio = () => {
+      if (audioClosed) return;
+      audioClosed = true;
+      const hit = lockedEarly + scatterReels.length >= 3;
+      if (teaseLive) {
+        target.dataset.anticipation = hit ? "hit" : "miss";
+        teaseResolve(hit);
+      }
+      whirStop();
+    };
     await new Promise<void>((resolve) => {
       let raf = 0;
       const finish = () => {
         cancelAnimationFrame(raf);
         waits.delete(finish);
+        closeAudio();
         resolve();
       };
       waits.add(finish);
@@ -1087,6 +1117,17 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         const prev = clock.get(spin) ?? now;
         clock.set(spin, now);
         return spin.rate * Math.max(0, now - prev);
+      };
+      const popCells = (spin: (typeof spins)[number], t: number) => {
+        const ampT = t < 0.9 ? 0 : Math.sin(((t - 0.9) / 0.1) * Math.PI);
+        for (let row = 0; row < 3; row++) {
+          const view = spin.strip.children[spin.pad + row] as
+            | (Container & { kkSym?: string })
+            | undefined;
+          if (!view || view.destroyed) continue;
+          const amp = view.kkSym === "bars" ? 0.16 : 0.07;
+          view.scale.set(1 + ampT * amp);
+        }
       };
       const t0 = performance.now();
       const run = (now: number) => {
@@ -1104,52 +1145,73 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           if (spin.landed) continue;
           spin.progress = Math.min(1, spin.progress + step(spin, now));
           const t = spin.progress;
-          const p = spinProgress(t);
-          const u = t < 0.88 ? 0 : (t - 0.88) / 0.12;
-          const settle = Math.sin(u * Math.PI) * cell * 0.05 * (1 - u);
+          const p = spin.slowed ? crawlProgress(t) : spinProgress(t);
+          const u = t < 0.9 ? 0 : (t - 0.9) / 0.1;
+          const settle = Math.sin(u * Math.PI) * cell * (spin.slowed ? 0.08 : 0.05) * (1 - u);
           const y = spin.startY + (spin.endY - spin.startY) * p + settle;
           const limit = spin.endY + cell * 0.35;
           spin.strip.position.y = Math.min(limit, Math.max(spin.startY - cell, y));
+          popCells(spin, t);
           if (t < 1) {
             pending = true;
             if (spin.slowed) building = true;
             continue;
           }
           spin.landed = true;
-          cue("stop");
-          if (!anticipate || !grid[spin.reel]?.some((c) => c.s === "bars")) continue;
-          seen += 1;
-          pulses.push({ reel: spin.reel, at: now });
-          if (anticipate && seen === 2) {
+          popCells(spin, 1);
+          const isScatter = !!grid[spin.reel]?.some((c) => c.s === "bars");
+          if (isScatter) {
+            scatterReels.push(spin.reel);
+            pulses.push({ reel: spin.reel, at: now, scatter: true });
+          }
+          const othersDone = spins.every((other) => other === spin || other.landed);
+          const early = earlyCount();
+          landStop(isScatter, !isScatter && teaseLive && othersDone && early === 2);
+          if (isScatter && anticipate && spin.reel < 4 && early === 2 && !teaseLive) {
+            teaseLive = true;
             target.dataset.anticipation = "build";
+            teaseBegin();
+            let slot = 0;
             for (const other of spins) {
               if (other.landed || other.slowed) continue;
-              const remain = Math.max(0.001, 1 - other.progress);
-              other.rate = remain / (remain / other.rate + extra);
+              const holdAt = 0.46;
+              if (other.progress > holdAt) other.progress = holdAt;
+              const remain = Math.max(0.08, 1 - other.progress);
+              const crawl = extra + slot * (turbo ? 220 : 380);
+              other.rate = remain / crawl;
               other.slowed = true;
+              slot += 1;
             }
           }
-          if (seen >= 3) {
-            target.dataset.anticipation = "resolved";
-            for (const other of spins) {
-              if (other.landed || !other.slowed) continue;
-              other.rate = 1 / other.ordinary;
-              other.slowed = false;
-            }
-          }
+          if (lockedEarly + scatterReels.length >= 3 && teaseLive)
+            target.dataset.anticipation = "hit";
         }
         fx.clear();
+        for (const spin of spins) {
+          if (!spin.slowed || spin.landed) continue;
+          const reelX = geom.gx + spin.reel * (cell + geom.gap);
+          const pulse = 0.55 + 0.4 * Math.sin(now / 80);
+          fx.roundRect(reelX - 5, geom.gy - 5, cell + 10, cell * 3 + 10, 12).fill({
+            color: 0x12383a,
+            alpha: 0.16,
+          });
+          fx.roundRect(reelX - 4, geom.gy - 4, cell + 8, cell * 3 + 8, 10).stroke({
+            width: 4,
+            color: 0xffd56a,
+            alpha: pulse,
+          });
+        }
         for (const pulse of pulses) {
-          const age = (now - pulse.at) / 220;
+          const age = (now - pulse.at) / (pulse.scatter ? 360 : 220);
           if (age >= 1) continue;
           const reelX = geom.gx + pulse.reel * (cell + geom.gap);
           fx.roundRect(reelX - 3, geom.gy - 3, cell + 6, cell * 3 + 6, 8).stroke({
-            width: 3,
-            color: 0xffd56a,
-            alpha: 1 - age,
+            width: pulse.scatter ? 5 : 3,
+            color: pulse.scatter ? 0xfff1b8 : 0xffd56a,
+            alpha: (1 - age) * (pulse.scatter ? 1 : 0.8),
           });
         }
-        if (building && now - tickAt > 170) {
+        if (building && now - tickAt > (turbo ? 120 : 160)) {
           scatterBuild(tickStep);
           tickStep += 1;
           tickAt = now;
@@ -1160,7 +1222,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       raf = requestAnimationFrame(run);
     });
     if (mine !== job) return;
-    board = grid.map((col) => col.map((cell) => ({ ...cell })));
+    board = grid.map((col) => col.map((cellData) => ({ ...cellData })));
     animating = false;
     if (pendingLayout) layout();
     else paintStanding();
@@ -1173,6 +1235,65 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       x: gx + reel * (cell + gap) + cell / 2,
       y: gy + row * cell + cell / 2,
     };
+  }
+
+  async function burstWin(line: SplashLine, sound = true) {
+    const cells = winningCells(line);
+    const tier: 0 | 1 | 2 =
+      line.pay >= stake * 15 ? 2 : line.pay >= stake * 4 ? 1 : 0;
+    if (sound) winSting(tier);
+    if (reduced || stopped || !cells.length) return;
+    const bits: Graphics[] = [];
+    const views: { view: Container; row: number; reel: number }[] = [];
+    for (const spot of cells) {
+      const view = reels[spot.reel]?.strip.children[spot.row] as Container | undefined;
+      if (view && !view.destroyed) {
+        const size = geom.cell;
+        view.pivot.set(size / 2, size / 2);
+        view.position.set(size / 2, spot.row * size + size / 2);
+        views.push({ view, row: spot.row, reel: spot.reel });
+      }
+    }
+    const count = 7 + tier * 5;
+    const origins = cells.map((spot) => cellCenter(spot.reel, spot.row));
+    for (let i = 0; i < count; i++) {
+      const origin = origins[i % origins.length]!;
+      const bit = new Graphics();
+      lineArt.addChild(bit);
+      bits.push(bit);
+      (bit as Graphics & { kk?: { ang: number; dist: number; r: number; color: number; ox: number; oy: number } }).kk = {
+        ang: (Math.PI * 2 * i) / count + (i % 2) * 0.2,
+        dist: geom.cell * (0.28 + (i % 4) * 0.1) * (1 + tier * 0.22),
+        r: 2.2 + (i % 3) + tier * 0.4,
+        color: i % 3 === 0 ? 0xfff6dd : i % 3 === 1 ? 0xffd56a : 0x7ee7ff,
+        ox: origin.x,
+        oy: origin.y,
+      };
+    }
+    const ms = turbo ? 200 : tier === 2 ? 620 : 440;
+    await tween(ms, (t) => {
+      const e = 1 - (1 - t) ** 2;
+      const pop = Math.sin(Math.min(1, t * 1.4) * Math.PI);
+      for (const item of views) {
+        if (item.view.destroyed) continue;
+        item.view.scale.set(1 + pop * (0.06 + tier * 0.03));
+      }
+      for (const bit of bits) {
+        if (bit.destroyed) continue;
+        const k = (bit as Graphics & { kk: { ang: number; dist: number; r: number; color: number; ox: number; oy: number } }).kk;
+        const x = k.ox + Math.cos(k.ang) * k.dist * e;
+        const y = k.oy + Math.sin(k.ang) * k.dist * e - t * geom.cell * 0.08;
+        bit.clear().circle(x, y, k.r * (1 - t * 0.35)).fill({ color: k.color, alpha: 1 - t });
+      }
+    });
+    for (const item of views) {
+      if (item.view.destroyed) continue;
+      const size = geom.cell;
+      item.view.scale.set(1);
+      item.view.pivot.set(0, 0);
+      item.view.position.set(0, item.row * size);
+    }
+    for (const bit of bits) if (!bit.destroyed) bit.destroy();
   }
 
   const scene: ReelScene = {
@@ -1314,14 +1435,20 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       };
       if (lines.length < 2) {
         focus(0);
-        await holdReadable(turbo ? 420 : 900);
+        await Promise.all([
+          holdReadable(turbo ? 420 : 900),
+          burstWin(lines[0]!),
+        ]);
         return;
       }
       // Shared cells stack if every route is drawn at once. Cycle the recorded wins; pays stay as stored.
       for (let index = 0; index < lines.length; index++) {
         if (stopped) return;
         focus(index);
-        await holdReadable(turbo ? 320 : 1100);
+        await Promise.all([
+          holdReadable(turbo ? 320 : 1100),
+          burstWin(lines[index]!, index === 0),
+        ]);
       }
     },
     async collect(spin) {
@@ -2157,6 +2284,17 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           : round.mode === "buy"
             ? "BOUGHT FEATURE"
             : "FREE SPINS";
+      bonusEnter();
+      if (!reduced && !stopped) {
+        const flash = new Graphics();
+        transient.addChild(flash);
+        await tween(turbo ? 100 : 200, (t) => {
+          if (flash.destroyed) return;
+          const a = t < 0.42 ? t / 0.42 : 1 - (t - 0.42) / 0.58;
+          flash.clear().rect(0, 0, geom.dw, geom.dh).fill({ color: 0xfff6dd, alpha: 0.34 * a });
+        });
+        if (!flash.destroyed) flash.destroy();
+      }
       await ceremony(
         "entry",
         label,

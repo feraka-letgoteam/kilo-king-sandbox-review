@@ -89,8 +89,8 @@ export interface ReelScene {
   ): void;
   setLocks(reels: number[]): void;
   /**
-   * `landed` stretches every still-unresolved reel by the same amount once two
-   * scatters are already visible. `ordinary` is the purchased-feature reveal:
+   * `landed` stretches every still-unresolved reel once two scatters have
+   * landed in the first four reels. `ordinary` is the purchased-feature reveal:
    * the feature is guaranteed, so the reels do not tease.
    */
   spinTo(
@@ -256,7 +256,6 @@ export async function presentScript(
   spinLine = lineSum(round.base.lines);
   if (spinLine > 0) {
     publish(`Line win ${money(spinLine)}`, false, null);
-    cue("win");
     scene.setMood("cheer");
     await scene.highlight(round.base.lines);
     if (interrupted()) return;
@@ -318,7 +317,6 @@ export async function presentScript(
     spinLine = lineSum(spin.lines);
     if (spinLine > 0) {
       publish(`Line win ${money(spinLine)}`, true, leftBeforeAward);
-      cue("win");
       scene.setMood("cheer");
       await scene.highlight(spin.lines);
       if (interrupted()) return;

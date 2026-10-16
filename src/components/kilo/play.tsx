@@ -78,6 +78,35 @@ function money(n: number) {
   return Math.max(0, Math.round(n)).toLocaleString();
 }
 
+/** Presentation roll. Snaps to zero and when motion is off so readouts still settle on the real figure. */
+function useRoll(value: number, motion: boolean, turbo: boolean) {
+  const [shown, setShown] = useState(value);
+  const shownRef = useRef(value);
+  useEffect(() => {
+    const from = shownRef.current;
+    if (!motion || from === value || value === 0) {
+      shownRef.current = value;
+      setShown(value);
+      return;
+    }
+    const delta = Math.abs(value - from);
+    const ms = (delta >= 20000 ? 860 : 480) * (turbo ? 0.45 : 1);
+    const t0 = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const u = Math.min(1, (now - t0) / ms);
+      const eased = 1 - (1 - u) ** 2;
+      const next = Math.round(from + (value - from) * eased);
+      shownRef.current = next;
+      setShown(next);
+      if (u < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value, motion, turbo]);
+  return shown;
+}
+
 type FisherPose = "idle" | "cast" | "cheer" | "slump";
 
 /** One coherent illustration. A full character rig is a separate art deliverable. */
@@ -195,6 +224,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const previewingRef = useRef(false);
   const previewGrid = useRef<SplashCell[][] | null>(null);
   const [hud, setHud] = useState<FeatureHud | null>(null);
+  const rollMotion = !reducedMotion;
+  const shownWin = useRoll(win, rollMotion, turbo);
+  const shownBonus = useRoll(hud?.bonusWin ?? 0, rollMotion, turbo);
+  const shownSpin = useRoll((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0), rollMotion, turbo);
+  const shownTotal = useRoll(hud?.total ?? win, rollMotion, turbo);
   const [fisher, setFisher] = useState<{ pose: FisherPose; tick: number }>({
     pose: "idle",
     tick: 0,
@@ -951,7 +985,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <span className="kk-eyebrow">
                 {!hud?.active && settled ? "LAST WIN" : "WIN"}
               </span>
-              <strong data-testid="last-win">{money(win)}</strong>
+              <strong data-testid="last-win">{money(shownWin)}</strong>
             </div>
             <div
               className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
@@ -959,7 +993,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             >
               <span className="kk-eyebrow">BONUS WIN</span>
               <strong data-testid="bonus-win">
-                {money(hud?.bonusWin ?? 0)}
+                {money(shownBonus)}
               </strong>
               {hud && hud.triggerWin > 0 ? (
                 <span className="kk-trigger">
@@ -970,13 +1004,13 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             <div className="kk-read kk-this-spin" data-readout="spin">
               <span className="kk-eyebrow">THIS SPIN</span>
               <strong data-testid="spin-win">
-                {money((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0))}
+                {money(shownSpin)}
               </strong>
             </div>
             <div className="kk-read kk-total kk-read-secondary" data-readout="total">
               <span className="kk-eyebrow">ROUND</span>
               <strong data-testid="round-total">
-                {money(hud?.total ?? win)}
+                {money(shownTotal)}
               </strong>
             </div>
             {afford ? (
