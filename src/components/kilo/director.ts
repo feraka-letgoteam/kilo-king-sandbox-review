@@ -7,7 +7,7 @@ import {
   type SplashLine,
   type SplashScript,
 } from "@/lib/kilo/engine";
-import { cue } from "@/lib/kilo/sound";
+import { bonusExit, cue, whirStop } from "@/lib/kilo/sound";
 
 export type Mood = "idle" | "cast" | "cheer" | "slump";
 export type MeterFace = {
@@ -404,6 +404,8 @@ export async function presentScript(
 }
 
 function snap(scene: ReelScene, round: SplashScript, opts: PresentOpts) {
+  whirStop();
+  bonusExit();
   const hud = finalHud(round);
   scene.show(round.free.at(-1)?.grid ?? round.base.grid);
   scene.setLocks([]);
