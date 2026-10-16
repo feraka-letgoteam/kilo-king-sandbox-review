@@ -369,11 +369,25 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const clearStreak = () => {
     for (let reel = 0; reel < reels.length; reel++) setStreak(reel, 0);
   };
+  const DISPLAY = "Barlow Condensed";
+  const TEXT = "Source Sans 3";
+  const ensureType = async () => {
+    if (typeof document === "undefined" || !document.fonts) return;
+    await Promise.all([
+      document.fonts.load(`600 22px "${DISPLAY}"`),
+      document.fonts.load(`400 16px "${TEXT}"`),
+      document.fonts.load(`600 16px "${TEXT}"`),
+      document.fonts.load(`700 28px "${TEXT}"`),
+    ]);
+    await document.fonts.ready;
+  };
+  void ensureType();
+
   const title = new Text({
     text: "Base game",
     style: {
       fill: 0xfff6dd,
-      fontFamily: "Arial",
+      fontFamily: "Source Sans 3",
       fontSize: 18,
       fontWeight: "700",
       stroke: { color: 0x140e06, width: 4 },
@@ -577,7 +591,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         text,
         style: {
           fill: 0xf5ead1,
-          fontFamily: "Arial",
+          fontFamily: "Source Sans 3",
           fontSize,
           fontWeight: "700",
         },
@@ -608,9 +622,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         text: "WILD",
         style: {
           fill: 0xffe7b0,
-          fontFamily: "Arial",
+          fontFamily: "Source Sans 3",
           fontSize: Math.max(9, size * 0.046),
-          fontWeight: "800",
+          fontWeight: "700",
         },
       });
       tag.anchor.set(0.5);
@@ -957,6 +971,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     detail: string,
     duration: number,
   ) {
+    await ensureType();
     const mine = job;
     animating = true;
     mark(phase);
@@ -991,9 +1006,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           text,
           style: {
             fill: colors[index] ?? 0xd7ecf2,
-            fontFamily: index === 0 ? "Arial" : "Avenir Next, Segoe UI, sans-serif",
+            fontFamily: index === 0 ? DISPLAY : TEXT,
             fontSize: sizes[index] ?? 15,
-            fontWeight: index === 0 ? "800" : "700",
+            fontWeight: index === 0 ? "600" : "700",
             align: "center",
             wordWrap: true,
             wordWrapWidth: wrap,
@@ -1051,14 +1066,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const wrap = panelWidth * (entry ? 0.48 : 0.7);
     const content = new Container();
     content.position.copyFrom(modal.position);
-    const label = (text: string, fontSize: number, color: number) => {
+    const label = (text: string, fontSize: number, color: number, family = TEXT) => {
       const node = new Text({
         text,
         style: {
           fill: color,
-          fontFamily: "Arial",
+          fontFamily: family,
           fontSize,
-          fontWeight: "700",
+          fontWeight: family === DISPLAY ? "600" : "700",
           align: "center",
           wordWrap: true,
           wordWrapWidth: wrap,
@@ -1069,21 +1084,24 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     };
     const headline = label(
       eyebrow,
-      Math.max(12, Math.min(entry ? 22 : 26, panelWidth * (entry ? 0.03 : 0.045))),
+      Math.max(14, Math.min(entry ? 22 : 26, panelWidth * (entry ? 0.03 : 0.045))),
       0xffe09b,
+      DISPLAY,
     );
     const valueText = label(
       value,
       Math.max(16, Math.min(entry ? 30 : 42, panelWidth * (entry ? 0.046 : 0.074))),
       0xfff6dd,
     );
-    const detailText = label(
-      detail,
-      Math.max(11, Math.min(entry ? 16 : 19, panelWidth * (entry ? 0.026 : 0.035))),
-      0xd7ecf2,
-    );
+    const detailText = detail.trim()
+      ? label(
+          detail,
+          Math.max(14, Math.min(entry ? 16 : 19, panelWidth * (entry ? 0.026 : 0.035))),
+          0xd7ecf2,
+        )
+      : null;
     const gap = Math.max(4, Math.min(10, panelHeight * (entry ? 0.018 : 0.032)));
-    const labels = [headline, valueText, detailText];
+    const labels = [headline, valueText, detailText].filter((item) => item != null);
     const wellTop = panelHeight * (entry ? 0.36 : 0.34);
     const wellBottom = panelHeight * (entry ? 0.64 : 0.78);
     const wellH = wellBottom - wellTop;
@@ -1095,7 +1113,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       guard += 1;
       for (const item of labels) {
         const size = Number(item.style.fontSize);
-        item.style.fontSize = Math.max(10, size - 1);
+        item.style.fontSize = Math.max(13, size - 1);
       }
     }
     const totalHeight =
@@ -1641,7 +1659,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           text,
           style: {
             fill: 0xfff6dd,
-            fontFamily: "Arial",
+            fontFamily: "Source Sans 3",
             fontSize: Math.max(13, Math.min(18, Math.round(cell * 0.11))),
             fontWeight: "700",
           },
@@ -1742,8 +1760,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             text: line.text,
             style: {
               fill: line.color,
-              fontFamily: "Arial",
-              fontWeight: "800",
+              fontFamily: "Source Sans 3",
+              fontWeight: "700",
               fontSize: line.size,
               align: "center",
             },
@@ -1884,8 +1902,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           text: money(value),
           style: {
             fill: 0xffefbc,
-            fontFamily: "Arial",
-            fontWeight: "800",
+            fontFamily: "Source Sans 3",
+            fontWeight: "700",
             fontSize: Math.max(15, Math.round(geom.cell * 0.15)),
             stroke: { color: 0x031920, width: Math.max(3, geom.cell * 0.02) },
           },
@@ -2528,13 +2546,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         `${round.awarded} spins · Starts at ×${collectMult(round.banked)}`,
         round.mods.length
           ? round.mods.map((mod) => names[mod] ?? mod).join(" · ")
-          : "No extra modifiers",
+          : "",
         turbo ? 780 : 1500,
       );
     },
     async retrigger(extra, nextMult, onAward) {
       const mine = job;
       mark("upgrade");
+      await ensureType();
       const root = host.closest(".kk-app") ?? document.body;
       const bonus = root.querySelector(".kk-bonus");
       bonus?.classList.add("is-awarding");
@@ -2559,29 +2578,29 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         text: `+${extra}`,
         style: {
           fill: 0xffe2a0,
-          fontFamily: "Arial",
-          fontWeight: "800",
+          fontFamily: TEXT,
+          fontWeight: "700",
           fontSize: Math.max(18, Math.min(48, w * 0.15)),
           align: "center",
         },
       });
       const free = new Text({
-        text: "FREE SPINS",
+        text: "Free spins",
         style: {
           fill: 0xe3f0e7,
-          fontFamily: "Arial",
-          fontWeight: "800",
-          fontSize: Math.max(12, Math.min(22, w * 0.052)),
+          fontFamily: DISPLAY,
+          fontWeight: "600",
+          fontSize: Math.max(14, Math.min(22, w * 0.052)),
           align: "center",
         },
       });
       const next = new Text({
-        text: nextMult >= 10 ? "MAX LEVEL" : `NEXT COLLECTION ×${nextMult}`,
+        text: nextMult >= 10 ? "Max level" : `Next ×${nextMult}`,
         style: {
           fill: 0x99e8cd,
-          fontFamily: "Arial",
-          fontWeight: "800",
-          fontSize: Math.max(11, Math.min(18, w * 0.034)),
+          fontFamily: TEXT,
+          fontWeight: "700",
+          fontSize: Math.max(13, Math.min(18, w * 0.034)),
           align: "center",
         },
       });
@@ -2721,7 +2740,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       sheet.addChild(new Graphics().rect(0, 0, sheetW, sheetH).fill({ color: 0x04121c }));
       const header = new Text({
         text: "72 idle      72 peak           158 idle           158 peak",
-        style: { fill: 0xf0ddb4, fontFamily: "Arial", fontSize: 13, fontWeight: "700" },
+        style: { fill: 0xf0ddb4, fontFamily: "Source Sans 3", fontSize: 13, fontWeight: "700" },
       });
       header.position.set(112, 8);
       sheet.addChild(header);
@@ -2729,7 +2748,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         const y = 36 + index * rowH;
         const label = new Text({
           text: sample.name,
-          style: { fill: 0xd7ecf2, fontFamily: "Arial", fontSize: 14, fontWeight: "700" },
+          style: { fill: 0xd7ecf2, fontFamily: "Source Sans 3", fontSize: 14, fontWeight: "700" },
         });
         label.position.set(8, y + 8);
         sheet.addChild(label);

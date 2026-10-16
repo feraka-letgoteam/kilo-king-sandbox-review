@@ -235,6 +235,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const [panel, setPanel] = useState(review);
   const [help, setHelp] = useState(false);
   const [buyPanel, setBuyPanel] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const [summary, setSummary] = useState<null | {
     payout: number;
     purchaseCost: number | null;
@@ -931,8 +932,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                     alt=""
                   />
                   <div className="kk-plate-copy">
-                    <span className="kk-eyebrow kk-eyebrow-desk">FREE SPINS</span>
-                    <span className="kk-eyebrow kk-eyebrow-phone">Spins</span>
+                    <span className="kk-eyebrow">Spins</span>
                     <b data-testid="spins-left">{hud.left ?? 0}</b>
                   </div>
                 </div>
@@ -963,20 +963,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                       );
                     })}
                   </div>
-                  {capNotice ? (
-                    <span className="kk-next kk-cap-note">MAX WIN REACHED</span>
-                  ) : hud.maxed || hud.nextMult == null ? (
-                    <span className="kk-next">MAX LEVEL</span>
-                  ) : (
-                    <span className="kk-next">
-                      <span className="kk-next-long">
-                        NEXT +{hud.nextSpins} SPINS · ×{hud.nextMult}
-                      </span>
-                      <span className="kk-next-short">
-                        +{hud.nextSpins} · ×{hud.nextMult}
-                      </span>
-                    </span>
-                  )}
                 </div>
                 <div className="kk-bonus-pay">
                   <img
@@ -985,11 +971,19 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                     alt=""
                   />
                   <div className="kk-plate-copy">
-                    <span className="kk-eyebrow kk-eyebrow-desk">COLLECT</span>
-                    <span className="kk-eyebrow kk-eyebrow-phone">Multiplier</span>
+                    <span className="kk-eyebrow">Multiplier</span>
                     <b className="kk-mult">×{hud.mult}</b>
                   </div>
                 </div>
+                {capNotice ? (
+                  <span className="kk-next kk-cap-note">Max win reached</span>
+                ) : hud.maxed || hud.nextMult == null ? (
+                  <span className="kk-next">Max level</span>
+                ) : (
+                  <span className="kk-next">
+                    Next +{hud.nextSpins} spins · ×{hud.nextMult}
+                  </span>
+                )}
               </div>
             ) : (
               <>
@@ -1011,27 +1005,13 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             <ReelStage onReady={onReady} />
           </div>
           </div>
-          <aside className="kk-dock" aria-label="Play controls">
-            <button
-              type="button"
-              className={`kk-feature-button ${mode === "buy" || mode === "chopper" ? "selected" : ""}`}
-              disabled={busy || summary != null || !!hud?.active}
-              aria-pressed={mode === "buy" || mode === "chopper"}
-              onClick={() => {
-                uiTap();
-                setHelp(false);
-                setPanel(false);
-                setBuyPanel(!buyPanel);
-              }}
-            >
-              <span>
-                {mode === "chopper"
-                  ? "CHOPPER"
-                  : mode === "buy"
-                    ? "FREE SPINS"
-                    : "BUY FEATURE"}
-              </span>
-            </button>
+          <aside
+            className="kk-dock"
+            aria-label="Play controls"
+            onKeyDown={(event) => {
+              if (event.key === "Escape") setToolsOpen(false);
+            }}
+          >
             <div className="kk-bet">
               <span className="kk-eyebrow" id="base-bet-label">
                 BASE BET
@@ -1079,91 +1059,126 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                 </button>
               </div>
             </div>
-            <button
-              type="button"
-              className={`kk-ante ${mode === "ante" ? "selected" : ""}`}
-              disabled={busy || summary != null}
-              aria-pressed={mode === "ante"}
-              onClick={() => {
-                uiTap();
-                setMode(mode === "ante" ? "spin" : "ante");
-              }}
-            >
-              <span>{mode === "ante" ? "ANTE ON" : "ANTE OFF"}</span>
-              <b>{money(splashCost(stake, "ante"))}</b>
-            </button>
-            <div className="kk-dock-tools">
+            <div className="kk-dock-play">
               <button
                 type="button"
-                className={`kk-turbo ${turbo ? "selected" : ""}`}
-                aria-pressed={turbo}
-                aria-label="Turbo"
-                disabled={busy || summary != null}
+                className={`kk-feature-button ${mode === "buy" || mode === "chopper" ? "selected" : ""}`}
+                disabled={busy || summary != null || !!hud?.active}
+                aria-pressed={mode === "buy" || mode === "chopper"}
                 onClick={() => {
                   uiTap();
-                  setTurbo(!turbo);
-                }}
-              >
-                <img src="/kilo-ui-v11/icon-turbo.svg" alt="" />
-              </button>
-              <button
-                type="button"
-                className="kk-round kk-sound"
-                aria-pressed={!mute}
-                aria-label={mute ? "Sound off" : "Sound on"}
-                onClick={() => {
-                  setMute(!mute);
-                  setMuted(!mute);
-                }}
-              >
-                <img
-                  src={mute ? "/kilo-ui-v11/icon-muted.svg" : "/kilo-ui-v11/icon-sound.svg"}
-                  alt=""
-                />
-              </button>
-              <button
-                type="button"
-                className="kk-round kk-rules-btn"
-                aria-label="Rules"
-                onClick={() => {
-                  uiTap();
-                  setHelp(!help);
+                  setHelp(false);
                   setPanel(false);
-                  setBuyPanel(false);
+                  setBuyPanel(!buyPanel);
                 }}
+              >
+                <span>
+                  {mode === "chopper"
+                    ? "Chopper"
+                    : mode === "buy"
+                      ? "Free spins"
+                      : "Buy feature"}
+                </span>
+              </button>
+              <div className="kk-spin-area">
+                <button
+                  type="button"
+                  className={`kk-spin${control.purchase ? " is-purchase" : ""}${busy ? " is-busy" : ""}`}
+                  data-testid="spin-button"
+                  disabled={
+                    summary != null ||
+                    !ready ||
+                    (!busy && (afford || !splashStakeOk(stake, mode)))
+                  }
+                  onClick={() => {
+                    if (summary) return;
+                    if (busy) skip();
+                    else void play();
+                  }}
+                >
+                  {control.label}
+                </button>
+                <span data-testid="charge-note">
+                  {summary
+                    ? "No charge"
+                    : busy
+                      ? reviewing
+                        ? "Replay"
+                        : hud?.active
+                          ? "Feature in progress"
+                          : "Round in progress"
+                      : `Charge ${money(cost)}`}
+                </span>
+              </div>
+            </div>
+            <div className={`kk-dock-utils${toolsOpen ? " is-open" : ""}`}>
+              <button
+                type="button"
+                className={`kk-ante ${mode === "ante" ? "selected" : ""}`}
+                disabled={busy || summary != null}
+                aria-pressed={mode === "ante"}
+                onClick={() => {
+                  uiTap();
+                  setMode(mode === "ante" ? "spin" : "ante");
+                }}
+              >
+                <span>{mode === "ante" ? "ANTE ON" : "ANTE OFF"}</span>
+                <b>{money(splashCost(stake, "ante"))}</b>
+              </button>
+              <button
+                type="button"
+                className="kk-tools-toggle"
+                aria-expanded={toolsOpen}
+                aria-controls="dock-tools"
+                aria-label="More controls"
+                onClick={() => setToolsOpen((open) => !open)}
               >
                 <img src="/kilo-ui-v11/icon-info.svg" alt="" />
               </button>
-            </div>
-            <div className="kk-spin-area">
-              <button
-                type="button"
-                className={`kk-spin${control.purchase ? " is-purchase" : ""}${busy ? " is-busy" : ""}`}
-                data-testid="spin-button"
-                disabled={
-                  summary != null ||
-                  !ready ||
-                  (!busy && (afford || !splashStakeOk(stake, mode)))
-                }
-                onClick={() => {
-                  if (summary) return;
-                  if (busy) skip();
-                  else void play();
-                }}
-              >
-                {control.label}
-              </button>
-              <span data-testid="charge-note">
-                {summary
-                  ? "SUMMARY · NO CHARGE"
-                  : busy
-                    ? reviewing
-                      ? "REPLAY · NO CHARGE"
-                      : hud?.active
-                        ? "FEATURE IN PROGRESS"
-                        : "ROUND IN PROGRESS"
-                    : `CHARGE ${money(cost)} LGC`}
-              </span>
+              <div className="kk-dock-tools" id="dock-tools">
+                <button
+                  type="button"
+                  className={`kk-turbo ${turbo ? "selected" : ""}`}
+                  aria-pressed={turbo}
+                  aria-label="Turbo"
+                  disabled={busy || summary != null}
+                  onClick={() => {
+                    uiTap();
+                    setTurbo(!turbo);
+                  }}
+                >
+                  <img src="/kilo-ui-v11/icon-turbo.svg" alt="" />
+                </button>
+                <button
+                  type="button"
+                  className="kk-round kk-sound"
+                  aria-pressed={!mute}
+                  aria-label={mute ? "Sound off" : "Sound on"}
+                  onClick={() => {
+                    setMute(!mute);
+                    setMuted(!mute);
+                  }}
+                >
+                  <img
+                    src={mute ? "/kilo-ui-v11/icon-muted.svg" : "/kilo-ui-v11/icon-sound.svg"}
+                    alt=""
+                  />
+                </button>
+                <button
+                  type="button"
+                  className="kk-round kk-rules-btn"
+                  aria-label="Rules"
+                  onClick={() => {
+                    uiTap();
+                    setHelp(!help);
+                    setPanel(false);
+                    setBuyPanel(false);
+                    setToolsOpen(false);
+                  }}
+                >
+                  <img src="/kilo-ui-v11/icon-info.svg" alt="" />
+                </button>
+              </div>
             </div>
           </aside>
           <footer
