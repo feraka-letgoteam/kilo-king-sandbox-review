@@ -1,3 +1,4 @@
+import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import {
   Application,
   Assets,
@@ -403,6 +404,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   let meterWilds = 0;
   let stake = 1000;
   let turbo = false;
+  let speedMode: SpinSpeed = "normal";
   let reduced = false;
   let geom = geomFor(host.clientWidth || 1100, host.clientHeight || 640);
   let board: SplashCell[][] = [
@@ -1179,7 +1181,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     // every reel that is still spinning. Extra symbols are inserted above the
     // window so the strip never reverses. A partial respin (locked crowns)
     // keeps the short cycle and only moves the free reels.
-    const anticipate = pace === "landed" && !reduced && only == null;
+    const timing = SPIN_TIMING[speedMode];
+    const anticipate = timing.anticipation && pace === "landed" && !reduced && only == null;
     const activeSet = new Set(active);
     let lockedEarly = 0;
     for (let reel = 0; reel < 4; reel++) {
@@ -1203,7 +1206,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       noted: boolean;
     };
     const spins: Spin[] = active.map((reel, order) => {
-      const travel = (turbo ? 12 : 18) + order;
+      const travel = timing.travel + order;
       const pad = 3;
       const strip = reels[reel]!.strip;
       const seq: SplashCell[] = [];
@@ -1226,14 +1229,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const startY = -startIndex * cell;
       const endY = -endIndex * cell;
       strip.position.set(0, startY);
-      const ordinary = (turbo ? 340 : 700) + order * (turbo ? 50 : 160);
+      const ordinary = timing.duration + order * timing.stagger;
       return {
         reel,
         strip,
         pad,
         startY,
         endY,
-        delay: order * (turbo ? 16 : 36),
+        delay: order * timing.delay,
         rate: 1 / ordinary,
         progress: 0,
         phase: "spin",
@@ -1543,8 +1546,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     setStake(n) {
       stake = n;
     },
-    setPace(nextTurbo, nextReduced) {
-      turbo = nextTurbo;
+    setPace(nextTurbo, nextReduced, speed) {
+      speedMode = speed ?? (nextTurbo ? "turbo" : "normal");
+      turbo = speedMode !== "normal";
       reduced = nextReduced;
       setAudioTurbo(nextTurbo);
     },

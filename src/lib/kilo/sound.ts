@@ -1,4 +1,25 @@
 const MUTE = "kilo-sandbox-mute";
+const VOLUMES = "kilo-audio-volumes";
+
+export function audioVolumes(): { music: number; effects: number } {
+  try {
+    const value = JSON.parse(localStorage.getItem(VOLUMES) || "null");
+    return { music: volume(value?.music), effects: volume(value?.effects) };
+  } catch { return { music: 70, effects: 70 }; }
+}
+function volume(value: unknown) {
+  return typeof value === "number" && Number.isFinite(value) ? Math.max(0, Math.min(100, value)) : 70;
+}
+export function audioReady() { return loaded; }
+export function setAudioVolumes(music: number, effects: number) {
+  const next = { music: volume(music), effects: volume(effects) };
+  try { localStorage.setItem(VOLUMES, JSON.stringify(next)); } catch { /* Session still works. */ }
+  const c = ac();
+  if (c && musicBus && sfxBus) {
+    musicBus.gain.setTargetAtTime(next.music / 100, c.currentTime, 0.03);
+    sfxBus.gain.setTargetAtTime(next.effects / 100, c.currentTime, 0.03);
+  }
+}
 
 /**
  * Placeholder score, not a licensed session. One F-minor theme at 124 BPM.
@@ -45,6 +66,7 @@ export function muted(): boolean {
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
+let musicBus: GainNode | null = null;
 let musicDuck: GainNode | null = null;
 let sfxBus: GainNode | null = null;
 let beds: Partial<Record<BedName | "tension" | "intro", AudioBuffer>> = {};
@@ -81,8 +103,13 @@ function ac(): AudioContext | null {
       master = ctx.createGain();
       master.gain.value = muted() ? 0 : 1;
       musicDuck = ctx.createGain();
+      musicBus = ctx.createGain();
       sfxBus = ctx.createGain();
-      musicDuck.connect(master);
+      const levels = audioVolumes();
+      musicBus.gain.value = levels.music / 100;
+      sfxBus.gain.value = levels.effects / 100;
+      musicDuck.connect(musicBus);
+      musicBus.connect(master);
       sfxBus.connect(master);
       master.connect(ctx.destination);
     }
@@ -114,6 +141,7 @@ export function preloadAudio() {
     loading = (async () => {
       try {
         const mapRes = await fetch(SFX_MAP_URL);
+        if (!mapRes.ok) throw new Error("Sound unavailable");
         sprites = (await mapRes.json()) as Record<string, Sprite>;
         const [base, spin, feature, chopper, intro, rise, sfx] = await Promise.all([
           decode(BED_URL.base),

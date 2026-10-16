@@ -1,3 +1,4 @@
+import { SPIN_TIMING, type SpinSpeed } from "./control-model.ts";
 import {
   collectMult,
   meterLevel,
@@ -41,6 +42,7 @@ export type FeatureHud = {
 };
 export type PresentOpts = {
   turbo: boolean;
+  speed?: SpinSpeed;
   reduced: boolean;
   skipped: () => boolean;
   onHud?: (hud: FeatureHud) => void;
@@ -72,7 +74,7 @@ export type SymbolCompareResult = { rows: SymbolEdge[] };
 
 export interface ReelScene {
   setStake(stake: number): void;
-  setPace(turbo: boolean, reduced: boolean): void;
+  setPace(turbo: boolean, reduced: boolean, speed?: SpinSpeed): void;
   setMood(mood: Mood): void;
   setCopy(title: string): void;
   setTally(tally: {
@@ -138,7 +140,7 @@ const lineSum = (lines: SplashLine[]) =>
 // Poll only during a short presentation hold, so Skip never waits for a whole plate.
 async function hold(opts: PresentOpts, ms: number) {
   if (opts.reduced || opts.skipped()) return;
-  const end = performance.now() + ms * (opts.turbo ? 0.4 : 1);
+  const end = performance.now() + ms * SPIN_TIMING[opts.speed ?? (opts.turbo ? "turbo" : "normal")].hold;
   while (!opts.skipped() && performance.now() < end)
     await new Promise<void>((resolve) =>
       window.setTimeout(resolve, Math.min(40, end - performance.now())),
@@ -152,7 +154,7 @@ export async function presentScript(
   opts: PresentOpts,
 ) {
   scene.setStake(round.stake);
-  scene.setPace(opts.turbo, opts.reduced);
+  scene.setPace(opts.turbo, opts.reduced, opts.speed);
   let line = 0,
     collect = 0,
     scatter = 0,
@@ -674,7 +676,7 @@ export async function presentEventPreview(
         ? "Bought feature"
         : "Free spins";
   scene.setStake(round.stake);
-  scene.setPace(opts.turbo, opts.reduced);
+  scene.setPace(opts.turbo, opts.reduced, opts.speed);
   const publish = (
     note: string,
     wilds: number,
@@ -922,7 +924,7 @@ export async function presentSettledCollection(
         ? "Bought feature"
         : "Free spins";
   scene.setStake(round.stake);
-  scene.setPace(opts.turbo, opts.reduced);
+  scene.setPace(opts.turbo, opts.reduced, opts.speed);
   let shownWilds: number | null = null;
   const publish = (
     note: string,

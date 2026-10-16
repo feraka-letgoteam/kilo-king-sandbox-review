@@ -1,43 +1,44 @@
-# Kilo King presentation rebuild
+# Kilo King — audit implementation
 
-Baseline: `bdb2e5b544a33b7c6a20e7a730e0d3813d7905d4` and the repository's `layout-v7` screenshots. Artwork comes from the checksum-verified `sandbox-20261016` release. This review changes the standalone presentation; it does not change engine outcomes, purchases, settlement, collection timing, hook behavior, or reel motion.
+The two design audits called for a clearer stage, fewer permanent controls, consistent utility panels and typography, and a purchase flow that makes the charge explicit. This pass implements those changes using the existing marina, fisherman, symbols, logo and Spin artwork. It does not replace the art style.
 
-## Findings and changes
+## Implemented
 
-| Finding in the baseline                                                                                 | Change                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A large reel cabinet and a small detached desktop control column competed for attention.                | Controls and readouts now form a console below the reel frame on desktop. Short landscape retains a narrow side console.                                                     |
-| Hiding bet and ante during a feature shortened the centered composition and moved the reels.            | One viewport calculation reserves fixed header, console, and readout dimensions. Feature state is not an input. A feature status replaces the idle controls.                 |
-| Thousands of layered CSS declarations made breakpoint behavior difficult to reason about.               | Replaced the presentation stylesheet with one base system and explicit portrait, desktop, and landscape variants.                                                            |
-| Phone controls and duplicated panels dominated the small reel window.                                   | Compact bet/buy grouping, a larger primary Spin target, one utility row, and a shorter totals plate. Touch controls stay at least 44px.                                      |
-| Purchase amounts were crowded inside the gold Spin medallion.                                           | The medallion says BUY; the charge remains fully visible immediately below it. Its accessible name retains the full action and amount. Confirmation logic is unchanged.      |
-| Profit summaries used a shallow banner with too little interior space for the result, cost, and button. | All feature summaries use the crown panel's larger safe area. Continue sits outside the decorative panel with its own 48px target. Neutral returns retain neutral treatment. |
-| A short landscape screen selected the portrait loader artwork.                                          | Portrait loading artwork is now selected only for portrait orientation.                                                                                                      |
-| Hidden carousel/drawer buttons could enter the dialog's focus list.                                     | Dialog focus cycling includes only enabled, visible controls.                                                                                                                |
-| The Source link referred to a previous release.                                                         | It now opens the branch containing this revision.                                                                                                                            |
+- **Stage and controls:** Features, Bet, Spin and Menu. The phone control and totals allocation is 148px, down from 264px. Balance and Win occupy one strip; a feature substitutes Bonus Win without moving the reel rectangle. Short landscape uses a 132px console that also occupies the header height. Very short screens can scroll rather than shrinking touch controls.
+- **Bet panel:** denomination grid, plus/minus, exact per-spin cost and Apply. Closing discards the draft bet. No native select or duplicated bet readout.
+- **Features:** Ante has its own toggle inside Features, with the 1.5× per-spin charge. Free Spins and Chopper have compact illustrated rows, prices and full unavailable reasons. One shared base-bet editor updates both quotes.
+- **Purchase confirmation:** Review opens a confirmation inside the same panel. Only its Buy button starts the existing charge path. Closing or cancelling discards the selection; Spin always starts the current base-game/Ante spin. The submission ref and existing busy ref guard repeated activation.
+- **Settings:** persisted Normal, Turbo and Super turbo; System/On/Off reduced motion; music/effects gain controls and master mute. Audio controls remain disabled while the audio pack is unavailable. No synthetic substitute score was added.
+- **Speed:** three distinct reel timing profiles. Super turbo omits the extended anticipation crawl, but preserves every recorded outcome and uses the existing Turbo collection holds. The presentation director forwards the selected profile; engine, bank, settlement and fixture files are unchanged.
+- **Rules and paytable:** symbol payouts and the ten line diagrams derive from the engine's existing constants. Rules retain feature and cap information, plus the current round breakdown.
+- **Type and surfaces:** Source Sans 3 for controls, body copy and tabular amounts; Barlow Condensed for feature/dialog titles and Spin. Restrained utility surfaces replace repeated illustrated plaques. Desktop dialogs are bounded; portrait utility panels are content-sized bottom sheets with internal scrolling and fixed action footers.
+- **Accessibility:** 44px minimum button targets, visible focus, slider keyboard input, disabled-fieldset filtering in the focus trap, Escape/backdrop dismissal and focus restoration. OS reduced motion is respected unless explicitly overridden.
 
-## Validation
+## Verification
 
-- Kilo TypeScript check.
-- Existing presentation suite: 72 fixture/skip cases over 18 saved rounds, with unchanged recorded results.
-- Viewport geometry checks across 12 representative screens and 14,685 width/height combinations, including breakpoint transitions. They check horizontal containment, minimum reel dimensions, aspect ratio, and space for desktop controls.
-- Standalone Vite production build.
-- Game logic files, director, collection renderer, motion files, fixtures, and bank are unchanged.
+- `npm run typecheck:kilo`
+- `npm run test:kilo`: 216 fixture/skip/speed cases across 18 saved rounds and three speed profiles; recorded payouts, caps, final boards, collector timing and script immutability remain intact. Existing isolated collection checks also run.
+- `node scripts/verify-controls.mjs`: purchase/balance boundaries, persisted preferences and storage failure, distinct timings, rendered panel content, and engine-backed paytable coverage. These are non-browser checks; they do not simulate pointer or keyboard interaction.
+- `node scripts/verify-layout-fit.mjs`: 12 representative devices and 14,685 viewport combinations; horizontal containment, renderer minimum and aspect ratio.
+- Standalone production build for the private review site.
 
-Fresh browser screenshots and interaction checks are still pending: the supported browser QA capability is unavailable in this environment. Geometry tests do not prove visual fit, animation quality, or browser behavior.
+Fresh browser screenshots and interaction QA are **pending**. The supported browser QA capability is unavailable in this environment. Geometry checks and static rendering do not prove visual fit, motion quality, focus behavior or charge behavior under actual browser interaction. Keep the PR in draft until that review is completed.
 
-## Review in the private build
+## Review the private build
 
-1. Enter, then play at 390×844 and 1440×900.
-2. Open Buy Feature; test the 10,000 base bet with Free Spins at 1,000,000 and disabled Chopper at 2,500,000.
-3. Use Review → Two collectors — 48,000. Check the landing above BONUS WIN, and resize during collection and transfer.
-4. Check entry, retrigger, completion, and the 5,000,000 capped return. Confirm the reel rectangle stays fixed between idle and feature.
-5. Test 844×390 landscape and its More controls drawer. The shortest screens may scroll vertically instead of reducing touch targets.
-6. Check keyboard focus, Skip, turbo, reduced motion, and refresh after a completed round.
+Preview: https://kilo-king-review.navymap4.chatgpt.site
 
-## Remaining work
+1. At 320×568, 390×844, 1440×900 and 844×390, inspect idle, feature and long balance values. Confirm no horizontal overflow and no reel movement when a feature begins.
+2. Open Bet, change the draft, close, and confirm the original bet remains. Apply another bet and verify the per-spin cost. Enable Ante inside Features and check the 1.5× cost; disable it and check the ordinary cost.
+3. At a 10,000 base bet, verify Free Spins costs exactly 1,000,000 and Chopper shows its 1,000,000 purchase-limit reason. Test insufficient balance too.
+4. Review a purchase, cancel, and confirm no debit or armed Spin. Confirm once, including rapid repeated clicks, and verify one charge; Continue must not charge or credit again.
+5. Check all three speeds, each motion preference, refresh persistence, tab order, focus return, Escape, backdrop close and orientation changes with a sheet open.
+6. Use Review → Two collectors — 48,000. Check the award landing above Bonus Win, collector portraits, retriggers, Skip and resize. Check feature entry and the 5,000,000 completion.
 
-- Visual verification of this new build before treating the layout as final.
-- The supplied release omits `public/kilo-audio/*`; sound remains unavailable. No substitute audio has been fabricated.
-- Bonus entry, retrigger, and win ceremonies still use the existing presentation assets and timings. Their dedicated art/motion pass should follow confirmation of the new viewport and typography.
-- The original GitHub repository omits most runtime art. For local review, use the release's `public/` assets with this branch, then `npm ci` and `npm run dev:review`.
+## Follow-up after layout review
+
+- Restore the missing `public/kilo-audio/*` pack before sound QA. Music/effects sliders are connected to independent gain buses but disabled until decoding succeeds.
+- Refine the existing entry, retrigger and win ceremonies in a separate art/motion pass. Those skins are still the previous assets.
+- The source repository omits most runtime artwork. Local review still requires the release's `public/` assets, then `npm ci` and `npm run dev:review`.
+
+This work updates the separate owner-private preview and draft PR. It does not merge to main or deploy the live game.

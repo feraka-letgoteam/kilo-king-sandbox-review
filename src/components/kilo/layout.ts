@@ -13,17 +13,18 @@ export type GameLayout = {
 
 export function fitGameLayout(width: number, height: number): GameLayout {
   const w = Math.max(280, Math.floor(width));
-  const h = Math.max(200, Math.floor(height) - 24);
+  const h = Math.max(200, Math.floor(height));
   const ratio = 1.66;
   const landscape = w >= 540 && h < 600 && w / h > 1.25;
   if (landscape) {
     const header = 42,
-      strip = 46,
-      side = 176,
+      strip = 44,
+      side = 132,
       gap = 8;
-    // Below 344px total height, allow vertical scrolling instead of crushing targets.
+    // The console also occupies the header height, keeping all four targets usable.
+    // Only unusually short viewports scroll; no touch target is scaled down.
     const reelHeight = Math.max(
-      210,
+      170,
       Math.min(h - header - strip - 8, (w - side - gap) / ratio),
     );
     const reelWidth = Math.floor(reelHeight * ratio);
@@ -34,15 +35,15 @@ export function fitGameLayout(width: number, height: number): GameLayout {
       reelWidth,
       reelHeight,
       header,
-      dock: reelHeight,
+      dock: header + reelHeight,
       strip,
       side,
     };
   }
   const portrait = w < 900;
   const header = portrait ? 80 : 68;
-  const dock = portrait ? 184 : 116;
-  const strip = portrait ? 80 : 56;
+  const dock = portrait ? 96 : 104;
+  const strip = portrait ? 52 : 56;
   const overhead = header + dock + strip + 8;
   const reelWidth = Math.floor(
     Math.min(portrait ? 680 : 1160, w, Math.max(280, (h - overhead) * ratio)),
