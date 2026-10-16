@@ -152,13 +152,7 @@ function FisherPortrait({
       {mini ? (
         <img src="/kilo-motion-v7/collector-idle.png" alt="" />
       ) : (
-        <picture>
-          <source
-            media="(max-width: 740px)"
-            srcSet="/kilo-night-v3/hero-bust.png"
-          />
-          <img src="/kilo-presentation-v6/hero-fishing.png" alt="" />
-        </picture>
+        <img src="/kilo-ui-v11/hero-bust.webp" alt="" />
       )}
     </div>
   );

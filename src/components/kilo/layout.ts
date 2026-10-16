@@ -41,9 +41,9 @@ export function fitGameLayout(width: number, height: number): GameLayout {
     };
   }
   const portrait = w < 900;
-  const header = portrait ? 80 : 68;
-  const dock = portrait ? 96 : 104;
-  const strip = portrait ? 52 : 56;
+  const header = portrait ? 80 : 96;
+  const dock = portrait ? 96 : 92;
+  const strip = portrait ? 52 : 48;
   const overhead = header + dock + strip + 8;
   const reelWidth = Math.floor(
     Math.min(portrait ? 680 : 1160, w, Math.max(280, (h - overhead) * ratio)),

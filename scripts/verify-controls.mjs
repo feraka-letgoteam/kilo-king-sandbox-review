@@ -37,7 +37,7 @@ registerHooks({
 const m = await import("../src/components/kilo/control-model.ts");
 const { createElement } = await import("react");
 const { renderToStaticMarkup } = await import("react-dom/server");
-const { BetPanel, FeaturesPanel, SettingsPanel } =
+const { BetPanel, FeaturesPanel, SettingsPanel, BonusArtwork } =
   await import("../src/components/kilo/control-panels.tsx");
 const { Paytable } = await import("../src/components/kilo/paytable.tsx");
 const { PAY } = await import("../src/lib/kilo/engine.ts");
@@ -121,13 +121,68 @@ const features = render(FeaturesPanel, {
 assert.match(features, /Above the 1,000,000 purchase limit/);
 assert.match(
   features,
-  /aria-label="Review Free spins purchase for 1,000,000 LGC"/,
+  /aria-label="Review 3 Scatters purchase for 1,000,000 LGC"/,
 );
 assert.match(
   features,
   /aria-label="Review Chopper purchase for 2,500,000 LGC" disabled/,
 );
 assert.doesNotMatch(features, /data-testid="confirm-purchase"/); // Selection is not confirmation.
+const { FEATURES } = await import("../src/components/kilo/feature-catalog.ts");
+assert.equal(FEATURES.length, 6);
+assert.equal(
+  new Set(FEATURES.map((f) => f.art)).size,
+  6,
+  "Every feature has its own illustration",
+);
+assert.deepEqual(
+  FEATURES.filter((f) => f.kind === "purchase").map((f) => f.mode),
+  ["buy", "chopper"],
+);
+for (const feature of FEATURES) {
+  assert.ok(
+    existsSync(new URL(`../public${feature.art}`, import.meta.url)),
+    `Missing art: ${feature.art}`,
+  );
+  assert.match(features, new RegExp(`data-feature="${feature.id}"`));
+  const preview = render(BonusArtwork, { feature });
+  assert.ok(preview.includes(feature.title));
+  assert.doesNotMatch(
+    preview,
+    /confirm-purchase|<button/,
+    "Artwork cannot start a purchase",
+  );
+  if (feature.kind !== "purchase") {
+    assert.equal(
+      "mode" in feature,
+      false,
+      "Unpurchasable features must not expose an engine purchase mode",
+    );
+    assert.equal(
+      "multiple" in feature,
+      false,
+      "Unpurchasable features must not invent prices",
+    );
+  }
+  if (feature.kind === "preview") {
+    assert.equal("spins" in feature, false);
+    assert.equal("multiplier" in feature, false);
+    assert.match(preview, /In development/);
+    assert.match(features, new RegExp(`aria-label="Preview ${feature.title}"`));
+  }
+}
+assert.deepEqual(
+  FEATURES.filter((f) => f.id.startsWith("scatter-")).map((f) => [
+    f.scatters,
+    f.spins,
+  ]),
+  [
+    [3, 10],
+    [4, 15],
+    [5, 20],
+  ],
+);
+assert.equal((features.match(/class="kk-feature-card"/g) || []).length, 6);
 const bet = render(BetPanel, {
   stake: 1000,
   ante: false,
