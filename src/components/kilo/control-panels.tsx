@@ -199,13 +199,34 @@ export function FeaturesPanel({
   useEffect(() => {
     if (choice) {
       detail.current?.focus({ preventScroll: true });
-    } else if (lastChoice.current) {
-      gallery.current
+      return;
+    }
+    const root = gallery.current;
+    if (!root) return;
+    if (lastChoice.current) {
+      root
         ?.querySelector<HTMLButtonElement>(
           `[data-feature="${lastChoice.current}"] button`,
         )
         ?.focus();
     }
+    // Rotation can remove the overflow without emitting a scroll event.
+    // Keep the phone pager tied to the visible card after either breakpoint.
+    const observer = new ResizeObserver(() => {
+      const first = root.children[0] as HTMLElement | undefined;
+      const next = root.children[1] as HTMLElement | undefined;
+      const step = first && next ? next.offsetLeft - first.offsetLeft : 0;
+      setActive(
+        root.scrollWidth > root.clientWidth + 1 && step > 0
+          ? Math.min(
+              FEATURES.length - 1,
+              Math.max(0, Math.round(root.scrollLeft / step)),
+            )
+          : 0,
+      );
+    });
+    observer.observe(root);
+    return () => observer.disconnect();
   }, [choice]);
 
   const showCard = (index: number) => {
