@@ -1,13 +1,44 @@
 @import "tailwindcss" source("../src");
 
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/kilo-ui-v11/fonts/SourceSans3-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/kilo-ui-v11/fonts/SourceSans3-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/kilo-ui-v11/fonts/SourceSans3-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("/kilo-ui-v11/fonts/BarlowCondensed-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
-  --ink: #fff0cf;
-  --muted: #a6bfbd;
+  font-family: "Source Sans 3", sans-serif;
+  --ink: #fff3d7;
+  --muted: #a4bebb;
   --sea: #04121c;
   --gold: #d8ad59;
   --cyan: #7de5db;
-  font-family: "Source Sans 3", sans-serif;
+  --edge: #b48a4980;
+  --display: "Barlow Condensed", sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -25,1817 +56,1555 @@ body,
 button,
 select {
   font: inherit;
+  color: inherit;
 }
 button,
-[role="button"] {
+[role="button"],
+select,
+summary {
   cursor: pointer;
 }
-button:disabled {
+button:disabled,
+select:disabled {
   cursor: default;
+}
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 button:focus-visible,
 a:focus-visible,
 select:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--cyan);
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
-button {
-  color: inherit;
+button:disabled {
+  opacity: 0.48;
 }
+button:not(:disabled),
+a {
+  transition:
+    filter 160ms,
+    background-color 160ms,
+    border-color 160ms;
+}
+button:not(:disabled):hover {
+  filter: brightness(1.12);
+}
+button:not(:disabled):active {
+  filter: brightness(0.92);
+}
+
+/* One game composition. Its geometry is independent of the round state. */
 .kk-app {
   height: 100dvh;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: 44px minmax(0, 1fr);
   overflow: hidden;
-  background:
-    linear-gradient(180deg, #020e1830 15%, #020d1860 65%, #020b14e0),
-    url("/kilo-night-v3/bg-marina.png") center top/cover;
   font-variant-numeric: tabular-nums;
-}
-.kk-dev:has(.kk-preview-banner) {
-  flex-wrap: nowrap;
-}
-.kk-dev .kk-preview-banner {
-  position: absolute;
-  left: 108px;
-  right: 148px;
-  top: 50%;
-  z-index: 2;
-  flex: none;
-  order: 0;
-  width: auto;
-  max-width: none;
-  transform: translateY(-50%);
-  margin: 0;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: #14303a;
-  color: #ffe7b0;
-  font-size: 11px;
-  font-weight: 700;
-  text-align: center;
-  text-shadow: none;
-  pointer-events: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  background:
+    linear-gradient(180deg, #020c1420 0%, #020c1438 45%, #020b14e8 100%),
+    url("/kilo-night-v3/bg-marina.png") center top / cover;
 }
 .kk-dev {
   position: relative;
-  z-index: 80;
+  z-index: 70;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  min-height: 36px;
-  padding: 4px 12px;
-  background: #020b12dc;
-  color: #b0c6c6;
-  font-size: 11px;
-  border-bottom: 1px solid #d8ad591a;
+  padding: 0 max(12px, env(safe-area-inset-right)) 0
+    max(12px, env(safe-area-inset-left));
+  border-bottom: 1px solid #d8ad5920;
+  background: #020b12d4;
 }
 .kk-sandbox {
-  font-size: 9px;
-  letter-spacing: 2px;
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: #8da9ab;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .kk-dev nav {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
 }
+.kk-dev button,
 .kk-dev a {
-  color: #ffe7b0;
-  font-size: 11px;
-  font-weight: 700;
-  text-decoration: underline;
-}
-.kk-dev button {
-  min-height: 32px;
-  min-width: 44px;
-  border: 0;
-  background: none;
-  font-size: 13px;
-  font-weight: 700;
-  color: #ffe7b0;
-  padding: 0 6px;
-}
-.kk-dev a[data-source],
-.kk-source-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  min-width: 44px;
-  border: 1px solid #d8ad59;
-  border-radius: 4px;
-  background: #163042;
-  color: #ffe7b0;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 0 8px;
-  cursor: pointer;
-}
-.kk-source-link {
-  width: 100%;
   min-height: 44px;
-  justify-content: flex-start;
-  background: rgb(255 255 255 / 10%);
+  min-width: 44px;
+  padding: 0 10px;
   border: 0;
-  border-radius: 8px;
-  padding: 8px;
+  background: none;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #dce9e4;
 }
-.kk-stage {
-  position: relative;
-  min-height: 0;
-  overflow: clip;
-  display: grid;
-  place-items: center;
-  container: stage / size;
-  padding: 8px;
+.kk-dev a {
+  color: #e7c779;
 }
 .kk-preview-banner {
   position: absolute;
-  z-index: 6;
-  left: 12px;
-  right: 12px;
-  top: 6px;
+  left: 150px;
+  right: 220px;
   margin: 0;
+  font-size: 11px;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #c3dfd5;
   pointer-events: none;
-  color: #ffe7b0;
-  font-size: 13px;
-  font-weight: 700;
-  text-shadow: 0 1px 2px #000;
 }
-.kk-storage-fault {
-  position: absolute;
-  z-index: 7;
-  left: 12px;
-  right: 12px;
-  top: 28px;
-  margin: 0;
-  text-align: center;
-  pointer-events: none;
-  color: #ffb4a8;
-  font-size: 13px;
-  font-weight: 700;
+.kk-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 12px max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.kk-stage:has([data-layout="portrait"]) {
+  align-items: start;
+  padding-top: clamp(12px, 3dvh, 28px);
 }
 .kk-shell {
-  width: min(1180px, calc(100cqw - 24px), calc((100cqh - 236px) * 1.85));
-  display: grid;
-  grid-template-rows: 124px auto 104px;
-  min-height: 0;
+  container: game / inline-size;
   position: relative;
-  filter: drop-shadow(0 20px 32px #0008);
+  width: var(--game-width);
+  height: var(--game-height);
+  display: grid;
+  grid-template-rows:
+    calc(var(--header-height) + var(--reel-height)) var(--dock-height)
+    var(--strip-height);
+  row-gap: 0;
+  align-content: start;
+  filter: drop-shadow(0 16px 28px #0008);
 }
 .kk-shell[inert] {
-  filter: drop-shadow(0 20px 32px #0008) saturate(0.7);
+  pointer-events: none;
+}
+.kk-playfield {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: var(--header-height) var(--reel-height);
 }
 .kk-crest {
   position: relative;
-  isolation: isolate;
+  height: var(--header-height);
   min-width: 0;
-  z-index: 2;
+  isolation: isolate;
+}
+.kk-canvas-wrap {
+  position: relative;
+  width: var(--reel-width);
+  height: var(--reel-height);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+.kk-canvas-wrap canvas {
+  display: block;
+  touch-action: pan-y;
+}
+.kk-logo {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: min(46%, 270px);
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px #000b);
 }
 .kk-bust {
   position: absolute;
+  left: 12px;
   bottom: 0;
-  left: 22px;
-  width: 178px;
-  height: 156px;
+  width: 110px;
+  height: 68px;
   pointer-events: none;
-  filter: drop-shadow(0 4px 5px #0008);
 }
 .kk-fisher {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-.kk-fisher picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+.kk-fisher picture,
 .kk-fisher img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: bottom;
 }
-.kk-bust {
-  width: 242px;
-  height: 156px;
-  left: 8px;
-}
-.kk-fisher.is-cheer:not(.is-mini) {
-  filter: drop-shadow(0 0 9px #d5ad5277);
-}
-.kk-logo {
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(47%, 460px);
-  height: 117px;
-  object-fit: contain;
-  pointer-events: none;
-  filter: drop-shadow(0 5px 6px #000a);
-}
-.kk-feature-button {
-  position: absolute;
-  right: 18px;
-  bottom: 37px;
-  width: 190px;
-  height: 71px;
-  border: 0;
-  padding: 0;
-  background: url("/kilo-night-v3/btn-buy.png") center/contain no-repeat;
-  font-weight: 900;
-  font-size: 13px;
-  text-shadow: 0 2px 3px #001b16;
-  letter-spacing: 0.3px;
-  transition: filter 0.15s;
-}
-.kk-feature-button span {
-  position: absolute;
-  left: 18.5%;
-  top: 50%;
-  width: 69%;
-  height: 29%;
-  display: grid;
-  place-items: center;
-  line-height: 1;
-  color: #fff7d8;
-  white-space: nowrap;
-}
-.kk-feature-button.selected {
-  filter: drop-shadow(0 0 8px #e9b858aa);
-}
-.kk-feature-button:disabled {
-  opacity: 0.55;
-}
 .kk-crest-status {
   position: absolute;
-  bottom: 3px;
-  left: 21%;
-  right: 21%;
-  height: 29px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28%;
+  text-align: right;
 }
 .kk-event {
   margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  color: #ffe7b3;
+  color: #f5e3bb;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
   text-shadow: 0 2px 4px #000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.kk-feature-readout {
+.kk-eyebrow {
+  display: block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: #c5c7ae;
+}
+
+/* Bonus meter uses the same header space as the logo. */
+.kk-bonus {
+  position: absolute;
+  inset: 2px 4px 6px;
+  display: grid;
+  grid-template-columns: minmax(70px, 1fr) auto minmax(90px, 1fr);
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  gap: 2px 14px;
+  padding: 5px 16px;
+  border: 1px solid var(--edge);
+  border-radius: 10px 10px 4px 4px;
+  background: linear-gradient(180deg, #173e43f2, #061820f5);
+  box-shadow:
+    inset 0 1px #f5df9740,
+    0 3px 10px #0005;
+}
+.kk-bonus-mark,
+.kk-plate,
+.kk-read-plate {
+  display: none;
+}
+.kk-bonus-spins {
+  grid-area: 1 / 1;
+}
+.kk-bonus-track {
+  grid-area: 1 / 2;
+  min-width: 0;
+}
+.kk-bonus-pay {
+  grid-area: 1 / 3;
+}
+.kk-plate-copy {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  white-space: nowrap;
-  font-size: 11px;
-  padding: 5px 12px;
-  background: #031722ed;
-  border: 1px solid #b88a4366;
-  border-radius: 20px;
-  max-width: 100%;
-  box-shadow: 0 3px 12px #0005;
+  gap: 10px;
 }
-.kk-feature-readout > b {
-  font-size: 18px;
-  color: #ffe19c;
-  line-height: 1;
-}
-.kk-mult {
-  color: #8de0d4 !important;
-}
-.kk-feature-readout .kk-eyebrow {
-  font-size: 8px;
-  letter-spacing: 0.7px;
-}
-.kk-ahead {
-  font-size: 10px;
-  color: #c7d8cd;
-}
-.kk-levels {
-  display: flex;
-  gap: 3px;
-}
-.kk-level {
-  font-size: 11px;
-  min-width: 26px;
-  padding: 2px 5px;
-  text-align: center;
-  color: #789c9d;
-  border-radius: 4px;
-  background: #0b2931;
-  border: 1px solid #39606166;
-}
-.kk-level.reached {
-  color: #e6d49e;
-}
-.kk-level.current {
-  background: linear-gradient(#ffe4a2, #b98431);
-  border-color: #f9d584;
-  color: #172a26;
-}
-.kk-pips {
-  display: flex;
-  gap: 3px;
-}
-.kk-pips i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #294c50;
-}
-.kk-pips i.filled {
-  background: #ffe3a0;
-  box-shadow: 0 0 5px #ffdb8c66;
-}
-.kk-bonus {
-  position: absolute;
-  inset: 0 12px 2px;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 138px minmax(0, 1fr) 210px;
-  grid-template-rows: minmax(0, 1fr) 18px;
-  align-items: center;
-  column-gap: 10px;
-}
-.kk-bonus-mark {
-  position: absolute;
-  left: 50%;
-  top: -2px;
-  width: 132px;
-  height: 26px;
-  transform: translateX(-50%);
-  object-fit: contain;
-  opacity: 0.78;
-  pointer-events: none;
-}
-.kk-bonus-spins,
-.kk-bonus-pay {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  line-height: 0.9;
-}
-.kk-bonus-pay {
-  align-items: flex-end;
-  text-align: right;
-  position: relative;
-  z-index: 1;
-}
-.kk-bonus-pay::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  right: -6px;
-  top: 46%;
-  width: calc(100% + 22px);
-  height: 82%;
-  min-height: 44px;
-  max-height: 86px;
-  transform: translateY(-50%);
-  background: url("/kilo-night-v3/ui-plate.svg") center / 100% 100% no-repeat;
-  pointer-events: none;
+.kk-bonus .kk-eyebrow {
+  font-size: 13px;
+  color: #a9cbc7;
 }
 .kk-bonus-spins b,
-.kk-bonus-pay .kk-mult {
-  font-size: 48px;
-  letter-spacing: -1px;
-  color: #ffe7b0;
-}
-.kk-bonus-pay .kk-mult {
-  color: #8de0d4;
-}
-.kk-next {
-  margin-top: 4px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  color: #d5ecf0;
-  white-space: nowrap;
-}
-.kk-next-short {
-  display: none;
+.kk-mult {
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffe7ad;
 }
 .kk-sockets {
   display: flex;
   justify-content: center;
-  align-items: end;
-  gap: 8px;
-  min-width: 0;
-  position: relative;
-  z-index: 2;
+  gap: 7px;
 }
 .kk-socket {
-  width: 62px;
-  height: 70px;
-  border: 0;
-  border-radius: 0;
-  background:
-    url("/kilo-night-v3/ui-socket.svg") center / 100% 100% no-repeat,
-    radial-gradient(ellipse at 50% 46%, #0e343c 0 42%, transparent 46%);
-  box-shadow: none;
-  overflow: visible;
   position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: url("/kilo-ui-v11/socket-empty.svg") center / contain no-repeat;
 }
 .kk-socket.next {
-  filter: drop-shadow(0 0 5px #e7c56a);
+  filter: drop-shadow(0 0 5px #e7c56a90);
 }
 .kk-socket.filled {
-  filter: drop-shadow(0 0 7px #f0c56acc);
+  background-image: url("/kilo-ui-v11/socket-filled.svg");
 }
 .kk-socket .kk-fisher {
-  position: absolute;
-  inset: 14% 8% 20% 8%;
-  width: auto;
-  height: auto;
-  margin: 0;
-  opacity: 1;
-  filter: none;
-  pointer-events: none;
+  inset: 8%;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.kk-socket .kk-fisher img {
+  object-fit: cover;
+  object-position: center 22%;
+}
+.kk-socket.filled .kk-fisher {
+  animation: kk-socket-pop 350ms ease-out both;
 }
 .kk-bonus.is-holding .kk-socket.filled {
-  filter: drop-shadow(0 0 10px #ffe7a8);
+  filter: drop-shadow(0 0 7px #ffe7a8);
 }
-.kk-milestones {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  gap: 6px;
+.kk-bonus.is-awarding .kk-bonus-spins b {
+  text-shadow: 0 0 12px #e7c56a;
 }
-.kk-mile {
-  min-width: 28px;
-  padding: 1px 6px;
-  border-radius: 99px;
+.kk-next {
+  grid-area: 2 / 1 / 3 / -1;
+  margin: 0;
   text-align: center;
-  font-size: 10px;
-  font-weight: 800;
-  color: #6d8c8e;
-  background: #0b242b;
-  border: 1px solid #35585c;
-}
-.kk-mile.done {
-  color: #e6d3a4;
-}
-.kk-mile.on {
-  color: #1b1408;
-  background: linear-gradient(#ffe4a4, #c39245);
-  border-color: #ffe1a4;
-}
-.kk-retrigger {
-  position: absolute;
-  left: 50%;
-  bottom: -8px;
-  z-index: 6;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 10px;
-  min-width: min(420px, 92%);
-  padding: 16px 64px 14px;
-  border-radius: 0;
-  background: url("/kilo-night-v3/ui-ribbon.svg") center / 100% 100% no-repeat;
-  color: #f6e7b0;
-  box-shadow: none;
-  pointer-events: none;
-  white-space: nowrap;
-}
-.kk-retrigger b {
-  font-size: 16px;
-  color: #fff6dd;
-}
-.kk-retrigger span {
   font-size: 12px;
-  font-weight: 800;
-  color: #d7fff8;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #b9d1ca;
 }
-.kk-fly-portrait {
-  position: fixed;
-  z-index: 30;
-  width: 46px;
-  height: 54px;
+.kk-cap-note {
+  color: #ffd56a;
+}
+
+/* Machined control plate, with a single dominant action. */
+.kk-dock {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns:
+    minmax(164px, 1.25fr) minmax(140px, 1fr) minmax(130px, 0.9fr)
+    144px 104px;
+  grid-template-areas: "bet buy ante tools spin";
+  align-items: center;
+  column-gap: 14px;
+  height: var(--dock-height);
+  margin-top: 8px;
+  padding: 8px 14px;
+  border: 1px solid #ac854b;
+  border-bottom-color: #6d664730;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(180deg, #1a343c, #081b23 44%, #06151c);
+  box-shadow:
+    inset 0 1px #e3cf8845,
+    inset 0 0 0 4px #04131a45;
+}
+.kk-dock-play,
+.kk-dock-utils {
+  display: contents;
+}
+.kk-bet {
+  grid-area: bet;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.kk-stepper {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+}
+.kk-stepper select {
+  appearance: none;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 1px;
+  height: 44px;
+  border: 1px solid #8d784b;
+  border-radius: 6px;
+  background: #04151b;
+  color: #fff1cd;
+  font-weight: 700;
+  font-size: 19px;
+  text-align: center;
+  text-align-last: center;
+  padding: 0 6px;
+  box-shadow: inset 0 2px 5px #0006;
+}
+.kk-round,
+.kk-turbo,
+.kk-tools-toggle {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #9d7b43;
+  border-radius: 50%;
+  background: linear-gradient(150deg, #24424a, #06151d 70%);
+  box-shadow:
+    inset 0 1px #f7e1a533,
+    0 2px 3px #0007;
+}
+.kk-round img,
+.kk-turbo img {
+  width: 19px;
+  height: 19px;
   object-fit: contain;
   pointer-events: none;
-  filter: drop-shadow(0 6px 8px #000c);
 }
-.kk-bonus-win,
-.kk-this-spin {
+.kk-dock .kk-turbo.selected,
+.kk-dock .kk-round[aria-pressed="true"] {
+  border-color: #6bc6b1;
+  background: linear-gradient(150deg, #286155, #0c302d);
+}
+.kk-feature-button {
+  grid-area: buy;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 56px;
+  height: 64px;
+  padding: 0 19%;
+  border: 0;
+  background: url("/kilo-ui-v11/button-action.webp") center / 100% 100%
+    no-repeat;
+  color: #fff6da;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 2px 3px #001b16;
+}
+.kk-feature-button span {
+  display: block;
+  text-align: center;
+}
+.kk-feature-button.selected {
+  filter: drop-shadow(0 0 5px #7de5db70);
+}
+.kk-ante {
+  grid-area: ante;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  min-height: 52px;
+  padding: 6px 10px;
+  border: 1px solid #8b794a80;
+  border-radius: 6px;
+  background: #061a22;
+}
+.kk-ante span {
+  color: #b6c6bb;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.kk-ante b {
+  color: #e6c680;
+  font-size: 14px;
+  font-weight: 600;
+}
+.kk-ante.selected {
+  border-color: #7de5db;
+  background: #123a34;
+}
+.kk-ante.selected span {
+  color: #baffdd;
+}
+.kk-dock-tools {
+  grid-area: tools;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.kk-tools-toggle {
+  display: none;
+}
+.kk-spin-area {
+  grid-area: spin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  width: 104px;
+}
+.kk-spin {
+  width: 80px;
+  height: 80px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: url("/kilo-ui-v11/spin-medallion.png") center / contain no-repeat;
+  box-shadow: 0 5px 15px #0007;
+}
+.kk-spin span {
+  max-width: 68%;
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  color: #20372c;
+  text-shadow: 0 1px #ffefb1;
+}
+.kk-spin-area > span {
+  color: #dfd5b6;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  text-align: center;
+  white-space: nowrap;
+}
+.kk-feature-context {
   display: none;
   min-width: 0;
+}
+.is-feature .kk-feature-context {
+  display: flex;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3px;
+  padding-left: 8px;
+}
+.kk-feature-context strong {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #ffe0a0;
+  text-transform: uppercase;
+}
+.kk-feature-context > span:last-child {
+  font-size: 13px;
+  color: #a9c4bc;
+}
+.is-feature .kk-bet,
+.is-feature .kk-feature-button,
+.is-feature .kk-ante {
+  display: none;
+}
+
+/* All amounts remain DOM text, including the collector's landing target. */
+.kk-strip {
+  position: relative;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1.5fr 0.75fr 1.25fr 0.75fr;
+  grid-template-areas: "balance bet last total";
+  height: var(--strip-height);
+  margin-top: 8px;
+  min-width: 0;
+  padding: 0 12px;
+  border: 1px solid #ac854b;
+  border-top: 1px solid #c6a15a25;
+  border-radius: 0 0 10px 10px;
+  background: #05151cf5;
+  box-shadow: inset 0 -2px #dec38115;
+}
+.kk-read {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 7px 14px;
+  border-right: 1px solid #c6a15a20;
+}
+.kk-read:last-of-type {
+  border-right: 0;
+}
+.kk-read-well {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  container-type: inline-size;
+}
+.kk-strip .kk-eyebrow {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #8daaa8;
+}
+.kk-strip strong {
+  display: block;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: clamp(15px, 8cqi, 24px);
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: #f4e5bb;
+}
+.kk-balance {
+  grid-area: balance;
+}
+.kk-bet-read {
+  grid-area: bet;
+}
+.kk-last-win {
+  grid-area: last;
+}
+.kk-total {
+  grid-area: total;
 }
 .kk-bonus-win {
   grid-area: bonus;
 }
 .kk-this-spin {
-  grid-area: thisspin;
-}
-.kk-bonus-win strong,
-.kk-this-spin strong {
-  font-size: 22px;
-  line-height: 1;
-  color: #fff6dd;
-}
-.kk-this-spin strong {
-  color: #b7f3ea;
-}
-.kk-trigger,
-.kk-spin-split {
-  font-size: 10px;
-  color: #b7cbc8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.kk-shell.is-feature .kk-bet,
-.kk-shell.is-feature .kk-ante {
-  display: none;
-}
-.kk-shell.is-feature .kk-bonus-win,
-.kk-shell.is-feature .kk-this-spin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.kk-shell.is-feature .kk-deck {
-  grid-template-areas: "sound rules balance bonus thisspin total turbo spin" "afford afford afford afford afford afford afford afford";
-}
-.kk-summary-split {
-  color: #d5ece8;
-  font-weight: 700;
-}
-.kk-canvas-wrap {
-  min-width: 0;
-  min-height: 0;
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1.85;
-  z-index: 1;
-}
-.kk-canvas-wrap canvas {
-  touch-action: pan-y;
-}
-.kk-deck {
-  position: relative;
-  z-index: 2;
-  min-width: 0;
-  display: grid;
-  grid-template-columns:
-    44px 44px minmax(86px, 1fr) 174px 92px minmax(90px, 1fr)
-    44px 104px;
-  grid-template-areas: "sound rules balance bet ante total turbo spin" "afford afford afford afford afford afford afford afford";
-  grid-template-rows: minmax(0, 1fr) 12px;
-  align-items: center;
-  column-gap: 8px;
-  padding: 4px 20px 4px;
-  margin: 0 6px;
-  background:
-    radial-gradient(ellipse at 50% 0, #24434a66, transparent 70%),
-    linear-gradient(180deg, #122c36, #061622 55%, #03101c);
-  border: 1px solid #a58143;
-  border-top: 2px solid #e5bf70;
-  border-radius: 0 0 16px 16px;
-  box-shadow:
-    inset 0 3px 0 #f6d68c24,
-    inset 0 -4px 0 #0006,
-    0 8px 18px #0008;
-}
-.kk-deck::before,
-.kk-deck::after {
-  content: "";
-  position: absolute;
-  bottom: 7px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fff0b0, #916022);
-  box-shadow: 0 1px 2px #000;
-}
-.kk-deck::before {
-  left: 7px;
-}
-.kk-deck::after {
-  right: 7px;
-}
-.kk-sound {
-  grid-area: sound;
-}
-.kk-rules-btn {
-  grid-area: rules;
-}
-.kk-balance {
-  grid-area: balance;
-  min-width: 0;
-}
-.kk-bet {
-  grid-area: bet;
-  min-width: 0;
-  text-align: center;
-}
-.kk-ante {
-  grid-area: ante;
-}
-.kk-total {
-  grid-area: total;
-  text-align: center;
-  min-width: 0;
-}
-.kk-turbo {
-  grid-area: turbo;
-}
-.kk-spin-area {
   grid-area: spin;
 }
-.kk-eyebrow {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 1.1px;
-  color: #9fb6b7;
-  font-weight: 700;
-  line-height: 1.4;
+.kk-bonus-win,
+.kk-this-spin {
+  display: none;
 }
-.kk-balance strong,
-.kk-total strong {
-  display: block;
-  font-size: clamp(17px, 1.7vw, 24px);
-  line-height: 1.3;
-  color: #ffe3a6;
-  font-weight: 750;
-  letter-spacing: -0.5px;
+.kk-total strong,
+.kk-bet-read strong {
+  color: #a6beb6;
+  font-size: clamp(14px, 7cqi, 18px);
 }
-.kk-total {
-  padding: 10px 6px;
-  border-left: 1px solid #b58f4844;
-  border-right: 1px solid #b58f4844;
-  background: linear-gradient(90deg, transparent, #0003, transparent);
+.is-feature .kk-strip {
+  grid-template-areas: "balance bonus spin total";
+  grid-template-columns: 1.3fr 1.3fr 0.9fr 0.75fr;
 }
-.kk-round,
-.kk-turbo {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border: 0;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  background: url("/kilo-night-v3/btn-round.png") center/40px 40px no-repeat;
-  border-radius: 50%;
-  transition: filter 0.15s;
+.is-feature .kk-bet-read,
+.is-feature .kk-last-win {
+  display: none;
 }
-.kk-round img,
-.kk-turbo img {
-  width: 48%;
-  height: 48%;
-  object-fit: contain;
-  pointer-events: none;
-}
-.kk-round[aria-pressed="false"] img {
-  opacity: 0.5;
-}
-.kk-round:hover:not(:disabled),
-.kk-turbo:hover:not(:disabled) {
-  filter: brightness(1.2);
-}
-.kk-stepper {
+.is-feature .kk-bonus-win,
+.is-feature .kk-this-spin {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0;
 }
-.kk-stepper select {
-  appearance: none;
-  min-width: 0;
-  width: 84px;
-  height: 40px;
-  border: 0;
-  border-bottom: 1px solid #b08b4866;
-  border-radius: 0;
-  background: #020d1566;
-  color: #fff1ca;
-  text-align: center;
-  font-weight: 750;
-  font-size: 18px;
-  font-variant-numeric: tabular-nums;
+.kk-bonus-win strong,
+.kk-last-win strong {
+  color: #ffe2a3;
 }
-.kk-step {
-  background-size: 34px 34px;
-}
-.kk-step img {
-  width: 42%;
-  height: 42%;
-}
-.kk-ante {
-  height: 46px;
-  min-height: 44px;
-  border: 1px solid #b5955460;
-  border-radius: 7px;
-  background: linear-gradient(#102c32, #071d26);
-  color: #cdd8c9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 4px 6px;
-  line-height: 1;
-}
-.kk-ante span {
+.kk-trigger {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #a6beb6;
   font-size: 9px;
-  letter-spacing: 0.8px;
-}
-.kk-ante b {
-  font-size: 14px;
-}
-.kk-ante.selected {
-  background: linear-gradient(#285c4a, #123c34);
-  border-color: #e5bd66;
-  color: #ffe7b5;
-}
-.kk-turbo.selected {
-  filter: drop-shadow(0 0 5px #e5bd66);
-}
-.kk-spin-area {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  min-width: 0;
-}
-.kk-spin {
-  width: 78px;
-  height: 78px;
-  border: 0;
-  border-radius: 50%;
-  padding: 12px 8px 17px;
-  display: grid;
-  place-items: center;
-  background: url("/kilo-night-v3/btn-spin.png") center/contain no-repeat;
-  color: #102b26;
-  font-size: 14px;
-  font-weight: 900;
-  line-height: 1;
-  text-shadow: 0 1px 0 #fff6d4;
-  filter: drop-shadow(0 3px 4px #0007);
-}
-.kk-spin.is-purchase {
-  font-size: 11px;
-  line-height: 1.15;
-  padding: 14px 9px;
-}
-.kk-spin:hover:not(:disabled) {
-  filter: brightness(1.12) drop-shadow(0 0 6px #ecc17066);
-}
-.kk-spin-area > span {
-  font-size: 9px;
-  letter-spacing: 0.15px;
-  color: #c8d1c1;
-  white-space: nowrap;
-  line-height: 12px;
+  line-height: 1.2;
 }
 .kk-afford {
-  grid-area: afford;
-  font-size: 10px;
-  margin: 0;
-  text-align: center;
-  color: #ffd49f;
-  line-height: 12px;
-}
-.kk-deck button:disabled,
-.kk-deck select:disabled {
-  opacity: 0.45;
-}
-.kk-notice {
   position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  z-index: 5;
-  max-width: min(440px, calc(100% - 24px));
-  background: #06282bf2;
-  color: #ffd59f;
-  border: 1px solid #be934e;
+  left: 0;
+  right: 0;
+  bottom: -27px;
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  color: #ffd5a2;
+}
+.kk-notice,
+.kk-storage-fault {
+  position: fixed;
+  z-index: 12;
+  left: 12px;
+  right: 12px;
+  bottom: max(8px, env(safe-area-inset-bottom));
+  margin: 0 auto;
+  max-width: 660px;
+  padding: 7px 12px;
   border-radius: 6px;
-  padding: 8px 12px;
+  background: #06151de8;
+  color: #d8d9c3;
+  font-size: 12px;
+  text-align: center;
+  pointer-events: none;
+}
+.kk-storage-fault {
+  top: 52px;
+  bottom: auto;
+  color: #ffc0a8;
+}
+
+/* Portrait retains all touch targets and the same geometry throughout a feature. */
+.kk-shell[data-layout="portrait"] .kk-logo {
+  width: min(54%, 210px);
+  height: 58px;
+  bottom: 20px;
+}
+.kk-shell[data-layout="portrait"] .kk-bust {
+  width: 78px;
+  height: 72px;
+  left: 0;
+}
+.kk-shell[data-layout="portrait"] .kk-crest-status {
+  left: 20%;
+  right: 20%;
+  top: auto;
+  bottom: 5px;
+  width: auto;
+  transform: none;
+  text-align: center;
+}
+.kk-shell[data-layout="portrait"] .kk-event {
+  font-size: 11px;
+  letter-spacing: 0.7px;
+}
+.kk-shell[data-layout="portrait"] .kk-bonus {
+  inset: 0 2px 8px;
+  grid-template-columns: 58px minmax(0, 1fr) 72px;
+  gap: 2px 6px;
+  padding: 6px 8px;
+}
+.kk-shell[data-layout="portrait"] .kk-plate-copy {
+  flex-direction: column;
+  gap: 1px;
+}
+.kk-shell[data-layout="portrait"] .kk-bonus .kk-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.4px;
+}
+.kk-shell[data-layout="portrait"] .kk-sockets {
+  gap: 4px;
+}
+.kk-shell[data-layout="portrait"] .kk-socket {
+  width: 26px;
+  height: 30px;
+  flex: 0 0 26px;
+}
+.kk-shell[data-layout="portrait"] .kk-next {
+  font-size: 11px;
+}
+.kk-shell[data-layout="portrait"] .kk-dock {
+  grid-template-columns: minmax(0, 1fr) 100px;
+  grid-template-rows: 58px 44px 44px;
+  grid-template-areas: "bet spin" "buy spin" "utils utils";
+  gap: 8px 10px;
+  padding: 10px;
+}
+.kk-shell[data-layout="portrait"] .kk-bet {
+  gap: 2px;
+}
+.kk-shell[data-layout="portrait"] .kk-bet > .kk-eyebrow {
+  font-size: 11px;
+}
+.kk-shell[data-layout="portrait"] .kk-stepper {
+  gap: 4px;
+}
+.kk-shell[data-layout="portrait"] .kk-stepper select {
+  font-size: 19px;
+  padding: 0 2px;
+}
+.kk-shell[data-layout="portrait"] .kk-feature-button {
+  height: 44px;
+  min-height: 44px;
+  font-size: 18px;
+}
+.kk-shell[data-layout="portrait"] .kk-spin-area {
+  width: 100px;
+}
+.kk-shell[data-layout="portrait"] .kk-spin {
+  width: 88px;
+  height: 88px;
+}
+.kk-shell[data-layout="portrait"] .kk-spin span {
+  font-size: 25px;
+}
+.kk-shell[data-layout="portrait"] .kk-dock-utils {
+  display: flex;
+  grid-area: utils;
+  gap: 8px;
+  min-width: 0;
+  align-items: center;
+}
+.kk-shell[data-layout="portrait"] .kk-ante {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 44px;
+  height: 44px;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 4px 8px;
+  gap: 4px;
+}
+.kk-shell[data-layout="portrait"] .kk-ante span,
+.kk-shell[data-layout="portrait"] .kk-ante b {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.kk-shell[data-layout="portrait"] .kk-dock-tools {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+.kk-shell[data-layout="portrait"].is-feature .kk-feature-context {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  padding-left: 2px;
+}
+.kk-shell[data-layout="portrait"] .kk-feature-context strong {
+  font-size: 25px;
+}
+.kk-shell[data-layout="portrait"] .kk-feature-context > span:last-child {
   font-size: 12px;
 }
-.kk-modal-root {
+.kk-shell[data-layout="portrait"] .kk-strip {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 48px 30px;
+  grid-template-areas: "balance last" "bet total";
+  padding: 0 8px;
+}
+.kk-shell[data-layout="portrait"].is-feature .kk-strip {
+  grid-template-areas: "balance bonus" "spin total";
+}
+.kk-shell[data-layout="portrait"] .kk-read {
+  padding: 4px 8px;
+}
+.kk-shell[data-layout="portrait"] .kk-read {
+  border-right: 0;
+}
+.kk-shell[data-layout="portrait"] .kk-balance,
+.kk-shell[data-layout="portrait"] .kk-bet-read,
+.kk-shell[data-layout="portrait"] .kk-this-spin {
+  border-right: 1px solid #c6a15a20;
+}
+.kk-shell[data-layout="portrait"] .kk-bet-read .kk-read-well,
+.kk-shell[data-layout="portrait"] .kk-total .kk-read-well,
+.kk-shell[data-layout="portrait"] .kk-this-spin .kk-read-well {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+}
+.kk-shell[data-layout="portrait"] .kk-strip strong {
+  font-size: clamp(15px, 11cqi, 21px);
+}
+.kk-shell[data-layout="portrait"] .kk-total strong,
+.kk-shell[data-layout="portrait"] .kk-bet-read strong,
+.kk-shell[data-layout="portrait"] .kk-this-spin strong {
+  font-size: 14px;
+}
+.kk-shell[data-layout="portrait"] .kk-strip .kk-eyebrow {
+  font-size: 10px;
+}
+
+/* Landscape uses a narrow console; secondary controls open upward in a drawer. */
+.kk-shell[data-layout="landscape"] {
+  grid-template-columns: var(--reel-width) var(--side-width);
+  grid-template-rows: calc(var(--header-height) + var(--reel-height)) var(
+      --strip-height
+    );
+  column-gap: 8px;
+  row-gap: 8px;
+}
+.kk-shell[data-layout="landscape"] .kk-playfield {
+  grid-area: 1 / 1;
+}
+.kk-shell[data-layout="landscape"] .kk-logo {
+  left: 0;
+  bottom: 5px;
+  transform: none;
+  height: 36px;
+  width: min(44%, 170px);
+}
+.kk-shell[data-layout="landscape"] .kk-bust {
+  display: none;
+}
+.kk-shell[data-layout="landscape"] .kk-crest-status {
+  width: 50%;
+  right: 6px;
+}
+.kk-shell[data-layout="landscape"] .kk-event {
+  font-size: 11px;
+}
+.kk-shell[data-layout="landscape"] .kk-bonus {
+  inset: 0 0 4px;
+  padding: 2px 8px;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0 8px;
+  border-radius: 6px;
+}
+.kk-shell[data-layout="landscape"] .kk-bonus .kk-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-bonus-spins b,
+.kk-shell[data-layout="landscape"] .kk-mult {
+  font-size: 19px;
+}
+.kk-shell[data-layout="landscape"] .kk-plate-copy {
+  gap: 4px;
+}
+.kk-shell[data-layout="landscape"] .kk-sockets {
+  gap: 4px;
+}
+.kk-shell[data-layout="landscape"] .kk-socket {
+  width: 22px;
+  height: 22px;
+}
+.kk-shell[data-layout="landscape"] .kk-next {
+  font-size: 10px;
+}
+.kk-shell[data-layout="landscape"] .kk-dock {
+  grid-area: 1 / 2;
+  margin-top: var(--header-height);
+  height: var(--reel-height);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 58px minmax(82px, 1fr) 44px;
+  grid-template-areas: "bet" "play" "utils";
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  border-bottom-color: #ac854b;
+}
+.kk-shell[data-layout="landscape"] .kk-bet {
+  gap: 2px;
+}
+.kk-shell[data-layout="landscape"] .kk-bet > .kk-eyebrow {
+  font-size: 11px;
+}
+.kk-shell[data-layout="landscape"] .kk-stepper {
+  gap: 5px;
+}
+.kk-shell[data-layout="landscape"] .kk-stepper select {
+  font-size: 17px;
+  padding: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-dock-play {
+  grid-area: play;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px;
+  align-items: center;
+  gap: 6px;
+}
+.kk-shell[data-layout="landscape"] .kk-feature-button {
+  grid-area: auto;
+  min-height: 58px;
+  height: 58px;
+  padding: 6px;
+  border: 1px solid #b69858;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #18534d, #072d2d);
+  font-size: 17px;
+}
+.kk-shell[data-layout="landscape"] .kk-spin-area {
+  grid-area: auto;
+  width: 80px;
+}
+.kk-shell[data-layout="landscape"] .kk-spin {
+  width: 64px;
+  height: 64px;
+}
+.kk-shell[data-layout="landscape"] .kk-spin span {
+  font-size: 21px;
+}
+.kk-shell[data-layout="landscape"] .kk-spin-area > span {
+  font-size: 10px;
+}
+.kk-shell[data-layout="landscape"] .kk-dock-utils {
+  display: flex;
+  grid-area: utils;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-ante {
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 44px;
+  min-height: 44px;
+  padding: 2px 4px;
+  gap: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-ante span,
+.kk-shell[data-layout="landscape"] .kk-ante b {
+  font-size: 12px;
+}
+.kk-shell[data-layout="landscape"] .kk-tools-toggle {
+  display: grid;
+  margin-left: auto;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+.kk-shell[data-layout="landscape"] .kk-dock-tools {
   position: absolute;
-  inset: 0;
-  z-index: 20;
+  right: 0;
+  bottom: 56px;
+  display: none;
+  z-index: 5;
+  padding: 9px;
+  border: 1px solid #b48a49;
+  border-radius: 8px;
+  background: #0b242b;
+  box-shadow: 0 6px 20px #0008;
+}
+.kk-shell[data-layout="landscape"] .is-open .kk-dock-tools {
+  display: flex;
+}
+.kk-shell[data-layout="landscape"].is-feature .kk-feature-context {
+  grid-area: bet;
+  padding-left: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-feature-context strong {
+  font-size: 23px;
+}
+.kk-shell[data-layout="landscape"] .kk-feature-context > span:last-child {
+  display: none;
+}
+.kk-shell[data-layout="landscape"].is-feature .kk-dock-play {
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+.kk-shell[data-layout="landscape"].is-feature .kk-spin-area {
+  width: 100%;
+}
+.kk-shell[data-layout="landscape"] .kk-strip {
+  grid-area: 2 / 1 / 3 / -1;
+  margin-top: 0;
+  padding: 0 4px;
+  border-radius: 6px;
+}
+.kk-shell[data-layout="landscape"] .kk-read {
+  padding: 4px 8px;
+}
+.kk-shell[data-layout="landscape"] .kk-strip strong {
+  font-size: clamp(14px, 9cqi, 19px);
+}
+.kk-shell[data-layout="landscape"] .kk-strip .kk-eyebrow {
+  font-size: 10px;
+}
+
+/* Compact desktop consoles reveal the secondary buttons in a drawer. */
+@container game (max-width: 880px) {
+  .kk-shell[data-layout="wide"] .kk-dock {
+    grid-template-columns: minmax(170px, 1fr) minmax(110px, 1fr) 100px 44px 96px;
+    column-gap: 10px;
+    padding-inline: 10px;
+  }
+  .kk-shell[data-layout="wide"] .kk-spin-area {
+    width: 96px;
+  }
+  .kk-shell[data-layout="wide"] .kk-tools-toggle {
+    grid-area: tools;
+    display: grid;
+  }
+  .kk-shell[data-layout="wide"] .kk-dock-tools {
+    display: none;
+    position: absolute;
+    right: 105px;
+    bottom: 100px;
+    z-index: 5;
+    padding: 10px;
+    border: 1px solid #b48a49;
+    border-radius: 8px;
+    background: #0b242b;
+  }
+  .kk-shell[data-layout="wide"] .is-open .kk-dock-tools {
+    display: flex;
+  }
+  .kk-shell[data-layout="wide"] .kk-feature-button {
+    font-size: 18px;
+    padding-inline: 16%;
+  }
+}
+
+@container game (max-width: 340px) {
+  .kk-shell[data-layout="portrait"] .kk-dock {
+    grid-template-columns: minmax(0, 1fr) 88px;
+    column-gap: 8px;
+    padding-inline: 8px;
+  }
+  .kk-shell[data-layout="portrait"] .kk-spin-area {
+    width: 88px;
+  }
+  .kk-shell[data-layout="portrait"] .kk-spin {
+    width: 80px;
+    height: 80px;
+  }
+  .kk-shell[data-layout="portrait"] .kk-stepper select {
+    font-size: 18px;
+  }
+}
+
+/* Dialogs are sized by content, with scrolling only inside the dialog. */
+.kk-modal-root {
+  position: fixed;
+  inset: 44px 0 0;
+  z-index: 60;
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: 16px max(12px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
 }
 .kk-modal-root.is-clear {
-  place-items: start center;
-  padding-top: 12px;
   pointer-events: none;
+  align-items: start;
 }
 .kk-scrim {
   position: absolute;
   inset: 0;
-  background: #010910db;
-  backdrop-filter: blur(5px);
+  background: #020c14d9;
+  backdrop-filter: blur(7px);
 }
 .kk-dialog {
   position: relative;
   z-index: 1;
-  width: min(720px, 100%);
-  max-height: 100%;
+  width: min(740px, 100%);
+  min-width: 0;
   min-height: 0;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 20px solid transparent;
-  border-image: url("/kilo-night-v3/panel-frame.png") 80 fill / 20px/0 stretch;
-  background: #051521;
+  border: 1px solid #be9854;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #18343c, #071921 45%, #04121b);
+  box-shadow:
+    inset 0 1px #ffe8a433,
+    0 24px 70px #000a;
   color: var(--ink);
-  box-shadow: 0 20px 80px #000c;
+  pointer-events: auto;
 }
 .kk-dialog-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 6px 10px 16px;
-  border-bottom: 1px solid #d8ad5933;
+  min-height: 66px;
+  padding: 10px 18px;
+  border-bottom: 1px solid #d8ad5928;
 }
 .kk-dialog-head strong,
 .kk-dialog h2 {
   margin: 0;
-  color: #ffe0a3;
-  font-size: 26px;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
+  font-family: var(--display);
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #f2d294;
 }
 .kk-dialog-head button {
+  flex: 0 0 44px;
   width: 44px;
   height: 44px;
-  min-width: 44px;
-  border: 1px solid #b79a5b66;
-  background: #102632;
+  padding: 0;
+  border: 1px solid #b79a5b60;
   border-radius: 50%;
+  background: #0a2028;
   font-size: 0;
 }
 .kk-dialog-head button::before {
   content: "×";
-  font-size: 26px;
-  color: #dacaa4;
-  line-height: 1;
+  font:
+    26px/1 "Source Sans 3",
+    sans-serif;
+  color: #e4d5ae;
 }
 .kk-dialog-body {
-  overflow: auto;
   min-height: 0;
-  padding: 16px 10px 10px;
-  line-height: 1.55;
+  overflow: auto;
   overscroll-behavior: contain;
+  padding: 16px 20px 20px;
+  font-size: 15px;
+  line-height: 1.5;
 }
 .kk-dialog-body p {
   margin: 0 0 14px;
 }
 .kk-muted {
-  color: #9fbbb9;
-  font-size: 12px;
+  color: #a0b8b3;
+  font-size: 13px;
+  line-height: 1.4;
 }
 .kk-rules {
   width: min(680px, 100%);
 }
-.kk-rules .kk-dialog-body {
-  font-size: 15px;
-}
 .kk-rules h2 {
-  font-size: 18px;
-  letter-spacing: 0;
-  margin-bottom: 14px;
+  font-size: 20px;
+  margin: 20px 0 12px;
 }
 .kk-rules details {
-  border-top: 1px solid #d8ad5933;
-  padding-top: 12px;
-  margin-bottom: 14px;
+  padding: 12px 0;
+  border-top: 1px solid #d8ad5930;
 }
 .kk-rules summary {
-  cursor: pointer;
-  color: #e8d3a8;
+  color: #f0d5a1;
+  min-height: 32px;
 }
 .kk-review {
   width: min(560px, 100%);
-  max-height: calc(100% - 136px);
-  pointer-events: auto;
+}
+.kk-review .kk-dialog-body {
+  font-size: 14px;
+}
+.kk-review button {
+  min-height: 44px;
+}
+.kk-symbol-compare canvas {
+  max-width: 100%;
+}
+.kk-symbol-compare pre {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  font-size: 11px;
 }
 .kk-text-action,
-.kk-reset {
+.kk-reset,
+.kk-source-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
-  border: 1px solid #9b895b66;
-  border-radius: 5px;
-  background: #112a32;
-  color: #e3d8b9;
-  padding: 8px 16px;
-  font-size: 13px;
-  font-weight: 650;
+  padding: 8px 14px;
+  border: 1px solid #a38a5150;
+  border-radius: 6px;
+  background: #0d2931;
+  color: #e0d4ae;
+  font-size: 14px;
+  text-decoration: none;
 }
+.kk-source-link {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Feature selection keeps its illustrations intact, without nested form panels. */
 .kk-purchases {
-  width: min(740px, 100%);
+  width: min(780px, 100%);
 }
-.kk-purchases .kk-dialog-body > p:first-child {
+.kk-purchases .kk-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 20px 18px;
+}
+.kk-purchases .kk-dialog-body > p {
+  margin: 0;
   text-align: center;
-  font-size: 13px;
-  color: #bfd0c9;
+}
+.kk-buy-stake {
+  color: #acbeb5;
+  font-size: 14px;
+}
+.kk-buy-stake b {
+  color: #ffe2a3;
+  margin-left: 4px;
+}
+.kk-purchase-nav {
+  display: none;
 }
 .kk-purchase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin: 8px 0 16px;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  min-height: min-content;
+  padding: 4px;
 }
 .kk-purchase {
+  display: block;
   position: relative;
-  width: 100%;
-  border: 1px solid #997338;
-  border-radius: 12px;
-  background:
-    radial-gradient(ellipse at 50% 12%, #224b50 0, transparent 60%),
-    linear-gradient(#0a2534, #04131e);
-  padding: 18px 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
   overflow: hidden;
-  color: #fff0ce;
-  box-shadow:
-    inset 0 0 0 3px #d8ad5914,
-    0 6px 14px #0004;
-  transition:
-    filter 0.15s,
-    border-color 0.15s;
+  border: 1px solid #99804880;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #21484d, #0c242d 50%, #07161e);
+  color: var(--ink);
+  text-align: center;
 }
-.kk-purchase::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid #c59c4c40;
-  border-radius: 8px;
-  pointer-events: none;
-}
-.kk-purchase:nth-child(2) {
-  background:
-    radial-gradient(ellipse at 50% 12%, #3d304f 0, transparent 60%),
-    linear-gradient(#142330, #091420);
-}
-.kk-purchase:hover:not(:disabled) {
-  border-color: #ffdc8d;
-  filter: brightness(1.1);
+.kk-purchase.is-premium {
+  background: linear-gradient(160deg, #265350, #0d2b31 50%, #07161e);
+  border-color: #6aa19490;
 }
 .kk-purchase.selected {
-  outline: 2px solid #e7bc66;
+  outline: 2px solid #8dd8b7;
   outline-offset: 2px;
 }
 .kk-purchase:disabled {
-  opacity: 0.45;
+  opacity: 1;
+}
+.kk-purchase:disabled .kk-purchase-art {
+  filter: saturate(0.55);
+  opacity: 0.6;
 }
 .kk3-feature-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.kk-purchase-art {
+  display: grid;
+  place-items: center;
+  height: 184px;
+  background: radial-gradient(ellipse at 50% 65%, #2a686164, transparent 70%);
+}
+.kk-purchase-art img {
+  display: block;
+  width: 86%;
+  height: 94%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 10px #0007);
+}
+.kk-purchase-copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  padding: 2px 18px 16px;
+}
+.kk-purchase strong {
+  font-family: var(--display);
+  font-size: 31px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #ffe0a3;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.kk-purchase-detail {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #c7d8ce;
+  min-height: 20px;
+}
+.kk-purchase-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+.kk-price-label {
+  font-size: 12px;
+  color: #9bb9b0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.kk-purchase-price b {
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff1cb;
+}
+.kk-purchase-times {
+  color: #a5bdb3;
+  font-size: 13px;
+  line-height: 1;
+}
+.kk-card-action {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  margin-top: 9px;
+  padding: 8px 14px;
+  border: 1px solid #fff1b080;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #efdb9b, #bd9149);
+  color: #182b25;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow:
+    inset 0 1px #fff4c9,
+    0 3px 7px #0005;
+}
+.kk-purchase-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-top: 9px;
+  padding: 8px 10px;
+  border: 1px solid #98694c60;
+  border-radius: 6px;
+  background: #39291c;
+  color: #f3cda3;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.kk-back-spins {
+  align-self: center;
+  border: 0;
+  background: none;
+  padding: 4px 16px;
+  min-height: 44px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.kk-purchase-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+.kk-purchase-pager button {
+  flex: 1 1 0;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: #0b2229;
+  color: #9eb8af;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.kk-purchase-pager button.is-current {
+  border-color: #c6a15a90;
+  background: #25433f;
+  color: #ffe2a3;
+}
+.kk-arrow-prev {
+  transform: rotate(180deg);
+}
+
+/* The result fits the crown panel; Continue has its own full-size hit area. */
+.kk-summary {
+  width: min(480px, 96vw, calc(100dvh - 150px));
+  max-height: 100%;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  align-items: center;
+  gap: 2px;
+}
+.kk-summary-plaque {
   position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  background: url("/kilo-ui-v11/panel-complete.webp") center / contain no-repeat;
+}
+.kk-summary.is-profit .kk-summary-plaque {
+  filter: drop-shadow(0 0 20px #cda44e28);
+}
+.kk-summary-body {
+  position: absolute;
+  left: 18%;
+  top: 29%;
+  width: 64%;
+  height: 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+  container-type: inline-size;
+}
+.kk-summary-body p {
+  margin: 0;
+  max-width: 100%;
+}
+.kk-summary-body .kk-eyebrow {
+  font-size: clamp(16px, 8cqi, 23px);
+  color: #e9c777;
+}
+.kk-summary-line {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9px;
-  text-align: center;
+  gap: 4px;
 }
-.kk-purchase-art {
-  width: 100%;
-  height: 142px;
-  display: grid;
-  place-items: center;
-  filter: drop-shadow(0 10px 12px #0007);
-}
-.kk-purchase img {
-  width: 190px;
-  max-width: 100%;
-  height: 156px;
-  object-fit: contain;
-}
-.kk-purchase strong {
-  font-size: 23px;
-  font-weight: 800;
-  line-height: 1.2;
-  color: #ffe1a6;
-  letter-spacing: -0.4px;
-}
-.kk3-feature-card-content > span:not(.kk-purchase-art) {
+.kk-summary-line > span {
   font-size: 12px;
-  color: #c2d2cc;
+  line-height: 1.2;
+  color: #abc9c0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
-.kk-purchase b {
-  font-size: 24px;
-  line-height: 1.25;
-  color: #fff1d0;
+.kk-summary-line strong {
+  font-size: clamp(28px, 17cqi, 52px);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff0bd;
   white-space: nowrap;
 }
-.kk-card-action {
-  display: block;
-  border-top: 1px solid #c59c4c44;
-  width: 100%;
-  margin-top: 4px;
-  padding-top: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 14px;
-  color: #e5c88f;
-}
-.kk-purchases .kk-muted {
-  text-align: center;
-}
-.kk-purchases .kk-text-action {
-  display: block;
-  margin: 0 auto;
-}
-.kk-summary {
-  width: min(520px, 92vw);
-  aspect-ratio: 4 / 3;
-  max-height: min(78dvh, 640px);
-  border: 0;
-  border-image: none;
-  background: url("/kilo-night-v3/modal-panel.png") center / contain no-repeat;
-  box-shadow: none;
-}
-.kk-summary-body {
-  display: grid;
-  justify-items: center;
-  text-align: center;
-  align-content: center;
-  gap: 8px;
-  height: 100%;
-  padding: 18% 14% 8%;
-  background: none;
-}
-.kk-summary h2 {
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  color: #ffe09b;
-}
-.kk-summary strong {
-  font-size: clamp(28px, 6vw, 46px);
-  font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.1;
-  color: #fff6dd;
-}
-.kk-summary.is-neutral strong {
-  color: #e7e1d4;
-}
-.kk-summary p {
-  margin: 0;
-  font-size: 14px;
-  color: #d7ecf2;
-}
-.kk-summary button {
-  min-height: 44px;
-  min-width: 148px;
-  margin-top: 6px;
-  border: 1px solid #ffe2a7;
-  border-radius: 6px;
-  background: linear-gradient(#f0d392, #bc8c41);
-  color: #172a2d;
-  font-weight: 800;
-  padding: 0 20px;
-}
-.kk-fly-pip {
-  position: fixed;
-  z-index: 25;
-  width: 22px;
-  height: 22px;
-  margin: -11px 0 0 -11px;
-  background: url("/kilo-night-v3/fx-pip.png") center/contain no-repeat;
-  pointer-events: none;
-}
-
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-shell {
-    width: min(560px, 100cqw);
-    grid-template-rows: 150px auto 196px;
-  }
-  .kk-canvas-wrap {
-    aspect-ratio: 1.52;
-  }
-  .kk-bust {
-    left: 3px;
-    width: 105px;
-    height: 110px;
-    bottom: 0;
-  }
-  .kk-logo {
-    top: -3px;
-    width: 76%;
-    height: 95px;
-  }
-  .kk-feature-button {
-    right: 8px;
-    bottom: 38px;
-    width: 136px;
-    height: 51px;
-    font-size: 10px;
-  }
-  .kk-crest-status {
-    left: 4px;
-    right: 4px;
-    bottom: 0;
-    height: 28px;
-  }
-  .kk-crest:has(.kk-feature-readout) .kk-bust {
-    bottom: 24px;
-    height: 85px;
-  }
-  .kk-feature-readout {
-    gap: 5px;
-    font-size: 10px;
-    padding: 5px 8px;
-  }
-  .kk-feature-readout .kk-eyebrow,
-  .kk-ahead {
-    display: none;
-  }
-  .kk-feature-readout > b {
-    font-size: 16px;
-  }
-  .kk-level {
-    font-size: 10px;
-    min-width: 24px;
-    padding: 2px 4px;
-  }
-  .kk-pips {
-    gap: 2px;
-  }
-  .kk-deck {
-    margin: 0 3px;
-    padding: 8px 12px 5px;
-    column-gap: 4px;
-    grid-template-columns: 44px 44px minmax(0, 1fr) minmax(0, 1fr) 44px 76px;
-    grid-template-rows: 39px 48px 80px 12px;
-    grid-template-areas: "balance balance balance total total total" "bet bet bet bet ante ante" "sound rules turbo spin spin spin" "afford afford afford afford afford afford";
-    border-radius: 0 0 13px 13px;
-  }
-  .kk-balance strong,
-  .kk-total strong {
-    font-size: 22px;
-  }
-  .kk-total {
-    text-align: right;
-    background: none;
-    border: 0;
-    padding: 0;
-  }
-  .kk-eyebrow {
-    font-size: 9px;
-  }
-  .kk-bet {
-    text-align: left;
-  }
-  .kk-stepper {
-    justify-content: flex-start;
-  }
-    .kk-stepper select {
-    width: 74px;
-    font-size: 17px;
-  }
-  .kk-step {
-    background-size: 32px 32px;
-  }
-  .kk-ante {
-    width: 124px;
-    justify-self: end;
-    flex-direction: row;
-    gap: 6px;
-    height: 38px;
-    min-height: 44px;
-    padding: 4px;
-  }
-  .kk-ante span {
-    font-size: 8px;
-  }
-  .kk-ante b {
-    font-size: 13px;
-  }
-  .kk-turbo {
-    justify-self: start;
-  }
-  .kk-spin-area {
-    justify-self: end;
-  }
-  .kk-spin {
-    width: 70px;
-    height: 70px;
-    font-size: 13px;
-  }
-  .kk-spin.is-purchase {
-    font-size: 10px;
-  }
-  .kk-spin-area > span {
-    font-size: 9px;
-  }
-  .kk-dialog {
-    border-width: 14px;
-    border-image-width: 14px;
-  }
-  .kk-modal-root {
-    padding: 12px;
-  }
-  .kk-dialog-head {
-    padding: 4px 4px 12px;
-    gap: 8px;
-  }
-  .kk-dialog-head strong {
-    font-size: 23px;
-  }
-  .kk-dialog-body {
-    padding: 12px 4px 8px;
-  }
-  .kk-purchase-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .kk-purchase {
-    padding: 12px;
-  }
-  .kk-purchase-art {
-    height: 94px;
-  }
-  .kk-purchase img {
-    height: 116px;
-    width: 150px;
-  }
-  .kk-purchase strong {
-    font-size: 22px;
-  }
-  .kk-purchase b {
-    font-size: 23px;
-  }
-  .kk3-feature-card-content {
-    gap: 6px;
-  }
-  .kk-card-action {
-    padding-top: 8px;
-  }
-  .kk-review {
-    max-height: calc(100% - 208px);
-  }
-  .kk-bonus {
-    inset: 4px 6px 0;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 34px minmax(0, 1fr);
-    column-gap: 6px;
-  }
-  .kk-bonus-mark {
-    width: 108px;
-    height: 16px;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .kk-bonus-pay {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 28px;
-  }
-  .kk-sockets {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    gap: 8px;
-  }
-  .kk-socket {
-    width: 64px;
-    height: 80px;
-  }
-  .kk-next {
-    font-size: 12px;
-  }
-  .kk-shell.is-feature .kk-deck {
-    grid-template-areas: "balance balance balance total total total" "bonus bonus bonus thisspin thisspin thisspin" "sound rules turbo spin spin spin" "afford afford afford afford afford afford";
-  }
-  .kk-bonus-win strong,
-  .kk-this-spin strong {
-    font-size: 20px;
-  }
-}
-@container stage (max-width:740px) and (min-height:521px) and (max-height:650px) {
-  .kk-shell {
-    grid-template-rows: 96px auto 196px;
-  }
-  .kk-logo {
-    width: 62%;
-    height: 68px;
-    top: -2px;
-  }
-  .kk-bust {
-    height: 75px;
-    width: 75px;
-  }
-  .kk-feature-button {
-    width: 112px;
-    height: 42px;
-    bottom: 26px;
-    right: 6px;
-    font-size: 8px;
-  }
-  .kk-crest-status {
-    height: 24px;
-  }
-  .kk-bonus {
-    grid-template-columns: 72px minmax(0, 1fr) 88px;
-    grid-template-rows: minmax(0, 1fr) 14px;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-sockets {
-    grid-row: 1;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-  }
-  .kk-sockets {
-    grid-column: 2;
-  }
-  .kk-bonus-pay {
-    grid-column: 3;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 22px;
-  }
-  .kk-socket {
-    width: 34px;
-    height: 40px;
-  }
-  .kk-next-long {
-    display: none;
-  }
-  .kk-next-short {
-    display: inline;
-  }
-  .kk-next {
-    font-size: 8px;
-  }
-}
-@container stage (max-height:520px) {
-  .kk-shell {
-    width: 100cqw;
-    height: calc(100cqh - 8px);
-    grid-template-columns: minmax(0, 1fr) 154px;
-    grid-template-rows: 48px minmax(0, 1fr);
-    gap: 0;
-  }
-  .kk-crest {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .kk-canvas-wrap {
-    grid-column: 1;
-    grid-row: 2;
-    aspect-ratio: auto;
-  }
-  .kk-bust {
-    display: none;
-  }
-  .kk-logo {
-    width: 230px;
-    max-width: 48%;
-    height: 43px;
-    top: -6px;
-    left: 40%;
-  }
-  .kk-feature-button {
-    right: 5px;
-    bottom: 12px;
-    width: 120px;
-    height: 42px;
-    font-size: 8px;
-  }
-  .kk-crest-status {
-    left: 0;
-    right: 0;
-    bottom: -2px;
-    height: 18px;
-  }
-  .kk-event {
-    font-size: 10px;
-  }
-  .kk-bonus {
-    inset: 0 4px;
-    grid-template-columns: 78px minmax(0, 1fr) 96px;
-    grid-template-rows: 1fr;
-  }
-  .kk-bonus-mark,
-  .kk-milestones {
-    display: none;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-sockets {
-    grid-row: 1;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-  }
-  .kk-sockets {
-    grid-column: 2;
-    align-items: center;
-  }
-  .kk-bonus-pay {
-    grid-column: 3;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 20px;
-  }
-  .kk-socket {
-    width: 30px;
-    height: 34px;
-    border-radius: 16px 16px 8px 8px;
-  }
-  .kk-next-long {
-    display: none;
-  }
-  .kk-next-short {
-    display: inline;
-  }
-  .kk-next {
-    margin-top: 1px;
-    font-size: 8px;
-  }
-  .kk-shell.is-feature .kk-deck {
-    grid-template-areas: "balance balance balance" "total total total" "bonus bonus bonus" "thisspin thisspin thisspin" "sound rules turbo" "spin spin spin" "afford afford afford";
-  }
-  .kk-bonus-win strong,
-  .kk-this-spin strong {
-    font-size: 16px;
-  }
-  .kk-feature-readout {
-    font-size: 9px;
-    padding: 2px 8px;
-    gap: 4px;
-  }
-  .kk-feature-readout > b {
-    font-size: 13px;
-  }
-  .kk-feature-readout .kk-eyebrow,
-  .kk-ahead {
-    display: none;
-  }
-  .kk-level {
-    font-size: 9px;
-    min-width: 22px;
-    padding: 0 3px;
-  }
-  .kk-deck {
-    grid-column: 2;
-    grid-row: 1/3;
-    margin: 4px 0 4px 4px;
-    border-radius: 12px;
-    padding: 9px 6px;
-    column-gap: 0;
-    grid-template-columns: 44px 44px 44px;
-    grid-template-rows: 36px 36px 44px 44px 44px minmax(66px, 1fr) 12px;
-    grid-template-areas: "balance balance balance" "total total total" "bet bet bet" "ante ante ante" "sound rules turbo" "spin spin spin" "afford afford afford";
-    justify-content: center;
-  }
-  .kk-balance,
-  .kk-total {
-    text-align: center;
-  }
-  .kk-total {
-    padding: 0;
-    background: none;
-    border: 0;
-  }
-  .kk-balance strong,
-  .kk-total strong {
-    font-size: 17px;
-    line-height: 1.1;
-  }
-  .kk-eyebrow {
-    font-size: 8px;
-  }
-    .kk-stepper select {
-    width: 48px;
-    font-size: 14px;
-  }
-  .kk-step {
-    background-size: 30px 30px;
-  }
-  .kk-ante {
-    height: 38px;
-    min-height: 36px;
-    flex-direction: row;
-    gap: 5px;
-  }
-  .kk-ante span {
-    font-size: 8px;
-  }
-  .kk-ante b {
-    font-size: 12px;
-  }
-  .kk-round,
-  .kk-turbo {
-    background-size: 34px 34px;
-  }
-  .kk-spin {
-    width: 62px;
-    height: 62px;
-    font-size: 11px;
-  }
-  .kk-spin.is-purchase {
-    font-size: 9px;
-  }
-  .kk-spin-area > span {
-    font-size: 8px;
-    line-height: 10px;
-  }
-  .kk-afford {
-    font-size: 8px;
-    line-height: 10px;
-    white-space: normal;
-  }
-  .kk-notice {
-    bottom: 6px;
-    font-size: 10px;
-  }
-  .kk-modal-root {
-    padding: 8px;
-  }
-  .kk-dialog {
-    border-width: 12px;
-    border-image-width: 12px;
-  }
-  .kk-dialog-head {
-    padding: 0 6px 6px;
-  }
-  .kk-dialog-head strong {
-    font-size: 21px;
-  }
-  .kk-dialog-body {
-    padding: 8px 6px;
-  }
-  .kk-purchase-grid {
-    gap: 14px;
-  }
-  .kk-purchase {
-    padding: 10px;
-  }
-  .kk-purchase-art {
-    height: 62px;
-  }
-  .kk-purchase img {
-    height: 90px;
-    width: 120px;
-  }
-  .kk-purchase strong {
-    font-size: 19px;
-  }
-  .kk-purchase b {
-    font-size: 20px;
-  }
-  .kk3-feature-card-content {
-    gap: 4px;
-  }
-  .kk-card-action {
-    padding-top: 6px;
-  }
-  .kk-review {
-    max-height: 100%;
-    margin-right: 156px;
-    width: min(480px, calc(100% - 156px));
-  }
-  .kk-summary {
-    width: min(420px, 70vw);
-    max-height: calc(100dvh - 16px);
-  }
-  .kk-summary-body {
-    padding: 20% 16% 6%;
-    gap: 4px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* The crest rail stays 124px in both modes. The feature does not paint a second panel over it. */
-.kk-shell.is-feature .kk-crest {
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-}
-.kk-shell.is-feature .kk-crest::before {
-  content: "";
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  bottom: 0;
-  height: 16px;
-  background: url("/kilo-night-v3/fg-rail.png") left center / auto 100% repeat-x;
-  pointer-events: none;
-  z-index: 1;
-}
-.kk-shell.is-feature .kk-crest::after {
-  content: none;
-}
-.kk-bonus {
-  inset: 0 8px 10px;
-  padding: 2px 0 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  grid-template-columns: minmax(108px, 168px) minmax(0, 1fr) minmax(128px, 210px);
-  grid-template-rows: 22px minmax(0, 1fr);
-  align-items: center;
-}
-.kk-bonus-mark {
-  display: block;
-  position: relative;
-  left: auto;
-  top: auto;
-  grid-column: 1 / -1;
-  grid-row: 1;
-  justify-self: center;
-  width: 148px;
-  height: 22px;
-  transform: none;
-  object-fit: contain;
-  object-position: center;
-  opacity: 0.95;
-  pointer-events: none;
-  z-index: 4;
-  filter: drop-shadow(0 2px 2px #000a);
-}
-.kk-bonus-spins,
-.kk-bonus-pay {
-  align-items: center;
-  text-align: center;
-  gap: 1px;
-  border: 0;
-  align-self: center;
-  justify-content: center;
-  min-height: 0;
-  padding: 6px 12px 7px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #143e46 0%, #071c24 100%);
-  box-shadow:
-    inset 0 0 0 1px #7ef0ea73,
-    0 0 0 2px #e4b45a,
-    0 0 0 4px #6d4516;
-}
-.kk-bonus-pay::before {
-  display: none;
-}
-.kk-bonus .kk-eyebrow {
-  font-size: 10px;
-  letter-spacing: 1.2px;
-  color: #e6d3a4;
-}
-.kk-bonus-spins b,
-.kk-bonus-pay .kk-mult {
-  font-size: 34px;
-  line-height: 0.85;
-}
-.kk-sockets {
-  gap: 6px;
-  align-items: center;
-  padding-top: 0;
-  align-self: center;
-}
-.kk-sockets::before {
-  content: none;
-}
-.kk-socket {
-  flex: 0 1 64px;
-  width: 64px;
-  height: 76px;
-  aspect-ratio: auto;
-  border: 0;
-  border-radius: 0;
-  overflow: visible;
-  background:
-    url("/kilo-night-v3/ui-socket.svg") center / 100% 100% no-repeat;
-  box-shadow: none;
-  filter: saturate(0.7) brightness(0.78);
-}
-.kk-socket.next {
-  filter: saturate(1) brightness(1.05) drop-shadow(0 0 6px #e7c56a);
-}
-.kk-socket.filled {
-  filter: none;
-}
-.kk-socket .kk-fisher {
-  position: absolute;
-  inset: 14% 8% 20% 8%;
-  width: auto;
-  height: auto;
-  margin: 0;
-  opacity: 1;
-  filter: none;
-  pointer-events: none;
-}
-.kk-socket.filled .kk-fisher {
-  opacity: 1;
-  filter: none;
-  animation: kk-socket-pop 0.35s cubic-bezier(0.2, 0.9, 0.2, 1) both;
-}
-.kk-socket .kk-fisher img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-}
-.kk-bonus.is-holding .kk-socket.filled {
-  filter: drop-shadow(0 0 8px #ffe7a8);
-}
-.kk-bonus.is-awarding .kk-bonus-spins b {
-  color: #fff6d2;
-  text-shadow: 0 0 12px #e7c56acc;
-}
-.kk-cap-note {
-  color: #ffd56a !important;
-  letter-spacing: 0.4px;
-}
-.kk-next {
-  margin-top: 2px;
+.kk-summary-body > p:last-child {
   font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  color: #e7f6f2;
+  line-height: 1.25;
+  color: #b3cbc1;
 }
-.kk-sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.kk-summary > button {
+  flex-shrink: 0;
+  width: min(230px, 80%);
+  height: 48px;
+  margin-top: -10px;
+  border: 1px solid #ecd58e;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #eedb9d, #bb914b);
+  color: #172820;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 20px #0007;
 }
+
+/* These DOM flights are positioned by the unchanged collection renderer. */
 .kk-award-fly {
   position: fixed;
-  z-index: 40;
+  z-index: 65;
   transform: translate(-50%, -50%);
   padding: 6px 14px;
   border-radius: 8px;
   background: #071820f2;
   border: 2px solid #e5c17a;
   color: #fff6dd;
+  font-family: "Source Sans 3", sans-serif;
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   pointer-events: none;
   white-space: nowrap;
 }
-.kk-bonus-win.is-landed {
-  animation: kk-bonus-land 680ms ease-out;
-}
-.kk-shell.is-feature .kk-bonus-win.is-landed strong {
-  color: #fff8e4;
-  text-shadow: 0 0 12px #ffd56a;
-}
-@keyframes kk-bonus-land {
-  0% {
-    box-shadow: inset 0 0 0 0 #ffd56a00;
-  }
-  35% {
-    box-shadow: inset 0 0 0 2px #ffd56ae0, 0 0 14px #ffd56a99;
-  }
-  100% {
-    box-shadow: inset 0 0 0 0 #ffd56a00;
-  }
+.kk-fly-portrait {
+  position: fixed;
+  z-index: 65;
+  width: 46px;
+  height: 54px;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 8px #000c);
 }
 .kk-fly-portrait.is-source {
   width: 62px;
   height: 74px;
   filter: drop-shadow(0 0 8px #ffd56a) drop-shadow(0 6px 8px #000c);
+}
+.kk-bonus-win.is-landed {
+  animation: kk-bonus-land 680ms ease-out;
+}
+.kk-bonus-win.is-landed strong {
+  text-shadow: 0 0 12px #ffd56a;
+}
+@keyframes kk-bonus-land {
+  35% {
+    box-shadow:
+      inset 0 0 0 2px #ffd56ae0,
+      0 0 14px #ffd56a60;
+  }
 }
 @keyframes kk-socket-pop {
   from {
@@ -1847,2903 +1616,9 @@ button {
     opacity: 1;
   }
 }
-.kk-this-spin {
-  position: relative;
-  padding: 8px 10px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  transition:
-    background 160ms,
-    border-color 160ms;
-}
-.kk-this-spin.is-collecting {
-  background: linear-gradient(110deg, #1b453b, #0a272c);
-  border-color: #e0be6f;
-  box-shadow: 0 0 18px #9ec78c18;
-}
-.kk-this-spin.is-collecting strong {
-  color: #ffdf94;
-}
-.kk-this-spin strong[hidden] {
-  display: none;
-}
-.kk-collection-mult {
-  font-size: 10px;
-  color: #c1ded1;
-  white-space: nowrap;
-  margin-top: 4px;
-}
-.kk-shell.is-feature .kk-bonus-win strong {
-  color: #ffe1a0;
-  font-size: 26px;
-}
-.kk-shell.is-feature .kk-total strong {
-  font-size: 17px;
-  color: #b4ccc7;
-}
-.kk-retrigger {
-  background: linear-gradient(100deg, #073239, #124b46, #073239);
-  border: 1px solid #e8c171;
-  border-radius: 6px;
-  padding: 12px 24px;
-  box-shadow: 0 6px 15px #0008;
-}
-.kk-purchases {
-  width: min(860px, 100%);
-}
-.kk-purchases .kk-dialog-head strong {
-  font-family: inherit;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
-.kk-purchases .kk-dialog-body > p:first-child {
-  margin: 0 0 18px;
-  line-height: 1.5;
-}
-.kk-purchase-grid {
-  gap: 18px;
-}
-.kk-purchase,
-.kk-purchase:nth-child(2) {
-  padding: 0;
-  border: 1px solid #a08450;
-  border-radius: 10px;
-  background: #061820;
-  text-align: left;
-  box-shadow: 0 6px 16px #0006;
-}
-.kk-purchase::before {
-  display: none;
-}
-.kk-purchase:hover:not(:disabled) {
-  filter: none;
-  border-color: #ffe2a0;
-  box-shadow:
-    0 0 0 1px #d4b474,
-    0 8px 24px #0008;
-}
-.kk3-feature-card-content {
-  display: block;
-  text-align: left;
-}
-.kk-purchase-art {
-  display: block;
-  height: auto;
-  aspect-ratio: 1.5;
-  position: relative;
-  filter: none;
-  overflow: hidden;
-}
-.kk-purchase-art::after {
-  content: "";
-  position: absolute;
-  inset: 50% 0 -1px;
-  background: linear-gradient(transparent, #061820);
-}
-.kk-purchase .kk-purchase-art img {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 250ms ease;
-}
-.kk-purchase:hover:not(:disabled) .kk-purchase-art img {
-  transform: scale(1.025);
-}
-.kk-purchase .kk-purchase-copy {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 0 22px 18px;
-  margin-top: -20px;
-  position: relative;
-  color: #c2d2cc;
-}
-.kk-purchase-kicker {
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: #b6cdbd;
-  font-weight: 750;
-}
-.kk-purchase strong {
-  display: block;
-  font-family: inherit;
-  font-size: 22px;
-  line-height: 1.1;
-  font-weight: 800;
-  color: #ffe2a6;
-  letter-spacing: -0.3px;
-}
-.kk-purchase-detail {
-  font-size: 12px;
-  line-height: 1.45;
-  min-height: 18px;
-}
-.kk-purchase-price {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-top: 5px;
-}
-.kk-purchase-price b {
-  font-size: 26px;
-  letter-spacing: -0.7px;
-}
-.kk-purchase-price > span {
-  font-size: 11px;
-  color: #a4bbb5;
-}
-.kk-purchase .kk-card-action {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 36px;
-  padding: 9px 12px;
-  margin-top: 5px;
-  border: 1px solid #ac955a7a;
-  border-radius: 4px;
-  background: #183e37;
-  font-size: 14px;
-  font-weight: 750;
-  letter-spacing: 1px;
-  color: #ffe6ac;
-}
-.kk-purchase:nth-child(2) .kk-card-action {
-  background: #302c45;
-}
-.kk-purchase.selected .kk-card-action {
-  border-color: #ffe3a4;
-}
-.kk-purchases .kk-muted {
-  font-size: 11px;
-}
-@container stage (max-width:740px) and (min-height:521px) {
-  .kk-bonus {
-    inset: 4px 3px 2px;
-    padding: 2px 6px 4px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 16px 30px minmax(0, 1fr);
-  }
-  .kk-bonus-mark {
-    grid-row: 1;
-    width: 96px;
-    height: 16px;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay {
-    border: 0;
-    flex-direction: row;
-    gap: 8px;
-    grid-row: 2;
-    padding: 2px 8px;
-    box-shadow:
-      inset 0 0 0 1px #7ef0ea73,
-      0 0 0 1px #e4b45a;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-    justify-content: flex-start;
-  }
-  .kk-bonus-pay {
-    grid-column: 2;
-    justify-content: flex-end;
-  }
-  .kk-bonus .kk-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.8px;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 26px;
-  }
-  .kk-bonus-pay .kk-next {
-    position: static;
-    font-size: 12px;
-  }
-  .kk-sockets {
-    padding: 0;
-    gap: 8px;
-    grid-column: 1 / -1;
-    grid-row: 3;
-  }
-  .kk-socket {
-    flex-basis: 64px;
-    width: 64px;
-    height: 78px;
-  }
-  .kk-bonus-win strong,
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 23px;
-  }
-  .kk-this-spin {
-    padding: 5px 9px;
-  }
-  .kk-this-spin strong {
-    font-size: 21px;
-  }
-  .kk-shell.is-feature .kk-total strong {
-    font-size: 17px;
-  }
-  .kk-purchases .kk-dialog-head strong {
-    font-size: 26px;
-  }
-  .kk-purchases .kk-dialog-body > p:first-child {
-    font-size: 12px;
-    margin-bottom: 12px;
-  }
-  .kk-purchase-grid {
-    gap: 12px;
-  }
-  .kk-purchase-art {
-    height: 133px;
-    aspect-ratio: auto;
-  }
-  .kk-purchase .kk-purchase-art img {
-    object-position: center 38%;
-  }
-  .kk-purchase .kk-purchase-copy {
-    padding: 0 14px 12px;
-    margin-top: -12px;
-    gap: 4px;
-  }
-  .kk-purchase-kicker {
-    font-size: 8px;
-  }
-  .kk-purchase strong {
-    font-size: 25px;
-  }
-  .kk-purchase-detail {
-    font-size: 11px;
-  }
-  .kk-purchase-price {
-    margin-top: 1px;
-  }
-  .kk-purchase-price b {
-    font-size: 23px;
-  }
-  .kk-purchase .kk-card-action {
-    min-height: 30px;
-    padding: 6px 10px;
-  }
-  .kk-retrigger {
-    min-width: 90%;
-    padding: 10px 12px;
-    gap: 8px;
-  }
-}
-@container stage (max-width:740px) and (min-height:521px) and (max-height:650px) {
-  .kk-bonus {
-    padding: 2px 4px;
-    grid-template-columns: 72px minmax(0, 1fr) 96px;
-    grid-template-rows: 1fr;
-  }
-  .kk-bonus-mark {
-    display: none;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-sockets {
-    grid-row: 1;
-    padding: 2px 4px;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .kk-bonus-pay {
-    grid-column: 3;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .kk-sockets {
-    grid-column: 2;
-    gap: 4px;
-    padding-top: 0;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 22px;
-  }
-  .kk-bonus-pay .kk-next {
-    position: static;
-    font-size: 11px;
-  }
-  .kk-sockets {
-    gap: 6px;
-    padding-top: 0;
-  }
-  .kk-socket {
-    flex-basis: 52px;
-    width: 52px;
-    height: 68px;
-  }
-}
-@container stage (max-height:520px) {
-  .kk-bonus {
-    inset: 0 3px;
-    padding: 1px 6px;
-    grid-template-columns: 72px minmax(0, 1fr) 108px;
-    grid-template-rows: 1fr;
-    border-radius: 8px 8px 0 0;
-  }
-  .kk-bonus-mark {
-    display: none;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay {
-    border: 0;
-    gap: 0;
-  }
-  .kk-bonus .kk-eyebrow {
-    font-size: 8px;
-    letter-spacing: 0.6px;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 18px;
-  }
-  .kk-sockets {
-    gap: 4px;
-    padding: 0;
-  }
-  .kk-socket {
-    flex-basis: 36px;
-    width: 36px;
-    height: 42px;
-    border-radius: 0;
-  }
-  .kk-socket .kk-fisher {
-    inset: 8% 2% 12% 2%;
-  }
-  .kk-next {
-    font-size: 10px;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 21px;
-  }
-  .kk-this-spin {
-    padding: 3px 6px;
-  }
-  .kk-collection-mult {
-    font-size: 9px;
-    margin-top: 2px;
-  }
-  .kk-purchases {
-    width: min(680px, 100%);
-  }
-  .kk-purchase-art {
-    height: 115px;
-    aspect-ratio: auto;
-  }
-  .kk-purchase .kk-purchase-copy {
-    padding: 0 14px 12px;
-    margin-top: -12px;
-    gap: 4px;
-  }
-  .kk-purchase strong {
-    font-size: 25px;
-  }
-  .kk-purchase-detail {
-    font-size: 11px;
-  }
-  .kk-retrigger {
-    padding: 8px 16px;
-    min-width: min(320px, 95%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .kk-purchase .kk-purchase-art img,
-  .kk-this-spin {
-    transition: none;
-  }
-  .kk-purchase:hover:not(:disabled) .kk-purchase-art img {
-    transform: none;
-  }
-}
-.kk-bust {
-  height: 132px;
-  width: 215px;
-}
-.kk-this-spin .kk-eyebrow {
-  white-space: nowrap;
-  letter-spacing: 1px;
-}
-@container stage (min-width:741px) and (min-height:521px) {
-  .kk-shell.is-feature .kk-deck {
-    grid-template-columns: 36px 36px minmax(75px, 1fr) minmax(95px, 1fr) minmax(
-        128px,
-        1.3fr
-      ) minmax(76px, 0.8fr) 36px 84px;
-  }
-}
-@container stage (max-width:740px) and (min-height:521px) {
-  .kk-bust {
-    height: 90px;
-    width: 90px;
-  }
-  .kk-purchase .kk-purchase-art img {
-    object-position: center top;
-  }
-}
-@container stage (max-width:740px) and (min-height:521px) and (max-height:650px) {
-  .kk-bust {
-    height: 75px;
-    width: 75px;
-  }
-}
-@container stage (max-width:740px) and (min-height:521px) {
-  .kk-this-spin {
-    height: 48px;
-    padding: 3px 8px;
-  }
-  .kk-this-spin .kk-eyebrow {
-    line-height: 1.1;
-    font-size: 8px;
-  }
-  .kk-this-spin strong {
-    line-height: 1;
-  }
-  .kk-collection-mult {
-    font-size: 9px;
-    margin-top: 1px;
-    line-height: 1.1;
-  }
-}
 
-/* Motion v7 skins. Layout rectangles stay reserved; only the rail, sockets and deck artwork change. */
-.kk-shell.is-feature .kk-crest {
-  background: url("/kilo-motion-v7/meter-desktop.svg") center / 100% 100% no-repeat;
-}
-.kk-shell.is-feature .kk-crest::before {
-  content: none;
-}
-.kk-bonus-spins,
-.kk-bonus-pay {
-  background: none;
-  box-shadow: none;
-}
-.kk-socket {
-  width: 58px;
-  height: 58px;
-  background: url("/kilo-motion-v7/socket-empty.svg") center / contain no-repeat;
-}
-.kk-socket.filled {
-  background-image: url("/kilo-motion-v7/socket-filled.svg");
-}
-.kk-deck {
-  background: url("/kilo-motion-v7/control-deck-desktop.svg") center / 100% 100% no-repeat;
-}
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-shell.is-feature .kk-crest {
-    background-image: url("/kilo-motion-v7/meter-phone.svg");
-  }
-  .kk-bonus-mark {
-    display: none;
-  }
-  .kk-socket {
-    width: 52px;
-    height: 52px;
-  }
-  .kk-deck {
-    background-image: url("/kilo-motion-v7/control-deck-phone.svg");
-  }
-}
-@container stage (max-height: 520px) {
-  .kk-shell.is-feature .kk-crest {
-    background-image: url("/kilo-motion-v7/meter-landscape.svg");
-  }
-  .kk-socket {
-    width: 34px;
-    height: 34px;
-  }
-  .kk-deck {
-    background-image: url("/kilo-motion-v7/control-deck-landscape.svg");
-  }
-  .kk-shell {
-    grid-template-columns: minmax(0, 1fr) 188px;
-  }
-  .kk-deck {
-    height: 100%;
-    min-height: 0;
-    box-sizing: border-box;
-    align-content: stretch;
-    padding: 6px 8px 4px;
-    column-gap: 4px;
-    row-gap: 2px;
-    overflow: hidden;
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    grid-template-rows:
-      minmax(36px, 0.72fr)
-      minmax(36px, 0.72fr)
-      44px
-      44px
-      44px
-      minmax(62px, 1.05fr)
-      minmax(16px, 0.35fr);
-  }
-  .kk-shell.is-feature .kk-deck {
-    grid-template-rows:
-      minmax(36px, 0.62fr)
-      minmax(36px, 0.62fr)
-      minmax(48px, 0.95fr)
-      minmax(48px, 0.95fr)
-      44px
-      minmax(62px, 1fr)
-      minmax(16px, 0.32fr);
-  }
-  .kk-deck .kk-eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.3px;
-    line-height: 1.15;
-  }
-  .kk-balance,
-  .kk-total,
-  .kk-bonus-win,
-  .kk-this-spin {
-    height: auto;
-    min-height: 0;
-    min-width: 0;
-    max-height: 100%;
-    padding: 0 2px;
-    overflow: visible;
-    justify-content: center;
-  }
-  .kk-balance strong,
-  .kk-total strong,
-  .kk-shell.is-feature .kk-bonus-win strong,
-  .kk-this-spin strong {
-    display: block;
-    font-size: 16px;
-    line-height: 1.25;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-  }
-  .kk-trigger,
-  .kk-collection-mult,
-  .kk-spin-split {
-    display: block;
-    margin-top: 1px;
-    font-size: 10px;
-    line-height: 1.2;
-    letter-spacing: 0;
-    white-space: nowrap;
-    overflow: visible;
-    text-overflow: clip;
-  }
-  .kk-sound {
-    justify-self: start;
-  }
-  .kk-rules-btn {
-    justify-self: center;
-  }
-  .kk-turbo {
-    justify-self: end;
-  }
-  .kk-round,
-  .kk-turbo {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    background-size: 40px 40px;
-  }
-  .kk-stepper {
-    width: 100%;
-  }
-  .kk-stepper select {
-    width: auto;
-    flex: 1;
-    height: 36px;
-    font-size: 15px;
-  }
-  .kk-ante {
-    width: 100%;
-    height: 40px;
-    min-height: 40px;
-    flex-direction: row;
-    gap: 6px;
-  }
-  .kk-ante span {
-    font-size: 10px;
-    letter-spacing: 0.3px;
-  }
-  .kk-ante b {
-    font-size: 14px;
-  }
-  .kk-spin {
-    width: 52px;
-    height: 52px;
-    font-size: 11px;
-  }
-  .kk-spin-area > span {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 9px;
-    line-height: 1.1;
-  }
-  .kk-afford {
-    font-size: 9px;
-    line-height: 1.15;
-  }
-}
-
-
-
-/* Hierarchy pass. The crest row stays the same height, so the reel window does not shift. */
-.kk-bonus {
-  grid-template-columns: minmax(96px, 0.72fr) minmax(0, 1.5fr) minmax(104px, 0.78fr);
-  grid-template-rows: minmax(0, 1fr);
-  align-items: center;
-}
-.kk-bonus-mark {
-  display: none;
-}
-.kk-bonus-spins {
-  grid-column: 1;
-  grid-row: 1;
-}
-.kk-bonus-track {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  min-width: 0;
-}
-.kk-bonus-pay {
-  grid-column: 3;
-  grid-row: 1;
-}
-.kk-bonus-track .kk-sockets {
-  width: 100%;
-  grid-column: auto;
-  grid-row: auto;
-}
-.kk-socket {
-  width: 72px;
-  height: 72px;
-  flex-basis: 72px;
-}
-.kk-next {
-  margin-top: 0;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-  text-align: center;
-}
-.kk-bonus-spins b,
-.kk-bonus-pay .kk-mult {
-  font-size: 30px;
-}
-.kk-shell.is-feature .kk-bonus-win strong {
-  font-size: 32px;
-  line-height: 1.05;
-  color: #ffe7b0;
-}
-.kk-shell.is-feature .kk-balance strong,
-.kk-shell.is-feature .kk-total strong {
-  font-size: 18px;
-  color: #c5d7d4;
-}
-.kk-shell.is-feature .kk-this-spin strong {
-  font-size: 16px;
-  color: #d7ebe7;
-}
-.kk-shell:not([data-layout="r2"]).is-same-return .kk-total {
-  display: none;
-}
-@container stage (min-width: 741px) and (min-height: 521px) {
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    grid-template-columns: 44px 44px minmax(86px, 1fr) minmax(150px, 1.5fr) minmax(90px, 0.8fr) 44px 104px;
-    grid-template-areas: "sound rules balance bonus thisspin turbo spin" "afford afford afford afford afford afford afford";
-  }
-}
-.kk-summary {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  background-size: 100% 100%;
-}
-.kk-summary-body {
-  position: absolute;
-  left: 11%;
-  right: 11%;
-  top: 34%;
-  bottom: 12%;
-  height: auto;
-  padding: 0;
-  gap: 6px;
-  overflow: hidden;
-}
-.kk-summary-body p {
-  margin: 0;
-}
-.kk-summary .kk-eyebrow {
-  font-size: 13px;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: #ffe09b;
-}
-.kk-summary-line {
-  font-size: 16px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  color: #d7ecf2;
-}
-.kk-summary-line strong {
-  display: block;
-  margin-top: 2px;
-  text-transform: none;
-  letter-spacing: -0.5px;
-}
-.kk-summary.is-neutral .kk-summary-line strong {
-  color: #e7e1d4;
-}
-.kk-summary button {
-  min-height: 44px;
-  min-width: 148px;
-  border: 1px solid #ffe2a7;
-  border-radius: 6px;
-  background: linear-gradient(#f0d392, #bc8c41);
-  color: #172a2d;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-}
-.kk-purchases .kk-dialog-head strong,
-.kk-summary .kk-eyebrow {
-  font-family: Arial, sans-serif;
-}
-
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-bonus {
-    grid-template-columns: minmax(64px, 0.7fr) minmax(0, 1.4fr) minmax(72px, 0.75fr);
-    grid-template-rows: minmax(0, 1fr);
-  }
-  .kk-bonus-mark {
-    display: none;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-bonus-track {
-    grid-row: 1;
-  }
-  .kk-socket {
-    width: 58px;
-    height: 58px;
-    flex-basis: 58px;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 26px;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 28px;
-  }
-  .kk-shell.is-feature .kk-balance strong,
-  .kk-shell.is-feature .kk-total strong,
-  .kk-shell.is-feature .kk-this-spin strong {
-    font-size: 16px;
-  }
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    grid-template-areas:
-      "balance balance balance balance balance balance"
-      "bonus bonus bonus bonus bonus bonus"
-      "thisspin thisspin thisspin thisspin thisspin thisspin"
-      "sound rules turbo spin spin spin"
-      "afford afford afford afford afford afford";
-  }
-}
-@container stage (max-width: 740px) and (min-height: 521px) and (max-height: 650px) {
-  .kk-socket {
-    width: 42px;
-    height: 42px;
-    flex-basis: 42px;
-  }
-  .kk-next {
-    font-size: 11px;
-  }
-  .kk-next-long {
-    display: none;
-  }
-  .kk-next-short {
-    display: inline;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 20px;
-  }
-}
-@container stage (max-height: 520px) {
-  .kk-bonus {
-    grid-template-columns: 72px minmax(0, 1fr) 84px;
-    grid-template-rows: minmax(0, 1fr);
-    inset: 0 4px;
-  }
-  .kk-bonus-mark {
-    display: none;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-bonus-track {
-    grid-row: 1;
-  }
-  .kk-socket {
-    width: 28px;
-    height: 28px;
-    flex-basis: 28px;
-  }
-  .kk-next {
-    font-size: 10px;
-    line-height: 1.1;
-  }
-  .kk-next-long {
-    display: none;
-  }
-  .kk-next-short {
-    display: inline;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 18px;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 22px;
-    line-height: 1.1;
-  }
-  .kk-shell.is-feature .kk-balance strong,
-  .kk-shell.is-feature .kk-total strong {
-    font-size: 15px;
-  }
-  .kk-shell.is-feature .kk-this-spin strong {
-    font-size: 14px;
-  }
-  .kk-shell.is-feature .kk-deck {
-    grid-template-areas:
-      "balance balance balance"
-      "bonus bonus bonus"
-      "total total total"
-      "thisspin thisspin thisspin"
-      "sound rules turbo"
-      "spin spin spin"
-      "afford afford afford";
-    grid-template-rows:
-      minmax(30px, 0.42fr)
-      minmax(52px, 1.05fr)
-      minmax(32px, 0.5fr)
-      minmax(30px, 0.46fr)
-      44px
-      minmax(58px, 0.95fr)
-      minmax(14px, 0.26fr);
-  }
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    grid-template-areas:
-      "balance balance balance"
-      "bonus bonus bonus"
-      "thisspin thisspin thisspin"
-      "sound rules turbo"
-      "spin spin spin"
-      "afford afford afford";
-    grid-template-rows:
-      minmax(32px, 0.48fr)
-      minmax(64px, 1.25fr)
-      minmax(34px, 0.55fr)
-      44px
-      minmax(62px, 1fr)
-      minmax(14px, 0.28fr);
-  }
-  .kk-summary-body {
-    top: 36%;
-    bottom: 10%;
-    left: 12%;
-    right: 12%;
-  }
-}
-
-/* Presentation hierarchy. Crest height stays put, so the reel window does not move. */
-.kk-bonus {
-  grid-template-columns: minmax(108px, 0.7fr) minmax(220px, 1.8fr) minmax(112px, 0.78fr);
-  align-items: center;
-  column-gap: 10px;
-  padding: 6px 14px 4px;
-}
-.kk-bonus-mark {
-  display: none;
-}
-.kk-bonus-spins,
-.kk-bonus-pay {
-  gap: 0;
-  padding: 2px 4px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #143e4688, #071c2488);
-  box-shadow: inset 0 0 0 1px #e4b45a55;
-}
-.kk-bonus-spins {
-  align-items: flex-start;
-  text-align: left;
-  padding-left: 10px;
-}
-.kk-bonus-pay {
-  align-items: flex-end;
-  text-align: right;
-  padding-right: 10px;
-}
-.kk-bonus .kk-eyebrow {
-  font-size: 11px;
-  letter-spacing: 1.3px;
-  color: #f0ddb4;
-}
-.kk-bonus-spins b,
-.kk-bonus-pay .kk-mult {
-  font-size: 42px;
-  line-height: 0.88;
-}
-.kk-bonus-track {
-  gap: 2px;
-}
-.kk-socket {
-  width: 88px;
-  height: 96px;
-  flex-basis: 88px;
-}
-.kk-socket .kk-fisher {
-  inset: 10% 6% 14% 6%;
-}
-.kk-next {
-  margin-top: 0;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  color: #f3efe2;
-}
-.kk-balance strong,
-.kk-total strong,
-.kk-bonus-win strong,
-.kk-this-spin strong {
-  font-variant-numeric: tabular-nums;
-}
-.kk-shell.is-feature .kk-bonus-win strong {
-  font-size: 40px;
-  line-height: 1;
-  color: #ffe7b0;
-}
-.kk-shell.is-feature .kk-balance strong,
-.kk-shell.is-feature .kk-total strong,
-.kk-shell.is-feature .kk-this-spin strong {
-  font-size: 18px;
-  color: #c5d5d2;
-}
-.kk-shell.is-feature .kk-this-spin {
-  min-height: 48px;
-}
-.kk-this-spin.is-collecting {
-  background: none;
-  border-color: transparent;
-  box-shadow: none;
-}
-.kk-summary-body {
-  top: 40%;
-  bottom: 11%;
-  left: 16%;
-  right: 16%;
-  gap: 2px;
-  align-content: safe center;
-  line-height: 1.15;
-}
-.kk-summary .kk-eyebrow {
-  font-size: 15px;
-  letter-spacing: 1.4px;
-}
-.kk-summary-line {
-  font-size: 15px;
-}
-.kk-summary-line strong {
-  font-size: clamp(26px, 4.6vw, 40px);
-}
-.kk-summary.is-neutral .kk-summary-line strong {
-  color: #d9d3c6;
-  text-shadow: none;
-}
-.kk-summary.is-neutral {
-  filter: saturate(0.85);
-}
-.kk-summary button,
-.kk-purchases .kk-text-action,
-.kk-purchase .kk-card-action,
-.kk-purchase:nth-child(2) .kk-card-action {
-  min-height: 44px;
-  border: 1px solid #ffe2a7;
-  border-radius: 6px;
-  background: linear-gradient(#f0d392, #bc8c41);
-  color: #172a2d;
-  font-weight: 800;
-}
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-shell {
-    width: min(560px, 100%);
-    max-width: 100%;
-    min-width: 0;
-    justify-self: center;
-  }
-  .kk-bonus {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 42px minmax(0, 1fr);
-    padding: 6px 8px 4px;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay {
-    grid-row: 1;
-    align-self: center;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-  }
-  .kk-bonus-pay {
-    grid-column: 2;
-  }
-  .kk-bonus-track {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    min-width: 0;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 30px;
-  }
-  .kk-socket {
-    width: 64px;
-    height: 72px;
-    flex-basis: 64px;
-  }
-  .kk-next {
-    font-size: 13px;
-  }
-  .kk-shell.is-feature .kk-deck,
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    overflow: clip;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px 44px 44px 76px;
-    grid-template-rows: 34px 56px 36px 68px 12px;
-    grid-template-areas:
-      "balance balance balance balance balance balance"
-      "bonus bonus bonus bonus bonus bonus"
-      "thisspin thisspin total total total total"
-      "sound rules turbo spin spin spin"
-      "afford afford afford afford afford afford";
-  }
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    grid-template-areas:
-      "balance balance balance balance balance balance"
-      "bonus bonus bonus bonus bonus bonus"
-      "thisspin thisspin thisspin thisspin thisspin thisspin"
-      "sound rules turbo spin spin spin"
-      "afford afford afford afford afford afford";
-  }
-  .kk-shell.is-feature .kk-bonus-win,
-  .kk-shell.is-feature .kk-this-spin,
-  .kk-shell.is-feature .kk-total,
-  .kk-shell.is-feature .kk-balance {
-    overflow: hidden;
-    align-self: center;
-    min-width: 0;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 28px;
-    line-height: 1;
-  }
-  .kk-shell.is-feature .kk-balance strong,
-  .kk-shell.is-feature .kk-total strong,
-  .kk-shell.is-feature .kk-this-spin strong {
-    font-size: 16px;
-  }
-  .kk-summary-line strong {
-    font-size: 24px;
-    line-height: 1;
-  }
-  .kk-summary .kk-eyebrow,
-  .kk-summary-line,
-  .kk-summary p {
-    font-size: 13px;
-  }
-  .kk-summary button {
-    min-height: 40px;
-    min-width: 128px;
-    margin-top: 2px;
-  }
-}
-@container stage (max-width: 740px) and (min-height: 521px) and (max-height: 650px) {
-  .kk-bonus {
-    grid-template-rows: 28px minmax(0, 1fr);
-    padding: 2px 6px;
-  }
-  .kk-socket {
-    width: 40px;
-    height: 44px;
-    flex-basis: 40px;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 18px;
-  }
-  .kk-next {
-    font-size: 11px;
-  }
-}
-@container stage (max-height: 520px) {
-  .kk-shell {
-    max-width: 100%;
-    min-width: 0;
-  }
-  .kk-preview-banner {
-    top: auto;
-    bottom: 4px;
-  }
-  .kk-bonus {
-    grid-template-columns: 64px minmax(0, 1fr) 72px;
-    grid-template-rows: minmax(0, 1fr);
-    padding: 1px 6px;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay,
-  .kk-bonus-track {
-    grid-row: 1;
-  }
-  .kk-bonus-spins {
-    grid-column: 1;
-  }
-  .kk-bonus-track {
-    grid-column: 2;
-  }
-  .kk-bonus-pay {
-    grid-column: 3;
-  }
-  .kk-bonus-spins,
-  .kk-bonus-pay {
-    padding: 0;
-    background: none;
-    box-shadow: none;
-  }
-  .kk-bonus .kk-eyebrow {
-    font-size: 8px;
-    letter-spacing: 0.4px;
-  }
-  .kk-bonus-spins b,
-  .kk-bonus-pay .kk-mult {
-    font-size: 18px;
-  }
-  .kk-socket {
-    width: 30px;
-    height: 30px;
-    flex-basis: 30px;
-  }
-  .kk-socket .kk-fisher {
-    inset: 8% 4% 12% 4%;
-  }
-  .kk-next {
-    font-size: 10px;
-    line-height: 1;
-  }
-  .kk-shell.is-feature .kk-deck,
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    overflow: clip;
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: 22px;
-  }
-  .kk-shell.is-feature .kk-balance strong,
-  .kk-shell.is-feature .kk-total strong,
-  .kk-shell.is-feature .kk-this-spin strong {
-    font-size: 15px;
-  }
-}
-
-.kk-symbol-compare canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 8px 0;
-  background: #04121c;
-}
-.kk-symbol-compare pre {
-  max-height: 180px;
-  overflow: auto;
-  white-space: pre-wrap;
-  font-size: 11px;
-  line-height: 1.35;
-  color: #c5d5d2;
-}
-
-/* Feature footer. Each amount has its own box and a gap, including 5,000,000. */
-.kk-shell.is-feature .kk-balance,
-.kk-shell.is-feature .kk-bonus-win,
-.kk-shell.is-feature .kk-this-spin,
-.kk-shell.is-feature .kk-total {
-  container-type: inline-size;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-  padding: 2px 10px;
-  align-self: stretch;
-  justify-content: center;
-}
-.kk-shell.is-feature .kk-balance .kk-eyebrow,
-.kk-shell.is-feature .kk-bonus-win .kk-eyebrow,
-.kk-shell.is-feature .kk-this-spin .kk-eyebrow,
-.kk-shell.is-feature .kk-total .kk-eyebrow,
-.kk-shell.is-feature .kk-trigger {
-  display: block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.kk-shell.is-feature .kk-balance strong,
-.kk-shell.is-feature .kk-bonus-win strong,
-.kk-shell.is-feature .kk-this-spin strong,
-.kk-shell.is-feature .kk-total strong {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  line-height: 1.05;
-  font-size: min(20px, calc(100cqi / 5.5));
-}
-.kk-shell.is-feature .kk-bonus-win strong {
-  font-size: min(32px, calc(100cqi / 5.5));
-  color: #ffe7b0;
-}
-@container stage (min-width: 741px) and (min-height: 521px) {
-  .kk-shell.is-feature .kk-deck {
-    column-gap: 14px;
-    grid-template-columns:
-      36px 36px
-      minmax(0, 1fr)
-      minmax(0, 1.4fr)
-      minmax(0, 1.05fr)
-      minmax(0, 1fr)
-      36px 84px;
-  }
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    column-gap: 14px;
-    grid-template-columns:
-      36px 36px minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1.15fr) 36px 104px;
-    grid-template-areas: "sound rules balance bonus thisspin turbo spin" "afford afford afford afford afford afford afford";
-  }
-  .kk-shell.is-feature .kk-this-spin {
-    box-shadow: inset 1px 0 0 #e4b45a66;
-    padding-left: 14px;
-  }
-}
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-shell.is-feature .kk-deck,
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    column-gap: 12px;
-    row-gap: 4px;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: 32px 48px 44px 72px 12px;
-    grid-template-areas:
-      "balance balance balance balance"
-      "bonus bonus bonus bonus"
-      "thisspin thisspin total total"
-      "sound rules turbo spin"
-      "afford afford afford afford";
-  }
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    grid-template-areas:
-      "balance balance balance balance"
-      "bonus bonus bonus bonus"
-      "thisspin thisspin thisspin thisspin"
-      "sound rules turbo spin"
-      "afford afford afford afford";
-  }
-  .kk-shell.is-feature .kk-this-spin {
-    box-shadow: inset -1px 0 0 #e4b45a66;
-  }
-  .kk-shell.is-feature .kk-total {
-    text-align: left;
-    border: 0;
-    background: none;
-    padding-left: 14px;
-    box-shadow: inset 1px 0 0 #e4b45a66;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: min(28px, calc(100cqi / 5.5));
-  }
-}
-@container stage (max-height: 520px) {
-  .kk-shell.is-feature .kk-deck,
-  .kk-shell.is-feature.is-same-return .kk-deck {
-    row-gap: 4px;
-    column-gap: 6px;
-  }
-  .kk-shell.is-feature .kk-bonus-win,
-  .kk-shell.is-feature .kk-this-spin,
-  .kk-shell.is-feature .kk-total {
-    border-top: 1px solid #e4b45a44;
-    box-shadow: none;
-    padding-left: 6px;
-  }
-  .kk-shell.is-feature .kk-bonus-win strong {
-    font-size: min(22px, calc(100cqi / 5.5));
-  }
-  .kk-shell.is-feature .kk-balance strong,
-  .kk-shell.is-feature .kk-this-spin strong,
-  .kk-shell.is-feature .kk-total strong {
-    font-size: min(16px, calc(100cqi / 5.5));
-  }
-}
-
-/* Purchase options. One set of rules. Art stays intact; copy sits below it. */
-.kk-dialog.kk-purchases {
-  width: min(760px, 100%);
-}
-.kk-dialog.kk-purchases .kk-dialog-head strong {
-  font-family: inherit;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 1.1px;
-}
-.kk-dialog.kk-purchases .kk-buy-stake {
-  margin: 0 0 10px;
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-  color: #c5d7d4;
-}
-.kk-dialog.kk-purchases .kk-buy-stake b {
-  color: #ffe3a6;
-  font-size: 16px;
-  font-weight: 800;
-}
-.kk-dialog.kk-purchases .kk-purchase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 0 0 8px;
-  align-items: stretch;
-}
-.kk-dialog.kk-purchases .kk-purchase,
-.kk-dialog.kk-purchases .kk-purchase:nth-child(2) {
-  display: flex;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #a58143;
-  border-radius: 12px;
-  background: #071820;
-  text-align: left;
-  box-shadow: none;
-  filter: none;
-}
-.kk-dialog.kk-purchases .kk-purchase::before {
-  content: none;
-}
-.kk-dialog.kk-purchases .kk-purchase:hover:not(:disabled) {
-  border-color: #ffe2a7;
-  filter: none;
-}
-.kk-dialog.kk-purchases .kk-purchase.selected {
-  outline: none;
-  border-color: #ffe2a7;
-  box-shadow: inset 0 0 0 1px #ffe2a7;
-}
-.kk-dialog.kk-purchases .kk-purchase:disabled {
-  opacity: 1;
-  cursor: default;
-}
-.kk-dialog.kk-purchases .kk-purchase:disabled .kk-purchase-art {
-  filter: saturate(0.4) brightness(0.75);
-}
-.kk-dialog.kk-purchases .kk3-feature-card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  gap: 0;
-  text-align: left;
-}
-.kk-dialog.kk-purchases .kk-purchase-art {
-  display: grid;
-  place-items: end center;
-  height: 228px;
-  aspect-ratio: auto;
-  margin: 0;
-  padding: 8px 10px 0;
-  overflow: hidden;
-  background: radial-gradient(ellipse at 50% 100%, #163c44, #041018 72%);
-  filter: none;
-}
-.kk-dialog.kk-purchases .kk-purchase-art::after {
-  content: none;
-}
-.kk-dialog.kk-purchases .kk-purchase .kk-purchase-art img,
-.kk-dialog.kk-purchases .kk-purchase:hover:not(:disabled) .kk-purchase-art img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: contain;
-  object-position: center bottom;
-  transform: none;
-}
-.kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 4px;
-  margin: 0;
-  padding: 10px 12px 12px;
-  color: #c5d7d4;
-}
-.kk-dialog.kk-purchases .kk-purchase strong {
-  font-family: inherit;
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.3px;
-  color: #ffe3a6;
-}
-.kk-dialog.kk-purchases .kk-purchase-detail {
-  min-height: 0;
-  font-size: 13px;
-  line-height: 1.35;
-  color: #d5e6e2;
-}
-.kk-dialog.kk-purchases .kk-purchase-price {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: 8px;
-  row-gap: 0;
-  align-items: baseline;
-  margin-top: 2px;
-}
-.kk-dialog.kk-purchases .kk-price-label {
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: #9fb6b7;
-}
-.kk-dialog.kk-purchases .kk-purchase-price b {
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: 0;
-  color: #fff6dd;
-  white-space: nowrap;
-}
-.kk-dialog.kk-purchases .kk-purchase-price > span:last-child {
-  font-size: 12px;
-  line-height: 1.2;
-  color: #9fb6b7;
-}
-.kk-dialog.kk-purchases .kk-purchase .kk-card-action,
-.kk-dialog.kk-purchases .kk-purchase:nth-child(2) .kk-card-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 42px;
-  margin-top: 8px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 8px;
-  background: linear-gradient(#f3d7a0, #c49245);
-  color: #17241c;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-.kk-dialog.kk-purchases .kk-purchase.selected .kk-card-action {
-  box-shadow: inset 0 0 0 1px #fff6dd;
-}
-.kk-dialog.kk-purchases .kk-purchase-block {
-  display: flex;
-  align-items: center;
-  min-height: 42px;
-  margin-top: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: #2a1c12;
-  color: #ffd7a8;
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1.3;
-}
-.kk-dialog.kk-purchases .kk-muted {
-  margin: 4px 0 0;
-  text-align: center;
-  font-size: 12px;
-}
-.kk-dialog.kk-purchases .kk-back-spins {
-  display: block;
-  width: auto;
-  min-width: 0;
-  min-height: 36px;
-  margin: 0 auto;
-  padding: 4px 8px;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-  color: #8ea8a6;
-  font-size: 13px;
-  font-weight: 650;
-  letter-spacing: 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.kk-dialog.kk-summary {
-  width: min(440px, 94vw);
-  height: auto;
-  aspect-ratio: auto;
-  max-height: min(92dvh, 680px);
-  border: 16px solid transparent;
-  border-image: url("/kilo-night-v3/panel-frame.png") 80 fill / 16px / 0 stretch;
-  background: #051521;
-  box-shadow: 0 20px 80px #000c;
-}
-.kk-dialog.kk-summary .kk-summary-body {
-  position: relative;
-  inset: auto;
-  top: auto;
-  right: auto;
-  bottom: auto;
-  left: auto;
-  height: auto;
-  overflow: visible;
-  padding: 8px 10px 12px;
-  gap: 8px;
-  align-content: center;
-}
-.kk-dialog.kk-summary .kk-summary-line strong {
-  font-size: clamp(28px, 8vw, 44px);
-  overflow-wrap: anywhere;
-}
-@container stage (max-width: 740px) and (min-height: 521px) {
-  .kk-dialog.kk-purchases .kk-purchase-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .kk-dialog.kk-purchases .kk3-feature-card-content {
-    flex-direction: row;
-    align-items: stretch;
-  }
-  .kk-dialog.kk-purchases .kk-purchase-art {
-    width: 42%;
-    height: auto;
-    min-height: 148px;
-    flex: 0 0 42%;
-    padding: 6px;
-  }
-  .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
-    flex: 1 1 auto;
-    min-width: 0;
-    justify-content: center;
-    padding: 8px 10px 10px 4px;
-  }
-  .kk-dialog.kk-purchases .kk-purchase strong {
-    font-size: 18px;
-  }
-  .kk-dialog.kk-summary {
-    width: min(360px, 94vw);
-  }
-  .kk-dialog.kk-summary .kk-summary-line strong {
-    font-size: 32px;
-  }
-}
-@container stage (max-height: 520px) {
-  .kk-dialog.kk-purchases .kk3-feature-card-content {
-    flex-direction: row;
-    align-items: stretch;
-  }
-  .kk-dialog.kk-purchases .kk-purchase-art {
-    width: 44%;
-    height: auto;
-    min-height: 132px;
-    flex: 0 0 44%;
-    padding: 6px;
-  }
-  .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
-    flex: 1 1 auto;
-    min-width: 0;
-    padding: 8px 8px 8px 4px;
-  }
-  .kk-dialog.kk-purchases .kk-purchase strong {
-    font-size: 16px;
-  }
-  .kk-dialog.kk-purchases .kk-purchase-detail,
-  .kk-dialog.kk-purchases .kk-purchase-price b {
-    font-size: 12px;
-  }
-  .kk-dialog.kk-purchases .kk-card-action,
-  .kk-dialog.kk-purchases .kk-purchase-block {
-    min-height: 34px;
-  }
-}
-
-
-
-/* Authoritative presentation. One definition each for the cabinet, controls,
-   bonus header, purchase dialog, and completion panel. Desktop is the base.
-   Portrait and short landscape are the only variants. */
-
-@font-face {
-  font-family: "Source Sans 3";
-  src: url("/kilo-ui-v11/fonts/SourceSans3-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Source Sans 3";
-  src: url("/kilo-ui-v11/fonts/SourceSans3-600.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Source Sans 3";
-  src: url("/kilo-ui-v11/fonts/SourceSans3-700.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Barlow Condensed";
-  src: url("/kilo-ui-v11/fonts/BarlowCondensed-600.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-.kk-stage .kk-shell[data-layout="r2"] {
-  --kk-plate: #071820e8;
-  --kk-edge: #c6a15a;
-  --kk-teal: #7dffe0;
-  width: max-content;
-  max-width: 100%;
-  height: auto;
-  max-height: 100%;
-  display: grid;
-  grid-template-columns: auto minmax(220px, 236px);
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "play dock"
-    "strip .";
-  gap: 8px;
-  padding: 0;
-  justify-content: center;
-  align-self: center;
-  align-items: start;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  filter: none;
-  box-shadow: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
-  grid-area: play;
-  width: min(1080px, calc(100cqw - 252px), calc((100cqh - 128px) * 1.66));
-  min-width: 0;
-  min-height: 0;
-  display: grid;
-  grid-template-rows: 64px auto;
-  justify-items: stretch;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-crest,
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
-  height: 64px;
-  min-height: 64px;
-  max-height: 64px;
-  overflow: hidden;
-  background: transparent;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
-  aspect-ratio: 1.66;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  max-height: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-logo {
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 52px;
-  width: min(40%, 340px);
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bust {
-  width: 108px;
-  height: 64px;
-  left: 4px;
-  bottom: 0;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-crest-status {
-  left: auto;
-  right: 12px;
-  top: 50%;
-  bottom: auto;
-  transform: translateY(-50%);
-  width: min(26%, 200px);
-  height: auto;
-  min-height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-event {
-  width: auto;
-  max-width: 100%;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: right;
-}
-
-/* Bonus header. The next-reward line is a direct grid item of this header. */
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
-  position: absolute;
-  inset: 4px 6px;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 132px minmax(0, 1fr) 148px;
-  grid-template-rows: minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: 8px;
-  row-gap: 0;
-  height: auto;
-  padding: 2px 8px;
-  background: var(--kk-plate);
-  border: 1px solid #c6a15a66;
-  border-radius: 8px;
-  box-shadow: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-mark,
-.kk-stage .kk-shell[data-layout="r2"] .kk-plate,
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay::before {
-  display: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins,
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay,
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-track {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-  min-width: 0;
-  max-height: none;
-  padding: 0;
-  background: none;
-  box-shadow: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins { grid-column: 1; grid-row: 1; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-track { grid-column: 2; grid-row: 1; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay { grid-column: 3; grid-row: 1; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-plate-copy {
-  position: static;
-  inset: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-  overflow: visible;
-  pointer-events: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow {
-  display: block;
-  overflow: visible;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.2px;
-  text-transform: none;
-  color: #ffe09b;
-  white-space: nowrap;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
-.kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult {
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  letter-spacing: 0;
-  color: #fff6dd;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-sockets {
-  display: flex;
-  width: auto;
-  max-width: 100%;
-  justify-content: center;
-  gap: 6px;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-socket {
-  width: 28px;
-  height: 28px;
-  flex: 0 0 28px;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-next {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  margin: 0;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
-  white-space: normal;
-  color: #d7ecf2;
-}
-
-/* Controls. Desktop is a content-sized column aligned to the reel frame. */
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock {
-  position: relative;
-  grid-area: dock;
-  align-self: start;
-  justify-self: stretch;
-  height: max-content;
-  margin-top: 64px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas:
-    "buy"
-    "bet"
-    "ante"
-    "tools"
-    "spin";
-  align-content: start;
-  gap: 8px;
-  min-height: 0;
-  padding: 10px;
-  overflow: visible;
-  box-sizing: border-box;
-  border: 1px solid #c6a15a66;
-  border-radius: 12px;
-  background: var(--kk-plate);
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock-play,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock-utils {
-  display: contents;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button {
-  grid-area: buy;
-  position: static;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 44px;
-  min-height: 44px;
-  margin: 0;
-  padding: 0 8px;
-  border: 1px solid var(--kk-edge);
-  border-radius: 8px;
-  background: #0c222a;
-  color: #fff6dd;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  box-shadow: none;
-  filter: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button span {
-  position: static;
-  display: block;
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  text-shadow: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button.selected {
-  border-color: var(--kk-teal);
-  box-shadow: inset 0 0 0 1px var(--kk-teal);
-  background: #12352f;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-feature-button:disabled {
-  opacity: 0.5;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bet {
-  grid-area: bet;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 4px;
-  width: 100%;
-  min-width: 0;
-  margin: 0;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-bet > .kk-eyebrow {
-  display: block;
-  overflow: visible;
-  color: #f0e2c0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.4px;
-  text-transform: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-stepper {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  min-width: 0;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-stepper select {
-  flex: 1 1 auto;
-  width: 1px;
-  min-width: 0;
-  height: 44px;
-  border: 1px solid var(--kk-edge);
-  border-radius: 8px;
-  background: #0c222a;
-  color: #fff6dd;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  text-align-last: center;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-ante {
-  grid-area: ante;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  width: 100%;
-  height: 44px;
-  min-height: 44px;
-  min-width: 0;
-  margin: 0;
-  padding: 0 10px;
-  border: 1px solid #c6a15a88;
-  border-radius: 8px;
-  background: #0c222a;
-  color: #f3e7cc;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-ante.selected {
-  border-color: var(--kk-teal);
-  background: #12352f;
-  color: #fff6dd;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-ante span {
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.2px;
-  white-space: nowrap;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-ante b {
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: #ffe3a6;
-  white-space: nowrap;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools {
-  grid-area: tools;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  width: 100%;
-  margin: 0;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-tools-toggle {
-  display: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-stepper .kk-round,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  padding: 0;
-  border: 1px solid #a58143;
-  border-radius: 8px;
-  background: #0c222a;
-  background-image: none;
-  box-shadow: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock .kk-turbo.selected,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock .kk-round[aria-pressed="true"] {
-  border-color: var(--kk-teal);
-  background: #12352f;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock img {
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-spin-area {
-  grid-area: spin;
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  gap: 4px;
-  width: 100%;
-  margin: 0;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-spin {
-  width: 92px;
-  height: 92px;
-  margin: 0;
-  border-radius: 0;
-  background: url("/kilo-ui-v11/spin-medallion.png") center / contain no-repeat;
-  color: #fff6d8;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.05;
-  text-align: center;
-  white-space: normal;
-  text-shadow: 0 1px 0 #3a2410;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-spin.is-purchase {
-  font-size: 15px;
-  padding: 8px;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-spin-area > span {
-  max-width: 100%;
-  color: #ffe3a6;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.2;
-  text-align: center;
-  white-space: normal;
-}
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-bet,
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-ante {
-  display: none;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock button:disabled,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock select:disabled {
-  opacity: 0.48;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock button:focus-visible,
-.kk-stage .kk-shell[data-layout="r2"] .kk-dock select:focus-visible {
-  outline: 2px solid #ffe2a7;
-  outline-offset: 2px;
-}
-
-/* Totals. */
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip {
-  grid-area: strip;
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.9fr) minmax(0, 1.15fr) minmax(72px, 0.7fr);
-  grid-template-areas: "balance bet last total";
-  gap: 8px;
-  min-height: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 1px solid #c6a15a66;
-  border-radius: 12px;
-  background: var(--kk-plate);
-}
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip {
-  grid-template-areas: "balance bonus spin total";
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read {
-  position: static;
-  display: flex;
-  min-width: 0;
-  min-height: 48px;
-  overflow: hidden;
-  border: 0;
-  border-right: 1px solid #8d704033;
-  background: transparent;
-  box-shadow: none;
-  padding: 4px 10px;
-  margin: 0;
-  text-align: left;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read:last-child { border-right: 0; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read-plate { display: none; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read-well {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  min-width: 0;
-  overflow: hidden;
-  container-type: inline-size;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-balance { grid-area: balance; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-bet-read { grid-area: bet; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-last-win { grid-area: last; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-bonus-win,
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-this-spin { display: none; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-bonus-win { grid-area: bonus; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-this-spin { grid-area: spin; }
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total { grid-area: total; }
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-bet-read,
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-last-win,
-.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-bet-read,
-.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-last-win {
-  display: none;
-}
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-bonus-win,
-.kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip .kk-this-spin,
-.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-bonus-win,
-.kk-stage .kk-shell[data-layout="r2"].is-same-return .kk-strip .kk-this-spin {
-  display: flex;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-eyebrow,
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-trigger {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #f0e2c0;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  line-height: 1.1;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip strong {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #fff6dd;
-  font-family: "Source Sans 3", sans-serif;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  font-size: clamp(14px, calc(100cqi / 8), 18px);
-  line-height: 1.15;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total,
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total .kk-eyebrow,
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-total strong {
-  color: #9eb4b1;
-}
-.kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-afford {
-  grid-column: 1 / -1;
-  margin: 0;
-  text-align: center;
-}
-
-/* Portrait. Bet, then Buy beside Spin, then one full-width utility row. */
-@container stage (max-width: 760px) {
-  .kk-stage .kk-shell[data-layout="r2"] {
-    width: 100%;
-    height: auto;
-    max-height: 100%;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-      "play"
-      "dock"
-      "strip";
-    padding: 4px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
-    width: 100%;
-    grid-template-rows: 64px auto;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
-    aspect-ratio: 1.66;
-    width: 100%;
-    height: auto;
-    max-height: none;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-crest,
-  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
-    height: 64px;
-    min-height: 64px;
-    max-height: 64px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bust { display: none; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-logo {
-    left: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 36px;
-    width: min(42%, 160px);
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-crest-status {
-    right: 8px;
-    width: 46%;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
-    inset: 2px 4px;
-    grid-template-columns: 72px minmax(0, 1fr) 96px;
-    padding: 3px 6px 2px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow { font-size: 13px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult { font-size: 18px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-socket {
-    width: 24px;
-    height: 24px;
-    flex-basis: 24px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-next { font-size: 12px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock {
-    margin-top: 0;
-    grid-template-areas:
-      "bet"
-      "play"
-      "utils";
-    gap: 6px;
-    padding: 6px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-play {
-    display: grid;
-    grid-area: play;
-    grid-template-columns: minmax(0, 1fr) 96px;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-utils {
-    display: flex;
-    grid-area: utils;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
-    width: 100%;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-ante,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-spin-area {
-    grid-area: auto;
-    position: static;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet > .kk-eyebrow {
-    display: block;
-    flex: 0 0 auto;
-    font-size: 16px;
-    white-space: nowrap;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper { flex: 1 1 auto; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button {
-    height: 48px;
-    min-height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-spin-area {
-    width: 96px;
-    justify-items: center;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-spin {
-    width: 64px;
-    height: 64px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-ante {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 0;
-    height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools {
-    flex: 0 0 auto;
-    width: auto;
-    justify-content: flex-end;
-    gap: 8px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper .kk-round,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round {
-    width: 44px;
-    min-width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-strip {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    grid-template-areas:
-      "balance bet"
-      "last total";
-  }
-  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-strip {
-    grid-template-areas:
-      "balance bonus"
-      "spin total";
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read { min-height: 42px; }
-}
-
-/* Short landscape. Reel height is the space left after the crest and totals.
-   Secondary controls sit in a drawer so 44px targets stay on the essentials. */
-@container stage (max-height: 520px) and (min-width: 761px) {
-  .kk-stage .kk-shell[data-layout="r2"] {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    grid-template-columns: minmax(0, 1fr) max-content;
-    grid-template-rows: minmax(0, 1fr) auto;
-    grid-template-areas:
-      "play dock"
-      "strip strip";
-    align-self: stretch;
-    justify-self: stretch;
-    padding: 4px;
-    gap: 6px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-playfield {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    grid-template-rows: 44px minmax(0, 1fr);
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-crest,
-  .kk-stage .kk-shell[data-layout="r2"].is-feature .kk-crest {
-    height: 44px;
-    min-height: 44px;
-    max-height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-canvas-wrap {
-    height: 100%;
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-    min-height: 0;
-    aspect-ratio: 1.66;
-    justify-self: center;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bust { display: none; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-logo {
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 30px;
-    width: min(40%, 180px);
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus {
-    inset: 1px 4px;
-    grid-template-columns: 92px minmax(0, 1fr) 108px;
-    padding: 1px 6px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus .kk-eyebrow { font-size: 13px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-spins b,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bonus-pay .kk-mult { font-size: 16px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-socket {
-    width: 22px;
-    height: 22px;
-    flex-basis: 22px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-next { font-size: 12px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock {
-    width: 268px;
-    margin-top: 44px;
-    grid-template-areas:
-      "bet"
-      "play"
-      "utils";
-    gap: 6px;
-    padding: 8px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-play {
-    display: grid;
-    grid-area: play;
-    grid-template-columns: minmax(0, 1fr) 96px;
-    align-items: center;
-    gap: 8px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-utils {
-    display: flex;
-    grid-area: utils;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-ante,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-spin-area {
-    grid-area: auto;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet {
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-bet > .kk-eyebrow {
-    display: block;
-    flex: 0 0 auto;
-    font-size: 15px;
-    white-space: nowrap;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-feature-button { height: 44px; min-height: 44px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-spin { width: 64px; height: 64px; }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-ante {
-    flex: 1 1 auto;
-    width: auto;
-    min-width: 0;
-    height: 44px;
-    min-height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-tools-toggle {
-    display: grid;
-    flex: 0 0 44px;
-    width: 44px;
-    min-width: 44px;
-    height: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools {
-    display: none;
-    position: absolute;
-    z-index: 6;
-    right: 8px;
-    bottom: 58px;
-    width: auto;
-    gap: 8px;
-    padding: 8px;
-    border: 1px solid var(--kk-edge);
-    border-radius: 10px;
-    background: #071820;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-utils.is-open .kk-dock-tools {
-    display: flex;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper .kk-round,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-turbo,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-dock-tools .kk-round,
-  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper select {
-    width: 44px;
-    min-width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-stepper select {
-    width: 1px;
-    flex: 1 1 auto;
-  }
-  .kk-stage .kk-shell[data-layout="r2"] .kk-strip .kk-read { min-height: 40px; }
-}
-
-/* Purchase cards. One composition: full illustration, then the copy. */
-.kk-app .kk-dialog.kk-purchases {
-  width: min(780px, 96vw);
-  height: auto;
-  max-height: calc(100dvh - 16px);
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  background: #071820;
-  border: 1px solid var(--gold, #c6a15a);
-  border-image: none;
-  border-radius: 16px;
-  box-shadow: 0 18px 50px #000c;
-  padding: 8px 12px 12px;
-  color: #f4f7f6;
-}
-.kk-app .kk-dialog.kk-purchases .kk-dialog-head strong,
-.kk-app .kk-dialog.kk-purchases .kk-purchase strong,
-.kk-app .kk-dialog.kk-summary .kk-eyebrow,
-.kk-app .kk-boot-enter {
-  font-family: "Barlow Condensed", sans-serif;
-  letter-spacing: 0.2px;
-}
-.kk-app .kk-dialog.kk-purchases .kk-dialog-body {
-  position: static;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  overflow: visible;
-  padding: 0;
-  background: none;
-}
-.kk-app .kk-dialog.kk-purchases .kk-buy-stake,
-.kk-app .kk-dialog.kk-purchases .kk-buy-stake b {
-  margin: 0;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 15px;
-  font-variant-numeric: tabular-nums;
-}
-.kk-app .kk-purchase-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-}
-.kk-app .kk-purchase-nav .kk-round {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  border: 1px solid #c6a15a;
-  border-radius: 8px;
-  background: #0c222a;
-}
-.kk-app .kk-purchase-pager {
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: center;
-  gap: 8px;
-}
-.kk-app .kk-purchase-pager button {
-  min-height: 44px;
-  min-width: 44px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: #b7c9c4;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  cursor: pointer;
-}
-.kk-app .kk-purchase-pager button.is-current {
-  color: #fff6d8;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-grid {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
-  width: 100%;
-  height: auto;
-  min-height: max-content;
-  margin: 0;
-  padding: 4px 0 8px;
-  overflow: visible;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase,
-.kk-app .kk-dialog.kk-purchases .kk-purchase:nth-child(2),
-.kk-app .kk-dialog.kk-purchases .kk-purchase.is-premium {
-  position: relative;
-  inset: auto;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 280px;
-  width: min(340px, 100%);
-  height: auto;
-  max-height: none;
-  aspect-ratio: auto;
-  overflow: visible;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #c6a15a;
-  border-radius: 16px;
-  background: #0b1820;
-  background-image: none;
-  box-shadow: none;
-  filter: none;
-  opacity: 1;
-  color: #f4f7f6;
-  text-align: center;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase.is-premium {
-  border-color: #7dffe0;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase.selected {
-  outline: 2px solid #7dffe0;
-  outline-offset: 3px;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase.selected::after,
-.kk-app .kk-dialog.kk-purchases .kk-purchase::before,
-.kk-app .kk-dialog.kk-purchases .kk-purchase-art::after {
-  content: none;
-  display: none;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase:disabled {
-  cursor: not-allowed;
-  filter: none;
-  opacity: 1;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase:disabled .kk-purchase-art {
-  opacity: 0.55;
-  filter: none;
-}
-.kk-app .kk-dialog.kk-purchases .kk3-feature-card-content {
-  position: relative;
-  inset: auto;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-art {
-  position: relative;
-  left: auto;
-  top: auto;
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  background:
-    radial-gradient(ellipse at 50% 78%, #1a4a52, #071820 72%);
-  border-bottom: 1px solid #c6a15a55;
-  border-radius: 15px 15px 0 0;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase .kk-purchase-art img,
-.kk-app .kk-dialog.kk-purchases .kk-purchase:hover:not(:disabled) .kk-purchase-art img {
-  position: static;
-  display: block;
-  width: 86%;
-  height: 86%;
-  max-width: none;
-  object-fit: contain;
-  object-position: center;
-  transform: none;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase .kk-purchase-copy {
-  position: relative;
-  left: auto;
-  top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 4px;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 10px 14px 12px;
-  overflow: visible;
-  background: transparent;
-  text-align: center;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase strong {
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 1;
-  color: #ffe3a6;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-detail,
-.kk-app .kk-dialog.kk-purchases .kk-purchase-times,
-.kk-app .kk-dialog.kk-purchases .kk-price-label,
-.kk-app .kk-dialog.kk-purchases .kk-purchase-block {
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: 0;
-  text-transform: none;
-  color: #d7e8e4;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-price {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
-  gap: 6px;
-  margin: 0;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-price b {
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-  color: #fff6dd;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase .kk-card-action,
-.kk-app .kk-dialog.kk-purchases .kk-purchase:nth-child(2) .kk-card-action,
-.kk-app .kk-dialog.kk-purchases .kk-purchase.selected .kk-card-action {
-  display: grid;
-  place-items: center;
-  min-height: 44px;
-  margin-top: 6px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 8px;
-  background: #e6c57a;
-  color: #17241c;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  text-transform: none;
-}
-.kk-app .kk-dialog.kk-purchases .kk-purchase-block {
-  display: block;
-  min-height: 44px;
-  margin-top: 6px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  background: #2a1c12;
-  color: #ffd7a8;
-  white-space: normal;
-}
-.kk-app .kk-dialog.kk-purchases .kk-muted,
-.kk-app .kk-dialog.kk-purchases .kk-back-spins {
-  display: block;
-  margin: 0;
-  font-size: 13px;
-}
-
-@container stage (max-width: 760px) or (max-height: 520px) {
-  .kk-app .kk-dialog.kk-purchases {
-    width: min(420px, 96vw);
-  }
-  .kk-app .kk-purchase-nav .kk-round { display: none; }
-  .kk-app .kk-dialog.kk-purchases .kk-purchase-grid {
-    justify-content: flex-start;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-  .kk-app .kk-dialog.kk-purchases .kk-purchase,
-  .kk-app .kk-dialog.kk-purchases .kk-purchase:nth-child(2),
-  .kk-app .kk-dialog.kk-purchases .kk-purchase.is-premium {
-    flex: 0 0 100%;
-    width: 100%;
-    scroll-snap-align: center;
-  }
-}
-
-/* Completion. Copy stays in the measured interior of the artwork. */
-.kk-app .kk-dialog.kk-summary {
-  width: min(420px, 86vw);
-  height: auto;
-  max-height: none;
-  aspect-ratio: 1 / 1;
-  display: block;
-  overflow: hidden;
-  border: 0;
-  border-image: none;
-  border-radius: 0;
-  box-shadow: none;
-  background-color: transparent;
-  background-image: url("/kilo-ui-v11/panel-complete.webp");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  color: #fff3cf;
-}
-.kk-app .kk-dialog.kk-summary.is-profit {
-  width: min(560px, 94vw);
-  aspect-ratio: 3 / 2;
-  background-image: url("/kilo-ui-v11/banner-win.webp");
-}
-.kk-app .kk-dialog.kk-summary .kk-summary-body {
-  position: absolute;
-  left: 20%;
-  top: 32%;
-  width: 60%;
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  background: none;
-  text-align: center;
-}
-.kk-app .kk-dialog.kk-summary.is-profit .kk-summary-body {
-  left: 24%;
-  top: 40%;
-  width: 52%;
-  height: 32%;
-}
-.kk-app .kk-dialog.kk-summary .kk-eyebrow,
-.kk-app .kk-dialog.kk-summary p {
-  margin: 0;
-  max-width: 100%;
-}
-.kk-app .kk-dialog.kk-summary .kk-eyebrow {
-  font-size: 16px;
-  color: #ffe09b;
-}
-.kk-app .kk-dialog.kk-summary .kk-summary-line,
-.kk-app .kk-dialog.kk-summary p {
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 14px;
-  color: #d7ecf2;
-}
-.kk-app .kk-dialog.kk-summary .kk-summary-line strong {
-  display: block;
-  margin-top: 2px;
-  font-family: "Source Sans 3", sans-serif;
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  font-size: clamp(26px, 4.2vw, 40px);
-  line-height: 1;
-  color: #fff6dd;
-}
-.kk-app .kk-dialog.kk-summary button {
-  min-height: 36px;
-  min-width: 128px;
-  margin-top: 4px;
-  padding: 0 16px;
-  border: 1px solid #ffe2a7;
-  border-radius: 6px;
-  background: #e6c57a;
-  color: #17241c;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-}
-@media (max-height: 520px) {
-  .kk-app .kk-dialog.kk-summary { width: min(280px, 70dvh); }
-  .kk-app .kk-dialog.kk-summary.is-profit { width: min(460px, 92vw); }
-  .kk-app .kk-dialog.kk-summary .kk-summary-line strong { font-size: 24px; }
-}
-
-.kk-app .kk-strip strong,
-.kk-app .kk-purchase-price b,
-.kk-app .kk-purchase-times,
-.kk-app .kk-summary-line strong,
-.kk-app .kk-ante b,
-.kk-app .kk-spin-area > span,
-.kk-app .kk-stepper select,
-.kk-app .kk-buy-stake b,
-.kk-app .kk-bonus-spins b,
-.kk-app .kk-bonus-pay .kk-mult {
-  font-family: "Source Sans 3", sans-serif;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Boot overlay. Art fills the viewport; logo and Enter sit on it.
-   Without these rules the loader and wordmark stack as two raw images. */
-.kk-app .kk-boot {
+/* Enter screen keeps its supplied composition, including separate landscape art. */
+.kk-boot {
   position: fixed;
   inset: 0;
   z-index: 90;
@@ -4751,28 +1626,27 @@ button {
   overflow: hidden;
   background: #02060c;
 }
-.kk-app .kk-boot-art {
+.kk-boot-art {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
 }
-.kk-app .kk-boot-logo {
+.kk-boot-logo {
   position: absolute;
   z-index: 1;
   left: 7vw;
-  top: 14vh;
+  top: 14dvh;
   width: min(300px, 26vw);
   height: auto;
-  margin: 0;
 }
-.kk-app .kk-boot-copy {
+.kk-boot-copy {
   position: absolute;
   z-index: 1;
   left: 7vw;
-  bottom: 12vh;
+  bottom: max(9dvh, env(safe-area-inset-bottom));
   display: grid;
   justify-items: start;
   gap: 10px;
@@ -4780,76 +1654,272 @@ button {
   margin: 0;
   text-align: left;
 }
-.kk-app .kk-boot-status {
+.kk-boot-status {
   margin: 0;
   color: #ffe7b5;
-  font-weight: 700;
-  text-shadow: 0 1px 2px #000c;
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px #000;
 }
-.kk-app .kk-boot-track {
+.kk-boot-track {
   width: 100%;
-  height: 14px;
-  background: url("/kilo-ui-v11/loading-track.svg") center / 100% 100% no-repeat;
+  height: 10px;
+  border: 1px solid #d3b57070;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #031820e8;
 }
-.kk-app .kk-boot-track span {
+.kk-boot-track span {
   display: block;
   height: 100%;
-  background: url("/kilo-ui-v11/loading-fill.svg") left center / auto 100% no-repeat;
+  background: linear-gradient(90deg, #266e60, #9ee2b2);
+  transition: width 200ms;
 }
-.kk-app .kk-boot-enter {
+.kk-boot-enter {
+  width: min(280px, 100%);
+  height: 76px;
   display: grid;
   place-items: center;
-  width: min(280px, 72vw);
-  aspect-ratio: 2172 / 724;
-  height: auto;
-  min-height: 44px;
   border: 0;
-  color: #f4fff9;
-  background: url("/kilo-ui-v11/button-action.webp") center / 100% 100% no-repeat;
-  font-size: 22px;
-  text-shadow: 0 1px 0 #043028, 0 0 8px #043028cc;
+  background: url("/kilo-ui-v11/button-action.webp") center / 100% 100%
+    no-repeat;
+  color: #fff2ce;
+  font-family: var(--display);
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 3px #002621;
 }
-.kk-app .kk-boot-enter:disabled {
-  filter: grayscale(0.35);
-  opacity: 0.7;
-}
+
 @media (max-width: 700px) {
-  .kk-app .kk-boot-art {
+  .kk-preview-banner {
+    display: none;
+  }
+  .kk-dev {
+    padding-inline: 10px;
+  }
+  .kk-dev button,
+  .kk-dev a {
+    padding-inline: 8px;
+  }
+  .kk-sandbox {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+  .kk-modal-root {
+    padding: 10px;
+  }
+  .kk-dialog-head {
+    padding: 8px 14px;
+    min-height: 62px;
+  }
+  .kk-dialog-head strong {
+    font-size: 25px;
+  }
+  .kk-purchases {
+    width: min(440px, 100%);
+  }
+  .kk-purchases .kk-dialog-body {
+    gap: 9px;
+    padding: 12px 12px 10px;
+  }
+  .kk-purchase-nav {
+    display: flex;
+  }
+  .kk-purchase-nav > .kk-round {
+    display: none;
+  }
+  .kk-purchase-grid {
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 3px;
+  }
+  .kk-purchase-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .kk-purchase {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+  }
+  .kk-purchase-art {
+    height: 166px;
+  }
+  .kk-purchase-copy {
+    gap: 5px;
+    padding: 0 16px 14px;
+  }
+  .kk-purchase strong {
+    font-size: 29px;
+  }
+  .kk-purchase-price b {
+    font-size: 28px;
+  }
+  .kk-purchase-detail {
+    font-size: 14px;
+  }
+  .kk-purchases .kk-muted {
+    font-size: 12px;
+  }
+  .kk-summary {
+    width: min(410px, 100%, calc(100dvh - 145px));
+  }
+  .kk-summary-body {
+    gap: 9px;
+  }
+  .kk-summary-line strong {
+    font-size: clamp(28px, 16cqi, 44px);
+  }
+}
+@media (max-width: 700px) and (orientation: portrait) {
+  .kk-boot-art {
     object-position: center 20%;
   }
-  .kk-app .kk-boot-logo {
+  .kk-boot-logo {
     left: 50%;
-    top: 8vh;
+    top: 7dvh;
     transform: translateX(-50%);
-    width: min(210px, 56vw);
+    width: min(240px, 60vw);
   }
-  .kk-app .kk-boot-copy {
+  .kk-boot-copy {
     left: 50%;
-    bottom: 4.5vh;
+    bottom: max(4dvh, env(safe-area-inset-bottom));
     transform: translateX(-50%);
-    width: min(300px, 84vw);
+    width: min(300px, 82vw);
     justify-items: center;
     text-align: center;
   }
 }
-@media (max-height: 500px) {
-  .kk-app .kk-boot-art {
-    object-fit: contain;
-    object-position: center;
-    background: #02060c;
+@media (max-height: 540px) and (orientation: landscape) {
+  .kk-stage {
+    padding: 4px 10px 8px;
   }
-  .kk-app .kk-boot-logo {
-    left: 4vw;
-    top: 8vh;
-    transform: none;
-    width: min(200px, 26vw);
+  .kk-modal-root {
+    padding: 8px;
   }
-  .kk-app .kk-boot-copy {
-    left: 4vw;
-    bottom: 7vh;
+  .kk-dialog-head {
+    min-height: 48px;
+    padding: 2px 12px;
+  }
+  .kk-dialog-head strong {
+    font-size: 22px;
+  }
+  .kk-purchases {
+    width: min(720px, 100%);
+  }
+  .kk-purchases .kk-dialog-body {
+    gap: 6px;
+    padding: 6px 12px;
+  }
+  .kk-purchase-nav {
+    display: none;
+  }
+  .kk-purchase-grid {
+    gap: 12px;
+    overflow: visible;
+  }
+  .kk-purchase {
+    flex: 1 1 0;
+  }
+  .kk3-feature-card-content {
+    display: grid;
+    grid-template-columns: 36% 64%;
+    min-height: 170px;
+    align-items: center;
+  }
+  .kk-purchase-art {
+    height: 140px;
+  }
+  .kk-purchase-art img {
+    width: 100%;
+    height: 100%;
+  }
+  .kk-purchase-copy {
+    padding: 10px 10px 10px 0;
+    gap: 4px;
+  }
+  .kk-purchase strong {
+    font-size: 23px;
+  }
+  .kk-purchase-detail {
+    font-size: 12px;
+  }
+  .kk-purchase-price {
+    margin-top: 0;
+  }
+  .kk-purchase-price b {
+    font-size: 22px;
+  }
+  .kk-card-action,
+  .kk-purchase-block {
+    min-height: 44px;
+    margin-top: 4px;
+    font-size: 16px;
+  }
+  .kk-purchase-block {
+    font-size: 11px;
+    padding: 4px;
+  }
+  .kk-purchase-times {
+    font-size: 11px;
+  }
+  .kk-purchases .kk-muted {
+    font-size: 11px;
+  }
+  .kk-back-spins {
+    min-height: 44px;
+    padding: 2px 12px;
+  }
+  .kk-summary {
+    width: min(340px, calc(100dvh - 112px));
+  }
+  .kk-summary-body {
+    gap: 6px;
+  }
+  .kk-summary-body .kk-eyebrow {
+    font-size: 15px;
+  }
+  .kk-summary-body > p:last-child {
+    font-size: 11px;
+  }
+  .kk-summary-line strong {
+    font-size: 29px;
+  }
+  .kk-summary-line > span {
+    font-size: 10px;
+  }
+  .kk-summary > button {
+    height: 44px;
+    font-size: 18px;
+  }
+  .kk-boot-art {
+    object-fit: cover;
+  }
+  .kk-boot-logo {
+    left: 5vw;
+    top: 6dvh;
     transform: none;
-    width: min(240px, 28vw);
-    justify-items: start;
-    text-align: center;
+    width: min(210px, 27vw);
+  }
+  .kk-boot-copy {
+    left: 5vw;
+    bottom: 6dvh;
+    transform: none;
+    width: min(240px, 30vw);
+    gap: 6px;
+  }
+  .kk-boot-enter {
+    height: 60px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

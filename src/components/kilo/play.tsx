@@ -4,6 +4,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
 } from "react";
 import {
@@ -24,7 +25,13 @@ import {
   settle,
   writeBank,
 } from "@/lib/kilo/bank";
-import { muted, preloadAudio, primeAudio, setMuted, uiTap } from "@/lib/kilo/sound";
+import {
+  muted,
+  preloadAudio,
+  primeAudio,
+  setMuted,
+  uiTap,
+} from "@/lib/kilo/sound";
 import {
   presentScript,
   presentEventPreview,
@@ -41,14 +48,15 @@ import {
   type SymbolCompareResult,
 } from "./director";
 import { ReelStage, type MountedScene } from "./ReelStage";
+import { fitGameLayout } from "./layout";
 import fixtures from "@/lib/kilo/fixtures.json";
 
 const STAKES = [100, 500, 1000, 2500, 10000];
-const LOADER_PHONE = "(max-width: 700px), (max-height: 500px)";
+const LOADER_PHONE = "(max-width: 700px) and (orientation: portrait)";
 const LOADER_PORTRAIT = "/kilo-ui-v11/loading-portrait.webp";
 const LOADER_DESKTOP = "/kilo-ui-v11/loading-desktop.webp";
-const SOURCE_ZIP = "/kilo-source-only.zip";
-const SOURCE_NAME = "kilo-source-only.zip";
+const SOURCE_URL =
+  "https://github.com/feraka-letgoteam/kilo-king-sandbox-review/tree/codex/presentation-rebuild";
 /** KING emblem is the live scatter. Packages carry the cash plaque. */
 const SCATTER_IS_KING = true;
 
@@ -214,6 +222,28 @@ const FEATURE_CHOICES = [
 export function KiloTable({ review = false }: { review?: boolean }) {
   const sceneRef = useRef<MountedScene | null>(null);
   const appRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLElement | null>(null);
+  const [layout, setLayout] = useState(() => fitGameLayout(1100, 800));
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (!entry) return;
+      const next = fitGameLayout(
+        entry.contentRect.width,
+        entry.contentRect.height,
+      );
+      setLayout((previous) =>
+        previous.width === next.width &&
+        previous.height === next.height &&
+        previous.mode === next.mode
+          ? previous
+          : next,
+      );
+    });
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
   const [collection, setCollection] = useState<CollectionDisplay>(null);
   const [awardLanded, setAwardLanded] = useState(false);
   const [capNotice, setCapNotice] = useState(false);
@@ -246,7 +276,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const busyRef = useRef(false);
   const [note, setNote] = useState("");
   const [previewNote, setPreviewNote] = useState("");
-  const [symbolReport, setSymbolReport] = useState<SymbolCompareResult | null>(null);
+  const [symbolReport, setSymbolReport] = useState<SymbolCompareResult | null>(
+    null,
+  );
   const compareSlot = useRef<HTMLDivElement>(null);
   const compareCanvas = useRef<HTMLCanvasElement | null>(null);
   const [storageFault, setStorageFault] = useState("");
@@ -256,7 +288,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const rollMotion = !reducedMotion;
   const shownWin = useRoll(win, rollMotion, turbo);
   const shownBonus = useRoll(hud?.bonusWin ?? 0, rollMotion, turbo);
-  const shownSpin = useRoll((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0), rollMotion, turbo);
+  const shownSpin = useRoll(
+    (hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0),
+    rollMotion,
+    turbo,
+  );
   const shownTotal = useRoll(hud?.total ?? win, rollMotion, turbo);
   const [fisher, setFisher] = useState<{ pose: FisherPose; tick: number }>({
     pose: "idle",
@@ -766,7 +802,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     } catch (error) {
       console.error("Kilo collection review failed", error);
       scene.show(spin.grid);
-      setNote("Collection review interrupted. The recorded board was restored.");
+      setNote(
+        "Collection review interrupted. The recorded board was restored.",
+      );
     } finally {
       stopWatch();
       if (writes.length) {
@@ -820,11 +858,24 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   }
 
   return (
-    <div className="kk-app" ref={appRef} data-reduced={reducedMotion ? "1" : "0"}>
+    <div
+      className="kk-app"
+      ref={appRef}
+      data-reduced={reducedMotion ? "1" : "0"}
+    >
       {booted ? null : (
-        <div className="kk-boot" role="dialog" aria-modal="true" aria-label="Loading">
+        <div
+          className="kk-boot"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Loading"
+        >
           <img className="kk-boot-art" alt="" src={loaderSrc} />
-          <img className="kk-boot-logo" src="/kilo-ui-v11/logo-kilo-king.webp" alt="Kilo King" />
+          <img
+            className="kk-boot-logo"
+            src="/kilo-ui-v11/logo-kilo-king.webp"
+            alt="Kilo King"
+          />
           <div className="kk-boot-copy">
             <p className="kk-boot-status" role="status">
               {bootError
@@ -843,7 +894,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               />
             </div>
             {bootError ? (
-              <button type="button" className="kk-boot-enter" onClick={() => setBootTry((n) => n + 1)}>
+              <button
+                type="button"
+                className="kk-boot-enter"
+                onClick={() => setBootTry((n) => n + 1)}
+              >
                 Retry
               </button>
             ) : (
@@ -864,11 +919,15 @@ export function KiloTable({ review = false }: { review?: boolean }) {
       )}
       <header className="kk-dev">
         {previewNote ? (
-          <p className="kk-preview-banner" role="status" data-testid="preview-banner">
+          <p
+            className="kk-preview-banner"
+            role="status"
+            data-testid="preview-banner"
+          >
             {previewNote}
           </p>
         ) : null}
-        <span className="kk-sandbox">{sourceNote || "LOCAL SANDBOX"}</span>
+        <span className="kk-sandbox">{sourceNote || "REVIEW BUILD"}</span>
         <nav aria-label="Game menu">
           <button
             type="button"
@@ -891,119 +950,134 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             Review
           </button>
           <a
-            href={SOURCE_ZIP}
-            download={SOURCE_NAME}
+            href={SOURCE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-source="1"
-            onClick={() =>
-              setSourceNote("Download started. Check your browser downloads.")
-            }
+            onClick={() => setSourceNote("Source branch opened in a new tab.")}
           >
             Source
           </a>
         </nav>
       </header>
-      <main className="kk-stage" data-testid="game-stage">
+      <main className="kk-stage" data-testid="game-stage" ref={stageRef}>
         {storageFault ? (
-          <p className="kk-storage-fault" role="alert" data-testid="storage-fault">
+          <p
+            className="kk-storage-fault"
+            role="alert"
+            data-testid="storage-fault"
+          >
             {storageFault}
           </p>
         ) : null}
         <div
           className={`kk-shell ${hud?.active ? "is-feature" : ""} ${hud?.active && hud.bonusWin === hud.total ? "is-same-return" : ""}`}
-          data-layout="r2"
+          data-layout={layout.mode}
+          style={
+            {
+              "--game-width": `${layout.width}px`,
+              "--game-height": `${layout.height}px`,
+              "--reel-width": `${layout.reelWidth}px`,
+              "--reel-height": `${layout.reelHeight}px`,
+              "--header-height": `${layout.header}px`,
+              "--dock-height": `${layout.dock}px`,
+              "--strip-height": `${layout.strip}px`,
+              "--side-width": `${layout.side}px`,
+            } as CSSProperties
+          }
           data-testid="game-hud"
           inert={modalOpen ? true : undefined}
         >
           <div className="kk-playfield">
-          <div className="kk-crest">
-            {hud?.active ? (
-              <div
-                className={`kk-bonus${hud.holding ? " is-holding" : ""}${hud.maxed ? " is-max" : ""}${capNotice ? " is-capped" : ""}`}
-              >
-                <img
-                  className="kk-bonus-mark"
-                  src="/kilo-night-v3/logo-kilo-king.png"
-                  alt=""
-                />
-                <div className="kk-bonus-spins">
+            <div className="kk-crest">
+              {hud?.active ? (
+                <div
+                  className={`kk-bonus${hud.holding ? " is-holding" : ""}${hud.maxed ? " is-max" : ""}${capNotice ? " is-capped" : ""}`}
+                >
                   <img
-                    className="kk-plate"
-                    src="/kilo-night-v3/ui-plate.svg"
+                    className="kk-bonus-mark"
+                    src="/kilo-night-v3/logo-kilo-king.png"
                     alt=""
                   />
-                  <div className="kk-plate-copy">
-                    <span className="kk-eyebrow">Spins</span>
-                    <b data-testid="spins-left">{hud.left ?? 0}</b>
+                  <div className="kk-bonus-spins">
+                    <img
+                      className="kk-plate"
+                      src="/kilo-night-v3/ui-plate.svg"
+                      alt=""
+                    />
+                    <div className="kk-plate-copy">
+                      <span className="kk-eyebrow">Spins</span>
+                      <b data-testid="spins-left">{hud.left ?? 0}</b>
+                    </div>
                   </div>
-                </div>
-                <div className="kk-bonus-track">
-                  <div
-                    className="kk-sockets"
-                    aria-label={
-                      hud.maxed
-                        ? "All collectors filled. Maximum multiplier."
-                        : `${hud.filled} of 4 collectors filled. Collect ×${hud.mult}.`
-                    }
-                  >
-                    {[0, 1, 2, 3].map((i) => {
-                      const filled = i < hud.filled;
-                      return (
-                        <div
-                          key={i}
-                          data-socket={i}
-                          className={`kk-socket${filled ? " filled" : ""}${!hud.maxed && !hud.holding && i === hud.filled ? " next" : ""}`}
-                        >
-                          {filled ? (
-                            <FisherPortrait
-                              mini
-                              pose={hud.holding ? "cheer" : "idle"}
-                            />
-                          ) : null}
-                        </div>
-                      );
-                    })}
+                  <div className="kk-bonus-track">
+                    <div
+                      className="kk-sockets"
+                      aria-label={
+                        hud.maxed
+                          ? "All collectors filled. Maximum multiplier."
+                          : `${hud.filled} of 4 collectors filled. Collect ×${hud.mult}.`
+                      }
+                    >
+                      {[0, 1, 2, 3].map((i) => {
+                        const filled = i < hud.filled;
+                        return (
+                          <div
+                            key={i}
+                            data-socket={i}
+                            className={`kk-socket${filled ? " filled" : ""}${!hud.maxed && !hud.holding && i === hud.filled ? " next" : ""}`}
+                          >
+                            {filled ? (
+                              <FisherPortrait
+                                mini
+                                pose={hud.holding ? "cheer" : "idle"}
+                              />
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
+                  <div className="kk-bonus-pay">
+                    <img
+                      className="kk-plate"
+                      src="/kilo-night-v3/ui-plate.svg"
+                      alt=""
+                    />
+                    <div className="kk-plate-copy">
+                      <span className="kk-eyebrow">Multiplier</span>
+                      <b className="kk-mult">×{hud.mult}</b>
+                    </div>
+                  </div>
+                  {capNotice ? (
+                    <span className="kk-next kk-cap-note">Max win reached</span>
+                  ) : hud.maxed || hud.nextMult == null ? (
+                    <span className="kk-next">Max level</span>
+                  ) : (
+                    <span className="kk-next">
+                      Next +{hud.nextSpins} spins · ×{hud.nextMult}
+                    </span>
+                  )}
                 </div>
-                <div className="kk-bonus-pay">
+              ) : (
+                <>
+                  <div className="kk-bust" key={fisher.tick}>
+                    <FisherPortrait pose={fisher.pose} />
+                  </div>
                   <img
-                    className="kk-plate"
-                    src="/kilo-night-v3/ui-plate.svg"
-                    alt=""
+                    className="kk-logo"
+                    src="/kilo-night-v3/logo-kilo-king.png"
+                    alt="Kilo King"
                   />
-                  <div className="kk-plate-copy">
-                    <span className="kk-eyebrow">Multiplier</span>
-                    <b className="kk-mult">×{hud.mult}</b>
+                  <div className="kk-crest-status">
+                    <p className="kk-event">{caption}</p>
                   </div>
-                </div>
-                {capNotice ? (
-                  <span className="kk-next kk-cap-note">Max win reached</span>
-                ) : hud.maxed || hud.nextMult == null ? (
-                  <span className="kk-next">Max level</span>
-                ) : (
-                  <span className="kk-next">
-                    Next +{hud.nextSpins} spins · ×{hud.nextMult}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <>
-                <div className="kk-bust" key={fisher.tick}>
-                  <FisherPortrait pose={fisher.pose} />
-                </div>
-                <img
-                  className="kk-logo"
-                  src="/kilo-night-v3/logo-kilo-king.png"
-                  alt="Kilo King"
-                />
-                <div className="kk-crest-status">
-                  <p className="kk-event">{caption}</p>
-                </div>
-              </>
-            )}
-          </div>
-          <div className="kk-canvas-wrap" data-testid="reel-host">
-            <ReelStage onReady={onReady} />
-          </div>
+                </>
+              )}
+            </div>
+            <div className="kk-canvas-wrap" data-testid="reel-host">
+              <ReelStage onReady={onReady} />
+            </div>
           </div>
           <aside
             className="kk-dock"
@@ -1012,6 +1086,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               if (event.key === "Escape") setToolsOpen(false);
             }}
           >
+            <div className="kk-feature-context" aria-live="polite">
+              <span className="kk-eyebrow">Feature in play</span>
+              <strong>{hud?.label || "Free spins"}</strong>
+              <span>Spins play automatically</span>
+            </div>
             <div className="kk-bet">
               <span className="kk-eyebrow" id="base-bet-label">
                 BASE BET
@@ -1085,6 +1164,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   type="button"
                   className={`kk-spin${control.purchase ? " is-purchase" : ""}${busy ? " is-busy" : ""}`}
                   data-testid="spin-button"
+                  aria-label={control.label}
                   disabled={
                     summary != null ||
                     !ready ||
@@ -1096,7 +1176,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                     else void play();
                   }}
                 >
-                  {control.label}
+                  <span>{control.purchase ? "BUY" : control.label}</span>
                 </button>
                 <span data-testid="charge-note">
                   {summary
@@ -1105,8 +1185,8 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                       ? reviewing
                         ? "Replay"
                         : hud?.active
-                          ? "Feature in progress"
-                          : "Round in progress"
+                          ? "Auto spins"
+                          : "Spinning"
                       : `Charge ${money(cost)}`}
                 </span>
               </div>
@@ -1133,7 +1213,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                 aria-label="More controls"
                 onClick={() => setToolsOpen((open) => !open)}
               >
-                <img src="/kilo-ui-v11/icon-info.svg" alt="" />
+                <span aria-hidden="true">•••</span>
               </button>
               <div className="kk-dock-tools" id="dock-tools">
                 <button
@@ -1160,7 +1240,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   }}
                 >
                   <img
-                    src={mute ? "/kilo-ui-v11/icon-muted.svg" : "/kilo-ui-v11/icon-sound.svg"}
+                    src={
+                      mute
+                        ? "/kilo-ui-v11/icon-muted.svg"
+                        : "/kilo-ui-v11/icon-sound.svg"
+                    }
                     alt=""
                   />
                 </button>
@@ -1187,21 +1271,33 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             data-collection-phase={collection?.phase ?? "idle"}
           >
             <div className="kk-read kk-balance" data-readout="balance">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">BALANCE</span>
                 <strong data-testid="balance">{money(bank)}</strong>
               </span>
             </div>
             <div className="kk-read kk-bet-read" data-readout="bet">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">BET</span>
                 <strong data-testid="bet-readout">{money(stake)}</strong>
               </span>
             </div>
             <div className="kk-read kk-last-win" data-readout="last">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">
                   {!hud?.active && settled ? "LAST WIN" : "WIN"}
@@ -1213,12 +1309,14 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
               data-readout="bonus"
             >
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">BONUS WIN</span>
-                <strong data-testid="bonus-win">
-                  {money(shownBonus)}
-                </strong>
+                <strong data-testid="bonus-win">{money(shownBonus)}</strong>
                 {hud && hud.triggerWin > 0 ? (
                   <span className="kk-trigger">
                     Trigger {money(hud.triggerWin)}
@@ -1227,21 +1325,28 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               </span>
             </div>
             <div className="kk-read kk-this-spin" data-readout="spin">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">THIS SPIN</span>
-                <strong data-testid="spin-win">
-                  {money(shownSpin)}
-                </strong>
+                <strong data-testid="spin-win">{money(shownSpin)}</strong>
               </span>
             </div>
-            <div className="kk-read kk-total kk-read-secondary" data-readout="total">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
+            <div
+              className="kk-read kk-total kk-read-secondary"
+              data-readout="total"
+            >
+              <img
+                className="kk-read-plate"
+                alt=""
+                src="/kilo-ui-v11/readout-plate.svg"
+              />
               <span className="kk-read-well">
                 <span className="kk-eyebrow">ROUND</span>
-                <strong data-testid="round-total">
-                  {money(shownTotal)}
-                </strong>
+                <strong data-testid="round-total">{money(shownTotal)}</strong>
               </span>
             </div>
             {afford ? (
@@ -1264,7 +1369,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           >
             <div className="kk-dialog-head">
               <strong>How to play</strong>
-              <button type="button" aria-label="Close" onClick={() => setHelp(false)}>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setHelp(false)}
+              >
                 Close
               </button>
             </div>
@@ -1289,8 +1398,8 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <p>
                 Three, four or five scatters award 10, 15 or 20 free spins.
                 Exactly two scatter reels lock for one respin. The +2 spins
-                modifier adds two to the initial award and each retrigger.
-                A purchased feature is already guaranteed: it shows the scatters
+                modifier adds two to the initial award and each retrigger. A
+                purchased feature is already guaranteed: it shows the scatters
                 and does not pay a scatter award.
               </p>
               <p>
@@ -1368,9 +1477,17 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   disabled={buyEdge.start}
                   onClick={() => scrollBuy(-1)}
                 >
-                  <img className="kk-arrow-prev" src="/kilo-ui-v11/icon-arrow.svg" alt="" />
+                  <img
+                    className="kk-arrow-prev"
+                    src="/kilo-ui-v11/icon-arrow.svg"
+                    alt=""
+                  />
                 </button>
-                <div className="kk-purchase-pager" role="tablist" aria-label="Features">
+                <div
+                  className="kk-purchase-pager"
+                  role="tablist"
+                  aria-label="Features"
+                >
                   {FEATURE_CHOICES.map((choice, index) => (
                     <button
                       key={choice.id}
@@ -1423,12 +1540,16 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                         </span>
                         <span className="kk-purchase-copy">
                           <strong>{choice.title}</strong>
-                          <span className="kk-purchase-detail">{choice.detail}</span>
+                          <span className="kk-purchase-detail">
+                            {choice.detail}
+                          </span>
                           <span className="kk-purchase-price">
                             <span className="kk-price-label">Cost</span>
                             <b>{money(price)}</b>
                           </span>
-                          <span className="kk-purchase-times">{choice.times}</span>
+                          <span className="kk-purchase-times">
+                            {choice.times}
+                          </span>
                           {blocked ? (
                             <span className="kk-purchase-block">{blocked}</span>
                           ) : (
@@ -1466,29 +1587,31 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             className={`kk-dialog kk-summary ${summary.celebrate ? "is-profit" : "is-neutral"}`}
             onClose={continueFeature}
           >
-            <div className="kk-dialog-body kk-summary-body">
-              <p className="kk-eyebrow">Feature complete</p>
-              <p className="kk-summary-line">
-                Returned:{" "}
-                <strong data-testid="summary-return">
-                  {money(summary.payout)}
-                </strong>
-              </p>
-              {summary.purchaseCost != null ? (
-                <p data-testid="summary-cost">
-                  Feature cost: {money(summary.purchaseCost)}
+            <div className="kk-summary-plaque">
+              <div className="kk-dialog-body kk-summary-body">
+                <p className="kk-eyebrow">Feature complete</p>
+                <p className="kk-summary-line">
+                  <span>Total return</span>
+                  <strong data-testid="summary-return">
+                    {money(summary.payout)}
+                  </strong>
                 </p>
-              ) : (
-                <p>Triggered from the spin.</p>
-              )}
-              <button
-                type="button"
-                data-testid="continue-feature"
-                onClick={continueFeature}
-              >
-                Continue
-              </button>
+                {summary.purchaseCost != null ? (
+                  <p data-testid="summary-cost">
+                    Feature cost: {money(summary.purchaseCost)}
+                  </p>
+                ) : (
+                  <p>Triggered from the spin.</p>
+                )}
+              </div>
             </div>
+            <button
+              type="button"
+              data-testid="continue-feature"
+              onClick={continueFeature}
+            >
+              Continue
+            </button>
           </Dialog>
         ) : null}
         {panel ? (
@@ -1500,7 +1623,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           >
             <div className="kk-dialog-head">
               <strong>Review scenes</strong>
-              <button type="button" aria-label="Close" onClick={() => setPanel(false)}>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setPanel(false)}
+              >
                 Close
               </button>
             </div>
@@ -1511,15 +1638,16 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               </p>
               <div className="mb-3 flex flex-col gap-2">
                 <a
-                  href={SOURCE_ZIP}
-                  download={SOURCE_NAME}
+                  href={SOURCE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-source="1"
                   className="kk-source-link"
                   onClick={() =>
-                    setSourceNote("Download started. Check your browser downloads.")
+                    setSourceNote("Source branch opened in a new tab.")
                   }
                 >
-                  Download source
+                  View source branch
                 </a>
                 {sourceNote ? <p className="kk-muted">{sourceNote}</p> : null}
                 <button
@@ -1537,7 +1665,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   disabled={busy || !ready}
                   className="min-h-11 w-full rounded-lg bg-white/10 px-2 text-left disabled:opacity-40"
                   onClick={() => {
-                    const fixture = ALL.find((item) => item.id === "hook-upgrade");
+                    const fixture = ALL.find(
+                      (item) => item.id === "hook-upgrade",
+                    );
                     if (fixture) pick(fixture);
                   }}
                 >
@@ -1549,7 +1679,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   disabled={busy || !ready}
                   className="min-h-11 w-full rounded-lg bg-white/10 px-2 text-left disabled:opacity-40"
                   onClick={() => {
-                    const fixture = ALL.find((item) => item.id === "tool-bazooka");
+                    const fixture = ALL.find(
+                      (item) => item.id === "tool-bazooka",
+                    );
                     if (fixture) pick(fixture);
                   }}
                 >
@@ -1568,12 +1700,15 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               {symbolReport ? (
                 <div className="kk-symbol-compare" data-testid="symbol-compare">
                   <p className="kk-muted">
-                    Same renderer as the reels. Idle and the largest 420ms package
-                    pulse. Nothing is bet or settled.
+                    Same renderer as the reels. Idle and the largest 420ms
+                    package pulse. Nothing is bet or settled.
                   </p>
                   <div ref={compareSlot} />
                   <pre data-testid="symbol-report">
-                    {JSON.stringify(symbolReport).replaceAll("brick", "package")}
+                    {JSON.stringify(symbolReport).replaceAll(
+                      "brick",
+                      "package",
+                    )}
                   </pre>
                 </div>
               ) : null}
@@ -1673,7 +1808,10 @@ function Dialog({
         ...root.querySelectorAll<HTMLElement>(
           "button, select, a[href], summary",
         ),
-      ].filter((node) => !node.hasAttribute("disabled"));
+      ].filter(
+        (node) =>
+          !node.hasAttribute("disabled") && node.getClientRects().length > 0,
+      );
     nodes()[0]?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
