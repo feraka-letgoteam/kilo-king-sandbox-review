@@ -33,12 +33,16 @@ for (const [width, height] of screens) {
   );
   if (fit.mode === "wide")
     assert.ok(
-      fit.width >= 580,
+      fit.width >= 800,
       "Desktop console has enough room for full-sized controls",
     );
   console.log(
     `${width}×${height}: ${fit.mode}, ${fit.reelWidth}×${Math.round(fit.reelHeight)} reels${fit.height > availableHeight ? ", vertical scrolling available" : ""}`,
   );
+  if (fit.artLeft) {
+    assert.equal(fit.width, fit.artLeft + fit.reelWidth + fit.artRight);
+    assert.ok(fit.artLeft >= 150 && fit.artRight >= 190);
+  }
 }
 // Check breakpoint transitions, not just the named devices.
 for (let width = 280; width <= 1920; width += 10) {
@@ -48,7 +52,9 @@ for (let width = 280; width <= 1920; width += 10) {
     assert.ok(fit.width <= width, `Horizontal overflow at ${width}×${height}`);
     assert.ok(fit.height > 0 && fit.reelHeight >= 160);
     if (fit.mode === "wide")
-      assert.ok(fit.width >= 580, `Console too narrow at ${width}×${height}`);
+      assert.ok(fit.width >= 800, `Console too narrow at ${width}×${height}`);
+    assert.ok(fit.artLeft + fit.reelWidth + fit.artRight <= fit.width);
+    if (fit.mode !== "wide") assert.equal(fit.artLeft + fit.artRight, 0);
   }
 }
 console.log(

@@ -15,6 +15,6 @@ Art direction: polished stylized 3D-painted night marina; navy/black materials, 
 
 ## Integration
 
-`feature-catalog.ts` defines availability independently of artwork. Only the existing `buy` and `chopper` modes may start purchases. 4/5 scatters describe existing natural triggers. Mystery and God Mode are design previews only. Images appear full-width in Features; `BonusArtwork` provides the separate entry-style composition for preview/confirmation. Existing in-round entry and win animations are not replaced by these images yet.
+`feature-catalog.ts` defines availability independently of artwork. Only the existing `buy` and `chopper` modes may start purchases. 4/5 scatters describe existing natural triggers. Mystery and God Mode are design previews only. The compact Features cards use contained illustration wells with a CSS mask to soften environmental edges; the source images have not been cropped or repainted. Purchase confirmation uses a small art well and live cost text. `BonusArtwork` provides the larger entry-style composition for non-purchasable previews. Existing in-round entry and win animations are not replaced by these images yet.
 
 No new price, multiplier, probability, payout or bonus gameplay is specified by these assets.

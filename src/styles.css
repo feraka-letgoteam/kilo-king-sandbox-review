@@ -99,14 +99,21 @@ button:not(:disabled):active {
 
 /* One game composition. Its geometry is independent of the round state. */
 .kk-app {
+  --review-height: 0px;
   height: 100dvh;
   display: grid;
-  grid-template-rows: 44px minmax(0, 1fr);
+  grid-template-rows: var(--review-height) minmax(0, 1fr);
   overflow: hidden;
   font-variant-numeric: tabular-nums;
   background:
     linear-gradient(180deg, #020c1420 0%, #020c1438 45%, #020b14e8 100%),
     url("/kilo-night-v3/bg-marina.png") center top / cover;
+}
+.kk-app[data-review="true"] {
+  --review-height: 44px;
+}
+.kk-app[data-review="false"] .kk-dev {
+  display: none;
 }
 .kk-dev {
   position: relative;
@@ -166,6 +173,7 @@ button:not(:disabled):active {
   pointer-events: none;
 }
 .kk-stage {
+  grid-row: 2;
   position: relative;
   display: grid;
   place-items: center;
@@ -186,9 +194,9 @@ button:not(:disabled):active {
   width: var(--game-width);
   height: var(--game-height);
   display: grid;
-  grid-template-rows:
-    calc(var(--header-height) + var(--reel-height)) var(--dock-height)
-    var(--strip-height);
+  grid-template-rows: calc(var(--header-height) + var(--reel-height)) var(
+      --dock-height
+    );
   row-gap: 0;
   align-content: start;
   filter: drop-shadow(0 16px 28px #0008);
@@ -196,8 +204,76 @@ button:not(:disabled):active {
 .kk-shell[inert] {
   pointer-events: none;
 }
+/* Desktop scene: the art frames a real, reserved center column. */
+.kk-shell[data-framing="sides"] {
+  grid-template-columns: var(--art-left) var(--reel-width) var(--art-right);
+}
+.kk-shell[data-framing="sides"] .kk-playfield {
+  grid-area: 1 / 2;
+}
+.kk-scene-brand {
+  position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
+  pointer-events: none;
+}
+.kk-side-logo {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  width: calc(100% + 22px);
+  max-width: none;
+  height: auto;
+  filter: drop-shadow(0 5px 8px #000b);
+}
+.kk-side-cargo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 95%;
+  height: 62%;
+  object-fit: contain;
+  object-position: left bottom;
+  filter: drop-shadow(0 10px 14px #0007);
+}
+.kk-scene-character {
+  grid-area: 1 / 3;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  padding-left: 4px;
+  pointer-events: none;
+}
+.kk-scene-character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 10px 18px #0008);
+}
+.kk-shell[data-framing="sides"] .kk-crest > .kk-logo,
+.kk-shell[data-framing="sides"] .kk-bust {
+  display: none;
+}
+.kk-shell[data-framing="sides"] .kk-crest-status {
+  inset: auto 0 12px;
+  transform: none;
+  width: auto;
+  text-align: center;
+}
+.kk-shell[data-framing="sides"] .kk-event {
+  font-size: 12px;
+  color: #bdd0d3;
+}
+.kk-shell[data-framing="sides"] .kk-console {
+  grid-area: 2 / 1 / 3 / -1;
+  width: min(1100px, 100%);
+  justify-self: center;
+}
 .kk-playfield {
   min-width: 0;
+  width: var(--reel-width);
+  justify-self: center;
   display: grid;
   grid-template-rows: var(--header-height) var(--reel-height);
 }
@@ -377,23 +453,27 @@ button:not(:disabled):active {
 }
 
 /* A compact instrument rail. Artwork belongs to the game, not every input. */
-.kk-dock {
+/* One slot console: monetary hierarchy and spin share the same surface. */
+.kk-console {
   position: relative;
   z-index: 3;
   display: grid;
-  grid-template-columns: 130px 170px 112px 60px;
-  justify-content: center;
-  grid-template-areas: "features bet spin menu";
+  grid-template-columns: 44px 72px minmax(88px, 1fr) minmax(80px, 1fr) 172px;
+  grid-template-rows: 32px 44px;
+  grid-template-areas: "menu features balance win spin" "menu features bet win spin";
   align-items: center;
-  gap: 12px;
+  align-content: center;
+  column-gap: 8px;
   height: var(--dock-height);
   margin-top: 8px;
-  padding: 0 24px;
-  border: 1px solid #9fbab82b;
-  border-bottom: 0;
-  border-radius: 12px 12px 0 0;
-  background: linear-gradient(180deg, #1b303cf8, #0a1622fc);
-  box-shadow: inset 0 1px #fff1c210;
+  padding: 8px 12px;
+  border-top: 1px solid #d0af6555;
+  border-bottom: 1px solid #102735;
+  border-radius: 3px 3px 10px 10px;
+  background: linear-gradient(180deg, #101f2af5, #040d17f5);
+  box-shadow:
+    inset 0 1px #fff6d00a,
+    0 12px 24px #0005;
 }
 .kk-feature-button,
 .kk-bet-button,
@@ -401,38 +481,42 @@ button:not(:disabled):active {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
+  min-height: 44px;
   min-width: 0;
-  padding: 8px;
+  padding: 6px;
   border: 0;
-  border-radius: 8px;
   background: transparent;
-  color: #e7e9dd;
-  font-size: 14px;
+  color: #ecede2;
   font-weight: 600;
 }
 .kk-feature-button {
   grid-area: features;
   flex-direction: column;
-  gap: 4px;
-  color: #e4c68a;
+  gap: 5px;
+  height: 62px;
+  border: 1px solid #c5a66b60;
+  border-radius: 5px;
+  background: linear-gradient(#243039, #111d28);
+  color: #ecd398;
+  font: 600 16px/1 var(--display);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 .kk-bet-button {
   grid-area: bet;
-  flex-direction: column;
-  gap: 4px;
-  background: #05151c80;
-  border: 1px solid #b0c2bc20;
+  justify-content: flex-start;
+  gap: 9px;
+  padding: 0;
 }
 .kk-bet-button .kk-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.7px;
-  color: #a7bcb9;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: #9bafba;
 }
 .kk-bet-button em {
   display: block;
   color: var(--cyan);
-  font-size: 10px;
+  font-size: 9px;
   font-style: normal;
   letter-spacing: 0;
   line-height: 1.3;
@@ -441,25 +525,28 @@ button:not(:disabled):active {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
 }
 .kk-bet-value b {
-  font-size: 22px;
+  font-size: 19px;
   line-height: 1.1;
   font-weight: 600;
 }
 .kk-menu-button {
   position: relative;
   grid-area: menu;
-  flex-direction: column;
-  gap: 3px;
-  font-size: 12px;
-  color: #bbc9c3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #b6c1c8;
+}
+.kk-menu-button:hover {
+  background: #ffffff0d;
 }
 .kk-speed-dot {
   position: absolute;
   top: 0;
-  right: 2px;
+  right: 0;
   display: grid;
   place-items: center;
   width: 17px;
@@ -471,19 +558,19 @@ button:not(:disabled):active {
 }
 .kk-spin-area {
   grid-area: spin;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 44px 84px 44px;
+  grid-template-rows: 84px 14px;
   align-items: center;
   justify-content: center;
-  gap: 1px;
   min-width: 0;
 }
 .kk-spin {
+  grid-area: 1 / 2;
   display: grid;
   place-items: center;
   width: 84px;
   height: 84px;
-  flex: 0 0 auto;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -491,48 +578,49 @@ button:not(:disabled):active {
   box-shadow: 0 5px 15px #0007;
 }
 .kk-spin span {
-  font-family: var(--display);
-  font-size: 24px;
-  font-weight: 600;
+  font: 600 24px/1 var(--display);
   color: #20372c;
   text-shadow: 0 1px #ffefb1;
 }
+.kk-spin:not(:disabled):active {
+  transform: scale(0.97);
+}
+.kk-stake-step {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #b9c6c84a;
+  border-radius: 50%;
+  background: #03111d55;
+  color: #c5d2d4;
+}
+.kk-stake-step.is-minus {
+  grid-area: 1 / 1;
+}
+.kk-stake-step.is-plus {
+  grid-area: 1 / 3;
+}
 .kk-charge {
-  font-size: 11px;
+  grid-area: 2 / 1 / 3 / -1;
+  text-align: center;
+  font-size: 10px;
   line-height: 14px;
   font-weight: 600;
-  color: #b7c7bf;
+  color: #a3b4c0;
   white-space: nowrap;
 }
 .kk-feature-context {
   grid-area: bet;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
+  align-items: center;
+  gap: 8px;
 }
 .kk-feature-context strong {
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 1.15;
-}
-.is-feature .kk-feature-button {
-  visibility: hidden;
-}
-/* One strip, two monetary readouts. Bonus win remains the collection target. */
-.kk-strip {
-  position: relative;
-  grid-row: 3;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  height: var(--strip-height);
-  margin-top: 8px;
-  padding: 4px 24px 8px;
-  border: 1px solid #9fbab82b;
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
-  background: #091b24f8;
+  font-size: 18px;
+  line-height: 1.1;
 }
 .kk-read {
   min-width: 0;
@@ -541,28 +629,45 @@ button:not(:disabled):active {
   justify-content: center;
   gap: 3px;
 }
-.kk-read:last-child {
-  text-align: right;
+.kk-balance {
+  grid-area: balance;
+  align-self: end;
 }
 .kk-read .kk-eyebrow {
   font-size: 10px;
-  letter-spacing: 1px;
+  line-height: 1.1;
+  letter-spacing: 0.7px;
+  color: #9cafbb;
+  text-transform: uppercase;
 }
 .kk-read .kk-eyebrow small {
-  margin-left: 4px;
-  color: #819d9d;
+  margin-left: 3px;
+  color: #8298a4;
   font-size: 9px;
 }
 .kk-read strong {
-  font-size: clamp(17px, 3cqi, 24px);
-  font-weight: 600;
+  font-size: clamp(15px, 2cqi, 19px);
   line-height: 1.1;
+  font-weight: 600;
   color: #eef0e4;
   white-space: nowrap;
 }
+.kk-bonus-win,
+.kk-last-win {
+  grid-area: win;
+  align-items: center;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.kk-bonus-win .kk-eyebrow,
+.kk-last-win .kk-eyebrow {
+  color: #dfc486;
+}
 .kk-bonus-win strong,
 .kk-last-win strong {
-  color: #efd594;
+  font-size: clamp(22px, 3.4cqi, 34px);
+  color: #ffe7b0;
 }
 .kk-afford {
   position: absolute;
@@ -597,37 +702,156 @@ button:not(:disabled):active {
   padding: 10px;
   background: #551d19;
 }
-.kk-shell[data-layout="portrait"] .kk-dock {
-  grid-template-columns: minmax(56px, 1fr) minmax(76px, 1.35fr) 80px 44px;
-  gap: 6px;
-  padding: 0 6px;
+/* The wide dock groups readouts, bet and spin into distinct control plates. */
+.kk-shell[data-layout="wide"] .kk-console {
+  grid-template-columns:
+    72px 44px minmax(115px, 1fr) minmax(115px, 1fr)
+    132px 172px;
+  grid-template-rows: 98px;
+  grid-template-areas: "features menu balance win bet spin";
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+.kk-shell[data-layout="wide"] .kk-console::before {
+  content: "";
+  grid-area: 1 / 2 / 2 / 5;
+  align-self: center;
+  z-index: -1;
+  height: 82px;
+  border: 1px solid #b5c7d62b;
+  border-top-color: #dcc58a60;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #142733ef, #08131ee8);
+  box-shadow:
+    inset 0 1px #f5e3a30a,
+    0 8px 16px #0004;
+}
+.kk-shell[data-layout="wide"] .kk-menu-button {
+  margin-left: 2px;
+}
+.kk-shell[data-layout="wide"] .kk-feature-button {
+  width: 66px;
+  height: 66px;
+  justify-self: start;
+  border-radius: 50%;
+  font-size: 13px;
+  gap: 4px;
+  background: linear-gradient(145deg, #304249, #0a1823);
+  border-color: #e3c47b9e;
+  box-shadow:
+    inset 0 0 0 3px #091722,
+    0 4px 12px #0006;
+}
+.kk-shell[data-layout="wide"] .kk-balance {
+  align-self: center;
+  padding-left: 8px;
+}
+.kk-shell[data-layout="wide"] .kk-bonus-win,
+.kk-shell[data-layout="wide"] .kk-last-win {
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 16px;
+}
+.kk-shell[data-layout="wide"] .kk-read strong {
+  font-size: clamp(15px, 1.7cqi, 21px);
+}
+.kk-shell[data-layout="wide"] .kk-bonus-win strong,
+.kk-shell[data-layout="wide"] .kk-last-win strong {
+  font-size: clamp(20px, 2.3cqi, 28px);
+}
+.kk-shell[data-layout="wide"] .kk-bet-button,
+.kk-shell[data-layout="wide"] .kk-feature-context {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 82px;
+  gap: 4px;
+  padding: 10px 16px;
+  border: 1px solid #b5c7d62b;
+  border-top-color: #dcc58a60;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #101e29f5, #060f19f5);
+}
+.kk-shell[data-layout="wide"] .kk-bet-value {
+  width: 100%;
+  justify-content: space-between;
+}
+.kk-shell[data-layout="wide"] .kk-bet-value b {
+  font-size: 22px;
+}
+.kk-shell[data-layout="wide"] .kk-bet-button .kk-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.kk-shell[data-layout="portrait"] .kk-console {
+  grid-template-columns: 44px 60px minmax(72px, 1fr) 84px;
+  grid-template-rows: 36px 88px;
+  grid-template-areas: "balance balance win win" "menu features bet spin";
+  gap: 4px 6px;
+  padding: 6px;
+}
+.kk-shell[data-layout="portrait"] .kk-balance {
+  align-self: center;
+  padding-left: 6px;
+}
+.kk-shell[data-layout="portrait"] .kk-read strong {
+  font-size: 15px;
+}
+.kk-shell[data-layout="portrait"] .kk-bonus-win,
+.kk-shell[data-layout="portrait"] .kk-last-win {
+  align-items: flex-end;
+  padding-right: 8px;
+}
+.kk-shell[data-layout="portrait"] .kk-bonus-win strong,
+.kk-shell[data-layout="portrait"] .kk-last-win strong {
+  font-size: 24px;
 }
 .kk-shell[data-layout="portrait"] .kk-feature-button {
+  height: 56px;
+  gap: 4px;
   padding: 4px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .kk-shell[data-layout="portrait"] .kk-bet-button {
-  min-height: 58px;
-  padding: 5px 4px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 }
 .kk-shell[data-layout="portrait"] .kk-bet-value b {
-  font-size: 20px;
+  font-size: 19px;
+}
+.kk-shell[data-layout="portrait"] .kk-spin-area {
+  grid-template-columns: 76px;
+  grid-template-rows: 76px 12px;
 }
 .kk-shell[data-layout="portrait"] .kk-spin {
+  grid-area: 1 / 1;
   width: 76px;
   height: 76px;
+}
+.kk-shell[data-layout="portrait"] .kk-stake-step {
+  display: none;
 }
 .kk-shell[data-layout="portrait"] .kk-spin span {
   font-size: 23px;
 }
 .kk-shell[data-layout="portrait"] .kk-charge {
   font-size: 10px;
+  line-height: 12px;
 }
-.kk-shell[data-layout="portrait"] .kk-strip {
-  padding-inline: 14px;
+.kk-shell[data-layout="portrait"] .kk-feature-context {
+  flex-direction: column;
+  gap: 3px;
+  text-align: center;
 }
 .kk-shell[data-layout="portrait"] .kk-feature-context strong {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* Portrait retains all touch targets and the same geometry throughout a feature. */
@@ -682,9 +906,7 @@ button:not(:disabled):active {
 }
 .kk-shell[data-layout="landscape"] {
   grid-template-columns: var(--reel-width) var(--side-width);
-  grid-template-rows: calc(var(--header-height) + var(--reel-height)) var(
-      --strip-height
-    );
+  grid-template-rows: calc(var(--header-height) + var(--reel-height));
   column-gap: 8px;
   row-gap: 8px;
 }
@@ -737,65 +959,77 @@ button:not(:disabled):active {
   font-size: 10px;
 }
 
-.kk-shell[data-layout="landscape"] .kk-dock {
+.kk-shell[data-layout="landscape"] .kk-console {
   grid-area: 1 / 2;
   align-self: stretch;
   height: auto;
-  margin-top: 0;
-  padding: 6px;
-  border-radius: 10px;
+  margin: 0;
+  padding: 10px;
   border: 1px solid #9fbab82b;
+  border-radius: 5px;
   grid-template-columns: minmax(0, 1fr) 44px;
-  grid-template-rows: 52px 88px 44px;
-  grid-template-areas: "bet bet" "spin spin" "features menu";
+  grid-template-rows: 28px 32px 44px 84px 44px;
+  grid-template-areas: "balance balance" "win win" "bet bet" "spin spin" "features menu";
   align-content: center;
+  gap: 0 6px;
+}
+.kk-shell[data-layout="landscape"] .kk-balance {
+  align-self: center;
+  flex-direction: row;
+  align-items: baseline;
   gap: 4px;
 }
+.kk-shell[data-layout="landscape"] .kk-read strong {
+  font-size: 13px;
+}
+.kk-shell[data-layout="landscape"] .kk-read .kk-eyebrow small {
+  display: none;
+}
+.kk-shell[data-layout="landscape"] .kk-bonus-win,
+.kk-shell[data-layout="landscape"] .kk-last-win {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+  padding: 0;
+}
+.kk-shell[data-layout="landscape"] .kk-bonus-win strong,
+.kk-shell[data-layout="landscape"] .kk-last-win strong {
+  font-size: 20px;
+}
+.kk-shell[data-layout="landscape"] .kk-bet-button {
+  justify-content: center;
+}
+.kk-shell[data-layout="landscape"] .kk-spin-area {
+  grid-template-columns: 70px;
+  grid-template-rows: 70px 12px;
+}
 .kk-shell[data-layout="landscape"] .kk-spin {
+  grid-area: 1 / 1;
   width: 70px;
   height: 70px;
 }
+.kk-shell[data-layout="landscape"] .kk-stake-step {
+  display: none;
+}
 .kk-shell[data-layout="landscape"] .kk-feature-button {
   min-height: 44px;
-  padding: 2px;
-  font-size: 11px;
+  height: 44px;
+  flex-direction: row;
+  gap: 5px;
+  font-size: 14px;
 }
 .kk-shell[data-layout="landscape"] .kk-feature-button svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
-.kk-shell[data-layout="landscape"] .kk-bet-button {
-  min-height: 48px;
-  padding: 4px;
-  gap: 2px;
-}
-.kk-shell[data-layout="landscape"] .kk-bet-value b {
-  font-size: 19px;
-}
-.kk-shell[data-layout="landscape"] .kk-bet-button .kk-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-}
-.kk-shell[data-layout="landscape"] .kk-bet-button em {
-  font-size: 9px;
-}
-.kk-shell[data-layout="landscape"] .kk-strip {
-  grid-area: 2 / 1 / 3 / -1;
-  margin-top: 0;
-  border: 1px solid #9fbab82b;
-  border-radius: 8px;
-  padding: 4px 12px;
-}
-.kk-shell[data-layout="landscape"] .kk-strip strong {
-  font-size: 18px;
+.kk-shell[data-layout="landscape"] .kk-feature-context {
+  justify-content: center;
 }
 
 /* A shared surface, type scale and focus treatment across utility panels. */
 .kk-modal-root {
   position: fixed;
-  inset: 44px 0 0;
+  inset: var(--review-height) 0 0;
   z-index: 60;
   display: grid;
   place-items: center;
@@ -824,8 +1058,8 @@ button:not(:disabled):active {
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #afc1b832;
-  border-radius: 16px;
-  background: linear-gradient(155deg, #163039, #0a1b25 60%);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #101e2a, #07111d);
   box-shadow:
     0 28px 90px #000a,
     inset 0 1px #f0e6c211;
@@ -874,8 +1108,8 @@ button:not(:disabled):active {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  min-height: 68px;
-  padding: 10px 16px 10px 22px;
+  min-height: 56px;
+  padding: 6px 12px 6px 18px;
   border-bottom: 1px solid #bbd0c41a;
 }
 .kk-dialog-head strong {
@@ -993,28 +1227,71 @@ button:not(:disabled):active {
   margin: 20px 0 10px;
 }
 .kk-bet-dialog {
-  width: min(420px, 100%);
+  width: min(360px, 100%);
 }
 .kk-bet-panel {
   text-align: center;
 }
 .kk-bet-adjust {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 16px 0 22px;
+  gap: 10px;
+  margin: 12px 0 16px;
+  padding: 10px;
+  border: 1px solid #d4b9763a;
+  border-radius: 4px;
+  background: #020b1580;
 }
 .kk-bet-adjust output {
-  font-size: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  font-size: 36px;
   font-weight: 600;
   color: #fff0cc;
-  line-height: 1.25;
+  line-height: 1.1;
 }
 .kk-denominations {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+.kk-bet-value-display {
+  animation: kk-feature-view-in 130ms ease-out;
+}
+.kk-bet-value-display b {
+  font-weight: 600;
+}
+.kk-bet-value-display small {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #a0b4c0;
+}
+.kk-denominations button {
+  grid-column: span 2;
+}
+.kk-denominations button:nth-last-child(2) {
+  grid-column: 2 / span 2;
+}
+.kk-bet-dialog .kk-dialog-head strong,
+.kk-settings .kk-dialog-head strong {
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.kk-bet-dialog .kk-dialog-body {
+  padding: 16px;
+}
+.kk-bet-dialog .kk-dialog-foot {
+  padding: 10px 16px 16px;
+}
+.kk-bet-dialog .kk-primary {
+  font-family: var(--display);
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
 }
 .kk-denominations button,
 .kk-segmented button {
@@ -1057,22 +1334,36 @@ button:not(:disabled):active {
 }
 /* Bonus gallery: illustration first, one aligned offer/action area per card. */
 .kk-purchases {
-  width: min(1080px, 100%);
-  border-color: #b6955c65;
-  border-radius: 12px;
-  background: linear-gradient(150deg, #12232c, #060f1a 65%);
+  width: min(900px, 100%);
+  border-color: #b8a47742;
+  border-radius: 6px;
+  background: #07111deb;
+}
+.kk-purchases:has(.kk-feature-gallery) {
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+}
+.kk-purchases:has(.kk-feature-gallery) .kk-dialog-head {
+  border: 0;
+  text-shadow: 0 2px 6px #000;
+}
+.kk-purchases:has(.kk-feature-gallery) .kk-dialog-head .kk-icon-button {
+  background: #06121de6;
+  border-color: #c5b17f60;
 }
 .kk-purchases .kk-dialog-head {
-  min-height: 62px;
-  border-color: #d9b97824;
+  min-height: 52px;
+  padding-block: 4px;
+  border-color: #d9b9781c;
 }
 .kk-purchases .kk-dialog-head strong {
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 30px;
+  letter-spacing: 1.4px;
+  font-size: 27px;
 }
 .kk-purchases .kk-features-body {
-  padding: 16px 20px 12px;
+  padding: 12px 16px 10px;
   animation: kk-feature-view-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @keyframes kk-feature-view-in {
@@ -1100,73 +1391,114 @@ button:not(:disabled):active {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  margin: 0 0 18px;
+  margin: 12px 0 0;
+}
+.kk-feature-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #c3d0d6;
+}
+.kk-feature-balance b {
+  color: #fff0cb;
+  font-size: 19px;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.kk-feature-balance small {
+  font-size: 10px;
+  font-weight: 400;
+}
+.kk-feature-bet-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b6a67442;
+  border-radius: 4px;
+  background: #01081180;
+}
+.kk-feature-bet-control .kk-icon-button {
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
 }
 .kk-feature-bet {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  min-height: 48px;
-  padding: 6px 14px;
-  border: 1px solid #c3b58b38;
-  border-radius: 5px;
-  background: #020c1680;
-  font-size: 13px;
-  color: #aabebf;
+  justify-content: center;
+  gap: 0;
+  min-width: 110px;
+  min-height: 44px;
+  padding: 2px 8px;
+  border: 0;
+  background: transparent;
+  font-size: 10px;
+  color: #9db1bd;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
 }
 .kk-feature-bet b {
   color: #fff0cb;
-  font-size: 21px;
+  font-size: 20px;
+  letter-spacing: 0;
 }
-.kk-ante-row {
-  display: flex;
+.kk-ante-feature {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 150px;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  border: 1px solid #cab77a60;
+  border-radius: 5px;
+  background: linear-gradient(110deg, #26342e, #0b1722 60%);
+  box-shadow: 0 4px 12px #0005;
 }
-.kk-ante-row h2 {
-  font-size: 15px;
+.kk-ante-feature[data-active="true"] {
+  border-color: #78d7bb;
+  box-shadow: inset 0 0 18px #67c8a918;
 }
-.kk-ante-row .kk-muted {
+.kk-ante-feature > img {
+  width: 76px;
+  height: 68px;
+  object-fit: contain;
+}
+.kk-ante-copy {
+  min-width: 0;
+}
+.kk-ante-copy .kk-feature-kind {
+  color: #d6bf80;
+}
+.kk-ante-copy h2 {
+  font: 600 26px/1.1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.kk-ante-copy p {
+  margin: 3px 0 0;
+  color: #c2cdd0;
   font-size: 12px;
+  line-height: 1.3;
 }
-.kk-switch {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.kk-ante-action {
   min-height: 44px;
-  padding: 7px 8px;
-  border: 0;
-  border-radius: 8px;
-  background: none;
+  border: 1px solid #ead49b;
+  border-radius: 4px;
+  background: linear-gradient(#f0d79b, #c7a361);
+  color: #14252a;
+  font: 600 19px/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.kk-switch > span {
-  width: 40px;
-  height: 24px;
-  padding: 3px;
-  border-radius: 20px;
-  background: #44595a;
-}
-.kk-switch > span::before {
-  content: "";
-  display: block;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #d8e0d5;
-  transition: transform 150ms;
-}
-.kk-switch[aria-checked="true"] > span {
-  background: #409681;
-}
-.kk-switch[aria-checked="true"] > span::before {
-  transform: translateX(16px);
-  background: #e9fff2;
-}
-.kk-switch b {
-  min-width: 21px;
-  font-size: 12px;
-  font-weight: 600;
+.kk-ante-action[aria-pressed="true"] {
+  border-color: #78d7bb;
+  background: #163a33;
+  color: #b6f0d9;
 }
 [data-tone="teal"] {
   --feature-accent: #74dfc2;
@@ -1195,7 +1527,7 @@ button:not(:disabled):active {
 .kk-feature-gallery {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 10px;
   isolation: isolate;
 }
 .kk-feature-card {
@@ -1203,12 +1535,12 @@ button:not(:disabled):active {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--feature-accent) 38%, transparent);
-  border-radius: 7px;
-  background: linear-gradient(180deg, var(--feature-glow), #08121e 72%);
-  box-shadow:
-    0 6px 16px #0004,
-    inset 0 -2px var(--feature-glow);
+  border: 1px solid color-mix(in srgb, var(--feature-accent) 30%, transparent);
+  border-top: 2px solid
+    color-mix(in srgb, var(--feature-accent) 65%, transparent);
+  border-radius: 5px;
+  background: linear-gradient(180deg, #14212c, #070f1b 78%);
+  box-shadow: 0 4px 10px #0004;
   transition:
     border-color 180ms,
     box-shadow 180ms;
@@ -1236,21 +1568,20 @@ button:not(:disabled):active {
 }
 .kk-feature-illustration {
   position: relative;
-  aspect-ratio: 3 / 2;
+  height: 108px;
   overflow: hidden;
 }
-.kk-feature-illustration::after {
-  content: "";
-  position: absolute;
-  inset: 50% 0 0;
-  background: linear-gradient(transparent, #08121e);
-  pointer-events: none;
-}
+
 .kk-feature-illustration img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  mask-image: radial-gradient(
+    ellipse 75% 80% at 50% 50%,
+    #000 55%,
+    transparent 100%
+  );
   transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 @media (hover: hover) {
@@ -1259,46 +1590,41 @@ button:not(:disabled):active {
   }
 }
 .kk-feature-kind {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 3px 7px;
-  border-radius: 3px;
-  background: #030b18db;
-  color: #e3e7df;
-  font-size: 10px;
-  font-weight: 700;
+  display: block;
+  color: var(--feature-accent);
+  font-size: 9px;
+  font-weight: 600;
   letter-spacing: 1px;
+  line-height: 13px;
   text-transform: uppercase;
 }
 .kk-feature-card-copy {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex: 1;
   flex-direction: column;
   align-items: stretch;
-  margin-top: -24px;
-  padding: 0 14px 14px;
+  padding: 0 10px 10px;
   text-align: center;
 }
-.kk-feature-card-copy h2 {
-  font-family: var(--display);
-  font-size: clamp(28px, 2.5vw, 34px);
-  line-height: 1.1;
-  letter-spacing: 1.1px;
+.kk-feature-card-head {
+  padding: 8px 8px 0;
+  text-align: center;
+}
+.kk-feature-card-head h2 {
+  font: 600 24px/1.1 var(--display);
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  color: #fff2d7;
-  text-shadow: 0 2px 5px #000;
+  color: #fff0d4;
 }
 .kk-feature-reward {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0 8px;
-  margin: 6px 0 0;
-  color: #b7c2cb;
-  font-size: 12px;
+  gap: 0 7px;
+  min-height: 18px;
+  margin: 0;
+  color: #aabcc8;
+  font-size: 11px;
   line-height: 18px;
 }
 .kk-feature-reward b {
@@ -1306,16 +1632,16 @@ button:not(:disabled):active {
   color: var(--feature-accent);
 }
 .kk-feature-offer {
-  min-height: 65px;
+  min-height: 42px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1px;
-  margin-top: auto;
+  gap: 0;
+  margin-bottom: 5px;
 }
 .kk-feature-offer > b {
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 700;
   line-height: 1.2;
   color: #fff1d6;
@@ -1339,11 +1665,15 @@ button:not(:disabled):active {
   gap: 4px;
   color: var(--feature-accent);
 }
-.kk-scatter-marks svg {
-  fill: color-mix(in srgb, var(--feature-accent) 14%, transparent);
+.kk-scatter-marks img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px #0008);
 }
 .kk-feature-action {
   min-height: 44px;
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1355,7 +1685,7 @@ button:not(:disabled):active {
   background: #101e2b;
   color: var(--feature-accent);
   font-family: var(--display);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.15;
   text-transform: uppercase;
@@ -1383,7 +1713,7 @@ button:not(:disabled):active {
     0 2px 5px #0006;
 }
 .kk-dialog-body .kk-unavailable {
-  margin: 8px 0 0;
+  margin: 0 0 7px;
   color: #e7bfb0;
   font-size: 12px;
   line-height: 1.35;
@@ -1396,6 +1726,77 @@ button:not(:disabled):active {
   text-align: center;
   color: #9fb2bf;
   font-size: 12px;
+}
+.kk-purchases:has(.kk-purchase-confirmation) {
+  width: min(420px, 100%);
+}
+.kk-purchase-confirmation {
+  text-align: center;
+  outline: none;
+}
+.kk-confirm-art {
+  display: block;
+  width: 180px;
+  height: 110px;
+  margin: 0 auto;
+  object-fit: contain;
+  mask-image: radial-gradient(
+    ellipse 75% 85% at 50% 50%,
+    #000 60%,
+    transparent
+  );
+}
+.kk-purchase-confirmation h2 {
+  font: 600 30px/1.1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+.kk-purchase-confirmation .kk-confirm-award {
+  margin: 4px 0 12px;
+  color: var(--feature-accent);
+  font-size: 13px;
+}
+.kk-confirm-cost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 13px 0;
+  border-block: 1px solid #b8a47725;
+}
+.kk-confirm-cost > span {
+  font-size: 11px;
+  color: #a8b9c4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.kk-confirm-cost strong {
+  font-size: clamp(30px, 7vw, 42px);
+  line-height: 1;
+  color: #ffe9b7;
+}
+.kk-confirm-cost small {
+  color: #a9bcc8;
+  font-size: 11px;
+}
+.kk-confirm-wallet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+.kk-confirm-wallet dt {
+  color: #93a8b6;
+  font-size: 11px;
+}
+.kk-confirm-wallet dd {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: #e8e9de;
+}
+.kk-purchase-confirmation > .kk-muted {
+  font-size: 12px;
+  margin-bottom: 0;
 }
 .kk-feature-detail {
   display: grid;
@@ -1496,31 +1897,6 @@ button:not(:disabled):active {
   padding-top: 16px;
   border-top: 1px solid #ffffff16;
   font-size: 13px;
-}
-.kk-purchase-terms {
-  margin: 0 0 18px;
-}
-.kk-purchase-terms > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 12px 0;
-  border-bottom: 1px solid #b9cebe25;
-  align-items: baseline;
-}
-.kk-purchase-terms dt {
-  color: #b8cbc1;
-  font-size: 14px;
-}
-.kk-purchase-terms dd {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 600;
-  text-align: right;
-}
-.kk-purchase-terms .kk-purchase-total {
-  font-size: 25px;
-  color: #efd59d;
 }
 .kk-confirm-actions .kk-primary {
   min-width: 0;
@@ -1934,6 +2310,34 @@ button:not(:disabled):active {
 }
 
 /* One substantial card on a phone; swipe and explicit controls share the same track. */
+@media (min-width: 621px) and (max-height: 760px) {
+  .kk-feature-illustration {
+    height: 84px;
+  }
+  .kk-feature-card-head h2 {
+    font-size: 22px;
+  }
+  .kk-feature-offer {
+    min-height: 38px;
+  }
+  .kk-feature-card-head {
+    padding-top: 6px;
+  }
+}
+@media (max-width: 620px) {
+  .kk-feature-illustration {
+    height: 160px;
+  }
+  .kk-feature-card-head {
+    padding-top: 12px;
+  }
+  .kk-feature-bet-control {
+    width: 100%;
+  }
+  .kk-feature-bet-control .kk-feature-bet {
+    flex: 1;
+  }
+}
 @media (max-width: 760px) {
   .kk-feature-detail {
     grid-template-columns: 1fr;
@@ -1949,10 +2353,10 @@ button:not(:disabled):active {
 }
 @media (min-width: 621px) and (max-width: 900px) {
   .kk-feature-gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .kk-feature-card-copy h2 {
-    font-size: 30px;
+  .kk-feature-card-head h2 {
+    font-size: 23px;
   }
 }
 @media (max-width: 620px) {
@@ -1972,27 +2376,35 @@ button:not(:disabled):active {
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
-    margin-bottom: 12px;
+    margin: 12px 0 0;
   }
   .kk-feature-bet {
     justify-content: center;
     padding-block: 4px;
   }
-  .kk-ante-row {
-    padding-inline: 4px;
+  .kk-feature-balance {
+    flex-direction: row;
+    align-items: baseline;
     justify-content: space-between;
   }
-  .kk-ante-row > div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .kk-ante-feature {
+    grid-template-columns: 44px minmax(0, 1fr) 80px;
+    gap: 8px;
+    padding: 8px;
   }
-  .kk-ante-row .kk-muted {
+  .kk-ante-feature > img {
+    width: 44px;
+    height: 56px;
+  }
+  .kk-ante-copy h2 {
+    font-size: 22px;
+  }
+  .kk-ante-copy p {
     font-size: 11px;
   }
-  .kk-switch {
-    gap: 5px;
-    padding-inline: 2px;
+  .kk-ante-action {
+    padding-inline: 4px;
+    font-size: 16px;
   }
   .kk-feature-gallery {
     grid-template-columns: none;
@@ -2013,8 +2425,8 @@ button:not(:disabled):active {
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
-  .kk-feature-card-copy h2 {
-    font-size: 32px;
+  .kk-feature-card-head h2 {
+    font-size: 28px;
   }
   .kk-feature-card-copy {
     padding-inline: 16px;

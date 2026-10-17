@@ -9,6 +9,8 @@ export type GameLayout = {
   dock: number;
   strip: number;
   side: number;
+  artLeft: number;
+  artRight: number;
 };
 
 export function fitGameLayout(width: number, height: number): GameLayout {
@@ -18,13 +20,13 @@ export function fitGameLayout(width: number, height: number): GameLayout {
   const landscape = w >= 540 && h < 600 && w / h > 1.25;
   if (landscape) {
     const header = 42,
-      strip = 44,
-      side = 132,
+      strip = 0,
+      side = 172,
       gap = 8;
     // The console also occupies the header height, keeping all four targets usable.
     // Only unusually short viewports scroll; no touch target is scaled down.
     const reelHeight = Math.max(
-      170,
+      210,
       Math.min(h - header - strip - 8, (w - side - gap) / ratio),
     );
     const reelWidth = Math.floor(reelHeight * ratio);
@@ -38,20 +40,31 @@ export function fitGameLayout(width: number, height: number): GameLayout {
       dock: header + reelHeight,
       strip,
       side,
+      artLeft: 0,
+      artRight: 0,
     };
   }
   const portrait = w < 900;
-  const header = portrait ? 80 : 96;
-  const dock = portrait ? 96 : 92;
-  const strip = portrait ? 52 : 48;
+  // Wider displays reserve real space for the title and character. They never
+  // overlap the reel canvas or become additional columns on a phone.
+  const framed = !portrait && w >= 1100;
+  const artLeft = framed ? Math.min(250, Math.floor(w * 0.14)) : 0;
+  const artRight = framed ? Math.min(340, Math.floor(w * 0.18)) : 0;
+  const header = portrait ? 80 : framed ? 64 : 96;
+  const dock = portrait ? 144 : 110;
+  const strip = 0;
   const overhead = header + dock + strip + 8;
   const reelWidth = Math.floor(
-    Math.min(portrait ? 680 : 1160, w, Math.max(280, (h - overhead) * ratio)),
+    Math.min(
+      portrait ? 680 : 1160,
+      w - artLeft - artRight,
+      Math.max(280, (h - overhead) * ratio),
+    ),
   );
   const reelHeight = reelWidth / ratio;
   return {
     mode: portrait ? "portrait" : "wide",
-    width: reelWidth,
+    width: Math.max(portrait ? 0 : 800, reelWidth + artLeft + artRight),
     height: overhead + reelHeight,
     reelWidth,
     reelHeight,
@@ -59,5 +72,7 @@ export function fitGameLayout(width: number, height: number): GameLayout {
     dock,
     strip,
     side: 0,
+    artLeft,
+    artRight,
   };
 }

@@ -115,6 +115,7 @@ const features = render(FeaturesPanel, {
   locked: false,
   onAnte: action,
   onEditBet: action,
+  onStake: action,
   onBuy: action,
   onClose: action,
 });

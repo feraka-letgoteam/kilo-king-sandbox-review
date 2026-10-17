@@ -4,7 +4,6 @@ import {
   BookOpen,
   ChevronRight,
   ChevronLeft,
-  Crown,
   Eye,
   Minus,
   Plus,
@@ -84,7 +83,14 @@ export function BetPanel({
           >
             <Minus size={21} />
           </button>
-          <output aria-live="polite">{amount(draft)}</output>
+          <output
+            className="kk-bet-value-display"
+            key={draft}
+            aria-live="polite"
+          >
+            <b>{amount(draft)}</b>
+            <small>LGC</small>
+          </output>
           <button
             type="button"
             className="kk-icon-button"
@@ -136,7 +142,12 @@ function ScatterMarks({ count }: { count: number }) {
   return (
     <span className="kk-scatter-marks" aria-label={`${count} scatters`}>
       {Array.from({ length: count }, (_, i) => (
-        <Crown key={i} size={17} aria-hidden="true" />
+        <img
+          key={i}
+          src="/kilo-contraband-v1/scatter-king.png"
+          alt=""
+          aria-hidden="true"
+        />
       ))}
     </span>
   );
@@ -177,6 +188,7 @@ export function FeaturesPanel({
   locked,
   onAnte,
   onEditBet,
+  onStake,
   onBuy,
   onClose,
 }: {
@@ -186,6 +198,7 @@ export function FeaturesPanel({
   locked: boolean;
   onAnte: (on: boolean) => void;
   onEditBet: () => void;
+  onStake: (stake: number) => void;
   onBuy: (mode: "buy" | "chopper") => void;
   onClose: () => void;
 }) {
@@ -265,95 +278,93 @@ export function FeaturesPanel({
         data-view={choice ? "detail" : "gallery"}
         className={`kk-dialog-body kk-features-body${choice ? " is-detail" : ""}`}
       >
-        {choice ? (
+        {choice?.kind === "purchase" && quote ? (
+          <div
+            className="kk-purchase-confirmation"
+            ref={detail}
+            tabIndex={-1}
+            data-testid="purchase-confirmation"
+            data-tone={choice.tone}
+          >
+            <img
+              className="kk-confirm-art"
+              src={choice.art}
+              width="1536"
+              height="1024"
+              alt=""
+            />
+            <h2>{choice.title}</h2>
+            <p className="kk-confirm-award">
+              {choice.spins} free spins · Starts at ×{choice.multiplier}
+            </p>
+            <div className="kk-confirm-cost">
+              <span>Purchase cost</span>
+              <strong>{amount(quote.cost)}</strong>
+              <small>LGC</small>
+            </div>
+            <dl className="kk-confirm-wallet">
+              <div>
+                <dt>Base bet</dt>
+                <dd>{amount(stake)} LGC</dd>
+              </div>
+              <div>
+                <dt>Balance</dt>
+                <dd>{amount(bank)} LGC</dd>
+              </div>
+            </dl>
+            <p className="kk-muted">
+              The bonus modifier may increase the starting award.
+              <br />
+              Charged once when you confirm.
+            </p>
+            {quote.reason && (
+              <p className="kk-unavailable" role="status">
+                {quote.reason}
+              </p>
+            )}
+          </div>
+        ) : choice ? (
           <div
             className="kk-feature-detail"
             ref={detail}
             tabIndex={-1}
-            data-testid={quote ? "purchase-confirmation" : "bonus-art-preview"}
+            data-testid="bonus-art-preview"
           >
             <BonusArtwork feature={choice} />
             <div className="kk-feature-detail-copy">
               <span className="kk-field-label">
-                {choice.kind === "purchase"
-                  ? "Bonus purchase"
-                  : choice.kind === "trigger"
-                    ? "Base-game trigger"
-                    : "Design preview"}
+                {choice.kind === "trigger" ? "Scatter bonus" : "Design preview"}
               </span>
               <h2>{choice.title}</h2>
               <p>{choice.detail}</p>
-              {quote ? (
-                <>
-                  <dl className="kk-purchase-terms">
-                    <div>
-                      <dt>Base bet</dt>
-                      <dd>{amount(stake)} LGC</dd>
-                    </div>
-                    <div>
-                      <dt>Purchase cost</dt>
-                      <dd className="kk-purchase-total">
-                        {amount(quote.cost)} LGC
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>Balance</dt>
-                      <dd>{amount(bank)} LGC</dd>
-                    </div>
-                  </dl>
-                  <p className="kk-muted">
-                    Charged once when you confirm. This replaces one base-game
-                    spin.
-                  </p>
-                  {quote.reason && (
-                    <p className="kk-unavailable" role="status">
-                      {quote.reason}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <p className="kk-preview-note">
-                  <Eye size={17} aria-hidden="true" />
-                  Preview only · No bet is placed.
-                </p>
-              )}
+              <p className="kk-preview-note">
+                <Eye size={17} aria-hidden="true" />
+                Preview only · No bet is placed.
+              </p>
             </div>
           </div>
         ) : (
           <>
-            <div className="kk-feature-toolbar">
+            <div
+              className="kk-ante-feature"
+              data-active={ante ? "true" : undefined}
+            >
+              <img src="/kilo-contraband-v1/scatter-king.png" alt="" />
+              <div className="kk-ante-copy">
+                <span className="kk-feature-kind">Spin feature</span>
+                <h2>Ante bet</h2>
+                <p>1.5× · {amount(splashCost(stake, "ante"))} LGC / spin</p>
+              </div>
               <button
                 type="button"
-                className="kk-feature-bet"
-                onClick={onEditBet}
+                className="kk-ante-action"
+                aria-pressed={ante}
+                aria-label={ante ? "Deactivate ante bet" : "Activate ante bet"}
                 disabled={locked}
+                onClick={() => onAnte(!ante)}
               >
-                <span>Base bet</span>
-                <b>
-                  {amount(stake)} <small>LGC</small>
-                </b>
-                <ChevronRight size={18} />
+                {ante ? "Deactivate" : "Activate"}
               </button>
-              <div className="kk-ante-row">
-                <div>
-                  <h2>Ante bet</h2>
-                  <span className="kk-muted">
-                    1.5× · {amount(splashCost(stake, "ante"))} LGC / spin
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="kk-switch"
-                  role="switch"
-                  aria-checked={ante}
-                  aria-label="Ante bet"
-                  disabled={locked}
-                  onClick={() => onAnte(!ante)}
-                >
-                  <span aria-hidden="true" />
-                  <b>{ante ? "On" : "Off"}</b>
-                </button>
-              </div>
             </div>
             <div
               className="kk-feature-gallery"
@@ -386,6 +397,16 @@ export function FeaturesPanel({
                     data-feature={feature.id}
                     data-tone={feature.tone}
                   >
+                    <div className="kk-feature-card-head">
+                      <span className="kk-feature-kind">
+                        {feature.kind === "purchase"
+                          ? "Bonus buy"
+                          : feature.kind === "trigger"
+                            ? "Scatter bonus"
+                            : "Art preview"}
+                      </span>
+                      <h2>{feature.title}</h2>
+                    </div>
                     <div className="kk-feature-illustration">
                       <img
                         src={feature.art}
@@ -394,16 +415,8 @@ export function FeaturesPanel({
                         height="1024"
                         decoding="async"
                       />
-                      <span className="kk-feature-kind">
-                        {feature.kind === "purchase"
-                          ? "Bonus buy"
-                          : feature.kind === "trigger"
-                            ? "Natural trigger"
-                            : "Art preview"}
-                      </span>
                     </div>
                     <div className="kk-feature-card-copy">
-                      <h2>{feature.title}</h2>
                       <div className="kk-feature-reward">
                         {feature.kind === "preview" ? (
                           <span>In development</span>
@@ -439,6 +452,11 @@ export function FeaturesPanel({
                           </>
                         )}
                       </div>
+                      {q?.reason && (
+                        <p className="kk-unavailable" role="status">
+                          {q.reason}
+                        </p>
+                      )}
                       <button
                         type="button"
                         className={
@@ -457,11 +475,6 @@ export function FeaturesPanel({
                         {q ? "Buy feature" : "View preview"}
                         <ChevronRight size={17} />
                       </button>
-                      {q?.reason && (
-                        <p className="kk-unavailable" role="status">
-                          {q.reason}
-                        </p>
-                      )}
                     </div>
                   </article>
                 );
@@ -500,6 +513,63 @@ export function FeaturesPanel({
                 <ChevronRight size={20} />
               </button>
             </nav>
+            <div className="kk-feature-toolbar">
+              <div className="kk-feature-balance">
+                <span>Balance</span>
+                <b>
+                  {amount(bank)} <small>LGC</small>
+                </b>
+              </div>
+              <div
+                className="kk-feature-bet-control"
+                aria-label="Feature base bet"
+              >
+                <button
+                  type="button"
+                  className="kk-icon-button"
+                  aria-label="Decrease feature base bet"
+                  disabled={locked || stake === STAKES[0]}
+                  onClick={() =>
+                    onStake(
+                      STAKES[
+                        Math.max(0, STAKES.findIndex((n) => n === stake) - 1)
+                      ]!,
+                    )
+                  }
+                >
+                  <Minus size={18} />
+                </button>
+                <button
+                  type="button"
+                  className="kk-feature-bet"
+                  onClick={onEditBet}
+                  disabled={locked}
+                >
+                  <span>Base bet</span>
+                  <b>
+                    {amount(stake)} <small>LGC</small>
+                  </b>
+                </button>
+                <button
+                  type="button"
+                  className="kk-icon-button"
+                  aria-label="Increase feature base bet"
+                  disabled={locked || stake === STAKES.at(-1)}
+                  onClick={() =>
+                    onStake(
+                      STAKES[
+                        Math.min(
+                          STAKES.length - 1,
+                          STAKES.findIndex((n) => n === stake) + 1,
+                        )
+                      ]!,
+                    )
+                  }
+                >
+                  <Plus size={18} />
+                </button>
+              </div>
+            </div>
             <p className="kk-gallery-note">
               Purchases require confirmation. Preview cards place no bet.
             </p>
