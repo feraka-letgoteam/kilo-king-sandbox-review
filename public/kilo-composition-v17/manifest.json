@@ -1,0 +1,538 @@
+{
+  "version": 17,
+  "kind": "static design proof, not a browser screenshot",
+  "renderer": "Sharp/libvips SVG rasterizer; no browser",
+  "fontOutlines": "Source Sans 3 and Barlow Condensed from shipped WOFF2 fonts",
+  "geometry": "fitGameLayout is imported from source; fitReels and default board are extracted from pixiStage.ts",
+  "reelGeometrySourceSha256": "1eb1c40449ceacf8d0dee5b7e810baa6349193f93e3dcf54a14679c0e40d288d",
+  "symbolGeometry": "Existing alpha bounds and cell fit factors; no symbol resizing or artwork edits",
+  "approximations": [
+    "Static idle frame only; does not demonstrate animation, gameplay, interaction or browser text rasterization.",
+    "SVG cabinet paint reproduces code primitives; texture tint, CSS box shadows, masks and blend details can differ from browser/Pixi rendering.",
+    "Control text baselines are composed from the specified line boxes, not captured from browser layout.",
+    "Feature panel is manually composed from current CSS. Desktop assumes an 8px thin scrollbar gutter; font intrinsic widths and browser flex sizing may differ slightly."
+  ],
+  "screens": [
+    {
+      "name": "desktop",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "available": {
+        "width": 1408,
+        "height": 860
+      },
+      "layout": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 730.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 120,
+        "strip": 0,
+        "side": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 12
+      },
+      "shell": {
+        "x": 16,
+        "y": 80.53012048192772,
+        "width": 1408,
+        "height": 730.9397590361446
+      },
+      "reelHost": {
+        "x": 255,
+        "y": 144.53012048192772,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "cabinet": {
+        "x": 255,
+        "y": 148.53012048192772,
+        "width": 888,
+        "height": 528
+      },
+      "reelGeometry": {
+        "cell": 164,
+        "gap": 8,
+        "gx": 18,
+        "gy": 22,
+        "statusY": 523,
+        "cab": {
+          "x": 0,
+          "y": 4,
+          "w": 888,
+          "h": 528
+        },
+        "dw": 888,
+        "dh": 535
+      },
+      "controlGroup": {
+        "x": 255,
+        "y": 691.4698795180723,
+        "width": 888,
+        "height": 120
+      },
+      "dock": {
+        "x": 255,
+        "y": 691.4698795180723,
+        "width": 888,
+        "height": 120
+      },
+      "featureLauncher": {
+        "x": 171,
+        "y": 710.4698795180723,
+        "width": 72,
+        "height": 82
+      },
+      "logoBox": {
+        "x": 23.17,
+        "y": 148.53012048192772,
+        "width": 224.66,
+        "height": 224.66
+      },
+      "characterBox": {
+        "x": 1143,
+        "y": 80.53012048192772,
+        "width": 281,
+        "height": 598.9397590361446,
+        "viewBox": [
+          160,
+          110,
+          1140,
+          2056
+        ]
+      },
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "features-desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "modal": {
+        "x": 260,
+        "y": 135,
+        "width": 920,
+        "height": 630
+      },
+      "scrollbarGutterAssumed": 8,
+      "activeTab": "buy",
+      "cards": [
+        {
+          "id": "scatter-3",
+          "x": 281,
+          "y": 273,
+          "width": 427,
+          "height": 378,
+          "art": {
+            "x": 282,
+            "y": 274,
+            "width": 425,
+            "height": 200
+          }
+        },
+        {
+          "id": "chopper",
+          "x": 724,
+          "y": 273,
+          "width": 427,
+          "height": 378,
+          "art": {
+            "x": 725,
+            "y": 274,
+            "width": 425,
+            "height": 200
+          }
+        }
+      ],
+      "ante": {
+        "x": 281,
+        "y": 665,
+        "width": 560,
+        "height": 58
+      },
+      "state": {
+        "stake": 1000,
+        "balance": 500000,
+        "ante": false
+      },
+      "kind": "static code-rendered design proof, not a browser screenshot"
+    },
+    {
+      "name": "phone",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "available": {
+        "width": 366,
+        "height": 812
+      },
+      "layout": {
+        "mode": "portrait",
+        "width": 366,
+        "height": 480.48192771084337,
+        "reelWidth": 366,
+        "reelHeight": 220.4819277108434,
+        "header": 104,
+        "dock": 144,
+        "strip": 0,
+        "side": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 12
+      },
+      "shell": {
+        "x": 12,
+        "y": 177.75903614457832,
+        "width": 366,
+        "height": 480.48192771084337
+      },
+      "reelHost": {
+        "x": 12,
+        "y": 281.7590361445783,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "cabinet": {
+        "x": 14,
+        "y": 282.7590361445783,
+        "width": 362,
+        "height": 218
+      },
+      "reelGeometry": {
+        "cell": 66,
+        "gap": 3,
+        "gx": 12,
+        "gy": 11,
+        "statusY": 214,
+        "cab": {
+          "x": 2,
+          "y": 1,
+          "w": 362,
+          "h": 218
+        },
+        "dw": 366,
+        "dh": 220
+      },
+      "controlGroup": {
+        "x": 12,
+        "y": 514.2409638554217,
+        "width": 366,
+        "height": 144
+      },
+      "dock": {
+        "x": 76,
+        "y": 514.2409638554217,
+        "width": 302,
+        "height": 144
+      },
+      "featureLauncher": {
+        "x": 12,
+        "y": 570.2409638554217,
+        "width": 56,
+        "height": 74
+      },
+      "logoBox": {
+        "x": 27,
+        "y": 89.75903614457832,
+        "width": 168,
+        "height": 178
+      },
+      "characterBox": {
+        "x": 202,
+        "y": 89.75903614457832,
+        "width": 168,
+        "height": 178,
+        "viewBox": [
+          160,
+          110,
+          1140,
+          1170
+        ]
+      },
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "features-phone",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "modal": {
+        "x": 12,
+        "y": 63,
+        "width": 366,
+        "height": 718
+      },
+      "scrollbarGutterAssumed": 0,
+      "activeTab": "buy",
+      "cards": [
+        {
+          "id": "scatter-3",
+          "x": 25,
+          "y": 197,
+          "width": 340,
+          "height": 366,
+          "art": {
+            "x": 26,
+            "y": 198,
+            "width": 338,
+            "height": 190
+          }
+        }
+      ],
+      "ante": {
+        "x": 25,
+        "y": 625,
+        "width": 340,
+        "height": 58
+      },
+      "state": {
+        "stake": 1000,
+        "balance": 500000,
+        "ante": false
+      },
+      "kind": "static code-rendered design proof, not a browser screenshot"
+    }
+  ],
+  "assets": [
+    {
+      "path": "kilo-contraband-v1/package-medium.png",
+      "sha256": "8d18b857c34d0104245780fab078f1a7cf85fb98ad9bb109946b6a99c6c0163b"
+    },
+    {
+      "path": "kilo-contraband-v1/package-small.png",
+      "sha256": "180d2643f469dbfc2a5c10bd89fbbadd3b567d061391f71a2570a1a5e80f0bbc"
+    },
+    {
+      "path": "kilo-contraband-v1/scatter-king.png",
+      "sha256": "379f284ce68a55325a85fb14fbbb94b85d569b9cb58c3b1ba7bd5f6440daf14a"
+    },
+    {
+      "path": "kilo-features-v12/chopper.webp",
+      "sha256": "e6e816d976d6dad533a27eead8b2d824193689e778c384d394ff851f795b4a5b"
+    },
+    {
+      "path": "kilo-features-v12/scatter-3.webp",
+      "sha256": "fbdf4083ff2c394bcc688201fe41bee06693eb473f9409c0bb6bf7d2990ac9c3"
+    },
+    {
+      "path": "kilo-motion-v7/collector-reaction-atlas.png",
+      "sha256": "ccf23a57e0b74f94b6c4762e7147c62e409df8a6188d91c5acc069f87eed9ac3"
+    },
+    {
+      "path": "kilo-motion-v7/value-plaque.svg",
+      "sha256": "757b4d3e84df1db753e27895ee358d3a4477bfe06aa0992c31e959c898cc0689"
+    },
+    {
+      "path": "kilo-night-v3/hero-idle.png",
+      "sha256": "239fdb5e1bc32f7905e92d8425f32439f425363bd1d44909a848893fbe1e2593"
+    },
+    {
+      "path": "kilo-night-v3/prop-dock-left.png",
+      "sha256": "9e4d42c2cb16354a74837f254849bb8f561dcde3011261882890e3b7e1179082"
+    },
+    {
+      "path": "kilo-night-v3/reel-well.png",
+      "sha256": "b5173036030f7306c91a274223ec12cb78d5d66d960895759ff0197cbd27bca8"
+    },
+    {
+      "path": "kilo-night-v3/sym-10.png",
+      "sha256": "b2bd08e05ef0e9898e829c258ebb1c666798522b7798ab0d8728d229e977af04"
+    },
+    {
+      "path": "kilo-night-v3/sym-a.png",
+      "sha256": "5d940fea071cff102bd3e5df8fbc5eec5a8f43f8ef9619cf7679e088d2afa533"
+    },
+    {
+      "path": "kilo-night-v3/sym-bobber.png",
+      "sha256": "bae2f3b77d84a03c6b1c2fd1c7f7d9fdb32330ee0d2a34312374e0bfdb2031fd"
+    },
+    {
+      "path": "kilo-night-v3/sym-can.png",
+      "sha256": "a0afab1a1c4db9e7ff53a16e59693a4ed1be78746c92af7fee9e7183e519cbab"
+    },
+    {
+      "path": "kilo-night-v3/sym-j.png",
+      "sha256": "7e69e3105e0a3a5ea1643cf2826c7a6acd75af0949bcb8429276805b1c269086"
+    },
+    {
+      "path": "kilo-night-v3/sym-k.png",
+      "sha256": "cc4e3aaa55cb6d74d03c65aaf0f525170de23b169e5b761932b1e4fb6cce2dd5"
+    },
+    {
+      "path": "kilo-night-v3/sym-q.png",
+      "sha256": "7096a5ee5c798936cfcd1195eafb7fbd8066a6d23c2501964cf39d3131ed362a"
+    },
+    {
+      "path": "kilo-scene-v14/marina-night.webp",
+      "sha256": "c26efe4882d19da363f2a258f2394763c196f31317b8abe9dce242a5817b5392"
+    },
+    {
+      "path": "kilo-scene-v14/pier-foreground.webp",
+      "sha256": "9de2d5b06943ba40e5e902d8970cd55b51bb6fb8c02f0ea1df0c310ec1b50c21"
+    },
+    {
+      "path": "kilo-scene-v15/logo-stacked.webp",
+      "sha256": "4ee4f8a90bed98f193392b23a5efd5e3a645810fbaa12aab2d97ad567f5d9407"
+    },
+    {
+      "path": "kilo-symbols-v8/sym-case-v8.png",
+      "sha256": "1d2b699c3546f8dccda26ae19fcb4f78e98f28b1208558ee7f6146f54d297c46"
+    },
+    {
+      "path": "kilo-symbols-v8/sym-reel-v8.png",
+      "sha256": "d9335346ebd1ef692ca37e9c388760f61a05dc56c5ee739ec5c5cc5c52ce4030"
+    }
+  ]
+}

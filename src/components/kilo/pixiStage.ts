@@ -1,3 +1,4 @@
+import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import {
   Application,
   Assets,
@@ -22,7 +23,6 @@ import { collectionShares, winningCells } from "./director";
 import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter, setAudioTurbo } from "@/lib/kilo/sound";
 import {
   ART as ART_FILES,
-  SOURCE_SLICES,
   SYMBOL_ALPHA,
   TOOL_PIVOTS,
   artUrl,
@@ -230,7 +230,6 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
         .map(([, url]) => url),
       artUrl("reel-well.png"),
-      artUrl("reel-frame.png"),
       artUrl("modal-panel.png"),
       artUrl(TOOL_PIVOTS.hook.file),
       artUrl(TOOL_PIVOTS.dynamite.file),
@@ -254,7 +253,6 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       .map(([sym, url]) => [sym, Assets.get<Texture>(url)]),
   ) as Record<Sym, Texture>;
   const wellTex = tex("reel-well.png");
-  const frameTex = tex("reel-frame.png");
   const modalTex = tex("modal-panel.png");
   const entryTex =
     (Assets.get("/kilo-ui-v11/banner-entry.webp") as Texture | undefined) || modalTex;
@@ -290,50 +288,13 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const retriggerTex = motionTex("retrigger-frame.svg");
   const plaqueTex = motionTex("value-plaque.svg");
 
-  const slice = (x: number, y: number, w: number, h: number) =>
-    new Texture({
-      source: frameTex.source,
-      frame: new Rectangle(x, y, w, h),
-    });
-  const src = SOURCE_SLICES.reel;
-  const frameTextures = [
-    slice(0, 0, src.left, src.top),
-    slice(src.left, 0, src.width - src.left - src.right, src.top),
-    slice(src.width - src.right, 0, src.right, src.top),
-    slice(0, src.top, src.left, src.height - src.top - src.bottom),
-    slice(
-      src.left,
-      src.top,
-      src.width - src.left - src.right,
-      src.height - src.top - src.bottom,
-    ),
-    slice(
-      src.width - src.right,
-      src.top,
-      src.right,
-      src.height - src.top - src.bottom,
-    ),
-    slice(0, src.height - src.bottom, src.left, src.bottom),
-    slice(
-      src.left,
-      src.height - src.bottom,
-      src.width - src.left - src.right,
-      src.bottom,
-    ),
-    slice(
-      src.width - src.right,
-      src.height - src.bottom,
-      src.right,
-      src.bottom,
-    ),
-  ];
-
   const world = new Container();
   app.stage.addChild(world);
+  const cabinet = new Graphics();
   const well = new TilingSprite({ texture: wellTex, width: 10, height: 10 });
   const veil = new Graphics();
   const routes = new Graphics();
-  const frame = frameTextures.map((texture) => new Sprite(texture));
+  const frame = new Graphics();
   const transient = new Container();
   const fx = new Graphics();
   const lineArt = new Container();
@@ -394,15 +355,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     },
   });
   title.anchor.set(0.5);
-  world.addChild(well, veil, routes);
+  world.addChild(cabinet, well, veil, routes);
   for (const reel of reels) world.addChild(reel.root);
-  for (const piece of frame) world.addChild(piece);
-  frame[4]!.visible = false;
+  world.addChild(frame);
   world.addChild(fx, lineArt, locks, title, transient);
 
   let meterWilds = 0;
   let stake = 1000;
   let turbo = false;
+  let speedMode: SpinSpeed = "normal";
   let reduced = false;
   let geom = geomFor(host.clientWidth || 1100, host.clientHeight || 640);
   let board: SplashCell[][] = [
@@ -654,42 +615,157 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   }
 
   function placeFrame() {
-    const { cab } = geom;
+    const { cab, cell, gap, gx, gy } = geom;
     const edge = frameBorders(cab);
-    const cols = [edge.l, cab.w - edge.l - edge.r, edge.r];
-    const rows = [edge.t, cab.h - edge.t - edge.b, edge.b];
-    let i = 0;
-    let y = cab.y;
-    for (let r = 0; r < 3; r++) {
-      let x = cab.x;
-      for (let c = 0; c < 3; c++) {
-        const piece = frame[i++]!;
-        piece.position.set(x, y);
-        piece.width = Math.max(1, cols[c]!);
-        piece.height = Math.max(1, rows[r]!);
-        x += cols[c]!;
-      }
-      y += rows[r]!;
+    const gridW = cell * 5 + gap * 4;
+    const gridH = cell * 3;
+    const x = cab.x;
+    const y = cab.y;
+    const right = x + cab.w;
+    const bottom = y + cab.h;
+    const metal = 0x142830;
+    const topMetal = 0x263b43;
+    const deep = 0x08151d;
+    const brass = 0xb69a62;
+    const brassLight = 0xe2c98c;
+
+    // Painted marine hardware, fitted entirely to the existing edge budget.
+    // The cell rectangle and collection landing coordinates do not change.
+    cabinet.clear();
+    cabinet
+      .roundRect(x + 1, y + 1, cab.w - 2, cab.h - 2, 5)
+      .fill(deep)
+      .stroke({ color: 0x020a10, width: 2 });
+    cabinet
+      .rect(gx - 2, gy - 2, gridW + 4, gridH + 4)
+      .fill(0x030c12);
+
+    frame.clear();
+    // Four solid rails leave the entire 5×3 playing area clear. The upper
+    // plane catches cool ambient light; the lower plane stays in shadow.
+    frame
+      .rect(x + 2, y + 2, cab.w - 4, edge.t - 3)
+      .fill(topMetal);
+    frame
+      .rect(x + 2, y + edge.t - 1, edge.l - 3, cab.h - edge.t - edge.b + 2)
+      .rect(right - edge.r + 1, y + edge.t - 1, edge.r - 3, cab.h - edge.t - edge.b + 2)
+      .fill(metal);
+    frame
+      .rect(x + 2, bottom - edge.b + 1, cab.w - 4, edge.b - 3)
+      .fill(0x101f27);
+    // Brushed edge lights have a physical source and remain thin. Keeping
+    // these accents inside the rails avoids a gold picture-frame silhouette.
+    frame
+      .moveTo(x + 6, y + 2.5)
+      .lineTo(right - 6, y + 2.5)
+      .stroke({ color: 0x78939a, alpha: 0.45, width: 1 });
+    frame
+      .moveTo(x + 2.5, y + 6)
+      .lineTo(x + 2.5, bottom - 6)
+      .stroke({ color: 0x506a71, alpha: 0.4, width: 1 });
+    frame
+      .moveTo(right - 2.5, y + 6)
+      .lineTo(right - 2.5, bottom - 6)
+      .moveTo(right - 6, bottom - 2.5)
+      .lineTo(x + 6, bottom - 2.5)
+      .stroke({ color: 0x030a0f, alpha: 0.95, width: 1 });
+    // A narrow brass insert is recessed against a dark gasket. Its stroke
+    // sits outside the symbol masks, even at the smallest phone geometry.
+    frame
+      .rect(gx - 1.5, gy - 1.5, gridW + 3, gridH + 3)
+      .stroke({ color: 0x02090e, width: 3 });
+    frame
+      .moveTo(gx - 1.5, gy + gridH + 1.5)
+      .lineTo(gx - 1.5, gy - 1.5)
+      .lineTo(gx + gridW + 1.5, gy - 1.5)
+      .stroke({ color: brass, alpha: 0.78, width: 1 });
+    frame
+      .moveTo(gx + gridW + 1.5, gy - 1.5)
+      .lineTo(gx + gridW + 1.5, gy + gridH + 1.5)
+      .lineTo(gx - 1.5, gy + gridH + 1.5)
+      .stroke({ color: brass, alpha: 0.3, width: 1 });
+
+    // Small square corner fittings and inset screw heads read as cabinet
+    // construction. Their size follows the rail, rather than the viewport.
+    const cap = Math.max(6, edge.l - 3);
+    const capInset = 1.5;
+    const screwR = Math.max(1.15, Math.min(1.8, edge.l * 0.1));
+    for (const [cx, cy] of [
+      [x + capInset, y + capInset],
+      [right - cap - capInset, y + capInset],
+      [x + capInset, bottom - cap - capInset],
+      [right - cap - capInset, bottom - cap - capInset],
+    ]) {
+      frame
+        .roundRect(cx!, cy!, cap, cap, 1.5)
+        .fill(0x34464a)
+        .stroke({ color: 0x060f15, width: 1 });
+      frame
+        .moveTo(cx! + 1.5, cy! + 1)
+        .lineTo(cx! + cap - 1.5, cy! + 1)
+        .stroke({ color: brassLight, alpha: 0.5, width: 1 });
+      const sx = cx! + cap / 2;
+      const sy = cy! + cap / 2;
+      frame
+        .circle(sx, sy, screwR + 0.7)
+        .fill(0x081219)
+        .circle(sx, sy - 0.2, screwR)
+        .fill({ color: brass, alpha: 0.8 });
+      frame
+        .moveTo(sx - screwR * 0.6, sy + screwR * 0.45)
+        .lineTo(sx + screwR * 0.6, sy - screwR * 0.45)
+        .stroke({ color: 0x142128, width: 0.8 });
     }
-    // The nine-slice bands contain transparent padding. Extend the well
-    // behind them so the marina never appears between the metal and reels.
-    const openingY = cab.y + edge.t;
-    const innerH = Math.max(1, cab.h - edge.t - edge.b);
-    well.position.set(cab.x + 6, cab.y + 6);
-    well.width = cab.w - 12;
-    well.height = cab.h - 12;
-    well.tint = 0x6b96a4;
+
+    // The texture is only an underlying material grain. A calm blue-green
+    // field keeps the illustrated symbols brighter than their surroundings.
+    well.position.set(gx, gy);
+    well.width = gridW;
+    well.height = gridH;
+    well.tint = 0x648b91;
     well.tileScale.set(Math.max(1.2, geom.cell / 110));
     veil.clear();
     veil
-      .rect(well.x, well.y, well.width, well.height)
-      .fill({ color: 0x03131c, alpha: 0.64 });
-    for (let i = 1; i < 5; i++) {
-      const x = geom.gx + i * (geom.cell + geom.gap) - geom.gap / 2;
+      .rect(gx, gy, gridW, gridH)
+      .fill({ color: deep, alpha: 0.76 });
+
+    // Recess shading is behind symbols and win routes. Non-overlapping bands
+    // approximate broad soft gradients without extra render filters.
+    const sideDepth = Math.min(24, cell * 0.12);
+    const endDepth = Math.min(48, cell * 0.24);
+    const steps = 12;
+    for (let reel = 0; reel < 5; reel++) {
+      const reelX = gx + reel * (cell + gap);
       veil
-        .moveTo(x, openingY)
-        .lineTo(x, openingY + innerH)
-        .stroke({ color: 0x74b6ba, alpha: 0.1, width: 1 });
+        .rect(reelX, gy, cell, gridH)
+        .fill({ color: 0x24474d, alpha: 0.12 });
+      for (let step = 0; step < steps; step++) {
+        const falloff = (1 - (step + 0.5) / steps) ** 2;
+        const sx = (sideDepth * step) / steps;
+        const sw = sideDepth / steps;
+        const sy = (endDepth * step) / steps;
+        const sh = endDepth / steps;
+        veil
+          .rect(reelX + sx, gy, sw, gridH)
+          .rect(reelX + cell - sx - sw, gy, sw, gridH)
+          .fill({ color: 0x020b11, alpha: 0.38 * falloff });
+        veil
+          .rect(reelX, gy + sy, cell, sh)
+          .fill({ color: 0x01070c, alpha: 0.66 * falloff });
+        veil
+          .rect(reelX, gy + gridH - sy - sh, cell, sh)
+          .fill({ color: 0x01070c, alpha: 0.42 * falloff });
+      }
+      if (reel < 4) {
+        const seam = reelX + cell + gap / 2;
+        veil
+          .rect(reelX + cell, gy, gap, gridH)
+          .fill({ color: 0x040e15, alpha: 0.78 });
+        veil
+          .moveTo(seam + 0.5, gy)
+          .lineTo(seam + 0.5, gy + gridH)
+          .stroke({ color: 0x6d8d91, alpha: 0.16, width: 1 });
+      }
     }
   }
 
@@ -1179,7 +1255,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     // every reel that is still spinning. Extra symbols are inserted above the
     // window so the strip never reverses. A partial respin (locked crowns)
     // keeps the short cycle and only moves the free reels.
-    const anticipate = pace === "landed" && !reduced && only == null;
+    const timing = SPIN_TIMING[speedMode];
+    const anticipate = timing.anticipation && pace === "landed" && !reduced && only == null;
     const activeSet = new Set(active);
     let lockedEarly = 0;
     for (let reel = 0; reel < 4; reel++) {
@@ -1203,7 +1280,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       noted: boolean;
     };
     const spins: Spin[] = active.map((reel, order) => {
-      const travel = (turbo ? 12 : 18) + order;
+      const travel = timing.travel + order;
       const pad = 3;
       const strip = reels[reel]!.strip;
       const seq: SplashCell[] = [];
@@ -1226,14 +1303,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const startY = -startIndex * cell;
       const endY = -endIndex * cell;
       strip.position.set(0, startY);
-      const ordinary = (turbo ? 340 : 700) + order * (turbo ? 50 : 160);
+      const ordinary = timing.duration + order * timing.stagger;
       return {
         reel,
         strip,
         pad,
         startY,
         endY,
-        delay: order * (turbo ? 16 : 36),
+        delay: order * timing.delay,
         rate: 1 / ordinary,
         progress: 0,
         phase: "spin",
@@ -1543,8 +1620,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     setStake(n) {
       stake = n;
     },
-    setPace(nextTurbo, nextReduced) {
-      turbo = nextTurbo;
+    setPace(nextTurbo, nextReduced, speed) {
+      speedMode = speed ?? (nextTurbo ? "turbo" : "normal");
+      turbo = speedMode !== "normal";
       reduced = nextReduced;
       setAudioTurbo(nextTurbo);
     },

@@ -34,107 +34,114 @@ const fixtures = Object.values(
 );
 let passed = 0;
 for (const fixture of fixtures) {
-  for (const skipAt of [Infinity, 1, 4, 12]) {
-    const round = fixture.script,
-      before = JSON.stringify(round);
-    let hud,
-      totalAtCollect,
-      actions = 0,
-      shown,
-      freeIndex = 0,
-      preWilds = round.banked;
-    let expectedRemaining = round.awarded;
-    const event = async () => {
-      actions++;
-    };
-    const scene = {
-      setStake() {},
-      setPace() {},
-      setMood() {},
-      setCopy() {},
-      setTally() {},
-      setMeter() {},
-      setLocks() {},
-      spinTo: async (grid) => {
-        shown = grid;
+  for (const speed of ["normal", "turbo", "super"]) {
+    for (const skipAt of [Infinity, 1, 4, 12]) {
+      const round = fixture.script,
+        before = JSON.stringify(round);
+      let hud,
+        totalAtCollect,
+        actions = 0,
+        shown,
+        freeIndex = 0,
+        preWilds = round.banked;
+      let expectedRemaining = round.awarded;
+      const event = async () => {
         actions++;
-      },
-      show: (grid) => {
-        shown = grid;
-      },
-      highlight: event,
-      tool: async (spin) => {
-        shown = spin.grid;
-        actions++;
-      },
-      intro: event,
-      retrigger: event,
-      finishPlate() {},
-      collect: async (spin) => {
-        assert.equal(
-          hud.mult,
-          spin.mult,
-          `${fixture.id}: collection uses pre-spin multiplier`,
-        );
-        totalAtCollect = hud.total;
-        actions++;
-      },
-    };
-    let lastTotal = 0;
-    await presentScript(scene, round, {
-      turbo: false,
-      reduced: true,
-      skipped: () => actions >= skipAt,
-      onHud(next) {
-        assert.ok(
-          next.total >= lastTotal && next.total <= round.payout,
-          `${fixture.id}: monotonic capped total`,
-        );
-        if (next.note === "Free spin") {
+      };
+      const scene = {
+        setStake() {},
+        setPace(turbo, reduced, actualSpeed) {
+          assert.equal(actualSpeed, speed);
+          assert.equal(turbo, speed !== "normal");
+          assert.equal(reduced, true);
+        },
+        setMood() {},
+        setCopy() {},
+        setTally() {},
+        setMeter() {},
+        setLocks() {},
+        spinTo: async (grid) => {
+          shown = grid;
+          actions++;
+        },
+        show: (grid) => {
+          shown = grid;
+        },
+        highlight: event,
+        tool: async (spin) => {
+          shown = spin.grid;
+          actions++;
+        },
+        intro: event,
+        retrigger: event,
+        finishPlate() {},
+        collect: async (spin) => {
           assert.equal(
-            next.left,
-            expectedRemaining,
-            `${fixture.id}: no advance announcement of retrigger spins`,
+            hud.mult,
+            spin.mult,
+            `${fixture.id}: collection uses pre-spin multiplier`,
           );
-          assert.equal(next.wilds, preWilds);
-          const spin = round.free[freeIndex++];
-          expectedRemaining = spin.left;
-          preWilds += spin.wilds;
-        }
-        if (
-          next.note.startsWith("Collected ") &&
-          hud?.note.startsWith("Collecting ")
-        )
-          assert.equal(
-            next.total - totalAtCollect,
-            next.spinCollect,
-            `${fixture.id}: collect credited after animation`,
+          totalAtCollect = hud.total;
+          actions++;
+        },
+      };
+      let lastTotal = 0;
+      await presentScript(scene, round, {
+        turbo: speed !== "normal",
+        speed,
+        reduced: true,
+        skipped: () => actions >= skipAt,
+        onHud(next) {
+          assert.ok(
+            next.total >= lastTotal && next.total <= round.payout,
+            `${fixture.id}: monotonic capped total`,
           );
-        lastTotal = next.total;
-        hud = next;
-      },
-    });
-    assert.equal(hud.total, round.payout, `${fixture.id}: final payout`);
-    assert.equal(
-      hud.line + hud.collect + hud.scatter,
-      round.payout,
-      `${fixture.id}: components reconcile`,
-    );
-    assert.equal(
-      hud.mult,
-      collectMult(round.banked + round.free.reduce((n, s) => n + s.wilds, 0)),
-    );
-    assert.deepEqual(
-      shown,
-      round.free.at(-1)?.grid ?? round.base.grid,
-      `${fixture.id}: final board`,
-    );
-    assert.equal(
-      JSON.stringify(round),
-      before,
-      `${fixture.id}: immutable script`,
-    );
-    passed++;
+          if (next.note === "Free spin") {
+            assert.equal(
+              next.left,
+              expectedRemaining,
+              `${fixture.id}: no advance announcement of retrigger spins`,
+            );
+            assert.equal(next.wilds, preWilds);
+            const spin = round.free[freeIndex++];
+            expectedRemaining = spin.left;
+            preWilds += spin.wilds;
+          }
+          if (
+            next.note.startsWith("Collected ") &&
+            hud?.note.startsWith("Collecting ")
+          )
+            assert.equal(
+              next.total - totalAtCollect,
+              next.spinCollect,
+              `${fixture.id}: collect credited after animation`,
+            );
+          lastTotal = next.total;
+          hud = next;
+        },
+      });
+      assert.equal(hud.total, round.payout, `${fixture.id}: final payout`);
+      assert.equal(
+        hud.line + hud.collect + hud.scatter,
+        round.payout,
+        `${fixture.id}: components reconcile`,
+      );
+      assert.equal(
+        hud.mult,
+        collectMult(round.banked + round.free.reduce((n, s) => n + s.wilds, 0)),
+      );
+      assert.deepEqual(
+        shown,
+        round.free.at(-1)?.grid ?? round.base.grid,
+        `${fixture.id}: final board`,
+      );
+      assert.equal(
+        JSON.stringify(round),
+        before,
+        `${fixture.id}: immutable script`,
+      );
+      passed++;
+    }
   }
   const summary = featureSummary(fixture.script);
   assert.equal(summary.feature, fixture.script.free.length > 0);
@@ -198,7 +205,9 @@ assert.equal(
   shares[1].reduce((n, v) => n + v, 0),
   5000,
 );
-const hookRound = fixtures.find((fixture) => fixture.id === "hook-upgrade").script;
+const hookRound = fixtures.find(
+  (fixture) => fixture.id === "hook-upgrade",
+).script;
 const order = [];
 await presentScript(
   {
@@ -253,7 +262,9 @@ assert.deepEqual(order.slice(secondHook, secondHook + 4), [
   "upgrade",
 ]);
 assert.ok(order.includes("meter:2"), "two collectors transfer together");
-const buy = featureSummary(fixtures.find((fixture) => fixture.id === "buy").script);
+const buy = featureSummary(
+  fixtures.find((fixture) => fixture.id === "buy").script,
+);
 assert.equal(buy.celebrate, false);
 assert.equal(buy.purchaseCost, 100000);
 const chopper = featureSummary(
@@ -267,7 +278,7 @@ const natural = featureSummary(
 assert.equal(natural.celebrate, true);
 assert.equal(natural.purchaseCost, null);
 console.log(
-  `PASS: ${passed} fixture/skip cases across ${fixtures.length} saved rounds.`,
+  `PASS: ${passed} fixture/skip/speed cases across ${fixtures.length} saved rounds and three speed profiles.`,
 );
 console.log(
   "Verified totals, cap, final boards, collector timing, remaining-spin timing and script immutability.",
@@ -302,10 +313,11 @@ assert.equal(small.base.lines[0].n, 3);
 
 const groups = groupRounds(fixtures);
 const hookGroup = groups.find((group) => group.id === "hook-upgrade");
-assert.deepEqual(
-  hookGroup.aliases.map((alias) => alias.id).sort(),
-  ["meter-4", "multi-collect", "tool-hook"],
-);
+assert.deepEqual(hookGroup.aliases.map((alias) => alias.id).sort(), [
+  "meter-4",
+  "multi-collect",
+  "tool-hook",
+]);
 assert.equal(
   groups.filter((group) => group.id === "tool-hook").length,
   0,
@@ -325,7 +337,9 @@ assert.equal(bazooka.previews[0].spinIndex, 16);
 const pair = findPairCollection(fixtures);
 assert.equal(pair.fixtureId, "tool-bazooka");
 assert.equal(pair.spinIndex, 15);
-const pairRound = fixtures.find((fixture) => fixture.id === pair.fixtureId).script;
+const pairRound = fixtures.find(
+  (fixture) => fixture.id === pair.fixtureId,
+).script;
 const pairSpin = pairRound.free[pair.spinIndex];
 const pairLedger = ledgerBefore(pairRound, pair.spinIndex);
 const pairFingerprint = JSON.stringify(pairRound);
@@ -363,17 +377,43 @@ await presentSettledCollection(
   },
   pairRound,
   pair.spinIndex,
-  { turbo: false, reduced: true, skipped: () => false, onHud: (hud) => { pairHud = hud; } },
+  {
+    turbo: false,
+    reduced: true,
+    skipped: () => false,
+    onHud: (hud) => {
+      pairHud = hud;
+    },
+  },
 );
 assert.equal(JSON.stringify(pairRound), pairFingerprint);
 assert.equal(pairCalls[0], "stake:" + pairRound.stake);
 assert.equal(pairCalls.includes("spin"), false);
 assert.equal(pairCalls.includes("entry"), false);
 assert.equal(pairCalls.includes("collect:" + pairSpin.got), true);
-assert.ok(pairCalls.indexOf("show") < pairCalls.indexOf("collect:" + pairSpin.got));
-assert.ok(pairCalls.indexOf("collect:" + pairSpin.got) < pairCalls.indexOf("deliver:" + pairSpin.wilds));
-assert.ok(pairCalls.indexOf("deliver:" + pairSpin.wilds) < pairCalls.indexOf("upgrade:" + pairSpin.extra + ":" + collectMult(pairLedger.wilds + pairSpin.wilds)));
-assert.equal(pairHud.bonusWin, pairLedger.line - pairRound.base.lines.reduce((n, line) => n + line.pay, 0) + pairLedger.collect + pairSpin.got);
+assert.ok(
+  pairCalls.indexOf("show") < pairCalls.indexOf("collect:" + pairSpin.got),
+);
+assert.ok(
+  pairCalls.indexOf("collect:" + pairSpin.got) <
+    pairCalls.indexOf("deliver:" + pairSpin.wilds),
+);
+assert.ok(
+  pairCalls.indexOf("deliver:" + pairSpin.wilds) <
+    pairCalls.indexOf(
+      "upgrade:" +
+        pairSpin.extra +
+        ":" +
+        collectMult(pairLedger.wilds + pairSpin.wilds),
+    ),
+);
+assert.equal(
+  pairHud.bonusWin,
+  pairLedger.line -
+    pairRound.base.lines.reduce((n, line) => n + line.pay, 0) +
+    pairLedger.collect +
+    pairSpin.got,
+);
 assert.equal(pairHud.left, pairSpin.left);
 assert.equal(pairHud.mult, collectMult(pairLedger.wilds + pairSpin.wilds));
 
@@ -381,7 +421,9 @@ const capped = groups.find((group) => group.id === "capped-ante");
 assert.equal(capped.previews[0].kind, "capped");
 assert.equal(capped.previews[0].spinIndex, 25);
 
-const hookPreview = hookGroup.previews.find((preview) => preview.kind === "hook");
+const hookPreview = hookGroup.previews.find(
+  (preview) => preview.kind === "hook",
+);
 const hookLedger = ledgerBefore(hookRound, hookPreview.spinIndex);
 assert.equal(hookLedger.wilds, 0);
 assert.equal(hookLedger.total, 5000);
@@ -446,16 +488,29 @@ async function playPreview(preview, script) {
       },
     },
   );
-  assert.equal(JSON.stringify(script), fingerprint, `${preview.kind}: immutable`);
-  assert.equal(calls.includes("spin"), false, `${preview.kind}: does not walk the feature`);
-  assert.equal(calls.includes("entry"), false, `${preview.kind}: does not open a purchase`);
+  assert.equal(
+    JSON.stringify(script),
+    fingerprint,
+    `${preview.kind}: immutable`,
+  );
+  assert.equal(
+    calls.includes("spin"),
+    false,
+    `${preview.kind}: does not walk the feature`,
+  );
+  assert.equal(
+    calls.includes("entry"),
+    false,
+    `${preview.kind}: does not open a purchase`,
+  );
   return { calls, hud, shown };
 }
 
 const hookPlay = await playPreview(hookPreview, hookRound);
-assert.deepEqual(hookPlay.calls.filter((call) => call.startsWith("tool")), [
-  "tool:hook",
-]);
+assert.deepEqual(
+  hookPlay.calls.filter((call) => call.startsWith("tool")),
+  ["tool:hook"],
+);
 assert.equal(hookPlay.calls[0], "show");
 assert.equal(hookPlay.hud.wilds, 0);
 assert.equal(hookPlay.hud.total, 5000);
@@ -562,7 +617,12 @@ try {
 }
 assert.equal(faulted, true, "fault stops the preview");
 assert.deepEqual(faultCalls, ["show", "board:hook"]);
-assert.equal(JSON.stringify(hookRound), JSON.stringify(fixtures.find((fixture) => fixture.id === "hook-upgrade").script));
+assert.equal(
+  JSON.stringify(hookRound),
+  JSON.stringify(
+    fixtures.find((fixture) => fixture.id === "hook-upgrade").script,
+  ),
+);
 
 const meter8 = fixtures.find((fixture) => fixture.id === "meter-8").script;
 assert.equal(meter8.free[0].lines.length, 2);
@@ -593,7 +653,9 @@ assert.equal(stageSource.includes('"COLLECTED"'), false);
 assert.ok(stageSource.includes('"BEFORE CAP"'));
 assert.ok(stageSource.includes('"MAX WIN REACHED"'));
 
-const bazookaRound = fixtures.find((fixture) => fixture.id === "tool-bazooka").script;
+const bazookaRound = fixtures.find(
+  (fixture) => fixture.id === "tool-bazooka",
+).script;
 const bazookaBefore = JSON.stringify(bazookaRound);
 
 function meterSnap(hud, extra = {}) {
@@ -737,13 +799,26 @@ function assertOvershoot(states) {
   const awarded = at("on-award", 15);
   assert.equal(awarded.note, "+10 spins · next collection ×3");
   assert.deepEqual(
-    [awarded.wilds, awarded.mult, awarded.filled, awarded.holding, awarded.left],
+    [
+      awarded.wilds,
+      awarded.mult,
+      awarded.filled,
+      awarded.holding,
+      awarded.left,
+    ],
     [9, 2, 4, true, 14],
     "announcement keeps ×2 and then shows 14 spins remaining",
   );
   const after = at("after-award", 15);
   assert.deepEqual(
-    [after.wilds, after.mult, after.filled, after.holding, after.maxed, after.left],
+    [
+      after.wilds,
+      after.mult,
+      after.filled,
+      after.holding,
+      after.maxed,
+      after.left,
+    ],
     [9, 3, 1, false, false, 14],
     "after the announcement the extra collector is the first socket at ×3",
   );
@@ -776,7 +851,13 @@ function assertOvershoot(states) {
   );
   const twelfth = at("deliver", 20, 0);
   assert.deepEqual(
-    [twelfth.wilds, twelfth.mult, twelfth.filled, twelfth.holding, twelfth.nextMult],
+    [
+      twelfth.wilds,
+      twelfth.mult,
+      twelfth.filled,
+      twelfth.holding,
+      twelfth.nextMult,
+    ],
     [12, 3, 4, true, 10],
     "entry into ×10 holds the completed set at ×3",
   );
@@ -792,7 +873,13 @@ function assertOvershoot(states) {
   assert.match(onMax.note, /next collection ×10/);
   const afterMax = at("after-award", 20);
   assert.deepEqual(
-    [afterMax.wilds, afterMax.mult, afterMax.filled, afterMax.holding, afterMax.maxed],
+    [
+      afterMax.wilds,
+      afterMax.mult,
+      afterMax.filled,
+      afterMax.holding,
+      afterMax.maxed,
+    ],
     [12, 10, 4, false, true],
     "×10 replaces ×3 only after the announcement",
   );

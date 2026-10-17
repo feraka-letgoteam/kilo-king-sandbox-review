@@ -1,0 +1,55 @@
+{
+  "name": "features-desktop",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "modal": {
+    "x": 260,
+    "y": 135,
+    "width": 920,
+    "height": 630
+  },
+  "scrollbarGutterAssumed": 8,
+  "activeTab": "buy",
+  "cards": [
+    {
+      "id": "scatter-3",
+      "x": 281,
+      "y": 273,
+      "width": 427,
+      "height": 378,
+      "art": {
+        "x": 282,
+        "y": 274,
+        "width": 425,
+        "height": 200
+      }
+    },
+    {
+      "id": "chopper",
+      "x": 724,
+      "y": 273,
+      "width": 427,
+      "height": 378,
+      "art": {
+        "x": 725,
+        "y": 274,
+        "width": 425,
+        "height": 200
+      }
+    }
+  ],
+  "ante": {
+    "x": 281,
+    "y": 665,
+    "width": 560,
+    "height": 58
+  },
+  "state": {
+    "stake": 1000,
+    "balance": 500000,
+    "ante": false
+  },
+  "kind": "static code-rendered design proof, not a browser screenshot"
+}

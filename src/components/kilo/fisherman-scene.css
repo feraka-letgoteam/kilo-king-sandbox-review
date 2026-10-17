@@ -1,0 +1,97 @@
+.kk-fisherman-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.kk-fisherman-scene > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  filter: drop-shadow(-3px 5px 4px #0007);
+}
+
+.kk-fisherman-upper {
+  /* SVG viewBox percentages place the pivot at source (768, 1200), the waist.
+     Translations use source units: 4px is roughly 1 CSS px at the intended size. */
+  transform-box: view-box;
+  transform-origin: 53.3333% 53.0156%;
+}
+.kk-fisherman-scene[data-compact="true"] .kk-fisherman-upper {
+  /* Same source-space waist (768,1200) in the shorter portrait viewBox. */
+  transform-origin: 53.3333% 93.1624%;
+}
+
+.kk-fisherman-scene[data-pose="idle"] .kk-fisherman-upper {
+  animation: kk-fisherman-breathe 3.6s ease-in-out infinite;
+}
+
+.kk-fisherman-scene[data-pose="cast"] .kk-fisherman-upper {
+  animation:
+    kk-fisherman-cast 520ms cubic-bezier(0.2, 0.7, 0.3, 1) both,
+    kk-fisherman-breathe 3.6s ease-in-out 520ms infinite;
+}
+
+.kk-fisherman-scene[data-pose="cheer"] .kk-fisherman-upper {
+  animation:
+    kk-fisherman-cheer 680ms cubic-bezier(0.2, 0.7, 0.3, 1) both,
+    kk-fisherman-breathe 3.6s ease-in-out 680ms infinite;
+}
+
+.kk-fisherman-scene[data-pose="slump"] .kk-fisherman-upper {
+  animation:
+    kk-fisherman-settle 480ms ease-out both,
+    kk-fisherman-breathe 3.6s ease-in-out 480ms infinite;
+}
+
+.kk-fisherman-scene[data-hidden="true"] .kk-fisherman-upper {
+  animation-play-state: paused;
+}
+
+.kk-fisherman-scene[data-reduced="true"] .kk-fisherman-upper {
+  animation: none;
+  transform: none;
+}
+
+@keyframes kk-fisherman-breathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-0.09deg);
+  }
+}
+
+@keyframes kk-fisherman-cast {
+  from {
+    transform: rotate(-0.4deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes kk-fisherman-cheer {
+  0% {
+    transform: translateY(3px) rotate(0.25deg);
+  }
+  38% {
+    transform: translateY(-6px) rotate(-0.2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes kk-fisherman-settle {
+  from {
+    transform: translateY(-2px) rotate(0.12deg);
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+  }
+}

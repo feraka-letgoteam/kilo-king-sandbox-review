@@ -4,6 +4,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type CSSProperties,
   type ReactNode,
 } from "react";
 import {
@@ -24,7 +25,16 @@ import {
   settle,
   writeBank,
 } from "@/lib/kilo/bank";
-import { muted, preloadAudio, primeAudio, setMuted, uiTap } from "@/lib/kilo/sound";
+import {
+  muted,
+  preloadAudio,
+  primeAudio,
+  setMuted,
+  uiTap,
+  audioReady,
+  audioVolumes,
+  setAudioVolumes,
+} from "@/lib/kilo/sound";
 import {
   presentScript,
   presentEventPreview,
@@ -32,7 +42,6 @@ import {
   findPairCollection,
   featureSummary,
   finalHud,
-  spinControl,
   faceFor,
   groupRounds,
   PREVIEW_BANNER,
@@ -41,14 +50,41 @@ import {
   type SymbolCompareResult,
 } from "./director";
 import { ReelStage, type MountedScene } from "./ReelStage";
+import { MarinaBackdrop } from "./MarinaBackdrop";
+import { FishermanScene } from "./FishermanScene";
+import { fitGameLayout } from "./layout";
 import fixtures from "@/lib/kilo/fixtures.json";
 
-const STAKES = [100, 500, 1000, 2500, 10000];
-const LOADER_PHONE = "(max-width: 700px), (max-height: 500px)";
+import {
+  Menu,
+  ChevronDown,
+  Crown,
+  Minus,
+  Plus,
+  RotateCw,
+  SkipForward,
+} from "lucide-react";
+import {
+  BetPanel,
+  FeaturesPanel,
+  SettingsPanel,
+  PanelHeader,
+  PanelDismissContext,
+  preloadFeatureArtwork,
+} from "./control-panels";
+import {
+  STAKES,
+  readPreferences,
+  savePreferences,
+  resolveMotion,
+  type GamePreferences,
+} from "./control-model";
+import { Paytable } from "./paytable";
+const LOADER_PHONE = "(max-width: 700px) and (orientation: portrait)";
 const LOADER_PORTRAIT = "/kilo-ui-v11/loading-portrait.webp";
 const LOADER_DESKTOP = "/kilo-ui-v11/loading-desktop.webp";
-const SOURCE_ZIP = "/kilo-source-only.zip";
-const SOURCE_NAME = "kilo-source-only.zip";
+const SOURCE_URL =
+  "https://github.com/feraka-letgoteam/kilo-king-sandbox-review/tree/codex/presentation-rebuild";
 /** KING emblem is the live scatter. Packages carry the cash plaque. */
 const SCATTER_IS_KING = true;
 
@@ -129,13 +165,7 @@ function FisherPortrait({
       {mini ? (
         <img src="/kilo-motion-v7/collector-idle.png" alt="" />
       ) : (
-        <picture>
-          <source
-            media="(max-width: 740px)"
-            srcSet="/kilo-night-v3/hero-bust.png"
-          />
-          <img src="/kilo-presentation-v6/hero-fishing.png" alt="" />
-        </picture>
+        <img src="/kilo-ui-v11/hero-bust.webp" alt="" />
       )}
     </div>
   );
@@ -192,32 +222,44 @@ function watchSettlementWrites(report: (key: string) => void) {
   };
 }
 
-const FEATURE_CHOICES = [
-  {
-    id: "buy" as const,
-    title: "Free spins",
-    detail: "10 spins. Collect every package.",
-    times: "100× bet",
-    art: "/kilo-ui-v11/feature-stash.webp",
-    skin: "standard",
-  },
-  {
-    id: "chopper" as const,
-    title: "Chopper",
-    detail: "10 spins. Starts at ×2.",
-    times: "250× bet",
-    art: "/kilo-ui-v11/feature-chopper.webp",
-    skin: "premium",
-  },
-];
-
 export function KiloTable({ review = false }: { review?: boolean }) {
   const sceneRef = useRef<MountedScene | null>(null);
   const appRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLElement | null>(null);
+  const [layout, setLayout] = useState(() => fitGameLayout(1100, 800));
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (!entry) return;
+      const next = fitGameLayout(
+        entry.contentRect.width,
+        entry.contentRect.height,
+      );
+      setLayout((previous) =>
+        previous.width === next.width &&
+        previous.height === next.height &&
+        previous.mode === next.mode &&
+        previous.artLeft === next.artLeft &&
+        previous.artRight === next.artRight &&
+        previous.header === next.header
+          ? previous
+          : next,
+      );
+    });
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
   const [collection, setCollection] = useState<CollectionDisplay>(null);
   const [awardLanded, setAwardLanded] = useState(false);
   const [capNotice, setCapNotice] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [systemMotion, setSystemMotion] = useState(false);
+  const [preferences, setPreferences] =
+    useState<GamePreferences>(readPreferences);
+  const reducedMotion = resolveMotion(preferences.motion, systemMotion);
+  const reducedRef = useRef(reducedMotion);
+  reducedRef.current = reducedMotion;
+  const turbo = preferences.speed !== "normal";
   const [ready, setReady] = useState(false);
   const [booted, setBooted] = useState(review);
   const [bootArt, setBootArt] = useState(0);
@@ -229,13 +271,25 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const [mode, setMode] = useState<SplashMode>("spin");
   const [busy, setBusy] = useState(false);
   const [mute, setMute] = useState(false);
-  const [turbo, setTurbo] = useState(false);
   const [win, setWin] = useState(0);
   const [sourceNote, setSourceNote] = useState("");
   const [panel, setPanel] = useState(review);
   const [help, setHelp] = useState(false);
   const [buyPanel, setBuyPanel] = useState(false);
-  const [toolsOpen, setToolsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [betPanel, setBetPanel] = useState(false);
+  const [betReturn, setBetReturn] = useState<"game" | "features">("game");
+  const [audioAvailable, setAudioAvailable] = useState(false);
+  const [volumes, setVolumes] = useState(audioVolumes);
+  function changePreferences(next: GamePreferences) {
+    if (busyRef.current) return;
+    setPreferences(next);
+    savePreferences(next);
+  }
+  function closeBet() {
+    setBetPanel(false);
+    if (betReturn === "features") setBuyPanel(true);
+  }
   const [summary, setSummary] = useState<null | {
     payout: number;
     purchaseCost: number | null;
@@ -246,7 +300,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const busyRef = useRef(false);
   const [note, setNote] = useState("");
   const [previewNote, setPreviewNote] = useState("");
-  const [symbolReport, setSymbolReport] = useState<SymbolCompareResult | null>(null);
+  const [symbolReport, setSymbolReport] = useState<SymbolCompareResult | null>(
+    null,
+  );
   const compareSlot = useRef<HTMLDivElement>(null);
   const compareCanvas = useRef<HTMLCanvasElement | null>(null);
   const [storageFault, setStorageFault] = useState("");
@@ -256,8 +312,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const rollMotion = !reducedMotion;
   const shownWin = useRoll(win, rollMotion, turbo);
   const shownBonus = useRoll(hud?.bonusWin ?? 0, rollMotion, turbo);
-  const shownSpin = useRoll((hud?.spinLine ?? 0) + (hud?.spinCollect ?? 0), rollMotion, turbo);
-  const shownTotal = useRoll(hud?.total ?? win, rollMotion, turbo);
   const [fisher, setFisher] = useState<{ pose: FisherPose; tick: number }>({
     pose: "idle",
     tick: 0,
@@ -269,11 +323,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     sceneRef.current = scene;
     setReady(true);
   }, []);
-  const buyRail = useRef<HTMLDivElement>(null);
-  const [buyEdge, setBuyEdge] = useState({ start: true, end: true, index: 0 });
 
   useEffect(() => {
-    void preloadAudio();
+    void preloadAudio().then(() => setAudioAvailable(audioReady()));
+    // Decode the small feature catalogue during entry, before its first open.
+    void preloadFeatureArtwork();
   }, []);
 
   useLayoutEffect(() => {
@@ -307,73 +361,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
       media.removeEventListener("change", load);
     };
   }, [review, bootTry]);
-
-  useEffect(() => {
-    if (!buyPanel) return;
-    const rail = buyRail.current;
-    if (!rail) return;
-    const measure = () => {
-      const max = Math.max(0, rail.scrollWidth - rail.clientWidth);
-      const cards = [...rail.querySelectorAll<HTMLElement>(".kk-purchase")];
-      const mid = rail.getBoundingClientRect().left + rail.clientWidth / 2;
-      let index = 0;
-      let best = Number.POSITIVE_INFINITY;
-      cards.forEach((card, i) => {
-        const box = card.getBoundingClientRect();
-        const dist = Math.abs(box.left + box.width / 2 - mid);
-        if (dist < best) {
-          best = dist;
-          index = i;
-        }
-      });
-      const railBox = rail.getBoundingClientRect();
-      const allIn =
-        cards.length > 0 &&
-        cards.every((card) => {
-          const box = card.getBoundingClientRect();
-          return box.left >= railBox.left - 2 && box.right <= railBox.right + 2;
-        });
-      const fits = max <= 8 || allIn;
-      setBuyEdge({
-        start: fits || index <= 0,
-        end: fits || index >= cards.length - 1,
-        index,
-      });
-    };
-    measure();
-    rail.addEventListener("scroll", measure, { passive: true });
-    const observer = new ResizeObserver(measure);
-    observer.observe(rail);
-    return () => {
-      rail.removeEventListener("scroll", measure);
-      observer.disconnect();
-    };
-  }, [buyPanel, stake, mode]);
-
-  function focusBuy(index: number) {
-    const rail = buyRail.current;
-    if (!rail) return;
-    const cards = [...rail.querySelectorAll<HTMLElement>(".kk-purchase")];
-    const next = Math.max(0, Math.min(cards.length - 1, index));
-    const card = cards[next];
-    if (!card) return;
-    uiTap();
-    setBuyEdge((edge) => ({
-      ...edge,
-      index: next,
-      start: next <= 0,
-      end: next >= cards.length - 1,
-    }));
-    const railBox = rail.getBoundingClientRect();
-    const cardBox = card.getBoundingClientRect();
-    const delta =
-      cardBox.left + cardBox.width / 2 - (railBox.left + railBox.width / 2);
-    rail.scrollBy({ left: delta, behavior: reducedMotion ? "auto" : "smooth" });
-  }
-
-  function scrollBuy(dir: number) {
-    focusBuy(buyEdge.index + dir);
-  }
 
   useEffect(() => {
     const slot = compareSlot.current;
@@ -464,7 +451,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReducedMotion(media.matches);
+    const apply = () => setSystemMotion(media.matches);
     apply();
     media.addEventListener("change", apply);
     return () => media.removeEventListener("change", apply);
@@ -496,7 +483,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   }, []);
 
   function reduced() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return reducedRef.current;
   }
 
   useEffect(() => {
@@ -570,6 +557,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     try {
       await presentScript(scene, script, {
         turbo,
+        speed: preferences.speed,
         reduced: reduced(),
         skipped: () => skipRef.current,
         onHud: (next) => setHud(next),
@@ -595,6 +583,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
       if (done.feature) {
         setMode("spin");
         setBuyPanel(false);
+        setSettingsOpen(false);
+        setBetPanel(false);
+        setHelp(false);
         setSummary({
           payout: done.payout,
           purchaseCost: done.purchaseCost,
@@ -628,13 +619,13 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     );
   }
 
-  async function play() {
-    if (busyRef.current || !ready || summary) return;
-    if (!splashStakeOk(stake, mode)) {
+  async function play(playMode: SplashMode = mode) {
+    if (busyRef.current || !sceneRef.current || !ready || summary) return;
+    if (!splashStakeOk(stake, playMode)) {
       setNote("That charge is outside the stake rules.");
       return;
     }
-    const cost = splashCost(stake, mode);
+    const cost = splashCost(stake, playMode);
     const paid = settle(cost, 0);
     if (!paid.ok) {
       setNote(paid.reason);
@@ -644,7 +635,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     setNote("");
     setSettled(false);
     setSummary(null);
-    const script = playSplash(stake, mode, cryptoRng());
+    const script = playSplash(stake, playMode, cryptoRng());
     rememberRound(
       JSON.stringify({ v: 2, script, credited: false } satisfies Saved),
     );
@@ -698,6 +689,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     try {
       await presentEventPreview(scene, fixture.script, preview, {
         turbo,
+        speed: preferences.speed,
         reduced: reduced(),
         skipped: () => skipRef.current,
         fault: () =>
@@ -766,7 +758,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     } catch (error) {
       console.error("Kilo collection review failed", error);
       scene.show(spin.grid);
-      setNote("Collection review interrupted. The recorded board was restored.");
+      setNote(
+        "Collection review interrupted. The recorded board was restored.",
+      );
     } finally {
       stopWatch();
       if (writes.length) {
@@ -783,13 +777,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
   const cost = splashCost(stake, mode);
   const cap = splashRoundCap(stake);
   const afford = !busy && cost > bank;
-  const control = spinControl({
-    ready,
-    busy,
-    summary: summary != null,
-    mode,
-    cost,
-  });
 
   function pick(fixture: Fixture) {
     setNote(`${fixture.title}. Seed ${fixture.seed}. ${fixture.note}`);
@@ -799,32 +786,33 @@ export function KiloTable({ review = false }: { review?: boolean }) {
     ? ""
     : busy
       ? "SPINNING"
-      : mode === "buy"
-        ? "FREE SPINS ARMED"
-        : mode === "chopper"
-          ? "CHOPPER ARMED"
-          : mode === "ante"
-            ? "ANTE ON"
-            : hud && !hud.active && hud.note && !/last result/i.test(hud.note)
-              ? hud.note
-              : "PLACE A BET";
-  const modalOpen = help || buyPanel || summary != null;
-
-  function stepStake(dir: number) {
-    uiTap();
-    const index = Math.max(0, STAKES.indexOf(stake));
-    const next = STAKES[Math.min(STAKES.length - 1, Math.max(0, index + dir))];
-    if (next == null) return;
-    setStake(next);
-    if (!splashStakeOk(next, mode)) setMode("spin");
-  }
+      : mode === "ante"
+        ? "ANTE ON"
+        : "PLACE A BET";
+  const modalOpen =
+    help || buyPanel || betPanel || settingsOpen || summary != null;
+  const controlsLocked = busy || summary != null || !!hud?.active;
 
   return (
-    <div className="kk-app" ref={appRef} data-reduced={reducedMotion ? "1" : "0"}>
+    <div
+      className="kk-app"
+      ref={appRef}
+      data-reduced={reducedMotion ? "1" : "0"}
+      data-review={review ? "true" : "false"}
+    >
       {booted ? null : (
-        <div className="kk-boot" role="dialog" aria-modal="true" aria-label="Loading">
+        <div
+          className="kk-boot"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Loading"
+        >
           <img className="kk-boot-art" alt="" src={loaderSrc} />
-          <img className="kk-boot-logo" src="/kilo-ui-v11/logo-kilo-king.webp" alt="Kilo King" />
+          <img
+            className="kk-boot-logo"
+            src="/kilo-ui-v11/logo-kilo-king.webp"
+            alt="Kilo King"
+          />
           <div className="kk-boot-copy">
             <p className="kk-boot-status" role="status">
               {bootError
@@ -843,7 +831,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               />
             </div>
             {bootError ? (
-              <button type="button" className="kk-boot-enter" onClick={() => setBootTry((n) => n + 1)}>
+              <button
+                type="button"
+                className="kk-boot-enter"
+                onClick={() => setBootTry((n) => n + 1)}
+              >
                 Retry
               </button>
             ) : (
@@ -862,13 +854,17 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           </div>
         </div>
       )}
-      <header className="kk-dev">
+      <header className="kk-dev" inert={modalOpen || !booted}>
         {previewNote ? (
-          <p className="kk-preview-banner" role="status" data-testid="preview-banner">
+          <p
+            className="kk-preview-banner"
+            role="status"
+            data-testid="preview-banner"
+          >
             {previewNote}
           </p>
         ) : null}
-        <span className="kk-sandbox">{sourceNote || "LOCAL SANDBOX"}</span>
+        <span className="kk-sandbox">{sourceNote || "REVIEW BUILD"}</span>
         <nav aria-label="Game menu">
           <button
             type="button"
@@ -891,365 +887,378 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             Review
           </button>
           <a
-            href={SOURCE_ZIP}
-            download={SOURCE_NAME}
+            href={SOURCE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             data-source="1"
-            onClick={() =>
-              setSourceNote("Download started. Check your browser downloads.")
-            }
+            onClick={() => setSourceNote("Source branch opened in a new tab.")}
           >
             Source
           </a>
         </nav>
       </header>
-      <main className="kk-stage" data-testid="game-stage">
+      <main className="kk-stage" data-testid="game-stage" ref={stageRef}>
+        <MarinaBackdrop reducedMotion={reducedMotion} />
         {storageFault ? (
-          <p className="kk-storage-fault" role="alert" data-testid="storage-fault">
+          <p
+            className="kk-storage-fault"
+            role="alert"
+            data-testid="storage-fault"
+          >
             {storageFault}
           </p>
         ) : null}
         <div
           className={`kk-shell ${hud?.active ? "is-feature" : ""} ${hud?.active && hud.bonusWin === hud.total ? "is-same-return" : ""}`}
-          data-layout="r2"
+          data-layout={layout.mode}
+          data-framing={layout.artLeft ? "sides" : "header"}
+          style={
+            {
+              "--game-width": `${layout.width}px`,
+              "--game-height": `${layout.height}px`,
+              "--reel-width": `${layout.reelWidth}px`,
+              "--reel-height": `${layout.reelHeight}px`,
+              "--header-height": `${layout.header}px`,
+              "--dock-height": `${layout.dock}px`,
+              "--strip-height": `${layout.strip}px`,
+              "--side-width": `${layout.side}px`,
+              "--art-left": `${layout.artLeft}px`,
+              "--art-right": `${layout.artRight}px`,
+              "--dock-gap": `${layout.dockGap}px`,
+            } as CSSProperties
+          }
           data-testid="game-hud"
-          inert={modalOpen ? true : undefined}
+          inert={modalOpen || !booted ? true : undefined}
         >
-          <div className="kk-playfield">
-          <div className="kk-crest">
-            {hud?.active ? (
-              <div
-                className={`kk-bonus${hud.holding ? " is-holding" : ""}${hud.maxed ? " is-max" : ""}${capNotice ? " is-capped" : ""}`}
-              >
+          <div className="kk-scene-pier" aria-hidden="true" />
+          {layout.artLeft > 0 && (
+            <>
+              <div className="kk-scene-brand">
                 <img
-                  className="kk-bonus-mark"
-                  src="/kilo-night-v3/logo-kilo-king.png"
-                  alt=""
-                />
-                <div className="kk-bonus-spins">
-                  <img
-                    className="kk-plate"
-                    src="/kilo-night-v3/ui-plate.svg"
-                    alt=""
-                  />
-                  <div className="kk-plate-copy">
-                    <span className="kk-eyebrow">Spins</span>
-                    <b data-testid="spins-left">{hud.left ?? 0}</b>
-                  </div>
-                </div>
-                <div className="kk-bonus-track">
-                  <div
-                    className="kk-sockets"
-                    aria-label={
-                      hud.maxed
-                        ? "All collectors filled. Maximum multiplier."
-                        : `${hud.filled} of 4 collectors filled. Collect ×${hud.mult}.`
-                    }
-                  >
-                    {[0, 1, 2, 3].map((i) => {
-                      const filled = i < hud.filled;
-                      return (
-                        <div
-                          key={i}
-                          data-socket={i}
-                          className={`kk-socket${filled ? " filled" : ""}${!hud.maxed && !hud.holding && i === hud.filled ? " next" : ""}`}
-                        >
-                          {filled ? (
-                            <FisherPortrait
-                              mini
-                              pose={hud.holding ? "cheer" : "idle"}
-                            />
-                          ) : null}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="kk-bonus-pay">
-                  <img
-                    className="kk-plate"
-                    src="/kilo-night-v3/ui-plate.svg"
-                    alt=""
-                  />
-                  <div className="kk-plate-copy">
-                    <span className="kk-eyebrow">Multiplier</span>
-                    <b className="kk-mult">×{hud.mult}</b>
-                  </div>
-                </div>
-                {capNotice ? (
-                  <span className="kk-next kk-cap-note">Max win reached</span>
-                ) : hud.maxed || hud.nextMult == null ? (
-                  <span className="kk-next">Max level</span>
-                ) : (
-                  <span className="kk-next">
-                    Next +{hud.nextSpins} spins · ×{hud.nextMult}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <>
-                <div className="kk-bust" key={fisher.tick}>
-                  <FisherPortrait pose={fisher.pose} />
-                </div>
-                <img
-                  className="kk-logo"
-                  src="/kilo-night-v3/logo-kilo-king.png"
+                  className="kk-side-logo"
+                  src="/kilo-scene-v15/logo-stacked.webp"
                   alt="Kilo King"
                 />
-                <div className="kk-crest-status">
-                  <p className="kk-event">{caption}</p>
-                </div>
-              </>
-            )}
-          </div>
-          <div className="kk-canvas-wrap" data-testid="reel-host">
-            <ReelStage onReady={onReady} />
-          </div>
-          </div>
-          <aside
-            className="kk-dock"
-            aria-label="Play controls"
-            onKeyDown={(event) => {
-              if (event.key === "Escape") setToolsOpen(false);
-            }}
-          >
-            <div className="kk-bet">
-              <span className="kk-eyebrow" id="base-bet-label">
-                BASE BET
-              </span>
-              <div className="kk-stepper">
-                <button
-                  type="button"
-                  className="kk-round kk-step"
-                  aria-label="Decrease bet"
-                  disabled={busy || summary != null || stake === STAKES[0]}
-                  onClick={() => stepStake(-1)}
-                >
-                  <img src="/kilo-ui-v11/icon-minus.svg" alt="" />
-                </button>
-                <select
-                  id="base-bet"
-                  aria-labelledby="base-bet-label"
-                  disabled={busy || summary != null}
-                  value={stake}
-                  onChange={(e) => {
-                    uiTap();
-                    const n = Number(e.target.value);
-                    setStake(n);
-                    if (!splashStakeOk(n, mode)) setMode("spin");
-                  }}
-                >
-                  {STAKES.map((n) => (
-                    <option key={n} value={n}>
-                      {money(n)}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  type="button"
-                  className="kk-round kk-step"
-                  aria-label="Increase bet"
-                  disabled={
-                    busy ||
-                    summary != null ||
-                    stake === STAKES[STAKES.length - 1]
-                  }
-                  onClick={() => stepStake(1)}
-                >
-                  <img src="/kilo-ui-v11/icon-plus.svg" alt="" />
-                </button>
+                <img
+                  className="kk-side-cargo"
+                  src="/kilo-night-v3/prop-dock-left.png"
+                  alt=""
+                  aria-hidden="true"
+                />
               </div>
+              <div className="kk-scene-character" aria-hidden="true">
+                <FishermanScene
+                  pose={fisher.pose}
+                  tick={fisher.tick}
+                  reducedMotion={reducedMotion}
+                />
+              </div>
+            </>
+          )}
+          <div className="kk-playfield">
+            <div className="kk-crest">
+              {layout.mode === "portrait" && !hud?.active && (
+                <div className="kk-portrait-brand">
+                  <img
+                    src="/kilo-scene-v15/logo-stacked.webp"
+                    alt="Kilo King"
+                    className="kk-portrait-logo"
+                  />
+                  <div className="kk-portrait-character" aria-hidden="true">
+                    <FishermanScene
+                      pose={fisher.pose}
+                      tick={fisher.tick}
+                      reducedMotion={reducedMotion}
+                      compact
+                    />
+                  </div>
+                </div>
+              )}
+              <img
+                className="kk-logo"
+                src="/kilo-night-v3/logo-kilo-king.png"
+                alt="Kilo King"
+              />
+              {hud?.active ? (
+                <div
+                  className={`kk-bonus${hud.holding ? " is-holding" : ""}${hud.maxed ? " is-max" : ""}${capNotice ? " is-capped" : ""}`}
+                >
+                  <img
+                    className="kk-bonus-mark"
+                    src="/kilo-night-v3/logo-kilo-king.png"
+                    alt="Kilo King"
+                  />
+                  <div className="kk-bonus-spins">
+                    <img
+                      className="kk-plate"
+                      src="/kilo-night-v3/ui-plate.svg"
+                      alt=""
+                    />
+                    <div className="kk-plate-copy">
+                      <span className="kk-eyebrow">Spins</span>
+                      <b data-testid="spins-left">{hud.left ?? 0}</b>
+                    </div>
+                  </div>
+                  <div className="kk-bonus-track">
+                    <div
+                      className="kk-sockets"
+                      aria-label={
+                        hud.maxed
+                          ? "All collectors filled. Maximum multiplier."
+                          : `${hud.filled} of 4 collectors filled. Collect ×${hud.mult}.`
+                      }
+                    >
+                      {[0, 1, 2, 3].map((i) => {
+                        const filled = i < hud.filled;
+                        return (
+                          <div
+                            key={i}
+                            data-socket={i}
+                            className={`kk-socket${filled ? " filled" : ""}${!hud.maxed && !hud.holding && i === hud.filled ? " next" : ""}`}
+                          >
+                            {filled ? (
+                              <FisherPortrait
+                                mini
+                                pose={hud.holding ? "cheer" : "idle"}
+                              />
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="kk-bonus-pay">
+                    <img
+                      className="kk-plate"
+                      src="/kilo-night-v3/ui-plate.svg"
+                      alt=""
+                    />
+                    <div className="kk-plate-copy">
+                      <span className="kk-eyebrow">Multiplier</span>
+                      <b className="kk-mult">×{hud.mult}</b>
+                    </div>
+                  </div>
+                  {capNotice ? (
+                    <span className="kk-next kk-cap-note">Max win reached</span>
+                  ) : hud.maxed || hud.nextMult == null ? (
+                    <span className="kk-next">Max level</span>
+                  ) : (
+                    <span className="kk-next">
+                      Next +{hud.nextSpins} spins · ×{hud.nextMult}
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="kk-crest-status">
+                    <p className="kk-event">{caption}</p>
+                  </div>
+                </>
+              )}
             </div>
-            <div className="kk-dock-play">
+            <div className="kk-canvas-wrap" data-testid="reel-host">
+              <ReelStage onReady={onReady} />
+            </div>
+          </div>
+          <div className="kk-control-group">
+            <button
+              type="button"
+              className="kk-feature-button"
+              disabled={controlsLocked}
+              onClick={() => {
+                uiTap();
+                setPanel(false);
+                setBuyPanel(true);
+              }}
+            >
+              <Crown size={23} aria-hidden="true" />
+              <span>Features</span>
+            </button>
+            <aside
+              className="kk-console"
+              data-dock-layout={
+                layout.reelWidth - (layout.artLeft ? 0 : 84) >= 860
+                  ? "inline"
+                  : "compact"
+              }
+              aria-label="Game controls"
+              data-testid="control-bar"
+              data-collection-phase={collection?.phase ?? "idle"}
+            >
               <button
                 type="button"
-                className={`kk-feature-button ${mode === "buy" || mode === "chopper" ? "selected" : ""}`}
-                disabled={busy || summary != null || !!hud?.active}
-                aria-pressed={mode === "buy" || mode === "chopper"}
+                className="kk-menu-button"
+                data-focus-fallback="true"
+                aria-label="Game settings"
                 onClick={() => {
                   uiTap();
-                  setHelp(false);
                   setPanel(false);
-                  setBuyPanel(!buyPanel);
+                  setSettingsOpen(true);
                 }}
               >
-                <span>
-                  {mode === "chopper"
-                    ? "Chopper"
-                    : mode === "buy"
-                      ? "Free spins"
-                      : "Buy feature"}
-                </span>
+                <Menu size={23} aria-hidden="true" />
+                {preferences.speed !== "normal" && (
+                  <b
+                    className="kk-speed-dot"
+                    aria-label={
+                      preferences.speed === "super" ? "Super turbo" : "Turbo"
+                    }
+                  >
+                    {preferences.speed === "super" ? "3" : "2"}
+                  </b>
+                )}
               </button>
+              <div
+                className="kk-read kk-balance"
+                data-readout="balance"
+                data-long-amount={money(bank).length >= 10 ? "true" : undefined}
+                data-extra-long-amount={
+                  money(bank).length >= 13 ? "true" : undefined
+                }
+              >
+                <span className="kk-eyebrow">
+                  Balance <small>LGC</small>
+                </span>
+                <strong data-testid="balance">{money(bank)}</strong>
+              </div>
+              {hud?.active ? (
+                <div className="kk-feature-context">
+                  <span className="kk-eyebrow">Free spins</span>
+                  <strong>{hud.left ?? 0} left</strong>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="kk-bet-button"
+                  aria-label={`Change base bet, ${money(stake)} LGC${mode === "ante" ? ", ante on" : ""}`}
+                  disabled={controlsLocked}
+                  onClick={() => {
+                    uiTap();
+                    setPanel(false);
+                    setBetReturn("game");
+                    setBetPanel(true);
+                  }}
+                >
+                  <span className="kk-eyebrow">
+                    Bet{mode === "ante" && <em>Ante on</em>}
+                  </span>
+                  <span className="kk-bet-value">
+                    <b data-testid="bet-readout">{money(stake)}</b>
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </button>
+              )}
+              {hud?.active ? (
+                <div
+                  className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
+                  data-readout="bonus"
+                  data-long-amount={
+                    money(shownBonus).length >= 10 ? "true" : undefined
+                  }
+                  data-extra-long-amount={
+                    money(shownBonus).length >= 13 ? "true" : undefined
+                  }
+                >
+                  <span className="kk-eyebrow">
+                    Bonus win <small>LGC</small>
+                  </span>
+                  <strong data-testid="bonus-win">{money(shownBonus)}</strong>
+                </div>
+              ) : (
+                <div
+                  className="kk-read kk-last-win"
+                  data-readout="last"
+                  data-long-amount={
+                    money(shownWin).length >= 10 ? "true" : undefined
+                  }
+                  data-extra-long-amount={
+                    money(shownWin).length >= 13 ? "true" : undefined
+                  }
+                >
+                  <span className="kk-eyebrow">
+                    {settled ? "Last win" : "Win"} <small>LGC</small>
+                  </span>
+                  <strong data-testid="last-win">{money(shownWin)}</strong>
+                </div>
+              )}
               <div className="kk-spin-area">
                 <button
                   type="button"
-                  className={`kk-spin${control.purchase ? " is-purchase" : ""}${busy ? " is-busy" : ""}`}
+                  className="kk-stake-step is-minus"
+                  aria-label="Decrease base bet"
+                  disabled={controlsLocked || stake === STAKES[0]}
+                  onClick={() => {
+                    if (!busyRef.current)
+                      setStake(
+                        STAKES[
+                          Math.max(0, STAKES.findIndex((n) => n === stake) - 1)
+                        ]!,
+                      );
+                  }}
+                >
+                  <Minus size={19} />
+                </button>
+                <button
+                  type="button"
+                  className={`kk-spin${busy ? " is-busy" : ""}`}
                   data-testid="spin-button"
+                  aria-label={busy ? "Skip animation" : "Spin"}
                   disabled={
                     summary != null ||
                     !ready ||
                     (!busy && (afford || !splashStakeOk(stake, mode)))
                   }
                   onClick={() => {
-                    if (summary) return;
                     if (busy) skip();
-                    else void play();
+                    else {
+                      primeAudio();
+                      void play();
+                    }
                   }}
                 >
-                  {control.label}
+                  {busy ? (
+                    <SkipForward className="kk-spin-icon" aria-hidden="true" />
+                  ) : (
+                    <RotateCw className="kk-spin-icon" aria-hidden="true" />
+                  )}
+                  <span>{busy ? "SKIP" : "SPIN"}</span>
                 </button>
-                <span data-testid="charge-note">
-                  {summary
-                    ? "No charge"
-                    : busy
-                      ? reviewing
-                        ? "Replay"
-                        : hud?.active
-                          ? "Feature in progress"
-                          : "Round in progress"
-                      : `Charge ${money(cost)}`}
+                <button
+                  type="button"
+                  className="kk-stake-step is-plus"
+                  aria-label="Increase base bet"
+                  disabled={controlsLocked || stake === STAKES.at(-1)}
+                  onClick={() => {
+                    if (!busyRef.current)
+                      setStake(
+                        STAKES[
+                          Math.min(
+                            STAKES.length - 1,
+                            STAKES.findIndex((n) => n === stake) + 1,
+                          )
+                        ]!,
+                      );
+                  }}
+                >
+                  <Plus size={19} />
+                </button>
+                <span className="kk-charge" data-testid="charge-note">
+                  {busy
+                    ? reviewing
+                      ? "Replay"
+                      : hud?.active
+                        ? "Free spins"
+                        : "Spinning"
+                    : `Cost ${money(cost)}`}
                 </span>
               </div>
-            </div>
-            <div className={`kk-dock-utils${toolsOpen ? " is-open" : ""}`}>
-              <button
-                type="button"
-                className={`kk-ante ${mode === "ante" ? "selected" : ""}`}
-                disabled={busy || summary != null}
-                aria-pressed={mode === "ante"}
-                onClick={() => {
-                  uiTap();
-                  setMode(mode === "ante" ? "spin" : "ante");
-                }}
-              >
-                <span>{mode === "ante" ? "ANTE ON" : "ANTE OFF"}</span>
-                <b>{money(splashCost(stake, "ante"))}</b>
-              </button>
-              <button
-                type="button"
-                className="kk-tools-toggle"
-                aria-expanded={toolsOpen}
-                aria-controls="dock-tools"
-                aria-label="More controls"
-                onClick={() => setToolsOpen((open) => !open)}
-              >
-                <img src="/kilo-ui-v11/icon-info.svg" alt="" />
-              </button>
-              <div className="kk-dock-tools" id="dock-tools">
-                <button
-                  type="button"
-                  className={`kk-turbo ${turbo ? "selected" : ""}`}
-                  aria-pressed={turbo}
-                  aria-label="Turbo"
-                  disabled={busy || summary != null}
-                  onClick={() => {
-                    uiTap();
-                    setTurbo(!turbo);
-                  }}
-                >
-                  <img src="/kilo-ui-v11/icon-turbo.svg" alt="" />
-                </button>
-                <button
-                  type="button"
-                  className="kk-round kk-sound"
-                  aria-pressed={!mute}
-                  aria-label={mute ? "Sound off" : "Sound on"}
-                  onClick={() => {
-                    setMute(!mute);
-                    setMuted(!mute);
-                  }}
-                >
-                  <img
-                    src={mute ? "/kilo-ui-v11/icon-muted.svg" : "/kilo-ui-v11/icon-sound.svg"}
-                    alt=""
-                  />
-                </button>
-                <button
-                  type="button"
-                  className="kk-round kk-rules-btn"
-                  aria-label="Rules"
-                  onClick={() => {
-                    uiTap();
-                    setHelp(!help);
-                    setPanel(false);
-                    setBuyPanel(false);
-                    setToolsOpen(false);
-                  }}
-                >
-                  <img src="/kilo-ui-v11/icon-info.svg" alt="" />
-                </button>
-              </div>
-            </div>
-          </aside>
-          <footer
-            className="kk-strip"
-            data-testid="control-bar"
-            data-collection-phase={collection?.phase ?? "idle"}
-          >
-            <div className="kk-read kk-balance" data-readout="balance">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">BALANCE</span>
-                <strong data-testid="balance">{money(bank)}</strong>
-              </span>
-            </div>
-            <div className="kk-read kk-bet-read" data-readout="bet">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">BET</span>
-                <strong data-testid="bet-readout">{money(stake)}</strong>
-              </span>
-            </div>
-            <div className="kk-read kk-last-win" data-readout="last">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">
-                  {!hud?.active && settled ? "LAST WIN" : "WIN"}
-                </span>
-                <strong data-testid="last-win">{money(shownWin)}</strong>
-              </span>
-            </div>
-            <div
-              className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
-              data-readout="bonus"
-            >
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">BONUS WIN</span>
-                <strong data-testid="bonus-win">
-                  {money(shownBonus)}
-                </strong>
-                {hud && hud.triggerWin > 0 ? (
-                  <span className="kk-trigger">
-                    Trigger {money(hud.triggerWin)}
-                  </span>
-                ) : null}
-              </span>
-            </div>
-            <div className="kk-read kk-this-spin" data-readout="spin">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">THIS SPIN</span>
-                <strong data-testid="spin-win">
-                  {money(shownSpin)}
-                </strong>
-              </span>
-            </div>
-            <div className="kk-read kk-total kk-read-secondary" data-readout="total">
-              <img className="kk-read-plate" alt="" src="/kilo-ui-v11/readout-plate.svg" />
-              <span className="kk-read-well">
-                <span className="kk-eyebrow">ROUND</span>
-                <strong data-testid="round-total">
-                  {money(shownTotal)}
-                </strong>
-              </span>
-            </div>
-            {afford ? (
-              <p className="kk-afford" role="status">
-                Insufficient local balance for this charge.
-              </p>
-            ) : null}
-          </footer>
+            </aside>
+          </div>
+          {afford && (
+            <p className="kk-afford" role="status">
+              Insufficient balance
+            </p>
+          )}
         </div>
         {note && !reviewing ? (
           <p role="status" className="kk-notice">
@@ -1262,14 +1271,16 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             className="kk-dialog kk-rules"
             onClose={() => setHelp(false)}
           >
-            <div className="kk-dialog-head">
-              <strong>How to play</strong>
-              <button type="button" aria-label="Close" onClick={() => setHelp(false)}>
-                Close
-              </button>
-            </div>
+            <PanelHeader
+              title="Rules & paytable"
+              onClose={() => setHelp(false)}
+              onBack={() => {
+                setHelp(false);
+                setSettingsOpen(true);
+              }}
+            />
             <div className="kk-dialog-body">
-              <h2>Catch. Collect. Climb.</h2>
+              <Paytable stake={stake} />
               <h2>Symbol guide</h2>
               <p>
                 {SCATTER_IS_KING
@@ -1289,8 +1300,8 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <p>
                 Three, four or five scatters award 10, 15 or 20 free spins.
                 Exactly two scatter reels lock for one respin. The +2 spins
-                modifier adds two to the initial award and each retrigger.
-                A purchased feature is already guaranteed: it shows the scatters
+                modifier adds two to the initial award and each retrigger. A
+                purchased feature is already guaranteed: it shows the scatters
                 and does not pay a scatter award.
               </p>
               <p>
@@ -1329,136 +1340,83 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             </div>
           </Dialog>
         ) : null}
-        {buyPanel ? (
+        {buyPanel && (
           <Dialog
-            label="Feature selection"
+            label="Features"
             className="kk-dialog kk-purchases"
             onClose={() => setBuyPanel(false)}
           >
-            <div className="kk-dialog-head">
-              <strong>BUY FEATURE</strong>
-              <button
-                type="button"
-                aria-label="Close"
-                onClick={() => setBuyPanel(false)}
-              >
-                Close
-              </button>
-            </div>
-            <div className="kk-dialog-body">
-              <p className="kk-buy-stake">
-                Base bet <b>{money(stake)}</b>
-              </p>
-              <div
-                className="kk-purchase-nav"
-                onKeyDown={(event) => {
-                  if (event.key === "ArrowRight") {
-                    event.preventDefault();
-                    scrollBuy(1);
-                  } else if (event.key === "ArrowLeft") {
-                    event.preventDefault();
-                    scrollBuy(-1);
-                  }
-                }}
-              >
-                <button
-                  type="button"
-                  className="kk-round"
-                  aria-label="Previous feature"
-                  disabled={buyEdge.start}
-                  onClick={() => scrollBuy(-1)}
-                >
-                  <img className="kk-arrow-prev" src="/kilo-ui-v11/icon-arrow.svg" alt="" />
-                </button>
-                <div className="kk-purchase-pager" role="tablist" aria-label="Features">
-                  {FEATURE_CHOICES.map((choice, index) => (
-                    <button
-                      key={choice.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={index === buyEdge.index}
-                      className={index === buyEdge.index ? "is-current" : ""}
-                      data-armed={mode === choice.id ? "1" : "0"}
-                      onClick={() => focusBuy(index)}
-                    >
-                      {choice.title}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className="kk-round"
-                  aria-label="Next feature"
-                  disabled={buyEdge.end}
-                  onClick={() => scrollBuy(1)}
-                >
-                  <img src="/kilo-ui-v11/icon-arrow.svg" alt="" />
-                </button>
-              </div>
-              <div className="kk-purchase-grid" ref={buyRail}>
-                {FEATURE_CHOICES.map((choice, index) => {
-                  const ok = splashStakeOk(stake, choice.id);
-                  const price = splashCost(stake, choice.id);
-                  const blocked = ok
-                    ? null
-                    : price > 1_000_000
-                      ? "Above the 1,000,000 purchase limit"
-                      : "Outside the stake rules";
-                  return (
-                    <button
-                      className={`kk-purchase is-${choice.skin} ${mode === choice.id ? "selected" : ""} ${index === buyEdge.index ? "is-settled" : ""}`}
-                      key={choice.id}
-                      type="button"
-                      aria-pressed={mode === choice.id}
-                      disabled={busy || !ok}
-                      onClick={() => {
-                        uiTap();
-                        setMode(choice.id);
-                        setBuyPanel(false);
-                      }}
-                    >
-                      <span className="kk3-feature-card-content">
-                        <span className="kk-purchase-art">
-                          <img src={choice.art} alt="" />
-                        </span>
-                        <span className="kk-purchase-copy">
-                          <strong>{choice.title}</strong>
-                          <span className="kk-purchase-detail">{choice.detail}</span>
-                          <span className="kk-purchase-price">
-                            <span className="kk-price-label">Cost</span>
-                            <b>{money(price)}</b>
-                          </span>
-                          <span className="kk-purchase-times">{choice.times}</span>
-                          {blocked ? (
-                            <span className="kk-purchase-block">{blocked}</span>
-                          ) : (
-                            <span className="kk-card-action">
-                              {mode === choice.id ? "Selected" : "Select"}
-                            </span>
-                          )}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-              <p className="kk-muted">
-                Round cap {money(cap)}. The main button confirms the charge.
-              </p>
-              <button
-                type="button"
-                className="kk-text-action kk-back-spins"
-                onClick={() => {
-                  uiTap();
-                  setMode("spin");
-                  setBuyPanel(false);
-                }}
-              >
-                Back to spins
-              </button>
-            </div>
+            <FeaturesPanel
+              stake={stake}
+              bank={bank}
+              ante={mode === "ante"}
+              locked={controlsLocked || !ready}
+              onAnte={(on) => {
+                if (!busyRef.current) setMode(on ? "ante" : "spin");
+              }}
+              onStake={(next) => {
+                if (!busyRef.current && !controlsLocked) setStake(next);
+              }}
+              onEditBet={() => {
+                setBuyPanel(false);
+                setBetReturn("features");
+                setBetPanel(true);
+              }}
+              onBuy={(purchaseMode) => {
+                setBuyPanel(false);
+                void play(purchaseMode);
+              }}
+              onClose={() => setBuyPanel(false)}
+            />
           </Dialog>
-        ) : null}
+        )}
+        {betPanel && (
+          <Dialog
+            label="Bet amount"
+            className="kk-dialog kk-bet-dialog"
+            onClose={closeBet}
+          >
+            <BetPanel
+              stake={stake}
+              ante={mode === "ante"}
+              onClose={closeBet}
+              onApply={(next) => {
+                if (!busyRef.current) setStake(next);
+                closeBet();
+              }}
+            />
+          </Dialog>
+        )}
+        {settingsOpen && (
+          <Dialog
+            label="Settings"
+            className="kk-dialog kk-settings"
+            onClose={() => setSettingsOpen(false)}
+          >
+            <SettingsPanel
+              preferences={preferences}
+              onChange={changePreferences}
+              locked={busy}
+              mute={mute}
+              onMute={() => {
+                setMute(!mute);
+                setMuted(!mute);
+              }}
+              audioAvailable={audioAvailable}
+              musicVolume={volumes.music}
+              effectsVolume={volumes.effects}
+              onVolume={(music, effects) => {
+                setVolumes({ music, effects });
+                setAudioVolumes(music, effects);
+              }}
+              onRules={() => {
+                setSettingsOpen(false);
+                setHelp(true);
+              }}
+              onClose={() => setSettingsOpen(false)}
+            />
+          </Dialog>
+        )}
         {summary ? (
           <Dialog
             label="Feature summary"
@@ -1466,29 +1424,31 @@ export function KiloTable({ review = false }: { review?: boolean }) {
             className={`kk-dialog kk-summary ${summary.celebrate ? "is-profit" : "is-neutral"}`}
             onClose={continueFeature}
           >
-            <div className="kk-dialog-body kk-summary-body">
-              <p className="kk-eyebrow">Feature complete</p>
-              <p className="kk-summary-line">
-                Returned:{" "}
-                <strong data-testid="summary-return">
-                  {money(summary.payout)}
-                </strong>
-              </p>
-              {summary.purchaseCost != null ? (
-                <p data-testid="summary-cost">
-                  Feature cost: {money(summary.purchaseCost)}
+            <div className="kk-summary-plaque">
+              <div className="kk-dialog-body kk-summary-body">
+                <p className="kk-eyebrow">Feature complete</p>
+                <p className="kk-summary-line">
+                  <span>Total return</span>
+                  <strong data-testid="summary-return">
+                    {money(summary.payout)}
+                  </strong>
                 </p>
-              ) : (
-                <p>Triggered from the spin.</p>
-              )}
-              <button
-                type="button"
-                data-testid="continue-feature"
-                onClick={continueFeature}
-              >
-                Continue
-              </button>
+                {summary.purchaseCost != null ? (
+                  <p data-testid="summary-cost">
+                    Feature cost: {money(summary.purchaseCost)}
+                  </p>
+                ) : (
+                  <p>Triggered from the spin.</p>
+                )}
+              </div>
             </div>
+            <button
+              type="button"
+              data-testid="continue-feature"
+              onClick={continueFeature}
+            >
+              Continue
+            </button>
           </Dialog>
         ) : null}
         {panel ? (
@@ -1500,7 +1460,11 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           >
             <div className="kk-dialog-head">
               <strong>Review scenes</strong>
-              <button type="button" aria-label="Close" onClick={() => setPanel(false)}>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setPanel(false)}
+              >
                 Close
               </button>
             </div>
@@ -1511,15 +1475,16 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               </p>
               <div className="mb-3 flex flex-col gap-2">
                 <a
-                  href={SOURCE_ZIP}
-                  download={SOURCE_NAME}
+                  href={SOURCE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-source="1"
                   className="kk-source-link"
                   onClick={() =>
-                    setSourceNote("Download started. Check your browser downloads.")
+                    setSourceNote("Source branch opened in a new tab.")
                   }
                 >
-                  Download source
+                  View source branch
                 </a>
                 {sourceNote ? <p className="kk-muted">{sourceNote}</p> : null}
                 <button
@@ -1537,7 +1502,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   disabled={busy || !ready}
                   className="min-h-11 w-full rounded-lg bg-white/10 px-2 text-left disabled:opacity-40"
                   onClick={() => {
-                    const fixture = ALL.find((item) => item.id === "hook-upgrade");
+                    const fixture = ALL.find(
+                      (item) => item.id === "hook-upgrade",
+                    );
                     if (fixture) pick(fixture);
                   }}
                 >
@@ -1549,7 +1516,9 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   disabled={busy || !ready}
                   className="min-h-11 w-full rounded-lg bg-white/10 px-2 text-left disabled:opacity-40"
                   onClick={() => {
-                    const fixture = ALL.find((item) => item.id === "tool-bazooka");
+                    const fixture = ALL.find(
+                      (item) => item.id === "tool-bazooka",
+                    );
                     if (fixture) pick(fixture);
                   }}
                 >
@@ -1568,12 +1537,15 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               {symbolReport ? (
                 <div className="kk-symbol-compare" data-testid="symbol-compare">
                   <p className="kk-muted">
-                    Same renderer as the reels. Idle and the largest 420ms package
-                    pulse. Nothing is bet or settled.
+                    Same renderer as the reels. Idle and the largest 420ms
+                    package pulse. Nothing is bet or settled.
                   </p>
                   <div ref={compareSlot} />
                   <pre data-testid="symbol-report">
-                    {JSON.stringify(symbolReport).replaceAll("brick", "package")}
+                    {JSON.stringify(symbolReport).replaceAll(
+                      "brick",
+                      "package",
+                    )}
                   </pre>
                 </div>
               ) : null}
@@ -1659,7 +1631,18 @@ function Dialog({
   const ref = useRef<HTMLDivElement>(null);
   const closeRef = useRef(onClose);
   const previousRef = useRef<HTMLElement | null>(null);
+  const closeTimer = useRef<number | null>(null);
+  const [closing, setClosing] = useState(false);
   closeRef.current = onClose;
+  const requestClose = useCallback(() => {
+    if (closeTimer.current !== null) return;
+    if (ref.current?.closest('.kk-app[data-reduced="1"]')) {
+      closeRef.current();
+      return;
+    }
+    setClosing(true);
+    closeTimer.current = window.setTimeout(() => closeRef.current(), 160);
+  }, []);
   if (!previousRef.current && typeof document !== "undefined") {
     const active = document.activeElement;
     if (active instanceof HTMLElement && active !== document.body)
@@ -1671,19 +1654,33 @@ function Dialog({
     const nodes = () =>
       [
         ...root.querySelectorAll<HTMLElement>(
-          "button, select, a[href], summary",
+          'button, input, select, a[href], summary, [tabindex]:not([tabindex="-1"])',
         ),
-      ].filter((node) => !node.hasAttribute("disabled"));
-    nodes()[0]?.focus();
+      ].filter(
+        (node) =>
+          !node.matches(":disabled") &&
+          !node.closest("[inert]") &&
+          node.getClientRects().length > 0,
+      );
+    (nodes()[0] ?? root).focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        closeRef.current();
+        requestClose();
         return;
       }
       if (!block || event.key !== "Tab") return;
+      if (closeTimer.current !== null) {
+        event.preventDefault();
+        return;
+      }
       const list = nodes();
       if (!list.length) return;
+      if (!root.contains(document.activeElement)) {
+        event.preventDefault();
+        list[0]?.focus();
+        return;
+      }
       const first = list[0]!;
       const last = list[list.length - 1]!;
       if (event.shiftKey && document.activeElement === first) {
@@ -1697,24 +1694,36 @@ function Dialog({
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
       const previous = previousRef.current;
-      if (previous && document.contains(previous)) previous.focus();
+      queueMicrotask(() => {
+        if (document.querySelector(".kk-modal-root.is-blocking")) return;
+        const target =
+          previous && document.contains(previous)
+            ? previous
+            : document.querySelector<HTMLElement>("[data-focus-fallback]");
+        target?.focus();
+      });
     };
-  }, [block]);
+  }, [block, requestClose]);
   return (
-    <div className={`kk-modal-root ${block ? "is-blocking" : "is-clear"}`}>
-      {block ? (
-        <div className="kk-scrim" onClick={() => closeRef.current()} />
-      ) : null}
+    <div
+      className={`kk-modal-root ${block ? "is-blocking" : "is-clear"}${closing ? " is-closing" : ""}`}
+    >
+      {block ? <div className="kk-scrim" onClick={requestClose} /> : null}
       <div
         ref={ref}
         role="dialog"
+        tabIndex={-1}
         aria-modal={block}
         aria-label={label}
         className={className}
         data-testid={testId}
+        inert={closing ? true : undefined}
       >
-        {children}
+        <PanelDismissContext.Provider value={requestClose}>
+          {children}
+        </PanelDismissContext.Provider>
       </div>
     </div>
   );
