@@ -1,112 +1,307 @@
-/* The foreground is tied to cabinet geometry, never the browser's waterline. */
+/* v16 composition: one material and type system, independent of reel geometry. */
+.kk-app {
+  --kk-metal-top: #263b43;
+  --kk-metal: #142830;
+  --kk-metal-deep: #08151d;
+  --kk-brass: #b69a62;
+  --kk-brass-light: #e2c98c;
+  --kk-text: #f2efdf;
+  --kk-muted: #a5b6bc;
+}
+/* Stable insets: parent measurement never depends on the child layout. */
 .kk-app .kk-stage {
   isolation: isolate;
   overflow-x: hidden;
+  place-items: safe center;
 }
-
 .kk-app .kk-shell {
   isolation: isolate;
   z-index: 1;
   filter: none;
 }
-
 .kk-app .kk-scene-pier {
   position: absolute;
   z-index: -1;
   left: -5%;
-  bottom: -44px;
+  bottom: -24px;
   width: 110%;
-  height: clamp(190px, 19cqi, 310px);
-  background: url("/kilo-scene-v14/pier-foreground.webp") center / 100% 100%
-    no-repeat;
+  height: clamp(190px, 18cqi, 280px);
   pointer-events: none;
+  background:
+    linear-gradient(90deg, #020b1570, #06121d24 34%, #020b154d),
+    url("/kilo-scene-v14/pier-foreground.webp") center/100% 100% no-repeat;
 }
-
 .kk-app .kk-playfield {
   position: relative;
   z-index: 2;
 }
-
-.kk-app .kk-canvas-wrap {
-  filter: drop-shadow(0 12px 12px #0009);
+.kk-app .kk-shell:not([data-layout="landscape"]) .kk-playfield::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: calc(-1 * var(--dock-gap) - 1px);
+  height: calc(var(--dock-gap) + 2px);
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    transparent 15%,
+    #13252d 15% 22%,
+    transparent 22% 78%,
+    #13252d 78% 85%,
+    transparent 85%
+  );
+  pointer-events: none;
 }
-
+.kk-app .kk-canvas-wrap {
+  filter: drop-shadow(0 8px 10px #000b);
+}
 .kk-app .kk-scene-brand {
   z-index: 1;
 }
-
-.kk-app .kk-side-logo {
-  top: calc(var(--header-height) + 20px);
-  left: 2%;
-  width: 94%;
-  filter: drop-shadow(0 5px 4px #020c15) drop-shadow(0 0 20px #071828);
+.kk-app .kk-scene-brand::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--header-height) - 8px);
+  left: -12%;
+  width: 124%;
+  height: calc(var(--art-left) * 1.24);
+  background: radial-gradient(
+    ellipse,
+    #031321f2 25%,
+    #031321b8 54%,
+    transparent 74%
+  );
 }
-
+.kk-app .kk-side-logo {
+  top: calc(var(--header-height) + 4px);
+  left: 3%;
+  width: 94%;
+  height: auto;
+  filter: drop-shadow(0 5px 5px #01070e);
+}
 .kk-app .kk-side-cargo {
   bottom: -8px;
   left: 2%;
-  width: 94%;
-  height: 50%;
+  width: 88%;
+  height: 38%;
   object-position: center bottom;
   filter: drop-shadow(0 8px 5px #000a);
 }
-
 .kk-app .kk-scene-character {
   position: relative;
   z-index: 1;
   padding: 0;
   overflow: hidden;
+  filter: saturate(0.9);
 }
-
-.kk-app .kk-scene-character::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 6%;
-  width: 89%;
-  height: 22px;
-  background: radial-gradient(
-    ellipse,
-    #02070be8 12%,
-    #02070b66 48%,
-    transparent 72%
-  );
-}
-
-/* A closer character crop: the rod can leave the side, the body stays grounded.
-   Offset compensates for the source sprite's transparent space below the boots. */
-.kk-app .kk-scene-character img {
-  position: absolute;
-  bottom: calc(var(--art-right) * -0.11);
-  left: -6%;
-  width: 142%;
-  max-width: none;
-  height: auto;
-  object-fit: initial;
-  filter: drop-shadow(-5px 7px 7px #0009);
-}
-
 .kk-app .kk-shell[data-framing="sides"] .kk-crest-status {
   inset: auto 0 14px;
+  transform: none;
 }
-
 .kk-app .kk-shell[data-framing="sides"] .kk-event {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1.4px;
-  color: #bdcbd0;
+  letter-spacing: 1.1px;
+  color: var(--kk-muted);
   text-shadow: 0 2px 5px #000;
 }
-
+/* The title persists above the changing HUD on smaller screens. */
+.kk-app .kk-shell[data-framing="header"] .kk-crest::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -8px 0 0;
+  background: radial-gradient(
+    ellipse,
+    #031321ed 12%,
+    #03132188 55%,
+    transparent 75%
+  );
+}
+.kk-app .kk-shell[data-framing="header"] .kk-logo {
+  left: 50%;
+  top: 0;
+  bottom: auto;
+  width: min(82%, 340px);
+  height: 82px;
+  transform: translateX(-50%);
+  object-fit: contain;
+}
+.kk-app .kk-shell[data-framing="header"] .kk-crest-status {
+  inset: auto 8px 9px;
+  width: auto;
+  transform: none;
+  text-align: center;
+}
+.kk-app .kk-shell[data-framing="header"].is-feature .kk-logo {
+  width: 156px;
+  height: 40px;
+}
+.kk-app .kk-shell[data-framing="header"].is-feature .kk-bonus {
+  top: 44px;
+  bottom: 4px;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-logo {
+  width: min(88%, 300px);
+  height: 76px;
+}
+/* Portrait uses the same title and fisherman, composed together above the
+   unchanged reel rectangle. Extra art uses only available letterbox space. */
+.kk-app .kk-shell[data-layout="portrait"] {
+  --crest-rise: clamp(
+    0px,
+    calc(
+      (
+          100dvh - var(--review-height) - var(--game-height) -
+            max(12px, env(safe-area-inset-top)) -
+            max(20px, env(safe-area-inset-bottom))
+        ) /
+        2 - 16px
+    ),
+    88px
+  );
+}
+.kk-app
+  .kk-shell[data-layout="portrait"]:not(.is-feature)
+  .kk-crest
+  > .kk-logo {
+  display: none;
+}
+.kk-app .kk-portrait-brand {
+  position: absolute;
+  top: calc(-1 * var(--crest-rise));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(350px, 100%);
+  height: calc(var(--header-height) + var(--crest-rise) - 14px);
+  pointer-events: none;
+}
+.kk-app .kk-portrait-logo {
+  position: absolute;
+  left: 2%;
+  top: 0;
+  width: 48%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 4px #0009);
+}
+.kk-app .kk-portrait-character {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 48%;
+  height: 100%;
+  overflow: hidden;
+  filter: saturate(0.9);
+  -webkit-mask-image: linear-gradient(#000 88%, transparent 100%);
+  mask-image: linear-gradient(#000 88%, transparent 100%);
+}
+.kk-app .kk-shell[data-layout="portrait"]:not(.is-feature) .kk-crest-status {
+  bottom: 3px;
+  font-size: 11px;
+}
+.kk-app .kk-shell[data-layout="portrait"]:not(.is-feature) .kk-event {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--kk-muted);
+}
+.kk-app .kk-bonus {
+  border-color: #b69a6266;
+  border-top-color: #e2c98c80;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(
+    180deg,
+    var(--kk-metal-top),
+    var(--kk-metal-deep)
+  );
+  box-shadow:
+    inset 0 1px #e2c98c18,
+    inset 0 -2px #030a10,
+    0 3px 8px #0005;
+}
+.kk-app .kk-shell[data-layout="portrait"].is-feature .kk-bonus {
+  top: 40px;
+  bottom: 2px;
+  padding: 4px 8px;
+}
+.kk-app .kk-shell[data-layout="portrait"].is-feature .kk-bonus .kk-eyebrow {
+  font-size: 10.5px;
+}
+.kk-app .kk-shell[data-layout="portrait"].is-feature .kk-bonus-spins b,
+.kk-app .kk-shell[data-layout="portrait"].is-feature .kk-mult {
+  font-size: 22px;
+}
 .kk-app .kk-shell[data-layout="portrait"] .kk-scene-pier {
-  bottom: -34px;
+  bottom: -24px;
   left: -10%;
   width: 120%;
-  height: 200px;
-  opacity: 0.9;
+  height: 190px;
+  opacity: 0.85;
 }
-
+.kk-app .kk-shell[data-layout="portrait"] .kk-playfield::after {
+  left: 82px;
+}
+.kk-app .kk-shell[data-layout="landscape"] {
+  column-gap: var(--dock-gap);
+  row-gap: 0;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-logo {
+  left: 6px;
+  top: 0;
+  width: min(45%, 180px);
+  height: 50px;
+  transform: none;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-crest-status {
+  left: 48%;
+  right: 6px;
+  bottom: 18px;
+  text-align: right;
+}
+.kk-app .kk-shell[data-layout="landscape"].is-feature .kk-logo {
+  display: none;
+}
+.kk-app .kk-shell[data-layout="landscape"].is-feature .kk-bonus {
+  inset: 0 0 4px;
+  grid-template-columns: 80px 42px minmax(88px, 1fr) 62px;
+  column-gap: 6px;
+  padding: 2px 8px;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-bonus-mark {
+  display: block;
+  grid-area: 1/1/3/2;
+  width: 80px;
+  height: auto;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-bonus-spins {
+  grid-area: 1/2;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-bonus-track {
+  grid-area: 1/3;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-bonus-pay {
+  grid-area: 1/4;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-next {
+  grid-area: 2/2/3/5;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-plate-copy {
+  flex-direction: column;
+  gap: 0;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-bonus .kk-eyebrow {
+  font-size: 9px;
+}
 .kk-app .kk-shell[data-layout="landscape"] .kk-scene-pier {
-  bottom: -42px;
-  height: 150px;
+  bottom: -24px;
+  height: 140px;
+}
+@media (max-width: 620px) {
+  .kk-app .kk-stage {
+    padding: max(12px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(20px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+  }
 }

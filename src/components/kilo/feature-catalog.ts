@@ -99,3 +99,36 @@ export const FEATURES: readonly BonusFeature[] = [
       "Artwork preview. Gameplay, awards and purchase terms are still being designed. This feature cannot be played or purchased yet.",
   },
 ];
+
+export const FEATURE_GROUPS = [
+  { id: "buy", title: "Buy features" },
+  { id: "scatter", title: "Scatter bonuses" },
+  { id: "development", title: "In development" },
+] as const;
+
+export type FeatureGroup = (typeof FEATURE_GROUPS)[number]["id"];
+
+/** Grouping changes presentation only; scatter previews never purchase a mode. */
+export function featuresForGroup(group: FeatureGroup): BonusFeature[] {
+  if (group === "buy")
+    return FEATURES.filter((feature) => feature.kind === "purchase");
+  if (group === "development")
+    return FEATURES.filter((feature) => feature.kind === "preview");
+  return FEATURES.flatMap((feature): BonusFeature[] => {
+    if (feature.kind === "preview" || !feature.scatters) return [];
+    return [
+      {
+        id: feature.id,
+        title: feature.title,
+        subtitle: feature.subtitle,
+        art: feature.art,
+        tone: feature.tone,
+        detail: feature.detail,
+        kind: "trigger",
+        scatters: feature.scatters,
+        spins: feature.spins,
+        multiplier: feature.multiplier,
+      },
+    ];
+  });
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kilo King · Composition 17</title>
+<style>
+*{box-sizing:border-box}html{color-scheme:dark}body{margin:0;background:#0d1117;color:#e7e9ed;font:15px/1.5 system-ui,sans-serif}header{padding:24px clamp(16px,4vw,48px) 18px;border-bottom:1px solid #303640}h1{margin:0 0 6px;font-size:clamp(23px,3vw,32px);letter-spacing:-.04em;font-weight:600}p{margin:0;color:#a8b0bb}.toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:16px clamp(16px,4vw,48px)}.group{display:flex;gap:4px;padding:3px;border:1px solid #303640;border-radius:9px;background:#141a22}button{border:0;border-radius:5px;padding:9px 15px;min-height:44px;background:transparent;color:#bac2cc;font:inherit;cursor:pointer}button[aria-pressed=true]{background:#34424f;color:white}button:focus-visible,a:focus-visible{outline:2px solid #e2c98c;outline-offset:3px}.links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.links a{color:#c8d7e3;text-underline-offset:4px}.viewport{overflow:auto;margin:0 clamp(12px,3vw,40px);padding:12px;background:#070a0f;border:1px solid #2a313a;border-radius:8px;min-height:320px}.viewport img{display:block;height:auto;margin:auto;box-shadow:0 8px 25px #0006}.viewport[data-scale=fit] img{width:auto;max-width:100%;max-height:calc(100vh - 255px)}.viewport[data-scale=actual] img{max-width:none;max-height:none}.note{padding:14px clamp(16px,4vw,48px) 24px;font-size:13px}.note span{color:#e4d2a6} @media(max-width:560px){header{padding-top:18px}.toolbar{gap:10px}.links{font-size:13px;gap:13px}.viewport[data-scale=fit] img{max-height:none}}
+</style>
+</head>
+<body>
+<header><h1>Kilo King · Composition 17</h1><p>Static design frames · 1440×900 and 390×844</p></header>
+<div class="toolbar">
+ <div class="group" aria-label="Composition"><button id="desktop" type="button" aria-pressed="true">Desktop</button><button id="phone" type="button" aria-pressed="false">Phone</button></div>
+ <div class="group" aria-label="Game view"><button id="base" type="button" aria-pressed="true">Base game</button><button id="features" type="button" aria-pressed="false">Features</button></div>
+ <div class="group" aria-label="Display size"><button id="fit" type="button" aria-pressed="true">Fit</button><button id="actual" type="button" aria-pressed="false">Actual size</button></div>
+ <nav class="links" aria-label="Frame downloads"><a id="png" href="desktop-1440x900.png">PNG</a><a id="svg" href="desktop-1440x900.svg">SVG</a><a id="coords" href="desktop-coordinates.json">Coordinates</a></nav>
+</div>
+<main class="viewport" data-scale="fit" aria-label="Composition preview"><img id="frame" src="desktop-1440x900.png" width="1440" height="900" alt="Kilo King desktop composition at 1440 by 900 pixels"></main>
+<p class="note">These are static design frames, <span>not browser screenshots</span>. Actual size displays one design pixel per CSS pixel; scroll to inspect the full frame.</p>
+<script>
+const frames={desktop:{file:'desktop-1440x900',width:1440,height:900},phone:{file:'phone-390x844',width:390,height:844}};
+const image=document.getElementById('frame');
+let device='desktop',view='base';
+function render(){const frame=frames[device],prefix=view==='features'?'features-':'',stem=prefix+frame.file;for(const option of Object.keys(frames))document.getElementById(option).setAttribute('aria-pressed',String(option===device));for(const option of ['base','features'])document.getElementById(option).setAttribute('aria-pressed',String(option===view));image.src=stem+'.png';image.width=frame.width;image.height=frame.height;image.alt='Kilo King '+device+' '+view+' composition at '+frame.width+' by '+frame.height+' pixels';document.getElementById('png').href=stem+'.png';document.getElementById('svg').href=stem+'.svg';document.getElementById('coords').href=prefix+device+'-coordinates.json';document.querySelector('.viewport').scrollTo(0,0)}
+for(const name of Object.keys(frames))document.getElementById(name).addEventListener('click',()=>{device=name;render()});
+for(const name of ['base','features'])document.getElementById(name).addEventListener('click',()=>{view=name;render()});
+for(const size of ['fit','actual'])document.getElementById(size).addEventListener('click',()=>{document.querySelector('.viewport').dataset.scale=size;for(const option of ['fit','actual'])document.getElementById(option).setAttribute('aria-pressed',String(option===size))});
+</script>
+</body></html>

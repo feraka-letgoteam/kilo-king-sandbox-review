@@ -6,6 +6,25 @@
   pointer-events: none;
   background: #06111d url("/kilo-scene-v14/marina-night.webp") center / cover
     no-repeat;
+  filter: saturate(0.68) brightness(0.8);
+}
+
+/* The environment frames the game. Artwork, symbols and controls sit outside
+   this grade and retain their color and contrast. */
+.kk-marina-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      #030d1b26,
+      transparent 32%,
+      #030d1b24 70%,
+      #02091180
+    ),
+    radial-gradient(ellipse at 50% 48%, transparent 38%, #030b183d 100%);
+  pointer-events: none;
 }
 
 .kk-marina-backdrop > canvas {

@@ -51,16 +51,26 @@ import {
 } from "./director";
 import { ReelStage, type MountedScene } from "./ReelStage";
 import { MarinaBackdrop } from "./MarinaBackdrop";
+import { FishermanScene } from "./FishermanScene";
 import { fitGameLayout } from "./layout";
 import fixtures from "@/lib/kilo/fixtures.json";
 
-import { Menu, ChevronDown, Crown, Minus, Plus } from "lucide-react";
+import {
+  Menu,
+  ChevronDown,
+  Crown,
+  Minus,
+  Plus,
+  RotateCw,
+  SkipForward,
+} from "lucide-react";
 import {
   BetPanel,
   FeaturesPanel,
   SettingsPanel,
   PanelHeader,
   PanelDismissContext,
+  preloadFeatureArtwork,
 } from "./control-panels";
 import {
   STAKES,
@@ -229,7 +239,10 @@ export function KiloTable({ review = false }: { review?: boolean }) {
       setLayout((previous) =>
         previous.width === next.width &&
         previous.height === next.height &&
-        previous.mode === next.mode
+        previous.mode === next.mode &&
+        previous.artLeft === next.artLeft &&
+        previous.artRight === next.artRight &&
+        previous.header === next.header
           ? previous
           : next,
       );
@@ -313,6 +326,8 @@ export function KiloTable({ review = false }: { review?: boolean }) {
 
   useEffect(() => {
     void preloadAudio().then(() => setAudioAvailable(audioReady()));
+    // Decode the small feature catalogue during entry, before its first open.
+    void preloadFeatureArtwork();
   }, []);
 
   useLayoutEffect(() => {
@@ -909,6 +924,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               "--side-width": `${layout.side}px`,
               "--art-left": `${layout.artLeft}px`,
               "--art-right": `${layout.artRight}px`,
+              "--dock-gap": `${layout.dockGap}px`,
             } as CSSProperties
           }
           data-testid="game-hud"
@@ -920,7 +936,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <div className="kk-scene-brand">
                 <img
                   className="kk-side-logo"
-                  src="/kilo-night-v3/logo-kilo-king.png"
+                  src="/kilo-scene-v15/logo-stacked.webp"
                   alt="Kilo King"
                 />
                 <img
@@ -931,12 +947,38 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                 />
               </div>
               <div className="kk-scene-character" aria-hidden="true">
-                <img src="/kilo-night-v3/hero-idle.png" alt="" />
+                <FishermanScene
+                  pose={fisher.pose}
+                  tick={fisher.tick}
+                  reducedMotion={reducedMotion}
+                />
               </div>
             </>
           )}
           <div className="kk-playfield">
             <div className="kk-crest">
+              {layout.mode === "portrait" && !hud?.active && (
+                <div className="kk-portrait-brand">
+                  <img
+                    src="/kilo-scene-v15/logo-stacked.webp"
+                    alt="Kilo King"
+                    className="kk-portrait-logo"
+                  />
+                  <div className="kk-portrait-character" aria-hidden="true">
+                    <FishermanScene
+                      pose={fisher.pose}
+                      tick={fisher.tick}
+                      reducedMotion={reducedMotion}
+                      compact
+                    />
+                  </div>
+                </div>
+              )}
+              <img
+                className="kk-logo"
+                src="/kilo-night-v3/logo-kilo-king.png"
+                alt="Kilo King"
+              />
               {hud?.active ? (
                 <div
                   className={`kk-bonus${hud.holding ? " is-holding" : ""}${hud.maxed ? " is-max" : ""}${capNotice ? " is-capped" : ""}`}
@@ -944,7 +986,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                   <img
                     className="kk-bonus-mark"
                     src="/kilo-night-v3/logo-kilo-king.png"
-                    alt=""
+                    alt="Kilo King"
                   />
                   <div className="kk-bonus-spins">
                     <img
@@ -1008,14 +1050,6 @@ export function KiloTable({ review = false }: { review?: boolean }) {
                 </div>
               ) : (
                 <>
-                  <div className="kk-bust" key={fisher.tick}>
-                    <FisherPortrait pose={fisher.pose} />
-                  </div>
-                  <img
-                    className="kk-logo"
-                    src="/kilo-night-v3/logo-kilo-king.png"
-                    alt="Kilo King"
-                  />
                   <div className="kk-crest-status">
                     <p className="kk-event">{caption}</p>
                   </div>
@@ -1026,35 +1060,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <ReelStage onReady={onReady} />
             </div>
           </div>
-          <aside
-            className="kk-console"
-            aria-label="Game controls"
-            data-testid="control-bar"
-            data-collection-phase={collection?.phase ?? "idle"}
-          >
-            <button
-              type="button"
-              className="kk-menu-button"
-              data-focus-fallback="true"
-              aria-label="Game settings"
-              onClick={() => {
-                uiTap();
-                setPanel(false);
-                setSettingsOpen(true);
-              }}
-            >
-              <Menu size={23} aria-hidden="true" />
-              {preferences.speed !== "normal" && (
-                <b
-                  className="kk-speed-dot"
-                  aria-label={
-                    preferences.speed === "super" ? "Super turbo" : "Turbo"
-                  }
-                >
-                  {preferences.speed === "super" ? "3" : "2"}
-                </b>
-              )}
-            </button>
+          <div className="kk-control-group">
             <button
               type="button"
               className="kk-feature-button"
@@ -1068,124 +1074,186 @@ export function KiloTable({ review = false }: { review?: boolean }) {
               <Crown size={23} aria-hidden="true" />
               <span>Features</span>
             </button>
-            <div className="kk-read kk-balance" data-readout="balance">
-              <span className="kk-eyebrow">
-                Balance <small>LGC</small>
-              </span>
-              <strong data-testid="balance">{money(bank)}</strong>
-            </div>
-            {hud?.active ? (
-              <div className="kk-feature-context">
-                <span className="kk-eyebrow">Free spins</span>
-                <strong>{hud.left ?? 0} left</strong>
-              </div>
-            ) : (
+            <aside
+              className="kk-console"
+              data-dock-layout={
+                layout.reelWidth - (layout.artLeft ? 0 : 84) >= 860
+                  ? "inline"
+                  : "compact"
+              }
+              aria-label="Game controls"
+              data-testid="control-bar"
+              data-collection-phase={collection?.phase ?? "idle"}
+            >
               <button
                 type="button"
-                className="kk-bet-button"
-                aria-label={`Change base bet, ${money(stake)} LGC${mode === "ante" ? ", ante on" : ""}`}
-                disabled={controlsLocked}
+                className="kk-menu-button"
+                data-focus-fallback="true"
+                aria-label="Game settings"
                 onClick={() => {
                   uiTap();
                   setPanel(false);
-                  setBetReturn("game");
-                  setBetPanel(true);
+                  setSettingsOpen(true);
                 }}
               >
-                <span className="kk-eyebrow">
-                  Bet{mode === "ante" && <em>Ante on</em>}
-                </span>
-                <span className="kk-bet-value">
-                  <b data-testid="bet-readout">{money(stake)}</b>
-                  <ChevronDown size={14} aria-hidden="true" />
-                </span>
+                <Menu size={23} aria-hidden="true" />
+                {preferences.speed !== "normal" && (
+                  <b
+                    className="kk-speed-dot"
+                    aria-label={
+                      preferences.speed === "super" ? "Super turbo" : "Turbo"
+                    }
+                  >
+                    {preferences.speed === "super" ? "3" : "2"}
+                  </b>
+                )}
               </button>
-            )}
-            {hud?.active ? (
               <div
-                className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
-                data-readout="bonus"
-              >
-                <span className="kk-eyebrow">
-                  Bonus win <small>LGC</small>
-                </span>
-                <strong data-testid="bonus-win">{money(shownBonus)}</strong>
-              </div>
-            ) : (
-              <div className="kk-read kk-last-win" data-readout="last">
-                <span className="kk-eyebrow">
-                  {settled ? "Last win" : "Win"} <small>LGC</small>
-                </span>
-                <strong data-testid="last-win">{money(shownWin)}</strong>
-              </div>
-            )}
-            <div className="kk-spin-area">
-              <button
-                type="button"
-                className="kk-stake-step is-minus"
-                aria-label="Decrease base bet"
-                disabled={controlsLocked || stake === STAKES[0]}
-                onClick={() => {
-                  if (!busyRef.current)
-                    setStake(
-                      STAKES[
-                        Math.max(0, STAKES.findIndex((n) => n === stake) - 1)
-                      ]!,
-                    );
-                }}
-              >
-                <Minus size={19} />
-              </button>
-              <button
-                type="button"
-                className={`kk-spin${busy ? " is-busy" : ""}`}
-                data-testid="spin-button"
-                aria-label={busy ? "Skip animation" : "Spin"}
-                disabled={
-                  summary != null ||
-                  !ready ||
-                  (!busy && (afford || !splashStakeOk(stake, mode)))
+                className="kk-read kk-balance"
+                data-readout="balance"
+                data-long-amount={money(bank).length >= 10 ? "true" : undefined}
+                data-extra-long-amount={
+                  money(bank).length >= 13 ? "true" : undefined
                 }
-                onClick={() => {
-                  if (busy) skip();
-                  else {
-                    primeAudio();
-                    void play();
+              >
+                <span className="kk-eyebrow">
+                  Balance <small>LGC</small>
+                </span>
+                <strong data-testid="balance">{money(bank)}</strong>
+              </div>
+              {hud?.active ? (
+                <div className="kk-feature-context">
+                  <span className="kk-eyebrow">Free spins</span>
+                  <strong>{hud.left ?? 0} left</strong>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="kk-bet-button"
+                  aria-label={`Change base bet, ${money(stake)} LGC${mode === "ante" ? ", ante on" : ""}`}
+                  disabled={controlsLocked}
+                  onClick={() => {
+                    uiTap();
+                    setPanel(false);
+                    setBetReturn("game");
+                    setBetPanel(true);
+                  }}
+                >
+                  <span className="kk-eyebrow">
+                    Bet{mode === "ante" && <em>Ante on</em>}
+                  </span>
+                  <span className="kk-bet-value">
+                    <b data-testid="bet-readout">{money(stake)}</b>
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </button>
+              )}
+              {hud?.active ? (
+                <div
+                  className={`kk-read kk-bonus-win${awardLanded ? " is-landed" : ""}`}
+                  data-readout="bonus"
+                  data-long-amount={
+                    money(shownBonus).length >= 10 ? "true" : undefined
                   }
-                }}
-              >
-                <span>{busy ? "SKIP" : "SPIN"}</span>
-              </button>
-              <button
-                type="button"
-                className="kk-stake-step is-plus"
-                aria-label="Increase base bet"
-                disabled={controlsLocked || stake === STAKES.at(-1)}
-                onClick={() => {
-                  if (!busyRef.current)
-                    setStake(
-                      STAKES[
-                        Math.min(
-                          STAKES.length - 1,
-                          STAKES.findIndex((n) => n === stake) + 1,
-                        )
-                      ]!,
-                    );
-                }}
-              >
-                <Plus size={19} />
-              </button>
-              <span className="kk-charge" data-testid="charge-note">
-                {busy
-                  ? reviewing
-                    ? "Replay"
-                    : hud?.active
-                      ? "Free spins"
-                      : "Spinning"
-                  : `Cost ${money(cost)}`}
-              </span>
-            </div>
-          </aside>
+                  data-extra-long-amount={
+                    money(shownBonus).length >= 13 ? "true" : undefined
+                  }
+                >
+                  <span className="kk-eyebrow">
+                    Bonus win <small>LGC</small>
+                  </span>
+                  <strong data-testid="bonus-win">{money(shownBonus)}</strong>
+                </div>
+              ) : (
+                <div
+                  className="kk-read kk-last-win"
+                  data-readout="last"
+                  data-long-amount={
+                    money(shownWin).length >= 10 ? "true" : undefined
+                  }
+                  data-extra-long-amount={
+                    money(shownWin).length >= 13 ? "true" : undefined
+                  }
+                >
+                  <span className="kk-eyebrow">
+                    {settled ? "Last win" : "Win"} <small>LGC</small>
+                  </span>
+                  <strong data-testid="last-win">{money(shownWin)}</strong>
+                </div>
+              )}
+              <div className="kk-spin-area">
+                <button
+                  type="button"
+                  className="kk-stake-step is-minus"
+                  aria-label="Decrease base bet"
+                  disabled={controlsLocked || stake === STAKES[0]}
+                  onClick={() => {
+                    if (!busyRef.current)
+                      setStake(
+                        STAKES[
+                          Math.max(0, STAKES.findIndex((n) => n === stake) - 1)
+                        ]!,
+                      );
+                  }}
+                >
+                  <Minus size={19} />
+                </button>
+                <button
+                  type="button"
+                  className={`kk-spin${busy ? " is-busy" : ""}`}
+                  data-testid="spin-button"
+                  aria-label={busy ? "Skip animation" : "Spin"}
+                  disabled={
+                    summary != null ||
+                    !ready ||
+                    (!busy && (afford || !splashStakeOk(stake, mode)))
+                  }
+                  onClick={() => {
+                    if (busy) skip();
+                    else {
+                      primeAudio();
+                      void play();
+                    }
+                  }}
+                >
+                  {busy ? (
+                    <SkipForward className="kk-spin-icon" aria-hidden="true" />
+                  ) : (
+                    <RotateCw className="kk-spin-icon" aria-hidden="true" />
+                  )}
+                  <span>{busy ? "SKIP" : "SPIN"}</span>
+                </button>
+                <button
+                  type="button"
+                  className="kk-stake-step is-plus"
+                  aria-label="Increase base bet"
+                  disabled={controlsLocked || stake === STAKES.at(-1)}
+                  onClick={() => {
+                    if (!busyRef.current)
+                      setStake(
+                        STAKES[
+                          Math.min(
+                            STAKES.length - 1,
+                            STAKES.findIndex((n) => n === stake) + 1,
+                          )
+                        ]!,
+                      );
+                  }}
+                >
+                  <Plus size={19} />
+                </button>
+                <span className="kk-charge" data-testid="charge-note">
+                  {busy
+                    ? reviewing
+                      ? "Replay"
+                      : hud?.active
+                        ? "Free spins"
+                        : "Spinning"
+                    : `Cost ${money(cost)}`}
+                </span>
+              </div>
+            </aside>
+          </div>
           {afford && (
             <p className="kk-afford" role="status">
               Insufficient balance

@@ -3,7 +3,7 @@ import "./marina-backdrop.css";
 
 const SCENE_SOURCE = "/kilo-scene-v14/marina-night.webp";
 const SOURCE_WATERLINE = 0.3;
-const FRAME_INTERVAL = 1000 / 20;
+const FRAME_INTERVAL = 1000 / 24;
 const MAX_PIXELS = 680_000;
 const LAMPS = [
   { x: 0.022, y: 0.096, radius: 0.019, period: 9.2, phase: 0 },
@@ -28,7 +28,39 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
     const context = canvas.getContext("2d", { alpha: true });
     const sourceCanvas = document.createElement("canvas");
     const sourceContext = sourceCanvas.getContext("2d", { alpha: false });
-    if (!context || !sourceContext) return;
+    const reflectionCanvas = document.createElement("canvas");
+    const reflectionContext = reflectionCanvas.getContext("2d");
+    const hazeCanvas = document.createElement("canvas");
+    const hazeContext = hazeCanvas.getContext("2d");
+    if (!context || !sourceContext || !reflectionContext || !hazeContext)
+      return;
+
+    // A small seamless noise veil, built once. Broad waves are broken up by
+    // finer harmonics so the sky drifts as wisps rather than a moving glow blob.
+    hazeCanvas.width = 768;
+    hazeCanvas.height = 160;
+    const haze = hazeContext.createImageData(
+      hazeCanvas.width,
+      hazeCanvas.height,
+    );
+    for (let y = 0; y < hazeCanvas.height; y++) {
+      const ny = y / (hazeCanvas.height - 1);
+      const edgeFade = Math.sin(ny * Math.PI) ** 2;
+      for (let x = 0; x < hazeCanvas.width; x++) {
+        const nx = (x / hazeCanvas.width) * Math.PI * 2;
+        const wave =
+          Math.sin(nx * 3 + Math.sin(ny * 8) * 1.5) +
+          0.48 * Math.sin(nx * 7 - ny * 15) +
+          0.22 * Math.sin(nx * 13 + ny * 27);
+        const density = Math.max(0, Math.min(1, (wave + 0.4) / 1.8));
+        const index = (y * hazeCanvas.width + x) * 4;
+        haze.data[index] = 112;
+        haze.data[index + 1] = 137;
+        haze.data[index + 2] = 177;
+        haze.data[index + 3] = Math.round(70 * density * edgeFade);
+      }
+    }
+    hazeContext.putImageData(haze, 0, 0);
 
     const scene = new Image();
     scene.decoding = "async";
@@ -42,6 +74,7 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
     let waterTop = 0;
     let waterClip: Path2D | null = null;
     let sceneCover = { left: 0, top: 0, width: 0, height: 0 };
+    const reflectionStrips: number[] = [];
     let elapsed = 0;
     let previousTime = 0;
 
@@ -64,32 +97,98 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
       // Keep the full-resolution CSS sky, buildings and boats visible. Only
       // refracted water and small translucent light halos enter this canvas.
       context.clearRect(0, 0, width, height);
-      const stripe = Math.max(2, Math.round(5 * bitmapScale));
+      const stripe = Math.max(1, Math.round(3 * bitmapScale));
       const depthRange = Math.max(1, height - waterTop);
       const seconds = elapsed / 1000;
+
+      // Sky-only wind drift. The base scene stays crisp and stationary; this
+      // low-opacity layer is clipped above the waterfront and never touches it.
+      context.save();
+      context.beginPath();
+      context.rect(
+        0,
+        0,
+        width,
+        Math.max(0, sceneCover.top + sceneCover.height * 0.19),
+      );
+      context.clip();
+      const hazeWidth = sceneCover.width * 0.78;
+      const hazeHeight = sceneCover.height * 0.14;
+      const hazeDrift = (seconds * sceneCover.width * 0.008) % hazeWidth;
+      context.globalAlpha = 0.32;
+      for (let tile = -2; tile < 3; tile++) {
+        context.drawImage(
+          hazeCanvas,
+          sceneCover.left + tile * hazeWidth + hazeDrift,
+          sceneCover.top - sceneCover.height * 0.025,
+          hazeWidth,
+          hazeHeight,
+        );
+      }
+      context.restore();
       context.save();
       if (waterClip) context.clip(waterClip);
+      reflectionStrips.length = 0;
       for (let y = waterTop; y < height; y += stripe) {
         const stripHeight = Math.min(stripe, height - y);
         const depth = (y - waterTop) / depthRange;
         const screenY = y / bitmapScale;
-        // Fade the displacement in at the horizon. At the foreground its
-        // combined amplitude stays below three CSS pixels, independent of DPR.
-        const amplitude = 2 * Math.sqrt(depth) * bitmapScale;
+        // Readable in the narrow water strips beside the cabinet: coherent
+        // 3–5 second waves, up to 6.5 CSS px sideways and 1.4px vertically.
+        const horizonFade = Math.min(1, depth * 16);
+        const amplitude =
+          (1.4 + 3.4 * Math.sqrt(depth)) * horizonFade * bitmapScale;
         const offset =
           amplitude *
-          (Math.sin(seconds * 0.72 + screenY * 0.075) +
-            0.35 * Math.sin(-seconds * 0.49 + screenY * 0.029));
+          (Math.sin(seconds * 1.85 + screenY * 0.055) +
+            0.35 * Math.sin(-seconds * 1.23 + screenY * 0.021));
+        const vertical =
+          1.4 *
+          Math.sqrt(depth) *
+          bitmapScale *
+          Math.sin(seconds * 1.45 - screenY * 0.033);
+        const sampleY = Math.max(
+          waterTop,
+          Math.min(height - stripHeight, y + vertical),
+        );
         context.drawImage(
           sourceCanvas,
           0,
-          y,
+          sampleY,
           width,
           stripHeight,
           offset,
           y,
           width,
           stripHeight,
+        );
+        // The mask contains the artwork's actual bright reflections, not new
+        // particle streaks. A travelling light swell changes their intensity.
+        const lightSwell =
+          0.5 + 0.5 * Math.sin(seconds * 1.65 - screenY * 0.028);
+        reflectionStrips.push(
+          sampleY,
+          y,
+          stripHeight,
+          offset,
+          0.06 + 0.26 * lightSwell,
+        );
+      }
+      // Batch the highlight modulation after refraction. The original art is
+      // already luminous; easing its highlights down and back up remains
+      // visible without bleaching neon colors or repeatedly changing blend mode.
+      for (let i = 0; i < reflectionStrips.length; i += 5) {
+        context.globalAlpha = reflectionStrips[i + 4]!;
+        context.drawImage(
+          reflectionCanvas,
+          0,
+          reflectionStrips[i]!,
+          width,
+          reflectionStrips[i + 2]!,
+          reflectionStrips[i + 3]!,
+          reflectionStrips[i + 1]!,
+          width,
+          reflectionStrips[i + 2]!,
         );
       }
       context.restore();
@@ -125,7 +224,7 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
       if (previousTime) elapsed += Math.min(100, now - previousTime);
       previousTime = now;
       draw();
-      // A real 20fps timer, rather than a 60/120fps RAF loop that discards frames.
+      // A capped 24fps timer, rather than a 60/120fps RAF loop that discards frames.
       timer = window.setTimeout(tick, FRAME_INTERVAL);
     };
 
@@ -153,6 +252,8 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
       height = Math.max(1, Math.floor(cssHeight * bitmapScale));
       canvas.width = sourceCanvas.width = width;
       canvas.height = sourceCanvas.height = height;
+      reflectionCanvas.width = width;
+      reflectionCanvas.height = height;
       context.imageSmoothingEnabled =
         sourceContext.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = sourceContext.imageSmoothingQuality =
@@ -184,6 +285,28 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
         height,
         Math.max(0, Math.ceil(imageTop + imageHeight * SOURCE_WATERLINE)),
       );
+      // Cache a highlight-only copy on resize. Restricting alpha to existing
+      // bright pixels preserves the shapes and colors of the neon reflections.
+      const reflections = sourceContext.getImageData(0, 0, width, height);
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const index = (y * width + x) * 4;
+          const brightness =
+            Math.max(
+              reflections.data[index]!,
+              reflections.data[index + 1]!,
+              reflections.data[index + 2]!,
+            ) / 255;
+          reflections.data[index] = 0;
+          reflections.data[index + 1] = 0;
+          reflections.data[index + 2] = 0;
+          reflections.data[index + 3] =
+            y < waterTop
+              ? 0
+              : Math.round(Math.max(0, (brightness - 0.32) / 0.68) * 175);
+        }
+      }
+      reflectionContext.putImageData(reflections, 0, 0);
       // A conservative water-only envelope leaves the boats and near-shore
       // pilings rigid. These points are normalized to this scene's artwork.
       waterClip = new Path2D();
@@ -246,6 +369,8 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
       intersectionObserver?.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       sourceCanvas.width = sourceCanvas.height = 0;
+      reflectionCanvas.width = reflectionCanvas.height = 0;
+      hazeCanvas.width = hazeCanvas.height = 0;
     };
   }, [reducedMotion]);
 

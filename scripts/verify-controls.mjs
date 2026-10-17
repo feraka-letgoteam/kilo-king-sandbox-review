@@ -19,6 +19,8 @@ registerHooks({
     return next(specifier, context);
   },
   load(url, context, next) {
+    if (url.endsWith(".css"))
+      return { format: "module", shortCircuit: true, source: "export {};" };
     if (url.endsWith(".tsx"))
       return {
         format: "module",
@@ -37,8 +39,14 @@ registerHooks({
 const m = await import("../src/components/kilo/control-model.ts");
 const { createElement } = await import("react");
 const { renderToStaticMarkup } = await import("react-dom/server");
-const { BetPanel, FeaturesPanel, SettingsPanel, BonusArtwork } =
-  await import("../src/components/kilo/control-panels.tsx");
+const {
+  BetPanel,
+  FeaturesPanel,
+  FeatureCard,
+  SettingsPanel,
+  BonusArtwork,
+  preloadFeatureArtwork,
+} = await import("../src/components/kilo/control-panels.tsx");
 const { Paytable } = await import("../src/components/kilo/paytable.tsx");
 const { PAY } = await import("../src/lib/kilo/engine.ts");
 
@@ -108,7 +116,7 @@ const action = () => {
 };
 const render = (Component, props) =>
   renderToStaticMarkup(createElement(Component, props));
-const features = render(FeaturesPanel, {
+const panelProps = {
   stake: 10000,
   bank: 1e9,
   ante: false,
@@ -118,7 +126,69 @@ const features = render(FeaturesPanel, {
   onStake: action,
   onBuy: action,
   onClose: action,
-});
+};
+const panel = render(FeaturesPanel, panelProps);
+const { FEATURES, FEATURE_GROUPS, featuresForGroup } =
+  await import("../src/components/kilo/feature-catalog.ts");
+const renderCards = (group) =>
+  featuresForGroup(group)
+    .map((feature) =>
+      render(FeatureCard, {
+        feature,
+        stake: 10000,
+        bank: 1e9,
+        locked: false,
+        onSelect: action,
+      }),
+    )
+    .join("");
+const features = renderCards("buy");
+assert.match(panel, /id="feature-tab-buy"[^>]*aria-selected="true"/);
+assert.match(
+  panel,
+  /Loading features/,
+  "Cold artwork has one visible loading state",
+);
+assert.doesNotMatch(panel, /data-testid="confirm-purchase"/);
+assert.deepEqual(
+  FEATURE_GROUPS.map((group) => group.id),
+  ["buy", "scatter", "development"],
+);
+assert.deepEqual(
+  featuresForGroup("buy").map((feature) => feature.id),
+  ["scatter-3", "chopper"],
+);
+assert.deepEqual(
+  featuresForGroup("scatter").map((feature) => feature.id),
+  ["scatter-3", "scatter-4", "scatter-5"],
+);
+assert.deepEqual(
+  featuresForGroup("development").map((feature) => feature.id),
+  ["mystery", "god-mode"],
+);
+for (const group of ["scatter", "development"]) {
+  for (const feature of featuresForGroup(group)) {
+    assert.equal(
+      "mode" in feature,
+      false,
+      "Preview grouping must remove purchase modes",
+    );
+    assert.equal(
+      "multiple" in feature,
+      false,
+      "Preview grouping must remove purchase prices",
+    );
+  }
+  const previewCards = renderCards(group);
+  assert.doesNotMatch(
+    previewCards,
+    /Review .* purchase|Buy feature|confirm-purchase/,
+  );
+  assert.equal(
+    (previewCards.match(/class="kk-feature-card"/g) || []).length,
+    group === "scatter" ? 3 : 2,
+  );
+}
 assert.match(features, /Above the 1,000,000 purchase limit/);
 assert.match(
   features,
@@ -129,7 +199,6 @@ assert.match(
   /aria-label="Review Chopper purchase for 2,500,000 LGC" disabled/,
 );
 assert.doesNotMatch(features, /data-testid="confirm-purchase"/); // Selection is not confirmation.
-const { FEATURES } = await import("../src/components/kilo/feature-catalog.ts");
 assert.equal(FEATURES.length, 6);
 assert.equal(
   new Set(FEATURES.map((f) => f.art)).size,
@@ -145,7 +214,13 @@ for (const feature of FEATURES) {
     existsSync(new URL(`../public${feature.art}`, import.meta.url)),
     `Missing art: ${feature.art}`,
   );
-  assert.match(features, new RegExp(`data-feature="${feature.id}"`));
+  const group =
+    feature.kind === "purchase"
+      ? "buy"
+      : feature.kind === "trigger"
+        ? "scatter"
+        : "development";
+  assert.match(renderCards(group), new RegExp(`data-feature="${feature.id}"`));
   const preview = render(BonusArtwork, { feature });
   assert.ok(preview.includes(feature.title));
   assert.doesNotMatch(
@@ -169,7 +244,10 @@ for (const feature of FEATURES) {
     assert.equal("spins" in feature, false);
     assert.equal("multiplier" in feature, false);
     assert.match(preview, /In development/);
-    assert.match(features, new RegExp(`aria-label="Preview ${feature.title}"`));
+    assert.match(
+      renderCards("development"),
+      new RegExp(`aria-label="Preview ${feature.title}"`),
+    );
   }
 }
 assert.deepEqual(
@@ -183,7 +261,36 @@ assert.deepEqual(
     [5, 20],
   ],
 );
-assert.equal((features.match(/class="kk-feature-card"/g) || []).length, 6);
+assert.equal((features.match(/class="kk-feature-card"/g) || []).length, 2);
+// Prewarming is cached, decoded images render immediately, and an artwork
+// failure resolves into a usable fallback rather than an endless busy panel.
+const loadedImages = [];
+globalThis.window = { setTimeout, clearTimeout };
+globalThis.Image = class {
+  naturalWidth = 1536;
+  set src(value) {
+    loadedImages.push(value);
+    queueMicrotask(() => {
+      if (value.endsWith("/mystery.webp")) this.onerror?.();
+      else this.onload?.();
+    });
+  }
+  decode() {
+    return Promise.resolve();
+  }
+};
+const preload = preloadFeatureArtwork();
+assert.equal(
+  preloadFeatureArtwork(),
+  preload,
+  "Repeated prewarm must reuse the in-flight decode",
+);
+await preload;
+assert.equal(loadedImages.length, 6);
+const warmedPanel = render(FeaturesPanel, panelProps);
+assert.doesNotMatch(warmedPanel, /Loading features/);
+assert.equal((warmedPanel.match(/class="kk-feature-card"/g) || []).length, 2);
+assert.match(renderCards("development"), /Artwork unavailable/);
 const bet = render(BetPanel, {
   stake: 1000,
   ante: false,

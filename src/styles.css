@@ -177,16 +177,12 @@ button:not(:disabled):active {
   position: relative;
   display: grid;
   place-items: center;
-  padding: 12px max(12px, env(safe-area-inset-right))
-    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
   min-width: 0;
   min-height: 0;
   overflow: auto;
   overscroll-behavior: contain;
-}
-.kk-stage:has([data-layout="portrait"]) {
-  align-items: center;
-  padding-bottom: max(12px, 7dvh);
 }
 .kk-shell {
   container: game / inline-size;
@@ -197,7 +193,7 @@ button:not(:disabled):active {
   grid-template-rows: calc(var(--header-height) + var(--reel-height)) var(
       --dock-height
     );
-  row-gap: 0;
+  row-gap: var(--dock-gap);
   align-content: start;
   filter: drop-shadow(0 16px 28px #0008);
 }
@@ -2579,9 +2575,6 @@ button:not(:disabled):active {
   }
 }
 @media (max-height: 540px) and (orientation: landscape) {
-  .kk-stage {
-    padding: 4px 10px 8px;
-  }
   .kk-modal-root {
     padding: 8px max(10px, env(safe-area-inset-right)) 8px
       max(10px, env(safe-area-inset-left));

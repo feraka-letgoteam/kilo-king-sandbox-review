@@ -1,0 +1,12 @@
+{
+  "scope": "Derived real-font and CSS cascade checks. Not a browser rendering test.",
+  "checks": {
+    "amount": 16632,
+    "grid": 1188,
+    "vertical": 16632
+  },
+  "configurations": 1188,
+  "failures": [],
+  "failureCount": 0,
+  "grouped": {}
+}
