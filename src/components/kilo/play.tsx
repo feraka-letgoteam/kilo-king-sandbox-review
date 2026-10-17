@@ -50,6 +50,7 @@ import {
   type SymbolCompareResult,
 } from "./director";
 import { ReelStage, type MountedScene } from "./ReelStage";
+import { MarinaBackdrop } from "./MarinaBackdrop";
 import { fitGameLayout } from "./layout";
 import fixtures from "@/lib/kilo/fixtures.json";
 
@@ -882,6 +883,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
         </nav>
       </header>
       <main className="kk-stage" data-testid="game-stage" ref={stageRef}>
+        <MarinaBackdrop reducedMotion={reducedMotion} />
         {storageFault ? (
           <p
             className="kk-storage-fault"
@@ -912,6 +914,7 @@ export function KiloTable({ review = false }: { review?: boolean }) {
           data-testid="game-hud"
           inert={modalOpen || !booted ? true : undefined}
         >
+          <div className="kk-scene-pier" aria-hidden="true" />
           {layout.artLeft > 0 && (
             <>
               <div className="kk-scene-brand">

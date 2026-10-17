@@ -1,0 +1,355 @@
+/* Presentation-only dock refinement. Scoped above legacy geometry rules. */
+.kk-app .kk-shell[data-layout] .kk-console {
+  --rail-edge: #bd9b5659;
+  --rail-ink: #f3efdf;
+  --rail-muted: #a9bac2;
+  border: 1px solid var(--rail-edge);
+  border-top-color: #dfc27c9c;
+  border-bottom-color: #030a10;
+  border-radius: 9px;
+  background: linear-gradient(
+    180deg,
+    #172c38f7 0%,
+    #0b1b27fa 42%,
+    #07121dfc 100%
+  );
+  box-shadow:
+    inset 0 1px 0 #fff1bc12,
+    inset 0 -3px 0 #01080c80,
+    0 9px 18px #0006;
+  isolation: isolate;
+}
+
+.kk-app .kk-shell[data-layout] .kk-console::before {
+  content: none;
+}
+
+.kk-app .kk-shell .kk-console .kk-menu-button,
+.kk-app .kk-shell .kk-console .kk-feature-button,
+.kk-app .kk-shell .kk-console .kk-stake-step {
+  border: 1px solid #c3ac7052;
+  background: linear-gradient(180deg, #223642, #0b1a26);
+  box-shadow:
+    inset 0 1px 0 #f8e9ba12,
+    0 3px 7px #0003;
+  color: #e4d3a3;
+}
+
+.kk-app .kk-shell .kk-console .kk-menu-button {
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.kk-app .kk-shell .kk-console .kk-feature-button {
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.kk-app .kk-shell .kk-console .kk-stake-step {
+  border-color: #b8c5c633;
+  background: #07121d80;
+  color: #b8c7cc;
+}
+
+.kk-app .kk-shell .kk-console .kk-read {
+  container-type: inline-size;
+  min-width: 0;
+  border-radius: 0;
+}
+
+.kk-app .kk-shell .kk-console .kk-read .kk-eyebrow,
+.kk-app .kk-shell .kk-console .kk-bet-button .kk-eyebrow,
+.kk-app .kk-shell .kk-console .kk-feature-context .kk-eyebrow {
+  color: var(--rail-muted);
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.kk-app .kk-shell .kk-console .kk-read strong {
+  color: var(--rail-ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.kk-app .kk-shell .kk-console .kk-bonus-win .kk-eyebrow,
+.kk-app .kk-shell .kk-console .kk-last-win .kk-eyebrow {
+  color: #dfc58a;
+}
+
+.kk-app .kk-shell .kk-console .kk-bonus-win strong,
+.kk-app .kk-shell .kk-console .kk-last-win strong {
+  color: #ffe6aa;
+}
+
+.kk-app .kk-shell .kk-console .kk-bet-button,
+.kk-app .kk-shell .kk-console .kk-feature-context {
+  border: 1px solid #b9ab6a3b;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #06131e9c, #1226308c);
+  box-shadow: inset 0 2px 5px #0004;
+}
+
+.kk-app .kk-shell .kk-console .kk-bet-value b,
+.kk-app .kk-shell .kk-console .kk-feature-context strong {
+  color: var(--rail-ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.kk-app .kk-shell .kk-console .kk-bet-value svg {
+  flex: 0 0 auto;
+  color: #c5af76;
+}
+
+.kk-app .kk-shell .kk-console .kk-charge {
+  color: #b8c7ce;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* The two readouts have capped tracks: they stay adjacent on a wide stage. */
+.kk-app .kk-shell[data-layout="wide"] .kk-console {
+  width: min(780px, 100%);
+  justify-self: center;
+  height: 110px;
+  grid-template-columns:
+    44px 68px minmax(110px, 152px) minmax(124px, 172px)
+    100px 178px;
+  grid-template-rows: 104px;
+  grid-template-areas: "menu features balance win bet spin";
+  gap: 0 8px;
+  justify-content: center;
+  padding: 2px 12px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-feature-button {
+  width: 68px;
+  height: 64px;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-balance,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win {
+  align-self: center;
+  align-items: flex-start;
+  justify-content: center;
+  height: 64px;
+  padding: 8px 6px;
+  gap: 4px;
+  text-align: left;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-balance {
+  border-left: 1px solid #d4c99d24;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-balance strong {
+  font-size: clamp(16px, 15cqi, 22px);
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-read .kk-eyebrow,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-button .kk-eyebrow,
+.kk-app
+  .kk-shell[data-layout="wide"]
+  .kk-console
+  .kk-feature-context
+  .kk-eyebrow {
+  font-size: 11px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win {
+  border-left: 1px solid #d4b66a33;
+  background: linear-gradient(90deg, #d4b66a0a, transparent);
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win strong,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win strong {
+  font-size: clamp(18px, 16cqi, 26px);
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-button,
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-feature-context {
+  height: 64px;
+  padding: 8px 10px;
+  gap: 5px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-value b {
+  font-size: 22px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin-area {
+  grid-template-columns: 44px 90px 44px;
+  grid-template-rows: 90px 14px;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin {
+  width: 90px;
+  height: 90px;
+  box-shadow:
+    0 5px 12px #0008,
+    0 0 16px #d4b66a12;
+}
+
+.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin span {
+  font-size: 25px;
+}
+
+/* 296px of usable width at a 320px viewport; no target drops below 44px. */
+.kk-app .kk-shell[data-layout="portrait"] .kk-console {
+  width: min(420px, 100%);
+  justify-self: center;
+  height: 144px;
+  padding: 6px;
+  grid-template-columns: 44px 58px minmax(68px, 1fr) 80px;
+  grid-template-rows: 36px 88px;
+  grid-template-areas: "balance balance win win" "menu features bet spin";
+  gap: 6px 4px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console::after {
+  position: absolute;
+  top: 45px;
+  right: 12px;
+  left: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d3bb7440, transparent);
+  content: "";
+  pointer-events: none;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance,
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win,
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win {
+  grid-area: 1 / 1 / 2 / -1;
+  width: calc(50% - 4px);
+  height: 36px;
+  padding: 0 4px;
+  gap: 2px;
+  align-self: center;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance {
+  justify-self: start;
+  align-items: flex-start;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win,
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win {
+  justify-self: end;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance strong {
+  font-size: clamp(16px, 14cqi, 20px);
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win strong,
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win strong {
+  font-size: clamp(18px, 16cqi, 22px);
+  line-height: 1.05;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-read .kk-eyebrow {
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-feature-button {
+  width: 58px;
+  height: 56px;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-button,
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-feature-context {
+  height: 56px;
+  padding: 5px 3px;
+  gap: 3px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value {
+  gap: 2px;
+}
+
+.kk-app
+  .kk-shell[data-layout="portrait"]
+  .kk-console
+  .kk-bet-button
+  .kk-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value b {
+  font-size: 18px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin-area {
+  grid-template-columns: 76px;
+  grid-template-rows: 76px 12px;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin {
+  width: 76px;
+  height: 76px;
+}
+
+/* Keep the 172px short-landscape stack and its existing geometry. */
+.kk-app .kk-shell[data-layout="landscape"] .kk-console {
+  height: auto;
+  padding: 9px 10px;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-balance,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bonus-win,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-last-win {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 0;
+  text-align: center;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-read .kk-eyebrow {
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-balance strong {
+  font-size: 15px;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bonus-win strong,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-last-win strong {
+  font-size: 18px;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bet-button,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-feature-context {
+  height: 44px;
+  padding: 4px 8px;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-feature-button {
+  height: 44px;
+  font-size: 13px;
+}

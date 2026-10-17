@@ -1,0 +1,112 @@
+/* The foreground is tied to cabinet geometry, never the browser's waterline. */
+.kk-app .kk-stage {
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+.kk-app .kk-shell {
+  isolation: isolate;
+  z-index: 1;
+  filter: none;
+}
+
+.kk-app .kk-scene-pier {
+  position: absolute;
+  z-index: -1;
+  left: -5%;
+  bottom: -44px;
+  width: 110%;
+  height: clamp(190px, 19cqi, 310px);
+  background: url("/kilo-scene-v14/pier-foreground.webp") center / 100% 100%
+    no-repeat;
+  pointer-events: none;
+}
+
+.kk-app .kk-playfield {
+  position: relative;
+  z-index: 2;
+}
+
+.kk-app .kk-canvas-wrap {
+  filter: drop-shadow(0 12px 12px #0009);
+}
+
+.kk-app .kk-scene-brand {
+  z-index: 1;
+}
+
+.kk-app .kk-side-logo {
+  top: calc(var(--header-height) + 20px);
+  left: 2%;
+  width: 94%;
+  filter: drop-shadow(0 5px 4px #020c15) drop-shadow(0 0 20px #071828);
+}
+
+.kk-app .kk-side-cargo {
+  bottom: -8px;
+  left: 2%;
+  width: 94%;
+  height: 50%;
+  object-position: center bottom;
+  filter: drop-shadow(0 8px 5px #000a);
+}
+
+.kk-app .kk-scene-character {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  overflow: hidden;
+}
+
+.kk-app .kk-scene-character::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 6%;
+  width: 89%;
+  height: 22px;
+  background: radial-gradient(
+    ellipse,
+    #02070be8 12%,
+    #02070b66 48%,
+    transparent 72%
+  );
+}
+
+/* A closer character crop: the rod can leave the side, the body stays grounded.
+   Offset compensates for the source sprite's transparent space below the boots. */
+.kk-app .kk-scene-character img {
+  position: absolute;
+  bottom: calc(var(--art-right) * -0.11);
+  left: -6%;
+  width: 142%;
+  max-width: none;
+  height: auto;
+  object-fit: initial;
+  filter: drop-shadow(-5px 7px 7px #0009);
+}
+
+.kk-app .kk-shell[data-framing="sides"] .kk-crest-status {
+  inset: auto 0 14px;
+}
+
+.kk-app .kk-shell[data-framing="sides"] .kk-event {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  color: #bdcbd0;
+  text-shadow: 0 2px 5px #000;
+}
+
+.kk-app .kk-shell[data-layout="portrait"] .kk-scene-pier {
+  bottom: -34px;
+  left: -10%;
+  width: 120%;
+  height: 200px;
+  opacity: 0.9;
+}
+
+.kk-app .kk-shell[data-layout="landscape"] .kk-scene-pier {
+  bottom: -42px;
+  height: 150px;
+}

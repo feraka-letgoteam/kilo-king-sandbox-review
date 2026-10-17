@@ -331,6 +331,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
 
   const world = new Container();
   app.stage.addChild(world);
+  const cabinet = new Graphics();
   const well = new TilingSprite({ texture: wellTex, width: 10, height: 10 });
   const veil = new Graphics();
   const routes = new Graphics();
@@ -395,7 +396,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     },
   });
   title.anchor.set(0.5);
-  world.addChild(well, veil, routes);
+  world.addChild(cabinet, well, veil, routes);
   for (const reel of reels) world.addChild(reel.root);
   for (const piece of frame) world.addChild(piece);
   frame[4]!.visible = false;
@@ -656,10 +657,20 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   }
 
   function placeFrame() {
-    const { cab } = geom;
+    const { cab, cell, gap, gx, gy } = geom;
     const edge = frameBorders(cab);
-    const cols = [edge.l, cab.w - edge.l - edge.r, edge.r];
-    const rows = [edge.t, cab.h - edge.t - edge.b, edge.b];
+    // The authored bands include transparent space: their visible straight
+    // rails are ~47px at the top/sides and 72px at the bottom. Compressing each
+    // entire band into the same destination edge reduced the metal to a line
+    // and distorted the corner fittings. One scale preserves their proportions;
+    // the extra transparent area can extend over the existing reel rectangle.
+    const frameScale = edge.b / 72;
+    const left = src.left * frameScale;
+    const right = src.right * frameScale;
+    const top = src.top * frameScale;
+    const bottom = src.bottom * frameScale;
+    const cols = [left, cab.w - left - right, right];
+    const rows = [top, cab.h - top - bottom, bottom];
     let i = 0;
     let y = cab.y;
     for (let r = 0; r < 3; r++) {
@@ -673,25 +684,68 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       }
       y += rows[r]!;
     }
-    // The nine-slice bands contain transparent padding. Extend the well
-    // behind them so the marina never appears between the metal and reels.
-    const openingY = cab.y + edge.t;
-    const innerH = Math.max(1, cab.h - edge.t - edge.b);
-    well.position.set(cab.x + 6, cab.y + 6);
-    well.width = cab.w - 12;
-    well.height = cab.h - 12;
-    well.tint = 0x6b96a4;
+    // A continuous navy chassis closes the transparent artwork padding and
+    // gives the brass a dark outer edge without changing any cell coordinates.
+    cabinet.clear();
+    cabinet
+      .roundRect(cab.x + 1, cab.y + 1, cab.w - 2, cab.h - 2, 5)
+      .fill({ color: 0x07121c })
+      .stroke({ color: 0x02070c, width: 2 });
+    cabinet
+      .rect(gx - 2, gy - 2, cell * 5 + gap * 4 + 4, cell * 3 + 4)
+      .fill({ color: 0x01090f })
+      .stroke({ color: 0x4f6465, alpha: 0.5, width: 1 });
+
+    const inset = Math.max(4, edge.l * 0.45);
+    well.position.set(cab.x + inset, cab.y + inset);
+    well.width = cab.w - inset * 2;
+    well.height = cab.h - inset * 2;
+    well.tint = 0x82aebd;
     well.tileScale.set(Math.max(1.2, geom.cell / 110));
     veil.clear();
     veil
       .rect(well.x, well.y, well.width, well.height)
-      .fill({ color: 0x03131c, alpha: 0.64 });
-    for (let i = 1; i < 5; i++) {
-      const x = geom.gx + i * (geom.cell + geom.gap) - geom.gap / 2;
+      .fill({ color: 0x03131d, alpha: 0.59 });
+
+    // Soft shading belongs to each reel well, behind symbols and win routes.
+    // Non-overlapping strips approximate gradients without extra render filters.
+    const innerH = cell * 3;
+    const sideDepth = Math.min(24, cell * 0.12);
+    const endDepth = Math.min(48, cell * 0.24);
+    const steps = 12;
+    for (let reel = 0; reel < 5; reel++) {
+      const x = gx + reel * (cell + gap);
       veil
-        .moveTo(x, openingY)
-        .lineTo(x, openingY + innerH)
-        .stroke({ color: 0x74b6ba, alpha: 0.1, width: 1 });
+        .rect(x, gy, cell, innerH)
+        .fill({ color: 0x183a49, alpha: 0.075 });
+      for (let step = 0; step < steps; step++) {
+        const falloff = (1 - (step + 0.5) / steps) ** 2;
+        const sx = (sideDepth * step) / steps;
+        const sw = sideDepth / steps;
+        const sy = (endDepth * step) / steps;
+        const sh = endDepth / steps;
+        veil
+          .rect(x + sx, gy, sw, innerH)
+          .rect(x + cell - sx - sw, gy, sw, innerH)
+          .fill({ color: 0x01080e, alpha: 0.42 * falloff });
+        veil
+          .rect(x, gy + sy, cell, sh)
+          .fill({ color: 0x01070d, alpha: 0.65 * falloff });
+        veil
+          .rect(x, gy + innerH - sy - sh, cell, sh)
+          .fill({ color: 0x01070d, alpha: 0.48 * falloff });
+      }
+      if (reel < 4) {
+        const seam = x + cell + gap / 2;
+        veil
+          .moveTo(seam - 0.5, gy)
+          .lineTo(seam - 0.5, gy + innerH)
+          .stroke({ color: 0x01080d, alpha: 0.72, width: 2 });
+        veil
+          .moveTo(seam + 1, gy)
+          .lineTo(seam + 1, gy + innerH)
+          .stroke({ color: 0x9ba596, alpha: 0.2, width: 1 });
+      }
     }
   }
 

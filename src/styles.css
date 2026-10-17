@@ -1,4 +1,6 @@
 @import "tailwindcss" source("../src");
+@import "./components/kilo/base-dock.css";
+@import "./components/kilo/base-scene.css";
 
 @font-face {
   font-family: "Source Sans 3";
@@ -105,9 +107,7 @@ button:not(:disabled):active {
   grid-template-rows: var(--review-height) minmax(0, 1fr);
   overflow: hidden;
   font-variant-numeric: tabular-nums;
-  background:
-    linear-gradient(180deg, #020c1420 0%, #020c1438 45%, #020b14e8 100%),
-    url("/kilo-night-v3/bg-marina.png") center top / cover;
+  background: #03101f;
 }
 .kk-app[data-review="true"] {
   --review-height: 44px;
