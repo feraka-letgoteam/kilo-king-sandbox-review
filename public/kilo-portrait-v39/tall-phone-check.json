@@ -1,0 +1,765 @@
+{
+  "version": "v39",
+  "method": "Production CSS cascade and calculated layout; not browser-computed bounds.",
+  "cssFile": "dist/assets/review-cmzDFehm.css",
+  "cssSha256": "ea3268dd8ae455ea6b955de1f0b2fa0334042b862534136aea95dc240e404c5b",
+  "cases": 28,
+  "rows": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 768,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 334.4096385542169,
+      "shellBottom": 494.4096385542169,
+      "viewportBelowShell": 305.5903614457831,
+      "spareContentHeight": 285.5903614457831,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 719,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 369.4096385542169,
+      "shellBottom": 529.4096385542168,
+      "viewportBelowShell": 270.5903614457832,
+      "spareContentHeight": 236.59036144578312,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 724,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 378.4096385542169,
+      "shellBottom": 538.4096385542168,
+      "viewportBelowShell": 261.5903614457832,
+      "spareContentHeight": 241.59036144578312,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 675,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 413.4096385542169,
+      "shellBottom": 573.4096385542168,
+      "viewportBelowShell": 226.59036144578317,
+      "spareContentHeight": 192.59036144578312,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 812,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 352.48192771084337,
+      "shellBottom": 512.4819277108434,
+      "viewportBelowShell": 331.51807228915663,
+      "spareContentHeight": 311.51807228915663,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 763,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 387.48192771084337,
+      "shellBottom": 547.4819277108434,
+      "viewportBelowShell": 296.51807228915663,
+      "spareContentHeight": 262.51807228915663,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 768,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 396.48192771084337,
+      "shellBottom": 556.4819277108434,
+      "viewportBelowShell": 287.51807228915663,
+      "spareContentHeight": 267.51807228915663,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 719,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 431.48192771084337,
+      "shellBottom": 591.4819277108434,
+      "viewportBelowShell": 252.51807228915663,
+      "spareContentHeight": 218.51807228915663,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        393,
+        852
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 369,
+      "availableHeight": 820,
+      "reelWidth": 369,
+      "reelHeight": 222.28915662650604,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 502.28915662650604,
+      "controlTop": 354.28915662650604,
+      "shellBottom": 514.289156626506,
+      "viewportBelowShell": 337.71084337349396,
+      "spareContentHeight": 317.71084337349396,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        393,
+        852
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 369,
+      "availableHeight": 771,
+      "reelWidth": 369,
+      "reelHeight": 222.28915662650604,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 502.28915662650604,
+      "controlTop": 389.28915662650604,
+      "shellBottom": 549.289156626506,
+      "viewportBelowShell": 302.71084337349396,
+      "spareContentHeight": 268.71084337349396,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        393,
+        852
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 369,
+      "availableHeight": 776,
+      "reelWidth": 369,
+      "reelHeight": 222.28915662650604,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 502.28915662650604,
+      "controlTop": 398.28915662650604,
+      "shellBottom": 558.289156626506,
+      "viewportBelowShell": 293.71084337349396,
+      "spareContentHeight": 273.71084337349396,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        393,
+        852
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 369,
+      "availableHeight": 727,
+      "reelWidth": 369,
+      "reelHeight": 222.28915662650604,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 502.28915662650604,
+      "controlTop": 433.28915662650604,
+      "shellBottom": 593.289156626506,
+      "viewportBelowShell": 258.71084337349396,
+      "spareContentHeight": 224.71084337349396,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        412,
+        915
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 388,
+      "availableHeight": 883,
+      "reelWidth": 388,
+      "reelHeight": 233.73493975903617,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 513.7349397590361,
+      "controlTop": 365.73493975903614,
+      "shellBottom": 525.7349397590361,
+      "viewportBelowShell": 389.26506024096386,
+      "spareContentHeight": 369.26506024096386,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        412,
+        915
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 388,
+      "availableHeight": 834,
+      "reelWidth": 388,
+      "reelHeight": 233.73493975903617,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 513.7349397590361,
+      "controlTop": 400.73493975903614,
+      "shellBottom": 560.7349397590361,
+      "viewportBelowShell": 354.26506024096386,
+      "spareContentHeight": 320.26506024096386,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        412,
+        915
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 388,
+      "availableHeight": 839,
+      "reelWidth": 388,
+      "reelHeight": 233.73493975903617,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 513.7349397590361,
+      "controlTop": 409.73493975903614,
+      "shellBottom": 569.7349397590361,
+      "viewportBelowShell": 345.26506024096386,
+      "spareContentHeight": 325.26506024096386,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        412,
+        915
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 388,
+      "availableHeight": 790,
+      "reelWidth": 388,
+      "reelHeight": 233.73493975903617,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 513.7349397590361,
+      "controlTop": 444.73493975903614,
+      "shellBottom": 604.7349397590361,
+      "viewportBelowShell": 310.26506024096386,
+      "spareContentHeight": 276.26506024096386,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        430,
+        932
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 406,
+      "availableHeight": 900,
+      "reelWidth": 406,
+      "reelHeight": 244.57831325301206,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 524.5783132530121,
+      "controlTop": 376.5783132530121,
+      "shellBottom": 536.5783132530121,
+      "viewportBelowShell": 395.4216867469879,
+      "spareContentHeight": 375.4216867469879,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        430,
+        932
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 406,
+      "availableHeight": 851,
+      "reelWidth": 406,
+      "reelHeight": 244.57831325301206,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 524.5783132530121,
+      "controlTop": 411.5783132530121,
+      "shellBottom": 571.5783132530121,
+      "viewportBelowShell": 360.4216867469879,
+      "spareContentHeight": 326.4216867469879,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        430,
+        932
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 406,
+      "availableHeight": 856,
+      "reelWidth": 406,
+      "reelHeight": 244.57831325301206,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 524.5783132530121,
+      "controlTop": 420.5783132530121,
+      "shellBottom": 580.5783132530121,
+      "viewportBelowShell": 351.4216867469879,
+      "spareContentHeight": 331.4216867469879,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        430,
+        932
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 406,
+      "availableHeight": 807,
+      "reelWidth": 406,
+      "reelHeight": 244.57831325301206,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 524.5783132530121,
+      "controlTop": 455.5783132530121,
+      "shellBottom": 615.5783132530121,
+      "viewportBelowShell": 316.4216867469879,
+      "spareContentHeight": 282.4216867469879,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        960
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 928,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 334.4096385542169,
+      "shellBottom": 494.4096385542169,
+      "viewportBelowShell": 465.5903614457831,
+      "spareContentHeight": 445.5903614457831,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        960
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 879,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 369.4096385542169,
+      "shellBottom": 529.4096385542168,
+      "viewportBelowShell": 430.5903614457832,
+      "spareContentHeight": 396.5903614457831,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        960
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 884,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 378.4096385542169,
+      "shellBottom": 538.4096385542168,
+      "viewportBelowShell": 421.5903614457832,
+      "spareContentHeight": 401.5903614457831,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        360,
+        960
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 336,
+      "availableHeight": 835,
+      "reelWidth": 336,
+      "reelHeight": 202.40963855421688,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 482.4096385542169,
+      "controlTop": 413.4096385542169,
+      "shellBottom": 573.4096385542168,
+      "viewportBelowShell": 386.5903614457832,
+      "spareContentHeight": 352.5903614457831,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        1200
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 1168,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 12,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 352.48192771084337,
+      "shellBottom": 512.4819277108434,
+      "viewportBelowShell": 687.5180722891566,
+      "spareContentHeight": 667.5180722891566,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        1200
+      ],
+      "reviewHeight": 0,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 1119,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 47,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 387.48192771084337,
+      "shellBottom": 547.4819277108434,
+      "viewportBelowShell": 652.5180722891566,
+      "spareContentHeight": 618.5180722891566,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        1200
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 1124,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 56,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 396.48192771084337,
+      "shellBottom": 556.4819277108434,
+      "viewportBelowShell": 643.5180722891566,
+      "spareContentHeight": 623.5180722891566,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    },
+    {
+      "viewport": [
+        390,
+        1200
+      ],
+      "reviewHeight": 44,
+      "safeInsets": {
+        "top": 47,
+        "right": 0,
+        "bottom": 34,
+        "left": 0
+      },
+      "availableWidth": 366,
+      "availableHeight": 1075,
+      "reelWidth": 366,
+      "reelHeight": 220.4819277108434,
+      "header": 104,
+      "dockHeight": 160,
+      "clearance": 16,
+      "shellTop": 91,
+      "shellHeight": 500.48192771084337,
+      "controlTop": 431.48192771084337,
+      "shellBottom": 591.4819277108434,
+      "viewportBelowShell": 608.5180722891566,
+      "spareContentHeight": 574.5180722891566,
+      "stateGeometry": "Base and feature share the same shell, reels and Spin rectangle."
+    }
+  ]
+}

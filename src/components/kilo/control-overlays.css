@@ -1,0 +1,488 @@
+/* Auto is a viewport takeover. The control/reel rectangles are never resized. */
+#kilo-auto-takeover {
+  inset: 0;
+  padding: 0;
+  align-items: center;
+  z-index: 70;
+}
+#kilo-auto-takeover .kk-scrim {
+  background: #020c12bd;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+#kilo-auto-takeover .kk-auto-takeover {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  align-items: safe center;
+  overscroll-behavior: contain;
+  padding: max(76px, calc(env(safe-area-inset-top) + 68px))
+    max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: none;
+  transform: none;
+  color: #fff8e8;
+  font-family: "Source Sans 3", sans-serif;
+}
+#kilo-auto-takeover .kk-auto-close {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+}
+#kilo-auto-takeover .kk-auto-close svg {
+  width: 42px;
+  height: 42px;
+  stroke-width: 3.5;
+}
+#kilo-auto-takeover .kk-autoplay-card {
+  width: min(600px, 100%);
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+  border: 2px solid var(--kk-brass-shade, #59412b);
+  border-radius: 16px;
+  background: #020c12;
+  box-shadow:
+    inset 0 1px #d2b37129,
+    0 16px 48px #0007;
+  animation: kk-auto-card-in 180ms ease-out both;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+#kilo-auto-takeover h2 {
+  margin: 0 0 16px;
+  color: var(--kk-brass-light, #eed39c);
+  font:
+    700 18px/22px "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+#kilo-auto-takeover .kk-auto-count-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+#kilo-auto-takeover .kk-auto-count-grid button {
+  position: relative;
+  height: 56px;
+  min-width: 0;
+  padding: 0 8px;
+  border: 2px solid #364247;
+  border-radius: 12px;
+  background: #19282e;
+  color: #fff8e8;
+  font:
+    700 24px/1 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 1px #ffffff0a;
+}
+#kilo-auto-takeover .kk-auto-count-grid button[aria-pressed="true"] {
+  background: #184739;
+  border-color: var(--kk-brass, #b28c50);
+}
+#kilo-auto-takeover .kk-auto-count-grid svg {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 14px;
+  height: 14px;
+  stroke-width: 3;
+  color: #9bddc3;
+}
+#kilo-auto-takeover .kk-auto-stop-policy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid #364247;
+  font:
+    600 16px/22px "Source Sans 3",
+    sans-serif;
+  color: #fff8e8;
+}
+#kilo-auto-takeover .kk-auto-stop-status {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+#kilo-auto-takeover .kk-auto-stop-status > span {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #184739;
+  color: #b6f0d9;
+  font:
+    700 14px/20px "Source Sans 3",
+    sans-serif;
+}
+#kilo-auto-takeover .kk-auto-stop-status svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 3;
+}
+#kilo-auto-takeover .kk-auto-start {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px;
+  border: 2px solid #e2c58b;
+  border-radius: 9px;
+  background: #b99650;
+  color: #020c12;
+  font:
+    700 18px/24px "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px #fff3;
+}
+#kilo-auto-takeover .kk-auto-cost {
+  margin: 10px 0 0;
+  text-align: center;
+  color: #b6c6be;
+  font:
+    600 13px/18px "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+#kilo-auto-takeover .kk-auto-cost strong {
+  color: #fff8e8;
+  font-weight: 700;
+}
+#kilo-auto-takeover .kk-auto-start-area .kk-auto-unavailable {
+  margin: 0 0 10px;
+  color: #f5d49b;
+  font:
+    600 14px/18px "Source Sans 3",
+    sans-serif;
+}
+#kilo-auto-takeover button:disabled {
+  opacity: 1;
+  background: #19282e;
+  color: #d3c6a7;
+  border-color: #8f754a;
+  cursor: default;
+}
+#kilo-auto-takeover button:focus-visible,
+.kk-app .kk-quick-menu button:focus-visible,
+.kk-app .kk-quick-menu input:focus-visible {
+  outline: 2px solid #9bddc3;
+  outline-offset: -3px;
+}
+#kilo-auto-takeover.is-closing .kk-autoplay-card {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: none;
+}
+@keyframes kk-auto-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 620px) {
+  #kilo-auto-takeover .kk-auto-takeover {
+    padding: max(64px, calc(env(safe-area-inset-top) + 56px)) 12px
+      max(12px, env(safe-area-inset-bottom));
+  }
+  #kilo-auto-takeover .kk-autoplay-card {
+    padding: 18px;
+    gap: 18px;
+    border-radius: 12px;
+  }
+  #kilo-auto-takeover h2 {
+    margin-bottom: 14px;
+  }
+  #kilo-auto-takeover .kk-auto-count-grid {
+    gap: 8px;
+  }
+  #kilo-auto-takeover .kk-auto-count-grid button {
+    font-size: 22px;
+    padding: 0 4px;
+  }
+  #kilo-auto-takeover .kk-auto-count-grid svg {
+    width: 10px;
+    height: 10px;
+    top: 3px;
+    right: 3px;
+  }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  #kilo-auto-takeover .kk-auto-takeover {
+    padding: max(16px, env(safe-area-inset-top))
+      max(72px, env(safe-area-inset-right))
+      max(16px, env(safe-area-inset-bottom))
+      max(24px, env(safe-area-inset-left));
+  }
+  #kilo-auto-takeover .kk-autoplay-card {
+    width: min(560px, 100%);
+    padding: 16px;
+    gap: 12px;
+  }
+  #kilo-auto-takeover h2 {
+    margin-bottom: 12px;
+  }
+  #kilo-auto-takeover .kk-auto-count-grid button {
+    height: 48px;
+  }
+  #kilo-auto-takeover .kk-auto-stop-policy {
+    padding-top: 10px;
+  }
+  #kilo-auto-takeover .kk-auto-start {
+    min-height: 48px;
+  }
+  #kilo-auto-takeover .kk-auto-cost {
+    margin-top: 6px;
+  }
+}
+
+/* Small, undimmed menu with a volume flyout; inline expansion on phones. */
+.kk-app .kk-quick-root {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+.kk-app .kk-quick-dismiss {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  background: transparent;
+}
+.kk-app .kk-quick-menu {
+  position: absolute;
+  box-sizing: border-box;
+  padding: var(--quick-padding);
+  border: 1px solid #59412b;
+  border-radius: 9px;
+  background: #020c12;
+  color: #fff8e8;
+  box-shadow:
+    0 10px 32px #0008,
+    inset 0 1px #e0c18a1a;
+  pointer-events: auto;
+  font-family: "Source Sans 3", sans-serif;
+  outline: none;
+  animation: kk-quick-in 120ms ease-out;
+}
+.kk-app .kk-quick-menu *,
+.kk-app .kk-quick-menu *::before,
+.kk-app .kk-quick-menu *::after {
+  box-sizing: border-box;
+}
+.kk-app .kk-quick-menu[data-scroll="true"] {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.kk-app .kk-quick-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: var(--quick-row);
+  min-height: 44px;
+  padding: 0 10px;
+  margin: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  color: #fff8e8;
+  font:
+    600 17px/22px "Source Sans 3",
+    sans-serif;
+  text-align: left;
+}
+.kk-app .kk-quick-row svg {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.7;
+}
+.kk-app .kk-quick-reset {
+  gap: 8px;
+  font-size: 14px;
+  line-height: 18px;
+}
+.kk-app .kk-quick-reset small {
+  display: block;
+  color: #b5c9c2;
+  font-size: 11px;
+  line-height: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.kk-app .kk-quick-reset:disabled {
+  color: #aabbb9;
+  cursor: default;
+}
+.kk-app .kk-quick-row[aria-expanded="true"] {
+  color: #eed39c;
+  background: #10272c;
+}
+.kk-app .kk-quick-row[aria-disabled="true"] {
+  color: #aabbb9;
+  cursor: default;
+}
+.kk-app .kk-quick-audio-row {
+  position: relative;
+}
+.kk-app .kk-quick-volume {
+  position: absolute;
+  top: calc((var(--quick-row) - var(--quick-slider-height)) / 2);
+  width: var(--quick-flyout-width);
+  height: var(--quick-slider-height);
+  padding: 5px 12px;
+  border: 1px solid #59412b;
+  border-radius: 7px;
+  background: #020c12;
+  box-shadow: 0 6px 20px #0006;
+}
+.kk-app .kk-quick-menu[data-side="right"] .kk-quick-volume {
+  left: calc(100% + var(--quick-flyout-offset));
+}
+.kk-app .kk-quick-menu[data-side="left"] .kk-quick-volume {
+  right: calc(100% + var(--quick-flyout-offset));
+}
+.kk-app .kk-quick-menu[data-inline="true"] .kk-quick-volume {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  border-width: 0;
+  border-radius: 5px;
+  padding: 6px 8px;
+  box-shadow: none;
+  background: #102127;
+}
+.kk-app .kk-quick-range {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+}
+.kk-app .kk-quick-range input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  min-width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  accent-color: #d9b166;
+  cursor: pointer;
+}
+.kk-app .kk-quick-range input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #d9b166 var(--volume-fill),
+    #3a494c var(--volume-fill)
+  );
+}
+.kk-app .kk-quick-range input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  margin-top: -7px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff8e8;
+  box-shadow: 0 0 0 1px #020c12;
+}
+.kk-app .kk-quick-range input::-moz-range-track {
+  height: 6px;
+  border-radius: 4px;
+  background: #3a494c;
+}
+.kk-app .kk-quick-range input::-moz-range-progress {
+  height: 6px;
+  border-radius: 4px;
+  background: #d9b166;
+}
+.kk-app .kk-quick-range input::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff8e8;
+}
+.kk-app .kk-quick-menu .kk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.kk-app .kk-rules .kk-info-settings {
+  width: 100%;
+  min-height: 44px;
+  margin: 0 0 14px;
+  border: 1px solid #59412b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #10272c;
+  color: #fff8e8;
+  font:
+    700 16px/22px "Source Sans 3",
+    sans-serif;
+  text-align: left;
+}
+@keyframes kk-quick-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (hover: hover) {
+  .kk-app .kk-quick-row:not([aria-disabled="true"]):hover {
+    background: #10272c;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kk-app .kk-quick-menu,
+  #kilo-auto-takeover .kk-autoplay-card {
+    animation: none;
+    transition: none;
+  }
+}
+.kk-app[data-reduced="1"] .kk-quick-menu,
+.kk-app[data-reduced="1"] #kilo-auto-takeover .kk-autoplay-card {
+  animation: none;
+  transition: none;
+}

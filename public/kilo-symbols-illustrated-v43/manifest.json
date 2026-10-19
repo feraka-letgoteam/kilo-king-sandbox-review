@@ -1,0 +1,159 @@
+{
+  "version": "v43-illustrated-candidates",
+  "status": "selected-runtime-art",
+  "alphaThresholdForMainBounds": 64,
+  "assets": {
+    "package-small": {
+      "file": "package-small.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        47,
+        331,
+        1222,
+        1021
+      ],
+      "originalMetadataBounds": [
+        50,
+        335,
+        1211,
+        992
+      ],
+      "runtimeBytes": 206434
+    },
+    "package-medium": {
+      "file": "package-medium.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        16,
+        289,
+        1242,
+        1026
+      ],
+      "originalMetadataBounds": [
+        27,
+        292,
+        1237,
+        1016
+      ],
+      "runtimeBytes": 226334
+    },
+    "package-trophy": {
+      "file": "package-trophy.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        14,
+        200,
+        1240,
+        1117
+      ],
+      "originalMetadataBounds": [
+        20,
+        203,
+        1236,
+        1113
+      ],
+      "runtimeBytes": 333186
+    },
+    "package-king": {
+      "file": "package-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        6,
+        148,
+        1245,
+        1096
+      ],
+      "originalMetadataBounds": [
+        15,
+        152,
+        1237,
+        1095
+      ],
+      "runtimeBytes": 361014
+    },
+    "scatter-king": {
+      "file": "scatter-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        29,
+        24,
+        1226,
+        1222
+      ],
+      "originalMetadataBounds": [
+        32,
+        26,
+        1223,
+        1220
+      ],
+      "runtimeBytes": 439838
+    },
+    "sym-can": {
+      "file": "sym-can.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        169,
+        66,
+        841,
+        967
+      ],
+      "originalMetadataBounds": [
+        191,
+        82,
+        833,
+        942
+      ],
+      "runtimeBytes": 241940
+    },
+    "sym-bobber": {
+      "file": "sym-bobber.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        128,
+        65,
+        909,
+        965
+      ],
+      "originalMetadataBounds": [
+        145,
+        82,
+        879,
+        942
+      ],
+      "runtimeBytes": 173792
+    },
+    "sym-reel-v8": {
+      "file": "sym-reel-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        31,
+        244,
+        1226,
+        1078
+      ],
+      "originalMetadataBounds": [
+        39,
+        249,
+        1221,
+        1075
+      ],
+      "runtimeBytes": 270418
+    }
+  },
+  "encoding": {
+    "format": "webp",
+    "quality": 94,
+    "alpha_quality": 100,
+    "method": 6,
+    "exact": true,
+    "alphaVerifiedLossless": true
+  }
+}

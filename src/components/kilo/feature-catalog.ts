@@ -1,3 +1,4 @@
+import type { PurchaseMode } from "@/lib/kilo/engine";
 /** Presentation catalogue. A preview deliberately has no purchasable engine mode. */
 type FeatureBase = {
   id: string;
@@ -12,7 +13,7 @@ export type BonusFeature = FeatureBase &
   (
     | {
         kind: "purchase";
-        mode: "buy" | "chopper";
+        mode: PurchaseMode;
         multiple: number;
         spins: number;
         multiplier: number;
@@ -28,55 +29,44 @@ export const FEATURES: readonly BonusFeature[] = [
     kind: "purchase",
     mode: "buy",
     multiple: 100,
-    title: "3 Scatters",
-    subtitle: "Free spins",
+    title: "Dockside Catch",
+    subtitle: "3 scatters",
     tone: "teal",
     scatters: 3,
     spins: 10,
     multiplier: 1,
-    art: "/kilo-features-v12/scatter-3.webp",
+    art: "/kilo-v79/surfaces/dock.webp",
     detail:
-      "Land 3 scatters to trigger the feature, or buy direct entry. The bonus modifier may add spins or raise the starting multiplier.",
+      "10 free spins. Fishermen collect every package at the current multiplier. A marked package stays for exactly one additional spin. Collectors advance the ×1 / ×2 / ×3 / ×10 ladder.",
   },
   {
     id: "scatter-4",
-    kind: "trigger",
-    title: "4 Scatters",
-    subtitle: "Free spins",
+    kind: "purchase",
+    mode: "yacht",
+    multiple: 200,
+    title: "Yacht Stash",
+    subtitle: "4+ scatters",
     tone: "amber",
     scatters: 4,
     spins: 15,
     multiplier: 1,
-    art: "/kilo-features-v12/scatter-4.webp",
+    art: "/kilo-v79/surfaces/yacht.webp",
     detail:
-      "Land 4 scatters in the base game to start with 15 free spins. The bonus modifier may increase the starting award. Direct purchase is not available.",
+      "15 free spins. VS encounters develop across the opening, middle and closing spins. Each winning ×2–×10 reel stays locked. Adjacent reels of the same side merge into one larger wild and their multipliers multiply. Separate participating groups add; each group product is counted once. No cash collection.",
   },
   {
-    id: "scatter-5",
-    kind: "trigger",
-    title: "5 Scatters",
-    subtitle: "Free spins",
-    tone: "crimson",
-    scatters: 5,
-    spins: 20,
-    multiplier: 1,
-    art: "/kilo-features-v12/scatter-5.webp",
-    detail:
-      "Land 5 scatters in the base game to start with 20 free spins. The bonus modifier may increase the starting award. Direct purchase is not available.",
-  },
-  {
-    id: "chopper",
+    id: "god-mode",
     kind: "purchase",
-    mode: "chopper",
-    multiple: 250,
-    title: "Chopper",
-    subtitle: "Bonus buy",
-    tone: "ice",
-    spins: 10,
-    multiplier: 2,
-    art: "/kilo-features-v12/chopper.webp",
+    mode: "getaway",
+    multiple: 1000,
+    title: "The Getaway",
+    subtitle: "God Mode",
+    tone: "gold",
+    spins: 1,
+    multiplier: 1,
+    art: "/kilo-v79/surfaces/getaway.webp",
     detail:
-      "Direct entry with 10 free spins and a ×2 starting multiplier. The bonus modifier may add spins or raise the starting multiplier to ×3.",
+      "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base bet and pays either 25,000× or zero. No free spins, secondary gamble or partial award. Activation itself is free; exit between spins.",
   },
   {
     id: "mystery",
@@ -85,18 +75,7 @@ export const FEATURES: readonly BonusFeature[] = [
     subtitle: "In development",
     tone: "violet",
     art: "/kilo-features-v12/mystery.webp",
-    detail:
-      "Artwork preview. Gameplay, awards and purchase terms are still being designed. This feature cannot be played or purchased yet.",
-  },
-  {
-    id: "god-mode",
-    kind: "preview",
-    title: "God Mode",
-    subtitle: "In development",
-    tone: "gold",
-    art: "/kilo-features-v12/god-mode.webp",
-    detail:
-      "Artwork preview. Gameplay, awards and purchase terms are still being designed. This feature cannot be played or purchased yet.",
+    detail: "Artwork preview. This feature cannot be played or purchased yet.",
   },
 ];
 

@@ -1,0 +1,400 @@
+{
+  "version": 44,
+  "status": "selected-runtime-art",
+  "style": "Matte cel-painted Miami; hand-drawn contours and broad color planes",
+  "alphaThreshold": 64,
+  "assets": {
+    "sym-10": {
+      "file": "sym-10.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        146,
+        202,
+        879,
+        821
+      ],
+      "previousFitBox": [
+        82,
+        200,
+        942,
+        823
+      ],
+      "sha256": "58bb30ca2d3072bc69ba2a6c42216413e75486d44c074e2efa834de9f59f15d2",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-10.png",
+      "sourceSha256": "d025fbe1f2d76c6d7fb8530330ca5fd93e6ffba3db82fa134d16cf2d534920a9"
+    },
+    "sym-j": {
+      "file": "sym-j.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        173,
+        84,
+        852,
+        940
+      ],
+      "previousFitBox": [
+        117,
+        82,
+        907,
+        942
+      ],
+      "sha256": "6c0e4e95875a809c56e1fd30b9763f7e0816cac3b1d4bd19be4965823f897e52",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-j.png",
+      "sourceSha256": "5899fc41095592e7d8bb65b4a9073b4eda9c29a96655c1a57014bba07c2b9820"
+    },
+    "sym-q": {
+      "file": "sym-q.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        136,
+        111,
+        888,
+        913
+      ],
+      "previousFitBox": [
+        82,
+        109,
+        942,
+        915
+      ],
+      "sha256": "07f6d7f260d805aae7b0aa5e5195c872cbd331d2b19b717568abae3a78d60013",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-q.png",
+      "sourceSha256": "d6ee4b7bb4e0f758cd6754d27cd6d7a41185ae19829c57549a47bbaf0e952292"
+    },
+    "sym-k": {
+      "file": "sym-k.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        170,
+        163,
+        854,
+        861
+      ],
+      "previousFitBox": [
+        82,
+        161,
+        942,
+        863
+      ],
+      "sha256": "f8ea6cc824495669ac7ba702ca0d8c911e281dc4cd99ce60b413c6add13febff",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-k.png",
+      "sourceSha256": "f272cd1794feda4d730bbab1ad2fef2e56ff64e215b00e41074640369a65218b"
+    },
+    "sym-a": {
+      "file": "sym-a.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        148,
+        152,
+        876,
+        872
+      ],
+      "previousFitBox": [
+        82,
+        150,
+        942,
+        874
+      ],
+      "sha256": "d0d926f8e621027d56a64defe4d78ea58966ba053f5b7c158c8b261c3a0a3aa4",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-a.png",
+      "sourceSha256": "272a30d978c736ac40a7c7964b3016bc8e47e36f3df9c0427ae6f799528adaeb"
+    },
+    "sym-bobber": {
+      "file": "sym-bobber.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        130,
+        102,
+        907,
+        927
+      ],
+      "previousFitBox": [
+        128,
+        65,
+        909,
+        965
+      ],
+      "sha256": "82d36a94b6ea8bd765ba76754f89ed1c76f0afb941d6849738a25c9ef1c08ee0",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-bobber.png",
+      "sourceSha256": "22fd724ddfe84ddafe9c3f693a8c632de9521ea0d06a4c4b60b44139edbc8565"
+    },
+    "sym-can": {
+      "file": "sym-can.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        218,
+        68,
+        792,
+        965
+      ],
+      "previousFitBox": [
+        169,
+        66,
+        841,
+        967
+      ],
+      "sha256": "1e290c6e9d9d16eac91e99230d07b7c09540512819ca26d8c10c8f065552ecd2",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-can.png",
+      "sourceSha256": "aa4bdce280b52a0fcc4b0d143b8d67a632ed0c743f1ec590e42cd0a8f65b15bc"
+    },
+    "sym-reel-v8": {
+      "file": "sym-reel-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        113,
+        246,
+        1143,
+        1076
+      ],
+      "previousFitBox": [
+        31,
+        244,
+        1226,
+        1078
+      ],
+      "sha256": "c2fbcf78cce662366887244b1f3532eb4c004058b1dc6499176887b82679462c",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-reel-v8.png",
+      "sourceSha256": "17358f4e8161bf28916a854e33bec81e953f7dfa67defb1090a3c2af7d180f4f"
+    },
+    "sym-case-v8": {
+      "file": "sym-case-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        82,
+        59,
+        1199,
+        1206
+      ],
+      "previousFitBox": [
+        44,
+        56,
+        1234,
+        1209
+      ],
+      "sha256": "7bd1a663e8e984c35b2192cd1b1ccc33dc275ee158f0bea6887103bb7de9fc96",
+      "sourceFile": "art/kilo-symbols-v44/originals/sym-case-v8.png",
+      "sourceSha256": "4563f39a1d1900bda805cc73f520960d8d1a404187d73ba1c341ea7cf5c732dc"
+    },
+    "package-small": {
+      "file": "package-small.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        137,
+        333,
+        1133,
+        1018
+      ],
+      "previousFitBox": [
+        47,
+        331,
+        1222,
+        1021
+      ],
+      "sha256": "f34e382f10d90e52a75aabddd99044088f370b5d2c5199ca2aa376bf9c201af2",
+      "sourceFile": "art/kilo-symbols-v44/originals/package-small.png",
+      "sourceSha256": "bd57e6cb1b3ef578e98f3f4003bf76e0bd4a2a068737527b7892194956cd80ab"
+    },
+    "package-medium": {
+      "file": "package-medium.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        196,
+        291,
+        1063,
+        1024
+      ],
+      "previousFitBox": [
+        16,
+        289,
+        1242,
+        1026
+      ],
+      "sha256": "fbec2fd5feca718c54eb6afd99c4717c5420c5fc47ac0243ebceef1bed6c6602",
+      "sourceFile": "art/kilo-symbols-v44/originals/package-medium.png",
+      "sourceSha256": "542c35aad26ab5e854282fbbf9d305835e9632fd1a7ebffec53953a3404f2c53"
+    },
+    "package-trophy": {
+      "file": "package-trophy.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        36,
+        203,
+        1218,
+        1115
+      ],
+      "previousFitBox": [
+        14,
+        200,
+        1240,
+        1117
+      ],
+      "sha256": "13fac587139ce1a007e87559c9d489c97d97fd60946ac40762ac51b99ce648f0",
+      "sourceFile": "art/kilo-symbols-v44/originals/package-trophy.png",
+      "sourceSha256": "42c0c5a39a4fd0a2215d2c9225b4105ed86b031b60af5bae2dfeb6065b26e6ae"
+    },
+    "package-king": {
+      "file": "package-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        97,
+        150,
+        1154,
+        1094
+      ],
+      "previousFitBox": [
+        6,
+        148,
+        1245,
+        1096
+      ],
+      "sha256": "210419f08e321f742a57c7c592b69fafe2831103503c61efbec8528925af8e55",
+      "sourceFile": "art/kilo-symbols-v44/originals/package-king.png",
+      "sourceSha256": "804a1b4b1b1ac94961f756a17ada16cec764646d305117be5dfd574279df3813"
+    },
+    "scatter-king": {
+      "file": "scatter-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        31,
+        43,
+        1223,
+        1204
+      ],
+      "previousFitBox": [
+        29,
+        24,
+        1226,
+        1222
+      ],
+      "sha256": "df5850f296e881dae5db867846f6742832824f6a0876fb59ceea8d51fe9013b4",
+      "sourceFile": "art/kilo-symbols-v44/originals/scatter-king.png",
+      "sourceSha256": "158db517388486a778a508c1b87dd08bade0bca946b1e1131256303b686fe8f1"
+    },
+    "tool-hook": {
+      "file": "tool-hook.webp",
+      "width": 512,
+      "height": 768,
+      "bounds": [
+        211,
+        4,
+        474,
+        636
+      ],
+      "previousFitBox": [
+        215,
+        8,
+        480,
+        666
+      ],
+      "sha256": "9ca74d4fe57117500ef348a035ae28d02b77088de4ac51d1294ce5b8d164d3d3",
+      "sourceFile": "art/kilo-symbols-v44/originals/tool-hook.png",
+      "sourceSha256": "9ff0ee95ae70309d6cf18c6ed95893ca20825f40dfcde9b039b68ac76e25a9af",
+      "registration": {
+        "sourceLandmark": [
+          500.49,
+          103.47
+        ],
+        "targetPivot": [
+          256,
+          48
+        ],
+        "resolvedPivot": [
+          255.83450946643717,
+          47.881365923795826
+        ]
+      }
+    },
+    "tool-dynamite": {
+      "file": "tool-dynamite.webp",
+      "width": 512,
+      "height": 512,
+      "bounds": [
+        35,
+        37,
+        475,
+        477
+      ],
+      "previousFitBox": [
+        34,
+        33,
+        476,
+        481
+      ],
+      "sha256": "0a41b8ef31fb633a55a47c635072d1a939b8eb22f9e0575659d8dcf3b5bdf6ab",
+      "sourceFile": "art/kilo-symbols-v44/originals/tool-dynamite.png",
+      "sourceSha256": "03c4d8c1253c9f4bfccffc5beda2371cf1e97552264a0e099306880d52660dbd"
+    },
+    "tool-bazooka": {
+      "file": "tool-bazooka.webp",
+      "width": 768,
+      "height": 384,
+      "bounds": [
+        67,
+        56,
+        733,
+        372
+      ],
+      "previousFitBox": [
+        55,
+        54,
+        723,
+        375
+      ],
+      "sha256": "e661172f076ed622039a89e77e8c52aede4451c876630e9343a905c27aa933c3",
+      "sourceFile": "art/kilo-symbols-v44/originals/tool-bazooka.png",
+      "sourceSha256": "8d54b975d136f65972f24e899ac2ee0cd6c59ccf8aacec13c3e76686c18e31b9",
+      "registration": {
+        "sourceLandmark": [
+          1658.1,
+          421
+        ],
+        "targetPivot": [
+          700,
+          192
+        ],
+        "resolvedPivot": [
+          699.6624561403509,
+          192.1228501228501
+        ]
+      }
+    },
+    "collector-idle": {
+      "file": "collector-idle.png",
+      "width": 444,
+      "height": 444,
+      "sha256": "4de059a7e5ba50f2a35411eac9098e2f62a8d369505b170ad7f3c9c3d36a7b2b",
+      "bounds": [
+        42,
+        46,
+        393,
+        392
+      ]
+    },
+    "collector-reaction-atlas": {
+      "file": "collector-reaction-atlas.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "ce6e7012f07cf9e2697ab7b6c2ba857fa88d9d614f89d6297ae5d93571b395a9",
+      "bounds": [
+        42,
+        46,
+        1723,
+        836
+      ]
+    }
+  }
+}

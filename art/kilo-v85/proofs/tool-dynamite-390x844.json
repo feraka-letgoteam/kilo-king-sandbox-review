@@ -1,0 +1,2429 @@
+{
+  "id": "tool-dynamite-390x844",
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+  "harnessConfig": {
+    "dynamicDockHeader": true,
+    "recorded": true,
+    "gcInterval": 1,
+    "exposeGc": true
+  },
+  "method": "Actual production mountScene, source-native cells, feature controller, geometry, environment painter and character painter, instrumented Pixi rasterized to CPU Canvas. WIN target harness; audio is mixed offline from recorded production cue timestamps. Not browser/WebGL or complete React UI. The stage actor is drawn with the production painter; its actual React mount is separately exercised by verify-stage-mount-v85.mjs.",
+  "viewport": [
+    390,
+    844
+  ],
+  "fps": 30,
+  "frames": 52,
+  "durationMs": 1699.9999999999989,
+  "normalSpinCalls": 0,
+  "sessionRecords": [],
+  "fixture": {
+    "seed": null,
+    "index": 9,
+    "stake": 1000,
+    "previousTotal": 0,
+    "event": null
+  },
+  "finalWin": 0,
+  "credits": [],
+  "bankEvents": [],
+  "reactions": [
+    {
+      "kind": "settle",
+      "ms": 0
+    }
+  ],
+  "cues": [],
+  "phases": [
+    {
+      "phase": "idle",
+      "ms": 0
+    }
+  ],
+  "snapshots": [
+    {
+      "file": "tool-dynamite-390x844-f0000.webp",
+      "ms": 0,
+      "phase": "idle"
+    },
+    {
+      "file": "tool-dynamite-390x844-f0012.webp",
+      "ms": 399.99999999999994,
+      "phase": "idle"
+    },
+    {
+      "file": "tool-dynamite-390x844-f0024.webp",
+      "ms": 800.0000000000002,
+      "phase": "idle"
+    },
+    {
+      "file": "tool-dynamite-390x844-f0036.webp",
+      "ms": 1200,
+      "phase": "idle"
+    },
+    {
+      "file": "tool-dynamite-390x844-f0048.webp",
+      "ms": 1599.999999999999,
+      "phase": "idle"
+    }
+  ],
+  "telemetry": [
+    {
+      "frame": 0,
+      "ms": 0,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 80,
+        "breath": 0.004367965336512403,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.04295887981170463,
+        "look": -0.17194818954944352,
+        "rod": -0.5196474344149151,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 1,
+      "ms": 33.333333333333336,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 113.33333333333334,
+        "breath": 0.008753396600124252,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.060813732524426574,
+        "look": -0.13715563855164792,
+        "rod": -0.46859650361927296,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 2,
+      "ms": 66.66666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 146.66666666666669,
+        "breath": 0.014630727652640008,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.07862240414309649,
+        "look": -0.10194655038741493,
+        "rod": -0.41612246064332814,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 3,
+      "ms": 100,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 180,
+        "breath": 0.02198210923282118,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.09637137101269727,
+        "look": -0.06642785390029515,
+        "rod": -0.3623846674309535,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 4,
+      "ms": 133.33333333333334,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 213.33333333333334,
+        "breath": 0.030785215436423985,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.11404715481715941,
+        "look": -0.030707418204140045,
+        "rod": -0.30754632389395464,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 5,
+      "ms": 166.66666666666669,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 246.66666666666669,
+        "breath": 0.041013311519236484,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.13163633281460482,
+        "look": 0.0051062749118516125,
+        "rod": -0.25177397227930187,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 6,
+      "ms": 200.00000000000003,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 280,
+        "breath": 0.05263533508961826,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.14912554803038852,
+        "look": 0.040904460438762,
+        "rod": -0.19523699138579956,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 7,
+      "ms": 233.33333333333337,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 313.33333333333337,
+        "breath": 0.06561599044396288,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.16650151940019745,
+        "look": 0.07657842046371184,
+        "rod": -0.1381070821662408,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 8,
+      "ms": 266.6666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 346.6666666666667,
+        "breath": 0.07991585575858956,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.18375105185550394,
+        "look": 0.11201981434258805,
+        "rod": -0.08055774627725813,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 9,
+      "ms": 300,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 380,
+        "breath": 0.09549150281252627,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.20086104634371582,
+        "look": 0.14712100772701994,
+        "rod": -0.02276375916049313,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 10,
+      "ms": 333.3333333333333,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 413.3333333333333,
+        "breath": 0.1122956288775892,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.21781850977541245,
+        "look": 0.1817753994463569,
+        "rod": 0.035099360744674055,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.055555555555555525
+      }
+    },
+    {
+      "frame": 11,
+      "ms": 366.66666666666663,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 446.66666666666663,
+        "breath": 0.13027720037521384,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.23461056489111454,
+        "look": 0.2158777452519206,
+        "rod": 0.09285588504485758,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.11111111111111105
+      }
+    },
+    {
+      "frame": 12,
+      "ms": 399.99999999999994,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 479.99999999999994,
+        "breath": 0.1493816078637556,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.2512244600400939,
+        "look": 0.24932447744032862,
+        "rod": 0.15033040907401998,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.16666666666666657
+      }
+    },
+    {
+      "frame": 13,
+      "ms": 433.33333333333326,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 513.3333333333333,
+        "breath": 0.1695508318855693,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.26764757886379814,
+        "look": 0.2820140193852064,
+        "rod": 0.20734838459167904,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.2222222222222221
+      }
+    },
+    {
+      "frame": 14,
+      "ms": 466.6666666666666,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 546.6666666666665,
+        "breath": 0.19072361917019515,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.2838674498765356,
+        "look": 0.3138470940220624,
+        "rod": 0.26373664988017614,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.2777777777777776
+      }
+    },
+    {
+      "frame": 15,
+      "ms": 499.9999999999999,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 579.9999999999998,
+        "breath": 0.21283566865852804,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.299871755936147,
+        "look": 0.3447270253494706,
+        "rod": 0.3193239556311228,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.33333333333333315
+      }
+    },
+    {
+      "frame": 16,
+      "ms": 533.3333333333333,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 613.3333333333331,
+        "breath": 0.23581982678302038,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.3156483435974694,
+        "look": 0.3745600320309087,
+        "rod": 0.37394148502392077,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.3888888888888888
+      }
+    },
+    {
+      "frame": 17,
+      "ms": 566.6666666666666,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 646.6666666666665,
+        "breath": 0.25960629141086017,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.3311852323414926,
+        "look": 0.4032555122055961,
+        "rod": 0.4274233664168987,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.44444444444444436
+      }
+    },
+    {
+      "frame": 18,
+      "ms": 600,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 679.9999999999999,
+        "breath": 0.28412282383075343,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.34647062367319587,
+        "look": 0.43072631864336564,
+        "rod": 0.4796071770940351,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.5
+      }
+    },
+    {
+      "frame": 19,
+      "ms": 633.3333333333334,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 713.3333333333333,
+        "breath": 0.3092949681395169,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.36149291008116036,
+        "look": 0.4568890234079389,
+        "rod": 0.5303344365374096,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.5555555555555556
+      }
+    },
+    {
+      "frame": 20,
+      "ms": 666.6666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 746.6666666666666,
+        "breath": 0.3350462773622086,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.3762406838521495,
+        "look": 0.48166417122482597,
+        "rod": 0.5794510877273272,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.6111111111111113
+      }
+    },
+    {
+      "frame": 21,
+      "ms": 700.0000000000001,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 780,
+        "breath": 0.3612985456190777,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.3907027457339663,
+        "look": 0.5049765207843824,
+        "rod": 0.6268079650084226,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.6666666666666669
+      }
+    },
+    {
+      "frame": 22,
+      "ms": 733.3333333333335,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 813.3333333333334,
+        "breath": 0.387972045634252,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.4048681134400084,
+        "look": 0.5267552732471943,
+        "rod": 0.6722612471008546,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.7222222222222224
+      }
+    },
+    {
+      "frame": 23,
+      "ms": 766.6666666666669,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 846.6666666666667,
+        "breath": 0.4149857708648535,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.4187260299890618,
+        "look": 0.5469342872578266,
+        "rod": 0.7156728938808044,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.7777777777777781
+      }
+    },
+    {
+      "frame": 24,
+      "ms": 800.0000000000002,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 880.0000000000001,
+        "breath": 0.442257681515207,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.4322659718740014,
+        "look": 0.565452279813945,
+        "rod": 0.7569110656037963,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.8333333333333337
+      }
+    },
+    {
+      "frame": 25,
+      "ms": 833.3333333333336,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 913.3333333333335,
+        "breath": 0.46970495368900333,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.44547765705319486,
+        "look": 0.5822530123807806,
+        "rod": 0.7958505232976674,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.8888888888888893
+      }
+    },
+    {
+      "frame": 26,
+      "ms": 866.666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 946.6666666666669,
+        "breath": 0.49724423092274994,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.45835105275853993,
+        "look": 0.5972854616857116,
+        "rod": 0.8323730091092099,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": {
+        "kind": "throw",
+        "progress": 0.944444444444445
+      }
+    },
+    {
+      "frame": 27,
+      "ms": 900.0000000000003,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 980.0000000000002,
+        "breath": 0.5247918773366114,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.47087638311420793,
+        "look": 0.610503974674265,
+        "rod": 0.8663676054493856,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 28,
+      "ms": 933.3333333333337,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1013.3333333333336,
+        "breath": 0.5522642316338269,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.48304413656030637,
+        "look": 0.621868407156942,
+        "rod": 0.8977310718463969,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 29,
+      "ms": 966.6666666666671,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1046.666666666667,
+        "breath": 0.5795778611773199,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.4948450730758241,
+        "look": 0.631344245725804,
+        "rod": 0.9263681584836083,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 30,
+      "ms": 1000.0000000000005,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1080.0000000000005,
+        "breath": 0.6066498153718737,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5062702311953733,
+        "look": 0.6389027125705561,
+        "rod": 0.9521918954701065,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 31,
+      "ms": 1033.3333333333337,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1113.3333333333337,
+        "breath": 0.6333978775823632,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5173109348144,
+        "look": 0.6445208528758117,
+        "rod": 0.9751238569654028,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 32,
+      "ms": 1066.666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1146.666666666667,
+        "breath": 0.6597408148229743,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5279587997776973,
+        "look": 0.6481816045341138,
+        "rod": 0.995094399356133,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 33,
+      "ms": 1100.0000000000002,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1180.0000000000002,
+        "breath": 0.6855986244591106,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5382057402462131,
+        "look": 0.6498738499629921,
+        "rod": 1.0120428727614201,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 34,
+      "ms": 1133.3333333333335,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1213.3333333333335,
+        "breath": 0.7108927771727662,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5480439748373243,
+        "look": 0.6495924498686979,
+        "rod": 1.025917805224572,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 35,
+      "ms": 1166.6666666666667,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1246.6666666666667,
+        "breath": 0.7355464554534836,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5574660325339086,
+        "look": 0.6473382588540687,
+        "rod": 1.0366770590317207,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 36,
+      "ms": 1200,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1280,
+        "breath": 0.7594847868906074,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5664647583577301,
+        "look": 0.6431181228231284,
+        "rod": 1.0442879586826734,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 37,
+      "ms": 1233.3333333333333,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1313.3333333333333,
+        "breath": 0.7826350715583358,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5750333188028298,
+        "look": 0.6369448581903011,
+        "rod": 1.0487273901253358,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 38,
+      "ms": 1266.6666666666665,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1346.6666666666665,
+        "breath": 0.8049270028030044,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5831652070247928,
+        "look": 0.6288372129573826,
+        "rod": 1.049981870952325,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 39,
+      "ms": 1299.9999999999998,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1379.9999999999998,
+        "breath": 0.8262928807620842,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5908542477819556,
+        "look": 0.6188198097764739,
+        "rod": 1.0480475913466,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 40,
+      "ms": 1333.333333333333,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1413.333333333333,
+        "breath": 0.8466678179664375,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.5980946021247976,
+        "look": 0.6069230711717973,
+        "rod": 1.0429304256517509,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 41,
+      "ms": 1366.6666666666663,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1446.6666666666663,
+        "breath": 0.8659899364014305,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6048807718299569,
+        "look": 0.5931831271474897,
+        "rod": 1.034645914531808,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 42,
+      "ms": 1399.9999999999995,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1479.9999999999995,
+        "breath": 0.8842005554284292,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6112076035755047,
+        "look": 0.5776417054619668,
+        "rod": 1.0232192177747592,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 43,
+      "ms": 1433.3333333333328,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1513.3333333333328,
+        "breath": 0.9012443699959701,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6170702928543047,
+        "look": 0.5603460049020936,
+        "rod": 1.0086850378830985,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 44,
+      "ms": 1466.666666666666,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1546.666666666666,
+        "breath": 0.9170696185993846,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6224643876224889,
+        "look": 0.5413485519420189,
+        "rod": 0.991087514683467,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 45,
+      "ms": 1499.9999999999993,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1579.9999999999993,
+        "breath": 0.9316282404787866,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6273857916802765,
+        "look": 0.5207070412220004,
+        "rod": 0.9704800912754512,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 46,
+      "ms": 1533.3333333333326,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1613.3333333333326,
+        "breath": 0.9448760215780213,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6318307677825716,
+        "look": 0.49848416033167714,
+        "rod": 0.9469253517266438,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 47,
+      "ms": 1566.6666666666658,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1646.6666666666658,
+        "breath": 0.9567727288213002,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6357959404769735,
+        "look": 0.4747473994299227,
+        "rod": 0.9204948310068907,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 48,
+      "ms": 1599.999999999999,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1679.999999999999,
+        "breath": 0.9672822322997301,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6392782986670484,
+        "look": 0.44956884627944765,
+        "rod": 0.8912687977389345,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 49,
+      "ms": 1633.3333333333323,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1713.3333333333323,
+        "breath": 0.9763726149966593,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6422751978989135,
+        "look": 0.423024967318636,
+        "rod": 0.8593360104252493,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 50,
+      "ms": 1666.6666666666656,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1746.6666666666656,
+        "breath": 0.9840162697186071,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6447843623693983,
+        "look": 0.39519637543548397,
+        "rod": 0.8247934478913838,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    },
+    {
+      "frame": 51,
+      "ms": 1699.9999999999989,
+      "phase": "idle",
+      "isSpinning": false,
+      "authoredEntry": [],
+      "stripVisibility": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "stripCellCounts": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "stripOffsets": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "groups": [],
+      "paid": 0,
+      "travellers": [],
+      "actor": {
+        "elapsed": 1779.9999999999989,
+        "breath": 0.9901899829374045,
+        "nod": 0,
+        "blink": "open",
+        "sway": 0.6468038866542574,
+        "look": 0.3661675851489082,
+        "rod": 0.7877460147644548,
+        "brace": 0,
+        "reaction": "win",
+        "reactionProgress": 1
+      },
+      "tool": null
+    }
+  ],
+  "capture": {
+    "kind": "movie",
+    "fromMs": 0,
+    "toMs": null,
+    "fps": 30,
+    "sampleIntervalMs": null,
+    "semanticPhaseFrames": false,
+    "frames": 52,
+    "sourceFps": 30
+  },
+  "audioProof": {
+    "file": "tool-dynamite-390x844-audio.mp4",
+    "method": "Offline mix of shipped beds and SFX at production-controller timestamps; phase-matched bed approximation, not browser/hardware latency proof.",
+    "events": [],
+    "peakBeforeGain": 0.14495433866977692,
+    "gain": 1
+  }
+}

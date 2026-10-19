@@ -1,0 +1,299 @@
+{
+  "version": 54,
+  "status": "alpha-and-size-verified; live-renderer-review-required",
+  "fisherman": {
+    "url": "/kilo-features-v54/fisherman-reel-in.webp",
+    "size": [
+      1152,
+      1152
+    ],
+    "frameSize": [
+      384,
+      576
+    ],
+    "grid": [
+      3,
+      2
+    ],
+    "anchor": [
+      0.5,
+      0.9583333333333334
+    ],
+    "pivot": [
+      192,
+      552
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "name": "ready",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 100,
+        "alphaBounds128": [
+          61,
+          80,
+          365,
+          552
+        ],
+        "footBounds128": [
+          61,
+          500,
+          324,
+          552
+        ],
+        "packingTranslationPx": [
+          -3,
+          -6
+        ]
+      },
+      {
+        "index": 1,
+        "name": "anticipate",
+        "rect": {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 100,
+        "alphaBounds128": [
+          59,
+          110,
+          373,
+          552
+        ],
+        "footBounds128": [
+          59,
+          500,
+          325,
+          552
+        ],
+        "packingTranslationPx": [
+          -6,
+          -6
+        ]
+      },
+      {
+        "index": 2,
+        "name": "heavy_pull",
+        "rect": {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 140,
+        "alphaBounds128": [
+          60,
+          77,
+          330,
+          552
+        ],
+        "footBounds128": [
+          60,
+          500,
+          324,
+          552
+        ],
+        "packingTranslationPx": [
+          -12,
+          -6
+        ]
+      },
+      {
+        "index": 3,
+        "name": "crank",
+        "rect": {
+          "x": 0,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 120,
+        "alphaBounds128": [
+          60,
+          91,
+          337,
+          552
+        ],
+        "footBounds128": [
+          60,
+          500,
+          324,
+          552
+        ],
+        "packingTranslationPx": [
+          -3,
+          -10
+        ]
+      },
+      {
+        "index": 4,
+        "name": "commit",
+        "rect": {
+          "x": 384,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 160,
+        "alphaBounds128": [
+          60,
+          79,
+          325,
+          552
+        ],
+        "footBounds128": [
+          60,
+          500,
+          325,
+          552
+        ],
+        "packingTranslationPx": [
+          -6,
+          -10
+        ]
+      },
+      {
+        "index": 5,
+        "name": "settle",
+        "rect": {
+          "x": 768,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 180,
+        "alphaBounds128": [
+          60,
+          87,
+          323,
+          552
+        ],
+        "footBounds128": [
+          60,
+          500,
+          323,
+          552
+        ],
+        "packingTranslationPx": [
+          -12,
+          -10
+        ]
+      }
+    ],
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "durationsMs": [
+      100,
+      100,
+      140,
+      120,
+      160,
+      180
+    ],
+    "totalMs": 800,
+    "loop": false,
+    "settleFrame": 5,
+    "reducedMotionFrame": 5,
+    "presentation": "One bounded recorded VS duel action; then settle. Preserve scale and existing 552px sole anchor. No cash or collector mechanic is represented by this texture."
+  },
+  "vice": {
+    "url": "/kilo-features-v54/vice-officer.webp",
+    "size": [
+      384,
+      576
+    ],
+    "anchor": [
+      0.5,
+      0.9583333333333334
+    ],
+    "alphaBounds128": [
+      12,
+      12,
+      335,
+      552
+    ],
+    "presentation": "Original adult Miami harbor commander: opposing stance facing the fisherman. Stable sole registration shares the fisherman 192/552 pivot. Static authored cutout; entrance, recoil and exit are runtime animation.",
+    "pivot": [
+      192,
+      552
+    ],
+    "packingTranslationPx": [
+      -22,
+      -6
+    ]
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "promptRecord": "../../art/kilo-features-v54/asset-prompts.json",
+    "processing": "RGBA-preserving resize, lossless WebP conversion and integer frame translation only; no pixel repainting or alpha masking."
+  },
+  "limitations": [
+    "Fisherman remains six separately drawn poses, not a skeletal or interpolated full animation.",
+    "Background-extraction generation slightly changes silhouettes, costume detail and boot shape; registration fixes the sole baseline, not those drawing variations.",
+    "Officer is a single authored pose; expressive articulated motion has not been authored in this asset pack.",
+    "Source RGB contains colors under zero alpha; these are invisible when alpha is composited correctly.",
+    "Small-size composites are asset inspections, not live browser or GPU verification."
+  ]
+}

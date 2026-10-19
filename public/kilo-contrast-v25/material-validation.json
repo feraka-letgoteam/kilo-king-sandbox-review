@@ -1,0 +1,38 @@
+{
+  "checkpoint": "ce639140f65ba7e48e5c7ade7e3effc0ea18f533",
+  "paintCases": 44,
+  "recoveredRegression": "Historical color/image token collision stays fixed; this pass also removes state filters and external paint.",
+  "unchangedGeometryRules": 57,
+  "unchangedControlTokens": true,
+  "protectedFiles": 17,
+  "unchangedControlStructureOutsideReadoutTypography": true,
+  "disabledRimUndimmed": true,
+  "flatOpaqueFaces": true,
+  "opaqueBorderRims": true,
+  "unblurredEdges": true,
+  "iconStrokeWidth": {
+    "secondary": 3,
+    "spin": 3.5
+  },
+  "labels": {
+    "size": 14,
+    "color": "#b6c6be"
+  },
+  "contrastRatios": {
+    "numbersOnWell": 18.65,
+    "previousNumbersOnLightestWell": 13.81,
+    "previousWinOnLightestWell": 11.36,
+    "labelsOnWell": 11.1,
+    "reasonOnFace": 18.65,
+    "iconsOnFace": 19.74,
+    "iconsOnSelectedFace": 19.74,
+    "disabledIconsOnFace": 19.74,
+    "disabledIconsOnSelectedFace": 19.74,
+    "costLabelOnFace": 11.1,
+    "brassRimOnFace": 6.35
+  },
+  "spacing": "Tokens and sizes unchanged. Landscape Auto–Spin gap is now 8px. Edge and focus paint stay inside control bounds; see the production cascade report.",
+  "browserQA": false,
+  "screenshots": [],
+  "limitation": "CSS token/AST, source identity and markup checks only. Live rendering remains unverified."
+}

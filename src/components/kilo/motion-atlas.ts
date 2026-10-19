@@ -1,4 +1,4 @@
-/** Replaceable motion v7 frames. Rectangles come from the supplied atlas manifest. */
+/** Registered v44 collector drawings retain the existing motion rectangles. */
 export type Rect = { x: number; y: number; w: number; h: number };
 
 export const MOTION_ROOT = "/kilo-motion-v7/";
@@ -12,7 +12,7 @@ export const motionMs = Object.freeze({
 });
 
 export const collectorAtlas = {
-  image: "collector-reaction-atlas.png",
+  image: "../kilo-v79/characters/collector-reaction-atlas.webp",
   frames: [
     { x: 0, y: 0, w: 444, h: 444 },
     { x: 444, y: 0, w: 443, h: 444 },

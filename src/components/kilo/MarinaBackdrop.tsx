@@ -259,14 +259,18 @@ export function MarinaBackdrop({ reducedMotion }: { reducedMotion: boolean }) {
       context.imageSmoothingQuality = sourceContext.imageSmoothingQuality =
         "high";
 
-      // Match CSS background-size: cover / background-position: center exactly.
+      // Use the same focal point as the static CSS scene, including portrait.
       const cover = Math.max(
         width / scene.naturalWidth,
         height / scene.naturalHeight,
       );
       const imageWidth = scene.naturalWidth * cover;
       const imageHeight = scene.naturalHeight * cover;
-      const imageLeft = (width - imageWidth) / 2;
+      const focus = Number.parseFloat(
+        getComputedStyle(host).getPropertyValue("--marina-focus-x"),
+      );
+      const focusX = Number.isFinite(focus) ? Math.max(0, Math.min(1, focus)) : 0.5;
+      const imageLeft = (width - imageWidth) * focusX;
       const imageTop = (height - imageHeight) / 2;
       sceneCover = {
         left: imageLeft,

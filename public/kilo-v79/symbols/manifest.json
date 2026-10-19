@@ -1,0 +1,590 @@
+{
+  "symbols": {
+    "sym-10": {
+      "file": "sym-10.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        162,
+        201,
+        861,
+        822
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-b523d7d7-bbd2-426c-bcc5-84f721f4deb7.png",
+      "referenceBounds": [
+        148,
+        201,
+        876,
+        822
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-j": {
+      "file": "sym-j.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        164,
+        132,
+        859,
+        893
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-834047f6-d941-4335-a696-549f7999cc4c.png",
+      "referenceBounds": [
+        118,
+        132,
+        906,
+        893
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-q": {
+      "file": "sym-q.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        108,
+        110,
+        917,
+        914
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-41976a46-7b77-4596-a156-4933bbe12b15.png",
+      "referenceBounds": [
+        102,
+        110,
+        922,
+        914
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-k": {
+      "file": "sym-k.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        159,
+        162,
+        866,
+        862
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-d9787026-b26c-4871-9c38-d57f4b46600d.png",
+      "referenceBounds": [
+        142,
+        162,
+        883,
+        862
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-a": {
+      "file": "sym-a.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        135,
+        155,
+        889,
+        869
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-49042178-0466-4c57-850a-e327c9ccb66b.png",
+      "referenceBounds": [
+        135,
+        151,
+        889,
+        873
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-bobber": {
+      "file": "sym-bobber.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        160,
+        94,
+        876,
+        935
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-9ea6c7c2-c2cc-4d7e-818c-246afd007a76.png",
+      "referenceBounds": [
+        160,
+        67,
+        876,
+        963
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-cash-roll": {
+      "file": "sym-cash-roll.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        170,
+        256,
+        840,
+        777
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-19b5004d-2a2c-4b78-b51c-8be0a6b9bc27.png",
+      "referenceBounds": [
+        170,
+        255,
+        840,
+        779
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-reel-v8": {
+      "file": "sym-reel-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        149,
+        250,
+        1107,
+        1072
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-ea640e04-2b14-4513-a018-6d529bdd25ea.png",
+      "referenceBounds": [
+        146,
+        250,
+        1110,
+        1072
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "sym-case-v8": {
+      "file": "sym-case-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        72,
+        98,
+        1204,
+        1167
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-e7fc5b2b-275e-4c87-befa-c84298600fbd.png",
+      "referenceBounds": [
+        47,
+        98,
+        1230,
+        1167
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "package-small": {
+      "file": "package-small.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        278,
+        391,
+        992,
+        963
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-ab27ef7f-7921-4c9e-9bce-88fc135a3de4.png",
+      "referenceBounds": [
+        48,
+        391,
+        1221,
+        963
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "package-medium": {
+      "file": "package-medium.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        145,
+        324,
+        1112,
+        990
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-fc9f3488-20f4-4311-98f4-2409bd9c7a10.png",
+      "referenceBounds": [
+        17,
+        324,
+        1240,
+        990
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "package-trophy": {
+      "file": "package-trophy.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        99,
+        265,
+        1153,
+        1053
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-98f2aea2-79ec-4f12-8a3f-acda1078bfa7.png",
+      "referenceBounds": [
+        15,
+        265,
+        1237,
+        1053
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "package-king": {
+      "file": "package-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        106,
+        238,
+        1143,
+        1007
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-183a9982-5922-447c-b1dc-47a2fe1d20ba.png",
+      "referenceBounds": [
+        8,
+        238,
+        1242,
+        1007
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    },
+    "scatter-king": {
+      "file": "scatter-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        34,
+        43,
+        1222,
+        1203
+      ],
+      "source": "/workspace/scratch/6281bb86619d/generated_images/exec-319d0288-aa1d-4804-a4eb-b7f5963db7f1.png",
+      "referenceBounds": [
+        32,
+        43,
+        1224,
+        1203
+      ],
+      "registration": "Uniform scale to previous ink budget; alpha preserved"
+    }
+  },
+  "clips": {
+    "sym-reel-v8": {
+      "url": "/kilo-v79/symbols/reel-reaction.webp",
+      "width": 1536,
+      "height": 1024,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "bounds": [
+        0,
+        34,
+        512,
+        503
+      ],
+      "reference": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          149,
+          250,
+          1107,
+          1072
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        70,
+        80,
+        85,
+        85,
+        90,
+        110
+      ]
+    },
+    "sym-case-v8": {
+      "url": "/kilo-v79/symbols/case-reaction.webp",
+      "width": 1536,
+      "height": 1024,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "bounds": [
+        2,
+        0,
+        509,
+        512
+      ],
+      "reference": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          72,
+          98,
+          1204,
+          1167
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        70,
+        80,
+        85,
+        85,
+        90,
+        110
+      ]
+    },
+    "sym-bobber": {
+      "url": "/kilo-v79/symbols/bobber-reaction.webp",
+      "width": 1536,
+      "height": 1024,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 1024,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "bounds": [
+        57,
+        16,
+        479,
+        490
+      ],
+      "reference": {
+        "width": 1024,
+        "height": 1024,
+        "bounds": [
+          160,
+          94,
+          876,
+          935
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "durations": [
+        70,
+        80,
+        85,
+        85,
+        90,
+        110
+      ]
+    },
+    "collector": {
+      "url": "/kilo-v79/characters/collector-reaction-atlas.webp",
+      "width": 1774,
+      "height": 887,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        {
+          "x": 444,
+          "y": 0,
+          "w": 443,
+          "h": 444
+        },
+        {
+          "x": 887,
+          "y": 0,
+          "w": 443,
+          "h": 444
+        },
+        {
+          "x": 1330,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        {
+          "x": 0,
+          "y": 444,
+          "w": 444,
+          "h": 443
+        },
+        {
+          "x": 444,
+          "y": 444,
+          "w": 443,
+          "h": 443
+        },
+        {
+          "x": 887,
+          "y": 444,
+          "w": 443,
+          "h": 443
+        },
+        {
+          "x": 1330,
+          "y": 444,
+          "w": 444,
+          "h": 443
+        }
+      ],
+      "bounds": [
+        5,
+        35,
+        437,
+        423
+      ],
+      "reference": {
+        "width": 444,
+        "height": 444,
+        "bounds": [
+          6,
+          37,
+          436,
+          423
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        0
+      ],
+      "durations": [
+        100,
+        110,
+        130,
+        150,
+        190,
+        140,
+        120,
+        120,
+        80
+      ]
+    }
+  }
+}

@@ -1,8 +1,14 @@
+import { FEATURE_PROFILE, featureEvent, cargoAt, FEATURE_SPINS, type FeatureKind, type FeatureEvent, type Cargo } from './feature-math.ts';
+import { runReelFeature, REEL_FEATURE_SPINS } from './reel-feature-math.ts';
+import { vsSeeded } from './vs-progression.ts';
+import { EXPERIENCE_CATALOGUES, EXPERIENCE_WEIGHT_TOTAL } from './experience-outcome-catalogue.ts';
 const CASINO_MIN_STAKE = 100;
 const CASINO_MAX_STAKE = 100_000;
-/** The Kilo King. Base lines stay quiet. The feature follows Big Bass Splash: the fisherman only appears in free spins, every money bass is one cell up to a 5,000× fish, any two scatters lock and respin, and the tools only fire on a mismatch. The ladder stops at ×10. Weights aim at about 90% of the stake charged. */
+/** Sandbox outcome generator. Version 4 records on-reel features before presentation; legacy generation remains for regression and saved-round compatibility. */
 
-export type SplashMode = "spin" | "ante" | "buy" | "chopper";
+export type PurchaseMode = 'buy' | 'yacht' | 'chopper' | 'getaway';
+export type SplashMode = "spin" | "ante" | PurchaseMode;
+export function isPurchaseMode(mode:string):mode is PurchaseMode { return ['buy','yacht','chopper','getaway'].includes(mode); }
 
 export type Sym =
   | "10"
@@ -20,6 +26,8 @@ export type Sym =
 
 export interface SplashCell {
   s: Sym;
+  /** Recorded VS trigger artwork; only used by the standalone Yacht feature. */
+  duel?: boolean;
   /** Brick cash, as a multiple of the base stake. Anchor cells only. */
   v?: number;
   /** How many reels and rows this bass covers. Anchor only. */
@@ -47,6 +55,10 @@ export interface SplashDrop {
   hook?: number[];
   /** Board before that respin. */
   primed?: SplashCell[][];
+  /** v51 base collection. Separate from the anywhere-scatter award. */
+  collect?: { got:number; beforeCap:number; collectors?:number };
+  /** A single recorded base recovery. Cargo is fixed; only open cells reroll. */
+  catchRun?: { before:SplashCell[][]; held:Cargo[]; caught:boolean };
 }
 
 /** Upgrades drawn once, before the free spins start. */
@@ -56,6 +68,7 @@ export type SplashMod = "moreFish" | "moreWilds" | "level2" | "extraSpins" | "mo
 export type SplashTool = "dynamite" | "hook" | "bazooka";
 
 export interface SplashFree extends SplashDrop {
+  mechanic?: FeatureEvent;
   wilds: number;
   mult: number;
   got: number;
@@ -70,6 +83,10 @@ export interface SplashFree extends SplashDrop {
 }
 
 export interface SplashScript {
+  catalogueSeed?:number;
+  generation?:'experience-v83';
+  version?: 3 | 4;
+  feature?: FeatureKind;
   mode: SplashMode;
   stake: number;
   cost: number;
@@ -85,8 +102,17 @@ export interface SplashScript {
 
 export type Rng = () => number;
 
-export const SPLASH_MAX_MULT = 5000;
-export const SPLASH_MAX_WIN = 5_000_000;
+/** Kilo King's declared maximum, in base-bet multiples; not an Engine-wide limit. */
+export const SPLASH_MAX_MULT = 25_000;
+/** Preserve existing mode ceilings; the overall/Getaway maximum is 25,000×. */
+export const SPLASH_MODE_MAX_MULT: Record<SplashMode, number> = {
+  spin: SPLASH_MAX_MULT,
+  ante: SPLASH_MAX_MULT,
+  buy: SPLASH_MAX_MULT,
+  yacht: 18_000,
+  chopper: SPLASH_MAX_MULT,
+  getaway: SPLASH_MAX_MULT,
+};
 export const SPLASH_COST_MAX = 1_000_000;
 
 /** Ten lines, row index top to bottom. */
@@ -122,7 +148,7 @@ export const LEVEL_MULT = [1, 2, 3, 10] as const;
 /** Anywhere scatter award, as a multiple of the base stake. Index is the scatter count. */
 export const SCATTER_PAY = [0, 0, 0.5, 5, 20, 200] as const;
 
-/** Cash on a money bass, as a multiple of the base stake. The 5,000× is the cap fish. */
+/** Cash on a package, as a multiple of the base stake. The largest package is 5,000×. */
 export const MONEY_LADDER = [2, 5, 10, 15, 20, 25, 50, 100, 200, 500, 1000, 2000, 5000] as const;
 
 const MONEY: [number, number][] = [
@@ -141,7 +167,7 @@ const MONEY: [number, number][] = [
   [5000, 1],
 ];
 
-/** Dynamite plants real bass, but not the cap fish. */
+/** Dynamite plants real packages, excluding the largest cash values. */
 const DYNAMITE_CASH: [number, number][] = [
   [2, 40],
   [5, 28],
@@ -238,11 +264,13 @@ export function splashCost(stake: number, mode: SplashMode): number {
   if (mode === "ante") return Math.round(stake * 1.5);
   if (mode === "buy") return stake * 100;
   if (mode === "chopper") return stake * 250;
+  if (mode === 'yacht') return stake * 200;
+  if (mode === 'getaway') return stake * 1000;
   return stake;
 }
 
-export function splashRoundCap(stake: number): number {
-  return Math.min(SPLASH_MAX_WIN, stake * SPLASH_MAX_MULT);
+export function splashRoundCap(stake: number, mode: SplashMode = "spin"): number {
+  return stake * SPLASH_MODE_MAX_MULT[mode];
 }
 
 export function splashStakeOk(stake: number, mode: SplashMode): boolean {
@@ -457,11 +485,14 @@ function maybeTool(
   grid: SplashCell[][],
   mods: SplashMod[],
   table: Weight[],
+  modern = false,
+  protectedCargo?:Cargo,
 ): { kind: SplashTool; reel?: number; shift?: "up" | "down" } | undefined {
   const wilds = countSym(grid, "splash");
   const fish = countAnchors(grid);
   const boost = mods.includes("moreTools") ? 1.8 : 1;
-  const roll = (kind: SplashTool) => rng() < Math.min(0.62, TOOL_CHANCE[kind] * boost);
+  const chances=modern?{dynamite:.20,hook:.14,bazooka:.065}:TOOL_CHANCE;
+  const roll = (kind: SplashTool) => rng() < Math.min(0.62, chances[kind] * boost);
   const before = cloneGrid(grid);
   const commit = (work: (SplashCell | null)[][]) => {
     const next = solid(work);
@@ -471,14 +502,14 @@ function maybeTool(
     for (let reel = 0; reel < 5; reel++) for (let row = 0; row < 3; row++) grid[reel][row] = before[reel][row];
   };
 
-  if (wilds > 0 && fish === 0 && roll("bazooka")) {
-    const work: (SplashCell | null)[][] = before.map((col) => col.map((cell) => (cell.s === "splash" ? { ...cell } : null)));
+  if (wilds > 0 && fish <= (modern ? 1 : 0) && roll("bazooka")) {
+    const work: (SplashCell | null)[][] = before.map((col) => col.map((cell) => (cell.s === "splash" || modern && cell.s === 'brick' ? { ...cell } : null)));
     fillOpen(rng, work, table, MONEY, true);
     commit(work);
-    if (countAnchors(grid) > 0 && countSym(grid, "splash") > 0) return { kind: "bazooka" };
+    if (countAnchors(grid) > (modern ? fish : 0) && countSym(grid, "splash") > 0) return { kind: "bazooka" };
     revert();
   }
-  if (wilds > 0 && fish === 0 && roll("dynamite")) {
+  if (wilds > 0 && fish <= (modern ? 1 : 0) && roll("dynamite")) {
     const work: (SplashCell | null)[][] = before.map((col) => col.map((cell) => ({ ...cell })));
     const cells = openCells(work);
     let id = nextFishId(before);
@@ -504,8 +535,13 @@ function maybeTool(
       return score(b) - score(a);
     });
     for (const reel of ranked) {
+      if(protectedCargo?.reel===reel)continue;
       const col = before[reel];
-      const up = rng() < 0.5;
+      const randomUp = rng() < 0.5;
+      // Modern hooks preserve the larger edge package when either direction
+      // is valid. The column still moves one cell and the result is recorded.
+      const up = modern && (col[0]?.v??0)!==(col[2]?.v??0)
+        ? (col[0]?.v??0)<(col[2]?.v??0) : randomUp;
       const shifted: SplashCell[] = up
         ? [{ ...col[1] }, { ...col[2] }, { s: "splash" }]
         : [{ s: "splash" }, { ...col[0] }, { ...col[1] }];
@@ -629,12 +665,14 @@ function runFeature(
   banked: number,
   room: number,
   mods: SplashMod[],
+  modern = false,
 ): { free: SplashFree[]; total: number; capped: boolean } {
   let left = spins;
   let wilds = banked;
   let total = 0;
   let capped = false;
   const free: SplashFree[] = [];
+  let carry:Cargo|undefined;
   while (left > 0 && free.length < 200) {
     if (total >= room) {
       capped = true;
@@ -642,8 +680,14 @@ function runFeature(
     }
     left -= 1;
     const grid = fillGrid(rng, table, money, true);
+    const held=carry;
+    if(modern){
+      for(const col of grid)for(const cell of col)if(cell.id!=null)cell.id+=free.length*100;
+      if(held)grid[held.reel]![held.row]={s:'brick',v:held.value/stake,id:held.id,w:1,h:1};
+      carry=undefined;
+    }
     const primed = cloneGrid(grid);
-    const saved = maybeTool(rng, grid, mods, table);
+    const saved = held&&!modern ? undefined : maybeTool(rng, grid, mods, table,modern,held);
     const paid = linePays(stake, grid);
     const landed = countSym(grid, "splash");
     const mult = collectMult(wilds);
@@ -665,6 +709,22 @@ function runFeature(
       left += extra;
     }
     total += add;
+    let mechanic:FeatureEvent|undefined;
+    if(modern){
+      if(!landed&&left>0&&!capped&&rng()<.85){
+        const candidates=cargoAt(grid,stake).filter(p=>p.id!==held?.id);
+        // A visible rule: the largest newly landed package gets one more
+        // chance. The same package never extends itself indefinitely.
+        if(candidates.length)carry=[...candidates].sort((a,b)=>b.value-a.value||a.reel-b.reel||a.row-b.row)[0];
+      }
+      mechanic=featureEvent('dock',`dock:${free.length}`);
+      mechanic.action=held&&!landed?'expire':'carry';
+      mechanic.heldBefore=held?[held]:[];mechanic.heldAfter=carry?[carry]:[];
+      mechanic.sources=carry?[carry]:held?[held]:[];
+      mechanic.beforeCap=rawGot;mechanic.credited=got;mechanic.multiplier=mult;
+      mechanic.pendingBefore=held?.value??0;mechanic.pendingAfter=carry?.value??0;
+      mechanic.nextMultiplier=collectMult(wilds);mechanic.final=left===0;
+    }
     free.push({
       grid,
       lines: fitted.lines,
@@ -676,6 +736,7 @@ function runFeature(
       left,
       level: meterLevel(wilds),
       extra,
+      ...(mechanic?{mechanic}:{}),
       ...(saved ? { tool: saved.kind, primed, ...(saved.reel == null ? {} : { toolReel: saved.reel }), ...(saved.shift ? { toolShift: saved.shift } : {}) } : {}),
     });
     if (capped) break;
@@ -683,7 +744,7 @@ function runFeature(
   return { free, total, capped };
 }
 
-export function playSplash(stake: number, mode: SplashMode, rng: Rng = Math.random): SplashScript {
+export function playLegacySplash(stake: number, mode: SplashMode, rng: Rng = Math.random): SplashScript {
   const bought = mode === "buy" || mode === "chopper";
   const grid = fillGrid(rng, bought ? BASE_QUIET : mode === "ante" ? ANTE : BASE, MONEY, false);
   if (bought) forceBars(rng, grid, 3);
@@ -694,7 +755,9 @@ export function playSplash(stake: number, mode: SplashMode, rng: Rng = Math.rand
   if (mods.includes("extraSpins")) awarded += 2;
   const basePay = bought ? { lines: [] as SplashLine[], sum: 0 } : linePays(stake, grid);
   const rawScatter = bought ? 0 : scatterPayFor(stake, scatters);
-  const room = splashRoundCap(stake);
+  // Historical generator only: preserve previously recorded LGC outcomes exactly.
+  // New rounds use playSplash and the bet-relative cap, with no currency ceiling.
+  const room = Math.min(5_000_000, stake * 5000);
   const baseFitted = fitAward(basePay.lines, rawScatter, room);
   const baseSum = baseFitted.lines.reduce((n, line) => n + line.pay, 0) + baseFitted.extra;
   let banked = mode === "chopper" ? 4 : 0;
@@ -743,4 +806,136 @@ export function cosmeticCell(rng: Rng = Math.random, reel = 2, feature = false):
   return s === "brick" ? { s, v: pick(rng, MONEY), w: 1, h: 1 } : { s };
 }
 
-export const SPLASH_MODES: SplashMode[] = ["spin", "ante", "buy", "chopper"];
+export const SPLASH_MODES: SplashMode[] = ["spin", "ante", "buy", 'yacht', 'getaway'];
+
+/** All feature decisions are recorded before presentation. v3 replays remain supported. */
+export function generateSplashCandidate(
+  stake: number,
+  mode: SplashMode,
+  rng: Rng = Math.random,
+): SplashScript {
+  if (!SPLASH_MODES.includes(mode) || !splashStakeOk(stake, mode))
+    throw new Error("Invalid Kilo bet");
+  if (mode === 'chopper') throw new Error('Chopper Route has been retired.');
+  const bought = isPurchaseMode(mode);
+  const baseTable = BASE.map(([s, w]): Weight => [
+    s,
+    s === "bars"
+      ? mode === "ante"
+        ? FEATURE_PROFILE.anteScatterWeight
+        : FEATURE_PROFILE.baseScatterWeight
+      : w,
+  ]);
+  const grid = fillGrid(rng, bought ? BASE_QUIET : baseTable, MONEY, false);
+  if (bought && mode !== 'getaway')
+    forceBars(rng, grid, mode === "yacht" ? 4 : 3);
+  const hooked = bought ? null : hookRespin(rng, grid, MONEY);
+  const scatters = scatterReels(grid);
+  const feature: FeatureKind | undefined =
+    mode === "getaway"
+      ? "getaway"
+      : mode === "yacht"
+        ? "yacht"
+        : bought || scatters === 3
+            ? "dock"
+            : scatters >= 4
+              ? "yacht"
+                : undefined;
+  // A real, recorded base collector. Only on non-feature landings with cargo.
+  if (
+    !bought &&
+    !feature &&
+    countAnchors(grid) > 0 &&
+    rng() < .042
+  ) {
+    const cells = openCells(grid);
+    const spot = takeCell(rng, cells);
+    if (spot) grid[spot[0]]![spot[1]] = { s: "splash" };
+  }
+  let catchRun:SplashDrop['catchRun'];
+  // A genuine one-respin recovery on an otherwise non-paying cargo board.
+  // It never interrupts the accepted two-scatter hook or a bonus trigger.
+  if(!bought&&!feature&&!hooked&&scatters===0&&countSym(grid,'splash')===0&&
+    countAnchors(grid)>=2&&linePays(stake,grid).sum===0&&rng()<.48){
+    const before=cloneGrid(grid),held=cargoAt(before,stake);
+    const work:(SplashCell|null)[][]=before.map(col=>col.map(c=>c.s==='brick'?{...c}:null));
+    const recovery:Weight[]=[...BASE_QUIET,['splash',45]];
+    fillOpen(rng,work,recovery,MONEY,false);
+    const next=solid(work);
+    for(let reel=0;reel<5;reel++)for(let row=0;row<3;row++)grid[reel]![row]=next[reel]![row]!;
+    catchRun={before,held,caught:countSym(grid,'splash')>0};
+  }
+  const lines = bought ? [] : linePays(stake, grid).lines;
+  const cap = splashRoundCap(stake, mode),
+    rawScatter = bought ? 0 : scatterPayFor(stake, scatters);
+  const fitted = fitAward(lines, rawScatter, cap);
+  let baseSum = fitted.lines.reduce((n, l) => n + l.pay, 0) + fitted.extra;
+  const rawCollect =
+    !bought && !feature && countSym(grid, "splash")
+      ? Math.round(brickSum(grid) * stake * countSym(grid,'splash'))
+      : 0;
+  const baseCollect = Math.min(rawCollect, cap - baseSum);
+  baseSum += baseCollect;
+  const awarded = feature ? feature === 'dock' ? FEATURE_SPINS.dock : REEL_FEATURE_SPINS[feature] : 0;
+  const dockTable = FS.map(([s, w]): Weight => [
+    s,
+    s === "splash"
+      ? 9.5
+      : s === "brick"
+        ? 68
+        : w,
+  ]);
+  const result =
+    feature && baseSum < cap
+      ? feature === "dock"
+        ? runFeature(
+            stake,
+            rng,
+            awarded,
+            dockTable,
+            MONEY,
+            0,
+            cap - baseSum,
+            [],
+            true,
+          )
+        : runReelFeature(feature, stake, rng, cap - baseSum)
+      : { free: [] as SplashFree[], total: 0, capped: false };
+  return {
+    version: feature && feature !== 'dock' ? 4 : 3,
+    mode,
+    feature,
+    stake,
+    cost: splashCost(stake, mode),
+    awarded,
+    banked: 0,
+    mods: [],
+    payout: baseSum + result.total,
+    capped: baseSum >= cap || result.capped,
+    base: {
+      grid,
+      lines: fitted.lines,
+      scatters,
+      scatterPay: fitted.extra,
+      ...(rawCollect
+        ? { collect: { got: baseCollect, beforeCap: rawCollect,collectors:countSym(grid,'splash') } }
+        : {}),
+      ...(catchRun?{catchRun}:{}),
+      ...(hooked ? { primed: hooked.primed, hook: hooked.hook } : {}),
+    },
+    free: result.free,
+  };
+}
+
+/** Weighted whole recorded outcomes. Input speed, balance and previous rounds
+ * are never inputs to selection. Presentation cannot redraw an outcome. */
+export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):SplashScript{
+  if(!SPLASH_MODES.includes(mode)||!splashStakeOk(stake,mode))throw new Error('Invalid Kilo bet');
+  const catalogue=EXPERIENCE_CATALOGUES[mode as keyof typeof EXPERIENCE_CATALOGUES];
+  if(!catalogue?.length)return generateSplashCandidate(stake,mode,rng);
+  const draw=Math.min(EXPERIENCE_WEIGHT_TOTAL-1,Math.floor(rng()*EXPERIENCE_WEIGHT_TOTAL));
+  let low=0,high=catalogue.length/2-1;
+  while(low<high){const mid=(low+high)>>>1;if(draw<catalogue[mid*2+1]!)high=mid;else low=mid+1;}
+  const seed=catalogue[low*2]!;
+  return {...generateSplashCandidate(stake,mode,vsSeeded(seed)),catalogueSeed:seed,generation:'experience-v83'};
+}

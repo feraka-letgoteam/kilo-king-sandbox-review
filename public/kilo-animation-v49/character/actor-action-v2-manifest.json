@@ -1,0 +1,395 @@
+{
+  "version": 49,
+  "revision": "actor-action-v2",
+  "status": "selected-improved-proportions",
+  "url": "/kilo-animation-v49/character/actor-action-v2.png",
+  "size": [
+    1536,
+    1536
+  ],
+  "grid": [
+    3,
+    2
+  ],
+  "frameSize": [
+    512,
+    768
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "name": "ready grip",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        79,
+        44,
+        467,
+        744
+      ],
+      "alphaBoundsAt4": [
+        76,
+        43,
+        468,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        0.0,
+        0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "reel reach",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        80,
+        44,
+        466,
+        744
+      ],
+      "alphaBoundsAt4": [
+        79,
+        43,
+        468,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        13.5,
+        0
+      ]
+    },
+    {
+      "index": 2,
+      "name": "reel crank down",
+      "rect": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        79,
+        48,
+        457,
+        744
+      ],
+      "alphaBoundsAt4": [
+        78,
+        47,
+        458,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        18.5,
+        0
+      ]
+    },
+    {
+      "index": 3,
+      "name": "reel crank up",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        77,
+        53,
+        455,
+        744
+      ],
+      "alphaBoundsAt4": [
+        74,
+        52,
+        456,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        1.0,
+        8
+      ]
+    },
+    {
+      "index": 4,
+      "name": "proud grin / fist",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        78,
+        50,
+        454,
+        744
+      ],
+      "alphaBoundsAt4": [
+        73,
+        47,
+        456,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        12.5,
+        8
+      ]
+    },
+    {
+      "index": 5,
+      "name": "settle",
+      "rect": {
+        "x": 1024,
+        "y": 768,
+        "w": 512,
+        "h": 768
+      },
+      "alphaBounds": [
+        76,
+        51,
+        466,
+        744
+      ],
+      "alphaBoundsAt4": [
+        74,
+        48,
+        469,
+        745
+      ],
+      "anchor": [
+        256,
+        744
+      ],
+      "sourcePackingTranslation": [
+        13.0,
+        8
+      ]
+    }
+  ],
+  "unionAlphaBounds": [
+    76,
+    44,
+    467,
+    744
+  ],
+  "alphaThreshold": 64,
+  "fixedAnchors": {
+    "soleBaselineCenter": [
+      256,
+      744
+    ],
+    "sourceSoleBaselineCenter": [
+      216.5,
+      626
+    ]
+  },
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "sourceFrameSize": [
+    418,
+    627
+  ],
+  "registeredSourceUnion": [
+    51.0,
+    9,
+    410.0,
+    626
+  ],
+  "sourcePackingTranslations": [
+    [
+      0.0,
+      0
+    ],
+    [
+      13.5,
+      0
+    ],
+    [
+      18.5,
+      0
+    ],
+    [
+      1.0,
+      8
+    ],
+    [
+      12.5,
+      8
+    ],
+    [
+      13.0,
+      8
+    ]
+  ],
+  "commonAffineTransform": {
+    "scaleX": 1.0868483883804219,
+    "scaleY": 1.1345218800648298,
+    "translateX": 20.697323915638663,
+    "translateY": 33.78930307941653
+  },
+  "proportionCalibration": {
+    "originalRatio": 0.5573979591836735,
+    "sourceRegisteredRatio": 0.5818476499189628,
+    "sharedHorizontalFactorRelativeToUniform": 0.9579792223296004,
+    "perFrameScaling": false,
+    "reason": "One common horizontal calibration matches the original silhouette envelope; all six frames use exactly the same scale."
+  },
+  "uniformAlternative": {
+    "url": "/kilo-animation-v49/character/actor-action-v2-uniform.png",
+    "commonAffineTransform": {
+      "scaleX": 1.1345218800648298,
+      "scaleY": 1.1345218800648298,
+      "translateX": 10.37601296596435,
+      "translateY": 33.78930307941653
+    },
+    "unionAlphaBounds": [
+      68,
+      44,
+      476,
+      744
+    ]
+  },
+  "originalRegistration": {
+    "desktop": {
+      "url": "/kilo-scenes-v43/base-actor.webp",
+      "canvas": [
+        1920,
+        1080
+      ],
+      "alphaBounds": [
+        1475,
+        153,
+        1912,
+        937
+      ],
+      "bootContactReference": {
+        "left": [
+          1537,
+          937
+        ],
+        "right": [
+          1796.5,
+          933
+        ]
+      }
+    },
+    "portrait": {
+      "url": "/kilo-scenes-v43/base-portrait-actor.webp",
+      "canvas": [
+        768,
+        1708
+      ],
+      "alphaBounds": [
+        388,
+        951,
+        762,
+        1639
+      ],
+      "bootContactReference": {
+        "left": [
+          442,
+          1639
+        ],
+        "right": [
+          660.5,
+          1625
+        ]
+      }
+    }
+  },
+  "sequence": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    0
+  ],
+  "durationsMs": [
+    120,
+    130,
+    150,
+    150,
+    240,
+    150,
+    100
+  ],
+  "totalMs": 1040,
+  "uniformTimingAlternative": {
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      0
+    ],
+    "frameMs": 150
+  },
+  "idleFallbackUrls": [
+    "/kilo-scenes-v43/base-actor.webp",
+    "/kilo-scenes-v43/base-portrait-actor.webp"
+  ],
+  "reducedMotion": "Keep the original actor layer. Do not play the action atlas.",
+  "generation": {
+    "tool": "built-in image_gen",
+    "source": "actor-action-v2-hand-corrected-source.png",
+    "priorSource": "actor-action-v2-source.png",
+    "prompts": [
+      "actor-v2-proportion-prompt.txt",
+      "actor-v2-hand-correction-prompt.txt"
+    ]
+  },
+  "proofs": [
+    "actor-v2-proof-256x384.png",
+    "actor-v2-proof-384x576.png",
+    "actor-v2-action-proof.gif",
+    "actor-v2-original-height-comparison.png"
+  ],
+  "limitations": [
+    "Source sheet packing drift is corrected using translation only; no pose is independently resized.",
+    "The fixed sole baseline is preserved but the source drawing has head/hat height variation of about 1.5 percent between poses.",
+    "Fifth pose keeps the rod-gripping arm and has a low proud fist plus grin; it is intentionally a compact reaction."
+  ],
+  "validation": {
+    "browserTesting": false,
+    "oldAssetsChanged": false,
+    "collectorChanged": false,
+    "runtimeCodeChanged": false
+  }
+}

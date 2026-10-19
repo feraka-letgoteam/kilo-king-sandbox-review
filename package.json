@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/with-app-env.mjs vite dev --host 0.0.0.0 --port 8080",
-    "build": "node scripts/with-app-env.mjs vite build && npm run db:migrate",
+    "build": "npm run build:review && node scripts/prepare-sites-review.mjs",
     "db:migrate": "node scripts/migrate.mjs",
     "build:dev": "node scripts/with-app-env.mjs vite build --mode development",
     "preview": "node scripts/with-app-env.mjs vite preview",
@@ -22,8 +22,15 @@
     "dev:review": "vite --config vite.review.config.ts",
     "build:review": "vite build --config vite.review.config.ts",
     "typecheck:kilo": "tsc --noEmit -p tsconfig.kilo.json",
-    "test:kilo": "node scripts/verify-presentation.mjs",
-    "test:kilo:browser": "node scripts/verify-browser.mjs"
+    "test:kilo": "node scripts/verify-presentation.mjs --features-v51",
+    "test:kilo:browser": "node scripts/verify-browser.mjs",
+    "build:grok": "node scripts/with-app-env.mjs vite build && npm run db:migrate",
+    "test:kilo:features": "node scripts/test-vs-groups-v77.mjs && node scripts/verify-god-card-motion-v77.mjs && node scripts/verify-v77.mjs",
+    "simulate:kilo:pacing": "node scripts/analyze-feature-pacing-v60.mjs",
+    "simulate:kilo:features": "node scripts/simulate-reel-features-v54.mjs",
+    "test:kilo:art": "node scripts/verify-feature-art-v59.mjs && node scripts/verify-v55-composition.mjs && node scripts/verify-v55-assets.mjs && node scripts/verify-v56-assets.mjs",
+    "test:kilo:audio": "node scripts/verify-audio-v54.mjs",
+    "test:kilo:characters": "node scripts/verify-character-life-v59.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.4",
@@ -86,6 +93,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@napi-rs/canvas": "0.1.100",
     "@types/node": "^22.16.5",
     "@types/pg": "^8.11.10",
     "@types/react": "^19.2.0",

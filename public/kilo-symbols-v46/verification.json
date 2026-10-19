@@ -1,0 +1,586 @@
+{
+  "checkpoint": "79007cfb18fb84ddea0ccb1d127ca128a195598e",
+  "verification": "Source, decoded-art and native proof only; live browser unverified",
+  "passed": 99,
+  "total": 99,
+  "checks": [
+    {
+      "name": "Protected source unchanged: src/components/kilo/BonusEntryScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/DockSkin.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/EnvironmentScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/FishermanScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/IntegratedScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/MarinaBackdrop.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/ReelStage.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/SceneScreens.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/StageSurround.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/auto-spins.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/base-dock.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/base-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-model.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-overlays-layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-overlays.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-overlays.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-panels.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/control-theme.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/director.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/dock-design.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/environment-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/feature-catalog.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/feature-panel.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/feature-takeover.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/fisherman-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/info-panel.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/info-panel.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/integrated-composition.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/integrated-scene-model.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/integrated-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/keyboard.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/marina-backdrop.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/marina-frame.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/material.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/material.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/modular-controls.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/paytable.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/portrait-framing.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/scene-atmosphere.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/scene-entry.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/scene-screens.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/scene-system.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/sprite-bounds.json",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/stage-art.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/stage-theme.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/symbol-labels.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/kilo/useMotionCanvas.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/README.md",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/SlotControls.tsx",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/controls.css",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/BarlowCondensed-600.woff2",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/OFL-BarlowCondensed.txt",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/OFL-SourceSans3-900.txt",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/OFL-SourceSans3.txt",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/SourceSans3-600.woff2",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/SourceSans3-700.woff2",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/fonts/SourceSans3-900.woff2",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/tokens.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/components/slot-controls/typography.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/lib/kilo/bank.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/lib/kilo/baseline.json",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/lib/kilo/engine.ts",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/lib/kilo/fixtures.json",
+      "passed": true
+    },
+    {
+      "name": "Protected source unchanged: src/lib/kilo/sound.ts",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-scene-v15/logo-stacked.webp",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-ui-v11/logo-kilo-king.webp",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-night-v3/logo-kilo-king.png",
+      "passed": true
+    },
+    {
+      "name": "Artwork paths/alpha only; tool canvases, source paths and pivots retained",
+      "passed": true
+    },
+    {
+      "name": "Package values, tiers, fit function, reaction motion and scatter budgets unchanged",
+      "passed": true
+    },
+    {
+      "name": "Collector frame rectangles, sequencing and reaction timings unchanged",
+      "passed": true
+    },
+    {
+      "name": "Only artwork references change in play.tsx",
+      "passed": true
+    },
+    {
+      "name": "Only artwork references change in pixiStage.ts",
+      "passed": true
+    },
+    {
+      "name": "Only artwork references change in feature-takeover.tsx",
+      "passed": true
+    },
+    {
+      "name": "Decoded registered artwork: sym-10",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-10.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          131,
+          201,
+          894,
+          821
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-j",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-j.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          167,
+          84,
+          857,
+          940
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-q",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-q.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          123,
+          110,
+          902,
+          914
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-k",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-k.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          164,
+          163,
+          860,
+          861
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-a",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-a.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          121,
+          151,
+          904,
+          873
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-bobber",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-bobber.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          166,
+          66,
+          872,
+          963
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-cash-roll",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-cash-roll.webp",
+        "canvas": [
+          1024,
+          1024
+        ],
+        "bounds": [
+          170,
+          194,
+          840,
+          839
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: package-small",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/package-small.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          93,
+          333,
+          1177,
+          1020
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: package-medium",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/package-medium.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          60,
+          291,
+          1198,
+          1024
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: package-trophy",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/package-trophy.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          16,
+          237,
+          1238,
+          1081
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: package-king",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/package-king.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          9,
+          208,
+          1243,
+          1036
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-reel-v8",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-reel-v8.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          91,
+          245,
+          1167,
+          1076
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: sym-case-v8",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/sym-case-v8.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          62,
+          58,
+          1217,
+          1207
+        ]
+      }
+    },
+    {
+      "name": "Decoded registered artwork: scatter-king",
+      "passed": true,
+      "detail": {
+        "url": "/kilo-symbols-v46/scatter-king.webp",
+        "canvas": [
+          1254,
+          1254
+        ],
+        "bounds": [
+          32,
+          27,
+          1225,
+          1221
+        ]
+      }
+    },
+    {
+      "name": "All14 static reel identities are uniquely registered",
+      "passed": true
+    },
+    {
+      "name": "Decoded collector: collector-idle",
+      "passed": true
+    },
+    {
+      "name": "Decoded collector: collector-reaction-atlas",
+      "passed": true
+    },
+    {
+      "name": "All visible collector portraits share one new asset",
+      "passed": true
+    },
+    {
+      "name": "Feature art uses current scatter and case",
+      "passed": true
+    },
+    {
+      "name": "Cash roll and contraband names agree with the art without changing IDs",
+      "passed": true
+    },
+    {
+      "name": "Actual revised silhouette stays inside cell and above value plaque, tier 2",
+      "passed": true
+    },
+    {
+      "name": "Actual revised silhouette stays inside cell and above value plaque, tier 25",
+      "passed": true
+    },
+    {
+      "name": "Actual revised silhouette stays inside cell and above value plaque, tier 200",
+      "passed": true
+    },
+    {
+      "name": "Actual revised silhouette stays inside cell and above value plaque, tier 5000",
+      "passed": true
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 @import "tailwindcss" source("../src");
 @import "./components/kilo/base-dock.css";
 @import "./components/kilo/base-scene.css";
+@import "./components/kilo/stage-theme.css";
+@import "./components/kilo/portrait-framing.css";
 
 @font-face {
   font-family: "Source Sans 3";
@@ -102,6 +104,7 @@ button:not(:disabled):active {
 /* One game composition. Its geometry is independent of the round state. */
 .kk-app {
   --review-height: 0px;
+  height: 100vh;
   height: 100dvh;
   display: grid;
   grid-template-rows: var(--review-height) minmax(0, 1fr);
@@ -1029,7 +1032,7 @@ button:not(:disabled):active {
   z-index: 60;
   display: grid;
   place-items: center;
-  padding: 20px max(12px, env(safe-area-inset-right))
+  padding: max(20px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
     max(20px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
 }
 .kk-modal-root.is-clear {
@@ -1124,7 +1127,9 @@ button:not(:disabled):active {
   color: #f3e7cd;
 }
 .kk-dialog-body {
+  flex: 1 1 auto;
   min-height: 0;
+  min-width: 0;
   overflow: auto;
   overscroll-behavior: contain;
   padding: 20px 22px;
@@ -1132,6 +1137,7 @@ button:not(:disabled):active {
   line-height: 1.45;
   scrollbar-width: thin;
   scrollbar-color: #546e6e transparent;
+  scroll-padding-block: 12px;
 }
 .kk-dialog-body p {
   margin: 0 0 14px;
@@ -2357,7 +2363,7 @@ button:not(:disabled):active {
 }
 @media (max-width: 620px) {
   .kk-modal-root:has(.kk-purchases) {
-    padding: 12px max(12px, env(safe-area-inset-right))
+    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
       max(12px, env(safe-area-inset-bottom))
       max(12px, env(safe-area-inset-left));
   }
@@ -2545,12 +2551,13 @@ button:not(:disabled):active {
   .kk-modal-root.is-blocking:has(
       .kk-dialog:not(.kk-summary):not(.kk-purchases)
     ) {
-    padding: 0;
+    padding: max(12px, env(safe-area-inset-top)) env(safe-area-inset-right) 0
+      env(safe-area-inset-left);
     align-items: end;
   }
   .kk-modal-root.is-blocking .kk-dialog:not(.kk-summary):not(.kk-purchases) {
     width: 100%;
-    max-height: calc(100% - 32px);
+    max-height: 100%;
     border-radius: 18px 18px 0 0;
     border-bottom: 0;
   }
@@ -2576,7 +2583,8 @@ button:not(:disabled):active {
 }
 @media (max-height: 540px) and (orientation: landscape) {
   .kk-modal-root {
-    padding: 8px max(10px, env(safe-area-inset-right)) 8px
+    padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
       max(10px, env(safe-area-inset-left));
   }
   .kk-dialog-head {
@@ -2642,4 +2650,95 @@ button:not(:disabled):active {
   animation-duration: 0.01ms !important;
   transition-delay: 0ms !important;
   transition-duration: 0.01ms !important;
+}
+
+/* Live panel surfaces share the control system's opaque enamel and brass.
+   This scope deliberately outranks the older material finish and keeps panel
+   geometry separate from the reel/cabinet layout. */
+.kk-app[data-material="marina"] .kk-modal-root
+  .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog) {
+  background: #071820;
+  border: 3px solid var(--kk-brass-shade);
+  border-top-color: var(--kk-brass-light);
+  box-shadow: inset 0 0 0 1px #020c12, 0 12px 32px #0009;
+}
+.kk-app[data-material="marina"] .kk-modal-root
+  .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+  .kk-dialog-head {
+  min-height: 58px;
+  padding: 6px 12px;
+  background: #10262d;
+  border-bottom: 1px solid var(--kk-brass-shade);
+  box-shadow: none;
+}
+.kk-app[data-material="marina"] .kk-modal-root .kk-dialog .kk-dialog-foot {
+  background: #020c12;
+  border-top-color: var(--kk-brass-shade);
+}
+.kk-app[data-material="marina"] .kk-modal-root
+  .kk-dialog:is(.kk-settings, .kk-bet-dialog, .kk-auto-dialog)
+  :is(.kk-icon-button, .kk-denominations button, .kk-segmented button) {
+  background: #020c12;
+  border-color: var(--kk-brass-shade);
+  color: var(--kk-text);
+  box-shadow: inset 0 1px #203c40;
+}
+.kk-app[data-material="marina"] .kk-modal-root
+  :is(.kk-settings, .kk-bet-dialog, .kk-auto-dialog)
+  :is(.kk-denominations button, .kk-segmented button)[aria-pressed="true"] {
+  background: #174438;
+  border-color: var(--kk-teal);
+  color: #fff8e8;
+}
+.kk-app[data-material="marina"] .kk-modal-root .kk-settings
+  :is(fieldset, .kk-audio-settings) {
+  min-width: 0;
+  background: #020c12;
+  box-shadow: inset 0 1px #203c40;
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .kk-app[data-material="marina"] .kk-modal-root.is-blocking
+    .kk-dialog:is(.kk-settings, .kk-bet-dialog, .kk-auto-dialog) {
+    border-radius: 14px 14px 0 0;
+    border-bottom: 0;
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings
+    .kk-settings-body {
+    padding: 14px 12px max(16px, env(safe-area-inset-bottom));
+    gap: 12px;
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .kk-app[data-material="marina"] .kk-modal-root
+    .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+    .kk-dialog-head {
+    min-height: 50px;
+    height: auto;
+    padding: 2px 12px;
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings {
+    width: min(760px, 100%);
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings
+    .kk-settings-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    align-items: start;
+    gap: 12px;
+    padding: 12px;
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings
+    :is(fieldset, fieldset:first-of-type, .kk-audio-settings) {
+    padding: 8px 10px;
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings
+    :is(.kk-compact-actions, .kk-menu-link) {
+    grid-column: 1 / -1;
+  }
+  .kk-app[data-material="marina"] .kk-modal-root .kk-settings
+    .kk-segmented button {
+    min-height: 44px;
+  }
 }

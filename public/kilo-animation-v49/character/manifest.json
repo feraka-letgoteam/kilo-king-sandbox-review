@@ -1,0 +1,1121 @@
+{
+  "version": 49,
+  "generation": {
+    "tool": "built-in image_gen",
+    "collectorPrompt": "collector-prompt.txt",
+    "actorPrompt": "actor-prompt.txt",
+    "originals": [
+      "collector-source.png",
+      "actor-source-v1-backdrop.png"
+    ],
+    "nonselectedOriginals": [
+      "actor-source-v2-backdrop.png"
+    ],
+    "alphaCleanup": "Only alpha below 4/255 becomes zero; all visible artwork and higher alpha retained.",
+    "actorV2Prompts": [
+      "actor-v2-proportion-prompt.txt",
+      "actor-v2-hand-correction-prompt.txt"
+    ]
+  },
+  "coordinateConvention": "Bounds are [left, top, right-exclusive, bottom-exclusive]; anchors use frame-local pixels.",
+  "alphaThreshold": 64,
+  "collector": {
+    "url": "/kilo-animation-v49/character/collector-expression-atlas.png",
+    "size": [
+      1776,
+      888
+    ],
+    "grid": [
+      4,
+      2
+    ],
+    "frameSize": [
+      444,
+      444
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "name": "anticipation",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          12,
+          49,
+          424,
+          392
+        ],
+        "alphaBoundsAt4": [
+          10,
+          47,
+          424,
+          394
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 1,
+        "name": "focus",
+        "rect": {
+          "x": 444,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          11,
+          48,
+          424,
+          392
+        ],
+        "alphaBoundsAt4": [
+          10,
+          47,
+          424,
+          394
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 2,
+        "name": "brow lift",
+        "rect": {
+          "x": 888,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          11,
+          48,
+          423,
+          392
+        ],
+        "alphaBoundsAt4": [
+          11,
+          46,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 3,
+        "name": "grin",
+        "rect": {
+          "x": 1332,
+          "y": 0,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          11,
+          48,
+          423,
+          392
+        ],
+        "alphaBoundsAt4": [
+          10,
+          46,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 4,
+        "name": "laugh",
+        "rect": {
+          "x": 0,
+          "y": 444,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          12,
+          47,
+          424,
+          391
+        ],
+        "alphaBoundsAt4": [
+          10,
+          47,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 5,
+        "name": "laugh easing",
+        "rect": {
+          "x": 444,
+          "y": 444,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          10,
+          47,
+          424,
+          391
+        ],
+        "alphaBoundsAt4": [
+          10,
+          46,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 6,
+        "name": "settle",
+        "rect": {
+          "x": 888,
+          "y": 444,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          12,
+          47,
+          424,
+          391
+        ],
+        "alphaBoundsAt4": [
+          10,
+          47,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      },
+      {
+        "index": 7,
+        "name": "return",
+        "rect": {
+          "x": 1332,
+          "y": 444,
+          "w": 444,
+          "h": 444
+        },
+        "alphaBounds": [
+          11,
+          47,
+          424,
+          391
+        ],
+        "alphaBoundsAt4": [
+          10,
+          47,
+          424,
+          393
+        ],
+        "anchor": [
+          217,
+          392
+        ]
+      }
+    ],
+    "unionAlphaBounds": [
+      10,
+      47,
+      424,
+      392
+    ],
+    "fixedAnchors": {
+      "bustBottomCenter": [
+        217,
+        392
+      ],
+      "runtimeBustCenter": [
+        217,
+        219
+      ]
+    },
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "commonSourceEnvelopeAfterGridResample": [
+      0,
+      22,
+      444,
+      434
+    ],
+    "commonAffineTransform": {
+      "scaleX": 0.9324324324324325,
+      "scaleY": 0.837378640776699,
+      "translateX": 10.0,
+      "translateY": 28.57766990291262
+    },
+    "targetExistingIdleEnvelope": [
+      10,
+      47,
+      424,
+      392
+    ],
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      0
+    ],
+    "durationsMs": [
+      100,
+      110,
+      130,
+      150,
+      190,
+      140,
+      120,
+      120,
+      80
+    ],
+    "totalMs": 1140,
+    "uniformTimingAlternative": {
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        0
+      ],
+      "frameMs": 120
+    },
+    "idleFallbackUrl": "/kilo-symbols-v47/collector-idle.png",
+    "reducedMotion": "Use existing idle asset; no reaction.",
+    "proofs": [
+      "collector-proof-96.png",
+      "collector-proof-144.png",
+      "collector-reaction-proof.gif"
+    ]
+  },
+  "actor": {
+    "version": 49,
+    "revision": "actor-action-v2",
+    "status": "selected-improved-proportions",
+    "url": "/kilo-animation-v49/character/actor-action-v2.png",
+    "size": [
+      1536,
+      1536
+    ],
+    "grid": [
+      3,
+      2
+    ],
+    "frameSize": [
+      512,
+      768
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "name": "ready grip",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          79,
+          44,
+          467,
+          744
+        ],
+        "alphaBoundsAt4": [
+          76,
+          43,
+          468,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          0.0,
+          0
+        ]
+      },
+      {
+        "index": 1,
+        "name": "reel reach",
+        "rect": {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          80,
+          44,
+          466,
+          744
+        ],
+        "alphaBoundsAt4": [
+          79,
+          43,
+          468,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          13.5,
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "name": "reel crank down",
+        "rect": {
+          "x": 1024,
+          "y": 0,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          79,
+          48,
+          457,
+          744
+        ],
+        "alphaBoundsAt4": [
+          78,
+          47,
+          458,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          18.5,
+          0
+        ]
+      },
+      {
+        "index": 3,
+        "name": "reel crank up",
+        "rect": {
+          "x": 0,
+          "y": 768,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          77,
+          53,
+          455,
+          744
+        ],
+        "alphaBoundsAt4": [
+          74,
+          52,
+          456,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          1.0,
+          8
+        ]
+      },
+      {
+        "index": 4,
+        "name": "proud grin / fist",
+        "rect": {
+          "x": 512,
+          "y": 768,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          78,
+          50,
+          454,
+          744
+        ],
+        "alphaBoundsAt4": [
+          73,
+          47,
+          456,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          12.5,
+          8
+        ]
+      },
+      {
+        "index": 5,
+        "name": "settle",
+        "rect": {
+          "x": 1024,
+          "y": 768,
+          "w": 512,
+          "h": 768
+        },
+        "alphaBounds": [
+          76,
+          51,
+          466,
+          744
+        ],
+        "alphaBoundsAt4": [
+          74,
+          48,
+          469,
+          745
+        ],
+        "anchor": [
+          256,
+          744
+        ],
+        "sourcePackingTranslation": [
+          13.0,
+          8
+        ]
+      }
+    ],
+    "unionAlphaBounds": [
+      76,
+      44,
+      467,
+      744
+    ],
+    "alphaThreshold": 64,
+    "fixedAnchors": {
+      "soleBaselineCenter": [
+        256,
+        744
+      ],
+      "sourceSoleBaselineCenter": [
+        216.5,
+        626
+      ]
+    },
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceFrameSize": [
+      418,
+      627
+    ],
+    "registeredSourceUnion": [
+      51.0,
+      9,
+      410.0,
+      626
+    ],
+    "sourcePackingTranslations": [
+      [
+        0.0,
+        0
+      ],
+      [
+        13.5,
+        0
+      ],
+      [
+        18.5,
+        0
+      ],
+      [
+        1.0,
+        8
+      ],
+      [
+        12.5,
+        8
+      ],
+      [
+        13.0,
+        8
+      ]
+    ],
+    "commonAffineTransform": {
+      "scaleX": 1.0868483883804219,
+      "scaleY": 1.1345218800648298,
+      "translateX": 20.697323915638663,
+      "translateY": 33.78930307941653
+    },
+    "proportionCalibration": {
+      "originalRatio": 0.5573979591836735,
+      "sourceRegisteredRatio": 0.5818476499189628,
+      "sharedHorizontalFactorRelativeToUniform": 0.9579792223296004,
+      "perFrameScaling": false,
+      "reason": "One common horizontal calibration matches the original silhouette envelope; all six frames use exactly the same scale."
+    },
+    "uniformAlternative": {
+      "url": "/kilo-animation-v49/character/actor-action-v2-uniform.png",
+      "commonAffineTransform": {
+        "scaleX": 1.1345218800648298,
+        "scaleY": 1.1345218800648298,
+        "translateX": 10.37601296596435,
+        "translateY": 33.78930307941653
+      },
+      "unionAlphaBounds": [
+        68,
+        44,
+        476,
+        744
+      ]
+    },
+    "originalRegistration": {
+      "desktop": {
+        "url": "/kilo-scenes-v43/base-actor.webp",
+        "canvas": [
+          1920,
+          1080
+        ],
+        "alphaBounds": [
+          1475,
+          153,
+          1912,
+          937
+        ],
+        "bootContactReference": {
+          "left": [
+            1537,
+            937
+          ],
+          "right": [
+            1796.5,
+            933
+          ]
+        }
+      },
+      "portrait": {
+        "url": "/kilo-scenes-v43/base-portrait-actor.webp",
+        "canvas": [
+          768,
+          1708
+        ],
+        "alphaBounds": [
+          388,
+          951,
+          762,
+          1639
+        ],
+        "bootContactReference": {
+          "left": [
+            442,
+            1639
+          ],
+          "right": [
+            660.5,
+            1625
+          ]
+        }
+      }
+    },
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      0
+    ],
+    "durationsMs": [
+      120,
+      130,
+      150,
+      150,
+      240,
+      150,
+      100
+    ],
+    "totalMs": 1040,
+    "uniformTimingAlternative": {
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "frameMs": 150
+    },
+    "idleFallbackUrls": [
+      "/kilo-scenes-v43/base-actor.webp",
+      "/kilo-scenes-v43/base-portrait-actor.webp"
+    ],
+    "reducedMotion": "Keep the original actor layer. Do not play the action atlas.",
+    "generation": {
+      "tool": "built-in image_gen",
+      "source": "actor-action-v2-hand-corrected-source.png",
+      "priorSource": "actor-action-v2-source.png",
+      "prompts": [
+        "actor-v2-proportion-prompt.txt",
+        "actor-v2-hand-correction-prompt.txt"
+      ]
+    },
+    "proofs": [
+      "actor-v2-proof-256x384.png",
+      "actor-v2-proof-384x576.png",
+      "actor-v2-action-proof.gif",
+      "actor-v2-original-height-comparison.png"
+    ],
+    "limitations": [
+      "Source sheet packing drift is corrected using translation only; no pose is independently resized.",
+      "The fixed sole baseline is preserved but the source drawing has head/hat height variation of about 1.5 percent between poses.",
+      "Fifth pose keeps the rod-gripping arm and has a low proud fist plus grin; it is intentionally a compact reaction."
+    ],
+    "validation": {
+      "browserTesting": false,
+      "oldAssetsChanged": false,
+      "collectorChanged": false,
+      "runtimeCodeChanged": false
+    }
+  },
+  "validation": {
+    "visualInspection": "Static contact sheets at 96 and 144 px collector canvas sizes, and 256 and 512 px actor canvas sizes.",
+    "browserTesting": false,
+    "runtimeCodeChanged": false,
+    "oldAssetsChanged": false
+  },
+  "exports": {
+    "actor-00.png": {
+      "bytes": 215540,
+      "sha256": "04a32fdddee0e20b4ae9054bf634c0cabc9a3a14499081dfafdc851ddc7d658b"
+    },
+    "actor-01.png": {
+      "bytes": 222357,
+      "sha256": "3fd8784be00347530203c8e556420000571b5c54f14278b95cf35700d5056694"
+    },
+    "actor-02.png": {
+      "bytes": 216680,
+      "sha256": "1d5a9636141eedf997727dc1010cbcfe193dfebcc8074706fe776835f47d2a07"
+    },
+    "actor-03.png": {
+      "bytes": 223850,
+      "sha256": "8d141cb856d2cdbf21b1cd61b5ffc2605fd9588f5329d9740db1ef61645ec781"
+    },
+    "actor-04.png": {
+      "bytes": 225441,
+      "sha256": "1d89bee76ba127c7193a9831195a731c1d6ac3f9ccfdcdc9ee916b490293731b"
+    },
+    "actor-05.png": {
+      "bytes": 216921,
+      "sha256": "b49904ff13fd020a10be78e9d3ba9a68899dcd75f090103cd8b062b781eb7af1"
+    },
+    "actor-action-atlas.png": {
+      "bytes": 1312048,
+      "sha256": "350042f5099310adad09dc23313d2a3652c3ea0b685ac96848a00936c5bd976a"
+    },
+    "collector-00.png": {
+      "bytes": 214721,
+      "sha256": "8f6987d43a3ee08d90eca42420f845a2cde3034dd8f92879c5b908e28ddbf057"
+    },
+    "collector-01.png": {
+      "bytes": 213827,
+      "sha256": "73a44305b99d3a46feaf808821c4a4ce165c8cddcfdb6b4ef65bfbdc63e2e491"
+    },
+    "collector-02.png": {
+      "bytes": 214722,
+      "sha256": "915e24857cc72b38a03f9293def7150d18aa999d67210e1b5f38be2d8eaea8f9"
+    },
+    "collector-03.png": {
+      "bytes": 214973,
+      "sha256": "a96dc67fc8a19163a3e6ac4c0e1151c8f321af5c0c429fc6cc6c84734179ec17"
+    },
+    "collector-04.png": {
+      "bytes": 214502,
+      "sha256": "269751f724c4d1d3b6268ba0d240cc6effe242f161f0bb5a0fa52c6e3b44247f"
+    },
+    "collector-05.png": {
+      "bytes": 215552,
+      "sha256": "b5cb60a26e29d1303c6589d8aa26decac4c6fcad60b1d0c4d48bddbe6c893c5f"
+    },
+    "collector-06.png": {
+      "bytes": 214497,
+      "sha256": "f9ed4e095717b9f0f0de58b0d7ace545a6a51439863943dd31d9547e06d6130c"
+    },
+    "collector-07.png": {
+      "bytes": 213498,
+      "sha256": "75179c43bdce7b3e2b23366d2f6865a73c604863e632e95fb36f4856a68dc341"
+    },
+    "collector-expression-atlas.png": {
+      "bytes": 1702187,
+      "sha256": "30a4bec63114fab8701755c02439a9b3ec9bbc8f64718a71c4ce2d9cb17142e5"
+    },
+    "actor-action-v2-uniform.png": {
+      "bytes": 2040934,
+      "sha256": "47d12504ca4dd4bc218437049acc974724c65301a8439ae40b2ff57ea782fc6d"
+    },
+    "actor-action-v2.png": {
+      "bytes": 1974517,
+      "sha256": "86e646535dff49e66471ae6c3c7593b1c2f4c47f384087fcf04b5d441c85464f"
+    },
+    "actor-v2-00.png": {
+      "bytes": 330166,
+      "sha256": "d1db6f6dd59fd6b4bdb4609b96c39e81c55156a70ad1b0166e7856b8de4c0a32"
+    },
+    "actor-v2-01.png": {
+      "bytes": 333463,
+      "sha256": "31c993b089e1418690741e2fbbca4c445b101fae36826f8e326b2f578a4f3ec2"
+    },
+    "actor-v2-02.png": {
+      "bytes": 335213,
+      "sha256": "ddb23872b660d842bc71a0f06eade563d84d052dc2c7bf0a68c2ca4368a89186"
+    },
+    "actor-v2-03.png": {
+      "bytes": 332254,
+      "sha256": "a4918efc5042288ca90728699532103ddabbe643797cf89c947d8f3f56341268"
+    },
+    "actor-v2-04.png": {
+      "bytes": 326544,
+      "sha256": "373f6fcbe3d3a4ef985bbe0c98330f5dc597cfc1fc562e1031a34b24ba5c93f7"
+    },
+    "actor-v2-05.png": {
+      "bytes": 330033,
+      "sha256": "a70fd63dc1f765ecf3802c91adf6eb0a3bb3b1bc4437894761149ca7b970d25a"
+    }
+  },
+  "actorV1": {
+    "url": "/kilo-animation-v49/character/actor-action-atlas.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "grid": [
+      3,
+      2
+    ],
+    "frameSize": [
+      512,
+      512
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "name": "ready grip",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          107,
+          9,
+          436,
+          507
+        ],
+        "alphaBoundsAt4": [
+          105,
+          9,
+          438,
+          509
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      },
+      {
+        "index": 1,
+        "name": "reel reach",
+        "rect": {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          106,
+          10,
+          435,
+          507
+        ],
+        "alphaBoundsAt4": [
+          105,
+          7,
+          437,
+          509
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      },
+      {
+        "index": 2,
+        "name": "reel crank",
+        "rect": {
+          "x": 1024,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          107,
+          10,
+          435,
+          507
+        ],
+        "alphaBoundsAt4": [
+          105,
+          7,
+          436,
+          509
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      },
+      {
+        "index": 3,
+        "name": "reel pull",
+        "rect": {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          107,
+          6,
+          437,
+          505
+        ],
+        "alphaBoundsAt4": [
+          106,
+          3,
+          438,
+          507
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      },
+      {
+        "index": 4,
+        "name": "proud fist",
+        "rect": {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          106,
+          6,
+          442,
+          505
+        ],
+        "alphaBoundsAt4": [
+          104,
+          3,
+          445,
+          507
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      },
+      {
+        "index": 5,
+        "name": "ease back",
+        "rect": {
+          "x": 1024,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        "alphaBounds": [
+          106,
+          7,
+          449,
+          504
+        ],
+        "alphaBoundsAt4": [
+          105,
+          4,
+          450,
+          506
+        ],
+        "anchor": [
+          253,
+          507
+        ]
+      }
+    ],
+    "unionAlphaBounds": [
+      106,
+      6,
+      449,
+      507
+    ],
+    "fixedAnchors": {
+      "soleBaselineCenter": [
+        253,
+        507
+      ],
+      "leftBootReference": [
+        153,
+        507
+      ],
+      "rightBootReference": [
+        347,
+        504
+      ]
+    },
+    "commonAffineTransform": {
+      "scaleX": 1,
+      "scaleY": 1,
+      "translateX": 0,
+      "translateY": 0
+    },
+    "originalRegistration": {
+      "desktop": {
+        "url": "/kilo-scenes-v43/base-actor.webp",
+        "canvas": [
+          1920,
+          1080
+        ],
+        "alphaBounds": [
+          1475,
+          153,
+          1912,
+          937
+        ],
+        "bootContactReference": {
+          "left": [
+            1537,
+            937
+          ],
+          "right": [
+            1796.5,
+            933
+          ]
+        }
+      },
+      "portrait": {
+        "url": "/kilo-scenes-v43/base-portrait-actor.webp",
+        "canvas": [
+          768,
+          1708
+        ],
+        "alphaBounds": [
+          388,
+          951,
+          762,
+          1639
+        ],
+        "bootContactReference": {
+          "left": [
+            442,
+            1639
+          ],
+          "right": [
+            660.5,
+            1625
+          ]
+        }
+      }
+    },
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      0
+    ],
+    "durationsMs": [
+      120,
+      130,
+      150,
+      150,
+      240,
+      150,
+      100
+    ],
+    "totalMs": 1040,
+    "uniformTimingAlternative": {
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "frameMs": 150
+    },
+    "idleFallbackUrls": [
+      "/kilo-scenes-v43/base-actor.webp",
+      "/kilo-scenes-v43/base-portrait-actor.webp"
+    ],
+    "reducedMotion": "Keep the original actor layer. Do not play the action atlas.",
+    "proofs": [
+      "actor-proof-256.png",
+      "actor-proof-512.png",
+      "actor-action-proof.gif"
+    ],
+    "limitations": [
+      "Boot x silhouettes vary by 1\u20132 source pixels and lower-row sole contact is 2\u20133 source pixels higher; no independent pose normalization was applied.",
+      "The authored rod changes grip/angle between a few poses; this is discrete cel animation, not a physically continuous reel crank.",
+      "Register all frames using one shared source envelope/anchor and one shared transform into each existing scene master; do not fit each frame's alpha bounds."
+    ]
+  }
+}

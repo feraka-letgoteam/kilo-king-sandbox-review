@@ -1,0 +1,1518 @@
+{
+  "version": 21,
+  "kind": "static design proof, not a browser screenshot",
+  "renderer": "Sharp/libvips SVG rasterizer; no browser",
+  "fontOutlines": "Source Sans 3 and Barlow Condensed from shipped WOFF2 fonts",
+  "geometry": "fitGameLayout is imported from source; fitReels and default board are extracted from pixiStage.ts",
+  "reelGeometrySourceSha256": "1eb1c40449ceacf8d0dee5b7e810baa6349193f93e3dcf54a14679c0e40d288d",
+  "symbolGeometry": "Existing alpha bounds and cell fit factors; no symbol resizing or artwork edits",
+  "approximations": [
+    "Static idle frame only; does not demonstrate animation, gameplay, interaction or browser text rasterization.",
+    "SVG cabinet paint reproduces code primitives; texture tint, CSS box shadows, masks and blend details can differ from browser/Pixi rendering.",
+    "Control text baselines are composed from the specified line boxes, not captured from browser layout.",
+    "These six frames depict base idle only. Modal, feature, interaction and resize verification is pending."
+  ],
+  "screens": [
+    {
+      "name": "desktop",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "available": {
+        "width": 1408,
+        "height": 860
+      },
+      "layout": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 698.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 0
+      },
+      "shell": {
+        "x": 16,
+        "y": 96.53012048192772,
+        "width": 1408,
+        "height": 698.9397590361446
+      },
+      "reelHost": {
+        "x": 255,
+        "y": 160.53012048192772,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "cabinet": {
+        "x": 255,
+        "y": 164.53012048192772,
+        "width": 888,
+        "height": 528
+      },
+      "reelGeometry": {
+        "cell": 164,
+        "gap": 8,
+        "gx": 18,
+        "gy": 22,
+        "statusY": 523,
+        "cab": {
+          "x": 0,
+          "y": 4,
+          "w": 888,
+          "h": 528
+        },
+        "dw": 888,
+        "dh": 535
+      },
+      "controlGroup": {
+        "x": 255,
+        "y": 695.4698795180723,
+        "width": 888,
+        "height": 100
+      },
+      "dock": {
+        "width": 888,
+        "height": 100,
+        "offset": 0,
+        "variant": "inline",
+        "turbo": {
+          "x": 4,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 56,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 112,
+          "y": 20,
+          "w": 192,
+          "h": 60
+        },
+        "win": {
+          "x": 316,
+          "y": 20,
+          "w": 192,
+          "h": 60
+        },
+        "bet": {
+          "x": 520,
+          "y": 6,
+          "w": 144,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 44
+        },
+        "minus": {
+          "x": 100,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 100,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 672,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 724,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "charge": {
+          "x": 734,
+          "y": 62,
+          "w": 80,
+          "h": 16
+        },
+        "feature": {
+          "x": 832,
+          "y": 22,
+          "w": 56,
+          "h": 56
+        },
+        "ante": {
+          "x": 520,
+          "y": 50,
+          "w": 100,
+          "h": 44
+        },
+        "steps": true,
+        "readInset": 12
+      },
+      "logoBox": {
+        "x": 23.17,
+        "y": 164.53012048192772,
+        "width": 224.66,
+        "height": 224.66
+      },
+      "characterBox": {
+        "x": 1143,
+        "y": 96.53012048192772,
+        "width": 281,
+        "height": 598.9397590361446,
+        "viewBox": [
+          160,
+          110,
+          1140,
+          2056
+        ]
+      },
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "phone",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "available": {
+        "width": 366,
+        "height": 812
+      },
+      "layout": {
+        "mode": "portrait",
+        "width": 366,
+        "height": 484.48192771084337,
+        "reelWidth": 366,
+        "reelHeight": 220.4819277108434,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "shell": {
+        "x": 12,
+        "y": 175.75903614457832,
+        "width": 366,
+        "height": 484.48192771084337
+      },
+      "reelHost": {
+        "x": 12,
+        "y": 279.7590361445783,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "cabinet": {
+        "x": 14,
+        "y": 280.7590361445783,
+        "width": 362,
+        "height": 218
+      },
+      "reelGeometry": {
+        "cell": 66,
+        "gap": 3,
+        "gx": 12,
+        "gy": 11,
+        "statusY": 214,
+        "cab": {
+          "x": 2,
+          "y": 1,
+          "w": 362,
+          "h": 218
+        },
+        "dw": 366,
+        "dh": 220
+      },
+      "controlGroup": {
+        "x": 12,
+        "y": 500.2409638554217,
+        "width": 366,
+        "height": 160
+      },
+      "dock": {
+        "width": 366,
+        "height": 160,
+        "offset": 0,
+        "variant": "phone",
+        "turbo": {
+          "x": 0,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 50,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 179,
+          "h": 36
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 179,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 44,
+          "w": 218,
+          "h": 56
+        },
+        "betButton": {
+          "x": 44,
+          "y": 0,
+          "w": 130,
+          "h": 56
+        },
+        "minus": {
+          "x": 0,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 174,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 100,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 230,
+          "y": 36,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 238,
+          "y": 85.6,
+          "w": 64,
+          "h": 16
+        },
+        "feature": {
+          "x": 322,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 150,
+          "y": 116,
+          "w": 216,
+          "h": 44
+        },
+        "steps": true,
+        "readInset": 8
+      },
+      "logoBox": {
+        "x": 27,
+        "y": 87.75903614457832,
+        "width": 168,
+        "height": 178
+      },
+      "characterBox": {
+        "x": 202,
+        "y": 87.75903614457832,
+        "width": 168,
+        "height": 178,
+        "viewBox": [
+          160,
+          110,
+          1140,
+          1170
+        ]
+      },
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "phone-small",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "available": {
+        "width": 336,
+        "height": 768
+      },
+      "layout": {
+        "mode": "portrait",
+        "width": 336,
+        "height": 466.4096385542169,
+        "reelWidth": 336,
+        "reelHeight": 202.40963855421688,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "shell": {
+        "x": 12,
+        "y": 162.79518072289156,
+        "width": 336,
+        "height": 466.4096385542169
+      },
+      "reelHost": {
+        "x": 12,
+        "y": 266.7951807228916,
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "cabinet": {
+        "x": 14,
+        "y": 267.7951807228916,
+        "width": 332,
+        "height": 200
+      },
+      "reelGeometry": {
+        "cell": 60,
+        "gap": 3,
+        "gx": 12,
+        "gy": 11,
+        "statusY": 196,
+        "cab": {
+          "x": 2,
+          "y": 1,
+          "w": 332,
+          "h": 200
+        },
+        "dw": 336,
+        "dh": 202
+      },
+      "controlGroup": {
+        "x": 12,
+        "y": 469.20481927710847,
+        "width": 336,
+        "height": 160
+      },
+      "dock": {
+        "width": 336,
+        "height": 160,
+        "offset": 0,
+        "variant": "phone",
+        "turbo": {
+          "x": 0,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 50,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 36
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 44,
+          "w": 188,
+          "h": 56
+        },
+        "betButton": {
+          "x": 44,
+          "y": 0,
+          "w": 100,
+          "h": 56
+        },
+        "minus": {
+          "x": 0,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 144,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 100,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 200,
+          "y": 36,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 208,
+          "y": 85.6,
+          "w": 64,
+          "h": 16
+        },
+        "feature": {
+          "x": 292,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 150,
+          "y": 116,
+          "w": 186,
+          "h": 44
+        },
+        "steps": true,
+        "readInset": 8
+      },
+      "logoBox": {
+        "x": 18.72,
+        "y": 74.79518072289156,
+        "width": 161.28,
+        "height": 178
+      },
+      "characterBox": {
+        "x": 186.72,
+        "y": 74.79518072289156,
+        "width": 161.28,
+        "height": 178,
+        "viewBox": [
+          160,
+          110,
+          1140,
+          1170
+        ]
+      },
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "landscape",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "available": {
+        "width": 812,
+        "height": 350
+      },
+      "layout": {
+        "mode": "landscape",
+        "width": 732,
+        "height": 350,
+        "reelWidth": 488,
+        "reelHeight": 294,
+        "header": 56,
+        "dock": 350,
+        "strip": 0,
+        "side": 96,
+        "controlLeft": 128,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 10
+      },
+      "shell": {
+        "x": 56,
+        "y": 16,
+        "width": 732,
+        "height": 350
+      },
+      "reelHost": {
+        "x": 194,
+        "y": 72,
+        "width": 488,
+        "height": 294
+      },
+      "cabinet": {
+        "x": 195,
+        "y": 74,
+        "width": 486,
+        "height": 290
+      },
+      "reelGeometry": {
+        "cell": 90,
+        "gap": 4,
+        "gx": 11,
+        "gy": 12,
+        "statusY": 287,
+        "cab": {
+          "x": 1,
+          "y": 2,
+          "w": 486,
+          "h": 290
+        },
+        "dw": 488,
+        "dh": 294
+      },
+      "controlGroup": {
+        "x": 56,
+        "y": 16,
+        "width": 732,
+        "height": 350
+      },
+      "dock": {
+        "width": 732,
+        "height": 350,
+        "offset": 0,
+        "variant": "side",
+        "turbo": {
+          "x": 662,
+          "y": 220,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 8,
+          "y": 52,
+          "w": 112,
+          "h": 36
+        },
+        "win": {
+          "x": 8,
+          "y": 94,
+          "w": 112,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 140,
+          "w": 128,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 88
+        },
+        "minus": {
+          "x": 84,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 662,
+          "y": 72,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 120,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 645.6,
+          "y": 179.51999999999998,
+          "w": 76.80000000000001,
+          "h": 16
+        },
+        "feature": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 236,
+          "w": 128,
+          "h": 44
+        },
+        "steps": true,
+        "readInset": 4
+      },
+      "logoBox": {
+        "x": 200,
+        "y": 16,
+        "width": 180,
+        "height": 50
+      },
+      "characterBox": null,
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "popout",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 400,
+        "height": 225
+      },
+      "stageInsets": {
+        "top": 8,
+        "right": 8,
+        "bottom": 8,
+        "left": 8
+      },
+      "available": {
+        "width": 384,
+        "height": 209
+      },
+      "layout": {
+        "mode": "landscape",
+        "compact": true,
+        "width": 352,
+        "height": 209,
+        "reelWidth": 280,
+        "reelHeight": 165,
+        "header": 0,
+        "dock": 209,
+        "strip": 0,
+        "side": 64,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 8
+      },
+      "shell": {
+        "x": 24,
+        "y": 8,
+        "width": 352,
+        "height": 209
+      },
+      "reelHost": {
+        "x": 24,
+        "y": 8,
+        "width": 280,
+        "height": 165
+      },
+      "cabinet": {
+        "x": 28,
+        "y": 9,
+        "width": 272,
+        "height": 164
+      },
+      "reelGeometry": {
+        "cell": 48,
+        "gap": 3,
+        "gx": 14,
+        "gy": 11,
+        "statusY": 160,
+        "cab": {
+          "x": 4,
+          "y": 1,
+          "w": 272,
+          "h": 164
+        },
+        "dw": 280,
+        "dh": 165
+      },
+      "controlGroup": {
+        "x": 24,
+        "y": 8,
+        "width": 352,
+        "height": 209
+      },
+      "dock": {
+        "width": 352,
+        "height": 209,
+        "offset": 0,
+        "variant": "mini",
+        "turbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "menu": {
+          "x": 298,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 0,
+          "y": 165,
+          "w": 100,
+          "h": 44
+        },
+        "win": {
+          "x": 100,
+          "y": 165,
+          "w": 100,
+          "h": 44
+        },
+        "bet": {
+          "x": 200,
+          "y": 165,
+          "w": 80,
+          "h": 44
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 36,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 36,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "spin": {
+          "x": 288,
+          "y": 51,
+          "w": 64,
+          "h": 64
+        },
+        "charge": {
+          "x": 294.4,
+          "y": 90.68,
+          "w": 51.2,
+          "h": 13
+        },
+        "feature": {
+          "x": 298,
+          "y": 128,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "steps": false,
+        "readInset": 0
+      },
+      "logoBox": null,
+      "characterBox": null,
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    },
+    {
+      "name": "popout-medium",
+      "kind": "static design proof, not a browser screenshot",
+      "viewport": {
+        "width": 480,
+        "height": 270
+      },
+      "stageInsets": {
+        "top": 8,
+        "right": 8,
+        "bottom": 8,
+        "left": 8
+      },
+      "available": {
+        "width": 464,
+        "height": 254
+      },
+      "layout": {
+        "mode": "landscape",
+        "compact": true,
+        "width": 420,
+        "height": 254,
+        "reelWidth": 348,
+        "reelHeight": 210,
+        "header": 0,
+        "dock": 254,
+        "strip": 0,
+        "side": 64,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 8
+      },
+      "shell": {
+        "x": 30,
+        "y": 8,
+        "width": 420,
+        "height": 254
+      },
+      "reelHost": {
+        "x": 30,
+        "y": 8,
+        "width": 348,
+        "height": 210
+      },
+      "cabinet": {
+        "x": 31,
+        "y": 9,
+        "width": 347,
+        "height": 209
+      },
+      "reelGeometry": {
+        "cell": 63,
+        "gap": 3,
+        "gx": 11,
+        "gy": 11,
+        "statusY": 205,
+        "cab": {
+          "x": 1,
+          "y": 1,
+          "w": 347,
+          "h": 209
+        },
+        "dw": 348,
+        "dh": 210
+      },
+      "controlGroup": {
+        "x": 30,
+        "y": 8,
+        "width": 420,
+        "height": 254
+      },
+      "dock": {
+        "width": 420,
+        "height": 254,
+        "offset": 0,
+        "variant": "mini",
+        "turbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "menu": {
+          "x": 366,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 0,
+          "y": 210,
+          "w": 134,
+          "h": 44
+        },
+        "win": {
+          "x": 134,
+          "y": 210,
+          "w": 134,
+          "h": 44
+        },
+        "bet": {
+          "x": 268,
+          "y": 210,
+          "w": 80,
+          "h": 44
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 36,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 36,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "spin": {
+          "x": 356,
+          "y": 51,
+          "w": 64,
+          "h": 64
+        },
+        "charge": {
+          "x": 362.4,
+          "y": 90.68,
+          "w": 51.2,
+          "h": 13
+        },
+        "feature": {
+          "x": 366,
+          "y": 128,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "steps": false,
+        "readInset": 0
+      },
+      "logoBox": null,
+      "characterBox": null,
+      "board": [
+        [
+          {
+            "s": "A"
+          },
+          {
+            "s": "cuffs"
+          },
+          {
+            "s": "10"
+          }
+        ],
+        [
+          {
+            "s": "brick",
+            "v": 5,
+            "w": 1,
+            "h": 1
+          },
+          {
+            "s": "Q"
+          },
+          {
+            "s": "keys"
+          }
+        ],
+        [
+          {
+            "s": "K"
+          },
+          {
+            "s": "lamp"
+          },
+          {
+            "s": "bars"
+          }
+        ],
+        [
+          {
+            "s": "duffel"
+          },
+          {
+            "s": "J"
+          },
+          {
+            "s": "brick",
+            "v": 10,
+            "w": 1,
+            "h": 1
+          }
+        ],
+        [
+          {
+            "s": "10"
+          },
+          {
+            "s": "bars"
+          },
+          {
+            "s": "splash"
+          }
+        ]
+      ],
+      "stake": 1000,
+      "balance": 500000,
+      "win": 0
+    }
+  ],
+  "assets": [
+    {
+      "path": "kilo-contraband-v1/package-medium.png",
+      "sha256": "8d18b857c34d0104245780fab078f1a7cf85fb98ad9bb109946b6a99c6c0163b"
+    },
+    {
+      "path": "kilo-contraband-v1/package-small.png",
+      "sha256": "180d2643f469dbfc2a5c10bd89fbbadd3b567d061391f71a2570a1a5e80f0bbc"
+    },
+    {
+      "path": "kilo-contraband-v1/scatter-king.png",
+      "sha256": "379f284ce68a55325a85fb14fbbb94b85d569b9cb58c3b1ba7bd5f6440daf14a"
+    },
+    {
+      "path": "kilo-motion-v7/collector-reaction-atlas.png",
+      "sha256": "ccf23a57e0b74f94b6c4762e7147c62e409df8a6188d91c5acc069f87eed9ac3"
+    },
+    {
+      "path": "kilo-motion-v7/value-plaque.svg",
+      "sha256": "757b4d3e84df1db753e27895ee358d3a4477bfe06aa0992c31e959c898cc0689"
+    },
+    {
+      "path": "kilo-night-v3/hero-idle.png",
+      "sha256": "239fdb5e1bc32f7905e92d8425f32439f425363bd1d44909a848893fbe1e2593"
+    },
+    {
+      "path": "kilo-night-v3/prop-dock-left.png",
+      "sha256": "9e4d42c2cb16354a74837f254849bb8f561dcde3011261882890e3b7e1179082"
+    },
+    {
+      "path": "kilo-night-v3/reel-well.png",
+      "sha256": "b5173036030f7306c91a274223ec12cb78d5d66d960895759ff0197cbd27bca8"
+    },
+    {
+      "path": "kilo-night-v3/sym-10.png",
+      "sha256": "b2bd08e05ef0e9898e829c258ebb1c666798522b7798ab0d8728d229e977af04"
+    },
+    {
+      "path": "kilo-night-v3/sym-a.png",
+      "sha256": "5d940fea071cff102bd3e5df8fbc5eec5a8f43f8ef9619cf7679e088d2afa533"
+    },
+    {
+      "path": "kilo-night-v3/sym-bobber.png",
+      "sha256": "bae2f3b77d84a03c6b1c2fd1c7f7d9fdb32330ee0d2a34312374e0bfdb2031fd"
+    },
+    {
+      "path": "kilo-night-v3/sym-can.png",
+      "sha256": "a0afab1a1c4db9e7ff53a16e59693a4ed1be78746c92af7fee9e7183e519cbab"
+    },
+    {
+      "path": "kilo-night-v3/sym-j.png",
+      "sha256": "7e69e3105e0a3a5ea1643cf2826c7a6acd75af0949bcb8429276805b1c269086"
+    },
+    {
+      "path": "kilo-night-v3/sym-k.png",
+      "sha256": "cc4e3aaa55cb6d74d03c65aaf0f525170de23b169e5b761932b1e4fb6cce2dd5"
+    },
+    {
+      "path": "kilo-night-v3/sym-q.png",
+      "sha256": "7096a5ee5c798936cfcd1195eafb7fbd8066a6d23c2501964cf39d3131ed362a"
+    },
+    {
+      "path": "kilo-scene-v14/marina-night.webp",
+      "sha256": "c26efe4882d19da363f2a258f2394763c196f31317b8abe9dce242a5817b5392"
+    },
+    {
+      "path": "kilo-scene-v14/pier-foreground.webp",
+      "sha256": "9de2d5b06943ba40e5e902d8970cd55b51bb6fb8c02f0ea1df0c310ec1b50c21"
+    },
+    {
+      "path": "kilo-scene-v15/logo-stacked.webp",
+      "sha256": "4ee4f8a90bed98f193392b23a5efd5e3a645810fbaa12aab2d97ad567f5d9407"
+    },
+    {
+      "path": "kilo-stage-v20/cabinet.webp",
+      "sha256": "82866d6e2c16dc50c9bd349058fe4840645ce0db278d669425cdd0e6343dace2"
+    },
+    {
+      "path": "kilo-stage-v20/spool.webp",
+      "sha256": "ce398e1aa29e72cbec713a1fa1f1caeb0b4b4e6b0b936136b093a18dfe41b8e7"
+    },
+    {
+      "path": "kilo-symbols-v8/sym-case-v8.png",
+      "sha256": "1d2b699c3546f8dccda26ae19fcb4f78e98f28b1208558ee7f6146f54d297c46"
+    },
+    {
+      "path": "kilo-symbols-v8/sym-reel-v8.png",
+      "sha256": "d9335346ebd1ef692ca37e9c388760f61a05dc56c5ee739ec5c5cc5c52ce4030"
+    }
+  ]
+}

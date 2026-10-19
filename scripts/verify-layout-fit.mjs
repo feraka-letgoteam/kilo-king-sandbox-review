@@ -5,9 +5,9 @@ import { fitGameLayout } from "../src/components/kilo/layout.ts";
 // Product contracts in CSS pixels. Scrolling is allowed only below these
 // deliberately retained renderer/control minimums, never as a blanket waiver.
 const MIN_REEL_WIDTH = 280;
-const MIN_LANDSCAPE_REEL_HEIGHT = 210;
+const MIN_LANDSCAPE_REEL_HEIGHT = 280 / 1.66;
 const REEL_RATIO = 1.66;
-const DOCK_GAP = 12;
+const DOCK_GAP = 0;
 const REVIEW_HEADER = 44;
 const EPSILON = 0.01;
 const zeroInsets = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -18,7 +18,8 @@ let shortViewportChecks = 0;
 // safe areas are additional lower bounds, rather than padding added twice.
 function availableSpace(width, height, review, insets = zeroInsets) {
   const phone = width <= 620;
-  const horizontal = phone ? 12 : 16;
+  const compact = height <= 380 && width / height >= 1.4;
+  const horizontal = compact ? 8 : phone ? 12 : 16;
   return {
     width:
       width -
@@ -27,8 +28,8 @@ function availableSpace(width, height, review, insets = zeroInsets) {
     height:
       height -
       (review ? REVIEW_HEADER : 0) -
-      Math.max(phone ? 12 : 16, insets.top) -
-      Math.max(phone ? 20 : 24, insets.bottom),
+      Math.max(compact ? 8 : phone ? 12 : 16, insets.top) -
+      Math.max(compact ? 8 : phone ? 20 : 24, insets.bottom),
   };
 }
 
@@ -36,7 +37,7 @@ function verifyAvailable(width, height, label) {
   const fit = fitGameLayout(width, height);
   checks += 1;
   for (const [key, value] of Object.entries(fit)) {
-    if (key !== "mode")
+    if (key !== "mode" && key !== "compact")
       assert.ok(
         Number.isFinite(value) && value >= 0,
         `${label}: invalid ${key}`,
@@ -45,27 +46,41 @@ function verifyAvailable(width, height, label) {
   assert.ok(fit.width <= width + EPSILON, `${label}: horizontal overflow`);
   assert.ok(fit.reelWidth >= MIN_REEL_WIDTH, `${label}: renderer too narrow`);
   assert.ok(
-    Math.abs(fit.reelWidth / fit.reelHeight - REEL_RATIO) < 0.01,
+    fit.compact || Math.abs(fit.reelWidth / fit.reelHeight - REEL_RATIO) < 0.01,
     `${label}: distorted reels`,
   );
-  assert.equal(fit.dockGap, DOCK_GAP, `${label}: explicit cabinet/control gap`);
+  assert.equal(
+    fit.dockGap,
+    fit.compact ? 8 : fit.mode === "landscape" ? 10 : DOCK_GAP,
+    `${label}: explicit cabinet/control gap`,
+  );
   assert.equal(fit.strip, 0, `${label}: no unbudgeted totals row`);
   let minimumHeight;
-  if (fit.mode === "landscape") {
+  if (fit.compact) {
+    assert.equal(fit.header, 0);
+    assert(fit.reelHeight >= 160);
+    assert.equal(fit.height, fit.reelHeight + 44);
+    assert.equal(fit.width, fit.reelWidth + 72);
+    minimumHeight = 204;
+  } else if (fit.mode === "landscape") {
     assert.equal(fit.header, 56, `${label}: landscape title/HUD height`);
-    assert.equal(fit.side, 172, `${label}: side-console width`);
+    assert.equal(fit.side, 96, `${label}: action-column width`);
+    assert.equal(fit.controlLeft, 128, `${label}: left bet controls`);
     assert.equal(fit.artLeft + fit.artRight, 0);
     assert.ok(fit.reelHeight >= MIN_LANDSCAPE_REEL_HEIGHT);
-    assert.equal(fit.width, fit.reelWidth + fit.side + fit.dockGap);
-    assert.equal(fit.height, fit.header + fit.reelHeight);
+    assert.equal(
+      fit.width,
+      fit.controlLeft + fit.reelWidth + fit.side + fit.dockGap * 2,
+    );
+    assert.equal(fit.height, Math.max(280, fit.header + fit.reelHeight));
     assert.equal(fit.dock, fit.height, `${label}: full side rail`);
-    assert.ok(fit.dock >= 252, `${label}: side controls need full height`);
-    minimumHeight = 56 + MIN_LANDSCAPE_REEL_HEIGHT;
+    assert.ok(fit.dock >= 280, `${label}: side controls need full height`);
+    minimumHeight = 280;
   } else {
     const portrait = fit.mode === "portrait";
     const framed = fit.artLeft > 0;
     assert.equal(fit.side, 0);
-    assert.equal(fit.dock, portrait ? 144 : 120, `${label}: full control rail`);
+    assert.equal(fit.dock, portrait ? 160 : 100, `${label}: full control rail`);
     assert.equal(
       fit.header,
       portrait ? 104 : framed ? 64 : 112,

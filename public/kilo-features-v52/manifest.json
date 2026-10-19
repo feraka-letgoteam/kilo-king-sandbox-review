@@ -1,0 +1,359 @@
+{
+  "version": 52,
+  "status": "authored-production-assets-awaiting-live-renderer-review",
+  "fisherman": {
+    "url": "/kilo-features-v52/fisherman-reel-in.webp",
+    "size": [
+      1152,
+      1152
+    ],
+    "frameSize": [
+      384,
+      576
+    ],
+    "grid": [
+      3,
+      2
+    ],
+    "anchor": [
+      0.5,
+      0.9583333333333334
+    ],
+    "pivot": [
+      192,
+      552
+    ],
+    "frames": [
+      {
+        "index": 0,
+        "name": "ready",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 100,
+        "alphaBounds": [
+          61,
+          83,
+          368,
+          557
+        ],
+        "sourceRect": [
+          33,
+          28,
+          441,
+          628
+        ],
+        "sourceSolePivot": [
+          211.0,
+          620
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            49.599999999999994,
+            78.39999999999998
+          ]
+        }
+      },
+      {
+        "index": 1,
+        "name": "anticipate",
+        "rect": {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 100,
+        "alphaBounds": [
+          56,
+          108,
+          375,
+          558
+        ],
+        "sourceRect": [
+          458,
+          64,
+          877,
+          628
+        ],
+        "sourceSolePivot": [
+          638.5,
+          620
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            47.599999999999994,
+            107.19999999999999
+          ]
+        }
+      },
+      {
+        "index": 2,
+        "name": "heavy_pull",
+        "rect": {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 140,
+        "alphaBounds": [
+          50,
+          81,
+          333,
+          558
+        ],
+        "sourceRect": [
+          900,
+          24,
+          1260,
+          628
+        ],
+        "sourceSolePivot": [
+          1077.0,
+          620
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            50.400000000000006,
+            75.19999999999999
+          ]
+        }
+      },
+      {
+        "index": 3,
+        "name": "crank",
+        "rect": {
+          "x": 0,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 120,
+        "alphaBounds": [
+          60,
+          91,
+          337,
+          554
+        ],
+        "sourceRect": [
+          35,
+          642,
+          405,
+          1230
+        ],
+        "sourceSolePivot": [
+          212.5,
+          1220
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            50.0,
+            89.59999999999997
+          ]
+        }
+      },
+      {
+        "index": 4,
+        "name": "commit",
+        "rect": {
+          "x": 384,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 160,
+        "alphaBounds": [
+          60,
+          78,
+          329,
+          555
+        ],
+        "sourceRect": [
+          485,
+          628,
+          840,
+          1230
+        ],
+        "sourceSolePivot": [
+          662.5,
+          1220
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            50.0,
+            78.39999999999998
+          ]
+        }
+      },
+      {
+        "index": 5,
+        "name": "settle",
+        "rect": {
+          "x": 768,
+          "y": 576,
+          "w": 384,
+          "h": 576
+        },
+        "anchor": [
+          0.5,
+          0.9583333333333334
+        ],
+        "pivot": [
+          192,
+          552
+        ],
+        "durationMs": 180,
+        "alphaBounds": [
+          59,
+          89,
+          329,
+          555
+        ],
+        "sourceRect": [
+          892,
+          638,
+          1244,
+          1230
+        ],
+        "sourceSolePivot": [
+          1068.0,
+          1220
+        ],
+        "packing": {
+          "uniformScale": 0.8,
+          "translation": [
+            51.19999999999999,
+            86.39999999999998
+          ]
+        }
+      }
+    ],
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "durationsMs": [
+      100,
+      100,
+      140,
+      120,
+      160,
+      180
+    ],
+    "totalMs": 800,
+    "loop": false,
+    "settleFrame": 5,
+    "reducedMotionFrame": 5,
+    "presentation": "Play once for a recorded VS action, then hold the stable last pose or clear. Do not float or loop.",
+    "uniformScale": 0.8
+  },
+  "chopper": {
+    "url": "/kilo-features-v52/chopper-body.webp",
+    "size": [
+      768,
+      480
+    ],
+    "anchor": [
+      0.5,
+      0.5
+    ],
+    "mainRotorPivot": [
+      443.073,
+      51.158
+    ],
+    "tailRotorPivot": [
+      40.1,
+      202.151
+    ],
+    "cargoDropPoint": [
+      425.425,
+      389.421
+    ],
+    "alphaBounds": [
+      23,
+      37,
+      746,
+      444
+    ],
+    "sourceCrop": [
+      38,
+      95,
+      1523,
+      934
+    ],
+    "uniformScale": 0.49023569023569025,
+    "presentation": "Body cutout only. Add sharp code-native rotor blades at the supplied pivots, run fly/drop/exit once, remove all parts after exit. No hover loop.",
+    "mainRotorSuggestedRadius": 225.68,
+    "mainRotorPerspectiveScaleY": 0.16,
+    "tailRotorSuggestedRadius": 31.304
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "transparentBackground": true,
+    "prompts": [
+      "fisherman-reel-in-prompt.txt",
+      "chopper-body-prompt.txt",
+      "chopper-alpha-cleanup-prompt.txt"
+    ]
+  },
+  "limitations": [
+    "Six separately authored poses, not a continuous skeletal rig. No generated interpolation is claimed.",
+    "Translation registration fixes the sole midpoint and baseline; pose drawing retains small boot-width, face and costume variation.",
+    "Use uniform fit; do not stretch the fisherman to fill a reel. The reel wild material and multiplier can fill the remaining reel height.",
+    "Helicopter body is a static authored cutout. Rotor, flight, cash drop and timing are runtime animation.",
+    "Asset proofs are composites of these files, not live game screenshots or a gameplay recording."
+  ]
+}

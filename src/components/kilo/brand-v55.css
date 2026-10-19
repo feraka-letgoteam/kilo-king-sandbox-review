@@ -1,0 +1,17 @@
+/* All game-logo geometry comes from gameBrandBox. Old .kk-logo selectors
+   cannot enlarge the feature mark and collide with the portrait HUD. */
+.kk-app .kk-game-brand {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+  filter: none;
+  transform: none;
+}

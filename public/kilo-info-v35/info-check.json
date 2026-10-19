@@ -1,0 +1,178 @@
+{
+  "version": "v35",
+  "checkpoint": "ac3e25bb9b2eeaa9c4c193764a7e9d9944d45431",
+  "method": "Production CSS author cascade, React server-rendered markup, asset existence, and source-derived responsive box arithmetic. No live browser verification.",
+  "cssFile": "dist/assets/review-0BmhykwX.css",
+  "cssSha256": "155f1a5b246ce8554a2d0cf65d5262f27d348fa52a67b0c201704656bd6efe06",
+  "markupChecks": [
+    {
+      "stake": 100,
+      "symbols": 10,
+      "payoutEntries": 30,
+      "paylines": 10,
+      "modes": 4,
+      "allArtworkPresent": true
+    },
+    {
+      "stake": 500,
+      "symbols": 10,
+      "payoutEntries": 30,
+      "paylines": 10,
+      "modes": 4,
+      "allArtworkPresent": true
+    },
+    {
+      "stake": 1000,
+      "symbols": 10,
+      "payoutEntries": 30,
+      "paylines": 10,
+      "modes": 4,
+      "allArtworkPresent": true
+    },
+    {
+      "stake": 2500,
+      "symbols": 10,
+      "payoutEntries": 30,
+      "paylines": 10,
+      "modes": 4,
+      "allArtworkPresent": true
+    },
+    {
+      "stake": 10000,
+      "symbols": 10,
+      "payoutEntries": 30,
+      "paylines": 10,
+      "modes": 4,
+      "allArtworkPresent": true
+    }
+  ],
+  "layout": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "contentWidth": 1096,
+      "symbolColumns": 3,
+      "symbolCellWidth": 344,
+      "symbolSize": 188,
+      "scrollTop": 76,
+      "scrollHeight": 824,
+      "closeTarget": [
+        52,
+        52
+      ],
+      "closeToContentGap": 12,
+      "featureColumns": "220px minmax(0,1fr)",
+      "bodyFont": "400 18px/1.55 \"Source Sans 3\",sans-serif",
+      "bodySizeOverride": null,
+      "sectionHeading": "700 32px/1.2 \"Source Sans 3\",sans-serif",
+      "sectionSizeOverride": null
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "contentWidth": 350,
+      "symbolColumns": 2,
+      "symbolCellWidth": 167,
+      "symbolSize": 128,
+      "scrollTop": 64,
+      "scrollHeight": 780,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "closeToContentGap": 8,
+      "featureColumns": "minmax(0,1fr)",
+      "bodyFont": "400 18px/1.55 \"Source Sans 3\",sans-serif",
+      "bodySizeOverride": "16px",
+      "sectionHeading": "700 32px/1.2 \"Source Sans 3\",sans-serif",
+      "sectionSizeOverride": "26px"
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "contentWidth": 320,
+      "symbolColumns": 2,
+      "symbolCellWidth": 152,
+      "symbolSize": 128,
+      "scrollTop": 64,
+      "scrollHeight": 736,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "closeToContentGap": 8,
+      "featureColumns": "minmax(0,1fr)",
+      "bodyFont": "400 18px/1.55 \"Source Sans 3\",sans-serif",
+      "bodySizeOverride": "16px",
+      "sectionHeading": "700 32px/1.2 \"Source Sans 3\",sans-serif",
+      "sectionSizeOverride": "26px"
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "contentWidth": 780,
+      "symbolColumns": 3,
+      "symbolCellWidth": 238.66666666666666,
+      "symbolSize": 140,
+      "scrollTop": 60,
+      "scrollHeight": 330,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "closeToContentGap": 8,
+      "featureColumns": "160px minmax(0,1fr)",
+      "bodyFont": "400 18px/1.55 \"Source Sans 3\",sans-serif",
+      "bodySizeOverride": null,
+      "sectionHeading": "700 32px/1.2 \"Source Sans 3\",sans-serif",
+      "sectionSizeOverride": null
+    },
+    {
+      "viewport": [
+        320,
+        568
+      ],
+      "contentWidth": 280,
+      "symbolColumns": 2,
+      "symbolCellWidth": 132,
+      "symbolSize": 128,
+      "scrollTop": 64,
+      "scrollHeight": 504,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "closeToContentGap": 8,
+      "featureColumns": "minmax(0,1fr)",
+      "bodyFont": "400 18px/1.55 \"Source Sans 3\",sans-serif",
+      "bodySizeOverride": "16px",
+      "sectionHeading": "700 32px/1.2 \"Source Sans 3\",sans-serif",
+      "sectionSizeOverride": "26px"
+    }
+  ],
+  "protectedSources": {
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/slot-controls/layout.ts": "a2fbc10c3008e8e16957e3e7fb81b42f4bb7a9b18a40b1aac063edcc79f943c8",
+    "src/components/slot-controls/SlotControls.tsx": "6a1a5bee56aa439c564677d37dd1ce94fa71132be2a2048f7ca0796f6726fde4",
+    "src/components/slot-controls/controls.css": "7905a9c01a575258af93c29a7129fa57b785aca0e5ebeb17fbe265008ada015b",
+    "src/components/kilo/control-panels.tsx": "14abeaf8f0d16b9e594b1e4fc4fd0734ceb012f138f3d15c18534772785c4eb8",
+    "src/components/kilo/auto-spins.ts": "579da984beea904bfe24d093b74d9a737026af0c8afaff44018ab5909ce3a3c4"
+  },
+  "remaining": [
+    "Verified theoretical RTP per mode is not supplied by the current sandbox. Existing baseline simulations are estimates, not an approved theoretical declaration.",
+    "The sandbox has no Stake Engine RGS integration; production recovery/settlement disclaimer must be finalized with that integration.",
+    "Live touch, focus, font rendering and visual equivalence remain unverified; browser QA was unavailable."
+  ]
+}

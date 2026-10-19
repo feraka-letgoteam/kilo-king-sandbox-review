@@ -1,0 +1,224 @@
+{
+  "version": 11,
+  "safeAreaUnits": "fractions of full original canvas, x/y/width/height",
+  "assets": {
+    "modal-vault": {
+      "master": "modal-vault.png",
+      "runtime": "modal-vault.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        31,
+        1522,
+        1024
+      ],
+      "textSafeRectNormalized": [
+        0.15,
+        0.24,
+        0.7,
+        0.48
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "card-standard-backing": {
+      "master": "card-standard-backing.png",
+      "runtime": "card-standard-backing.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "textSafeRectNormalized": [
+        0.16,
+        0.56,
+        0.68,
+        0.29
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "card-premium-backing": {
+      "master": "card-premium-backing.png",
+      "runtime": "card-premium-backing.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        0,
+        1024,
+        1536
+      ],
+      "textSafeRectNormalized": [
+        0.16,
+        0.56,
+        0.68,
+        0.29
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "banner-entry": {
+      "master": "banner-entry.png",
+      "runtime": "banner-entry.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "textSafeRectNormalized": [
+        0.23,
+        0.35,
+        0.54,
+        0.27
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "banner-upgrade": {
+      "master": "banner-upgrade.png",
+      "runtime": "banner-upgrade.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "alphaBounds": [
+        12,
+        9,
+        2156,
+        724
+      ],
+      "textSafeRectNormalized": [
+        0.29,
+        0.38,
+        0.48,
+        0.26
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "panel-complete": {
+      "master": "panel-complete.png",
+      "runtime": "panel-complete.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        1,
+        1254,
+        1172
+      ],
+      "textSafeRectNormalized": [
+        0.22,
+        0.29,
+        0.56,
+        0.44
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "banner-win": {
+      "master": "banner-win.png",
+      "runtime": "banner-win.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        0,
+        1536,
+        1008
+      ],
+      "textSafeRectNormalized": [
+        0.22,
+        0.39,
+        0.56,
+        0.27
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    },
+    "button-action": {
+      "master": "button-action.png",
+      "runtime": "button-action.webp",
+      "width": 2172,
+      "height": 724,
+      "hasAlpha": true,
+      "alphaBounds": [
+        0,
+        0,
+        2172,
+        724
+      ],
+      "textSafeRectNormalized": [
+        0.15,
+        0.32,
+        0.7,
+        0.32
+      ],
+      "scaling": "uniform; do not nine-slice illustrated ornament"
+    }
+  },
+  "vectorComponents": {
+    "readout-plate": {
+      "file": "readout-plate.svg",
+      "source": [
+        640,
+        128
+      ],
+      "nineSliceInsets": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "notes": "Do not stretch corner bolts; uniform scale or 9-slice, solid inner well."
+    },
+    "toast-plate": {
+      "file": "toast-plate.svg",
+      "source": [
+        640,
+        160
+      ],
+      "nineSliceInsets": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "notes": "Do not stretch corner bolts; uniform scale or 9-slice, solid inner well."
+    },
+    "tooltip-plate": {
+      "file": "tooltip-plate.svg",
+      "source": [
+        320,
+        160
+      ],
+      "nineSliceInsets": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "notes": "Do not stretch corner bolts; uniform scale or 9-slice, solid inner well."
+    },
+    "bonus-rail": {
+      "file": "bonus-rail.svg",
+      "source": [
+        1024,
+        192
+      ],
+      "nineSliceInsets": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "notes": "Do not stretch corner bolts; uniform scale or 9-slice, solid inner well."
+    }
+  }
+}

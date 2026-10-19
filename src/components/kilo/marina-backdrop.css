@@ -4,9 +4,15 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #06111d url("/kilo-scene-v14/marina-night.webp") center / cover
+  --marina-focus-x: 0.5;
+  background: #06111d url("/kilo-scene-v14/marina-night.webp") calc(var(--marina-focus-x) * 100%) center / cover
     no-repeat;
   filter: saturate(0.68) brightness(0.8);
+}
+.kk-stage:has(.kk-shell[data-layout="portrait"]) .kk-marina-backdrop {
+  /* Frame the illuminated docks and reflections on a tall phone instead of
+     cropping away both shores and leaving only the dark center of the water. */
+  --marina-focus-x: 0.13;
 }
 
 /* The environment frames the game. Artwork, symbols and controls sit outside

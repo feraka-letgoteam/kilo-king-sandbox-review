@@ -22,11 +22,10 @@ export function setAudioVolumes(music: number, effects: number) {
 }
 
 /**
- * Placeholder score, not a licensed session. One F-minor theme at 124 BPM.
- * The theme is drums plus a short filtered stab. No sine lead.
- * Looping beds are 32 bars and bar-aligned. Intro is a one-shot of the first
- * half, then idle. Drop replacement ogg files at the same paths to upgrade.
- * A full loss stays quiet. A tease miss only fades the riser.
+ * Original v54 F-minor score at 112 BPM: warm keys, bass and restrained drums.
+ * Sixteen-bar beds share the same bar grid so crossfades retain their phase.
+ * Intro, tension and feature Foley are finite. Reduced motion affects visuals
+ * independently of the user's explicit music/effects/mute preferences.
  */
 const BED_URL = {
   base: "/kilo-audio/bed-base.ogg",
@@ -43,18 +42,20 @@ type BedName = keyof typeof BED_URL;
 type TrackName = BedName | "intro";
 type Sprite = [number, number];
 
-const SHORT = new Set([
-  "land1",
-  "land2",
-  "land3",
-  "land4",
-  "land5",
-  "scatter1",
-  "scatter2",
-  "scatter3",
-  "ui",
-  "tick",
-]);
+export const FEATURE_CUE_NAMES = [
+  "boatThrust", "boatCoast", "boatBrake", "boatPass",
+  "vsReady", "vsPull", "vsImpact", "vsLock", "vsConnect", "vsAmount", "vsTransfer", "vsBank",
+  "vsLatch", "reelPull", "cargoLock", "chopperApproach", "cargoDrop",
+  "multiplierBoost", "cascadeBreak", "cascadeLand", "getawayLaunch",
+  "getawayWin", "getawayLoss",
+] as const;
+export type FeatureCueName = (typeof FEATURE_CUE_NAMES)[number];
+
+const REQUIRED_CUES = [
+  "land1", "land2", "land3", "land4", "land5", "scatter1", "scatter2", "scatter3",
+  "ui", "tick", "spin", "resolve", "winSmall", "winMid", "winBig", "collect",
+  "tool", "level", "featureEnter", "chopperEnter", "featureComplete", ...FEATURE_CUE_NAMES,
+];
 
 export function muted(): boolean {
   try {
@@ -81,19 +82,13 @@ let featureMode = false;
 let featureBed: "feature" | "chopper" | null = null;
 let turbo = false;
 let wanted: BedName | null = null;
-let whirAt = 0;
+let whirAt = -Infinity;
 let landIx = 0;
 let scatterN = 0;
 let introPlayed = false;
 let introToken = 0;
 let stingAt = 0;
-
-function reducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-}
+let vsLocks = 0;
 
 function ac(): AudioContext | null {
   try {
@@ -121,7 +116,7 @@ function ac(): AudioContext | null {
 
 function resume() {
   const c = ac();
-  if (c && c.state === "suspended") void c.resume();
+  if (c && c.state === "suspended") void c.resume().catch(() => { /* Retry on the next gesture. */ });
 }
 
 function bedLevel() {
@@ -131,18 +126,22 @@ function bedLevel() {
 async function decode(url: string) {
   const c = ac();
   if (!c) throw new Error("no audio");
-  const res = await fetch(url);
+  const res = await fetch(url, url === SFX_URL ? { cache: "no-cache" } : undefined);
   if (!res.ok) throw new Error(url);
   return c.decodeAudioData(await res.arrayBuffer());
 }
 
 export function preloadAudio() {
+  if (loaded) return Promise.resolve();
+  // Unsupported audio environments remain unavailable without repeatedly
+  // issuing network requests on every spin or server-side replay.
+  if (!ac()) return Promise.resolve();
   if (!loading) {
-    loading = (async () => {
+    const attempt = (async () => {
       try {
-        const mapRes = await fetch(SFX_MAP_URL);
+        const mapRes = await fetch(SFX_MAP_URL, { cache: "no-cache" });
         if (!mapRes.ok) throw new Error("Sound unavailable");
-        sprites = (await mapRes.json()) as Record<string, Sprite>;
+        const candidateMap: unknown = await mapRes.json();
         const [base, spin, feature, chopper, intro, rise, sfx] = await Promise.all([
           decode(BED_URL.base),
           decode(BED_URL.spin),
@@ -152,14 +151,31 @@ export function preloadAudio() {
           decode(TENSION_URL),
           decode(SFX_URL),
         ]);
+        if (!candidateMap || typeof candidateMap !== "object" || Array.isArray(candidateMap)) {
+          throw new Error("Invalid sound map");
+        }
+        const map = candidateMap as Record<string, unknown>;
+        for (const name of REQUIRED_CUES) {
+          const value = map[name];
+          if (!Array.isArray(value) || value.length !== 2 ||
+            !value.every((part) => typeof part === "number" && Number.isFinite(part)) ||
+            value[0] < 0 || value[1] <= 0 || value[0] + value[1] > sfx.duration * 1000 + 1) {
+            throw new Error(`Invalid sound cue: ${name}`);
+          }
+        }
+        sprites = candidateMap as Record<string, Sprite>;
         beds = { base, spin, feature, chopper, intro, tension: rise };
         sfxBuf = sfx;
         loaded = true;
         if (wanted) startBed(wanted);
       } catch (error) {
+        loaded = false;
         console.error("kilo-audio", error);
       }
     })();
+    loading = attempt;
+    // Cache concurrent requests, never a failed attempt. The next gesture can retry.
+    void attempt.finally(() => { if (loading === attempt) loading = null; });
   }
   return loading;
 }
@@ -168,7 +184,7 @@ export function preloadAudio() {
 export function primeAudio() {
   resume();
   void preloadAudio().then(() => {
-    if (wanted || reducedMotion() || muted()) return;
+    if (!loaded || wanted || muted()) return;
     playIntro();
   });
 }
@@ -184,7 +200,7 @@ export function setAudioTurbo(on: boolean) {
 
 function startBed(name: BedName) {
   wanted = name;
-  if (reducedMotion() || muted()) return;
+  if (muted()) return;
   const c = ac();
   const buf = beds[name];
   if (!c || !musicDuck || !loaded || !buf) return;
@@ -237,7 +253,7 @@ function playIntro() {
     startBed("base");
     return;
   }
-  if (reducedMotion() || muted()) return;
+  if (muted()) return;
   const c = ac();
   const buf = beds.intro;
   if (!c || !musicDuck || !buf) {
@@ -285,7 +301,6 @@ function playIntro() {
 }
 
 function play(name: string, opts?: { gain?: number; rate?: number }) {
-  if (reducedMotion() && !SHORT.has(name)) return;
   if (muted()) return;
   const c = ac();
   const spr = sprites[name];
@@ -293,25 +308,28 @@ function play(name: string, opts?: { gain?: number; rate?: number }) {
   resume();
   const src = c.createBufferSource();
   src.buffer = sfxBuf;
-  src.playbackRate.value = opts?.rate ?? 1;
+  const rate = Math.max(0.25, Math.min(4, opts?.rate ?? 1));
+  src.playbackRate.value = rate;
   const gain = c.createGain();
   src.connect(gain);
   gain.connect(sfxBus);
   const level = opts?.gain ?? 0.85;
   const offset = spr[0] / 1000;
   const dur = spr[1] / 1000;
+  const playbackDuration = dur / rate;
   const t0 = c.currentTime;
   gain.gain.setValueAtTime(level, t0);
-  if (dur > 0.04) {
-    gain.gain.setValueAtTime(level, t0 + Math.max(0, dur - 0.012));
-    gain.gain.linearRampToValueAtTime(0.0001, t0 + dur);
+  if (playbackDuration > 0.04) {
+    gain.gain.setValueAtTime(level, t0 + Math.max(0, playbackDuration - 0.012));
+    gain.gain.linearRampToValueAtTime(0.0001, t0 + playbackDuration);
   }
+  src.onended = () => { src.disconnect(); gain.disconnect(); };
   src.start(t0, offset, dur);
 }
 
 function duck(ms: number) {
   const c = ctx;
-  if (!c || !musicDuck || reducedMotion()) return;
+  if (!c || !musicDuck) return;
   const t = c.currentTime;
   const now = musicDuck.gain.value || 1;
   musicDuck.gain.cancelScheduledValues(t);
@@ -347,9 +365,7 @@ export function whirStart() {
   landIx = 0;
   scatterN = 0;
   primeAudio();
-  if (!reducedMotion()) {
-    play("spin", { gain: turbo ? 0.12 : 0.24 });
-  }
+  play("spin", { gain: turbo ? 0.12 : 0.24 });
   if (!featureBed) startBed("spin");
 }
 
@@ -359,7 +375,7 @@ export function whirStop() {
 }
 
 export function teaseBegin() {
-  if (reducedMotion() || muted() || tension) return;
+  if (muted() || tension) return;
   const c = ac();
   const buf = beds.tension;
   if (!c || !sfxBus || !buf) return;
@@ -374,6 +390,11 @@ export function teaseBegin() {
   gain.connect(sfxBus);
   src.start();
   tension = { src, gain };
+  src.onended = () => {
+    if (tension?.src === src) tension = null;
+    src.disconnect();
+    gain.disconnect();
+  };
   duck(turbo ? 900 : 4200);
 }
 
@@ -420,17 +441,43 @@ export function winSting(tier: 0 | 1 | 2) {
   play("winBig", { gain: 0.9 });
 }
 
-export function bonusEnter(mode?: string) {
-  const bed: "feature" | "chopper" = mode === "chopper" ? "chopper" : "feature";
+/** Pass feature identity separately when the charge mode is base/ante/buy. */
+export function bonusEnter(mode?: string, feature?: string) {
+  vsLocks = 0;
+  const identity = feature ?? mode;
+  const isRoute = identity === "route" || identity === "chopper";
+  const bed: "feature" | "chopper" = isRoute ? "chopper" : "feature";
   featureBed = bed;
   featureMode = true;
-  if (!reducedMotion()) {
-    play(mode === "chopper" ? "chopperEnter" : "featureEnter", { gain: 0.8 });
-  }
+  play(isRoute ? "chopperEnter" : identity === "getaway" ? "getawayLaunch" : "featureEnter", { gain: 0.8 });
   startBed(bed);
 }
 
+/** Presentation-only cues. The outcome renderer owns their event timing. */
+export function featureCue(name: FeatureCueName) {
+  const gains: Record<FeatureCueName, number> = {
+    boatThrust: .38, boatCoast: .30, boatBrake: .42, boatPass: .36,
+    vsReady: .42, vsPull: .40, vsImpact: .55, vsLock: .58,
+    vsConnect: .38, vsAmount: .40, vsTransfer: .32, vsBank: .42,
+    vsLatch: .68, reelPull: .48, cargoLock: .56, chopperApproach: .42,
+    cargoDrop: .58, multiplierBoost: .64, cascadeBreak: .46, cascadeLand: .48,
+    getawayLaunch: .55, getawayWin: .84, getawayLoss: .42,
+  };
+  // One continuous confrontation mix: pull leaves room for contact, lock
+  // resolves upward with recorded growth, and bank is a single quiet landing.
+  // Pitch/gain never select an outcome or affect the presentation clock.
+  if (name === 'vsLock') vsLocks = Math.min(5, vsLocks + 1);
+  if (name === 'vsReady') duck(650);
+  if (name === 'vsImpact') duck(380);
+  if (name === 'vsAmount') duck(650);
+  if (name === "getawayWin") duck(1500);
+  const pitched = name === 'vsLock' || name === 'vsLatch' || name === 'vsAmount';
+  const rate = pitched ? 2 ** (Math.max(0, vsLocks - 1) * 2 / 12) : 1;
+  play(name, { gain: gains[name], rate });
+}
+
 export function bonusExit() {
+  vsLocks = 0;
   featureMode = false;
   featureBed = null;
   stopTension(0.05);
@@ -450,6 +497,7 @@ export function setMuted(on: boolean) {
   }
   if (!on) {
     resume();
+    void preloadAudio();
     if (wanted) startBed(wanted);
     else if (featureBed) startBed(featureBed);
     else primeAudio();

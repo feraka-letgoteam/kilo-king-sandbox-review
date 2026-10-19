@@ -1,0 +1,377 @@
+/* These destination takeovers never target the game shell or controls. Kilo,
+   his ground contact and cargo belong to the authored destination plate. */
+.ks-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  isolation: isolate;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  background: #030d14;
+  color: #fff6e6;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+}
+.ks-loading *,
+.ks-completion * {
+  box-sizing: border-box;
+}
+.ks-loading-shade,
+.ks-completion-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ks-loading-shade {
+  background: linear-gradient(90deg, #020c13db 0%, #020c1399 38%, #020c1314 68%);
+}
+.ks-loading-content {
+  position: relative;
+  width: min(100%, 1440px);
+  min-height: 100dvh;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  grid-template-rows: minmax(20px, 1fr) auto auto minmax(20px, 1fr);
+  padding: max(28px, env(safe-area-inset-top))
+    max(32px, env(safe-area-inset-right)) max(28px, env(safe-area-inset-bottom))
+    max(32px, env(safe-area-inset-left));
+}
+.ks-loading-brand {
+  grid-area: 2 / 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ks-eyebrow {
+  margin: 0;
+  color: #d7c8a6;
+  font: 700 13px/18px "Source Sans 3", sans-serif;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+.ks-loading-logo {
+  width: min(100%, 430px);
+  height: 210px;
+  object-fit: contain;
+  margin: 12px 0 0;
+}
+.ks-loading-tagline {
+  margin: 0;
+  color: #f0e3ca;
+  font-size: 17px;
+  line-height: 24px;
+}
+.ks-loading-gate {
+  grid-area: 3 / 1;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 280px);
+  margin-top: 28px;
+}
+.ks-loading-status {
+  min-height: 20px;
+  margin: 0 0 8px;
+  color: #d4ded7;
+  font-size: 14px;
+  line-height: 20px;
+}
+.ks-loading-status[role="alert"] {
+  color: #f0d0a0;
+}
+.ks-loading-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 5px;
+  height: 3px;
+  margin-bottom: 22px;
+}
+.ks-loading-track span {
+  background: #31494c;
+}
+.ks-loading-track span[data-complete="true"] {
+  background: #a4dfca;
+}
+.ks-loading .ks-primary,
+#kilo-completion-takeover .ks-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 180px;
+  min-height: 52px;
+  padding: 12px 24px;
+  border: 1px solid #e5c480;
+  border-radius: 4px;
+  background: #d7b36c;
+  color: #112021;
+  box-shadow: inset 0 1px #fff0c3, 0 3px 0 #6b512d;
+  font: 800 16px/22px "Source Sans 3", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.ks-loading .ks-primary:disabled {
+  background: #16292e;
+  border-color: #586b66;
+  color: #b2c2ba;
+  box-shadow: inset 0 1px #71827a55, 0 3px 0 #030b0f;
+  opacity: 1;
+  cursor: default;
+}
+.ks-loading .ks-primary svg,
+#kilo-completion-takeover .ks-primary svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+}
+.ks-loading .ks-primary:focus-visible,
+#kilo-completion-takeover .ks-primary:focus-visible {
+  outline: 3px solid #b5f3de;
+  outline-offset: 5px;
+}
+.ks-loading .ks-primary:not(:disabled):active,
+#kilo-completion-takeover .ks-primary:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 1px #fff0c3, 0 1px 0 #6b512d;
+}
+#kilo-completion-takeover {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: block;
+  padding: 0;
+}
+#kilo-completion-takeover .kk-scrim {
+  background: #020a10;
+  backdrop-filter: none;
+}
+#kilo-completion-takeover [role="dialog"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  overflow: auto;
+  border: 0;
+  border-radius: 0;
+  background: #030d14;
+  box-shadow: none;
+  transform: none;
+  text-shadow: none;
+}
+.ks-completion {
+  position: relative;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff7e6;
+  text-align: center;
+  font-family: "Source Sans 3", sans-serif;
+}
+.ks-completion-shade {
+  background: radial-gradient(ellipse at 50% 48%, #020c13db 5%, #020c1370 55%, #020c1320 88%);
+}
+.ks-completion-content {
+  position: relative;
+  width: min(100%, 820px);
+  padding: max(24px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom))
+    max(24px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ks-completion-logo {
+  width: 180px;
+  height: 88px;
+  object-fit: contain;
+  margin: 0 0 22px;
+}
+#kilo-completion-takeover .ks-completion h1 {
+  margin: 8px 0 28px;
+  font: 700 38px/1.1 "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff7e6;
+}
+.ks-completion-award {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 12px;
+}
+.ks-completion-case {
+  position: relative;
+  width: 144px;
+  height: 104px;
+  margin: -14px 0 8px;
+  pointer-events: none;
+}
+.ks-completion-award > span {
+  font-size: 14px;
+  line-height: 20px;
+  color: #d8e0d8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.ks-completion-award > strong {
+  max-width: 100%;
+  font: 800 clamp(48px, 7vw, 90px)/1.05 "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: #ffdf91;
+  overflow-wrap: anywhere;
+}
+.ks-completion[data-celebrate="false"] .ks-completion-award > strong {
+  color: #fff7e6;
+}
+.ks-completion-cost {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 10px 0 0;
+  color: #cbd8cf;
+  font-size: 15px;
+}
+.ks-completion-cost b {
+  color: #f2eadb;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+#kilo-completion-takeover .ks-primary {
+  margin-top: 28px;
+}
+@media (max-width: 620px) and (orientation: portrait) {
+  .ks-loading-shade {
+    background: linear-gradient(180deg, #020c1370 0%, #020c1340 45%, #020c1300 72%);
+  }
+  .ks-loading-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* The portrait character is authored in the lower third. Keep the logo
+       and Enter in the quiet upper sky, clear of his face and fishing arm. */
+    justify-content: flex-start;
+    padding: max(12dvh, env(safe-area-inset-top))
+      max(20px, env(safe-area-inset-right))
+      max(44px, env(safe-area-inset-bottom))
+      max(20px, env(safe-area-inset-left));
+  }
+  .ks-loading-brand {
+    width: 100%;
+  }
+  .ks-loading-gate {
+    margin-top: 24px;
+    width: min(100%, 260px);
+  }
+  .ks-loading-logo {
+    width: min(100%, 300px);
+    height: 140px;
+    margin-top: 4px;
+  }
+  .ks-loading-tagline {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .ks-eyebrow {
+    font-size: 12px;
+    letter-spacing: 1.6px;
+  }
+  .ks-completion-content {
+    padding-inline: 20px;
+  }
+  .ks-completion-logo {
+    width: 160px;
+    height: 80px;
+    margin-bottom: 24px;
+  }
+  .ks-completion-case { width: 112px; height: 80px; }
+  #kilo-completion-takeover .ks-completion h1 {
+    font-size: 32px;
+  }
+  .ks-completion-award > strong {
+    font-size: 48px;
+  }
+}
+@media (max-height: 480px) and (orientation: landscape) {
+  .ks-loading-content {
+    width: min(100%, 1100px);
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr);
+    padding-block: max(16px, env(safe-area-inset-top));
+  }
+  .ks-loading-logo {
+    width: 100%;
+    height: 116px;
+    margin: 0;
+  }
+  .ks-loading-tagline {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .ks-loading-gate {
+    margin-top: 16px;
+  }
+  .ks-loading-track {
+    margin-bottom: 12px;
+  }
+  .ks-completion-content {
+    padding-block: 16px;
+  }
+  .ks-completion-case {
+    position: absolute;
+    width: 112px;
+    height: 85px;
+    left: 24px;
+    top: 104px;
+    margin: 0;
+  }
+  .ks-completion-logo {
+    width: 120px;
+    height: 54px;
+    margin-bottom: 5px;
+  }
+  #kilo-completion-takeover .ks-completion h1 {
+    margin: 4px 0 10px;
+    font-size: 28px;
+  }
+  .ks-completion-award {
+    padding: 4px 0 6px;
+    gap: 5px;
+    width: min(100%, 620px);
+  }
+  .ks-completion-award > strong {
+    font-size: 56px;
+  }
+  .ks-completion-cost {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  #kilo-completion-takeover .ks-primary {
+    margin-top: 14px;
+    min-height: 46px;
+    padding-block: 9px;
+  }
+}
+
+/* v62: one weighted arrival, then a stable final amount. No count-up re-credit. */
+@keyframes ks-result-contact { from { transform:translateY(5px); } 70% { transform:translateY(-.5px); } to { transform:translateY(0); } }
+.ks-completion-content { animation:ks-result-contact 220ms cubic-bezier(.2,.75,.25,1) both; }
+.ks-completion[data-reduced="true"] .ks-completion-content { animation:none; }
+@media (prefers-reduced-motion:reduce) { .ks-completion-content { animation:none; } }

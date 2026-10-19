@@ -1,0 +1,415 @@
+/* Kilo's marina equipment: painted cabinet + quiet live instrument faces.
+   Positions and hit areas belong exclusively to dock-design.ts. */
+.kk-app .kk-canvas-wrap {
+  position: relative;
+  overflow: visible;
+}
+.kk-stage-surround {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+  filter: none;
+}
+.kk-app .kk-canvas-wrap > div {
+  position: relative;
+  z-index: 1;
+}
+.kk-app .kk-shell .kk-control-group {
+  z-index: 3;
+}
+.kk-app .kk-shell[data-layout="portrait"]:not(.is-feature) .kk-crest-status {
+  bottom: 17px;
+}
+.kk-app .kk-shell[data-layout="portrait"]:not(.is-feature) .kk-event {
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: none;
+}
+.kk-app .kk-shell[data-layout] .kk-console .kk-eyebrow {
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 14px;
+  letter-spacing: 0.8px;
+  color: #e0e6db;
+}
+.kk-app .kk-shell .kk-console .kk-eyebrow small {
+  font-size: 10px;
+  color: #a9bcb8;
+}
+.kk-app .kk-shell .kk-console .kk-read {
+  padding-inline: 12px;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-read {
+  padding-inline: 8px;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-read {
+  padding-inline: 4px;
+}
+.kk-app
+  .kk-shell[data-layout]:not([data-layout="wide"])
+  .kk-console
+  .kk-eyebrow {
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.55px;
+}
+.kk-app .kk-shell .kk-console .kk-utility-button,
+.kk-app .kk-shell .kk-console .kk-menu-button {
+  background: linear-gradient(155deg, #223a3e, #071820 75%);
+  border: 1.5px solid #a78d58;
+  border-bottom-color: #5f5037;
+  border-radius: 50%;
+  color: #eff4eb;
+  box-shadow:
+    inset 0 0 0 2px #071820,
+    inset 0 3px 2px #bac7ac30,
+    0 2px 2px #0009;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease,
+    transform 100ms ease;
+}
+.kk-app .kk-shell .kk-console .kk-stake-control,
+.kk-app .kk-shell .kk-console .kk-feature-context {
+  background: transparent;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button {
+  gap: 2px;
+  padding: 0 4px;
+}
+.kk-app .kk-shell .kk-console .kk-stake-step {
+  color: #f5f1df;
+}
+.kk-app .kk-shell .kk-console .kk-spin {
+  border: 2px solid #f0d599;
+  border-bottom-color: #7b603b;
+  background: #102a31;
+  box-shadow:
+    0 0 0 2px #041018,
+    0 0 0 4px #ab8851,
+    0 5px 6px #000a;
+  overflow: visible;
+}
+.kk-app .kk-shell .kk-console .kk-spin::before {
+  inset: 0;
+  border: 0;
+  box-shadow: none;
+  background: url("/kilo-stage-v20/spool.webp") center/100% 100% no-repeat;
+  transition: filter 140ms ease;
+}
+.kk-app .kk-shell .kk-console .kk-spin::after {
+  content: none;
+}
+.kk-app .kk-shell[data-layout] .kk-console .kk-spin-icon {
+  position: absolute;
+  top: 16%;
+  left: 28%;
+  width: 44%;
+  height: 44%;
+  color: #fff8dd;
+  stroke-width: 3.1;
+  filter: drop-shadow(0 1px 1px #000);
+}
+.kk-app .kk-shell .kk-console .kk-spin > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button {
+  background: linear-gradient(155deg, #223a3e, #071820 75%);
+  border: 1.5px solid #bf9b55;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 3px #071820,
+    inset 0 0 0 4px #80653f;
+  filter: drop-shadow(0 3px 3px #0008);
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button::before,
+.kk-app .kk-shell .kk-control-group .kk-feature-button::after {
+  content: none;
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button svg {
+  width: 62%;
+  height: 62%;
+  color: #eac16e;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante {
+  flex-direction: row;
+  gap: 7px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: #dce5dc;
+  font:
+    700 12px/1 "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante small {
+  color: #b8c9c3;
+  font-size: 11px;
+  text-transform: none;
+}
+.kk-app .kk-shell .kk-console .kk-ante-pill {
+  min-width: 34px;
+  padding: 4px 7px;
+  border: 1px solid #8c967d;
+  border-radius: 12px;
+  background: #071820;
+  color: #e0e4d6;
+  font:
+    700 11px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante[aria-pressed="true"] .kk-ante-pill {
+  border-color: #7cd0b9;
+  background: #1b4d44;
+  color: #d6fff0;
+  box-shadow: inset 0 1px #c4ffde29;
+}
+.kk-app .kk-shell .kk-console[data-dock-layout="inline"] .kk-dock-ante {
+  border-top: 1px solid #a48b553b;
+}
+.kk-app .kk-shell .kk-console[data-dock-layout="side"] .kk-dock-ante small {
+  display: none;
+}
+.kk-app .kk-shell .kk-console .kk-last-win strong,
+.kk-app .kk-shell .kk-console .kk-bonus-win strong {
+  color: #f4dfaa;
+}
+.kk-app .kk-shell[data-layout] .kk-console .kk-charge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 9px;
+  background: #041219e6;
+  color: #fff1cb;
+  font:
+    700 13px/18px "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px #000;
+  pointer-events: none;
+}
+.kk-app .kk-shell .kk-console .kk-charge small {
+  font-size: 10px;
+  color: #c9d3c7;
+}
+.kk-app .kk-shell .kk-console .kk-charge b {
+  font-weight: 700;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-charge {
+  font-size: 12px;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-charge small {
+  font-size: 9px;
+}
+.kk-app .kk-dock-skin {
+  filter: drop-shadow(0 4px 4px #0005);
+}
+.kk-app .kk-control-guide {
+  margin: 0 0 20px;
+  padding: 12px;
+  background: #071820;
+  border-left: 2px solid #b99a5f;
+}
+.kk-control-guide summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #efdbab;
+}
+.kk-control-guide dl {
+  margin: 4px 0;
+  display: grid;
+  gap: 12px;
+}
+.kk-control-guide dt {
+  color: #f2ead7;
+  font-weight: 700;
+}
+.kk-control-guide dd {
+  margin: 3px 0 0;
+  color: #b8c9c6;
+}
+@media (hover: hover) {
+  .kk-app .kk-shell .kk-console .kk-spin:not(:disabled):hover::before {
+    filter: brightness(1.16);
+  }
+  .kk-app .kk-shell .kk-console .kk-spin:not(:disabled):hover {
+    box-shadow:
+      0 0 0 2px #041018,
+      0 0 0 4px #e7c888,
+      0 5px 9px #000b;
+  }
+  .kk-app .kk-shell .kk-console .kk-utility-button:not(:disabled):hover,
+  .kk-app .kk-shell .kk-console .kk-menu-button:not(:disabled):hover {
+    background: #24433c;
+    color: #fff9e5;
+  }
+}
+.kk-app .kk-shell .kk-console .kk-spin:not(:disabled):active {
+  transform: translateY(2px) scale(0.97);
+  box-shadow:
+    0 0 0 2px #041018,
+    0 0 0 4px #9f804e,
+    0 2px 2px #000b;
+  filter: brightness(0.92);
+}
+@media (prefers-reduced-motion: reduce) {
+  .kk-app .kk-shell .kk-console .kk-spin::before {
+    transition: none;
+    transform: none !important;
+  }
+}
+.kk-app[data-reduced="1"] .kk-shell .kk-console .kk-spin::before {
+  transition: none;
+  transform: none !important;
+}
+/* Small popout keeps a real reel viewport. Secondary functions live in Menu. */
+@media (max-height: 380px) and (min-aspect-ratio: 7/5) {
+  .kk-app .kk-stage {
+    padding: max(8px, env(safe-area-inset-top))
+      max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-left));
+  }
+}
+.kk-app .kk-stage .kk-shell[data-compact="true"] {
+  grid-template-columns: var(--reel-width) var(--side-width);
+  column-gap: var(--dock-gap);
+}
+.kk-app
+  .kk-stage
+  .kk-shell[data-layout="landscape"][data-compact="true"]
+  .kk-playfield {
+  grid-area: 1 / 1;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-scene-pier,
+.kk-app .kk-shell[data-compact="true"] .kk-logo,
+.kk-app .kk-shell[data-compact="true"] .kk-crest-status {
+  display: none;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-read {
+  align-items: center;
+  text-align: center;
+  gap: 1px;
+  padding: 0;
+}
+.kk-app .kk-shell[data-layout][data-compact="true"] .kk-console .kk-eyebrow {
+  font-size: 10px;
+  line-height: 11px;
+  letter-spacing: 0;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-bet-button .kk-eyebrow {
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-bet-button em {
+  padding: 1px 4px;
+  color: #d8e2d6;
+  background: #243638;
+  border-radius: 5px;
+  font-size: 9px;
+}
+.kk-app
+  .kk-shell[data-compact="true"]
+  .kk-console
+  .kk-bet-button
+  em[data-on="true"] {
+  color: #c5f9e7;
+  background: #1b4d44;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-bet-button {
+  gap: 2px;
+  padding: 0;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-feature-context {
+  gap: 3px;
+  align-items: center;
+}
+.kk-app .kk-shell[data-layout][data-compact="true"] .kk-console .kk-charge {
+  white-space: nowrap;
+  font-size: 10px;
+  gap: 2px;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-console .kk-charge small {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.kk-app .kk-shell[data-compact="true"].is-feature .kk-feature-button {
+  display: none;
+}
+.kk-app .kk-shell[data-layout][data-compact="true"] .kk-bonus {
+  position: absolute;
+  inset: auto;
+  left: calc(100% + var(--dock-gap));
+  top: 128px;
+  width: var(--side-width);
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px 2px;
+  gap: 4px;
+  border: 0;
+  background: #071820;
+  box-shadow: none;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-bonus-mark,
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-bonus-spins,
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-bonus-pay {
+  display: none;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-bonus-track {
+  width: 100%;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-sockets {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-socket {
+  width: 13px;
+  height: 17px;
+  flex: 0 0 13px;
+}
+.kk-app .kk-shell[data-compact="true"] .kk-bonus .kk-next {
+  position: static;
+  white-space: normal;
+  text-align: center;
+  font:
+    600 10px/12px "Source Sans 3",
+    sans-serif;
+}
+.kk-compact-actions {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.kk-compact-actions button {
+  min-height: 44px;
+  border: 1px solid #829b9666;
+  border-radius: 4px;
+  background: #071820;
+  color: #e9dfc2;
+}
+.kk-compact-actions button:disabled {
+  opacity: 0.45;
+}
+
+.kk-app .kk-shell[data-compact="true"].is-feature .kk-charge {
+  display: none;
+}

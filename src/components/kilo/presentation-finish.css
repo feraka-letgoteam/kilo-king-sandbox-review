@@ -1,0 +1,146 @@
+/* v80: paint and feature-header presentation only. Control layout remains in
+   slot-controls; no control dimensions, reel rectangles or touch areas here. */
+.kk-app {
+  --kk-painted-gold:#d5b376;
+  --kk-painted-teal:#356967;
+  --kk-painted-cream:#fff1bb;
+}
+.kk-app .sc-system[data-variant] :is(.sc-circle,.sc-spin,.sc-action-plate) {
+  background:#102a33;
+  border-color:#b89963;
+  box-shadow:inset 0 -2px 0 #07151d;
+  color:#fff1d3;
+}
+.kk-app .sc-system[data-variant] .sc-spin {
+  background:#1c494b;
+  border-color:#d5b376;
+  box-shadow:inset 0 -3px 0 #0b242d;
+}
+.kk-app .sc-system[data-variant] :is(.sc-circle,.sc-spin,.sc-well)::after {
+  background:none;box-shadow:none;
+}
+.kk-app .sc-system[data-variant] .sc-readout-card,
+.kk-app .sc-system[data-variant] .sc-bet::before {
+  background:#091c26;border-color:#53635d;
+  box-shadow:inset 0 2px 0 #05121a;
+}
+.kk-app .sc-system[data-variant] :is(.sc-circle[aria-pressed="true"],.sc-badge[data-active="true"]) {
+  background:#356967;border-color:#b6c9ab;
+}
+.kk-app :is(.kk-dialog,.kk-quick-menu,.kk-quick-volume),
+#kilo-auto-takeover .kk-autoplay-card,
+#kilo-features-takeover :is(.kf-card,.kf-confirm),.kk-reel-completion {
+  background-color:#112b35;border-color:#b79c6d;
+  box-shadow:inset 0 -3px 0 #081b24,0 4px 0 #03101970;
+}
+/* These legacy material selectors are more specific than the generic overlay
+   rule. Override the entire layered background, not just background-color. */
+.kk-app[data-material="marina"] .kk-dialog:is(.kk-settings,.kk-purchases,.kk-bet-dialog,.kk-auto-dialog),
+.kk-app[data-material="marina"] .kk-dialog:is(.kk-settings,.kk-purchases,.kk-bet-dialog,.kk-auto-dialog) .kk-dialog-head,
+.kk-app[data-material="marina"] :is(.kk-settings,.kk-purchases,.kk-bet-dialog,.kk-auto-dialog) :is(.kk-icon-button,.kk-compact-actions button,.kk-denominations button,.kk-segmented button) {
+  background:#112b35;border-color:#b79c6d;box-shadow:inset 0 -2px #081b24;
+}
+#kilo-features-takeover .kf-card[data-feature="yacht"] {background:#303132;border-color:#bfa274;}
+#kilo-features-takeover .kf-card[data-feature="getaway"] {background:#15303f;border-color:#8aaab3;}
+#kilo-features-takeover .kf-card[data-feature="dock"] {background:#173a3d;border-color:#80a99a;}
+#kilo-features-takeover .kf-art-wrap::before {background:none;}
+#kilo-features-takeover :is(.kf-action,.kf-ante-toggle),
+#kilo-auto-takeover .kk-auto-start,.ks-loading .ks-primary,
+#kilo-completion-takeover .ks-primary,.kk-reel-completion button {
+  background:#d5b376;border-color:#e6cd97;
+  color:#10232b;box-shadow:inset 0 -3px #9d7846,0 2px #071924;
+}
+.kk-app .sc-system[data-variant] :is(.sc-spin,.sc-circle):active,
+#kilo-features-takeover .kf-action:active {
+  box-shadow:inset 0 2px #071924;
+}
+
+/* Dedicated collector tracker. No inherited .kk-bonus/plate cascade. */
+.kk-dockside-header {position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;}
+.kk-dockside-header svg {display:block;overflow:visible;}
+.kk-dockside-header .dock-portrait {transform-box:fill-box;transform-origin:center;animation:kk-collector-dock 260ms cubic-bezier(.2,.7,.3,1) both;}
+.kk-dockside-header[data-holding="true"] .dock-socket {filter:brightness(1.13);}
+.kk-dockside-header[data-reduced="true"] .dock-portrait {animation:none;}
+@keyframes kk-collector-dock {0%{opacity:0;transform:scale(.7)}65%{opacity:1;transform:scale(1.1)}100%{opacity:1;transform:scale(1)}}
+
+/* Values belong to the connection. The cabinet lip carries a quiet equation
+   or the combined collection; no full-width opaque strip or flying box. */
+.kk-app .kk-stage-readout {
+  background:transparent;border:0;border-radius:0;box-shadow:none;
+  padding:0 6px;gap:8px;color:#c2d8ca;
+  text-shadow:0 2px #07131a,1px 0 #07131a,-1px 0 #07131a;
+}
+.kk-app .kk-stage-readout strong {color:#fff1bb;font-weight:700;}
+.kk-app .kk-stage-readout[data-kind="local"] {visibility:hidden;}
+.kk-award-fly,.kk-feature-transfer {
+  padding:0;background:none;border:0;border-radius:0;box-shadow:none;
+  color:#fff1bb;font-family:"Source Sans 3",sans-serif;font-weight:700;
+  text-shadow:0 2px #07131a,2px 0 #07131a,-2px 0 #07131a,0 -1px #07131a;
+}
+.kk-fly-portrait,.kk-fly-portrait.is-source {filter:drop-shadow(0 2px 0 #07131a);}
+.kk-bonus-win.is-landed strong {text-shadow:none;}
+
+.kk-scene-presence {position:fixed;inset:0;z-index:90;pointer-events:none;opacity:1;transition:opacity 220ms cubic-bezier(.2,.7,.2,1);}
+.kk-scene-presence[data-visible="false"] {opacity:0;}
+.kk-scene-presence[data-reduced="true"] {transition:none;}
+.ks-entry-shade {background:#05121c92;}
+.ks-bonus-entry .ks-entry-copy {animation:kk-scene-copy-in 280ms cubic-bezier(.2,.7,.25,1) both;}
+.ks-bonus-entry .ks-entry-destination {color:#e9dfbf;}
+.ks-bonus-entry .ks-entry-award {color:#fff1bb;text-shadow:0 3px #07131a,2px 0 #07131a,-2px 0 #07131a;}
+.ks-bonus-entry[data-immediate="true"] .ks-entry-copy,
+.ks-bonus-entry[data-reduced="true"] .ks-entry-copy {animation:none;}
+@keyframes kk-scene-copy-in {from{opacity:0;transform:translateY(9px)}70%{opacity:1;transform:translateY(-1px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce) {
+  .kk-dockside-header .dock-portrait,.ks-bonus-entry .ks-entry-copy {animation:none;}
+  .kk-scene-presence {transition:none;}
+}
+
+/* v84: one finite, hard-ink performance across the DOM ceremony surfaces.
+   Layout, line wrapping, amounts, touch targets and all control tokens stay put. */
+.kk-impact-print { position:absolute; pointer-events:none; z-index:-1; color:#ffcb55;
+  left:50%;top:50%;width:min(115%,660px);height:190%;overflow:visible;
+  transform:translate(-50%,-50%);opacity:0;animation:kk-ink-contact 700ms ease-out both; }
+.ks-completion-award { position:relative; isolation:isolate; }
+.kk-reel-completion { isolation:isolate; }
+.kk-reel-completion > .kk-impact-print { width:105%;height:170%; }
+.ks-completion[data-celebrate="true"] .ks-completion-award > strong,
+.kk-reel-completion[data-feature][data-result="win"] strong { animation:kk-result-ink 420ms ease-out both; }
+#kilo-completion-takeover .ks-completion h1 { text-shadow:0 3px 0 #071018; }
+#kilo-features-takeover .kf-shell[data-reduced="false"] .kf-card { animation:kf-impact-arrive 350ms ease-out both; }
+#kilo-features-takeover .kf-shell[data-reduced="false"] .kf-card:nth-child(2) { animation-delay:35ms; }
+#kilo-features-takeover .kf-shell[data-reduced="false"] .kf-card:nth-child(3) { animation-delay:70ms; }
+#kilo-features-takeover .kf-shell .kf-art { transform-origin:50% 85%;transition:transform 160ms ease-out; }
+@media(hover:hover) { #kilo-features-takeover .kf-shell .kf-card:hover .kf-art { transform:translateY(-3px) rotate(-1.5deg); } }
+.ks-loading[data-reduced="false"] .ks-loading-logo { animation:kk-logo-commit 540ms ease-out both; }
+@keyframes kk-ink-contact {
+  0%,10% { opacity:0;transform:translate(-50%,-50%) scale(.45,.16) rotate(-7deg); }
+  28% { opacity:.9;transform:translate(-50%,-50%) scale(1.06,1.08) rotate(1deg); }
+  48% { opacity:.54;transform:translate(-50%,-50%) scale(1.12,1.12); }
+  100% { opacity:0;transform:translate(-50%,-50%) scale(1.18,1.18); }
+}
+@keyframes kk-result-ink {
+  0%,12% { transform:translateY(5px) scale(.78,.62) rotate(-3deg); }
+  38% { transform:translateY(-2px) scale(1.12,1.16) rotate(.7deg); }
+  74% { transform:translateY(1px) scale(.985,.97) rotate(-.2deg); }
+  100% { transform:none; }
+}
+@keyframes kf-impact-arrive {
+  0%,12% { opacity:0;transform:translateY(12px) rotate(-2deg) scale(.97,.92); }
+  48% { opacity:1;transform:translateY(-2px) rotate(.3deg) scale(1.004,1.018); }
+  100% { opacity:1;transform:none; }
+}
+@keyframes kk-logo-commit {
+  0%,16% { opacity:0;transform:translateY(12px) scale(.86,.78) rotate(-4deg); }
+  48% { opacity:1;transform:translateY(-3px) scale(1.045,1.07) rotate(1deg); }
+  76% { transform:translateY(1px) scale(.99,.98) rotate(-.3deg); }
+  100% { opacity:1;transform:none; }
+}
+[data-reduced="1"] .kk-impact-print,[data-reduced="true"] .kk-impact-print { display:none;animation:none; }
+[data-reduced="1"] .kk-reel-completion[data-feature][data-result="win"] strong,.kk-reel-completion[data-reduced="true"][data-feature][data-result="win"] strong,
+.ks-completion[data-reduced="true"] .ks-completion-award > strong { animation:none; }
+@media(prefers-reduced-motion:reduce) {
+  .kk-impact-print { display:none;animation:none; }
+  .kk-reel-completion strong,.ks-completion .ks-completion-award > strong,
+  .kf-shell .kf-card,.ks-loading .ks-loading-logo { animation:none!important; }
+  #kilo-features-takeover .kf-shell .kf-art { transition:none;transform:none!important; }
+}

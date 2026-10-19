@@ -1,0 +1,52 @@
+{
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "triangles": 593880,
+  "maxDisplacement": 0.14614693535855502,
+  "actualPixiGeometry": true,
+  "printedAmountStationary": true,
+  "parentDisposal": true,
+  "collection": {
+    "bank": [
+      48000
+    ],
+    "actions": [
+      "collect",
+      "collect",
+      "collect-bank"
+    ],
+    "meshFrames": 150
+  },
+  "interruptions": [
+    {
+      "speed": "normal",
+      "action": "resize",
+      "passed": true
+    },
+    {
+      "speed": "normal",
+      "action": "skip",
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "action": "resize",
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "action": "skip",
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "action": "resize",
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "action": "skip",
+      "passed": true
+    }
+  ],
+  "method": "Pure production fields, actual installed Pixi object/geometry API, and instrumented production scene. Not browser/GPU rendering."
+}

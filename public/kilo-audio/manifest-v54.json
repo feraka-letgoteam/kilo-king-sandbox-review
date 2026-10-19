@@ -1,0 +1,71 @@
+{
+  "version": 54,
+  "original": true,
+  "sampleRate": 44100,
+  "channels": 2,
+  "bpm": 112,
+  "barsPerBed": 16,
+  "key": "F minor",
+  "cueCount": 44,
+  "generator": "scripts/build-boat-audio-v62.py",
+  "files": [
+    {
+      "file": "bed-base.ogg",
+      "seconds": 34.285714,
+      "peak": 0.523584,
+      "rms": 0.121527,
+      "bytes": 397480,
+      "sha256": "88417d65073d96f92501caab6c0da14ea3d9612d1dc0d294bd2d9f3e3b926057"
+    },
+    {
+      "file": "bed-spin.ogg",
+      "seconds": 34.285714,
+      "peak": 0.551035,
+      "rms": 0.120713,
+      "bytes": 435907,
+      "sha256": "d77d03992217dd07d3094296f1acca82126247a68a2b1e77060fd5082a78e667"
+    },
+    {
+      "file": "bed-feature.ogg",
+      "seconds": 34.285714,
+      "peak": 0.591087,
+      "rms": 0.125859,
+      "bytes": 436408,
+      "sha256": "d03b886dd88c6ab367072a5b0597b6b6e435b6426cbe0ee3ef4bc598e7e5e77c"
+    },
+    {
+      "file": "bed-chopper.ogg",
+      "seconds": 34.285714,
+      "peak": 0.612111,
+      "rms": 0.125455,
+      "bytes": 452083,
+      "sha256": "d351c70f2db588de017baf3d570aaf412339155fa21db6b9b6a0cbb08e07ce66"
+    },
+    {
+      "file": "bed-intro.ogg",
+      "seconds": 8.571429,
+      "peak": 0.521808,
+      "rms": 0.131235,
+      "bytes": 104922,
+      "sha256": "0740448876b3ad5bb95c549355a3104ad0322fdde70f555f08cd6060f6017c80"
+    },
+    {
+      "file": "stem-tension.ogg",
+      "seconds": 4.285714,
+      "peak": 0.4854,
+      "rms": 0.07293,
+      "bytes": 52802,
+      "sha256": "cfe1cb53a6ccfd984bdd4daf13239f7ee33f7f95566e5faec1a46c13aa1fb660"
+    },
+    {
+      "file": "sfx.ogg",
+      "seconds": 27.99,
+      "peak": 0.743567,
+      "rms": 0.139655,
+      "bytes": 294598,
+      "sha256": "3c17d0eff228e1c7e0a21deaa0eb7ded4b3c337346a31d2d9c3f5fe449151528"
+    }
+  ],
+  "extensionVersion": 62,
+  "baseCheckpoint": "1d63732"
+}

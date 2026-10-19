@@ -1,0 +1,1165 @@
+{
+  "version": "v41",
+  "checkpoint": "16e9f4050bcbd6c162733129480f8287477a9c93",
+  "method": "Source checks, mocked decode lifecycle, production author CSS cascade and calculated layout. No browser screenshots or live-browser interaction claims.",
+  "cssFile": "dist/assets/review-CXelWSLm.css",
+  "cssSha256": "6d726da0c9f51b9a9116f372c364eff474a47edbbc33df0279e3249f5d65f75c",
+  "protectedSources": {
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/ReelStage.tsx": "f1c323e44e313a2cfa9d945d1989f77b17534b0de362bb74ca07da0173cc28af",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/kilo/control-model.ts": "0fb93db011808cf45436fc5e81e4cf68ac95e0249f25f3fd228469752085fa34",
+    "src/components/kilo/auto-spins.ts": "579da984beea904bfe24d093b74d9a737026af0c8afaff44018ab5909ce3a3c4",
+    "src/components/kilo/modular-controls.css": "574103db980ce276dc652e23e32374c03515b2c1d7c87975db797e7225b5ef88",
+    "src/components/slot-controls/SlotControls.tsx": "87b4d6bb0b40439e374da72f83fbfa15eb8f091016fffc470497ffa90c3db46a",
+    "src/components/slot-controls/controls.css": "7418a5817409b92001433706d78a2c0ec007b2a9ad3b719bc424ce6e9931f1a2",
+    "src/components/slot-controls/layout.ts": "978a0d8cfbe237f2f3746044503e5e643f3b4c1a663b8a1f9d0c0e4931f8c527",
+    "src/components/slot-controls/tokens.ts": "43c7a8a5d34d75c2023770d536ebc331913dd5c5a9d6690683a9b980fefa4e35"
+  },
+  "syntheticStateCases": [
+    {
+      "name": "base",
+      "scene": "base"
+    },
+    {
+      "name": "three natural",
+      "scene": "scatter-3"
+    },
+    {
+      "name": "three plus extra spins",
+      "scene": "scatter-3"
+    },
+    {
+      "name": "four natural",
+      "scene": "scatter-4"
+    },
+    {
+      "name": "four plus extra spins",
+      "scene": "scatter-4"
+    },
+    {
+      "name": "five natural",
+      "scene": "scatter-5"
+    },
+    {
+      "name": "five plus extra spins",
+      "scene": "scatter-5"
+    },
+    {
+      "name": "purchased free spins",
+      "scene": "scatter-3"
+    },
+    {
+      "name": "Chopper precedence",
+      "scene": "chopper"
+    },
+    {
+      "name": "cap does not activate preview mode",
+      "scene": "scatter-5"
+    },
+    {
+      "name": "no round",
+      "scene": "base"
+    },
+    {
+      "name": "entry before intro",
+      "phase": "entry"
+    },
+    {
+      "name": "feature spin",
+      "phase": "feature"
+    },
+    {
+      "name": "restored prior feature",
+      "phase": "base"
+    },
+    {
+      "name": "zero-return completion",
+      "phase": "complete"
+    },
+    {
+      "name": "loading takes precedence",
+      "phase": "loading"
+    }
+  ],
+  "recordedFixtureCases": 18,
+  "decodeCases": [
+    "cache reuse",
+    "eight-image cache eviction",
+    "failure retry",
+    "optional ornament failure",
+    "15-second timeout and retry"
+  ],
+  "layouts": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 0,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "shellHeight": 482.4096385542168,
+      "controls": {
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 68,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 498.4096385542168,
+        "w": 360,
+        "h": 301.5903614457832
+      },
+      "portraitFramingPaint": "url(/kilo-portrait-v40/dock-continuation.webp)",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 0,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "shellHeight": 482.4096385542168,
+      "controls": {
+        "menu": {
+          "x": 288,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 498.4096385542168,
+        "w": 360,
+        "h": 301.5903614457832
+      },
+      "portraitFramingPaint": "none",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 44,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "shellHeight": 482.4096385542168,
+      "controls": {
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 68,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 542.4096385542168,
+        "w": 360,
+        "h": 257.5903614457832
+      },
+      "portraitFramingPaint": "url(/kilo-portrait-v40/dock-continuation.webp)",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 44,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "shellHeight": 482.4096385542168,
+      "controls": {
+        "menu": {
+          "x": 288,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 542.4096385542168,
+        "w": 360,
+        "h": 257.5903614457832
+      },
+      "portraitFramingPaint": "none",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 0,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "shellHeight": 500.48192771084337,
+      "controls": {
+        "menu": {
+          "x": 303,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 247,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 303,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 15,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 83,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 83,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 516.4819277108434,
+        "w": 390,
+        "h": 327.51807228915663
+      },
+      "portraitFramingPaint": "url(/kilo-portrait-v40/dock-continuation.webp)",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 0,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "shellHeight": 500.48192771084337,
+      "controls": {
+        "menu": {
+          "x": 303,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 516.4819277108434,
+        "w": 390,
+        "h": 327.51807228915663
+      },
+      "portraitFramingPaint": "none",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 44,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "shellHeight": 500.48192771084337,
+      "controls": {
+        "menu": {
+          "x": 303,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 247,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 303,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 15,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 83,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 83,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 560.4819277108434,
+        "w": 390,
+        "h": 283.51807228915663
+      },
+      "portraitFramingPaint": "url(/kilo-portrait-v40/dock-continuation.webp)",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 44,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "shellHeight": 500.48192771084337,
+      "controls": {
+        "menu": {
+          "x": 303,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "portraitFraming": {
+        "x": 0,
+        "y": 560.4819277108434,
+        "w": 390,
+        "h": 283.51807228915663
+      },
+      "portraitFramingPaint": "none",
+      "framingClearance": 4
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 0,
+      "feature": false,
+      "mode": "landscape",
+      "reel": {
+        "width": 488,
+        "height": 294
+      },
+      "dockHeight": 350,
+      "shellHeight": 350,
+      "controls": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 160,
+          "w": 84,
+          "h": 64
+        },
+        "minus": {
+          "x": 84,
+          "y": 192,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 148,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 0,
+      "feature": true,
+      "mode": "landscape",
+      "reel": {
+        "width": 488,
+        "height": 294
+      },
+      "dockHeight": 350,
+      "shellHeight": 350,
+      "controls": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 44,
+      "feature": false,
+      "mode": "landscape",
+      "reel": {
+        "width": 415,
+        "height": 250
+      },
+      "dockHeight": 306,
+      "shellHeight": 306,
+      "controls": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 589,
+          "y": 209,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 563,
+          "y": 105,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 589,
+          "y": 53,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 160,
+          "w": 84,
+          "h": 64
+        },
+        "minus": {
+          "x": 84,
+          "y": 192,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 148,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 44,
+      "feature": true,
+      "mode": "landscape",
+      "reel": {
+        "width": 415,
+        "height": 250
+      },
+      "dockHeight": 306,
+      "shellHeight": 306,
+      "controls": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 589,
+          "y": 209,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 563,
+          "y": 105,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 0,
+      "feature": false,
+      "mode": "wide",
+      "reel": {
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "shellHeight": 758.9397590361446,
+      "controls": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        "auto": {
+          "x": 981.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "buy": {
+          "x": 1189.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "bet": {
+          "x": 769.12,
+          "y": 20,
+          "w": 152,
+          "h": 88
+        },
+        "minus": {
+          "x": 921.12,
+          "y": 64,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 921.12,
+          "y": 20,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 0,
+      "feature": true,
+      "mode": "wide",
+      "reel": {
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "shellHeight": 758.9397590361446,
+      "controls": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 44,
+      "feature": false,
+      "mode": "wide",
+      "reel": {
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "shellHeight": 758.9397590361446,
+      "controls": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        "auto": {
+          "x": 981.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "buy": {
+          "x": 1189.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "bet": {
+          "x": 769.12,
+          "y": 20,
+          "w": 152,
+          "h": 88
+        },
+        "minus": {
+          "x": 921.12,
+          "y": 64,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 921.12,
+          "y": 20,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 44,
+      "feature": true,
+      "mode": "wide",
+      "reel": {
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "shellHeight": 758.9397590361446,
+      "controls": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "url": "/kilo-scenes-v41/loading-hero.webp",
+      "bytes": 310696,
+      "width": 1024,
+      "height": 1536,
+      "channels": "srgba",
+      "sha256": "1c5602acf3a267d34693d3c700873863c0272e50234fdf9059401cf17c4360f6"
+    },
+    {
+      "url": "/kilo-scenes-v41/entry-frame.webp",
+      "bytes": 409546,
+      "width": 1200,
+      "height": 675,
+      "channels": "srgba",
+      "sha256": "4f549ba719ba6eddd17180f40e7c049524d747611daa705c0ae2c870fb1a0a9e"
+    },
+    {
+      "url": "/kilo-scenes-v41/boat.webp",
+      "bytes": 409270,
+      "width": 1024,
+      "height": 576,
+      "channels": "srgba",
+      "sha256": "3b931460dd4f09870052e452e784c5efe5ed95b4e944cf4fcb3d05f3f1242896"
+    },
+    {
+      "url": "/kilo-scenes-v41/helicopter-body.webp",
+      "bytes": 482140,
+      "width": 1024,
+      "height": 683,
+      "channels": "srgba",
+      "sha256": "b34660d5fa3e4f4e061c2e1e1561365be55b36237c7966aa26f1e43db250dbc3"
+    },
+    {
+      "url": "/kilo-scenes-v41/getaway-boat.webp",
+      "bytes": 429924,
+      "width": 1024,
+      "height": 576,
+      "channels": "srgba",
+      "sha256": "8b16706a25fd9d49c7b68db9e016639773fdb9d72f3e12fdd7e33513e9368b1a"
+    },
+    {
+      "url": "/kilo-scenes-v41/loading.webp",
+      "bytes": 214400,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "f8d3fd415b54c963999e04cafd48ecb8440ca042ff6dadb19a154b86a29834ef"
+    },
+    {
+      "url": "/kilo-scenes-v41/loading-portrait.webp",
+      "bytes": 183326,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "36c0de8ee681bab9c8a0a1e83dd8931775d1099f137c27ec1d3948b1bacfe269"
+    },
+    {
+      "url": "/kilo-scenes-v41/base.webp",
+      "bytes": 207896,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "b33ac4df0c4ce3d923f1e4ab7396f051101672e57d0c59fc4e7ea78c6636efd1"
+    },
+    {
+      "url": "/kilo-scenes-v41/base-portrait.webp",
+      "bytes": 176710,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "6bdc8f5ebb21d54e20b0ee22476772cf3af14fa51faeddda4405146b4092c2d0"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-3.webp",
+      "bytes": 229486,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "03587faa03666247e7c456fe0f4956fb3482d844276a8b80dda1ab7cb60f0337"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-3-portrait.webp",
+      "bytes": 193004,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "e11504af672ebc1c7f9b5dfe09770a1e3569b348d91fb555ccb8b961a7777736"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-4.webp",
+      "bytes": 231646,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "2aa879a72871dfda7ed8f03b47786677fe9cd496846fc26ae98eed116402593d"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-4-portrait.webp",
+      "bytes": 177410,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "fb20113a2944087893c55e1cd666e7fab60a034a703104a8d61922e4483c4241"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-5.webp",
+      "bytes": 222596,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "451a03d8650faa5bebf745e9206ed24d61c8480dacb88bf56e83c2a94759a0d3"
+    },
+    {
+      "url": "/kilo-scenes-v41/scatter-5-portrait.webp",
+      "bytes": 213910,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "ecb4f1f670e843b97cc592e16ec8cbd51724ed8a6cefe22199baa3cd271cef37"
+    },
+    {
+      "url": "/kilo-scenes-v41/chopper.webp",
+      "bytes": 177522,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "7f975d3fe62c624585ea30f8a70b09aec3159b626e660a3c3952f6fd0dce0941"
+    },
+    {
+      "url": "/kilo-scenes-v41/chopper-portrait.webp",
+      "bytes": 159476,
+      "width": 768,
+      "height": 1366,
+      "channels": "srgb",
+      "sha256": "971bc716e9cd2c6a76d8d3a1dd7970a6e52d072fd2308104e6d37140d6a633c1"
+    },
+    {
+      "url": "/kilo-scenes-v41/mystery.webp",
+      "bytes": 197394,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "559c081521a935fcddb8a85db18ba630b452ce7409f02223648cfb7dc44ae630"
+    },
+    {
+      "url": "/kilo-scenes-v41/mystery-portrait.webp",
+      "bytes": 174672,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "ca0cb32bfcc3bb65e1d809dd11251c9348a199a63c843d55d491e7dab4ca72fa"
+    },
+    {
+      "url": "/kilo-scenes-v41/god-mode.webp",
+      "bytes": 216532,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "8ac6fe12ad269f74b0d2e32a8580fde59793ab5f4efb392aa8d398507d893537"
+    },
+    {
+      "url": "/kilo-scenes-v41/god-mode-portrait.webp",
+      "bytes": 181362,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "94ae24924592874645392c9c4dbf6405d20cfff03d052ef69b7899c14f2a6c2c"
+    },
+    {
+      "url": "/kilo-scenes-v41/max-win.webp",
+      "bytes": 196068,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "e8591cec370818bb340493dcde462af8240d8c59599dc6d294f9cca1f7236546"
+    },
+    {
+      "url": "/kilo-scenes-v41/max-win-portrait.webp",
+      "bytes": 177226,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "4d781671568d96132938c01e35fc3558bc3400f2f9831dbe46a0c973e1197315"
+    },
+    {
+      "url": "/kilo-scenes-v41/completion.webp",
+      "bytes": 202240,
+      "width": 1600,
+      "height": 900,
+      "channels": "srgb",
+      "sha256": "2ece8d94c8cd872ef4018c1121c28376e0859d015818afc9a648b5f8169f4cf2"
+    },
+    {
+      "url": "/kilo-scenes-v41/completion-portrait.webp",
+      "bytes": 143184,
+      "width": 768,
+      "height": 1365,
+      "channels": "srgb",
+      "sha256": "e09f8e629e61583e7b8cd3f345ff82caa791b4bba3ec09e2e4485c3ffa4b0332"
+    }
+  ],
+  "totalEnvironmentBytes": 5917636
+}

@@ -1,0 +1,21 @@
+{
+  "version": 55,
+  "status": "integrated-after-source-and-art-review",
+  "approvedForRuntime": true,
+  "reason": "Fixed camera and registration retained. New rig replaces base actor; water samples the new plate. Art and alignment inspected. Live cloud seam/GPU review remains outstanding.",
+  "material": "Quieter illustrated stone and restrained lantern reflections",
+  "assets": [
+    {
+      "file": "base-desktop-sky-clean.webp",
+      "sha256": "af4f4a1a18a3b66d26baef422061da3f9e4a3501eb49bcf67aa5399f3c65d3d9",
+      "bytes": 2208036
+    },
+    {
+      "file": "base-portrait-sky-clean.webp",
+      "sha256": "905f1b6e14b7cc8699d24c175e9371b8b599300e4b3f376a9f636cf4e28df8b5",
+      "bytes": 1462486
+    }
+  ],
+  "verification": "art/kilo-v55/environment/alignment-report.json",
+  "prompts": "art/kilo-v55/environment/prompts.json"
+}

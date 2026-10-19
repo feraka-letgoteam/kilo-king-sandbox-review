@@ -1,0 +1,11 @@
+{
+  "samples": 4004,
+  "clamped": 0,
+  "maxJointStepAt1000Samples": 1.9844133252684915,
+  "minElbowBendDegrees": 99.7335926042896,
+  "maxElbowBendDegrees": 173.1293609093089,
+  "constantBoneLengths": true,
+  "method": "Actual production authoring helper, fixed-length two-bone IK. Atlas has64 distinct sampled drawings; no crossfaded limbs. Local part rig, not full skeletal body or3D performance.",
+  "frameCount": 64,
+  "frameSize": 256
+}

@@ -1,0 +1,22 @@
+{
+  "version": 55,
+  "url": "/kilo-v55/frame/cabinet.webp",
+  "size": [
+    1536,
+    1024
+  ],
+  "slices": {
+    "x": [
+      0,
+      208,
+      1328
+    ],
+    "y": [
+      0,
+      208,
+      816
+    ]
+  },
+  "layout": "unchanged stageArtLayout and ring clip; center never drawn",
+  "sourceSha256": "dedfaa5662c4d2cb68a1a64297d328e6b80ae6f73991165110704850e0629642"
+}

@@ -1,0 +1,97 @@
+/** Source and native decoded-art QA. Does not launch or claim a browser. */
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {createRequire} from 'node:module';
+import ts from 'typescript';
+import {ART,ART_ROOT,SYMBOL_ALPHA,TOOL_PIVOTS} from '../src/components/kilo/art-map.ts';
+import {V8_ROOT,V8_META,CONTRABAND_ROOT,PACKAGE_META,SCATTER_KING} from '../src/components/kilo/fish-art.ts';
+import {MOTION_ROOT,collectorAtlas} from '../src/components/kilo/motion-atlas.ts';
+import {SYMBOL_LABELS} from '../src/components/kilo/symbol-labels.ts';
+let sharp;try{sharp=(await import('sharp')).default;}catch{sharp=createRequire(path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES||'/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules','package.json'))('sharp');}
+const checkpoint='1874c2182d103f6b6c3c4b63988c32672d846f0b';
+const checks=[];
+const read=p=>fs.readFileSync(p,'utf8');
+const baseline=p=>execFileSync('git',['show',`${checkpoint}:${p}`],{maxBuffer:30e6});
+const hash=x=>createHash('sha256').update(x).digest('hex');
+function check(name,f){try{const detail=f();checks.push({name,passed:true,...(detail?{detail}:{})});}catch(e){checks.push({name,passed:false,detail:String(e.message||e)});}}
+const exceptions=new Set(['art-map.ts','fish-art.ts','motion-atlas.ts','pixiStage.ts','play.tsx','feature-takeover.tsx','paytable.tsx','info-panel.tsx']);
+const sources=execFileSync('git',['ls-tree','-r','--name-only',checkpoint,'src/components/kilo','src/components/slot-controls','src/lib/kilo'],{encoding:'utf8'}).trim().split('\n');
+for(const file of sources.filter(p=>!exceptions.has(path.basename(p))))check(`Protected source unchanged: ${file}`,()=>assert.equal(hash(fs.readFileSync(file)),hash(baseline(file))));
+for(const file of ['public/kilo-scene-v15/logo-stacked.webp','public/kilo-ui-v11/logo-kilo-king.webp','public/kilo-night-v3/logo-kilo-king.png'])check(`Original logo unchanged: ${file}`,()=>assert.equal(hash(fs.readFileSync(file)),hash(baseline(file))));
+const printer=ts.createPrinter({removeComments:true});
+const parse=(file,text)=>ts.createSourceFile(file,text,ts.ScriptTarget.Latest,true,file.endsWith('.tsx')?ts.ScriptKind.TSX:ts.ScriptKind.TS);
+const printed=(node,s)=>printer.printNode(ts.EmitHint.Unspecified,node,s);
+function outside(s,ignored){return s.statements.filter(n=>!ts.isVariableStatement(n)||!n.declarationList.declarations.every(d=>ignored.includes(d.name.getText(s)))).map(n=>printed(n,s));}
+function props(s,name,ignored=[]){let d;function visit(n){if(ts.isVariableDeclaration(n)&&n.name.getText(s)===name)d=n;ts.forEachChild(n,visit);}visit(s);assert(d?.initializer);let o=d.initializer;while(ts.isAsExpression(o)||ts.isSatisfiesExpression(o))o=o.expression;assert(ts.isObjectLiteralExpression(o));return Object.fromEntries(o.properties.filter(p=>!ignored.includes(p.name?.getText(s).replaceAll('"',''))).map(p=>[p.name?.getText(s),printed(p,s)]));}
+function guard(file,ignored){const p=`src/components/kilo/${file}`,a=parse(p,read(p)),b=parse(p,baseline(p).toString());assert.deepEqual(outside(a,ignored),outside(b,ignored));return {a,b};}
+check('Artwork paths/alpha only; tool canvases, source paths and pivots retained',()=>{
+ guard('art-map.ts',['ART','SYMBOL_ALPHA']);
+});
+check('Package values, tiers, fit function, reaction motion and scatter budgets unchanged',()=>{
+ const {a,b}=guard('fish-art.ts',['CONTRABAND_ROOT','V8_META','PACKAGE_META','SCATTER_KING']);
+ assert.deepEqual(props(a,'V8_META',['sym-reel-v8','sym-case-v8']),props(b,'V8_META',['sym-reel-v8','sym-case-v8']));
+ assert.deepEqual(props(a,'SCATTER_KING',['file','width','height','bounds']),props(b,'SCATTER_KING',['file','width','height','bounds']));
+});
+check('Collector frame rectangles, sequencing and reaction timings unchanged',()=>{
+ const {a,b}=guard('motion-atlas.ts',['collectorAtlas']);
+ assert.deepEqual(props(a,'collectorAtlas',['image']),props(b,'collectorAtlas',['image']));
+});
+for(const file of ['play.tsx','pixiStage.ts','feature-takeover.tsx','paytable.tsx','info-panel.tsx'])check(`Only artwork references and approved copy changed in ${file}`,()=>{
+ const p=`src/components/kilo/${file}`;
+ function normalized(text){
+  text=text.replaceAll('/kilo-symbols-v45/','/kilo-symbols-v44/');
+  if(file==='pixiStage.ts')text=text
+   .replace('import { SYMBOL_LABELS } from "./symbol-labels";\n','')
+   .replace('const shown = SYMBOL_LABELS[line.s];','const shown = line.s === "brick" ? "package" : line.s;')
+   .replaceAll('"Dime bag"','"Small package"').replaceAll('"Kilo brick"','"Medium package"').replaceAll('"Kilo bundle"','"Trophy package"').replaceAll('"Bulk kilos"','"King package"');
+  if(file==='paytable.tsx')text=text.replace('name: "Cash roll"','name: "Fuel can"').replace('name: "Dime bags & kilos"','name: "Cash package"').replace('Package line wins and','Cash-package line wins and');
+  if(file==='info-panel.tsx')text=text
+   .replaceAll('contraband package','cash package').replaceAll('contraband-package','cash-package')
+   .replace('title="Dime bags & kilos"','title="Cash packages"')
+   .replace('Dime bags and wrapped kilos show cash values based on your base\n                bet. These values are collected only by fishermen during free\n                spins. They are not scatters. The separate Cash roll symbol pays\n                ordinary line wins.','Packages show cash values based on your base bet. These values\n                are collected only by fishermen during free spins. Packages are\n                not scatters.');
+  return text;
+ }
+ const actual=normalized(read(p)),before=baseline(p).toString();
+ assert.equal(printed(parse(p,actual),parse(p,actual)),printed(parse(p,before),parse(p,before)));
+});
+const manifest=JSON.parse(read('public/kilo-symbols-v45/manifest.json'));
+const assets=[];
+const url=(root,file)=>path.posix.normalize(root+file);
+for(const [sym,file]of Object.entries(ART))if(['10','J','Q','K','A','cuffs','keys'].includes(sym))assets.push({key:sym==='cuffs'?'sym-bobber':sym==='keys'?'sym-cash-roll':`sym-${sym.toLowerCase()}`,url:url(ART_ROOT,file),width:1024,height:1024,bounds:SYMBOL_ALPHA[sym]});
+for(const [key,m]of Object.entries(PACKAGE_META))assets.push({key,url:url(CONTRABAND_ROOT,m.file),...m});
+for(const key of ['sym-reel-v8','sym-case-v8'])assets.push({key,url:url(V8_ROOT,V8_META[key].file),...V8_META[key]});
+assets.push({key:'scatter-king',url:url(CONTRABAND_ROOT,SCATTER_KING.file),...SCATTER_KING});
+async function alphaBounds(bytes){const {data,info}=await sharp(bytes).ensureAlpha().raw().toBuffer({resolveWithObject:true});let l=info.width,t=info.height,r=-1,b=-1,clear=0;for(let y=0;y<info.height;y++)for(let x=0;x<info.width;x++){const a=data[(y*info.width+x)*4+3];if(a===0)clear++;if(a>64){l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x);b=Math.max(b,y);}}return {bounds:[l,t,r+1,b+1],clear};}
+for(const item of assets){try{
+ assert(item.url.startsWith('/kilo-symbols-v45/'));
+ const bytes=fs.readFileSync(`public${item.url}`),m=await sharp(bytes).metadata(),alpha=await alphaBounds(bytes);
+ assert.equal(m.width,item.width);assert.equal(m.height,item.height);assert(m.hasAlpha&&alpha.clear>m.width*m.height*.05);
+ assert.deepEqual(alpha.bounds,[...item.bounds]);assert.equal(manifest.assets[item.key].sha256,hash(bytes));
+ checks.push({name:`Decoded registered artwork: ${item.key}`,passed:true,detail:{url:item.url,canvas:[m.width,m.height],bounds:alpha.bounds}});
+}catch(e){checks.push({name:`Decoded registered artwork: ${item.key}`,passed:false,detail:String(e.message||e)});}}
+check('All14 static reel identities are uniquely registered',()=>assert.equal(assets.length,14));
+for(const [key,urlPath,canvas]of [['collector-idle','/kilo-symbols-v45/collector-idle.png',[444,444]],['collector-reaction-atlas',url(MOTION_ROOT,collectorAtlas.image),[1774,887]]]){try{
+ const bytes=fs.readFileSync(`public${urlPath}`),m=await sharp(bytes).metadata(),a=await alphaBounds(bytes);
+ assert(urlPath.startsWith('/kilo-symbols-v45/'));assert.deepEqual([m.width,m.height],canvas);assert(m.hasAlpha&&a.clear>m.width*m.height*.05);assert.equal(hash(bytes),manifest.assets[key].sha256);
+ checks.push({name:`Decoded collector: ${key}`,passed:true});
+}catch(e){checks.push({name:`Decoded collector: ${key}`,passed:false,detail:String(e.message||e)});}}
+check('All visible collector portraits share one new asset',()=>{
+ assert.equal(url(ART_ROOT,ART.splash),'/kilo-symbols-v45/collector-idle.png');
+ for(const f of ['play.tsx','pixiStage.ts']){const text=read(`src/components/kilo/${f}`);assert(text.includes('/kilo-symbols-v45/collector-idle.png'));assert(!text.includes('/kilo-motion-v7/collector-idle.png'));}
+});
+check('Feature art uses current scatter and case',()=>{const t=read('src/components/kilo/feature-takeover.tsx');assert(t.includes('/kilo-symbols-v45/scatter-king.webp'));assert(t.includes('/kilo-symbols-v45/sym-case-v8.webp'));});
+check('Cash roll and contraband names agree with the art without changing IDs',()=>{
+ assert.equal(SYMBOL_LABELS.keys,'Cash roll');assert.equal(SYMBOL_LABELS.brick,'Contraband');
+ assert.deepEqual(Object.keys(SYMBOL_LABELS).sort(),['10','J','Q','K','A','cuffs','keys','lamp','duffel','brick','bars','splash'].sort());
+ const paytable=read('src/components/kilo/paytable.tsx'),info=read('src/components/kilo/info-panel.tsx');
+ assert(paytable.includes('id: "keys", name: "Cash roll"'));assert(!paytable.includes('Fuel can'));
+ assert(paytable.includes('name: "Dime bags & kilos"'));assert(info.includes('Dime bags and wrapped kilos'));
+ assert(read('src/components/kilo/pixiStage.ts').includes('const shown = SYMBOL_LABELS[line.s]'));
+ assert.equal(url(ART_ROOT,ART.keys),'/kilo-symbols-v45/sym-cash-roll.webp');
+});
+const failed=checks.filter(c=>!c.passed),report={checkpoint,verification:'Source, decoded-art and native proof only; live browser unverified',passed:checks.length-failed.length,total:checks.length,checks};
+fs.writeFileSync('public/kilo-symbols-v45/verification.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({passed:report.passed,total:report.total,failed},null,2));if(failed.length)process.exitCode=1;

@@ -1,0 +1,1138 @@
+{
+  "checkpoint": "c6e56c746909d2228a56c173548545a334f6133f",
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "protectedFiles": [
+    "src/lib/kilo/engine.ts",
+    "src/lib/kilo/feature-math.ts",
+    "src/lib/kilo/reel-feature-math.ts",
+    "src/lib/kilo/vs-groups.ts",
+    "src/lib/kilo/vs-progression.ts",
+    "src/lib/kilo/vs-outcome-catalogue.ts",
+    "src/lib/kilo/experience-outcome-catalogue.ts",
+    "src/lib/kilo/fixtures.json",
+    "src/components/kilo/director.ts",
+    "src/components/kilo/control-model.ts",
+    "src/components/kilo/layout.ts",
+    "src/components/kilo/play.tsx",
+    "src/components/slot-controls/layout.ts",
+    "src/components/kilo/feature-takeover.tsx",
+    "src/components/kilo/god-card-motion.ts"
+  ],
+  "collectionByteIdentical": true,
+  "anatomicalSamples": 1212,
+  "constantBoneLengths": true,
+  "reactionPriority": true,
+  "unchangedMaxClocks": true,
+  "samples": [
+    {
+      "stage": 1,
+      "preload": {
+        "pitch": 0.0945,
+        "lean": 0.0945,
+        "heave": 17.1,
+        "surge": -10.8,
+        "wake": 0.63,
+        "wakeLength": 1.405,
+        "spray": 0.684,
+        "intensity": 0.9,
+        "thrust": false,
+        "highlight": 1
+      },
+      "thrust": {
+        "pitch": -0.2115,
+        "lean": -0.324,
+        "heave": -28.8,
+        "surge": 20.7,
+        "wake": 0.9,
+        "wakeLength": 1.9900000000000002,
+        "spray": 0.9,
+        "intensity": 0.9,
+        "thrust": true,
+        "highlight": 0.7
+      },
+      "brake": {
+        "pitch": 0.117,
+        "lean": 0.25200000000000006,
+        "heave": 17.1,
+        "surge": -14.4,
+        "wake": 0.441,
+        "wakeLength": 0.775,
+        "spray": 0.41400000000000003,
+        "intensity": 0.9,
+        "thrust": true,
+        "highlight": 0
+      },
+      "rest": {
+        "pitch": 0,
+        "lean": 0,
+        "heave": 0,
+        "surge": 0,
+        "wake": 0,
+        "wakeLength": 1,
+        "spray": 0,
+        "intensity": 0.9,
+        "thrust": false,
+        "highlight": 0
+      }
+    },
+    {
+      "stage": 2,
+      "preload": {
+        "pitch": 0.10079999999999999,
+        "lean": 0.10079999999999999,
+        "heave": 18.24,
+        "surge": -11.52,
+        "wake": 0.6719999999999999,
+        "wakeLength": 1.432,
+        "spray": 0.7296,
+        "intensity": 0.96,
+        "thrust": false,
+        "highlight": 1
+      },
+      "thrust": {
+        "pitch": -0.22559999999999997,
+        "lean": -0.34559999999999996,
+        "heave": -30.72,
+        "surge": 22.08,
+        "wake": 0.96,
+        "wakeLength": 2.056,
+        "spray": 0.96,
+        "intensity": 0.96,
+        "thrust": true,
+        "highlight": 0.7
+      },
+      "brake": {
+        "pitch": 0.1248,
+        "lean": 0.26880000000000004,
+        "heave": 18.24,
+        "surge": -15.36,
+        "wake": 0.4704,
+        "wakeLength": 0.76,
+        "spray": 0.4416,
+        "intensity": 0.96,
+        "thrust": true,
+        "highlight": 0
+      },
+      "rest": {
+        "pitch": 0,
+        "lean": 0,
+        "heave": 0,
+        "surge": 0,
+        "wake": 0,
+        "wakeLength": 1,
+        "spray": 0,
+        "intensity": 0.96,
+        "thrust": false,
+        "highlight": 0
+      }
+    },
+    {
+      "stage": 3,
+      "preload": {
+        "pitch": 0.1092,
+        "lean": 0.1092,
+        "heave": 19.76,
+        "surge": -12.48,
+        "wake": 0.728,
+        "wakeLength": 1.468,
+        "spray": 0.7904,
+        "intensity": 1.04,
+        "thrust": false,
+        "highlight": 1
+      },
+      "thrust": {
+        "pitch": -0.2444,
+        "lean": -0.3744,
+        "heave": -33.28,
+        "surge": 23.92,
+        "wake": 1,
+        "wakeLength": 2.144,
+        "spray": 1,
+        "intensity": 1.04,
+        "thrust": true,
+        "highlight": 0.7
+      },
+      "brake": {
+        "pitch": 0.13520000000000001,
+        "lean": 0.2912,
+        "heave": 19.76,
+        "surge": -16.64,
+        "wake": 0.5096,
+        "wakeLength": 0.74,
+        "spray": 0.47840000000000005,
+        "intensity": 1.04,
+        "thrust": true,
+        "highlight": 0
+      },
+      "rest": {
+        "pitch": 0,
+        "lean": 0,
+        "heave": 0,
+        "surge": 0,
+        "wake": 0,
+        "wakeLength": 1,
+        "spray": 0,
+        "intensity": 1.04,
+        "thrust": false,
+        "highlight": 0
+      }
+    },
+    {
+      "stage": 4,
+      "preload": {
+        "pitch": 0.11864999999999998,
+        "lean": 0.11864999999999998,
+        "heave": 21.47,
+        "surge": -13.559999999999999,
+        "wake": 0.7909999999999999,
+        "wakeLength": 1.5085,
+        "spray": 0.8587999999999999,
+        "intensity": 1.13,
+        "thrust": false,
+        "highlight": 1
+      },
+      "thrust": {
+        "pitch": -0.26554999999999995,
+        "lean": -0.40679999999999994,
+        "heave": -36.16,
+        "surge": 25.99,
+        "wake": 1,
+        "wakeLength": 2.243,
+        "spray": 1,
+        "intensity": 1.13,
+        "thrust": true,
+        "highlight": 0.7
+      },
+      "brake": {
+        "pitch": 0.1469,
+        "lean": 0.3164,
+        "heave": 21.47,
+        "surge": -18.08,
+        "wake": 0.5537,
+        "wakeLength": 0.7175,
+        "spray": 0.5197999999999999,
+        "intensity": 1.13,
+        "thrust": true,
+        "highlight": 0
+      },
+      "rest": {
+        "pitch": 0,
+        "lean": 0,
+        "heave": 0,
+        "surge": 0,
+        "wake": 0,
+        "wakeLength": 1,
+        "spray": 0,
+        "intensity": 1.13,
+        "thrust": false,
+        "highlight": 0
+      }
+    },
+    {
+      "stage": 5,
+      "preload": {
+        "pitch": 0.12915,
+        "lean": 0.12915,
+        "heave": 23.37,
+        "surge": -14.76,
+        "wake": 0.861,
+        "wakeLength": 1.5535,
+        "spray": 0.9348,
+        "intensity": 1.23,
+        "thrust": false,
+        "highlight": 1
+      },
+      "thrust": {
+        "pitch": -0.28905,
+        "lean": -0.44279999999999997,
+        "heave": -39.36,
+        "surge": 28.29,
+        "wake": 1,
+        "wakeLength": 2.3529999999999998,
+        "spray": 1,
+        "intensity": 1.23,
+        "thrust": true,
+        "highlight": 0.7
+      },
+      "brake": {
+        "pitch": 0.15990000000000001,
+        "lean": 0.34440000000000004,
+        "heave": 23.37,
+        "surge": -19.68,
+        "wake": 0.6027,
+        "wakeLength": 0.6925,
+        "spray": 0.5658,
+        "intensity": 1.23,
+        "thrust": true,
+        "highlight": 0
+      },
+      "rest": {
+        "pitch": 0,
+        "lean": 0,
+        "heave": 0,
+        "surge": 0,
+        "wake": 0,
+        "wakeLength": 1,
+        "spray": 0,
+        "intensity": 1.23,
+        "thrust": false,
+        "highlight": 0
+      }
+    }
+  ],
+  "results": [
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "reduced": false,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 7560
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "reduced": false,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 7560
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "reduced": true,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "reduced": true,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 4212
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 4212
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "reduced": false,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 2973.9999999999995
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "reduced": false,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 159,
+      "clock": 2973.9999999999995
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "reduced": true,
+      "phone": false,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "reduced": true,
+      "phone": true,
+      "paid": [
+        25000000
+      ],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 93,
+      "clock": 4000
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 93,
+      "clock": 4000
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 93,
+      "clock": 2247
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 93,
+      "clock": 2247
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 93,
+      "clock": 1734.4
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 93,
+      "clock": 1734.4
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 158,
+      "clock": 7590
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 158,
+      "clock": 7590
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 660
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 158,
+      "clock": 4228.5
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 158,
+      "clock": 4228.5
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 471
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "reduced": false,
+      "phone": false,
+      "paid": [],
+      "observations": 158,
+      "clock": 3086.7999999999997
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "reduced": false,
+      "phone": true,
+      "paid": [],
+      "observations": 158,
+      "clock": 3086.7999999999997
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "reduced": true,
+      "phone": false,
+      "paid": [],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "reduced": true,
+      "phone": true,
+      "paid": [],
+      "observations": 3,
+      "clock": 374.4
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "result",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "result",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 25000000
+    },
+    {
+      "outcome": "full",
+      "speed": "super",
+      "action": "resize",
+      "phase": "result",
+      "paid": 25000000
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "early",
+      "speed": "super",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "normal",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "skip",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "skip",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "skip",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "skip",
+      "phase": "result",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "resize",
+      "phase": "anticipate",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "resize",
+      "phase": "advance",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "resize",
+      "phase": "settle",
+      "paid": 0
+    },
+    {
+      "outcome": "late",
+      "speed": "super",
+      "action": "resize",
+      "phase": "result",
+      "paid": 0
+    }
+  ],
+  "method": "Actual production controllers and transforms with instrumented Pixi, not browser/WebGL."
+}

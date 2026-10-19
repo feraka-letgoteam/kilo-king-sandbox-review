@@ -1,0 +1,184 @@
+/* Presentation takeover only. The host keeps the existing intro lifetime and
+   input handling. This layer never measures or changes the game rectangle. */
+.ks-bonus-entry {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  color: #fff5e3;
+  font-family: "Source Sans 3", sans-serif;
+  text-align: center;
+}
+.ks-bonus-entry *,
+.ks-bonus-entry *::before,
+.ks-bonus-entry *::after {
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.ks-entry-shade {
+  position: absolute;
+  inset: 0;
+  background: #010a12b8;
+}
+.ks-entry-copy {
+  position: relative;
+  width: min(94vw, 680px);
+  max-height: calc(100dvh - 40px);
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  padding-block: 12px;
+}
+.ks-entry-destination {
+  margin: 0;
+  color: #efe2c9;
+  font: 700 14px/20px "Source Sans 3", sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.ks-entry-hero {
+  --entry-number-y: 40%;
+  position: relative;
+  width: min(90vw, 600px);
+  aspect-ratio: 1000 / 667;
+  isolation: isolate;
+  animation: ks-entry-arrive 180ms cubic-bezier(.2,.75,.25,1) both;
+}
+.ks-bonus-entry[data-scene="scatter-4"] .ks-entry-hero {
+  --entry-number-y: 58%;
+}
+.ks-bonus-entry[data-scene="scatter-5"] .ks-entry-hero {
+  --entry-number-y: 41.5%;
+}
+.ks-bonus-entry[data-scene="chopper"] .ks-entry-hero {
+  --entry-number-y: 47%;
+}
+.ks-entry-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.ks-entry-award {
+  position: absolute;
+  left: 50%;
+  top: var(--entry-number-y);
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0;
+  width: 46%;
+  color: #ffdf91;
+  text-shadow: 0 3px 0 #171711, 0 0 16px #041014;
+}
+.ks-entry-award > strong {
+  font: 900 110px/0.95 "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.ks-entry-heading {
+  margin: -2px 0 0;
+  color: #fff3d3;
+  font: 800 48px/1 "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+}
+.ks-entry-multiplier {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 0;
+  color: #e3ece5;
+  font: 600 14px/22px "Source Sans 3", sans-serif;
+}
+.ks-entry-multiplier strong {
+  color: #a9e6d3;
+  font-size: 28px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.ks-entry-modifiers {
+  margin: 0;
+  width: min(92%, 500px);
+  color: #d8e4dc;
+  font: 600 14px/20px "Source Sans 3", sans-serif;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 620px) and (orientation: portrait) {
+  .ks-entry-copy {
+    width: 100%;
+    gap: 10px;
+    padding: 16px;
+    max-height: calc(100dvh - 32px);
+  }
+  .ks-entry-destination {
+    font-size: 13px;
+    letter-spacing: 1.6px;
+  }
+  .ks-entry-hero {
+    width: 90vw;
+  }
+  .ks-entry-award > strong {
+    font-size: 72px;
+  }
+  .ks-entry-heading {
+    font-size: 34px;
+    letter-spacing: 1px;
+  }
+  .ks-entry-modifiers {
+    width: 100%;
+  }
+}
+@media (max-height: 480px) and (orientation: landscape) {
+  .ks-entry-copy {
+    width: min(96vw, 650px);
+    gap: 5px;
+    padding-block: 8px;
+    max-height: calc(100dvh - 16px);
+  }
+  .ks-entry-hero {
+    width: 330px;
+  }
+  .ks-entry-award > strong {
+    font-size: 72px;
+  }
+  .ks-entry-heading {
+    font-size: 30px;
+  }
+  .ks-entry-multiplier strong {
+    font-size: 24px;
+  }
+  .ks-entry-modifiers {
+    width: 96%;
+    line-height: 18px;
+  }
+}
+.ks-bonus-entry[data-reduced="true"] .ks-entry-hero,
+.ks-bonus-entry[data-immediate="true"] .ks-entry-hero,
+.kk-app[data-reduced="1"] .ks-entry-hero {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ks-entry-hero {
+    animation: none;
+  }
+}
+@keyframes ks-entry-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

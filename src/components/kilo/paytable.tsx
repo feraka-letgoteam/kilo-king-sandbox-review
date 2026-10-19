@@ -1,14 +1,8 @@
-import { PAY, PAYLINES, SCATTER_PAY } from "@/lib/kilo/engine";
+import { PAY, PAYLINES } from "@/lib/kilo/engine";
 import { ART, ART_ROOT } from "./art-map";
-import {
-  CONTRABAND_ROOT,
-  PACKAGE_META,
-  SCATTER_KING,
-  V8_ROOT,
-  V8_META,
-} from "./fish-art";
+import { CONTRABAND_ROOT, PACKAGE_META, V8_ROOT, V8_META } from "./fish-art";
 
-const symbols = [
+export const PAY_SYMBOLS = [
   {
     id: "duffel",
     name: "Tackle case",
@@ -20,10 +14,10 @@ const symbols = [
     image: V8_ROOT + V8_META["sym-reel-v8"].file,
   },
   { id: "cuffs", name: "Bobber", image: ART_ROOT + ART.cuffs },
-  { id: "keys", name: "Fuel can", image: ART_ROOT + ART.keys },
+  { id: "keys", name: "Cash roll", image: ART_ROOT + ART.keys },
   {
     id: "brick",
-    name: "Cash package",
+    name: "Dime bags & kilos",
     image: CONTRABAND_ROOT + PACKAGE_META["package-small"].file,
   },
   ...(["A", "K", "Q", "J", "10"] as const).map((id) => ({
@@ -32,91 +26,104 @@ const symbols = [
     image: ART_ROOT + ART[id],
   })),
 ];
+
+/** The real paytable, presented as unboxed artwork like the reference. */
 export function Paytable({ stake }: { stake: number }) {
   return (
-    <section className="kk-paytable">
-      <h2>Line wins</h2>
-      <p>
-        10 fixed paylines. Matching symbols pay from the leftmost reel. Values
-        below are multiples of the base bet.
+    <section
+      className="kk-info-section"
+      aria-labelledby="kk-info-paytable-title"
+    >
+      <h2 id="kk-info-paytable-title">Pay table</h2>
+      <p className="kk-info-intro">
+        All wins below are multiples of the base bet. Current base bet:{" "}
+        <strong>{stake.toLocaleString("en-US")}</strong>.
       </p>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Symbol</th>
-            <th scope="col">3</th>
-            <th scope="col">4</th>
-            <th scope="col">5</th>
-          </tr>
-        </thead>
-        <tbody>
-          {symbols.map((s) => (
-            <tr key={s.id}>
-              <th scope="row">
-                <img src={s.image} alt="" />
-                <span>{s.name}</span>
-              </th>
-              {PAY[s.id]!.map((pay, i) => (
-                <td key={i}>{pay}×</td>
+      <div className="kk-info-symbols">
+        {PAY_SYMBOLS.map((symbol) => (
+          <figure
+            className="kk-info-symbol"
+            key={symbol.id}
+            data-symbol={symbol.id}
+          >
+            <img
+              src={symbol.image}
+              alt=""
+              width="188"
+              height="188"
+              decoding="async"
+            />
+            <figcaption>{symbol.name}</figcaption>
+            <dl className="kk-info-pays" aria-label={`${symbol.name} payouts`}>
+              {([5, 4, 3] as const).map((count) => (
+                <div key={count} data-match={count}>
+                  <dt>
+                    <span className="kk-info-match-count">{count}</span>
+                    <span className="kk-info-sr"> matching symbols</span>
+                  </dt>
+                  <dd>{PAY[symbol.id]![count - 3].toLocaleString("en-US")}×</dd>
+                </div>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p>
-        The fisherman substitutes for line symbols except KING scatters. A line
-        of fishermen pays the tackle-case award.
-      </p>
-      <div className="kk-scatter-pay">
-        <img src={CONTRABAND_ROOT + SCATTER_KING.file} alt="KING scatter" />
-        <div>
-          <h2>Scatter wins</h2>
-          <p>
-            {[2, 3, 4, 5]
-              .map((n) => `${n} scatters: ${SCATTER_PAY[n]}×`)
-              .join(" · ")}
-          </p>
-        </div>
+            </dl>
+          </figure>
+        ))}
       </div>
-      <details>
-        <summary>View the 10 paylines</summary>
-        <div className="kk-paylines">
-          {PAYLINES.map((rows, i) => (
-            <figure key={i}>
-              <svg
-                viewBox="0 0 100 64"
-                role="img"
-                aria-label={`Payline ${i + 1}: rows ${rows.map((r) => r + 1).join(", ")}`}
-              >
-                {Array.from({ length: 15 }, (_, cell) => (
+    </section>
+  );
+}
+
+export function Paylines() {
+  return (
+    <section
+      className="kk-info-section"
+      aria-labelledby="kk-info-paylines-title"
+    >
+      <h2 id="kk-info-paylines-title">Paylines</h2>
+      <div className="kk-info-paylines">
+        {PAYLINES.map((rows, line) => (
+          <figure key={line}>
+            <svg
+              viewBox="0 0 112 64"
+              role="img"
+              aria-label={`Payline ${line + 1}: rows ${rows.map((row) => row + 1).join(", ")}`}
+            >
+              {Array.from({ length: 15 }, (_, cell) => {
+                const column = Math.floor(cell / 3);
+                const row = cell % 3;
+                return (
                   <rect
                     key={cell}
-                    x={4 + Math.floor(cell / 3) * 19}
-                    y={4 + (cell % 3) * 19}
-                    width="15"
-                    height="15"
-                    rx="2"
-                    fill="#29404a"
+                    x={column * 23}
+                    y={row * 22}
+                    width="20"
+                    height="19"
+                    rx="1"
+                    fill={rows[column] === row ? "#ddb868" : "#ece7dc"}
+                    data-active={rows[column] === row ? "1" : "0"}
                   />
-                ))}
-                <polyline
-                  points={rows
-                    .map((row, col) => `${11.5 + col * 19},${11.5 + row * 19}`)
-                    .join(" ")}
-                  fill="none"
-                  stroke="#e0be77"
-                  strokeWidth="2.5"
-                />
-              </svg>
-              <figcaption>{i + 1}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </details>
-      <p className="kk-muted">
-        Base bet: {stake.toLocaleString("en-US")} LGC. Package line wins and
-        package cash collections are separate awards.
-      </p>
+                );
+              })}
+            </svg>
+            <figcaption>{line + 1}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <div className="kk-info-centered">
+        <p>
+          Kilo King has 5 reels, 3 rows and 10 fixed paylines. All paylines are
+          active on every spin.
+        </p>
+        <p>
+          Three or more matching symbols pay on consecutive reels, starting from
+          the leftmost reel. Only the longest matching combination pays on each
+          line. Wins on different lines are added together.
+        </p>
+        <p>
+          Line wins and scatter wins are separate. Package line wins and
+          cash collections are also separate awards. Collection multipliers do
+          not multiply line wins.
+        </p>
+      </div>
     </section>
   );
 }

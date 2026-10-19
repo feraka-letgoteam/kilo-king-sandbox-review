@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kilo King · Motion 18</title>
+<style>
+@font-face{font-family:Kilo;src:url('/kilo-ui-v11/KiloDisplay.woff')}*{box-sizing:border-box}body{margin:0;background:#06121d;color:#e8edf2;font:15px system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:30px}header{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid #284653;padding-bottom:24px}h1,h2{font-family:Kilo,Georgia,serif;color:#e9cd89;letter-spacing:.025em}h1{font-size:36px;margin:8px 0}h2{font-size:24px;margin:0 0 10px}p{line-height:1.6;color:#a5bdca;margin:6px 0}.tag{color:#7bc9c3;font-size:12px;letter-spacing:.18em}a{color:#b7ddda}.layout{display:grid;grid-template-columns:minmax(260px,.8fr) 1.5fr;gap:24px;margin-top:24px}.panel{border:1px solid #284653;border-radius:16px;background:#0c1d29;padding:24px;min-width:0}.character{display:block;width:100%;height:520px;background:radial-gradient(ellipse at 50% 40%,#173442,transparent 65%)}.marina{display:block;width:100%;aspect-ratio:1672/941;border-radius:8px}.tools{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}button,select{font:inherit;min-height:44px;border:1px solid #45616b;border-radius:8px;padding:9px 15px;background:#162f3d;color:#f0e7d6;cursor:pointer}button[aria-pressed=true]{background:#d6b674;color:#13242b;border-color:#f2d692}label{display:flex;gap:8px;align-items:center;min-height:44px}input[type=range]{width:100%;accent-color:#d6b674}.symbols{display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;margin-top:20px}.symbols figure{margin:0;text-align:center;flex:1}.symbols canvas{width:158px;height:188px;max-width:100%;background:#102b3a;border-radius:10px}.symbols.small canvas{width:72px;height:86px}.symbols figcaption{margin-top:10px;color:#d5cba9}details{border-top:1px solid #284653;margin-top:20px;padding-top:18px}summary{cursor:pointer;min-height:36px}.footer{margin-top:22px;font-size:13px}.error{color:#ffbca8}video{width:100%;margin-top:14px;border-radius:8px}@media(max-width:800px){main{padding:16px}.layout{grid-template-columns:1fr}.panel{padding:18px}.character{height:390px}header{display:block}h1{font-size:30px}.symbols{gap:6px}.symbols canvas{width:110px;height:131px}}
+</style>
+<main><header><div><div class="tag">KILO KING / ANIMATION ASSETS</div><h1>Motion study 18</h1><p>Separate drawings. Connected joints. Restrained reactions.</p></div><a href="/?review">Return to the game</a></header>
+<div class="layout">
+<section class="panel"><h2>The fisherman</h2><p>Shoulder, elbow, wrist and neck articulation. Both feet remain planted.</p><canvas class="character" id="figure" aria-label="Animated fisherman rig"></canvas>
+<div class="tools" id="poses"><button data-pose="idle" aria-pressed="true">Idle</button><button data-pose="cast" aria-pressed="false">Cast</button><button data-pose="cheer" aria-pressed="false">Acknowledge</button><button data-pose="slump" aria-pressed="false">Settle</button></div>
+<label><input id="explode" type="checkbox">Separate the attachments</label>
+<label>Motion <select id="speed"><option value="1">Normal</option><option value=".25">Quarter speed</option></select></label>
+<label><input id="reduced" type="checkbox">Reduced motion</label><button id="pause" aria-pressed="false">Pause</button>
+<p class="footer">Authored with named raster attachments and a portable Canvas2D rig. This is not a Spine export.</p></section>
+<section class="panel"><h2>A living marina</h2><p>Boats rock on their own pivots. Their reflections ripple with a separate phase.</p><canvas class="marina" id="marina" aria-label="Layered animated marina"></canvas>
+<h2 style="margin-top:26px">Symbol reactions</h2><p>Collector blink, foil catch and emerald highlight. Value labels stay still.</p>
+<div class="tools"><button id="react">Replay reactions</button><button id="small" aria-pressed="false">72px cells</button></div>
+<div class="symbols" id="symbols"><figure><canvas id="collector"></canvas><figcaption>Collector</figcaption></figure><figure><canvas id="package"></canvas><figcaption>Package</figcaption></figure><figure><canvas id="scatter"></canvas><figcaption>Scatter</figcaption></figure></div>
+<details><summary>Assets and authoring data</summary><p><a href="rig-manifest.json">Parts, pivots and motion manifest</a> · <a href="extraction-manifest.json">Extraction record</a> · <a href="ARTWORK.md">Art direction and prompts</a></p><p>Sky and shore share a locked clean plate. Water is sampled below the pier mask; boats and reflections are independent. The existing foreground remains separate in the game.</p></details>
+<p id="status" class="footer" role="status">Loading the prepared artwork…</p></section>
+</div>
+</main><script type="module">
+import {ASSETS,RIG,CLIPS,drawFisherman,drawMarina,reactionAt} from './motion.mjs';
+const $=id=>document.getElementById(id),assets={};
+await Promise.all(Object.entries({...ASSETS,package:'/kilo-contraband-v1/package-trophy.png',scatter:'/kilo-contraband-v1/scatter-king.png'}).map(async([name,url])=>{const im=new Image();im.src=url;await im.decode();assets[name]=im;})).then(()=>{$('status').textContent='Prepared assets loaded. Motion here is rendered from the same authoring code used in the draft game.';}).catch(error=>{$('status').classList.add('error');$('status').textContent='An asset could not load. Reload this page to retry.';throw error;});
+let pose='idle',elapsed=0,worldTime=0,reactionTime=0,paused=false,last=performance.now();
+function context(id){const canvas=$(id),rect=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);const w=Math.round(rect.width*dpr),h=Math.round(rect.height*dpr);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}const ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);return [ctx,w,h];}
+$('poses').addEventListener('click',e=>{if(!e.target.dataset.pose)return;pose=e.target.dataset.pose;elapsed=0;for(const b of $('poses').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b===e.target));});
+$('pause').onclick=()=>{paused=!paused;$('pause').textContent=paused?'Resume':'Pause';$('pause').setAttribute('aria-pressed',String(paused));};
+$('react').onclick=()=>reactionTime=0;
+$('small').onclick=()=>{const active=$('symbols').classList.toggle('small');$('small').setAttribute('aria-pressed',String(active));};
+const media=matchMedia('(prefers-reduced-motion:reduce)');$('reduced').checked=media.matches;
+function draw(now){const dt=Math.min(80,now-last);last=now;const reduced=$('reduced').checked;
+if(!paused&&!document.hidden){const step=dt*Number($('speed').value);elapsed+=step;worldTime+=step;reactionTime+=step;}
+let [ctx,w,h]=context('figure');const view=RIG.view,s=Math.min(w/view[2],h/view[3]);ctx.save();ctx.translate((w-view[2]*s)/2,h-view[3]*s);ctx.scale(s,s);ctx.translate(-view[0],-view[1]);drawFisherman(ctx,assets,{pose,elapsed,reduced,explode:$('explode').checked?1:0});ctx.restore();
+[ctx,w,h]=context('marina');drawMarina(ctx,assets,w,h,worldTime,reduced);
+for(const kind of ['collector','package','scatter']){[ctx,w,h]=context(kind);const state=reactionAt(kind,reactionTime,reduced),size=w;const im=kind==='collector'?assets['collector-'+state.frame+'.png']:assets[kind];ctx.drawImage(im,0,0,size,size);if(kind!=='collector'&&state.alpha){ctx.save();ctx.globalAlpha=state.alpha;const fx=assets[kind==='package'?'foil-glint.webp':'gem-glint.webp'];const n=size*(kind==='package'?.18:state.scale);ctx.drawImage(fx,size*state.x-n/2,size*(kind==='package'?.34:.25)-n/2,n,n);ctx.restore();}if(kind==='package'){ctx.fillStyle='#e7d5a2';ctx.textAlign='center';ctx.font='600 '+Math.round(size*.13)+'px system-ui';ctx.fillText('10,000',size/2,size*1.13);}}
+setTimeout(()=>requestAnimationFrame(draw),1000/24);}
+requestAnimationFrame(draw);
+</script></html>

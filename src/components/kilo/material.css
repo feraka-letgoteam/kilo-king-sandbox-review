@@ -1,0 +1,562 @@
+/* Authoritative marina finish for the bar, settings, purchases and bet controls.
+   Palette, grain and light direction are supplied by material.ts. Geometry stays
+   in dock-design.ts; these surfaces never scale the stage or its symbols. */
+.kk-app[data-material="marina"]
+  .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog) {
+  border: 3px solid transparent;
+  border-radius: 9px;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  box-shadow:
+    inset 0 0 0 2px #020a10,
+    inset 0 3px #9ec2b239,
+    0 18px 48px #000b;
+  color: var(--kk-text);
+  font-family: "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.kk-app[data-material="marina"]
+  .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+  .kk-dialog-head {
+  min-height: 64px;
+  height: auto;
+  padding: 9px 18px;
+  border-bottom: 2px solid var(--kk-brass-shade);
+  background: var(--kk-grain), var(--kk-face);
+  box-shadow: 0 1px #d8b67b38;
+}
+.kk-app[data-material="marina"]
+  .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+  .kk-dialog-head
+  strong {
+  color: var(--kk-text);
+  font:
+    600 27px/1 "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 1px;
+}
+.kk-app[data-material="marina"]
+  :is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+  :is(
+    .kk-icon-button,
+    .kk-compact-actions button,
+    .kk-denominations button,
+    .kk-segmented button
+  ) {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  color: var(--kk-text);
+  box-shadow:
+    inset 0 1px #cce0bf29,
+    0 2px 2px #0006;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition:
+    filter 120ms ease,
+    transform 100ms ease;
+}
+.kk-app[data-material="marina"]
+  :is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+  :is(
+    .kk-icon-button,
+    .kk-compact-actions button,
+    .kk-denominations button,
+    .kk-segmented button
+  ):disabled {
+  opacity: 1;
+  color: #b7b7a1;
+  filter: saturate(0.55);
+  box-shadow: inset 0 2px 3px #0008;
+}
+.kk-app[data-material="marina"]
+  :is(.kk-settings, .kk-bet-dialog)
+  :is(
+    .kk-segmented button,
+    .kk-denominations button,
+    .kk-compact-actions button
+  )[aria-pressed="true"],
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-tabs
+  button[aria-selected="true"],
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-ante-action[aria-pressed="true"] {
+  background:
+    var(--kk-selected) padding-box,
+    var(--kk-metal) border-box;
+  border-color: transparent;
+  color: #efffe9;
+  box-shadow:
+    inset 0 2px 4px #0009,
+    inset 0 -2px #86bdaa3d;
+}
+.kk-app[data-material="marina"] .kk-dialog :is(button, input):focus-visible {
+  outline: 2px solid var(--kk-teal);
+  outline-offset: 2px;
+}
+/* Settings are recessed instruments inside the same plated shell. */
+.kk-app[data-material="marina"] .kk-settings .kk-settings-body {
+  padding: 24px 18px 14px;
+  gap: 20px;
+}
+.kk-app[data-material="marina"] .kk-settings fieldset,
+.kk-app[data-material="marina"] .kk-settings .kk-audio-settings {
+  padding: 14px 12px 12px;
+  border: 1px solid var(--kk-brass-shade);
+  border-radius: 5px;
+  background: var(--kk-well);
+  box-shadow:
+    inset 0 3px 5px #0009,
+    0 1px #cfb27d40;
+}
+.kk-app[data-material="marina"] .kk-settings fieldset:first-of-type {
+  padding-block: 16px;
+}
+.kk-app[data-material="marina"] .kk-settings legend,
+.kk-app[data-material="marina"] .kk-settings .kk-setting-heading h2 {
+  padding: 0 4px;
+  color: var(--kk-text);
+  font:
+    600 21px/23px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.kk-app[data-material="marina"] .kk-settings .kk-segmented {
+  gap: 6px;
+}
+.kk-app[data-material="marina"] .kk-settings .kk-segmented button {
+  min-height: 50px;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 6px 3px;
+}
+.kk-app[data-material="marina"] .kk-settings .kk-setting-hint {
+  margin: 10px 2px 0;
+  color: var(--kk-muted);
+  font:
+    400 12px/17px "Source Sans 3",
+    sans-serif;
+}
+.kk-app[data-material="marina"] .kk-audio-muted {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #e7d5b4;
+  font:
+    700 12px/18px "Source Sans 3",
+    sans-serif;
+}
+.kk-app[data-material="marina"] .kk-audio-levels {
+  padding-top: 8px;
+}
+.kk-app[data-material="marina"] .kk-volume output {
+  color: var(--kk-text);
+  font:
+    700 13px/1 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.kk-app[data-material="marina"] .kk-volume input {
+  accent-color: var(--kk-teal);
+}
+.kk-app[data-material="marina"] .kk-settings .kk-menu-link {
+  padding: 8px 4px;
+  border-top: 1px solid var(--kk-brass-shade);
+  color: var(--kk-text);
+  font-weight: 600;
+}
+.kk-app[data-material="marina"] .kk-settings .kk-menu-link svg:first-child {
+  color: var(--kk-brass-light);
+}
+/* A single brass rim; the old spool artwork and extra concentric rings are retired. */
+.kk-app[data-material="marina"] .kk-shell[data-layout] .kk-console .kk-spin {
+  border: 7px solid transparent;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  box-shadow:
+    inset 0 3px 6px #000a,
+    0 4px 6px #000a;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-spin::before,
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-spin::after {
+  content: none;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout="portrait"]
+  .kk-console
+  .kk-spin {
+  border-width: 5px;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-compact="true"]
+  .kk-console
+  .kk-spin {
+  border-width: 4px;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-spin-icon {
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  color: #fff6db;
+}
+.kk-app[data-material="marina"] .kk-shell[data-layout] .kk-console .kk-charge {
+  color: #fff1cb;
+  background: #041319;
+  box-shadow: inset 0 1px 2px #0008;
+  font-weight: 700;
+  transition: transform 100ms ease;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-charge
+  small {
+  color: #e3dfce;
+  font-weight: 700;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-spin:not(:disabled):active {
+  transform: translateY(2px) scale(0.97);
+  filter: brightness(0.92);
+  box-shadow:
+    inset 0 4px 8px #000c,
+    0 1px 2px #0009;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-spin:not(:disabled):active
+  + .kk-charge {
+  transform: translateY(2px) scale(0.97);
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  :is(.kk-utility-button, .kk-menu-button, .kk-feature-button) {
+  border: 2px solid transparent;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  box-shadow:
+    inset 0 1px #cce0bf29,
+    0 2px 3px #0008;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-speed-dot {
+  top: -3px;
+  right: -3px;
+  min-width: 19px;
+  min-height: 19px;
+  border: 2px solid var(--kk-brass);
+  background: #092b2b;
+  color: #fff0ca;
+  font:
+    700 12px/15px "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 1px 2px #000;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-dock-ante {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  gap: 8px;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-dock-ante
+  .kk-ante-pill {
+  border: 1px solid var(--kk-brass);
+  background: var(--kk-well);
+  box-shadow: inset 0 2px 2px #0008;
+}
+.kk-app[data-material="marina"]
+  .kk-shell[data-layout]
+  .kk-console
+  .kk-dock-ante[aria-pressed="true"]
+  .kk-ante-pill {
+  background: var(--kk-selected);
+  color: #efffe9;
+  border-color: var(--kk-teal);
+}
+/* Cards use the same bevel and recessed price well; restriction copy belongs to
+   the disabled action instead of forming a competing full-width price strip. */
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-card {
+  border: 3px solid transparent;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  border-radius: 7px;
+  box-shadow:
+    inset 0 0 0 1px #020b11,
+    0 4px 9px #0007;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-hero {
+  margin: 3px 3px 0;
+  border-radius: 3px 3px 0 0;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-card-copy {
+  padding: 3px 12px 14px;
+  grid-template-rows: auto auto 1fr;
+  gap: 13px;
+  background: transparent;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-reward {
+  min-height: 34px;
+  font-size: 13px;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-reward strong {
+  font-size: 27px;
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  :is(
+    .kk-feature-offer[data-purchase="true"],
+    .kk-confirm-cost,
+    .kk-feature-toolbar,
+    .kk-bet-value-display
+  ) {
+  border: 1px solid var(--kk-brass-shade);
+  border-radius: 4px;
+  background: var(--kk-well);
+  box-shadow:
+    inset 0 3px 5px #000a,
+    0 1px #d0ac6b66;
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-offer[data-purchase="true"] {
+  padding: 13px 12px 11px;
+  gap: 4px;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-price-label {
+  color: var(--kk-muted);
+  font-size: 10px;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-offer > b {
+  font:
+    700 clamp(26px, 7vw, 32px)/34px "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: #f5e2b8;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-decision {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  margin-top: 3px;
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-decision[data-unavailable="true"] {
+  grid-template-columns: minmax(100px, 0.9fr) minmax(0, 1fr);
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-decision
+  .kk-feature-availability {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  align-self: center;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-availability:empty {
+  display: none;
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-availability
+  .kk-unavailable {
+  color: #f2d4a0;
+  font:
+    600 12px/17px "Source Sans 3",
+    sans-serif;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-action {
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px;
+  margin: 0;
+  gap: 5px;
+  border: 2px solid transparent;
+  background:
+    var(--kk-selected) padding-box,
+    var(--kk-metal) border-box;
+  box-shadow:
+    inset 0 1px #b9e2b84d,
+    0 2px 3px #0008;
+  color: #fff0ce;
+  font:
+    600 18px/22px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.4px;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-action:disabled {
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  color: #e5ce9e;
+  box-shadow: inset 0 2px 4px #000b;
+  opacity: 1;
+  filter: none;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-tabs {
+  padding: 4px;
+  margin-bottom: 18px;
+  border: 1px solid var(--kk-brass-shade);
+  background: var(--kk-well);
+  box-shadow: inset 0 2px 3px #0009;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-tabs button {
+  border: 2px solid transparent;
+  font:
+    700 13px/17px "Source Sans 3",
+    sans-serif;
+  color: var(--kk-muted);
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-utilities {
+  padding: 12px;
+  gap: 14px;
+  margin-top: 18px;
+  border: 3px solid transparent;
+  border-radius: 6px;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  box-shadow: inset 0 1px #9bb9a836;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-ante-feature {
+  grid-template-columns: minmax(0, 1fr) 94px;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-ante-action {
+  gap: 5px;
+  padding-inline: 4px;
+  border: 2px solid transparent;
+  background:
+    var(--kk-grain) padding-box,
+    var(--kk-face) padding-box,
+    var(--kk-metal) border-box;
+  font:
+    700 13px/16px "Source Sans 3",
+    sans-serif;
+  color: var(--kk-text);
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-toolbar {
+  padding: 8px;
+  gap: 10px;
+}
+.kk-app[data-material="marina"]
+  .kk-purchases
+  :is(
+    .kk-feature-balance b,
+    .kk-feature-bet b,
+    .kk-confirm-cost strong,
+    .kk-confirm-wallet dd
+  ) {
+  font-family: "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-bet-control {
+  background: transparent;
+}
+@media (hover: hover) {
+  .kk-app[data-material="marina"]
+    .kk-shell[data-layout]
+    .kk-console
+    .kk-spin:not(:disabled):hover:not(:active) {
+    filter: brightness(1.12);
+    box-shadow:
+      inset 0 2px 4px #0008,
+      0 5px 9px #000b;
+  }
+  .kk-app[data-material="marina"]
+    :is(.kk-settings, .kk-purchases, .kk-bet-dialog)
+    button:not(:disabled):hover:not(:active) {
+    filter: brightness(1.12);
+  }
+}
+@media (max-width: 620px) {
+  .kk-app[data-material="marina"]
+    .kk-dialog:is(.kk-settings, .kk-purchases, .kk-bet-dialog, .kk-auto-dialog)
+    .kk-dialog-head {
+    padding-inline: 12px;
+  }
+  .kk-app[data-material="marina"] .kk-settings .kk-settings-body {
+    padding: 20px 12px 12px;
+    gap: 16px;
+  }
+  .kk-app[data-material="marina"] .kk-purchases .kk-feature-utilities {
+    padding: 10px;
+    gap: 10px;
+  }
+  .kk-app[data-material="marina"] .kk-purchases .kk-feature-bet {
+    min-width: 58px;
+  }
+  .kk-app[data-material="marina"] .kk-purchases .kk-feature-toolbar {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kk-app[data-material="marina"] .kk-charge,
+  .kk-app[data-material="marina"] .kk-dialog button {
+    transition: none;
+  }
+}
+.kk-app[data-material="marina"][data-reduced="1"] .kk-charge,
+.kk-app[data-material="marina"][data-reduced="1"] .kk-dialog button {
+  transition: none;
+}
+
+.kk-app[data-material="marina"]
+  .kk-purchases
+  .kk-feature-card:is(:hover, :focus-within) {
+  border-color: transparent;
+  box-shadow:
+    inset 0 0 0 1px #020b11,
+    0 5px 12px #0008;
+}
+
+.kk-app[data-material="marina"] .kk-purchases .kk-feature-toolbar:only-child {
+  grid-column: 1 / -1;
+}

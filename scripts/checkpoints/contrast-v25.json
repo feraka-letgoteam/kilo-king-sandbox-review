@@ -1,0 +1,551 @@
+{
+  "commit": "ce639140f65ba7e48e5c7ade7e3effc0ea18f533",
+  "controlTokens": {
+    "target": 44,
+    "gap": 8,
+    "moduleGap": 12,
+    "desktopSpin": 100,
+    "mobileSpin": 96,
+    "narrowSpin": 80,
+    "portraitGroup": 360,
+    "portraitReadout": 44,
+    "compactSpin": 64,
+    "secondaryRim": 2,
+    "wellRim": 3,
+    "spinRim": 8,
+    "wellRadius": 7,
+    "numericInset": 10,
+    "labelSize": 14,
+    "amountSize": 28,
+    "reasonWidth": 176
+  },
+  "sourceFiles": {
+    "src/components/kilo/DockSkin.tsx": "69b1605fa1890c1c0561c183e6078f51483eaf66e1e59f65fa651db1b4f87e74",
+    "src/components/kilo/FishermanScene.tsx": "b5c98842d986f8ea59deb5deb01ee65590055753745648162fff24163fd3b4e7",
+    "src/components/kilo/MarinaBackdrop.tsx": "757f30040ac70cc4eee0513933d4f3082c29c6480dc78f842c780520fd431f16",
+    "src/components/kilo/ReelStage.tsx": "f1c323e44e313a2cfa9d945d1989f77b17534b0de362bb74ca07da0173cc28af",
+    "src/components/kilo/StageSurround.tsx": "dcbd09fb08824735789c3f5cd08d32669e30a0ad80fa797f1be1b4d94e1f5589",
+    "src/components/kilo/art-map.ts": "c5970134e9beba978905ee0d7b8e7ff33909c1bd9df912563bb9801b1f64a0b3",
+    "src/components/kilo/auto-spins.ts": "09c5e7b5338bec1eb5b4962792b36dafca57dcf33c7e1bff59164d30bec8e203",
+    "src/components/kilo/base-dock.css": "fc086406c33b365844cda5ec0038b90644de47f7b7705196f578c2d5b207551d",
+    "src/components/kilo/base-scene.css": "00d89f34069986ddd8acf4e16cac494c58024da8461144d72914550d4840ff68",
+    "src/components/kilo/control-model.ts": "0fb93db011808cf45436fc5e81e4cf68ac95e0249f25f3fd228469752085fa34",
+    "src/components/kilo/control-panels.tsx": "ba654dec2c3c650f98e90d63ce759e5f923832bba668194c19ea1fba305cc426",
+    "src/components/kilo/control-theme.ts": "0d0a630e369d5dc97df3c4da0794cd840ee7c8adbf9f6fddf25695c2e9274071",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/dock-design.ts": "71ae29d2674914d5931dd9e799d4745f623c50f24f152e5b0b15c26bb7d18a8a",
+    "src/components/kilo/feature-catalog.ts": "662378f26babc78e06243c2264f93a3465742dbdf8e254e14b096471ebbbcb3e",
+    "src/components/kilo/feature-panel.css": "17fe7132b03060d8a6f83b93e16fc8baa61c73605fa44e058263a1103e76b65d",
+    "src/components/kilo/fish-art.ts": "212a798e60be018e44c5488f146b514946031cdb2912e1da8ba4502d3d0cf84b",
+    "src/components/kilo/fisherman-scene.css": "e4a86065e6fda6e4cf3e547b34f29e7e55eb20de197789373ab9b7c2fefb5040",
+    "src/components/kilo/keyboard.ts": "7d4ab73e414f0e119b219fdf974be75f2edb9ab6d2a314256c5fb77e0c476ad1",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/kilo/marina-backdrop.css": "b3dcba3018107e89859bc8d7a82f90d6755d002f7645ac4a475831bbe5d503eb",
+    "src/components/kilo/marina-frame.ts": "038c1de88bf7bc369db9845fc74cee231450752a51c542ef708dccf158e837a3",
+    "src/components/kilo/material.css": "68ba8d43369308c9f68dfac9768c5e08d6ec69ef17fecb93705fce63caa044cd",
+    "src/components/kilo/material.ts": "58af51fead26955c2374d13455e02fe2fbc1d3c228b209d6ac5aea04ea840b40",
+    "src/components/kilo/modular-controls.css": "430f41b3864dbb8c78a4e8a8e360852a89d68d098b8ac927fe3c553f371268ec",
+    "src/components/kilo/motion-atlas.ts": "1d8c1b0a5ea57f7593a734d236d1aaa7fda0ab5ee553a03afd2e59e0fa9a6661",
+    "src/components/kilo/paytable.tsx": "34ec4dffa5f06c8bb908b7466bcaa4950d1e9a18ff9cea50c5d50a54db9acab3",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/play.tsx": "6ad6b7c1a5f9ea8b4bee69774cc7d351639bc86a63632b5a82e36b596e152b86",
+    "src/components/kilo/sprite-bounds.json": "d1a02c8ca57721cfff311d9efe8fe5f7e5a76efe294bc981a1f7e3ee3a3e00b4",
+    "src/components/kilo/stage-art.ts": "84071906973706f838ff7563e33ad0ae3dca7f2c4e42acf0a870b305906dd0f3",
+    "src/components/kilo/stage-theme.css": "cffe7f8bad2e34be8d73d7913fa6d8b119eef091982de75faa84f41077c47613",
+    "src/components/kilo/useMotionCanvas.ts": "8497a1265ac2909f58e79ad17f7635873e3a696e49593071fc26abc86566a5a8",
+    "src/components/preview-host-bridge.tsx": "e4277e80ce127e7305057fb280d03d0703c5c7115b17d2e2aecf000e4867555e",
+    "src/components/slot-controls/README.md": "77d747160970adea766c8d5051a6c9df0c9de363ed577eb0343af3f67d5fa852",
+    "src/components/slot-controls/SlotControls.tsx": "ed412add560254cac3b3906eb860aff6fd41f9493f564ee95b18a6eba2107235",
+    "src/components/slot-controls/controls.css": "14364a02e8b31bd47b4b47b459ef9afaee56fab0be7999dee3a6d08bbd6bfd22",
+    "src/components/slot-controls/fonts/BarlowCondensed-600.woff2": "2120ccb0d16322a130664ee7aedeebeb05dcd76117b287573d77878f4e259b1d",
+    "src/components/slot-controls/fonts/OFL-BarlowCondensed.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "src/components/slot-controls/fonts/OFL-SourceSans3.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "src/components/slot-controls/fonts/SourceSans3-600.woff2": "6a4765c81093ca1c2e2b602ced84ee842b9511459d32f169725cfe7a1eb6ceee",
+    "src/components/slot-controls/fonts/SourceSans3-700.woff2": "1261a6a379cbf194650c5211c606c5cdd60813ee0e182850f19ebef1691894f5",
+    "src/components/slot-controls/layout.ts": "21c08002a2fd1f3ba71165c96c6e6d49788e8a5cf859fd4027acc945be429e27",
+    "src/components/slot-controls/tokens.ts": "bae0612de09ba0af01147ad9ac97846ac114d4a665ee6906ef58e62afc26c821",
+    "src/components/slot-controls/typography.ts": "7f1682bd66c87e23cdf9ce235db796dee6bb38c8bc22205a2b93fc297dce3c48",
+    "src/lib/app-data/app-data.test.ts": "ec0c40fdaafb4e3d551086de9f9b4a745da7c252f7fbbc5c51a8b1b0a541391e",
+    "src/lib/app-data/client.server.ts": "ab544af8b5b96e16248fdcf7ce634c132ccd3659c33cf0daa22f6e74ef5a5da0",
+    "src/lib/app-data/errors.ts": "8e0dd8d761b2a5a1cafcb7523e2063151f0b6677837b19c3f6d494af148f3889",
+    "src/lib/app-data/index.ts": "72cf57dc1a863f9693d34c11772ba4bae790cc17d9efb1e8619b8a2e6247a7fa",
+    "src/lib/app-data/login.ts": "fbc723841bb67148dd9de12ed614ba6c095d799a533309857cc4d202d6be5ad9",
+    "src/lib/app-data/readiness-schedule.test.ts": "97c87401c474b9f87f2e21152fb377744f353736848f0044466ba2e260b06745",
+    "src/lib/app-data/readiness-schedule.ts": "3ea7f192220446b08747f3ef76c7d2fe150356470621f2220738b23e7976f683",
+    "src/lib/app-data/readiness.ts": "377786c1cf739eb9dc7c8b2bdcd09991686a700375a67a0c6e73b4334d394da1",
+    "src/lib/app-data/server-only.ts": "82821474088face6b9fcadad49793629e5f07a16386402b816262a1c070a3210",
+    "src/lib/app-data/types.ts": "65f3c7566db12661ee9d3633eaae66a85505e00f57a61c258fa72bd22881489f",
+    "src/lib/app-data/use-connector-readiness.ts": "57e6d2b3709be83ac2eed9c42eaa822a067fb5aa44a6098c982892c43f3a4f2f",
+    "src/lib/auth/client.ts": "4bca649afb627b11231a7b31acfcffe9323efddebc05944b2d769d2b8589294f",
+    "src/lib/auth/email-password.ts": "9b1da7c786e48adfa9a6f7c485bcf5817cf2075a601d8726a965f11171910354",
+    "src/lib/auth/gate-identity.server.ts": "96546b8b6910a01163c36c34a0d417d803bec222b93304be764d810838764159",
+    "src/lib/auth/gate-identity.test.ts": "21202fb2b56ffd10cb9b5bb7d9f305be88cce3902b858f73cea914df05ce2652",
+    "src/lib/auth/gate-session-marker.ts": "3dbf8cb789b0288f9d5c53b1515a3e87d265fcb22e11fe28dc3289c4bd7c06eb",
+    "src/lib/auth/gate-session.server.ts": "68aa500523ca2f0ad5c7ba34372c10aa1851a9774f8567c6b7781af5dd6cf204",
+    "src/lib/auth/gates.tsx": "39950c211bd4ad4f7129082bf5a43a42ff23975e681b99fd7cfbce372f83a5be",
+    "src/lib/auth/isolation.server.ts": "a4adf6a5d548e70a0be52d7efdc7433126028908072b47bf9f92135d9ee558a0",
+    "src/lib/auth/middleware.ts": "8dc37c4e9bd583f175402330d0952ef4d584c7410723cc2649c4046d5084bd80",
+    "src/lib/auth/pglite-dialect.ts": "bd66925574245cd47cdd98b5c068dd7b4ee4a51c9439e8421dc54c62fe7c4f50",
+    "src/lib/auth/popup.server.ts": "81f8833d9ab639f76b86f4bb23fed42a04cec4b0c6d90b7a67425a9232c9bb4a",
+    "src/lib/auth/preview.ts": "d52a3654a5cef7e841cbca789fd106dc464ea55db574f02aa5d295b7350f8664",
+    "src/lib/auth/provider.tsx": "4cbbc7f8cc1765788ad65455a33f64dcdafc6fe4ed1d13f90ccfa0ba4c13d1f3",
+    "src/lib/auth/providers.ts": "4acefac17931529bdeab053588a917b06e44abdb67a275a2ca1c7841080c6a78",
+    "src/lib/auth/server.ts": "e0544cadbfa1a09c3cb4cf2a0ec187dbbb2831aebf7de887a3c858abdd72ca43",
+    "src/lib/auth/sign-in-gate.test.ts": "2c352588cb6a8f58faf3aecc1d1f418ae827ddbb6a5eca8e56668ec72cd328d2",
+    "src/lib/auth/sign-in-gate.ts": "d2c65c20ab50ae41657ceecd61ded005fac29315deace9fc4d966cf56300754c",
+    "src/lib/auth/use-current-user.ts": "6444e7a0e6b908ad47c73981d63552ec0d33225f24a6c63370b9cec8088442d6",
+    "src/lib/auth/verify.server.ts": "42a7d5c1b17027ba004d6524a7f7bb4827b908d75ee3c3aefc940fa9c891c2ee",
+    "src/lib/db.ts": "8decf7689ff4833ad2f6f263eff9041dd2a68ce923824fa1d55ad620dea72e49",
+    "src/lib/env.server.ts": "9b834e0978ae76332a65a05f5bc75f80684db8c6aa638916869385c12e3343d5",
+    "src/lib/error-component.tsx": "d219e4297409810a21bd382e60169faf69243d49dafd17cb0ea3a1888082b2f4",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/lib/kilo/baseline.json": "eb27ec26439f47f9a87f7cc0f6cb0fda4dfe603bc7cc019d6e0cbebdc9e6f216",
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/fixtures.json": "184a133e9f5d4018fed8d2fa791837fdd464d5fec00602bc4eead8591475e505",
+    "src/lib/kilo/sound.ts": "e5996edc2db60307c236121e307d3a1edb22a14bd24207f198e0d084667a02c1",
+    "src/lib/multiplayer/index.ts": "bcb96816a2135e315078e2e7d0eda5522579b0caf9e768dc6c34294e4fa49137",
+    "src/lib/multiplayer/p2p.ts": "4d0d2492ac249a2cf267c8d2db7688b5a2c488ab640da7727c0f1b73c2e92f60",
+    "src/lib/og/site.json": "0996a5d7258a3858447ba1a6d579af050f2fc4e8724642acc4e7ef0c0f53d888",
+    "src/lib/preview-embedder-origin.ts": "c2d5e1acc5653ff2abc08a5eeb5feb3331f4e3d7c751ec83d60dee83cf33a6ee",
+    "src/lib/preview-host-bridge.ts": "63a91311378037680b6be414937295069ec2950520d1dc959741cf430ba6b38b",
+    "src/lib/preview-path-prefix.test.ts": "08da80da191446ed449da9a1180ccaaeebb8eaf295bf3ef9f0a5fcca51860ce1",
+    "src/lib/preview-path-prefix.ts": "d46d4c21d47c2765198352b649037def35371c3995525cc42f5aff6a0f1519b7",
+    "src/review-entry.tsx": "15a00e9eb1255c9184168d6bbb4814d5396641b07af09d0f4f53f651b002e621",
+    "src/routeTree.gen.ts": "42a6484d6077bffb6d73b215125fa5da298a255e55e9bd5774037a6140450d17",
+    "src/router.tsx": "0b72f2ad19d5a6e60d1e699d2fe0e4c0a2fa00d88881314e51a0e79fb1541611",
+    "src/routes/__root.tsx": "e0f7ed46ea44390f60b8bcca3634a233566d623f21f2dac32975212660a86a4e",
+    "src/routes/index.tsx": "b1ef0472f3fdb9f50f8e8aea0da247f4a6ae3f681803bc30937a26c64ed27959",
+    "src/routes/replay.tsx": "749435dc8fd8e9d7c6169670b0db815de264e50f96e6a6a36695e6f8eab18340",
+    "src/styles.css": "510f0c70a16b9f2bc6ad5535f9d09cc2bc3c37ae1ce75e5439b03cc51e0913d2"
+  },
+  "layouts": {
+    "1440x900": {
+      "variant": "desktop",
+      "width": 888,
+      "height": 100,
+      "footerWidth": 888,
+      "balance": {
+        "x": 112,
+        "y": 18,
+        "w": 190,
+        "h": 64
+      },
+      "win": {
+        "x": 314,
+        "y": 18,
+        "w": 190,
+        "h": 64
+      },
+      "bet": {
+        "x": 516,
+        "y": 4,
+        "w": 148,
+        "h": 92
+      },
+      "betButton": {
+        "x": 0,
+        "y": 2,
+        "w": 104,
+        "h": 44
+      },
+      "minus": {
+        "x": 104,
+        "y": 46,
+        "w": 44,
+        "h": 44
+      },
+      "plus": {
+        "x": 104,
+        "y": 2,
+        "w": 44,
+        "h": 44
+      },
+      "ante": {
+        "x": 0,
+        "y": 46,
+        "w": 104,
+        "h": 44
+      },
+      "turbo": {
+        "x": 0,
+        "y": 28,
+        "w": 44,
+        "h": 44
+      },
+      "featureTurbo": {
+        "x": 0,
+        "y": 28,
+        "w": 44,
+        "h": 44
+      },
+      "menu": {
+        "x": 52,
+        "y": 28,
+        "w": 44,
+        "h": 44
+      },
+      "featureMenu": {
+        "x": 52,
+        "y": 28,
+        "w": 44,
+        "h": 44
+      },
+      "auto": {
+        "x": 676,
+        "y": 28,
+        "w": 44,
+        "h": 44
+      },
+      "spin": {
+        "x": 728,
+        "y": 0,
+        "w": 100,
+        "h": 100
+      },
+      "charge": {
+        "x": 736,
+        "y": 64,
+        "w": 84,
+        "h": 18
+      },
+      "buy": {
+        "x": 836,
+        "y": 24,
+        "w": 52,
+        "h": 52
+      },
+      "counter": {
+        "x": 516,
+        "y": 4,
+        "w": 148,
+        "h": 60
+      },
+      "drawer": {
+        "turbo": false,
+        "auto": false,
+        "ante": false
+      }
+    },
+    "390x844": {
+      "variant": "portrait",
+      "width": 366,
+      "height": 160,
+      "footerWidth": 366,
+      "balance": {
+        "x": 3,
+        "y": 0,
+        "w": 176,
+        "h": 44
+      },
+      "win": {
+        "x": 187,
+        "y": 0,
+        "w": 176,
+        "h": 44
+      },
+      "bet": {
+        "x": 3,
+        "y": 56,
+        "w": 124,
+        "h": 88
+      },
+      "betButton": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 44
+      },
+      "minus": {
+        "x": 80,
+        "y": 44,
+        "w": 44,
+        "h": 44
+      },
+      "plus": {
+        "x": 80,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "ante": {
+        "x": 0,
+        "y": 44,
+        "w": 80,
+        "h": 44
+      },
+      "turbo": {
+        "x": 239,
+        "y": 104,
+        "w": 44,
+        "h": 44
+      },
+      "featureTurbo": {
+        "x": 239,
+        "y": 78,
+        "w": 44,
+        "h": 44
+      },
+      "menu": {
+        "x": 291,
+        "y": 104,
+        "w": 44,
+        "h": 44
+      },
+      "featureMenu": {
+        "x": 291,
+        "y": 78,
+        "w": 44,
+        "h": 44
+      },
+      "auto": {
+        "x": 239,
+        "y": 52,
+        "w": 44,
+        "h": 44
+      },
+      "spin": {
+        "x": 135,
+        "y": 52,
+        "w": 96,
+        "h": 96
+      },
+      "charge": {
+        "x": 142.68,
+        "y": 113.44,
+        "w": 80.64,
+        "h": 18
+      },
+      "buy": {
+        "x": 291,
+        "y": 52,
+        "w": 44,
+        "h": 44
+      },
+      "counter": {
+        "x": 3,
+        "y": 56,
+        "w": 124,
+        "h": 64
+      },
+      "drawer": {
+        "turbo": false,
+        "auto": false,
+        "ante": false
+      }
+    },
+    "360x800": {
+      "variant": "portrait",
+      "width": 336,
+      "height": 160,
+      "footerWidth": 336,
+      "balance": {
+        "x": 0,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "win": {
+        "x": 172,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "bet": {
+        "x": 0,
+        "y": 56,
+        "w": 112,
+        "h": 88
+      },
+      "betButton": {
+        "x": 0,
+        "y": 0,
+        "w": 68,
+        "h": 44
+      },
+      "minus": {
+        "x": 68,
+        "y": 44,
+        "w": 44,
+        "h": 44
+      },
+      "plus": {
+        "x": 68,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "ante": {
+        "x": 0,
+        "y": 44,
+        "w": 68,
+        "h": 44
+      },
+      "turbo": {
+        "x": 224,
+        "y": 104,
+        "w": 44,
+        "h": 44
+      },
+      "featureTurbo": {
+        "x": 224,
+        "y": 78,
+        "w": 44,
+        "h": 44
+      },
+      "menu": {
+        "x": 276,
+        "y": 104,
+        "w": 44,
+        "h": 44
+      },
+      "featureMenu": {
+        "x": 276,
+        "y": 78,
+        "w": 44,
+        "h": 44
+      },
+      "auto": {
+        "x": 224,
+        "y": 52,
+        "w": 44,
+        "h": 44
+      },
+      "spin": {
+        "x": 120,
+        "y": 52,
+        "w": 96,
+        "h": 96
+      },
+      "charge": {
+        "x": 127.68,
+        "y": 113.44,
+        "w": 80.64,
+        "h": 18
+      },
+      "buy": {
+        "x": 276,
+        "y": 52,
+        "w": 44,
+        "h": 44
+      },
+      "counter": {
+        "x": 0,
+        "y": 56,
+        "w": 112,
+        "h": 64
+      },
+      "drawer": {
+        "turbo": false,
+        "auto": false,
+        "ante": false
+      }
+    },
+    "844x390": {
+      "variant": "landscape",
+      "width": 732,
+      "height": 350,
+      "footerWidth": 488,
+      "balance": {
+        "x": 0,
+        "y": 52,
+        "w": 128,
+        "h": 44
+      },
+      "win": {
+        "x": 0,
+        "y": 100,
+        "w": 128,
+        "h": 44
+      },
+      "bet": {
+        "x": 0,
+        "y": 148,
+        "w": 128,
+        "h": 128
+      },
+      "betButton": {
+        "x": 0,
+        "y": 0,
+        "w": 84,
+        "h": 84
+      },
+      "minus": {
+        "x": 84,
+        "y": 44,
+        "w": 44,
+        "h": 44
+      },
+      "plus": {
+        "x": 84,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "ante": {
+        "x": 0,
+        "y": 84,
+        "w": 84,
+        "h": 44
+      },
+      "turbo": {
+        "x": 662,
+        "y": 227,
+        "w": 44,
+        "h": 44
+      },
+      "featureTurbo": {
+        "x": 662,
+        "y": 227,
+        "w": 44,
+        "h": 44
+      },
+      "menu": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "featureMenu": {
+        "x": 0,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "auto": {
+        "x": 662,
+        "y": 75,
+        "w": 44,
+        "h": 44
+      },
+      "spin": {
+        "x": 636,
+        "y": 123,
+        "w": 96,
+        "h": 96
+      },
+      "charge": {
+        "x": 643.68,
+        "y": 184.44,
+        "w": 80.64,
+        "h": 18
+      },
+      "buy": {
+        "x": 84,
+        "y": 0,
+        "w": 44,
+        "h": 44
+      },
+      "counter": {
+        "x": 0,
+        "y": 148,
+        "w": 128,
+        "h": 60
+      },
+      "drawer": {
+        "turbo": false,
+        "auto": false,
+        "ante": false
+      }
+    }
+  }
+}

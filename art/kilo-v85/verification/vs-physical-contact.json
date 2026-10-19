@@ -1,0 +1,70 @@
+{
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "method": "Actual controller, displayed baked frame, parent matrices and finite prop segments. Not browser/GPU.",
+  "results": [
+    {
+      "winner": "vice",
+      "cell": 60,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 239.26019612125967,
+        "y": 103.74023927986525
+      },
+      "ink": {
+        "x": 240.03,
+        "y": 100.8
+      },
+      "distanceInCells": 0.05065571437159057,
+      "u": 0.6708561855859251,
+      "v": 0.30729767982834333
+    },
+    {
+      "winner": "vice",
+      "cell": 130,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 500.89709159606264,
+        "y": 214.27051843970798
+      },
+      "ink": {
+        "x": 502.565,
+        "y": 207.9
+      },
+      "distanceInCells": 0.05065571437159,
+      "u": 0.6708561855859251,
+      "v": 0.3072976798283434
+    },
+    {
+      "winner": "king",
+      "cell": 60,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 239.26019612125967,
+        "y": 103.74023927986525
+      },
+      "ink": {
+        "x": 240.03,
+        "y": 100.8
+      },
+      "distanceInCells": 0.05065571437159057,
+      "u": 0.6708561855859251,
+      "v": 0.30729767982834333
+    },
+    {
+      "winner": "king",
+      "cell": 130,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 500.89709159606264,
+        "y": 214.27051843970798
+      },
+      "ink": {
+        "x": 502.565,
+        "y": 207.9
+      },
+      "distanceInCells": 0.05065571437159,
+      "u": 0.6708561855859251,
+      "v": 0.3072976798283434
+    }
+  ]
+}

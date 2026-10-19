@@ -1,0 +1,296 @@
+{
+  "version": 56,
+  "format": "rgba-webp-atlas",
+  "columns": 4,
+  "rows": 2,
+  "loop": false,
+  "payoutAuthority": "recorded event only",
+  "alpha": "generated source alpha retained; no chroma key or painted masks",
+  "proofType": "offline artwork inspection, not browser or Pixi renderer evidence",
+  "boat": {
+    "url": "/kilo-v56/vehicles/getaway-stop.webp",
+    "size": [
+      2304,
+      576
+    ],
+    "frame": [
+      576,
+      288
+    ],
+    "frameCount": 8,
+    "anchor": [
+      0.5,
+      0.65
+    ],
+    "registration": [
+      288,
+      187
+    ],
+    "registrationPart": "hull center",
+    "uniformScale": 0.9,
+    "suggestedWidthCells": 4.2,
+    "durationMs": 1600,
+    "settleFrame": 7,
+    "direction": "right",
+    "frames": [
+      {
+        "index": 0,
+        "name": "approach",
+        "durationMs": 180,
+        "rect": [
+          0,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          543,
+          362
+        ],
+        "sourcePivot": [
+          316,
+          260
+        ],
+        "packingOffset": [
+          4,
+          -47
+        ],
+        "visibleBounds": [
+          39,
+          46,
+          455,
+          228
+        ],
+        "sha256": "57d4a761ac12911bebbea23daad106b0fbf9a61239a822d3b1d87e35c1364175"
+      },
+      {
+        "index": 1,
+        "name": "ease-throttle",
+        "durationMs": 160,
+        "rect": [
+          576,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          543,
+          0,
+          1086,
+          362
+        ],
+        "sourcePivot": [
+          308,
+          258
+        ],
+        "packingOffset": [
+          11,
+          -45
+        ],
+        "visibleBounds": [
+          44,
+          46,
+          450,
+          227
+        ],
+        "sha256": "cbd03c75207026df83c2d56c69884cf17049c08a2dea1d5dc3ba889069e7b572"
+      },
+      {
+        "index": 2,
+        "name": "decelerate",
+        "durationMs": 160,
+        "rect": [
+          1152,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1086,
+          0,
+          1629,
+          362
+        ],
+        "sourcePivot": [
+          313,
+          260
+        ],
+        "packingOffset": [
+          6,
+          -47
+        ],
+        "visibleBounds": [
+          42,
+          45,
+          451,
+          224
+        ],
+        "sha256": "928ace2980102954e48b6e06c220a113be6d6f50893f03d0c08a6457d4b1094d"
+      },
+      {
+        "index": 3,
+        "name": "brake-splash",
+        "durationMs": 180,
+        "rect": [
+          1728,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1629,
+          0,
+          2172,
+          362
+        ],
+        "sourcePivot": [
+          312,
+          260
+        ],
+        "packingOffset": [
+          7,
+          -47
+        ],
+        "visibleBounds": [
+          43,
+          45,
+          451,
+          224
+        ],
+        "sha256": "4449cbf2ce2b30718c0acef28c458f22712cfc119b9e018e41fb519c24fafd5f"
+      },
+      {
+        "index": 4,
+        "name": "wake-settle",
+        "durationMs": 190,
+        "rect": [
+          0,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          0,
+          362,
+          543,
+          724
+        ],
+        "sourcePivot": [
+          316,
+          241
+        ],
+        "packingOffset": [
+          4,
+          -30
+        ],
+        "visibleBounds": [
+          46,
+          41,
+          457,
+          229
+        ],
+        "sha256": "bb1b580c2da96201238b5d890807a818b68002097df70b5db4380e7b31312b52"
+      },
+      {
+        "index": 5,
+        "name": "hull-stop",
+        "durationMs": 180,
+        "rect": [
+          576,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          543,
+          362,
+          1086,
+          724
+        ],
+        "sourcePivot": [
+          312,
+          241
+        ],
+        "packingOffset": [
+          7,
+          -30
+        ],
+        "visibleBounds": [
+          44,
+          42,
+          455,
+          229
+        ],
+        "sha256": "df176e4f93b255272ca59aead4cbf44c5a91b95b7ece17fc53b020bd8a02b66e"
+      },
+      {
+        "index": 6,
+        "name": "quiet-victory",
+        "durationMs": 180,
+        "rect": [
+          1152,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1086,
+          362,
+          1629,
+          724
+        ],
+        "sourcePivot": [
+          312,
+          241
+        ],
+        "packingOffset": [
+          7,
+          -30
+        ],
+        "visibleBounds": [
+          53,
+          18,
+          453,
+          230
+        ],
+        "sha256": "f3bd80271674b54f790d6a5f8be694b719b23187e9cfe860c9eb1cb5f22a9fe8"
+      },
+      {
+        "index": 7,
+        "name": "stopped",
+        "durationMs": 370,
+        "rect": [
+          1728,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1629,
+          362,
+          2172,
+          724
+        ],
+        "sourcePivot": [
+          313,
+          241
+        ],
+        "packingOffset": [
+          6,
+          -30
+        ],
+        "visibleBounds": [
+          64,
+          39,
+          454,
+          230
+        ],
+        "sha256": "99c9036a1395e4704ab13c45d0c464272063faffbd5f16fdcc97098e9e3034b1"
+      }
+    ],
+    "description": "Eight authored approach, deceleration, brake spray, water settle, victory and stopped drawings. Final drawing has no travelling wake.",
+    "source": "getaway-stop-padded-source.png"
+  }
+}

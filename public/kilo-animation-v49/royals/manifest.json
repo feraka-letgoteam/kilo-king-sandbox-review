@@ -1,0 +1,929 @@
+{
+  "version": 49,
+  "kind": "royal-reaction-atlases",
+  "authoring": "Five independent builtin imagegen edits of approved v47 idle art",
+  "frameOrder": "row-major",
+  "alphaBoundsThreshold": 16,
+  "processing": "Uniform full-sheet downsample only; no frame crop, per-frame scale, translation, warping, relighting or redraw.",
+  "assets": {
+    "10": {
+      "symbol": "10",
+      "sheet": "/kilo-animation-v49/royals/sym-10-reaction.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "grid": [
+        2,
+        2
+      ],
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "unionAlphaBounds": [
+        44,
+        63,
+        444,
+        390
+      ],
+      "anchor": [
+        256.0,
+        256.0
+      ],
+      "originalInput": "/kilo-symbols-v47/sym-10.webp",
+      "originalInputCanvas": [
+        1024,
+        1024
+      ],
+      "originalInputAlphaBounds": [
+        148,
+        201,
+        728,
+        621
+      ],
+      "originalInputAlphaBoundsAny": [
+        147,
+        200,
+        730,
+        623
+      ],
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        50,
+        80,
+        90,
+        100,
+        60
+      ],
+      "totalDurationMs": 380,
+      "frames": [
+        {
+          "index": 0,
+          "phase": "neutral",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            63,
+            90,
+            425,
+            363
+          ],
+          "alphaBoundsAny": [
+            0,
+            17,
+            491,
+            443
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "bevel-turn",
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            44,
+            90,
+            403,
+            362
+          ],
+          "alphaBoundsAny": [
+            41,
+            20,
+            440,
+            492
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "depth-compression",
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            81,
+            64,
+            365,
+            350
+          ],
+          "alphaBoundsAny": [
+            0,
+            14,
+            509,
+            490
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "recovery",
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            46,
+            63,
+            406,
+            353
+          ],
+          "alphaBoundsAny": [
+            1,
+            3,
+            492,
+            509
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        }
+      ],
+      "bytes": 505500,
+      "transparentPixelFraction": 0.5342,
+      "registrationAnchor": [
+        266.0,
+        258.0
+      ],
+      "originalInputRegistrationAnchor": [
+        512.0,
+        511.5
+      ],
+      "sha256": "099757685a703e85f0028a202613ae9c3cd5e4bfa25f70648aca4683af03f524",
+      "smallReelReview": "Glyph remains readable at roughly 75\u201390px visual height; fixed lighting and newly drawn bevel/extrusion variations present.",
+      "caveats": [
+        "Authored cell placement and footprint vary mildly across phases; no per-frame normalization applied."
+      ]
+    },
+    "j": {
+      "symbol": "J",
+      "sheet": "/kilo-animation-v49/royals/sym-j-reaction.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "grid": [
+        2,
+        2
+      ],
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "unionAlphaBounds": [
+        21,
+        31,
+        466,
+        464
+      ],
+      "anchor": [
+        256.0,
+        256.0
+      ],
+      "originalInput": "/kilo-symbols-v47/sym-j.webp",
+      "originalInputCanvas": [
+        1024,
+        1024
+      ],
+      "originalInputAlphaBounds": [
+        118,
+        132,
+        788,
+        761
+      ],
+      "originalInputAlphaBoundsAny": [
+        117,
+        131,
+        790,
+        763
+      ],
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        50,
+        80,
+        90,
+        100,
+        60
+      ],
+      "totalDurationMs": 380,
+      "frames": [
+        {
+          "index": 0,
+          "phase": "neutral",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            45,
+            67,
+            442,
+            428
+          ],
+          "alphaBoundsAny": [
+            35,
+            33,
+            464,
+            473
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "bevel-turn",
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            28,
+            67,
+            388,
+            427
+          ],
+          "alphaBoundsAny": [
+            2,
+            15,
+            494,
+            491
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "depth-compression",
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            73,
+            34,
+            395,
+            398
+          ],
+          "alphaBoundsAny": [
+            25,
+            5,
+            487,
+            486
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "recovery",
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            21,
+            31,
+            414,
+            407
+          ],
+          "alphaBoundsAny": [
+            1,
+            6,
+            496,
+            442
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        }
+      ],
+      "bytes": 413730,
+      "transparentPixelFraction": 0.6058,
+      "registrationAnchor": [
+        254.0,
+        263.0
+      ],
+      "originalInputRegistrationAnchor": [
+        512.0,
+        512.5
+      ],
+      "sha256": "d6f9222626da3347921a29156a046df740d6d2000fa0aa8a59aad4f0e154fca9",
+      "smallReelReview": "Glyph remains readable at roughly 75\u201390px visual height; fixed lighting and newly drawn bevel/extrusion variations present.",
+      "caveats": [
+        "Authored cell placement and footprint vary mildly across phases; no per-frame normalization applied."
+      ]
+    },
+    "q": {
+      "symbol": "Q",
+      "sheet": "/kilo-animation-v49/royals/sym-q-reaction.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "grid": [
+        2,
+        2
+      ],
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "unionAlphaBounds": [
+        50,
+        48,
+        443,
+        439
+      ],
+      "anchor": [
+        256.0,
+        256.0
+      ],
+      "originalInput": "/kilo-symbols-v47/sym-q.webp",
+      "originalInputCanvas": [
+        1024,
+        1024
+      ],
+      "originalInputAlphaBounds": [
+        102,
+        110,
+        820,
+        804
+      ],
+      "originalInputAlphaBoundsAny": [
+        101,
+        109,
+        822,
+        806
+      ],
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        50,
+        80,
+        90,
+        100,
+        60
+      ],
+      "totalDurationMs": 380,
+      "frames": [
+        {
+          "index": 0,
+          "phase": "neutral",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            53,
+            58,
+            440,
+            429
+          ],
+          "alphaBoundsAny": [
+            0,
+            53,
+            506,
+            444
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "bevel-turn",
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            68,
+            57,
+            386,
+            430
+          ],
+          "alphaBoundsAny": [
+            7,
+            44,
+            477,
+            468
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "depth-compression",
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            60,
+            48,
+            416,
+            399
+          ],
+          "alphaBoundsAny": [
+            0,
+            0,
+            509,
+            512
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "recovery",
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            50,
+            48,
+            419,
+            407
+          ],
+          "alphaBoundsAny": [
+            25,
+            0,
+            476,
+            471
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        }
+      ],
+      "bytes": 509022,
+      "transparentPixelFraction": 0.4764,
+      "registrationAnchor": [
+        271.5,
+        267.5
+      ],
+      "originalInputRegistrationAnchor": [
+        512.0,
+        512.0
+      ],
+      "sha256": "5bc3b4fbd223368e70b680d3dab595f1f0f3bf984e4e64a28a73fc34cfd22d8e",
+      "smallReelReview": "Glyph remains readable at roughly 75\u201390px visual height; fixed lighting and newly drawn bevel/extrusion variations present.",
+      "caveats": [
+        "Authored cell placement and footprint vary mildly across phases; no per-frame normalization applied."
+      ]
+    },
+    "k": {
+      "symbol": "K",
+      "sheet": "/kilo-animation-v49/royals/sym-k-reaction.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "grid": [
+        2,
+        2
+      ],
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "unionAlphaBounds": [
+        35,
+        48,
+        454,
+        423
+      ],
+      "anchor": [
+        256.0,
+        256.0
+      ],
+      "originalInput": "/kilo-symbols-v47/sym-k.webp",
+      "originalInputCanvas": [
+        1024,
+        1024
+      ],
+      "originalInputAlphaBounds": [
+        142,
+        162,
+        741,
+        700
+      ],
+      "originalInputAlphaBoundsAny": [
+        141,
+        161,
+        743,
+        702
+      ],
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        50,
+        80,
+        90,
+        100,
+        60
+      ],
+      "totalDurationMs": 380,
+      "frames": [
+        {
+          "index": 0,
+          "phase": "neutral",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            55,
+            73,
+            434,
+            398
+          ],
+          "alphaBoundsAny": [
+            53,
+            40,
+            439,
+            434
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "bevel-turn",
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            52,
+            72,
+            389,
+            397
+          ],
+          "alphaBoundsAny": [
+            50,
+            32,
+            395,
+            442
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "depth-compression",
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            71,
+            48,
+            386,
+            375
+          ],
+          "alphaBoundsAny": [
+            46,
+            44,
+            413,
+            468
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "recovery",
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            35,
+            48,
+            423,
+            379
+          ],
+          "alphaBoundsAny": [
+            30,
+            15,
+            449,
+            497
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        }
+      ],
+      "bytes": 488948,
+      "transparentPixelFraction": 0.5424,
+      "registrationAnchor": [
+        262.0,
+        259.5
+      ],
+      "originalInputRegistrationAnchor": [
+        512.5,
+        512.0
+      ],
+      "sha256": "58367296babf2b273c4d09391de45b1ef0f839606e751b5b69141298a74f7a6c",
+      "smallReelReview": "Glyph remains readable at roughly 75\u201390px visual height; fixed lighting and newly drawn bevel/extrusion variations present.",
+      "caveats": [
+        "Authored cell placement and footprint vary mildly across phases; no per-frame normalization applied."
+      ]
+    },
+    "a": {
+      "symbol": "A",
+      "sheet": "/kilo-animation-v49/royals/sym-a-reaction.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "cell": [
+        512,
+        512
+      ],
+      "grid": [
+        2,
+        2
+      ],
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "unionAlphaBounds": [
+        19,
+        56,
+        486,
+        425
+      ],
+      "anchor": [
+        256.0,
+        256.0
+      ],
+      "originalInput": "/kilo-symbols-v47/sym-a.webp",
+      "originalInputCanvas": [
+        1024,
+        1024
+      ],
+      "originalInputAlphaBounds": [
+        135,
+        151,
+        754,
+        722
+      ],
+      "originalInputAlphaBoundsAny": [
+        134,
+        150,
+        756,
+        724
+      ],
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        50,
+        80,
+        90,
+        100,
+        60
+      ],
+      "totalDurationMs": 380,
+      "frames": [
+        {
+          "index": 0,
+          "phase": "neutral",
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            24,
+            65,
+            481,
+            416
+          ],
+          "alphaBoundsAny": [
+            21,
+            45,
+            491,
+            441
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 1,
+          "phase": "bevel-turn",
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            25,
+            67,
+            448,
+            414
+          ],
+          "alphaBoundsAny": [
+            22,
+            46,
+            462,
+            442
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 2,
+          "phase": "depth-compression",
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            35,
+            56,
+            442,
+            398
+          ],
+          "alphaBoundsAny": [
+            0,
+            4,
+            509,
+            458
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        },
+        {
+          "index": 3,
+          "phase": "recovery",
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            19,
+            56,
+            462,
+            402
+          ],
+          "alphaBoundsAny": [
+            1,
+            52,
+            495,
+            409
+          ],
+          "anchor": [
+            256.0,
+            256.0
+          ]
+        }
+      ],
+      "bytes": 488150,
+      "transparentPixelFraction": 0.5298,
+      "registrationAnchor": [
+        262.0,
+        268.5
+      ],
+      "originalInputRegistrationAnchor": [
+        512.0,
+        512.0
+      ],
+      "sha256": "fff783dc21efe67f08865260640fbc391f02d2e88dadd517fcc0f4c6418bc424",
+      "smallReelReview": "Glyph remains readable at roughly 75\u201390px visual height; fixed lighting and newly drawn bevel/extrusion variations present.",
+      "caveats": [
+        "Authored cell placement and footprint vary mildly across phases; no per-frame normalization applied."
+      ]
+    }
+  },
+  "caveats": [
+    "All four frames are newly generated redraws, so neutral is visually matched rather than pixel-identical to approved idle. Keep the original idle outside reactions.",
+    "Some generated lower-row phases shift upward slightly and have a smaller footprint, most visible for J; retained to avoid changing authored geometry or motion."
+  ]
+}

@@ -325,7 +325,8 @@ const settings = render(SettingsPanel, {
 assert.match(settings, /Normal/);
 assert.match(settings, /Super turbo/);
 assert.match(settings, /<fieldset disabled/);
-assert.match(settings, /Sound unavailable/);
+assert.match(settings, /Audio files did not load\. This session is muted\./);
+assert.doesNotMatch(settings, /type="range"/);
 const table = render(Paytable, { stake: 1000 });
 assert.equal(
   (table.match(/scope="row"/g) || []).length,

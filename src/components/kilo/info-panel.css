@@ -1,0 +1,584 @@
+/* Full viewport information surface. ID scope defeats the legacy narrow
+   dialog/portrait sheet rules without changing any game or dock geometry. */
+#kilo-info-takeover {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: block;
+  padding: 0;
+}
+#kilo-info-takeover .kk-scrim {
+  background: #02090fdc;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+#kilo-info-takeover .kk-info-panel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #f6f1e8;
+  font:
+    400 18px/1.55 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  text-shadow: none;
+  transform: none;
+  animation: kk-info-enter 180ms ease-out both;
+}
+#kilo-info-takeover.is-closing .kk-info-panel {
+  animation: kk-info-leave 160ms ease-in both;
+}
+#kilo-info-takeover .kk-info-panel * {
+  box-sizing: border-box;
+}
+#kilo-info-takeover .kk-info-close {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  opacity: 1;
+  cursor: pointer;
+}
+#kilo-info-takeover .kk-info-close svg {
+  width: 36px;
+  height: 36px;
+  stroke-width: 3;
+}
+#kilo-info-takeover .kk-info-close:hover {
+  background: #ffffff12;
+}
+#kilo-info-takeover :is(button, [tabindex]):focus-visible {
+  outline: 2px solid #8bd4cb;
+  outline-offset: -2px;
+}
+#kilo-info-takeover .kk-info-scroll {
+  position: absolute;
+  top: max(76px, calc(env(safe-area-inset-top) + 64px));
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #6c777c transparent;
+}
+#kilo-info-takeover .kk-info-content {
+  width: 100%;
+  max-width: 1176px;
+  margin: 0 auto;
+  padding-top: 0;
+  padding-right: max(40px, env(safe-area-inset-right));
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+  padding-left: max(40px, env(safe-area-inset-left));
+}
+#kilo-info-takeover .kk-info-section {
+  margin: 0 0 64px;
+  padding: 0;
+}
+#kilo-info-takeover h2 {
+  margin: 0 0 32px;
+  padding: 0 0 18px;
+  border-bottom: 1px solid #f3ecdd54;
+  color: #fffaf1;
+  font:
+    700 32px/1.2 "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  text-shadow: none;
+}
+#kilo-info-takeover h3 {
+  margin: 0 0 14px;
+  color: #fffaf1;
+  font:
+    700 22px/1.25 "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+#kilo-info-takeover p {
+  margin: 0 0 14px;
+  overflow-wrap: break-word;
+}
+#kilo-info-takeover strong {
+  font-weight: 700;
+  color: #fffaf1;
+}
+#kilo-info-takeover .kk-info-intro {
+  text-align: center;
+  color: #c6c9c7;
+  margin-bottom: 32px;
+}
+#kilo-info-takeover .kk-info-symbols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 44px 32px;
+}
+#kilo-info-takeover .kk-info-symbol {
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#kilo-info-takeover .kk-info-symbol img {
+  width: 188px;
+  height: 188px;
+  max-width: 100%;
+  object-fit: contain;
+}
+#kilo-info-takeover .kk-info-symbol figcaption {
+  margin: 6px 0 12px;
+  color: #c6c9c7;
+  font:
+    600 14px/20px "Source Sans 3",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+#kilo-info-takeover .kk-info-pays {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font:
+    650 20px/26px "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+#kilo-info-takeover .kk-info-pays > div {
+  display: grid;
+  grid-template-columns: 18px 76px;
+  gap: 16px;
+}
+#kilo-info-takeover .kk-info-pays dt {
+  color: #ddb868;
+}
+#kilo-info-takeover .kk-info-pays dd {
+  margin: 0;
+  color: #fffaf1;
+}
+#kilo-info-takeover .kk-info-paylines {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 26px 36px;
+  max-width: 920px;
+  margin: 0 auto 32px;
+}
+#kilo-info-takeover .kk-info-paylines figure {
+  margin: 0;
+  min-width: 0;
+  text-align: center;
+}
+#kilo-info-takeover .kk-info-paylines svg {
+  display: block;
+  width: 100%;
+  max-width: 136px;
+  height: auto;
+  margin: 0 auto;
+}
+#kilo-info-takeover .kk-info-paylines figcaption {
+  margin-top: 8px;
+  color: #c6c9c7;
+  font:
+    600 14px/20px "Source Sans 3",
+    sans-serif;
+}
+#kilo-info-takeover .kk-info-centered {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+#kilo-info-takeover .kk-info-feature {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  margin: 0 0 48px;
+}
+#kilo-info-takeover .kk-info-feature-art {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+#kilo-info-takeover .kk-info-feature p:last-child {
+  margin-bottom: 0;
+}
+#kilo-info-takeover .kk-info-feature ul {
+  padding-left: 20px;
+  margin: 0;
+}
+#kilo-info-takeover .kk-info-feature li {
+  padding-left: 4px;
+  margin: 6px 0;
+}
+#kilo-info-takeover .kk-info-numeric {
+  color: #fffaf1;
+  font-weight: 600;
+}
+#kilo-info-takeover .kk-info-scatter-awards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 20px;
+  margin: 18px 0;
+}
+#kilo-info-takeover .kk-info-scatter-awards > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
+}
+#kilo-info-takeover .kk-info-scatter-awards dt {
+  color: #ddb868;
+  font-weight: 600;
+}
+#kilo-info-takeover .kk-info-scatter-awards dd {
+  margin: 0;
+}
+#kilo-info-takeover .kk-info-trigger-awards {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+#kilo-info-takeover .kk-info-trigger-awards p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  margin: 0;
+}
+#kilo-info-takeover .kk-info-trigger-awards strong {
+  color: #ddb868;
+}
+#kilo-info-takeover .kk-info-ladder {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+  margin: 22px 0;
+  list-style: none;
+}
+#kilo-info-takeover .kk-info-ladder li {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+#kilo-info-takeover .kk-info-ladder strong {
+  color: #ddb868;
+  font-size: 30px;
+  line-height: 1.2;
+}
+#kilo-info-takeover .kk-info-ladder span {
+  font-size: 14px;
+  color: #c6c9c7;
+}
+#kilo-info-takeover .kk-info-modes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 48px;
+  margin: 0 0 32px;
+}
+#kilo-info-takeover .kk-info-modes article {
+  border-bottom: 1px solid #f3ecdd2b;
+  padding-bottom: 20px;
+  min-width: 0;
+}
+#kilo-info-takeover .kk-info-mode-cost {
+  color: #ddb868;
+}
+#kilo-info-takeover .kk-info-mode-cost strong {
+  color: inherit;
+}
+#kilo-info-takeover .kk-info-mode-limit {
+  font-size: 16px;
+  color: #c6c9c7;
+}
+#kilo-info-takeover .kk-info-facts h3 {
+  margin-top: 40px;
+}
+#kilo-info-takeover .kk-info-facts h3:first-child {
+  margin-top: 0;
+}
+#kilo-info-takeover .kk-info-muted {
+  color: #b6bfbd;
+  font-size: 16px;
+}
+#kilo-info-takeover .kk-info-rtp {
+  max-width: 520px;
+  margin: 24px auto;
+}
+#kilo-info-takeover .kk-info-rtp > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3ecdd20;
+  text-align: left;
+}
+#kilo-info-takeover .kk-info-rtp dd {
+  margin: 0;
+  color: #ddb868;
+}
+#kilo-info-takeover .kk-info-breakdown {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+#kilo-info-takeover .kk-info-breakdown dt {
+  color: #c6c9c7;
+  font-size: 16px;
+}
+#kilo-info-takeover .kk-info-breakdown dd {
+  margin: 4px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+#kilo-info-takeover .kk-info-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 48px;
+  margin: 0;
+}
+#kilo-info-takeover .kk-info-controls dt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  color: #fffaf1;
+  margin-bottom: 8px;
+}
+#kilo-info-takeover .kk-info-controls dt svg {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  color: #ddb868;
+  stroke-width: 2.5;
+}
+#kilo-info-takeover .kk-info-controls dd {
+  margin: 0;
+}
+#kilo-info-takeover .kk-info-settings-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: max-content;
+  max-width: 100%;
+  min-height: 48px;
+  margin: 32px auto 0;
+  padding: 10px 20px;
+  border: 1px solid #9d8656;
+  border-radius: 6px;
+  background: #102629;
+  color: #fffaf1;
+  font:
+    650 17px/24px "Source Sans 3",
+    sans-serif;
+  box-shadow: none;
+  cursor: pointer;
+}
+#kilo-info-takeover .kk-info-settings-link svg {
+  width: 20px;
+  height: 20px;
+}
+#kilo-info-takeover .kk-info-footer {
+  text-align: center;
+  color: #a7b2af;
+  font-size: 14px;
+}
+#kilo-info-takeover .kk-info-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes kk-info-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes kk-info-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@media (max-width: 700px) {
+  #kilo-info-takeover .kk-info-panel {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  #kilo-info-takeover .kk-info-close {
+    width: 44px;
+    height: 44px;
+    right: max(12px, env(safe-area-inset-right));
+  }
+  #kilo-info-takeover .kk-info-close svg {
+    width: 30px;
+    height: 30px;
+  }
+  #kilo-info-takeover .kk-info-scroll {
+    top: max(64px, calc(env(safe-area-inset-top) + 56px));
+  }
+  #kilo-info-takeover .kk-info-content {
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  #kilo-info-takeover .kk-info-section {
+    margin-bottom: 44px;
+  }
+  #kilo-info-takeover h2 {
+    font-size: 26px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+  }
+  #kilo-info-takeover h3 {
+    font-size: 20px;
+  }
+  #kilo-info-takeover .kk-info-intro {
+    margin-bottom: 24px;
+  }
+  #kilo-info-takeover .kk-info-symbols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  #kilo-info-takeover .kk-info-symbol img {
+    width: 128px;
+    height: 128px;
+  }
+  #kilo-info-takeover .kk-info-symbol figcaption {
+    margin-bottom: 8px;
+  }
+  #kilo-info-takeover .kk-info-pays {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  #kilo-info-takeover .kk-info-pays > div {
+    grid-template-columns: 16px 64px;
+    gap: 12px;
+  }
+  #kilo-info-takeover .kk-info-paylines {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 30px;
+    max-width: 400px;
+  }
+  #kilo-info-takeover .kk-info-feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  #kilo-info-takeover .kk-info-feature-art {
+    width: 180px;
+    max-width: 100%;
+    height: 160px;
+    justify-self: center;
+  }
+  #kilo-info-takeover .kk-info-feature h3 {
+    text-align: center;
+  }
+  #kilo-info-takeover .kk-info-scatter-awards {
+    gap: 10px 16px;
+  }
+  #kilo-info-takeover .kk-info-ladder {
+    gap: 8px;
+  }
+  #kilo-info-takeover .kk-info-ladder strong {
+    font-size: 26px;
+  }
+  #kilo-info-takeover .kk-info-modes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  #kilo-info-takeover .kk-info-controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  #kilo-info-takeover .kk-info-breakdown {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  #kilo-info-takeover .kk-info-breakdown > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  #kilo-info-takeover .kk-info-breakdown dd {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+@media (max-height: 480px) and (orientation: landscape) {
+  #kilo-info-takeover .kk-info-scroll {
+    top: max(60px, calc(env(safe-area-inset-top) + 52px));
+  }
+  #kilo-info-takeover .kk-info-close {
+    top: max(8px, env(safe-area-inset-top));
+    width: 44px;
+    height: 44px;
+  }
+  #kilo-info-takeover .kk-info-content {
+    padding-left: max(32px, env(safe-area-inset-left));
+    padding-right: max(32px, env(safe-area-inset-right));
+  }
+  #kilo-info-takeover .kk-info-symbol img {
+    width: 140px;
+    height: 140px;
+  }
+  #kilo-info-takeover .kk-info-feature {
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #kilo-info-takeover .kk-info-panel,
+  #kilo-info-takeover.is-closing .kk-info-panel {
+    animation: none;
+  }
+}
+.kk-app[data-reduced="1"] #kilo-info-takeover .kk-info-panel,
+.kk-app[data-reduced="1"] #kilo-info-takeover.is-closing .kk-info-panel {
+  animation: none;
+}
+#kilo-info-takeover .kk-cluster-paytable { width:100%; border-collapse:collapse; margin:12px 0; font:600 14px/1.4 'Source Sans 3',sans-serif; font-variant-numeric:tabular-nums; }
+#kilo-info-takeover .kk-cluster-paytable :is(th,td) { padding:7px 5px; border-bottom:1px solid #526461; text-align:center; }
+#kilo-info-takeover .kk-cluster-paytable caption { color:#b6dcd3; padding:8px; }

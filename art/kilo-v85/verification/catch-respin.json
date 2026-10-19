@@ -1,0 +1,408 @@
+{
+  "method": "Actual production director and scene, instrumented Pixi; not browser/WebGL.",
+  "fixtures": {
+    "caught": 6,
+    "miss": 76
+  },
+  "results": [
+    {
+      "seed": 6,
+      "speed": "normal",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 12496,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "normal",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 12496,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "normal",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 4192,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "normal",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 4192,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 6,
+      "speed": "normal",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 3584,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "normal",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 3584,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "normal",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "normal",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "seed": 6,
+      "speed": "turbo",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 6608,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "turbo",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 6608,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "turbo",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 1920,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "turbo",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 1920,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 6,
+      "speed": "turbo",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 3424,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "turbo",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 3424,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "turbo",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "turbo",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "seed": 6,
+      "speed": "super",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 5552,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "super",
+      "reduced": false,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 5552,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "super",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 1040,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "super",
+      "reduced": false,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 1040,
+      "phases": [
+        "cast",
+        "respin",
+        "settle"
+      ],
+      "payout": 0
+    },
+    {
+      "seed": 6,
+      "speed": "super",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 3424,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 6,
+      "speed": "super",
+      "reduced": true,
+      "outcome": "caught",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 3424,
+      "phases": [],
+      "payout": 37000
+    },
+    {
+      "seed": 76,
+      "speed": "super",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        1440,
+        900
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "seed": 76,
+      "speed": "super",
+      "reduced": true,
+      "outcome": "miss",
+      "size": [
+        390,
+        844
+      ],
+      "durationMs": 16,
+      "phases": [],
+      "payout": 0
+    },
+    {
+      "action": "skip",
+      "at": "cast",
+      "durationMs": 1680,
+      "payout": 37000
+    },
+    {
+      "action": "skip",
+      "at": "respin",
+      "durationMs": 2320,
+      "payout": 37000
+    },
+    {
+      "action": "skip",
+      "at": "settle",
+      "durationMs": 4000,
+      "payout": 37000
+    },
+    {
+      "action": "resize",
+      "at": "cast",
+      "durationMs": 12496,
+      "payout": 37000
+    },
+    {
+      "action": "resize",
+      "at": "respin",
+      "durationMs": 12496,
+      "payout": 37000
+    },
+    {
+      "action": "resize",
+      "at": "settle",
+      "durationMs": 12496,
+      "payout": 37000
+    },
+    {
+      "actualDockIntroRoute": true
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "atlas": "/kilo-animation-v49/scenes/chopper-rotor-cycle-4f.webp",
+  "atlasSizePx": [
+    1536,
+    1024
+  ],
+  "frames": [
+    {
+      "rect": [
+        0,
+        0,
+        1536,
+        240
+      ],
+      "pivot": [
+        768,
+        117
+      ],
+      "phase": 0,
+      "centerExclusionRect": [
+        728,
+        0,
+        80,
+        240
+      ]
+    },
+    {
+      "rect": [
+        0,
+        245,
+        1536,
+        245
+      ],
+      "pivot": [
+        768,
+        124
+      ],
+      "phase": 22.5,
+      "centerExclusionRect": [
+        728,
+        0,
+        80,
+        245
+      ]
+    },
+    {
+      "rect": [
+        0,
+        508,
+        1536,
+        216
+      ],
+      "pivot": [
+        768,
+        113
+      ],
+      "phase": 45,
+      "centerExclusionRect": [
+        728,
+        0,
+        80,
+        216
+      ]
+    },
+    {
+      "rect": [
+        0,
+        732,
+        1536,
+        276
+      ],
+      "pivot": [
+        768,
+        117
+      ],
+      "phase": 67.5,
+      "centerExclusionRect": [
+        728,
+        0,
+        80,
+        276
+      ]
+    }
+  ],
+  "cycleMs": 400,
+  "sourceFrameMs": 100,
+  "rotorPhaseDegrees": [
+    0,
+    22.5,
+    45,
+    67.5
+  ],
+  "fourBladeSymmetryPeriodDegrees": 90,
+  "runtimeLiveReviewed": false,
+  "renderOrder": [
+    "original plate",
+    "cleanup overlay",
+    "atlas frame with registered source transform",
+    "original hub-cap overlay",
+    "foreground actor/UI"
+  ],
+  "orientations": {
+    "desktop": {
+      "sourceSizePx": [
+        1600,
+        900
+      ],
+      "cleanup": "/kilo-animation-v49/scenes/chopper-rotor-cleanup-desktop.webp",
+      "hubCap": "/kilo-animation-v49/scenes/chopper-rotor-hub-desktop.webp",
+      "hubPx": [
+        1468,
+        130
+      ],
+      "scale": [
+        0.81,
+        0.35
+      ],
+      "rotationDegrees": -8.0,
+      "transformOrder": "translate(hubPx) rotate(rotationDegrees) scale(scaleX,scaleY) translate(-frame.pivot); sourceRect=frame.rect",
+      "sourceSha256": "076d4d2b3ad0821cfe7eafe6f89198964cf2fe93f140cf80bce877e51d06f574"
+    },
+    "portrait": {
+      "sourceSizePx": [
+        768,
+        1800
+      ],
+      "cleanup": "/kilo-animation-v49/scenes/chopper-rotor-cleanup-portrait.webp",
+      "hubCap": "/kilo-animation-v49/scenes/chopper-rotor-hub-portrait.webp",
+      "hubPx": [
+        750,
+        749
+      ],
+      "scale": [
+        0.39,
+        0.22
+      ],
+      "rotationDegrees": -8.5,
+      "transformOrder": "translate(hubPx) rotate(rotationDegrees) scale(scaleX,scaleY) translate(-frame.pivot); sourceRect=frame.rect",
+      "sourceSha256": "53ab125b614ebde08ebc639b9370e039bcd7d72519c8ff218931ca0d9f96cfeb"
+    }
+  },
+  "centerExclusion": "Already baked into runtime atlas alpha: per-frame x[728,808), y[0,height). Removes generated hub and foreshortened gold center hardware. Original source hub/shaft overlay supplies one fixed hardware unit."
+}

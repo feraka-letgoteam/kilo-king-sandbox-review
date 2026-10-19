@@ -1,0 +1,733 @@
+{
+  "version": "v85",
+  "method": "Native Canvas rendering of production controllers; offline audio mix, not live browser/GPU/complete React UI.",
+  "proofs": [
+    {
+      "id": "base-hit-1440x900",
+      "file": "base-hit-1440x900-audio.mp4",
+      "videoSha256": "56a73bad30700f28b31aec3c8067604c6440f66f777a677cb8be892e27668020",
+      "bytes": 2406512,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 7399.999999999977,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 223,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "base-hit-1440x900.json",
+      "metadataSha256": "fb7830daa8e22986b71d989037acc030e4acb2c3f9996b43cc8d77dfbd0dbf8d",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "base-hit-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 2406512,
+          "sha256": "56a73bad30700f28b31aec3c8067604c6440f66f777a677cb8be892e27668020"
+        }
+      ],
+      "finalWin": 11000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "base-hit-390x844",
+      "file": "base-hit-390x844-audio.mp4",
+      "videoSha256": "c0e01a97432493f1a9ad68fb9e004b3ed86f6cd439532e5d2bec28f971134257",
+      "bytes": 1167080,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 7399.999999999977,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 223,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "base-hit-390x844.json",
+      "metadataSha256": "6145fa21942e256b2e1fdcabdd9430cf5b160374c10a4f226897d94883bc6be9",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "base-hit-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 1167080,
+          "sha256": "c0e01a97432493f1a9ad68fb9e004b3ed86f6cd439532e5d2bec28f971134257"
+        }
+      ],
+      "finalWin": 11000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "vs-wide-1440x900",
+      "file": "vs-wide-1440x900-audio.mp4",
+      "videoSha256": "be9eb9c5df67ac7d3e9c7a835460a99ba6f7c32a55ec72c3a16d76e375deb609",
+      "bytes": 2069245,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 4633.333333333336,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 140,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "vs-wide-1440x900.json",
+      "metadataSha256": "478672eecdc31a77d5672c602ebc9ea619f0c0a6f51e50640f9ca2db3507cd1f",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "vs-wide-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 2069245,
+          "sha256": "be9eb9c5df67ac7d3e9c7a835460a99ba6f7c32a55ec72c3a16d76e375deb609"
+        }
+      ],
+      "finalWin": 688000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "vs-wide-390x844",
+      "file": "vs-wide-390x844-audio.mp4",
+      "videoSha256": "ace1a3d234c5e7e0b22eb27ccb0b4811f3b204b776b0a4ec0232b80e66c2505a",
+      "bytes": 948136,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 4633.333333333336,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 140,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "vs-wide-390x844.json",
+      "metadataSha256": "044a49c1c799e8f3f31a8565a3621728235644410f2e8c065cbaeccf3ad80a41",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "vs-wide-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 948136,
+          "sha256": "ace1a3d234c5e7e0b22eb27ccb0b4811f3b204b776b0a4ec0232b80e66c2505a"
+        }
+      ],
+      "finalWin": 688000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "vs-five-390x844",
+      "file": "vs-five-390x844-audio.mp4",
+      "videoSha256": "f614d08d204c6c83baf21920710a83dee9866f482eac63ff9d8d0a709a3136f3",
+      "bytes": 1019979,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 4600.000000000003,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 139,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "vs-five-390x844.json",
+      "metadataSha256": "cbff7458fa021da420e1d5ea5f962f2ed82e076c12005f55c4587ad677f541d9",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "vs-five-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 1019979,
+          "sha256": "f614d08d204c6c83baf21920710a83dee9866f482eac63ff9d8d0a709a3136f3"
+        }
+      ],
+      "finalWin": 18000000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "god-full-1440x900",
+      "file": "god-full-1440x900-audio.mp4",
+      "videoSha256": "848f9516a8d1f2336e79d809f478cd9ba7e05e9cd42c8a0b7b13faeabdc3fd5d",
+      "bytes": 4858784,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 11100.000000000024,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 334,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "god-full-1440x900.json",
+      "metadataSha256": "7e5c7a1d31d2f914e143129dbec06853375a52adb8801b6c8caf16f489b78f81",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "god-full-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 4194304,
+          "sha256": "ab2f6fc9b9ae2f0f2532720ff68b32ed0ff242dacbc3f89543fc5ec49150c372"
+        },
+        {
+          "file": "god-full-1440x900-audio.mp4.parts/part-001.bin",
+          "bytes": 664480,
+          "sha256": "30ea0f6e6b284940481540bfea44889b2a56b70bd83d225083de2d0cce1054e1"
+        }
+      ],
+      "finalWin": 25000000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "god-full-390x844",
+      "file": "god-full-390x844-audio.mp4",
+      "videoSha256": "e37d430a40ff3037752f949f41400881d2f102581ac9d00c09d5f9e813e96881",
+      "bytes": 2249269,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 11100.000000000024,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 334,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "god-full-390x844.json",
+      "metadataSha256": "97dfdf03ec999e215136ab8bf4abe59c790684124f347151c4df582a82c50d13",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "god-full-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 2249269,
+          "sha256": "e37d430a40ff3037752f949f41400881d2f102581ac9d00c09d5f9e813e96881"
+        }
+      ],
+      "finalWin": 25000000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "god-early-loss-1440x900",
+      "file": "god-early-loss-1440x900-audio.mp4",
+      "videoSha256": "c57e333f75f13759f63653aff2b20aacaf2d4fcadbec4cbe29051f7cbc7a6e59",
+      "bytes": 2607458,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 6999.999999999981,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 211,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "god-early-loss-1440x900.json",
+      "metadataSha256": "f206fad3b2f483898946368a5f4a20a4e38a6061f636106fa69d4342df19d71c",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "god-early-loss-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 2607458,
+          "sha256": "c57e333f75f13759f63653aff2b20aacaf2d4fcadbec4cbe29051f7cbc7a6e59"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "god-late-overshoot-1440x900",
+      "file": "god-late-overshoot-1440x900-audio.mp4",
+      "videoSha256": "4b5311cfdc1ee65836c7ce33cd640bf6b04c3e74a23f748e5322d76f9c819f94",
+      "bytes": 4888365,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 10733.33333333335,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 323,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "god-late-overshoot-1440x900.json",
+      "metadataSha256": "7b4886f4867c57be61786c6837ca164aa10c5f92f0a4015fd44be4883d618da7",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "god-late-overshoot-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 4194304,
+          "sha256": "b42ff8529ed1fe00c9f31fc43dc8ba83bf26460c220aedadf395765db562b3a6"
+        },
+        {
+          "file": "god-late-overshoot-1440x900-audio.mp4.parts/part-001.bin",
+          "bytes": 694061,
+          "sha256": "74a329440b7834091cf27d44424496c1b92de444391b818593dfeaaff17ffb23"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "collection-1440x900",
+      "file": "collection-1440x900-audio.mp4",
+      "videoSha256": "41f29fc6f1c1b36a59360d7beecd46399096fce01c211a364b0d2e58c149c091",
+      "bytes": 1975967,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 8966.666666666652,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 270,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "collection-1440x900.json",
+      "metadataSha256": "70cc2ac03f104dcd7f9e528221cda6be2e98a4d3150b4d1b3c8d4aa00cec2b69",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "collection-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 1975967,
+          "sha256": "41f29fc6f1c1b36a59360d7beecd46399096fce01c211a364b0d2e58c149c091"
+        }
+      ],
+      "finalWin": 48000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "collection-390x844",
+      "file": "collection-390x844-audio.mp4",
+      "videoSha256": "7688d02b0b65c2a62a541fce953ec254182dd8f2a82937c40da5d0756e6c476e",
+      "bytes": 1185738,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 8966.666666666652,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 270,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "collection-390x844.json",
+      "metadataSha256": "e133bf18e8972a08f2420ee06f887d9b62f6fb36220a932fd2502c59492d0366",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "collection-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 1185738,
+          "sha256": "7688d02b0b65c2a62a541fce953ec254182dd8f2a82937c40da5d0756e6c476e"
+        }
+      ],
+      "finalWin": 48000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "catch-win-390x844",
+      "file": "catch-win-390x844-audio.mp4",
+      "videoSha256": "3af2c0a137baa72375e03efa0fe71493b9288fe460e5692ca18fdcc935abd592",
+      "bytes": 1774333,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 9866.666666666668,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 297,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "catch-win-390x844.json",
+      "metadataSha256": "a870c279af9e59f94413f1dae5b5cac1a18c2c737a7d9b103a34a1133604d019",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "catch-win-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 1774333,
+          "sha256": "3af2c0a137baa72375e03efa0fe71493b9288fe460e5692ca18fdcc935abd592"
+        }
+      ],
+      "finalWin": 4000,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "entry-dock-390x844",
+      "file": "entry-dock-390x844-audio.mp4",
+      "videoSha256": "8b25e38327de4351dc44ad3a4e48eb651d563c474c30a0be3fd3678e9c8042e4",
+      "bytes": 351130,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 2299.999999999999,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 70,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "entry-dock-390x844.json",
+      "metadataSha256": "0e820288626f2f192fb81cd467031f20bdc3f04954ef5f9536afe66672566c9c",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "entry-dock-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 351130,
+          "sha256": "8b25e38327de4351dc44ad3a4e48eb651d563c474c30a0be3fd3678e9c8042e4"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "entry-vs-1440x900",
+      "file": "entry-vs-1440x900-audio.mp4",
+      "videoSha256": "f07a2e6f17a264a6c1297d96835d71ab29759dc83993265447a5aa59c6d6d2b5",
+      "bytes": 549653,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 2266.6666666666656,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 69,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "entry-vs-1440x900.json",
+      "metadataSha256": "6a8ba316a39c976484010c78898621359973fb49e4b2e22ac6ff80af1572dc1d",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "entry-vs-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 549653,
+          "sha256": "f07a2e6f17a264a6c1297d96835d71ab29759dc83993265447a5aa59c6d6d2b5"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "retrigger-390x844",
+      "file": "retrigger-390x844-audio.mp4",
+      "videoSha256": "0112b84154f98c0b6f14a21e50036e990a69c7f82cede2107dc3e829870427b4",
+      "bytes": 438737,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 2600.0000000000005,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 79,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "retrigger-390x844.json",
+      "metadataSha256": "55ebe39503cf5232f29dd27b8063241dfc37f457ac09ed338624ab91e113a353",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "retrigger-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 438737,
+          "sha256": "0112b84154f98c0b6f14a21e50036e990a69c7f82cede2107dc3e829870427b4"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "tool-hook-390x844",
+      "file": "tool-hook-390x844-audio.mp4",
+      "videoSha256": "781b33a2bef545c13ae24c5a1d9f4a6f6a287d6383df22dd925b207548655e26",
+      "bytes": 373423,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 2666.6666666666674,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 81,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "tool-hook-390x844.json",
+      "metadataSha256": "a45f9dc147860eec170785d7b7fcdfb96e283e0ce470724d70561453ed4545d9",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "tool-hook-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 373423,
+          "sha256": "781b33a2bef545c13ae24c5a1d9f4a6f6a287d6383df22dd925b207548655e26"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "tool-dynamite-390x844",
+      "file": "tool-dynamite-390x844-audio.mp4",
+      "videoSha256": "a001de20705a46232f8a1a2664c0c93fa512bc63e39f6dde1b860d3c16cf1413",
+      "bytes": 304383,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 1699.9999999999989,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 52,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "tool-dynamite-390x844.json",
+      "metadataSha256": "44b02db5595d99effbbd52f70b0c7912f4bae90780b90df3af673bfef805e25c",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "tool-dynamite-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 304383,
+          "sha256": "a001de20705a46232f8a1a2664c0c93fa512bc63e39f6dde1b860d3c16cf1413"
+        }
+      ],
+      "finalWin": 0,
+      "selection": "selected recorded acceptance example"
+    },
+    {
+      "id": "ordinary-1440x900",
+      "file": "ordinary-1440x900-audio.mp4",
+      "videoSha256": "16fc9f15cfaf425d3f61893f80d10908067d6b205af0aa076cd64671c0fcd95d",
+      "bytes": 29127286,
+      "viewport": [
+        1440,
+        900
+      ],
+      "durationMs": 51300.00000000087,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 1540,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "ordinary-1440x900.json",
+      "metadataSha256": "538e8e1a766ea9bd21f976e88c5b6d17dbaf42b1b183c9344c58ae7e5057e560",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-000.bin",
+          "bytes": 4194304,
+          "sha256": "ee7434529d3b70f49764a482182f55d9accef89db73c476b4688ab78227a851b"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-001.bin",
+          "bytes": 4194304,
+          "sha256": "7966544478aa322c5e5ed3c49d6aa90472b47440d6b2e46259c897b44ba9688f"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-002.bin",
+          "bytes": 4194304,
+          "sha256": "1f319e0bf7d7c353023cd46d58541c7782dd388d12e0f264d5cfef8ac17e5997"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-003.bin",
+          "bytes": 4194304,
+          "sha256": "0ff8fcce27f894e22332f2209a9d0350477dba59f52e1f6313d7d437637b61d2"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-004.bin",
+          "bytes": 4194304,
+          "sha256": "1e2553a9ab2341e7bbd2c850e71a1670d51eda79bf945b3b0cd4d8c4c40e5a01"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-005.bin",
+          "bytes": 4194304,
+          "sha256": "f645d8f448202a1b9d52eabb40148e8e960294accfd1c464ca43bd58537db95d"
+        },
+        {
+          "file": "ordinary-1440x900-audio.mp4.parts/part-006.bin",
+          "bytes": 3961462,
+          "sha256": "ebbd5a82a95d7bd3758b48d865ed1758db8f48d4bb55ef9c888bde7a1887bd29"
+        }
+      ],
+      "finalWin": 14000,
+      "selection": "unselected predeclared stream"
+    },
+    {
+      "id": "dock-progression-390x844",
+      "file": "dock-progression-390x844-audio.mp4",
+      "videoSha256": "8e1874bfdfd49c1ca0053a4baf6e95d8c74ead696cecd478a7ade101673b71b5",
+      "bytes": 17097151,
+      "viewport": [
+        390,
+        844
+      ],
+      "durationMs": 94199.99999999774,
+      "capture": {
+        "kind": "movie",
+        "fromMs": 0,
+        "toMs": null,
+        "fps": 30,
+        "sampleIntervalMs": null,
+        "semanticPhaseFrames": false,
+        "frames": 2827,
+        "sourceFps": 30
+      },
+      "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+      "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1",
+      "metadata": "dock-progression-390x844.json",
+      "metadataSha256": "7f74a01074e0a9f0da268f6f9d0505c9f86721afb06d3b8f91c9bd25d83e7aea",
+      "metadataStorage": null,
+      "storedParts": [
+        {
+          "file": "dock-progression-390x844-audio.mp4.parts/part-000.bin",
+          "bytes": 4194304,
+          "sha256": "7e6a5047cf909e63fba05ac9b10fda19e9c61c1d75d87f61448fbcaab74f82b4"
+        },
+        {
+          "file": "dock-progression-390x844-audio.mp4.parts/part-001.bin",
+          "bytes": 4194304,
+          "sha256": "0a8bdbac1041c334985402cce6090746c292c90d862f31aebd280c400375aea1"
+        },
+        {
+          "file": "dock-progression-390x844-audio.mp4.parts/part-002.bin",
+          "bytes": 4194304,
+          "sha256": "73da6aa5c950e2ea0a7074a67d502c4c69fd0d44c95bd7607f4228b2a3f9bbfd"
+        },
+        {
+          "file": "dock-progression-390x844-audio.mp4.parts/part-003.bin",
+          "bytes": 4194304,
+          "sha256": "2d252bd0c583b59d08d3448445a0dcb9d80a624f923ee6ae141389a9ef0a86c3"
+        },
+        {
+          "file": "dock-progression-390x844-audio.mp4.parts/part-004.bin",
+          "bytes": 319935,
+          "sha256": "f5a9bd40a74d307235332551ff7d6441d6a28f2850c12503db0279c600efb4ce"
+        }
+      ],
+      "finalWin": 197600,
+      "selection": "selected recorded acceptance example"
+    }
+  ],
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "proofHarnessFingerprint": "cc7d6cfd853bae09b5c2e7aa34810a249656f3dbe30452c44cac3c690a4ff0f1"
+}

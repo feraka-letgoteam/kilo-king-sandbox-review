@@ -1,0 +1,53 @@
+/* Host placement only. The independent module owns all internal layout/paint. */
+.kk-app .kk-shell .kk-modular-controls {
+  position: relative;
+  display: block;
+  min-width: 0;
+  justify-self: center;
+  z-index: 3;
+}
+/* The cabinet is painted OUTSIDE the reel canvas. Keep the entire control row
+   beyond that painted edge; include this space in the shell and pier geometry. */
+.kk-app .kk-shell:not([data-layout="landscape"]) {
+  --cabinet-clearance: 32px;
+  row-gap: var(--cabinet-clearance);
+  height: calc(var(--game-height) + var(--cabinet-clearance));
+}
+.kk-app .kk-shell[data-layout="portrait"] {
+  /* 14px of cabinet paint + 2px of clear separation, not a free-standing gap. */
+  --cabinet-clearance: 16px;
+}
+.kk-app .kk-stage .kk-shell[data-layout="portrait"] .kk-scene-pier {
+  /* End the supporting artwork with the 160px control allocation rather than
+     leaving a decorative 24px shelf below the last row of buttons. */
+  bottom: 0;
+  height: var(--dock-height);
+}
+/* Tiny popouts retain the renderer's own frame. The decorative overhanging
+   surround cannot share the footer's existing 44px readout allocation. */
+.kk-app .kk-shell[data-compact="true"] .kk-stage-surround {
+  display: none;
+}
+.kk-app .kk-shell[data-framing="sides"] .kk-modular-controls {
+  grid-area: 2 / 1 / 3 / -1;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-modular-controls {
+  grid-area: 1 / 1 / 2 / -1;
+  align-self: start;
+  pointer-events: none;
+  z-index: 3;
+}
+/* Preserve the renderer's bonus-landing anchor without inheriting retired dock rules. */
+.kk-app .kk-modular-controls .sc-readout.kk-bonus-win {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  padding: 0 7px;
+}
+.kk-app .kk-modular-controls .sc-readout.kk-bonus-win strong {
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 700;
+}
+.kk-app .kk-shell[data-layout="landscape"] .sc-readout.kk-bonus-win {
+  align-items: flex-start;
+}

@@ -4,11 +4,16 @@ import {
   meterLevel,
   LEVEL_MULT,
   PAYLINES,
+  isPurchaseMode,
   type SplashCell,
   type SplashLine,
   type SplashScript,
+  type SplashDrop,
 } from "@/lib/kilo/engine";
 import { bonusExit, cue, whirStop } from "@/lib/kilo/sound";
+import type { FeatureEvent } from '@/lib/kilo/feature-math';
+import { presentCargoFeature, cargoFinalHud } from './feature-director.ts';
+import { presentReelFeature, reelFeatureFinalHud } from './reel-feature-director.ts';
 
 export type Mood = "idle" | "cast" | "cheer" | "slump";
 export type MeterFace = {
@@ -20,6 +25,8 @@ export type MeterFace = {
   holding: boolean;
 };
 export type FeatureHud = {
+  mechanic?: FeatureEvent;
+  phase?: 'entry';
   active: boolean;
   label: string;
   left: number | null;
@@ -73,6 +80,12 @@ export type SymbolEdge = {
 export type SymbolCompareResult = { rows: SymbolEdge[] };
 
 export interface ReelScene {
+  setBoatStage?(active: boolean): void;
+  reelFeatureStep?(event: FeatureEvent, callbacks: { award: (value: number) => void; state: (state: FeatureEvent) => void; reelsSettled?: Promise<void> }): Promise<void>;
+  setFeatureState?(event:FeatureEvent|null,phase?:'before'|'after'):void;
+  featureStep?(event:FeatureEvent,grid:SplashCell[][]):Promise<void>;
+  featureIntro?(round:SplashScript):Promise<void>;
+  catchRespin?(run:NonNullable<SplashDrop['catchRun']>,grid:SplashCell[][]):Promise<void>;
   setStake(stake: number): void;
   setPace(turbo: boolean, reduced: boolean, speed?: SpinSpeed): void;
   setMood(mood: Mood): void;
@@ -104,7 +117,11 @@ export interface ReelScene {
   show(grid: SplashCell[][]): void;
   /** Marks the restored preview board before the named action. Optional for tests. */
   armPreview?(kind: string): void;
-  highlight(lines: SplashLine[]): Promise<void>;
+  /** Notify when each recorded line first becomes visible; this is display only. */
+  highlight(
+    lines: SplashLine[],
+    onLineStart?: (line: SplashLine, index: number) => void,
+  ): Promise<void>;
   collect(spin: {
     grid: SplashCell[][];
     mult: number;
@@ -153,6 +170,8 @@ export async function presentScript(
   round: SplashScript,
   opts: PresentOpts,
 ) {
+  if(round.version===4)return presentReelFeature(scene,round,opts);
+  if(round.version===3&&round.feature&&round.feature!=='dock')return presentCargoFeature(scene,round,opts);
   scene.setStake(round.stake);
   scene.setPace(opts.turbo, opts.reduced, opts.speed);
   let line = 0,
@@ -164,7 +183,7 @@ export async function presentScript(
     spinCollect = 0;
   let shownWilds: number | null = null;
   const spinBonus = round.mods.includes("extraSpins") ? 2 : 0;
-  const modeLabel =
+  const modeLabel = round.feature==='dock'?'Dockside Catch':
     round.mode === "chopper"
       ? "Chopper"
       : round.mode === "buy"
@@ -201,13 +220,37 @@ export async function presentScript(
       nextMult: shown.nextMult,
       nextSpins: shown.nextSpins,
       holding: shown.holding,
-      bonusWin: Math.max(0, line - triggerLine + collect),
-      triggerWin: triggerLine + scatter,
+      bonusWin: Math.max(0, line - triggerLine + collect-(round.base.collect?.got??0)),
+      triggerWin: triggerLine + scatter+Math.min(collect,round.base.collect?.got??0),
     });
   };
   const interrupted = () => {
     if (!opts.skipped()) return false;
     snap(scene, round, opts);
+    return true;
+  };
+  const presentLines = async (
+    lines: SplashLine[],
+    active: boolean,
+    left: number | null,
+  ) => {
+    const before = line;
+    let revealed = -1;
+    const reveal = (_award: SplashLine, index: number) => {
+      if (index <= revealed || opts.skipped()) return;
+      revealed = index;
+      spinLine = lineSum(lines.slice(0, index + 1));
+      line = before + spinLine;
+      if (!active) triggerLine = spinLine;
+      publish(`Line win ${money(spinLine)}`, active, left);
+    };
+    // Routine acknowledgements stay small; a substantial result earns the
+    // character's larger action. The recorded award and publication stay intact.
+    scene.setMood(lineSum(lines) >= round.stake * 5 ? "cheer" : "idle");
+    await scene.highlight(lines, reveal);
+    if (interrupted()) return false;
+    // Also supports nonvisual scenes that do not emit individual line callbacks.
+    reveal(lines.at(-1)!, lines.length - 1);
     return true;
   };
 
@@ -235,7 +278,8 @@ export async function presentScript(
   scene.setMood("cast");
   publish("Good luck", false, null);
   cue("spin");
-  const pace = round.mode === "buy" || round.mode === "chopper" ? "ordinary" : "landed";
+  scene.setFeatureState?.(null);
+  const pace = isPurchaseMode(round.mode) ? "ordinary" : "landed";
   if (round.base.hook && round.base.primed) {
     await scene.spinTo(round.base.primed, null, pace);
     if (interrupted()) return;
@@ -253,18 +297,18 @@ export async function presentScript(
     if (interrupted()) return;
     publish(round.awarded ? "Third scatter landed" : "No third scatter", false, null);
     await hold(opts, 250);
+  } else if(round.base.catchRun){
+    await scene.spinTo(round.base.catchRun.before,null,pace);
+    if(interrupted())return;
+    publish('Cargo held · one catch respin',false,null);
+    if(scene.catchRespin)await scene.catchRespin(round.base.catchRun,round.base.grid);
+    else await scene.spinTo(round.base.grid,null,'ordinary');
   } else await scene.spinTo(round.base.grid, null, pace);
   if (interrupted()) return;
 
   spinLine = lineSum(round.base.lines);
   if (spinLine > 0) {
-    publish(`Line win ${money(spinLine)}`, false, null);
-    scene.setMood("cheer");
-    await scene.highlight(round.base.lines);
-    if (interrupted()) return;
-    line += spinLine;
-    triggerLine = spinLine;
-    publish(`Line win ${money(spinLine)}`, false, null);
+    if (!(await presentLines(round.base.lines, false, null))) return;
   }
   if (round.base.scatterPay > 0) {
     scatter = round.base.scatterPay;
@@ -273,6 +317,13 @@ export async function presentScript(
     await hold(opts, 350);
   }
   if (interrupted()) return;
+  if(round.base.collect?.got){
+    publish('Dockside Deal',false,null);
+    await scene.collect({grid:round.base.grid,mult:1,got:round.base.collect.got,wilds:round.base.collect.collectors??1});
+    if(interrupted())return;
+    collect+=round.base.collect.got;spinCollect=round.base.collect.got;
+    publish(`Dockside Deal · ${money(spinCollect)}`,false,null);
+  }
   if (!round.free.length) {
     const note = round.capped
       ? `Maximum win · ${money(round.payout)}`
@@ -307,6 +358,7 @@ export async function presentScript(
     spinCollect = 0;
     scene.setMood("cast");
     publish("Free spin", true, remaining);
+    scene.setFeatureState?.(spin.mechanic??null,'before');
     cue("spin");
     if (spin.tool && spin.primed) {
       await scene.spinTo(spin.primed, null);
@@ -316,15 +368,11 @@ export async function presentScript(
       await scene.tool({ ...spin, tool: spin.tool });
     } else await scene.spinTo(spin.grid, null);
     if (interrupted()) return;
+    if(spin.mechanic?.kind==='dock')scene.setFeatureState?.(null);
     const leftBeforeAward = Math.max(0, remaining - 1);
     spinLine = lineSum(spin.lines);
     if (spinLine > 0) {
-      publish(`Line win ${money(spinLine)}`, true, leftBeforeAward);
-      scene.setMood("cheer");
-      await scene.highlight(spin.lines);
-      if (interrupted()) return;
-      line += spinLine;
-      publish(`Line win ${money(spinLine)}`, true, leftBeforeAward);
+      if (!(await presentLines(spin.lines, true, leftBeforeAward))) return;
     }
     if (spin.got > 0) {
       publish(`Collecting at ×${spin.mult}`, true, leftBeforeAward);
@@ -367,6 +415,9 @@ export async function presentScript(
       shownWilds = null;
     }
     if (interrupted()) return;
+    if(spin.mechanic&&spin.got===0&&scene.featureStep&&(spin.mechanic.heldBefore.length||spin.mechanic.heldAfter.length))await scene.featureStep(spin.mechanic,spin.grid);
+    if(interrupted())return;
+    scene.setFeatureState?.(spin.mechanic??null,'after');
     const beforeWilds = wilds;
     wilds += spin.wilds;
     const resultNote = resultPreview(spin, spinLine);
@@ -417,6 +468,7 @@ function snap(scene: ReelScene, round: SplashScript, opts: PresentOpts) {
   bonusExit();
   const hud = finalHud(round);
   scene.show(round.free.at(-1)?.grid ?? round.base.grid);
+  scene.setFeatureState?.(round.free.at(-1)?.mechanic??null,'after');
   scene.setLocks([]);
   scene.setTally({
     line: hud.line,
@@ -432,10 +484,12 @@ function snap(scene: ReelScene, round: SplashScript, opts: PresentOpts) {
 
 /** The settled ledger. Skip and a thrown animation both land here. */
 export function finalHud(round: SplashScript): FeatureHud {
+  if(round.version===4)return reelFeatureFinalHud(round);
+  if(round.version===3&&round.feature&&round.feature!=='dock')return cargoFinalHud(round);
   const line =
     lineSum(round.base.lines) +
     round.free.reduce((n, spin) => n + lineSum(spin.lines), 0);
-  const collect = round.free.reduce((n, spin) => n + spin.got, 0);
+  const collect = (round.base.collect?.got??0)+round.free.reduce((n, spin) => n + spin.got, 0);
   const wilds =
     round.banked + round.free.reduce((n, spin) => n + spin.wilds, 0);
   const active = round.free.length > 0;
@@ -464,8 +518,8 @@ export function finalHud(round: SplashScript): FeatureHud {
       wilds,
       round.mods.includes("extraSpins") ? 2 : 0,
     ),
-    bonusWin: Math.max(0, line - lineSum(round.base.lines) + collect),
-    triggerWin: lineSum(round.base.lines) + round.base.scatterPay,
+    bonusWin: Math.max(0, line - lineSum(round.base.lines) + collect-(round.base.collect?.got??0)),
+    triggerWin: lineSum(round.base.lines) + round.base.scatterPay+(round.base.collect?.got??0),
   };
 }
 
@@ -1155,7 +1209,7 @@ export function announcementFace(
 
 /** What the completion panel may say. Continue never charges or credits. */
 export function featureSummary(round: SplashScript) {
-  const purchased = round.mode === "buy" || round.mode === "chopper";
+  const purchased = isPurchaseMode(round.mode);
   return {
     feature: round.free.length > 0,
     payout: round.payout,
@@ -1178,7 +1232,7 @@ export function spinControl(state: {
   if (!state.ready) return { label: "LOADING", purchase: false };
   if (state.busy) return { label: "SKIP", purchase: false };
   if (state.summary) return { label: "SPIN", purchase: false };
-  if (state.mode === "buy" || state.mode === "chopper")
+  if (isPurchaseMode(state.mode))
     return { label: `BUY ${money(state.cost)}`, purchase: true };
   return { label: "SPIN", purchase: false };
 }

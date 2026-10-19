@@ -1,0 +1,46 @@
+/* Decorative continuation of the marina, outside the accepted game rectangle.
+   The pseudo-element never enters grid flow, owns no interaction, and clips
+   all artwork below the complete 160px control allocation. */
+@media (max-width: 620px) and (orientation: portrait) {
+  .kk-app .kk-stage .kk-shell[data-layout="portrait"]::after {
+    content: "";
+    --framing-clearance: 4px;
+    position: absolute;
+    /* Clamp the zero-height plane to the viewport on short devices, so even
+       its positioning box cannot add a new scrollable overflow. */
+    top: min(
+      calc(100% + var(--framing-clearance)),
+      calc(100dvh - var(--review-height) - max(12px, env(safe-area-inset-top)))
+    );
+    left: 50%;
+    width: 100vw;
+    --framing-height: max(
+      0px,
+      calc(
+        100dvh - var(--review-height) - max(12px, env(safe-area-inset-top)) -
+          var(--game-height) - var(--cabinet-clearance) -
+          var(--framing-clearance)
+      )
+    );
+    height: var(--framing-height);
+    transform: translateX(-50%);
+    overflow: clip;
+    contain: paint;
+    pointer-events: none;
+    z-index: 0;
+    /* The square asset has a transparent upper quarter. Crop that air rather
+       than inserting a second water gap, preserving the artwork's aspect ratio.
+       The full-width near timber continues off the bottom of the viewport. */
+    background-image: url("/kilo-portrait-v40/dock-continuation.webp");
+    background-position: center bottom;
+    background-size: max(100vw, calc(var(--framing-height) / 0.74)) auto;
+    background-repeat: no-repeat;
+  }
+  /* The yacht plate already includes its full-height teak foreground. Avoid
+     placing a second, differently lit dock over that continuous perspective. */
+  .kk-app[data-environment="scatter-4"]
+    .kk-stage
+    .kk-shell[data-layout="portrait"]::after {
+    background-image: none;
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Source ZIP</title>
+  </head>
+  <body>
+    <p id="status">Preparing the archive…</p>
+    <script>
+      const file = "kilo-king-corrected-source.zip";
+      const url = new URL(file, location.href).href;
+      const status = document.getElementById("status");
+      fetch(url)
+        .then((response) => {
+          if (!response.ok) throw new Error("The archive was not found");
+          return response.blob();
+        })
+        .then((blob) => {
+          const anchor = document.createElement("a");
+          anchor.href = URL.createObjectURL(blob);
+          anchor.download = file;
+          anchor.click();
+          status.textContent = "Save started.";
+        })
+        .catch((error) => {
+          status.textContent = error instanceof Error ? error.message : "Save failed";
+        });
+    </script>
+  </body>
+</html>

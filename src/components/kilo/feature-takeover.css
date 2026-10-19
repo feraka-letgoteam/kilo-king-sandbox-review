@@ -1,0 +1,174 @@
+/* v58: illustrated feature deck. One layout each for desktop, portrait and short landscape. */
+#kilo-features-takeover.kk-modal-root { position:fixed; inset:0; z-index:150; display:block; padding:0; background:rgba(24,27,30,.84); backdrop-filter:blur(12px); color:#fff8ed; }
+#kilo-features-takeover .kk-scrim { background:rgba(24,27,30,.84); backdrop-filter:blur(12px); }
+#kilo-features-takeover .kk-feature-takeover { position:relative; display:block; width:100%; max-width:none; height:100dvh; max-height:none; margin:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; transform:none; text-align:center; text-shadow:none; font:600 16px/1.35 'Source Sans 3',sans-serif; font-variant-numeric:tabular-nums; }
+#kilo-features-takeover * { box-sizing:border-box; }
+#kilo-features-takeover button { cursor:pointer; font:inherit; text-shadow:none; }
+#kilo-features-takeover button:disabled { cursor:default; opacity:1; filter:none; }
+#kilo-features-takeover :is(button,[tabindex]):focus-visible { outline:2px solid #b5f3e5; outline-offset:3px; }
+#kilo-features-takeover :is(h1,h2) { margin:0; color:#fff8ed; font:800 30px/1 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+#kilo-features-takeover .kf-shell { width:min(100%,1020px); height:100%; margin:auto; padding:max(18px,env(safe-area-inset-top)) 24px max(18px,env(safe-area-inset-bottom)); display:flex; flex-direction:column; justify-content:center; gap:14px; }
+#kilo-features-takeover .kf-header { position:relative; display:flex; align-items:center; justify-content:center; flex:0 0 44px; }
+#kilo-features-takeover .kf-header h1 { font-size:24px; letter-spacing:.06em; }
+#kilo-features-takeover :is(.kf-close,.kf-back) { position:absolute; top:0; width:44px; height:44px; display:grid; place-items:center; border:1px solid #7d898a; border-radius:50%; background:#111b21; color:#fff8ed; padding:10px; box-shadow:none; }
+#kilo-features-takeover .kf-close { right:0; } #kilo-features-takeover .kf-back { left:0; }
+#kilo-features-takeover :is(.kf-close,.kf-back) svg { width:22px; height:22px; stroke-width:3; }
+#kilo-features-takeover .kf-content { position:relative; width:100%; min-height:0; overflow:auto; overscroll-behavior:contain; outline:none; }
+#kilo-features-takeover .kf-catalogue { display:grid; gap:12px; }
+#kilo-features-takeover .kf-ante { display:grid; grid-template-columns:120px 1fr auto 132px; align-items:center; gap:18px; min-height:88px; padding:4px 18px 4px 0; background:#153b39; border:1px solid #558c7b; border-radius:14px; text-align:left; overflow:hidden; }
+#kilo-features-takeover .kf-ante-emblem { height:88px; overflow:hidden; background:#22514b; transform:skewX(-7deg); }
+#kilo-features-takeover .kf-ante-emblem img { width:138px; height:102px; object-fit:contain; transform:skewX(7deg) translate(-8px,-6px); }
+#kilo-features-takeover .kf-ante-copy { display:flex; flex-direction:column; gap:2px; }
+#kilo-features-takeover .kf-ante-copy strong { font:800 28px/29px 'Barlow Condensed',sans-serif; text-transform:uppercase; }
+#kilo-features-takeover .kf-ante-copy span { font-size:14px; line-height:18px; color:#e0ede7; }
+#kilo-features-takeover .kf-ante-cost { display:flex; flex-direction:column; text-align:right; }
+#kilo-features-takeover .kf-ante-cost strong { font-size:24px; line-height:26px; color:#fff8ed; }
+#kilo-features-takeover .kf-ante-cost span { font-size:12px; color:#c8ddd4; }
+#kilo-features-takeover .kf-ante-toggle { min-height:44px; padding:8px 14px; border:1px solid #b1eed8; border-radius:22px; background:#8ce3bd; color:#09231e; font-weight:800; text-transform:uppercase; }
+#kilo-features-takeover .kf-ante-toggle[aria-pressed=true] { background:#09231e; color:#b1eed8; }
+#kilo-features-takeover .kf-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+#kilo-features-takeover .kf-card { --card-paint:#1d5851; position:relative; display:grid; grid-template-rows:202px minmax(97px,auto) auto; min-width:0; padding:0 18px 18px; border:1px solid #4f6663; border-radius:15px; background:#182124; box-shadow:0 4px 0 #060d10; overflow:hidden; }
+#kilo-features-takeover .kf-card[data-feature=yacht] { --card-paint:#8e4930; border-color:#8c6547; background:#292021; }
+#kilo-features-takeover .kf-card[data-feature=getaway] { --card-paint:#234575; border-color:#6b778b; background:#1a2132; }
+#kilo-features-takeover .kf-art-wrap { position:relative; min-width:0; margin:0 -18px; overflow:hidden; background:var(--card-paint); isolation:isolate; }
+#kilo-features-takeover .kf-art-wrap::before { content:''; position:absolute; inset:0; background:linear-gradient(150deg,#fff0 35%,#070e17b8); z-index:-1; }
+#kilo-features-takeover .kf-art { display:block; width:112%; height:200px; margin-left:-6%; object-fit:contain; object-position:center 38%; }
+#kilo-features-takeover .kf-art-title { position:absolute; left:0; right:0; bottom:-2px; font:900 66px/.95 'Barlow Condensed',sans-serif; font-style:italic; letter-spacing:-.03em; color:var(--feature-accent); -webkit-text-stroke:1px #091318; text-shadow:0 4px 0 #081015; transform:rotate(-3deg); }
+#kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { height:172px; }
+#kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:84px; letter-spacing:.01em; }
+#kilo-features-takeover .kf-duel-art { position:absolute; inset:0; }
+#kilo-features-takeover .kf-duel-art img { position:absolute; width:83%; height:100%; object-fit:contain; bottom:-2px; }
+#kilo-features-takeover .kf-duel-art img:first-child { left:-12%; }
+#kilo-features-takeover .kf-duel-art img:last-child { right:-12%; }
+#kilo-features-takeover .kf-card-copy { align-self:start; min-width:0; padding-top:13px; }
+#kilo-features-takeover .kf-kicker { display:block; color:var(--feature-accent,#8ce3d0); font:800 11px/14px 'Source Sans 3',sans-serif; letter-spacing:.08em; margin:0 0 3px; }
+#kilo-features-takeover .kf-card h2 { font-size:28px; line-height:29px; }
+#kilo-features-takeover .kf-summary { margin:7px 0 0; color:#f0ede7; font-size:15px; line-height:19px; }
+#kilo-features-takeover .kf-warning { color:#fff0be; }
+#kilo-features-takeover .kf-purchase-row { display:grid; gap:8px; align-self:end; padding-top:14px; }
+#kilo-features-takeover .kf-price { display:flex; flex-direction:column; gap:1px; justify-content:center; }
+#kilo-features-takeover .kf-price strong { color:#fff8ed; font:800 28px/30px 'Source Sans 3',sans-serif; }
+#kilo-features-takeover .kf-price span { color:#c8d1cd; font-size:12px; line-height:15px; }
+#kilo-features-takeover .kf-action { display:flex; align-items:center; justify-content:center; width:100%; min-height:46px; padding:8px 12px; border:1px solid #f7e4b6; border-radius:24px; background:var(--feature-accent,#d9bd79); color:#101b1c; font:900 17px/19px 'Barlow Condensed',sans-serif; text-transform:uppercase; box-shadow:inset 0 2px 0 #fff4ce60,0 2px 0 #060d10; }
+#kilo-features-takeover .kf-action:disabled { background:#242d31; border-color:#a59875; color:#f4e0b7; box-shadow:none; font:700 13px/16px 'Source Sans 3',sans-serif; text-transform:none; }
+#kilo-features-takeover .kf-reason { margin:0; grid-column:2/-1; font-size:13px; color:#ffe0a4; }
+#kilo-features-takeover .kf-footnote { margin:0; color:#c8d2cf; font-size:12px; line-height:16px; }
+#kilo-features-takeover .kf-footer { display:flex; align-items:center; justify-content:center; gap:28px; flex:0 0 52px; }
+#kilo-features-takeover .kf-wallet { display:flex; flex-direction:column; align-items:flex-end; font-size:19px; line-height:23px; }
+#kilo-features-takeover .kf-wallet span { font-size:11px; line-height:15px; color:#c0ceca; text-transform:uppercase; }
+#kilo-features-takeover .kf-bet { display:grid; grid-template-columns:44px minmax(80px,auto) 44px; align-items:center; gap:8px; }
+#kilo-features-takeover .kf-bet button { min-width:44px; min-height:44px; display:flex; flex-direction:column; justify-content:center; align-items:center; border:1px solid #788d8b; border-radius:50%; background:#0c181f; color:#fff8ed; padding:0 4px; box-shadow:none; }
+#kilo-features-takeover .kf-bet .kf-bet-value { border:0; border-radius:0; background:transparent; }
+#kilo-features-takeover .kf-bet svg { width:20px; height:20px; stroke-width:3; }
+#kilo-features-takeover .kf-bet-value span { font-size:12px; color:#d1dcd7; line-height:16px; text-transform:uppercase; }
+#kilo-features-takeover .kf-bet-value strong { font-size:24px; line-height:27px; }
+#kilo-features-takeover .kf-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+/* Confirmation retains the selected illustration and dims only the catalogue. */
+#kilo-features-takeover [data-confirming=true] .kf-content { overflow:auto; display:grid; }
+#kilo-features-takeover [data-confirming=true] .kf-content > * { grid-area:1/1; }
+#kilo-features-takeover [data-confirming=true] .kf-catalogue { opacity:.18; filter:blur(4px); pointer-events:none; }
+#kilo-features-takeover .kf-confirm-shade { position:relative; display:flex; align-items:center; justify-content:center; background:#0c11188c; }
+#kilo-features-takeover .kf-confirm { width:min(100%,350px); display:grid; gap:12px; padding:0 22px 14px; border:1px solid #9a9279; border-radius:15px; background:#18232b; box-shadow:0 8px 20px #0005; overflow:hidden; }
+#kilo-features-takeover .kf-confirm-hero { height:140px; margin:0 -22px; background:#294852; }
+#kilo-features-takeover .kf-confirm-art { display:block; width:100%; height:150px; object-fit:contain; }
+#kilo-features-takeover .kf-confirm-copy h2 { font-size:30px; }
+#kilo-features-takeover .kf-confirm-copy .kf-summary { font-size:14px; line-height:18px; }
+#kilo-features-takeover .kf-confirm-detail { font-size:13px; line-height:17px; margin:8px 0 0; color:#d9e1dc; }
+#kilo-features-takeover .kf-confirm-wallet { display:grid; gap:4px; margin:0; padding:10px 12px; border-radius:7px; background:#08141b; font-size:13px; line-height:18px; }
+#kilo-features-takeover .kf-confirm-wallet > div { display:flex; justify-content:space-between; gap:12px; }
+#kilo-features-takeover .kf-confirm-wallet dt { color:#bdcec7; } #kilo-features-takeover .kf-confirm-wallet dd { margin:0; font-weight:800; color:#fff8ed; }
+#kilo-features-takeover .kf-confirm-cost { margin-top:4px; padding-top:6px; border-top:1px solid #485249; font-size:20px; line-height:23px; }
+#kilo-features-takeover .kf-confirm-note { margin:0 0 8px; color:#d6e1db; font-size:12px; line-height:16px; }
+#kilo-features-takeover .kf-cancel { min-height:44px; width:100%; border:0; background:transparent; color:#e3eee8; box-shadow:none; margin-top:2px; }
+@media(max-width:600px) and (min-height:501px) {
+  #kilo-features-takeover .kf-shell { padding:max(8px,env(safe-area-inset-top)) 12px max(8px,env(safe-area-inset-bottom)); gap:9px; }
+  #kilo-features-takeover .kf-header h1 { font-size:22px; }
+  #kilo-features-takeover .kf-catalogue { gap:9px; }
+  #kilo-features-takeover .kf-ante { grid-template-columns:57px 1fr 82px; gap:8px; min-height:76px; padding:6px 8px 6px 0; border-radius:11px; }
+  #kilo-features-takeover .kf-ante-emblem { grid-row:1/3; height:62px; }
+  #kilo-features-takeover .kf-ante-emblem img { width:88px; height:69px; transform:skewX(7deg) translate(-18px,0); }
+  #kilo-features-takeover .kf-ante-copy strong { font-size:22px; line-height:23px; }
+  #kilo-features-takeover .kf-ante-copy span { font-size:11px; line-height:14px; }
+  #kilo-features-takeover .kf-ante-cost { grid-column:2; grid-row:2; flex-direction:row; gap:5px; align-items:baseline; }
+  #kilo-features-takeover .kf-ante-cost strong { font-size:17px; line-height:19px; }
+  #kilo-features-takeover .kf-ante-cost span { font-size:11px; }
+  #kilo-features-takeover .kf-ante-toggle { grid-column:3; grid-row:1/3; padding:6px; font-size:12px; }
+  #kilo-features-takeover .kf-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+  #kilo-features-takeover .kf-card { grid-template-rows:104px minmax(89px,auto) auto; padding:0 10px 10px; border-radius:12px; }
+  #kilo-features-takeover .kf-art-wrap { margin:0 -10px; }
+  #kilo-features-takeover .kf-art { height:102px; width:122%; margin-left:-11%; }
+  #kilo-features-takeover .kf-art-title { font-size:43px; bottom:0; }
+  #kilo-features-takeover .kf-card-copy { padding-top:8px; }
+  #kilo-features-takeover .kf-kicker { font-size:10px; line-height:12px; margin-bottom:3px; letter-spacing:.03em; }
+  #kilo-features-takeover .kf-card h2 { font-size:23px; line-height:24px; }
+  #kilo-features-takeover .kf-summary { margin-top:5px; font-size:12px; line-height:15px; }
+  #kilo-features-takeover .kf-purchase-row { gap:7px; padding-top:8px; }
+  #kilo-features-takeover .kf-price strong { font-size:22px; line-height:24px; }
+  #kilo-features-takeover .kf-price span { font-size:10px; line-height:13px; }
+  #kilo-features-takeover .kf-action { min-height:44px; font-size:16px; padding:6px 8px; }
+  #kilo-features-takeover .kf-action:disabled { font-size:11px; line-height:14px; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] { grid-column:1/-1; grid-template-columns:42% 1fr; grid-template-rows:auto auto; gap:0 12px; padding:10px; text-align:left; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-wrap { grid-row:1/3; margin:-10px 0 -10px -10px; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { position:absolute; inset:4px auto auto -10px; width:148%; height:112px; margin:0; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:54px; bottom:12px; text-align:center; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-card-copy { padding-top:0; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-purchase-row { padding-top:7px; gap:6px; }
+  #kilo-features-takeover .kf-footnote { font-size:11px; line-height:15px; }
+  #kilo-features-takeover .kf-footer { gap:12px; flex-basis:50px; }
+  #kilo-features-takeover .kf-wallet { font-size:17px; line-height:21px; }
+  #kilo-features-takeover .kf-wallet span { font-size:10px; }
+  #kilo-features-takeover .kf-bet { grid-template-columns:44px minmax(70px,auto) 44px; gap:4px; }
+  #kilo-features-takeover .kf-bet-value strong { font-size:22px; line-height:25px; }
+}
+@media(max-height:500px) {
+  #kilo-features-takeover .kf-shell { width:min(100%,1060px); padding:6px 16px; gap:5px; }
+  #kilo-features-takeover .kf-header { flex-basis:44px; }
+  #kilo-features-takeover .kf-header h1 { font-size:22px; }
+  #kilo-features-takeover .kf-catalogue { grid-template-columns:170px 1fr; gap:8px; align-items:stretch; }
+  #kilo-features-takeover .kf-ante { grid-template-columns:1fr; grid-template-rows:66px auto auto 44px; gap:4px; padding:8px; text-align:center; align-content:center; border-radius:12px; }
+  #kilo-features-takeover .kf-ante-emblem { height:66px; width:100%; transform:none; background:transparent; }
+  #kilo-features-takeover .kf-ante-emblem img { width:100%; height:76px; transform:translateY(-5px); }
+  #kilo-features-takeover .kf-ante-copy strong { font-size:22px; line-height:23px; }
+  #kilo-features-takeover .kf-ante-copy span { font-size:11px; line-height:14px; }
+  #kilo-features-takeover .kf-ante-cost { text-align:center; }
+  #kilo-features-takeover .kf-ante-cost strong { font-size:20px; line-height:22px; }
+  #kilo-features-takeover .kf-ante-cost span { font-size:11px; line-height:13px; }
+  #kilo-features-takeover .kf-ante-toggle { font-size:13px; min-height:44px; padding:6px; }
+  #kilo-features-takeover .kf-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  #kilo-features-takeover .kf-card { grid-template-rows:74px minmax(77px,auto) auto; padding:0 10px 9px; border-radius:12px; }
+  #kilo-features-takeover .kf-art-wrap { margin:0 -10px; }
+  #kilo-features-takeover .kf-art { height:82px; width:100%; margin:0; }
+  #kilo-features-takeover .kf-art-title { font-size:35px; bottom:-1px; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { height:72px; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:42px; }
+  #kilo-features-takeover .kf-card-copy { padding-top:6px; }
+  #kilo-features-takeover .kf-kicker { font-size:9px; line-height:11px; margin-bottom:2px; }
+  #kilo-features-takeover .kf-card h2 { font-size:22px; line-height:23px; }
+  #kilo-features-takeover .kf-summary { font-size:11px; line-height:14px; margin-top:4px; }
+  #kilo-features-takeover .kf-purchase-row { padding-top:5px; gap:5px; }
+  #kilo-features-takeover .kf-price strong { font-size:21px; line-height:23px; }
+  #kilo-features-takeover .kf-price span { font-size:10px; line-height:12px; }
+  #kilo-features-takeover .kf-action { min-height:44px; font-size:15px; line-height:16px; padding:6px; }
+  #kilo-features-takeover .kf-action:disabled { font-size:11px; line-height:13px; }
+  #kilo-features-takeover .kf-footnote { grid-column:1/-1; font-size:10px; line-height:12px; }
+  #kilo-features-takeover .kf-footer { flex-basis:44px; }
+  #kilo-features-takeover .kf-wallet { font-size:17px; line-height:20px; }
+  #kilo-features-takeover .kf-bet-value strong { font-size:20px; line-height:22px; }
+  #kilo-features-takeover .kf-confirm { width:min(100%,690px); grid-template-columns:160px 1fr; gap:8px 16px; padding:12px 16px; text-align:left; }
+  #kilo-features-takeover .kf-confirm-hero { grid-column:1; grid-row:1/4; align-self:stretch; display:flex; align-items:center; height:auto; margin:-12px 0 -12px -16px; }
+  #kilo-features-takeover .kf-confirm-art { width:100%; height:150px; }
+  #kilo-features-takeover .kf-confirm-copy h2 { font-size:24px; }
+  #kilo-features-takeover .kf-confirm-detail { font-size:12px; line-height:15px; margin-top:5px; }
+  #kilo-features-takeover .kf-confirm-copy .kf-summary { font-size:12px; line-height:15px; }
+  #kilo-features-takeover .kf-confirm-wallet { grid-column:2; padding:6px 10px; font-size:12px; line-height:15px; }
+  #kilo-features-takeover .kf-confirm-cost { font-size:17px; line-height:20px; margin-top:0; padding-top:4px; }
+  #kilo-features-takeover .kf-confirm-actions { grid-column:2; display:grid; grid-template-columns:1fr 70px; gap:4px 8px; }
+  #kilo-features-takeover .kf-confirm-note { grid-column:1/-1; font-size:11px; line-height:14px; margin:0; }
+  #kilo-features-takeover .kf-cancel { margin:0; }
+}
+@media(prefers-reduced-motion:no-preference) {
+  #kilo-features-takeover [data-reduced=false] .kf-card { animation:kf-deck-in 200ms ease-out both; }
+  #kilo-features-takeover [data-reduced=false] .kf-card:nth-child(2) { animation-delay:35ms; }
+  #kilo-features-takeover [data-reduced=false] .kf-card:nth-child(3) { animation-delay:70ms; }
+  @keyframes kf-deck-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+}

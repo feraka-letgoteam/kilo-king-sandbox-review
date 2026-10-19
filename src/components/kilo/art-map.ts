@@ -1,18 +1,20 @@
 /** Artwork only. Keep the current engine, result script, bank and settlement. */
 export const ART_ROOT = "/kilo-night-v3/";
 export const ART = {
-  "10": "sym-10.png",
-  J: "sym-j.png",
-  Q: "sym-q.png",
-  K: "sym-k.png",
-  A: "sym-a.png",
-  cuffs: "sym-bobber.png",
-  keys: "sym-can.png",
-  lamp: "sym-reel.png",
-  duffel: "sym-case.png",
-  brick: "sym-bass.png",
-  bars: "sym-scatter.png",
-  splash: "sym-wild.png",
+  // Restore the approved open letter silhouettes and their original colors.
+  // The shared illustrated win motion still gives these a short squash/settle.
+  "10": "/kilo-symbols-v47/sym-10.webp",
+  "J": "/kilo-symbols-v47/sym-j.webp",
+  "Q": "/kilo-symbols-v47/sym-q.webp",
+  "K": "/kilo-symbols-v47/sym-k.webp",
+  "A": "/kilo-symbols-v47/sym-a.webp",
+  "cuffs": "/kilo-v79/symbols/sym-bobber.webp",
+  "keys": "/kilo-v79/symbols/sym-cash-roll.webp",
+  "lamp": "/kilo-v79/symbols/sym-reel-v8.webp",
+  "duffel": "/kilo-v79/symbols/sym-case-v8.webp",
+  "brick": "/kilo-v79/symbols/package-small.webp",
+  "bars": "/kilo-v79/symbols/scatter-king.webp",
+  "splash": "/kilo-v79/characters/collector-idle.webp",
 } as const;
 export const HERO = {
   idle: "hero-idle.png",
@@ -33,16 +35,16 @@ export const SOURCE_SLICES = {
   panel: { width: 900, height: 600, left: 80, top: 80, right: 80, bottom: 80 },
 } as const;
 export const TOOL_PIVOTS = {
-  hook: { file: "tool-hook.png", width: 512, height: 768, x: 256, y: 48 },
+  hook: { file: "/kilo-v79/symbols/tool-hook.webp", width: 512, height: 768, x: 256, y: 48 },
   dynamite: {
-    file: "tool-dynamite.png",
+    file: "/kilo-v79/symbols/tool-dynamite.webp",
     width: 512,
     height: 512,
     x: 256,
     y: 256,
   },
   bazooka: {
-    file: "tool-bazooka.png",
+    file: "/kilo-v79/symbols/tool-bazooka.webp",
     width: 768,
     height: 384,
     x: 700,
@@ -57,15 +59,15 @@ export const HERO_BASELINE = {
 } as const;
 /** Visible alpha bounds as left, top, right, bottom on the 1024 canvas. Bass and wild use the full canvas. */
 export const SYMBOL_ALPHA: Record<string, [number, number, number, number]> = {
-  "10": [82, 200, 942, 823],
-  J: [117, 82, 907, 942],
-  Q: [82, 109, 942, 915],
-  K: [82, 161, 942, 863],
-  A: [82, 150, 942, 874],
-  cuffs: [145, 82, 879, 942],
-  keys: [191, 82, 833, 942],
+  "10": [148, 201, 876, 822],
+  J: [119, 132, 906, 892],
+  Q: [102, 110, 922, 913],
+  K: [143, 162, 883, 862],
+  A: [136, 151, 889, 872],
+  cuffs: [160, 66, 877, 964],
+  keys: [170, 243, 840, 791],
   lamp: [82, 138, 942, 886],
   duffel: [82, 110, 942, 914],
   bars: [82, 196, 942, 827],
 };
-export const artUrl = (file: string) => ART_ROOT + file;
+export const artUrl = (file: string) => file.startsWith('/') ? file : ART_ROOT + file;

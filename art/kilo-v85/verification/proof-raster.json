@@ -1,0 +1,8 @@
+{
+  "maxAlpha": 102,
+  "expectedAlpha": 102,
+  "opaqueInteriorPixels": 816,
+  "supersampled": true,
+  "alphaAppliedOnce": true,
+  "method": "Production display-list mesh fields rasterized by the offline CPU proof painter. Capture regression only; not GPU evidence."
+}

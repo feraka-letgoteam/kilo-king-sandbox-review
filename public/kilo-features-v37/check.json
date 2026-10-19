@@ -1,0 +1,646 @@
+{
+  "version": "v37",
+  "checkpoint": "59601c744bbfa7cafe43925eecc6d99a00c1f2d1",
+  "verification": "Production CSS cascade, React markup, exact layout rectangles and actual confirmation closure. No browser screenshots or live interaction proof.",
+  "cssFile": "dist/assets/review-XG3IDqe8.css",
+  "cssSha256": "db2e9dad6e2615a6b42d7e88375b3a2341f0c756040710e76ec22f1e1803b8aa",
+  "protectedSources": {
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/kilo/control-model.ts": "0fb93db011808cf45436fc5e81e4cf68ac95e0249f25f3fd228469752085fa34",
+    "src/components/kilo/feature-catalog.ts": "662378f26babc78e06243c2264f93a3465742dbdf8e254e14b096471ebbbcb3e",
+    "src/components/kilo/auto-spins.ts": "579da984beea904bfe24d093b74d9a737026af0c8afaff44018ab5909ce3a3c4",
+    "src/components/kilo/control-panels.tsx": "14abeaf8f0d16b9e594b1e4fc4fd0734ceb012f138f3d15c18534772785c4eb8",
+    "src/components/kilo/control-overlays.tsx": "da7f7b20ef540f968516233a9fbd2f1b69a28255ee7964fd0774afd464bb3134",
+    "src/components/kilo/info-panel.tsx": "f7ab30144a50c0dfe11a43cbb63ca45d5e5ef33c3bf10809d25c2b65ee02d350",
+    "src/components/kilo/info-panel.css": "2ece83bcdeca6d5b981d9e082e7f432ad565522780c235a0b79b1ab6346c62e1",
+    "src/components/kilo/play.tsx": "d1af8ae3a7d28eddf6c62dc6c87c27a622b9d1d07b5fec3fd636df739e63b5d4",
+    "src/components/slot-controls/layout.ts": "d4ea656d45bf3ea7844000fe23170e17dc0e7bea918187fe29a1d7300199815d",
+    "src/components/slot-controls/controls.css": "cb727827231878d04e8ca578b69842e8271be7d90dc3d802a3aec0f3174e815f",
+    "src/components/kilo/modular-controls.css": "1db3f755d504bcfc4c32875171a8d1ceb282d4cbb38df1e49ed1891165cf1822"
+  },
+  "purchaseChecks": 22,
+  "featureCaseCount": 27,
+  "featureLayout": [
+    {
+      "headingSize": 22,
+      "priceSize": 28,
+      "actionSize": 15,
+      "viewport": [
+        1440,
+        900
+      ],
+      "gridWidth": 620,
+      "cardWidth": 304,
+      "gridGap": 12,
+      "cardMinHeight": 348,
+      "artHeight": 124,
+      "scrollTop": 80,
+      "closeTarget": [
+        52,
+        52
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    },
+    {
+      "headingSize": 18,
+      "priceSize": 23,
+      "actionSize": 14,
+      "viewport": [
+        390,
+        844
+      ],
+      "gridWidth": 366,
+      "cardWidth": 178,
+      "gridGap": 10,
+      "cardMinHeight": 276,
+      "artHeight": 94,
+      "scrollTop": 68,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    },
+    {
+      "headingSize": 18,
+      "priceSize": 23,
+      "actionSize": 14,
+      "viewport": [
+        360,
+        800
+      ],
+      "gridWidth": 336,
+      "cardWidth": 163,
+      "gridGap": 10,
+      "cardMinHeight": 276,
+      "artHeight": 94,
+      "scrollTop": 68,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    },
+    {
+      "headingSize": 22,
+      "priceSize": 28,
+      "actionSize": 15,
+      "viewport": [
+        844,
+        390
+      ],
+      "gridWidth": 620,
+      "cardWidth": 304,
+      "gridGap": 12,
+      "cardMinHeight": 300,
+      "artHeight": 100,
+      "scrollTop": 64,
+      "closeTarget": [
+        44,
+        44
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    },
+    {
+      "headingSize": 22,
+      "priceSize": 28,
+      "actionSize": 15,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "gridWidth": 620,
+      "cardWidth": 304,
+      "gridGap": 12,
+      "cardMinHeight": 348,
+      "artHeight": 124,
+      "scrollTop": 80,
+      "closeTarget": [
+        52,
+        52
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    },
+    {
+      "headingSize": 22,
+      "priceSize": 28,
+      "actionSize": 15,
+      "viewport": [
+        1180,
+        660
+      ],
+      "gridWidth": 620,
+      "cardWidth": 304,
+      "gridGap": 12,
+      "cardMinHeight": 348,
+      "artHeight": 124,
+      "scrollTop": 80,
+      "closeTarget": [
+        52,
+        52
+      ],
+      "columns": 2,
+      "overflow": "vertical when required"
+    }
+  ],
+  "controlLayout": [
+    {
+      "previousBarWidth": 1182.7200000000003,
+      "screenWidthPercent": 76.3,
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 0,
+      "variant": "desktop",
+      "reel": [
+        888,
+        534.9397590361446
+      ],
+      "dock": [
+        1408,
+        128
+      ],
+      "barWidth": 1098.2399999999998,
+      "spin": {
+        "x": 1053.12,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "bet": {
+        "x": 769.12,
+        "y": 20,
+        "w": 196,
+        "h": 88
+      },
+      "numericWell": {
+        "x": 310.88,
+        "y": 20,
+        "w": 213.12,
+        "h": 88
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 1182.7200000000003,
+      "screenWidthPercent": 76.3,
+      "viewport": [
+        1440,
+        900
+      ],
+      "reviewHeight": 44,
+      "variant": "desktop",
+      "reel": [
+        888,
+        534.9397590361446
+      ],
+      "dock": [
+        1408,
+        128
+      ],
+      "barWidth": 1098.2399999999998,
+      "spin": {
+        "x": 1053.12,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "bet": {
+        "x": 769.12,
+        "y": 20,
+        "w": 196,
+        "h": 88
+      },
+      "numericWell": {
+        "x": 310.88,
+        "y": 20,
+        "w": 213.12,
+        "h": 88
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 332,
+      "screenWidthPercent": 85.1,
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 0,
+      "variant": "portrait",
+      "reel": [
+        366,
+        220.4819277108434
+      ],
+      "dock": [
+        366,
+        160
+      ],
+      "barWidth": 332,
+      "spin": {
+        "x": 135,
+        "y": 56,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 15,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 15,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": true
+    },
+    {
+      "previousBarWidth": 332,
+      "screenWidthPercent": 85.1,
+      "viewport": [
+        390,
+        844
+      ],
+      "reviewHeight": 44,
+      "variant": "portrait",
+      "reel": [
+        366,
+        220.4819277108434
+      ],
+      "dock": [
+        366,
+        160
+      ],
+      "barWidth": 332,
+      "spin": {
+        "x": 135,
+        "y": 56,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 15,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 15,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": true
+    },
+    {
+      "previousBarWidth": 332,
+      "screenWidthPercent": 92.2,
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 0,
+      "variant": "portrait",
+      "reel": [
+        336,
+        202.40963855421688
+      ],
+      "dock": [
+        336,
+        160
+      ],
+      "barWidth": 332,
+      "spin": {
+        "x": 120,
+        "y": 56,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": true
+    },
+    {
+      "previousBarWidth": 332,
+      "screenWidthPercent": 92.2,
+      "viewport": [
+        360,
+        800
+      ],
+      "reviewHeight": 44,
+      "variant": "portrait",
+      "reel": [
+        336,
+        202.40963855421688
+      ],
+      "dock": [
+        336,
+        160
+      ],
+      "barWidth": 332,
+      "spin": {
+        "x": 120,
+        "y": 56,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 0,
+        "w": 164,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": true
+    },
+    {
+      "previousBarWidth": 745,
+      "screenWidthPercent": 88.3,
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 0,
+      "variant": "landscape",
+      "reel": [
+        501,
+        302
+      ],
+      "dock": [
+        745,
+        358
+      ],
+      "barWidth": 745,
+      "spin": {
+        "x": 649,
+        "y": 131,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 160,
+        "w": 128,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 52,
+        "w": 128,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 672,
+      "screenWidthPercent": 79.6,
+      "viewport": [
+        844,
+        390
+      ],
+      "reviewHeight": 44,
+      "variant": "landscape",
+      "reel": [
+        428,
+        258
+      ],
+      "dock": [
+        672,
+        314
+      ],
+      "barWidth": 672,
+      "spin": {
+        "x": 576,
+        "y": 109,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 160,
+        "w": 128,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 52,
+        "w": 128,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 1536,
+      "screenWidthPercent": 74.2,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reviewHeight": 0,
+      "variant": "desktop",
+      "reel": [
+        1040,
+        626.5060240963855
+      ],
+      "dock": [
+        1888,
+        128
+      ],
+      "barWidth": 1424,
+      "spin": {
+        "x": 1456,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "bet": {
+        "x": 1172,
+        "y": 20,
+        "w": 196,
+        "h": 88
+      },
+      "numericWell": {
+        "x": 388,
+        "y": 20,
+        "w": 376,
+        "h": 88
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 1536,
+      "screenWidthPercent": 74.2,
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reviewHeight": 44,
+      "variant": "desktop",
+      "reel": [
+        1040,
+        626.5060240963855
+      ],
+      "dock": [
+        1888,
+        128
+      ],
+      "barWidth": 1424,
+      "spin": {
+        "x": 1456,
+        "y": 0,
+        "w": 128,
+        "h": 128
+      },
+      "bet": {
+        "x": 1172,
+        "y": 20,
+        "w": 196,
+        "h": 88
+      },
+      "numericWell": {
+        "x": 388,
+        "y": 20,
+        "w": 376,
+        "h": 88
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 1148,
+      "screenWidthPercent": 97.3,
+      "viewport": [
+        1180,
+        660
+      ],
+      "reviewHeight": 0,
+      "variant": "landscape",
+      "reel": [
+        904,
+        544.5783132530121
+      ],
+      "dock": [
+        1148,
+        600.5783132530121
+      ],
+      "barWidth": 1148,
+      "spin": {
+        "x": 1052,
+        "y": 252.28915662650604,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 160,
+        "w": 128,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 52,
+        "w": 128,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    },
+    {
+      "previousBarWidth": 1107,
+      "screenWidthPercent": 93.8,
+      "viewport": [
+        1180,
+        660
+      ],
+      "reviewHeight": 44,
+      "variant": "landscape",
+      "reel": [
+        863,
+        520
+      ],
+      "dock": [
+        1107,
+        576
+      ],
+      "barWidth": 1107,
+      "spin": {
+        "x": 1011,
+        "y": 240,
+        "w": 96,
+        "h": 96
+      },
+      "bet": {
+        "x": 0,
+        "y": 160,
+        "w": 128,
+        "h": 64
+      },
+      "numericWell": {
+        "x": 0,
+        "y": 52,
+        "w": 128,
+        "h": 44
+      },
+      "minimumTarget": 44,
+      "overlap": false,
+      "portraitUnchanged": false
+    }
+  ],
+  "asset": {
+    "mode": "RGBA",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPixels": 792622,
+    "visiblePixels": 779894
+  }
+}

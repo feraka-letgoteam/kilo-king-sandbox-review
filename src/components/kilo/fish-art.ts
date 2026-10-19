@@ -1,13 +1,13 @@
 /** Symbol pass. Tier comes from the recorded cell value, never stake or payout.
- *  Cash packages and the KING scatter live in /kilo-contraband-v1/.
- *  Bounds are that delivery's own alpha. Do not reuse the fish rectangles.
+ *  Cash packages and the KING scatter use the illustrated v79 delivery.
+ *  New canvases are uniformly registered into the accepted symbol ink budgets.
  */
 export const FISH_LADDER = [
   2, 5, 10, 15, 20, 25, 50, 100, 200, 500, 1000, 2000, 5000,
 ] as const;
 
 export const V8_ROOT = "/kilo-symbols-v8/";
-export const CONTRABAND_ROOT = "/kilo-contraband-v1/";
+export const CONTRABAND_ROOT = "/kilo-v79/symbols/";
 
 export type V8Key =
   | "fish-small"
@@ -53,44 +53,44 @@ export const V8_META: Record<V8Key, ArtMeta> = {
     bounds: [21, 152, 1237, 951],
   },
   "sym-reel-v8": {
-    file: "sym-reel-v8.png",
+    file: "../kilo-v79/symbols/sym-reel-v8.webp",
     width: 1254,
     height: 1254,
-    bounds: [39, 249, 1221, 1075],
+    bounds: [147, 245, 1110, 1077],
   },
   "sym-case-v8": {
-    file: "sym-case-v8.png",
+    file: "../kilo-v79/symbols/sym-case-v8.webp",
     width: 1254,
     height: 1254,
-    bounds: [44, 56, 1234, 1209],
+    bounds: [46, 98, 1232, 1167],
   },
 };
 
 /** Measured from the delivered canvases. Placement only; the PNG alpha stays whole. */
 export const PACKAGE_META: Record<PackageKey, ArtMeta> = {
   "package-small": {
-    file: "package-small.png",
+    file: "package-small.webp",
     width: 1254,
     height: 1254,
-    bounds: [50, 335, 1211, 992],
+    bounds: [48, 355, 1221, 998],
   },
   "package-medium": {
-    file: "package-medium.png",
+    file: "package-medium.webp",
     width: 1254,
     height: 1254,
-    bounds: [27, 292, 1237, 1016],
+    bounds: [17, 298, 1241, 1018],
   },
   "package-trophy": {
-    file: "package-trophy.png",
+    file: "package-trophy.webp",
     width: 1254,
     height: 1254,
-    bounds: [20, 203, 1236, 1113],
+    bounds: [16, 239, 1238, 1079],
   },
   "package-king": {
-    file: "package-king.png",
+    file: "package-king.webp",
     width: 1254,
     height: 1254,
-    bounds: [15, 152, 1237, 1095],
+    bounds: [8, 231, 1243, 1013],
   },
 };
 
@@ -100,10 +100,10 @@ export const SCATTER_KING: ArtMeta & {
   cx: number;
   cy: number;
 } = {
-  file: "scatter-king.png",
+  file: "scatter-king.webp",
   width: 1254,
   height: 1254,
-  bounds: [32, 26, 1223, 1220],
+  bounds: [32, 42, 1224, 1205],
   boxW: 0.82,
   boxH: 0.82,
   cx: 0.5,
@@ -122,7 +122,9 @@ const TIERS = [
 export type FishTier = (typeof TIERS)[number];
 
 export function fishTier(value: number): FishTier {
-  if (!(FISH_LADDER as readonly number[]).includes(value)) {
+  // The recorded Chopper book also contains 0.5x and 1x cargo. They share
+  // the lowest visual tier; this does not add values to the base-game ladder.
+  if (!(FISH_LADDER as readonly number[]).includes(value) && value !== .5 && value !== 1) {
     throw new RangeError(`Unknown recorded package value: ${value}`);
   }
   return TIERS.find((tier) => value <= tier.max)!;
@@ -150,15 +152,19 @@ export function placement(
   };
 }
 
-/** Whole-sprite acknowledgement. Not a frame animation. Identity outside 0–420ms. */
+/** Short compression, release and weighted settle inside the existing 420ms.
+ * Printed values remain separate and still. This is deformation, not new art. */
 export function fishReaction(elapsedMs: number, reducedMotion = false) {
   if (reducedMotion || elapsedMs < 0 || elapsedMs >= 420) {
     return { scale: 1, rotation: 0 };
   }
   const p = elapsedMs / 420;
-  const wave = Math.sin(Math.PI * p);
+  const smooth = (v: number) => { const t = Math.max(0, Math.min(1, v)); return t*t*(3-2*t); };
+  const load = smooth(p / .16) * (1 - smooth((p - .16) / .13));
+  const release = Math.sin(Math.PI * Math.max(0, Math.min(1, (p - .19) / .81))) ** 2;
+  const recoil = p < .58 ? 0 : Math.sin((p - .58) / .42 * Math.PI * 2) * (1-p) ** 2;
   return {
-    scale: 1 + 0.035 * wave,
-    rotation: -0.025 * Math.sin(2 * Math.PI * p) * wave,
+    scale: 1 - .024 * load + .035 * release + .018 * recoil,
+    rotation: .016 * load - .033 * release * Math.sin(Math.PI * p) + .04 * recoil,
   };
 }

@@ -1,0 +1,67 @@
+/* Inspection values from dist/assets/review-BHOdbrBp.css; not a replacement stylesheet.
+   Source-resolved, not browser getComputedStyle. */
+
+.sc-spin {
+  background-color: #020c12;
+  background-image: none;
+  border-top-width: 8px;
+  border-top-style: solid;
+  border-top-color: #b28c50;
+  box-shadow: inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  box-sizing: border-box;
+}
+
+.sc-spin:disabled {
+  background-color: #020c12;
+  background-image: none;
+  border-top-width: 8px;
+  border-top-style: solid;
+  border-top-color: #b28c50;
+  box-shadow: inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  box-sizing: border-box;
+}
+
+.sc-circle {
+  background-color: #020c12;
+  background-image: none;
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-top-color: #b28c50;
+  box-shadow: inset 0 0 0 1px #020c12;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  box-sizing: border-box;
+}
+
+.sc-readout {
+  background-color: #020c12;
+  background-image: none;
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: #020c12;
+  box-shadow: inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  box-sizing: border-box;
+}
+
+.sc-bet::before {
+  background-color: #020c12;
+  background-image: none;
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: #020c12;
+  box-shadow: inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+  box-sizing: border-box;
+}

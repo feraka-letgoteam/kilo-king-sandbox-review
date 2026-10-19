@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "id": "king-blink",
+  "atlas": "/kilo-v57/characters/king-blink.webp",
+  "width": 288,
+  "height": 160,
+  "logicalHead": {
+    "width": 137,
+    "height": 151,
+    "pivot": [
+      68,
+      140
+    ]
+  },
+  "states": {
+    "half": {
+      "x": 4,
+      "y": 4,
+      "w": 137,
+      "h": 151
+    },
+    "closed": {
+      "x": 147,
+      "y": 4,
+      "w": 137,
+      "h": 151
+    }
+  },
+  "open": "Use original v55 head frame",
+  "registration": "All visible pixels outside eye-socket polygons and all alpha values are identical to v55 head. Lossless WebP may normalize RGB under zero alpha. Swap frame only; keep parent head pivot and transform.",
+  "defaultCadence": "Runtime owned. Disable on alternate victory head and reduced motion."
+}

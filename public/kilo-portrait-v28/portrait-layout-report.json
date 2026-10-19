@@ -1,0 +1,4496 @@
+{
+  "checkpoint": "79390ad",
+  "passed": true,
+  "method": "Source-derived pixel rectangles, checkpoint comparisons, real React server-rendered markup, and production CSS cascade resolution. No browser execution or live screenshots.",
+  "protectedSourceFiles": 94,
+  "protectedSourcePaths": [
+    "src/components/kilo/DockSkin.tsx",
+    "src/components/kilo/FishermanScene.tsx",
+    "src/components/kilo/MarinaBackdrop.tsx",
+    "src/components/kilo/ReelStage.tsx",
+    "src/components/kilo/StageSurround.tsx",
+    "src/components/kilo/art-map.ts",
+    "src/components/kilo/auto-spins.ts",
+    "src/components/kilo/base-dock.css",
+    "src/components/kilo/base-scene.css",
+    "src/components/kilo/control-model.ts",
+    "src/components/kilo/control-panels.tsx",
+    "src/components/kilo/control-theme.ts",
+    "src/components/kilo/director.ts",
+    "src/components/kilo/dock-design.ts",
+    "src/components/kilo/feature-catalog.ts",
+    "src/components/kilo/feature-panel.css",
+    "src/components/kilo/fish-art.ts",
+    "src/components/kilo/fisherman-scene.css",
+    "src/components/kilo/keyboard.ts",
+    "src/components/kilo/layout.ts",
+    "src/components/kilo/marina-backdrop.css",
+    "src/components/kilo/marina-frame.ts",
+    "src/components/kilo/material.css",
+    "src/components/kilo/material.ts",
+    "src/components/kilo/modular-controls.css",
+    "src/components/kilo/motion-atlas.ts",
+    "src/components/kilo/paytable.tsx",
+    "src/components/kilo/pixiStage.ts",
+    "src/components/kilo/play.tsx",
+    "src/components/kilo/sprite-bounds.json",
+    "src/components/kilo/stage-art.ts",
+    "src/components/kilo/stage-theme.css",
+    "src/components/kilo/useMotionCanvas.ts",
+    "src/components/preview-host-bridge.tsx",
+    "src/components/slot-controls/SlotControls.tsx",
+    "src/components/slot-controls/controls.css",
+    "src/components/slot-controls/fonts/BarlowCondensed-600.woff2",
+    "src/components/slot-controls/fonts/OFL-BarlowCondensed.txt",
+    "src/components/slot-controls/fonts/OFL-SourceSans3.txt",
+    "src/components/slot-controls/fonts/SourceSans3-600.woff2",
+    "src/components/slot-controls/fonts/SourceSans3-700.woff2",
+    "src/components/slot-controls/typography.ts",
+    "src/lib/app-data/app-data.test.ts",
+    "src/lib/app-data/client.server.ts",
+    "src/lib/app-data/errors.ts",
+    "src/lib/app-data/index.ts",
+    "src/lib/app-data/login.ts",
+    "src/lib/app-data/readiness-schedule.test.ts",
+    "src/lib/app-data/readiness-schedule.ts",
+    "src/lib/app-data/readiness.ts",
+    "src/lib/app-data/server-only.ts",
+    "src/lib/app-data/types.ts",
+    "src/lib/app-data/use-connector-readiness.ts",
+    "src/lib/auth/client.ts",
+    "src/lib/auth/email-password.ts",
+    "src/lib/auth/gate-identity.server.ts",
+    "src/lib/auth/gate-identity.test.ts",
+    "src/lib/auth/gate-session-marker.ts",
+    "src/lib/auth/gate-session.server.ts",
+    "src/lib/auth/gates.tsx",
+    "src/lib/auth/isolation.server.ts",
+    "src/lib/auth/middleware.ts",
+    "src/lib/auth/pglite-dialect.ts",
+    "src/lib/auth/popup.server.ts",
+    "src/lib/auth/preview.ts",
+    "src/lib/auth/provider.tsx",
+    "src/lib/auth/providers.ts",
+    "src/lib/auth/server.ts",
+    "src/lib/auth/sign-in-gate.test.ts",
+    "src/lib/auth/sign-in-gate.ts",
+    "src/lib/auth/use-current-user.ts",
+    "src/lib/auth/verify.server.ts",
+    "src/lib/db.ts",
+    "src/lib/env.server.ts",
+    "src/lib/error-component.tsx",
+    "src/lib/kilo/bank.ts",
+    "src/lib/kilo/baseline.json",
+    "src/lib/kilo/engine.ts",
+    "src/lib/kilo/fixtures.json",
+    "src/lib/kilo/sound.ts",
+    "src/lib/multiplayer/index.ts",
+    "src/lib/multiplayer/p2p.ts",
+    "src/lib/og/site.json",
+    "src/lib/preview-embedder-origin.ts",
+    "src/lib/preview-host-bridge.ts",
+    "src/lib/preview-path-prefix.test.ts",
+    "src/lib/preview-path-prefix.ts",
+    "src/review-entry.tsx",
+    "src/routeTree.gen.ts",
+    "src/router.tsx",
+    "src/routes/__root.tsx",
+    "src/routes/index.tsx",
+    "src/routes/replay.tsx",
+    "src/styles.css"
+  ],
+  "existingTokensUnchanged": true,
+  "unchangedDesktopLandscapeCompactCases": 72,
+  "productionStylesheet": "dist/assets/review-eUdhl29n.css",
+  "productionStylesheetSha256": "882ea53c7290edfc415ddd020795dac7148f96967de26032cb60f01b199aaf13",
+  "geometry": [
+    {
+      "viewport": "360x800",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "base",
+      "dock": {
+        "variant": "portrait",
+        "width": 336,
+        "height": 160,
+        "footerWidth": 336,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 288,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 127.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 232,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 288,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "auto": {
+          "x": 232,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        },
+        "buy": {
+          "x": 288,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 16,
+      "spinToolsGap": 16,
+      "minTarget": 44,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "360x800",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "feature",
+      "dock": {
+        "variant": "portrait",
+        "width": 336,
+        "height": 160,
+        "footerWidth": 336,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 288,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 127.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 288,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 232,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 288,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 16,
+      "spinToolsGap": 16,
+      "minTarget": 44,
+      "bottomClearance": 8
+    },
+    {
+      "viewport": "390x844",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "base",
+      "dock": {
+        "variant": "portrait",
+        "width": 366,
+        "height": 160,
+        "footerWidth": 366,
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 259,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 259,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 315,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 315,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 259,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 142.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 315,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 259,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 315,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 259,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 315,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 259,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 315,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "auto": {
+          "x": 259,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        },
+        "buy": {
+          "x": 315,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 28,
+      "spinToolsGap": 28,
+      "minTarget": 44,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "390x844",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "feature",
+      "dock": {
+        "variant": "portrait",
+        "width": 366,
+        "height": 160,
+        "footerWidth": 366,
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 259,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 259,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 315,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 315,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 259,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 142.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 315,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 259,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 315,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 3,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 259,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 315,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 28,
+      "spinToolsGap": 28,
+      "minTarget": 44,
+      "bottomClearance": 8
+    },
+    {
+      "viewport": "320x568",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "base",
+      "dock": {
+        "variant": "portrait",
+        "width": 296,
+        "height": 160,
+        "footerWidth": 296,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "minus": {
+          "x": 56,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 56,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 56,
+          "h": 44
+        },
+        "turbo": {
+          "x": 196,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 196,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 248,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 196,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 114.4,
+          "y": 98.4,
+          "w": 67.2,
+          "h": 18
+        },
+        "buy": {
+          "x": 248,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "turbo": {
+          "x": 196,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 196,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 248,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "turbo": {
+          "x": 196,
+          "y": 101,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 248,
+          "y": 101,
+          "w": 47,
+          "h": 47
+        },
+        "auto": {
+          "x": 196,
+          "y": 49,
+          "w": 47,
+          "h": 47
+        },
+        "buy": {
+          "x": 248,
+          "y": 49,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 5,
+      "betSpinGap": 8,
+      "spinToolsGap": 8,
+      "minTarget": 44,
+      "bottomClearance": 12
+    },
+    {
+      "viewport": "320x568",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "feature",
+      "dock": {
+        "variant": "portrait",
+        "width": 296,
+        "height": 160,
+        "footerWidth": 296,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "minus": {
+          "x": 56,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 56,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 56,
+          "h": 44
+        },
+        "turbo": {
+          "x": 196,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 196,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 248,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 196,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 114.4,
+          "y": 98.4,
+          "w": 67.2,
+          "h": 18
+        },
+        "buy": {
+          "x": 248,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "turbo": {
+          "x": 196,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "turbo": {
+          "x": 196,
+          "y": 67,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 248,
+          "y": 67,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 5,
+      "betSpinGap": 8,
+      "spinToolsGap": 8,
+      "minTarget": 44,
+      "bottomClearance": 28
+    },
+    {
+      "viewport": "344x800",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "base",
+      "dock": {
+        "variant": "portrait",
+        "width": 320,
+        "height": 160,
+        "footerWidth": 320,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "minus": {
+          "x": 44,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 44,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 216,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 216,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 272,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 272,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 216,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 111.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 272,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 88
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 216,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 272,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 216,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 272,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 88
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 216,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 272,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "auto": {
+          "x": 216,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        },
+        "buy": {
+          "x": 272,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 16,
+      "spinToolsGap": 16,
+      "minTarget": 44,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "344x800",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "feature",
+      "dock": {
+        "variant": "portrait",
+        "width": 320,
+        "height": 160,
+        "footerWidth": 320,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "minus": {
+          "x": 44,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 44,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 216,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 216,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 272,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 272,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 216,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 111.68,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 272,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 64
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 216,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 272,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "win": {
+          "x": 164,
+          "y": 0,
+          "w": 156,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 0,
+          "y": 60,
+          "w": 88,
+          "h": 64
+        },
+        "spin": {
+          "x": 104,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 216,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 272,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 16,
+      "spinToolsGap": 16,
+      "minTarget": 44,
+      "bottomClearance": 8
+    },
+    {
+      "viewport": "485x902",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "base",
+      "dock": {
+        "variant": "portrait",
+        "width": 461,
+        "height": 160,
+        "footerWidth": 461,
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 306.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 362.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 306.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 190.18,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 362.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 306.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 362.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 109,
+          "w": 47,
+          "h": 47
+        },
+        "auto": {
+          "x": 306.5,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        },
+        "buy": {
+          "x": 362.5,
+          "y": 53,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 28,
+      "spinToolsGap": 28,
+      "minTarget": 44,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "485x902",
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "state": "feature",
+      "dock": {
+        "variant": "portrait",
+        "width": 461,
+        "height": 160,
+        "footerWidth": 461,
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 60,
+          "h": 44
+        },
+        "minus": {
+          "x": 60,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 60,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 60,
+          "h": 44
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 306.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 362.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 306.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 190.18,
+          "y": 117.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 362.5,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "modules": {
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "conservativePaintBounds": {
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "free-spins": {
+          "x": 50.5,
+          "y": 60,
+          "w": 104,
+          "h": 64
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "turbo": {
+          "x": 306.5,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        },
+        "menu": {
+          "x": 362.5,
+          "y": 79,
+          "w": 47,
+          "h": 47
+        }
+      },
+      "minimumPaintSeparation": 8,
+      "betSpinGap": 28,
+      "spinToolsGap": 28,
+      "minTarget": 44,
+      "bottomClearance": 8
+    }
+  ],
+  "paint": [
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#79cbb0",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "speed-super",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "free-spins",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#79cbb0",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "speed-super",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "free-spins",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#79cbb0",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "speed-super",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "free-spins",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#79cbb0",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "speed-super",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "bet",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "auto",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "module": "buy",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "turbo",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "menu",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "2px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 0 0 1px #020c12"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "balance",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "win",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "free-spins",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "3px",
+        "border-top-style": "solid",
+        "border-top-color": "#020c12",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #59412b, inset 0 -1px 0 #203c40"
+      }
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "module": "spin-button",
+      "values": {
+        "background-color": "#020c12",
+        "background-image": "none",
+        "border-top-width": "8px",
+        "border-top-style": "solid",
+        "border-top-color": "#b28c50",
+        "opacity": "1",
+        "filter": "none",
+        "box-shadow": "inset 0 1px 0 #f0d39a, inset 0 -2px 0 #59412b"
+      }
+    }
+  ],
+  "limitations": [
+    "CSS resolution uses the repository cascade evaluator, not browser computedStyle.",
+    "Geometry includes a conservative 3px badge overflow on all secondary controls; font rasterization and browser painting are not observed.",
+    "Safe-area insets are zero in these source-derived viewport checks.",
+    "Narrow fallback below 320px control width retains its earlier 8px spacing and 80px Spin. Desktop and landscape remain byte-equivalent in computed layout outputs."
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "version": "v55",
+  "text": "KILO KING",
+  "rendering": "hand-painted planar gold; deep teal/navy extrusion; crown and fishing hook",
+  "generation": "built-in image_gen, transparent background",
+  "packaging": "proportional trim and resample only; original generated alpha retained",
+  "assets": [
+    {
+      "file": "/kilo-v55/brand/logo-stacked.webp",
+      "source": "art/kilo-v55/brand/logo-stacked-source.png",
+      "dimensions": [
+        1200,
+        986
+      ],
+      "sourceDimensions": [
+        1374,
+        1145
+      ],
+      "sourceCrop": [
+        24,
+        27,
+        1362,
+        1126
+      ],
+      "alphaBounds": [
+        42,
+        35,
+        1159,
+        953
+      ],
+      "visibleAlphaBoundsThreshold5": [
+        42,
+        37,
+        1158,
+        950
+      ],
+      "visibleAspectRatio": 1.22234,
+      "transparentGuardPercentEachAxis": 3.5,
+      "proofBox": [
+        220,
+        180
+      ],
+      "lossless": true,
+      "bytes": 913908,
+      "sha256": "ccb003a24a30d9ea76bad4c7cc496d22c225905c5705a8627a4284865483cc73",
+      "compactVariant": {
+        "file": "/kilo-v55/brand/logo-stacked-640.webp",
+        "dimensions": [
+          640,
+          526
+        ],
+        "alphaBounds": [
+          21,
+          17,
+          619,
+          508
+        ],
+        "bytes": 299600,
+        "sha256": "5c8e3c8350320372d9fa58c8127552865688a50a67d60c3670b54ab6e538c416"
+      }
+    },
+    {
+      "file": "/kilo-v55/brand/logo-wide.webp",
+      "source": "art/kilo-v55/brand/logo-wide-source.png",
+      "dimensions": [
+        1200,
+        386
+      ],
+      "sourceDimensions": [
+        2188,
+        719
+      ],
+      "sourceCrop": [
+        245,
+        74,
+        1949,
+        621
+      ],
+      "alphaBounds": [
+        41,
+        14,
+        1159,
+        372
+      ],
+      "visibleAlphaBoundsThreshold5": [
+        43,
+        16,
+        1157,
+        370
+      ],
+      "visibleAspectRatio": 3.14689,
+      "transparentGuardPercentEachAxis": 3.5,
+      "proofBox": [
+        180,
+        60
+      ],
+      "lossless": true,
+      "bytes": 366318,
+      "sha256": "be14e2ff13942a9e144235c0eecbdeb116cddc715bc6715d62ed51970c48c8b8",
+      "compactVariant": {
+        "file": "/kilo-v55/brand/logo-wide-600.webp",
+        "dimensions": [
+          600,
+          193
+        ],
+        "alphaBounds": [
+          19,
+          6,
+          581,
+          187
+        ],
+        "bytes": 111826,
+        "sha256": "5cbf4ae576203b74ef607e2eeee7184ab347c63a1f9e04e831fd381076378af4"
+      }
+    }
+  ]
+}

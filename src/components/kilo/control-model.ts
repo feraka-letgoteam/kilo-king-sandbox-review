@@ -75,7 +75,7 @@ export function purchaseQuote(
   balance: number,
 ) {
   const cost = splashCost(stake, mode);
-  const reason = !splashStakeOk(stake, mode)
+  const reason = mode === 'chopper' ? 'Requires five scatters · not available to buy' : !splashStakeOk(stake, mode)
     ? cost > SPLASH_COST_MAX
       ? `Above the ${SPLASH_COST_MAX.toLocaleString("en-US")} purchase limit`
       : "Outside the bet limits"

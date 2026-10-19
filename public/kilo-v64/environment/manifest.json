@@ -1,0 +1,93 @@
+{
+  "method": "Built-in image generation edits of existing feature plates; native original-size WebP exports and transparent motion sprites. Original files retained.",
+  "assets": [
+    {
+      "id": "scatter-3",
+      "url": "/kilo-v64/environment/scatter-3.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "alpha": false,
+      "source": "exec-b4b97314-2ffa-4c9a-b0a0-3e313c5095a3.png",
+      "sha256": "2165b5cb3a8ed7fa78279c3afce811e49fe645dfadd9cc26e8040e6870c7916b"
+    },
+    {
+      "id": "scatter-3-portrait",
+      "url": "/kilo-v64/environment/scatter-3-portrait.webp",
+      "size": [
+        768,
+        1708
+      ],
+      "alpha": false,
+      "source": "exec-9cea7173-4ffa-4f73-9fcd-cacefeeb657f.png",
+      "sha256": "a6edf834a3beb12c685426204d9709be156e3bc01c971deea9c0dc56c64aea0f"
+    },
+    {
+      "id": "scatter-4",
+      "url": "/kilo-v64/environment/scatter-4.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "alpha": false,
+      "source": "exec-3350a897-0ab8-4477-815e-7281457e0e43.png",
+      "sha256": "7e802a7e6fba3ffae12b4c5279c9d57e373b9e07b8fdd5dce97406cd946ff2a4"
+    },
+    {
+      "id": "scatter-4-portrait",
+      "url": "/kilo-v64/environment/scatter-4-portrait.webp",
+      "size": [
+        768,
+        1708
+      ],
+      "alpha": false,
+      "source": "exec-ccd2467f-315e-4aff-9ae2-d6c4ec9c55b1.png",
+      "sha256": "3b5950282a37c1d67dd23978560d2a581464c23b6f1550365b59a44069d114a0"
+    },
+    {
+      "id": "chopper",
+      "url": "/kilo-v64/environment/chopper.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "alpha": false,
+      "source": "exec-361426f3-2e73-4e59-843d-439946cb0246.png",
+      "sha256": "4f910d657312caf3dfd4c3f6ef7ecdbec8fa7153a7bdbe8db3eb1d50dfa44631"
+    },
+    {
+      "id": "chopper-portrait",
+      "url": "/kilo-v64/environment/chopper-portrait.webp",
+      "size": [
+        768,
+        1800
+      ],
+      "alpha": false,
+      "source": "exec-3c949bc5-4606-4be2-a991-1bb8668ab434.png",
+      "sha256": "c72597ce5305d31fbb080aa8c97fbee1a85c6a16d81b8e8a2f2f4383f303055c"
+    },
+    {
+      "id": "cloud-bank",
+      "url": "/kilo-v64/environment/cloud-bank.webp",
+      "size": [
+        1024,
+        341
+      ],
+      "alpha": true,
+      "source": "exec-e4eb7e23-8d7f-4780-823a-dc17720cefbf.png",
+      "sha256": "f7bdb400e46cbb464350e0deb03ead8bec87db70f0ac0eb2996a83298a9e5f4a"
+    },
+    {
+      "id": "jetski",
+      "url": "/kilo-v64/environment/jetski.webp",
+      "size": [
+        384,
+        192
+      ],
+      "alpha": true,
+      "source": "exec-c7bd8186-7a9a-4988-96e2-84061bd7a0de.png",
+      "sha256": "e1e682c1c5beaddc7a9af5d980c7f37216b15f5757934f35067a6a5dd3ba29f1"
+    }
+  ]
+}

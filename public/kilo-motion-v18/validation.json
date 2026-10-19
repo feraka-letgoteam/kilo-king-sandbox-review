@@ -1,0 +1,10 @@
+{
+  "assetCount": 24,
+  "assetBytes": 5557607,
+  "sampledPoses": 2004,
+  "fixedFootFrames": 61,
+  "marinaViewports": 5,
+  "symbolPlacementChecks": 344,
+  "collectorTimingChecks": 800,
+  "browserQA": false
+}

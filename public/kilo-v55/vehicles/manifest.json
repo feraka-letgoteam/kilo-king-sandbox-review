@@ -1,0 +1,566 @@
+{
+  "version": 55,
+  "format": "rgba-webp-atlas",
+  "columns": 4,
+  "rows": 2,
+  "loop": false,
+  "payoutAuthority": "recorded event only",
+  "alpha": "generated source alpha retained; no chroma key or painted masks",
+  "proofType": "offline art inspection, not browser or Pixi renderer evidence",
+  "chopper": {
+    "url": "/kilo-v55/vehicles/chopper-action.webp",
+    "size": [
+      2048,
+      640
+    ],
+    "frame": [
+      512,
+      320
+    ],
+    "frameCount": 8,
+    "anchor": [
+      0.5,
+      0.5
+    ],
+    "registration": [
+      256,
+      104
+    ],
+    "registrationPart": "main rotor hub",
+    "uniformScale": 0.78,
+    "suggestedWidthCells": 2.2,
+    "durationMs": 900,
+    "frames": [
+      {
+        "index": 0,
+        "name": "approach-bank",
+        "durationMs": 100,
+        "rect": [
+          0,
+          0,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          444,
+          444
+        ],
+        "sourcePivot": [
+          246,
+          180
+        ],
+        "packingOffset": [
+          64,
+          -36
+        ],
+        "visibleBounds": [
+          71,
+          34,
+          401,
+          298
+        ]
+      },
+      {
+        "index": 1,
+        "name": "level-in",
+        "durationMs": 100,
+        "rect": [
+          512,
+          0,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          444,
+          0,
+          887,
+          444
+        ],
+        "sourcePivot": [
+          253,
+          174
+        ],
+        "packingOffset": [
+          59,
+          -32
+        ],
+        "visibleBounds": [
+          66,
+          33,
+          395,
+          283
+        ]
+      },
+      {
+        "index": 2,
+        "name": "hover",
+        "durationMs": 120,
+        "rect": [
+          1024,
+          0,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          887,
+          0,
+          1330,
+          444
+        ],
+        "sourcePivot": [
+          244,
+          174
+        ],
+        "packingOffset": [
+          66,
+          -32
+        ],
+        "visibleBounds": [
+          76,
+          49,
+          409,
+          274
+        ]
+      },
+      {
+        "index": 3,
+        "name": "hatch-open",
+        "durationMs": 100,
+        "rect": [
+          1536,
+          0,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        "sourcePivot": [
+          239,
+          162
+        ],
+        "packingOffset": [
+          70,
+          -22
+        ],
+        "visibleBounds": [
+          78,
+          46,
+          413,
+          281
+        ]
+      },
+      {
+        "index": 4,
+        "name": "hook-release",
+        "durationMs": 180,
+        "rect": [
+          0,
+          320,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          0,
+          444,
+          444,
+          887
+        ],
+        "sourcePivot": [
+          230,
+          148
+        ],
+        "packingOffset": [
+          77,
+          -11
+        ],
+        "visibleBounds": [
+          84,
+          50,
+          414,
+          292
+        ]
+      },
+      {
+        "index": 5,
+        "name": "hook-retract",
+        "durationMs": 100,
+        "rect": [
+          512,
+          320,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          444,
+          444,
+          887,
+          887
+        ],
+        "sourcePivot": [
+          237,
+          144
+        ],
+        "packingOffset": [
+          71,
+          -8
+        ],
+        "visibleBounds": [
+          83,
+          65,
+          413,
+          270
+        ]
+      },
+      {
+        "index": 6,
+        "name": "exit-bank",
+        "durationMs": 100,
+        "rect": [
+          1024,
+          320,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          887,
+          444,
+          1330,
+          887
+        ],
+        "sourcePivot": [
+          231,
+          147
+        ],
+        "packingOffset": [
+          76,
+          -11
+        ],
+        "visibleBounds": [
+          88,
+          30,
+          409,
+          263
+        ]
+      },
+      {
+        "index": 7,
+        "name": "depart",
+        "durationMs": 100,
+        "rect": [
+          1536,
+          320,
+          512,
+          320
+        ],
+        "sourceCrop": [
+          1330,
+          444,
+          1774,
+          887
+        ],
+        "sourcePivot": [
+          230,
+          160
+        ],
+        "packingOffset": [
+          77,
+          -21
+        ],
+        "visibleBounds": [
+          91,
+          10,
+          417,
+          262
+        ]
+      }
+    ],
+    "description": "Eight authored views: bank, rotor phase, cargo hatch and hook.",
+    "source": "chopper-source.png",
+    "cargoDropPoint": [
+      248,
+      278
+    ]
+  },
+  "boat": {
+    "url": "/kilo-v55/vehicles/getaway-action.webp",
+    "size": [
+      2304,
+      576
+    ],
+    "frame": [
+      576,
+      288
+    ],
+    "frameCount": 8,
+    "anchor": [
+      0.5,
+      0.65
+    ],
+    "registration": [
+      288,
+      187
+    ],
+    "registrationPart": "hull center",
+    "uniformScale": 1.04,
+    "suggestedWidthCells": 4.2,
+    "durationMs": 900,
+    "frames": [
+      {
+        "index": 0,
+        "name": "loaded",
+        "durationMs": 100,
+        "rect": [
+          0,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          0,
+          0,
+          444,
+          444
+        ],
+        "sourcePivot": [
+          233,
+          300
+        ],
+        "packingOffset": [
+          46,
+          -125
+        ],
+        "visibleBounds": [
+          74,
+          40,
+          507,
+          249
+        ]
+      },
+      {
+        "index": 1,
+        "name": "throttle",
+        "durationMs": 100,
+        "rect": [
+          576,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          444,
+          0,
+          887,
+          444
+        ],
+        "sourcePivot": [
+          231,
+          301
+        ],
+        "packingOffset": [
+          48,
+          -126
+        ],
+        "visibleBounds": [
+          69,
+          39,
+          501,
+          248
+        ]
+      },
+      {
+        "index": 2,
+        "name": "accelerate",
+        "durationMs": 100,
+        "rect": [
+          1152,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          887,
+          0,
+          1330,
+          444
+        ],
+        "sourcePivot": [
+          236,
+          300
+        ],
+        "packingOffset": [
+          43,
+          -125
+        ],
+        "visibleBounds": [
+          60,
+          41,
+          497,
+          254
+        ]
+      },
+      {
+        "index": 3,
+        "name": "bank-near",
+        "durationMs": 140,
+        "rect": [
+          1728,
+          0,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1330,
+          0,
+          1774,
+          444
+        ],
+        "sourcePivot": [
+          233,
+          321
+        ],
+        "packingOffset": [
+          46,
+          -147
+        ],
+        "visibleBounds": [
+          55,
+          28,
+          480,
+          263
+        ]
+      },
+      {
+        "index": 4,
+        "name": "cut-water",
+        "durationMs": 140,
+        "rect": [
+          0,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          0,
+          444,
+          444,
+          887
+        ],
+        "sourcePivot": [
+          235,
+          269
+        ],
+        "packingOffset": [
+          44,
+          -93
+        ],
+        "visibleBounds": [
+          67,
+          27,
+          505,
+          242
+        ]
+      },
+      {
+        "index": 5,
+        "name": "bank-away",
+        "durationMs": 100,
+        "rect": [
+          576,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          444,
+          444,
+          887,
+          887
+        ],
+        "sourcePivot": [
+          232,
+          267
+        ],
+        "packingOffset": [
+          47,
+          -91
+        ],
+        "visibleBounds": [
+          71,
+          31,
+          498,
+          239
+        ]
+      },
+      {
+        "index": 6,
+        "name": "level-out",
+        "durationMs": 100,
+        "rect": [
+          1152,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          887,
+          444,
+          1330,
+          887
+        ],
+        "sourcePivot": [
+          229,
+          267
+        ],
+        "packingOffset": [
+          50,
+          -91
+        ],
+        "visibleBounds": [
+          64,
+          30,
+          495,
+          237
+        ]
+      },
+      {
+        "index": 7,
+        "name": "depart",
+        "durationMs": 120,
+        "rect": [
+          1728,
+          288,
+          576,
+          288
+        ],
+        "sourceCrop": [
+          1330,
+          444,
+          1774,
+          887
+        ],
+        "sourcePivot": [
+          224,
+          266
+        ],
+        "packingOffset": [
+          55,
+          -90
+        ],
+        "visibleBounds": [
+          61,
+          32,
+          490,
+          238
+        ]
+      }
+    ],
+    "description": "Eight authored hull/driver/spray drawings; spray is integrated.",
+    "source": "getaway-separated-source.png"
+  }
+}

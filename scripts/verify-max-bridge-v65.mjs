@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+const source=fs.readFileSync('src/components/kilo/ReelStage.tsx','utf8');
+const js=ts.transpileModule(source,{fileName:'ReelStage.tsx',compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX}}).outputText;
+let hooks=[],cursor=0,pending=[],layouts=[],mountResolve,mounted=false,destroyed=false,ready=0,calls=[];
+const effect=(queue)=>(fn,deps)=>{const i=cursor++,prev=hooks[i];if(!prev||deps.some((v,n)=>v!==prev.deps[n]))queue.push(()=>{prev?.cleanup?.();hooks[i]={deps,cleanup:fn()};});};
+const runtime={useRef(value){const i=cursor++;return hooks[i]??(hooks[i]={current:value});},useEffect:effect(pending),useLayoutEffect:effect(layouts)};
+const scene={setBoatStage(active){calls.push(active);},destroy(){destroyed=true;}};
+const module={};new Function('require','exports',js)(id=>id==='react'?runtime:id==='react/jsx-runtime'?{jsx:(_,props)=>props}:id==='./pixiStage'?{mountScene:async node=>{mounted=true;calls.push(node.dataset.boatStage==='true');return await new Promise(resolve=>mountResolve=()=>resolve(scene));}}:(()=>{throw Error(id);})(),module);
+const node={dataset:{}};const onReady=()=>{ready++;};
+const render=active=>{cursor=0;const props=module.ReelStage({onReady,boatStage:active});props.ref.current=node;node.dataset.boatStage=String(props['data-boat-stage']);layouts.splice(0).forEach(fn=>fn());pending.splice(0).forEach(fn=>fn());};
+const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
+render(false);await flush();assert(mounted);
+// Activation can happen while the renderer's assets are still decoding.
+render(true);mountResolve();await flush();assert.equal(calls.at(-1),true);assert.equal(ready,1);
+render(false);assert.equal(calls.at(-1),false,'exit restores original reel interior before paint');
+render(true);assert.equal(calls.at(-1),true,'re-entry hides every symbol before paint');
+render(true);assert.equal(ready,1,'mode changes never remount or resize the renderer');
+for(const hook of hooks)hook?.cleanup?.();assert(destroyed);
+console.log('PASS actual React bridge: activation during load, re-entry, exit, no remount, cleanup.');

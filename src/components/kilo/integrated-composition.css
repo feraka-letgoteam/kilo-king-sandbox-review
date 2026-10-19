@@ -1,0 +1,61 @@
+/* One registered scene owns the architecture, character and foreground. */
+.kk-app .kk-stage {
+  background: #030d16;
+  /* The decorative world extends below the fixed phone shell, but must not
+     enlarge the stage's scroll area. Fixed dialogs own their own scrolling. */
+  overflow: hidden;
+}
+.kk-app .kk-shell::after,
+.kk-app .kk-scene-brand::before {
+  content: none !important;
+}
+.kk-app .kk-side-logo {
+  filter: none;
+  left: 5%;
+  width: 86%;
+}
+.kk-app .kk-entry-skip {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 101;
+  min-width: 80px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid #a88c58;
+  border-radius: 5px;
+  background: #06151e;
+  color: #fff3d9;
+  font:
+    700 14px/20px "Source Sans 3",
+    sans-serif;
+  cursor: pointer;
+}
+.kk-app .kk-entry-skip:focus-visible {
+  outline: 3px solid #8fd5c5;
+  outline-offset: 4px;
+}
+
+/* The illustrated cabinet lip owns transient payouts; controls stay untouched. */
+.kk-app .kk-stage-readout {
+  position: absolute;
+  z-index: 5;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1px 8px;
+  border: 1px solid #937d4e;
+  border-radius: 4px;
+  background: #061920;
+  color: #c6dcd8;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.kk-app .kk-stage-readout[hidden] { display: none; }
+.kk-app .kk-stage-readout strong { color: #fff2d7; font-weight: 750; white-space: nowrap; }
+.kk-app .kk-stage-readout span { min-width: 0; }

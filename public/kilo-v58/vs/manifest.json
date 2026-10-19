@@ -1,0 +1,240 @@
+{
+  "version": 58,
+  "kind": "transparent-authored-vs-portraits",
+  "method": "Built-in image generation; deterministic Sharp extraction and atlas registration. No repainting or invented alpha.",
+  "source": "art/kilo-v58/vs/source-atlas.png",
+  "portraitAtlas": {
+    "file": "portraits.webp",
+    "width": 1536,
+    "height": 1536
+  },
+  "stripAtlas": {
+    "file": "reel-strips.webp",
+    "width": 768,
+    "height": 1920
+  },
+  "artDirection": "Kilo King orange vest/navy beanie facing right; Vice officer navy uniform/aviators facing left. Warm upper-left key, cool restrained rim; no glow, no background.",
+  "integration": "Use full portraits for challenge windows. Use narrow strip crops for the persistent expanded reel. Never stretch or soften. Copy is real runtime text in the strip's reserved lower region. Crossfade or mask-wipe anticipation to winner as one brief resolved action; no whole-card looping float.",
+  "assets": [
+    {
+      "id": "king-ready",
+      "actor": "king",
+      "phase": "anticipation",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 635,
+        "height": 670
+      },
+      "headAnchor": [
+        360,
+        23
+      ],
+      "offsetY": 24,
+      "portrait": {
+        "file": "king-ready.webp",
+        "width": 768,
+        "height": 768,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 768
+        },
+        "headCenter": [
+          384,
+          150
+        ],
+        "alphaBounds": {
+          "x": 44,
+          "y": 19,
+          "w": 612,
+          "h": 652
+        },
+        "opaquePixels": 261351
+      },
+      "strip": {
+        "file": "king-ready-strip.webp",
+        "width": 384,
+        "height": 960,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 960
+        },
+        "copySafe": {
+          "x": 16,
+          "y": 764,
+          "w": 352,
+          "h": 180
+        }
+      }
+    },
+    {
+      "id": "vice-ready",
+      "actor": "vice",
+      "phase": "anticipation",
+      "rect": {
+        "left": 635,
+        "top": 0,
+        "width": 612,
+        "height": 670
+      },
+      "headAnchor": [
+        257,
+        29
+      ],
+      "offsetY": 24,
+      "portrait": {
+        "file": "vice-ready.webp",
+        "width": 768,
+        "height": 768,
+        "frame": {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 768
+        },
+        "headCenter": [
+          384,
+          150
+        ],
+        "alphaBounds": {
+          "x": 143,
+          "y": 23,
+          "w": 578,
+          "h": 636
+        },
+        "opaquePixels": 240501
+      },
+      "strip": {
+        "file": "vice-ready-strip.webp",
+        "width": 384,
+        "height": 960,
+        "frame": {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 960
+        },
+        "copySafe": {
+          "x": 16,
+          "y": 764,
+          "w": 352,
+          "h": 180
+        }
+      }
+    },
+    {
+      "id": "king-win",
+      "actor": "king",
+      "phase": "winner",
+      "rect": {
+        "left": 0,
+        "top": 670,
+        "width": 685,
+        "height": 591
+      },
+      "headAnchor": [
+        350,
+        6
+      ],
+      "offsetY": 24,
+      "portrait": {
+        "file": "king-win.webp",
+        "width": 768,
+        "height": 768,
+        "frame": {
+          "x": 0,
+          "y": 768,
+          "w": 768,
+          "h": 768
+        },
+        "headCenter": [
+          384,
+          150
+        ],
+        "alphaBounds": {
+          "x": 56,
+          "y": 18,
+          "w": 646,
+          "h": 577
+        },
+        "opaquePixels": 240714
+      },
+      "strip": {
+        "file": "king-win-strip.webp",
+        "width": 384,
+        "height": 960,
+        "frame": {
+          "x": 0,
+          "y": 960,
+          "w": 384,
+          "h": 960
+        },
+        "copySafe": {
+          "x": 16,
+          "y": 764,
+          "w": 352,
+          "h": 180
+        }
+      }
+    },
+    {
+      "id": "vice-win",
+      "actor": "vice",
+      "phase": "winner",
+      "rect": {
+        "left": 685,
+        "top": 670,
+        "width": 562,
+        "height": 591
+      },
+      "headAnchor": [
+        247,
+        15
+      ],
+      "offsetY": 24,
+      "portrait": {
+        "file": "vice-win.webp",
+        "width": 768,
+        "height": 768,
+        "frame": {
+          "x": 768,
+          "y": 768,
+          "w": 768,
+          "h": 768
+        },
+        "headCenter": [
+          384,
+          150
+        ],
+        "alphaBounds": {
+          "x": 152,
+          "y": 20,
+          "w": 525,
+          "h": 565
+        },
+        "opaquePixels": 197352
+      },
+      "strip": {
+        "file": "vice-win-strip.webp",
+        "width": 384,
+        "height": 960,
+        "frame": {
+          "x": 384,
+          "y": 960,
+          "w": 384,
+          "h": 960
+        },
+        "copySafe": {
+          "x": 16,
+          "y": 764,
+          "w": 352,
+          "h": 180
+        }
+      }
+    }
+  ]
+}

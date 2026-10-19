@@ -1,0 +1,2324 @@
+{
+  "version": 49,
+  "type": "authored-symbol-reactions",
+  "generator": "built-in imagegen; one generation per symbol sheet",
+  "frameOrder": "row-major",
+  "alphaThreshold": 64,
+  "cell": [
+    512,
+    512
+  ],
+  "sheetSize": [
+    1024,
+    1024
+  ],
+  "defaultSequence": [
+    0,
+    1,
+    2,
+    3,
+    0
+  ],
+  "defaultDurationsMs": [
+    90,
+    125,
+    145,
+    140,
+    120
+  ],
+  "loop": false,
+  "assets": {
+    "sym-bobber": {
+      "url": "/kilo-animation-v49/symbols/sym-bobber.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/sym-bobber.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            104,
+            80,
+            414,
+            446
+          ],
+          "alphaBoundsNonzero": [
+            100,
+            77,
+            417,
+            448
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            623
+          ],
+          "sourceArtCrop": [
+            87,
+            52,
+            561,
+            609
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            325,
+            360
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            97,
+            101,
+            419,
+            419
+          ],
+          "alphaBoundsNonzero": [
+            94,
+            99,
+            422,
+            421
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            623
+          ],
+          "sourceArtCrop": [
+            678,
+            118,
+            1169,
+            602
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            926,
+            394
+          ],
+          "sourceTranslation": [
+            26,
+            -34
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            95,
+            64,
+            424,
+            439
+          ],
+          "alphaBoundsNonzero": [
+            92,
+            62,
+            426,
+            442
+          ],
+          "sourceRegion": [
+            0,
+            623,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            88,
+            636,
+            588,
+            1206
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            338,
+            967
+          ],
+          "sourceTranslation": [
+            -13,
+            20
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            106,
+            75,
+            413,
+            411
+          ],
+          "alphaBoundsNonzero": [
+            103,
+            72,
+            415,
+            414
+          ],
+          "sourceRegion": [
+            627,
+            623,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            691,
+            669,
+            1160,
+            1181
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            926,
+            984
+          ],
+          "sourceTranslation": [
+            26,
+            3
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        95,
+        64,
+        424,
+        446
+      ],
+      "unionAlphaBoundsNonzero": [
+        92,
+        62,
+        426,
+        448
+      ],
+      "pivot": [
+        0.50651,
+        0.552083
+      ],
+      "pivotPx": [
+        259.333,
+        282.667
+      ],
+      "registrationLandmark": "Center of the red/ivory body; squash and tilt retained",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/sym-bobber.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/sym-bobber.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/sym-bobber.webp",
+        "width": 1024,
+        "height": 1024,
+        "bounds": [
+          160,
+          66,
+          877,
+          964
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Drawn body squash, rebound, changing seam, and two contained water drops",
+      "sha256": "f1666aebdfab2908a298b53b57434bbc711b6123da9ef8fe58cc5c320d1b1ff4",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "sym-reel-v8": {
+      "url": "/kilo-animation-v49/symbols/sym-reel-v8.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/sym-reel-v8.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            77,
+            158,
+            450,
+            461
+          ],
+          "alphaBoundsNonzero": [
+            74,
+            155,
+            452,
+            464
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            632
+          ],
+          "sourceArtCrop": [
+            47,
+            169,
+            614,
+            632
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            155,
+            354
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            46,
+            145,
+            428,
+            409
+          ],
+          "alphaBoundsNonzero": [
+            43,
+            143,
+            431,
+            411
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            632
+          ],
+          "sourceArtCrop": [
+            632,
+            151,
+            1213,
+            554
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            786,
+            355
+          ],
+          "sourceTranslation": [
+            -4,
+            -1
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            113,
+            61,
+            461,
+            415
+          ],
+          "alphaBoundsNonzero": [
+            111,
+            59,
+            464,
+            418
+          ],
+          "sourceRegion": [
+            0,
+            632,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            96,
+            633,
+            626,
+            1171
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            149,
+            963
+          ],
+          "sourceTranslation": [
+            6,
+            18
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            113,
+            160,
+            430,
+            417
+          ],
+          "alphaBoundsNonzero": [
+            110,
+            157,
+            433,
+            420
+          ],
+          "sourceRegion": [
+            627,
+            632,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            725,
+            781,
+            1209,
+            1175
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            779,
+            963
+          ],
+          "sourceTranslation": [
+            3,
+            18
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        46,
+        61,
+        461,
+        461
+      ],
+      "unionAlphaBoundsNonzero": [
+        43,
+        59,
+        464,
+        464
+      ],
+      "pivot": [
+        0.285156,
+        0.544271
+      ],
+      "pivotPx": [
+        146.0,
+        278.667
+      ],
+      "registrationLandmark": "Visible front crank axle",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/sym-reel-v8.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/sym-reel-v8.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/sym-reel-v8.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          147,
+          245,
+          1110,
+          1077
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Crank and grip move through four clock positions, with redrawn foreshortening and spool details",
+      "sha256": "0d369176017c66d8bf814827dcedbf6b32db5ad52d26c13e4eefe51d1f081280",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "sym-case-v8": {
+      "url": "/kilo-animation-v49/symbols/sym-case-v8.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/sym-case-v8.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            61,
+            81,
+            453,
+            442
+          ],
+          "alphaBoundsNonzero": [
+            59,
+            78,
+            456,
+            444
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            606
+          ],
+          "sourceArtCrop": [
+            24,
+            53,
+            620,
+            602
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            249,
+            513
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            61,
+            153,
+            448,
+            441
+          ],
+          "alphaBoundsNonzero": [
+            59,
+            150,
+            451,
+            444
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            606
+          ],
+          "sourceArtCrop": [
+            633,
+            162,
+            1221,
+            602
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            858,
+            513
+          ],
+          "sourceTranslation": [
+            18,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            61,
+            39,
+            459,
+            443
+          ],
+          "alphaBoundsNonzero": [
+            59,
+            37,
+            462,
+            445
+          ],
+          "sourceRegion": [
+            0,
+            606,
+            629,
+            1254
+          ],
+          "sourceArtCrop": [
+            26,
+            612,
+            629,
+            1225
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            251,
+            1134
+          ],
+          "sourceTranslation": [
+            -2,
+            6
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            56,
+            99,
+            451,
+            441
+          ],
+          "alphaBoundsNonzero": [
+            54,
+            96,
+            453,
+            443
+          ],
+          "sourceRegion": [
+            629,
+            606,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            629,
+            708,
+            1228,
+            1229
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            861,
+            1141
+          ],
+          "sourceTranslation": [
+            15,
+            -1
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        56,
+        39,
+        459,
+        443
+      ],
+      "unionAlphaBoundsNonzero": [
+        54,
+        37,
+        462,
+        445
+      ],
+      "pivot": [
+        0.407552,
+        0.751302
+      ],
+      "pivotPx": [
+        208.667,
+        384.667
+      ],
+      "registrationLandmark": "Center of front handle on stationary case base",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/sym-case-v8.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/sym-case-v8.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/sym-case-v8.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          46,
+          98,
+          1232,
+          1167
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Hinged lid partially closes, springs wide open with raised catches, and settles",
+      "sha256": "6fab178aeddc7070fb1ddc074024d556818b8424b3755c467300599a50d6ebcb",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "sym-cash-roll": {
+      "url": "/kilo-animation-v49/symbols/sym-cash-roll.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/sym-cash-roll.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            89,
+            157,
+            454,
+            444
+          ],
+          "alphaBoundsNonzero": [
+            87,
+            155,
+            456,
+            447
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            650,
+            630
+          ],
+          "sourceArtCrop": [
+            66,
+            168,
+            620,
+            606
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            172,
+            443
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            89,
+            125,
+            443,
+            442
+          ],
+          "alphaBoundsNonzero": [
+            86,
+            122,
+            446,
+            444
+          ],
+          "sourceRegion": [
+            650,
+            0,
+            1254,
+            630
+          ],
+          "sourceArtCrop": [
+            685,
+            125,
+            1225,
+            609
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            792,
+            449
+          ],
+          "sourceTranslation": [
+            7,
+            -6
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            90,
+            122,
+            493,
+            447
+          ],
+          "alphaBoundsNonzero": [
+            87,
+            119,
+            495,
+            450
+          ],
+          "sourceRegion": [
+            0,
+            630,
+            687,
+            1254
+          ],
+          "sourceArtCrop": [
+            67,
+            659,
+            679,
+            1155
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            172,
+            987
+          ],
+          "sourceTranslation": [
+            0,
+            83
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            89,
+            158,
+            428,
+            447
+          ],
+          "alphaBoundsNonzero": [
+            86,
+            156,
+            430,
+            450
+          ],
+          "sourceRegion": [
+            687,
+            630,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            694,
+            714,
+            1211,
+            1156
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            801,
+            988
+          ],
+          "sourceTranslation": [
+            -2,
+            82
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        89,
+        122,
+        493,
+        447
+      ],
+      "unionAlphaBoundsNonzero": [
+        86,
+        119,
+        495,
+        450
+      ],
+      "pivot": [
+        0.307292,
+        0.660156
+      ],
+      "pivotPx": [
+        157.333,
+        338.0
+      ],
+      "registrationLandmark": "Center of left rolled-paper spiral",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/sym-cash-roll.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/sym-cash-roll.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/sym-cash-roll.webp",
+        "width": 1024,
+        "height": 1024,
+        "bounds": [
+          170,
+          243,
+          840,
+          791
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Loose bill unfurls, ripples, and curls back while roll core stays registered",
+      "sha256": "3a9fddab36ee6a4570c1c7d187831b078f74810982ae7139f7fe00351b36f810",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "scatter-king": {
+      "url": "/kilo-animation-v49/symbols/scatter-king.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/scatter-king.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            54,
+            65,
+            450,
+            450
+          ],
+          "alphaBoundsNonzero": [
+            52,
+            63,
+            452,
+            452
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "sourceArtCrop": [
+            13,
+            30,
+            614,
+            615
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            313,
+            608
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            60,
+            66,
+            442,
+            450
+          ],
+          "alphaBoundsNonzero": [
+            57,
+            64,
+            444,
+            453
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "sourceArtCrop": [
+            662,
+            31,
+            1242,
+            615
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            953,
+            608
+          ],
+          "sourceTranslation": [
+            -13,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            55,
+            67,
+            449,
+            450
+          ],
+          "alphaBoundsNonzero": [
+            52,
+            64,
+            452,
+            453
+          ],
+          "sourceRegion": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            14,
+            638,
+            613,
+            1220
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            313,
+            1213
+          ],
+          "sourceTranslation": [
+            0,
+            22
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            55,
+            67,
+            442,
+            450
+          ],
+          "alphaBoundsNonzero": [
+            53,
+            65,
+            445,
+            453
+          ],
+          "sourceRegion": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            653,
+            638,
+            1242,
+            1220
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            951,
+            1213
+          ],
+          "sourceTranslation": [
+            -11,
+            22
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        54,
+        65,
+        450,
+        450
+      ],
+      "unionAlphaBoundsNonzero": [
+        52,
+        63,
+        452,
+        453
+      ],
+      "pivot": [
+        0.490885,
+        0.875
+      ],
+      "pivotPx": [
+        251.333,
+        448.0
+      ],
+      "registrationLandmark": "Center of plaque lower edge",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/scatter-king.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/scatter-king.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/scatter-king.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          32,
+          42,
+          1224,
+          1205
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Crown turns slightly in depth, revealing changing side facets above the retained KING SCATTER plaque",
+      "sha256": "1bb648b31525186817ae37c93d328c2f191105946f627bd51d71db50e89d18c3",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "package-small": {
+      "url": "/kilo-animation-v49/symbols/package-small.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/package-small.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            74,
+            170,
+            467,
+            426
+          ],
+          "alphaBoundsNonzero": [
+            72,
+            168,
+            470,
+            429
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            645,
+            640
+          ],
+          "sourceArtCrop": [
+            43,
+            187,
+            641,
+            579
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            342,
+            385
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            85,
+            165,
+            457,
+            433
+          ],
+          "alphaBoundsNonzero": [
+            82,
+            162,
+            459,
+            435
+          ],
+          "sourceRegion": [
+            645,
+            0,
+            1254,
+            640
+          ],
+          "sourceArtCrop": [
+            650,
+            191,
+            1216,
+            600
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            933,
+            396
+          ],
+          "sourceTranslation": [
+            36,
+            -11
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            89,
+            174,
+            451,
+            424
+          ],
+          "alphaBoundsNonzero": [
+            86,
+            171,
+            454,
+            426
+          ],
+          "sourceRegion": [
+            0,
+            640,
+            620,
+            1254
+          ],
+          "sourceArtCrop": [
+            49,
+            697,
+            600,
+            1079
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            325,
+            889
+          ],
+          "sourceTranslation": [
+            17,
+            123
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            72,
+            166,
+            467,
+            430
+          ],
+          "alphaBoundsNonzero": [
+            69,
+            164,
+            470,
+            432
+          ],
+          "sourceRegion": [
+            620,
+            640,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            639,
+            702,
+            1240,
+            1104
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            941,
+            905
+          ],
+          "sourceTranslation": [
+            28,
+            107
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        72,
+        165,
+        467,
+        433
+      ],
+      "unionAlphaBoundsNonzero": [
+        69,
+        162,
+        470,
+        435
+      ],
+      "pivot": [
+        0.528646,
+        0.584635
+      ],
+      "pivotPx": [
+        270.667,
+        299.333
+      ],
+      "registrationLandmark": "Center of sealed bag body; fold deformation retained",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/package-small.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/package-small.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/package-small.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          48,
+          355,
+          1221,
+          998
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Sealed bag corners and zip seam flex with redrawn internal plastic folds",
+      "sha256": "e311b641b1d3f924a560e1209005805bfad8bb6c494645f99341a2232610af55",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "package-medium": {
+      "url": "/kilo-animation-v49/symbols/package-medium.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/package-medium.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            60,
+            169,
+            450,
+            408
+          ],
+          "alphaBoundsNonzero": [
+            57,
+            166,
+            452,
+            411
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "sourceArtCrop": [
+            21,
+            185,
+            614,
+            552
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            247,
+            391
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            52,
+            169,
+            445,
+            405
+          ],
+          "alphaBoundsNonzero": [
+            50,
+            167,
+            447,
+            408
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "sourceArtCrop": [
+            641,
+            195,
+            1237,
+            557
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            877,
+            400
+          ],
+          "sourceTranslation": [
+            -3,
+            -9
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            61,
+            162,
+            452,
+            401
+          ],
+          "alphaBoundsNonzero": [
+            58,
+            159,
+            455,
+            404
+          ],
+          "sourceRegion": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            18,
+            756,
+            613,
+            1123
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            242,
+            972
+          ],
+          "sourceTranslation": [
+            5,
+            46
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            53,
+            166,
+            445,
+            400
+          ],
+          "alphaBoundsNonzero": [
+            51,
+            164,
+            448,
+            403
+          ],
+          "sourceRegion": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            639,
+            764,
+            1235,
+            1122
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            874,
+            973
+          ],
+          "sourceTranslation": [
+            0,
+            45
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        52,
+        162,
+        452,
+        408
+      ],
+      "unionAlphaBoundsNonzero": [
+        50,
+        159,
+        455,
+        411
+      ],
+      "pivot": [
+        0.404948,
+        0.592448
+      ],
+      "pivotPx": [
+        207.333,
+        303.333
+      ],
+      "registrationLandmark": "Center of front crown mark",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/package-medium.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/package-medium.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/package-medium.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          17,
+          298,
+          1241,
+          1018
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Left and right straps tug in turn, visibly creasing and releasing wrapper edges",
+      "sha256": "fe6c210ce8880c148a1a7aa66a1436b04983e298ed5d315d4d362e3fbef5ccae",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "package-trophy": {
+      "url": "/kilo-animation-v49/symbols/package-trophy.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/package-trophy.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            53,
+            135,
+            456,
+            434
+          ],
+          "alphaBoundsNonzero": [
+            50,
+            133,
+            458,
+            437
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "sourceArtCrop": [
+            11,
+            135,
+            623,
+            591
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            105,
+            423
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            46,
+            130,
+            446,
+            423
+          ],
+          "alphaBoundsNonzero": [
+            43,
+            127,
+            448,
+            426
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "sourceArtCrop": [
+            636,
+            153,
+            1244,
+            601
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            740,
+            449
+          ],
+          "sourceTranslation": [
+            -8,
+            -26
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            53,
+            122,
+            456,
+            433
+          ],
+          "alphaBoundsNonzero": [
+            51,
+            119,
+            458,
+            435
+          ],
+          "sourceRegion": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            12,
+            694,
+            623,
+            1168
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            105,
+            1002
+          ],
+          "sourceTranslation": [
+            0,
+            48
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            51,
+            129,
+            452,
+            428
+          ],
+          "alphaBoundsNonzero": [
+            48,
+            126,
+            454,
+            431
+          ],
+          "sourceRegion": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            634,
+            711,
+            1243,
+            1168
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            730,
+            1008
+          ],
+          "sourceTranslation": [
+            2,
+            42
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        46,
+        122,
+        456,
+        434
+      ],
+      "unionAlphaBoundsNonzero": [
+        43,
+        119,
+        458,
+        437
+      ],
+      "pivot": [
+        0.220052,
+        0.634115
+      ],
+      "pivotPx": [
+        112.667,
+        324.667
+      ],
+      "registrationLandmark": "Center of crown mark on lower package",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/package-trophy.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/package-trophy.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/package-trophy.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          16,
+          239,
+          1238,
+          1079
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Central strap depresses wrapping, arches on release, then settles over the two-block stack",
+      "sha256": "8c9cd3595326bc6f734ba9f29ba10a8189131a5e6a41e848b2fbd6436de1e428",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    },
+    "package-king": {
+      "url": "/kilo-animation-v49/symbols/package-king.webp",
+      "pngUrl": "/kilo-animation-v49/symbols/package-king.png",
+      "width": 1024,
+      "height": 1024,
+      "cellWidth": 512,
+      "cellHeight": 512,
+      "frameCount": 4,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            55,
+            175,
+            455,
+            439
+          ],
+          "alphaBoundsNonzero": [
+            53,
+            173,
+            457,
+            442
+          ],
+          "sourceRegion": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "sourceArtCrop": [
+            15,
+            195,
+            622,
+            599
+          ],
+          "sourceOrigin": [
+            0,
+            0
+          ],
+          "sourceAnchor": [
+            269,
+            477
+          ],
+          "sourceTranslation": [
+            0,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            56,
+            173,
+            455,
+            435
+          ],
+          "alphaBoundsNonzero": [
+            53,
+            170,
+            458,
+            438
+          ],
+          "sourceRegion": [
+            627,
+            0,
+            1254,
+            627
+          ],
+          "sourceArtCrop": [
+            640,
+            201,
+            1246,
+            603
+          ],
+          "sourceOrigin": [
+            627,
+            0
+          ],
+          "sourceAnchor": [
+            893,
+            487
+          ],
+          "sourceTranslation": [
+            3,
+            -10
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            54,
+            174,
+            457,
+            438
+          ],
+          "alphaBoundsNonzero": [
+            51,
+            171,
+            460,
+            440
+          ],
+          "sourceRegion": [
+            0,
+            627,
+            627,
+            1254
+          ],
+          "sourceArtCrop": [
+            14,
+            739,
+            626,
+            1143
+          ],
+          "sourceOrigin": [
+            0,
+            627
+          ],
+          "sourceAnchor": [
+            270,
+            1023
+          ],
+          "sourceTranslation": [
+            -1,
+            81
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "alphaBounds": [
+            55,
+            172,
+            452,
+            436
+          ],
+          "alphaBoundsNonzero": [
+            53,
+            169,
+            454,
+            439
+          ],
+          "sourceRegion": [
+            627,
+            627,
+            1254,
+            1254
+          ],
+          "sourceArtCrop": [
+            640,
+            742,
+            1243,
+            1147
+          ],
+          "sourceOrigin": [
+            627,
+            627
+          ],
+          "sourceAnchor": [
+            894,
+            1029
+          ],
+          "sourceTranslation": [
+            2,
+            75
+          ]
+        }
+      ],
+      "unionAlphaBounds": [
+        54,
+        172,
+        457,
+        439
+      ],
+      "unionAlphaBoundsNonzero": [
+        51,
+        169,
+        460,
+        442
+      ],
+      "pivot": [
+        0.433594,
+        0.704427
+      ],
+      "pivotPx": [
+        222.0,
+        360.667
+      ],
+      "registrationLandmark": "Center of crown mark on lower central package",
+      "registration": "Per-frame translation to stable body landmark, shared 2/3 scale, no per-frame alpha normalization",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceFile": "art/kilo-animation-v49/symbols/originals/package-king.png",
+      "promptFile": "art/kilo-animation-v49/symbols/prompts/package-king.txt",
+      "idle": {
+        "url": "/kilo-symbols-v47/package-king.webp",
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          8,
+          231,
+          1243,
+          1013
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durationsMs": [
+        90,
+        125,
+        145,
+        140,
+        120
+      ],
+      "action": "Two straps alternately tighten and rebound, changing wrapper creases on the intact six-block stack",
+      "sha256": "03a5059e9b06f6e68c45724dbb31921e3d242f2f9130e040f94f08b7065bef08",
+      "validation": {
+        "equalCells": true,
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentCellBorders": true,
+        "crossCellContamination": false,
+        "alphaLosslessRoundTrip": true
+      }
+    }
+  },
+  "limitations": [
+    "Four authored key poses per asset, intended for brief reactions, not long smooth loops.",
+    "Imagegen redrew fine edges and details between frames; small residual line/facet variation remains.",
+    "The reference case is open, so its cycle uses open, partly closed, wide open, and settling states.",
+    "Crown text is preserved semantically but redraw may produce subpixel plaque-edge variation."
+  ]
+}

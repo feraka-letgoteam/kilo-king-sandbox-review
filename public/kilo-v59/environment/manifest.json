@@ -1,0 +1,92 @@
+{
+  "version": 59,
+  "role": "Dedicated Max-spin environment and one coherent giant boat super-symbol",
+  "runtimeIntegration": "Root-owned; this manifest does not modify routing or mechanics",
+  "assets": [
+    {
+      "file": "getaway-desktop.webp",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 320280,
+      "sha256": "1303853e6e99f47d6ff2ab79de86c87273746db7ab7df85aa72b88b6cfea0478",
+      "alpha": false
+    },
+    {
+      "file": "getaway-portrait.webp",
+      "width": 1080,
+      "height": 2400,
+      "bytes": 341296,
+      "sha256": "74afae98c6c5f1b40b00804726df005ee310931ec186696c5ea03387f047e430",
+      "alpha": false
+    },
+    {
+      "file": "getaway-super-symbol.webp",
+      "width": 1600,
+      "height": 960,
+      "bytes": 859234,
+      "sha256": "b682df8fa474733e0444b0a161912197011ca244bd8a2fdef4b1641880663051",
+      "alpha": true,
+      "ink": {
+        "threshold": 8,
+        "bounds": {
+          "x": 53,
+          "y": 152,
+          "width": 1493,
+          "height": 741
+        },
+        "normalized": {
+          "left": 0.033125,
+          "top": 0.15833333333333333,
+          "right": 0.96625,
+          "bottom": 0.9302083333333333
+        },
+        "coverage": 0.42069661458333335
+      }
+    }
+  ],
+  "desktop": {
+    "stageSafe": {
+      "x": 300,
+      "y": 120,
+      "width": 1050,
+      "height": 632
+    },
+    "kingFoot": {
+      "x": 1708.8,
+      "y": 882.36
+    }
+  },
+  "portrait": {
+    "stageSafe": {
+      "x": 60,
+      "y": 280,
+      "width": 960,
+      "height": 578
+    },
+    "kingFoot": {
+      "x": 885.6,
+      "y": 2088
+    }
+  },
+  "superSymbol": {
+    "direction": "right",
+    "canvas": {
+      "width": 1600,
+      "height": 960
+    },
+    "nativeInkAspect": 2.018292682926829,
+    "registration": "Uniformly scaled from generated source with transparent padding; no segmented redraw, motion or baked UI",
+    "recommendedBoardPlacement": "Fit whole canvas to the existing 5:3 board; use measured ink bounds for stage stopping and clip to board."
+  },
+  "authoring": {
+    "tool": "image_gen built-in",
+    "prompts": "art/kilo-v59/environment/prompts.json",
+    "source": "art/kilo-v59/environment/raw"
+  },
+  "limits": [
+    "Environment plates are authored flattened artwork; this handoff does not claim independently animated water or lamps.",
+    "The desktop bay retains subdued distant skyline and water detail behind the game area. Root can use its feature treatment to quiet the plate as needed.",
+    "Super-symbol is one coherent still illustration for segmented runtime motion, not a frame-by-frame boat animation.",
+    "Artwork was inspected offline; live browser compositing and mobile review are root-owned."
+  ]
+}

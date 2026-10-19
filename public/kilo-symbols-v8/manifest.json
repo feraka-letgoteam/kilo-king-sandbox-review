@@ -1,0 +1,170 @@
+{
+  "fish-small": {
+    "file": "assets/fish-small.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      43,
+      234,
+      1213,
+      878
+    ],
+    "rawBounds": [
+      0,
+      27,
+      1240,
+      1206
+    ],
+    "transparentFraction": 0.726
+  },
+  "fish-medium": {
+    "file": "assets/fish-medium.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      33,
+      172,
+      1239,
+      881
+    ],
+    "rawBounds": [
+      30,
+      15,
+      1253,
+      1254
+    ],
+    "transparentFraction": 0.66
+  },
+  "fish-trophy": {
+    "file": "assets/fish-trophy.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      20,
+      151,
+      1238,
+      1046
+    ],
+    "rawBounds": [
+      0,
+      39,
+      1253,
+      1254
+    ],
+    "transparentFraction": 0.608
+  },
+  "fish-king": {
+    "file": "assets/fish-king.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      21,
+      152,
+      1237,
+      951
+    ],
+    "rawBounds": [
+      14,
+      33,
+      1240,
+      1254
+    ],
+    "transparentFraction": 0.61
+  },
+  "sym-reel-v8": {
+    "file": "assets/sym-reel-v8.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      39,
+      249,
+      1221,
+      1075
+    ],
+    "rawBounds": [
+      31,
+      31,
+      1224,
+      1232
+    ],
+    "transparentFraction": 0.646
+  },
+  "sym-case-v8": {
+    "file": "assets/sym-case-v8.png",
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      44,
+      56,
+      1234,
+      1209
+    ],
+    "rawBounds": [
+      27,
+      49,
+      1239,
+      1222
+    ],
+    "transparentFraction": 0.38
+  },
+  "sym-10": {
+    "file": "assets/sym-10.png",
+    "width": 1024,
+    "height": 1024,
+    "bounds": [
+      82,
+      200,
+      942,
+      823
+    ],
+    "existing": true
+  },
+  "sym-j": {
+    "file": "assets/sym-j.png",
+    "width": 1024,
+    "height": 1024,
+    "bounds": [
+      117,
+      82,
+      907,
+      942
+    ],
+    "existing": true
+  },
+  "sym-q": {
+    "file": "assets/sym-q.png",
+    "width": 1024,
+    "height": 1024,
+    "bounds": [
+      82,
+      109,
+      942,
+      915
+    ],
+    "existing": true
+  },
+  "sym-k": {
+    "file": "assets/sym-k.png",
+    "width": 1024,
+    "height": 1024,
+    "bounds": [
+      82,
+      161,
+      942,
+      863
+    ],
+    "existing": true
+  },
+  "sym-a": {
+    "file": "assets/sym-a.png",
+    "width": 1024,
+    "height": 1024,
+    "bounds": [
+      82,
+      150,
+      942,
+      874
+    ],
+    "existing": true
+  }
+}

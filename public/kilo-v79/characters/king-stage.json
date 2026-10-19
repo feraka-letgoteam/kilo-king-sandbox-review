@@ -1,0 +1,120 @@
+{
+  "version": 79,
+  "character": "king",
+  "facing": "left",
+  "image": "/kilo-v79/characters/stage-king.webp",
+  "imageSize": {
+    "width": 1024,
+    "height": 1536
+  },
+  "canvas": {
+    "width": 512,
+    "height": 768
+  },
+  "pixelRatio": 2,
+  "anchors": {
+    "footBaseline": 755.5,
+    "bodyCenter": {
+      "x": 333,
+      "y": 413
+    },
+    "pelvis": {
+      "x": 331,
+      "y": 418
+    },
+    "sternum": {
+      "x": 353,
+      "y": 229
+    },
+    "neck": {
+      "x": 357,
+      "y": 176
+    },
+    "headCenter": {
+      "x": 354,
+      "y": 127
+    },
+    "rodGrip": {
+      "x": 229,
+      "y": 272
+    }
+  },
+  "inkBounds": {
+    "x": 7.5,
+    "y": 5.5,
+    "width": 499.5,
+    "height": 750.5
+  },
+  "blink": {
+    "image": "/kilo-v79/characters/stage-king-blink.webp",
+    "target": {
+      "x": 309.5,
+      "y": 105.5,
+      "width": 49.0,
+      "height": 25.5
+    },
+    "imageTarget": {
+      "x": 619,
+      "y": 211,
+      "width": 98,
+      "height": 51
+    },
+    "frames": {
+      "half": {
+        "x": 0,
+        "y": 0,
+        "width": 98,
+        "height": 51
+      },
+      "closed": {
+        "x": 98,
+        "y": 0,
+        "width": 98,
+        "height": 51
+      }
+    },
+    "durationsMs": [
+      45,
+      70,
+      45
+    ],
+    "notes": "New v79 inked drawing. Only the registered eye/brow region is composited; the exact new body and head silhouette remain the master."
+  },
+  "reaction": {
+    "image": "/kilo-v79/characters/stage-king-reaction.webp",
+    "target": {
+      "x": 309.5,
+      "y": 105.5,
+      "width": 49.0,
+      "height": 25.5
+    },
+    "imageTarget": {
+      "x": 619,
+      "y": 211,
+      "width": 98,
+      "height": 51
+    },
+    "frame": {
+      "x": 0,
+      "y": 0,
+      "width": 98,
+      "height": 51
+    },
+    "kind": "restrained raised brow",
+    "suggestedHoldMs": 280,
+    "notes": "New v79 inked drawing. Only the registered eye/brow region is composited; the exact new body and head silhouette remain the master."
+  },
+  "motionGuidance": {
+    "feet": "fixed",
+    "breathing": "Localized torso deformation, not whole-body translation or scaling.",
+    "reaction": "Use one coherent body with restrained head / shoulder motion. Do not play the rejected raw redraw sheet.",
+    "reducedMotion": "neutral master; no deformation or recurring blink",
+    "noDisconnectedJoints": true
+  },
+  "excludedAssets": [
+    {
+      "file": "art/kilo-v58/characters/king-reaction-sheet-source.png",
+      "reason": "Generated six-pose sheet changes lower-body drawing and registration; review only, not runtime ready."
+    }
+  ]
+}

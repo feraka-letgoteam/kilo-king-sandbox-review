@@ -1,0 +1,285 @@
+/* v79 illustrated marine finish. This file owns PAINT ONLY: the accepted
+   control coordinates, target sizes, numeric sizes and responsive allocations
+   remain exclusively in the existing layout and component stylesheets. */
+.kk-app {
+  --kk-ink: #06182e;
+  --kk-painted-navy: #102d4c;
+  --kk-painted-teal: #176577;
+  --kk-painted-gold: #ffc54f;
+  --kk-painted-cream: #fff1bd;
+  --kk-painted-coral: #ff795d;
+}
+
+/* Hard cel planes replace the photographic clearcoat; all edges are inset. */
+.kk-app .sc-system[data-variant] :is(.sc-circle,.sc-spin,.sc-action-plate) {
+  background: #102d4c;
+  border-color: #eab04a;
+  box-shadow: inset 0 0 0 2px #06182e, inset 0 4px 0 #33778c,
+    inset 0 -5px 0 #06182e;
+  color: #fff7dd;
+  opacity: 1;
+  filter: none;
+}
+.kk-app .sc-system[data-variant] .sc-spin {
+  background: #124a61;
+  border-color: #ffc54f;
+  box-shadow: inset 0 0 0 2px #06182e, inset 0 5px 0 #54bfca,
+    inset 0 -6px 0 #071b33;
+}
+.kk-app .sc-system[data-variant] :is(.sc-circle,.sc-spin,.sc-well)::after {
+  background: none;
+  box-shadow: inset 0 1px 0 #fff1bd55;
+}
+.kk-app .sc-system[data-variant] .sc-readout-card,
+.kk-app .sc-system[data-variant] .sc-bet::before {
+  background: #091e35;
+  border-color: #0a1424;
+  box-shadow: inset 0 2px 0 #06111f, inset 0 -2px 0 #33788b,
+    inset 2px 0 0 #123c53, inset -2px 0 0 #071727;
+}
+.kk-app .sc-system[data-variant] .sc-readout {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+.kk-app .sc-system[data-variant] .sc-label { color: #d6e4db; }
+.kk-app .sc-system[data-variant] .sc-well strong { color: #fff6d9; }
+.kk-app .sc-system[data-variant] .sc-icon { color: #fff8e0; }
+.kk-app .sc-system[data-variant] .sc-badge {
+  background: #173b54;
+  border-color: #ffcb62;
+  color: #fff8e0;
+  box-shadow: inset 0 -2px #06182e;
+}
+.kk-app .sc-system[data-variant] :is(.sc-circle[aria-pressed="true"],.sc-badge[data-active="true"]) {
+  background: #166d79;
+  border-color: #71f0dc;
+}
+.kk-app .sc-system[data-variant] .sc-button:disabled {
+  opacity: 1;
+  filter: none;
+}
+
+/* One ink/paint system for every actionable overlay, never a new layout. */
+.kk-app :is(.kk-dialog,.kk-quick-menu,.kk-quick-volume),
+#kilo-auto-takeover .kk-autoplay-card {
+  background-color: #102d4c;
+  border-color: #eab04a;
+  box-shadow: inset 0 0 0 2px #06182e, inset 0 5px 0 #2d7186,
+    inset 0 -5px 0 #06182e, 0 8px 0 #03102066;
+  color: #fff5da;
+}
+.kk-app :is(.kk-dialog-head,.kk-settings-group,.kk-rules-section),
+.kk-app .kk-quick-row[aria-expanded="true"] {
+  background-color: #123d57;
+  border-color: #32778b;
+}
+.kk-app .kk-quick-menu .kk-quick-row { color: #fff7df; }
+.kk-app .kk-quick-menu .kk-quick-row:not([aria-disabled="true"]):hover {
+  background: #1d5e73;
+}
+.kk-app :is(.kk-dialog h1,.kk-dialog h2,.kk-dialog h3),
+#kilo-auto-takeover h2 {
+  color: #ffe09b;
+  text-shadow: 0 2px 0 #06182e;
+}
+#kilo-auto-takeover .kk-auto-count-grid button {
+  background: #0b223a;
+  border-color: #235671;
+  box-shadow: inset 0 2px 0 #06182e, inset 0 -2px 0 #32778b;
+  color: #fff7df;
+}
+#kilo-auto-takeover .kk-auto-count-grid button[aria-pressed="true"] {
+  background: #167081;
+  border-color: #8ce9d2;
+  box-shadow: inset 0 2px 0 #4cc6c3, inset 0 -3px 0 #0a354b;
+}
+#kilo-auto-takeover .kk-auto-start,
+.ks-loading .ks-primary,
+#kilo-completion-takeover .ks-primary,
+.kk-reel-completion button {
+  background: #ffc54f;
+  color: #13263c;
+  border-color: #fff1bd;
+  box-shadow: inset 0 3px 0 #fff1bd, inset 0 -4px 0 #d58028,
+    0 3px 0 #06182e;
+}
+#kilo-auto-takeover button:disabled,
+.ks-loading .ks-primary:disabled {
+  background: #24465b;
+  color: #e6d8b4;
+  border-color: #bd9e62;
+  opacity: 1;
+}
+
+/* New commissioned emblems carry the catalogue. The accepted cards and full
+   purchase disclosure remain in their original measured boxes. */
+#kilo-features-takeover .kf-card {
+  --card-paint: #147c84;
+  background: #0e2c43;
+  border-color: #42bac0;
+  box-shadow: inset 0 0 0 2px #07182c, inset 0 -4px 0 #06182e,
+    0 4px 0 #06182e;
+}
+#kilo-features-takeover .kf-card[data-feature="yacht"] {
+  --card-paint: #b86037;
+  background: #322b3a;
+  border-color: #ffbf62;
+}
+#kilo-features-takeover .kf-card[data-feature="getaway"] {
+  --card-paint: #266f9a;
+  background: #112f50;
+  border-color: #6fc6e5;
+}
+#kilo-features-takeover .kf-art-wrap::before {
+  background: linear-gradient(155deg,#fff1bd24 0 31%,transparent 31% 69%,#06182e48 69%);
+}
+#kilo-features-takeover .kf-art-title {
+  font-family: "Source Sans 3",sans-serif;
+  font-weight: 900;
+  color: #fff0bc;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 3px #09213a;
+  text-shadow: 0 3px 0 #052035;
+}
+#kilo-features-takeover :is(.kf-card h2,.kf-confirm h2,.kf-header h1) {
+  color: #fff0c2;
+  text-shadow: 0 2px 0 #06182e;
+}
+#kilo-features-takeover .kf-ante {
+  background: #155464;
+  border-color: #63cebf;
+  box-shadow: inset 0 0 0 2px #08243a, inset 0 -4px 0 #0b3447;
+}
+#kilo-features-takeover .kf-ante-emblem { background: #217d87; }
+#kilo-features-takeover :is(.kf-action,.kf-ante-toggle) {
+  background: #ffcd62;
+  color: #10273c;
+  border-color: #fff1bd;
+  box-shadow: inset 0 3px 0 #fff1bd, inset 0 -4px 0 #d88631,0 2px 0 #06182e;
+}
+#kilo-features-takeover .kf-ante-toggle[aria-pressed="true"] {
+  background: #6ce2c9;
+  color: #082d42;
+  border-color: #c3ffdf;
+  box-shadow: inset 0 2px #c3ffdf,inset 0 -3px #28888b;
+}
+#kilo-features-takeover .kf-action:disabled {
+  background: #294758;
+  border-color: #c4a168;
+  color: #fff0c8;
+  box-shadow: inset 0 -3px 0 #112c43;
+}
+#kilo-features-takeover .kf-confirm {
+  background: #112f49;
+  border-color: #ffd379;
+  box-shadow: inset 0 0 0 2px #07182c, inset 0 -4px #06182e,0 8px #03102066;
+}
+#kilo-features-takeover .kf-confirm-hero { background: #186b7d; }
+#kilo-features-takeover .kf-confirm-wallet { background: #081e35; }
+#kilo-features-takeover :is(.kf-close,.kf-back,.kf-bet button) {
+  background-color: #143d58;
+  border-color: #edbd64;
+  box-shadow: inset 0 2px #347f91,inset 0 -3px #06182e;
+}
+#kilo-features-takeover .kf-bet .kf-bet-value { background: transparent; box-shadow:none; }
+
+/* Keep the exact entry/completion durations and their stable final amounts. */
+.ks-loading .ks-eyebrow,.ks-completion .ks-eyebrow { color: #ffdf96; }
+.ks-loading-track span { background: #153d58; }
+.ks-loading-track span[data-complete="true"] { background: #6ae3cf; }
+.ks-bonus-entry[data-scene] .ks-entry-hero { --entry-number-y: 86%; }
+.ks-entry-award { color:#fff0b8; text-shadow:0 3px #06182e,2px 0 #06182e,-2px 0 #06182e; }
+.ks-entry-heading { color: #ffe09a; text-shadow: 0 3px #06182e; }
+.ks-completion-award > strong { color:#ffdf85; text-shadow:0 3px #071b34; }
+.kk-reel-completion {
+  background: #102d4c;
+  border-color: #ffd075;
+  box-shadow: inset 0 0 0 2px #06182e, inset 0 4px #347d8f,inset 0 -4px #06182e;
+}
+.kk-reel-completion p { color: #87ead7; }
+.kk-reel-completion strong { color: #ffe6a7; text-shadow: 0 2px #06182e; }
+.kk-reel-completion[data-result="loss"] { border-color: #ee9772; }
+
+#kilo-info-takeover .kk-scrim { background: #06182ef0; }
+#kilo-info-takeover :is(h2,h3) {
+  color:#ffe0a0;
+  text-shadow:0 2px #06182e;
+  border-color:#367c8c;
+}
+#kilo-info-takeover .kk-info-intro { color:#d5e9e4; }
+#kilo-info-takeover .kk-info-close {
+  background:#143d58;
+  box-shadow:inset 0 2px #3e8d9d,inset 0 -3px #06182e;
+  color:#fff0bc;
+}
+.ks-loading[data-reduced="false"] .ks-loading-logo {
+  animation:kk-painted-logo-arrive 360ms cubic-bezier(.2,.75,.25,1) both;
+}
+.ks-loading[data-reduced="false"] .ks-loading-gate {
+  animation:kk-painted-gate-arrive 240ms cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes kk-painted-logo-arrive {
+  0% { opacity:0;transform:translateY(8px) rotate(-2deg) scale(.94); }
+  25% { opacity:1;transform:translateY(8px) rotate(-2deg) scale(.93); }
+  70% { opacity:1;transform:translateY(-2px) rotate(.4deg) scale(1.025); }
+  100% { opacity:1;transform:none; }
+}
+@keyframes kk-painted-gate-arrive {
+  0% { opacity:0;transform:translateY(7px); }
+  75% { opacity:1;transform:translateY(-1px); }
+  100% { opacity:1;transform:none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ks-loading[data-reduced="false"] :is(.ks-loading-logo,.ks-loading-gate) { animation:none; }
+}
+
+/* The same clocks now have a preload, contact and short recovery. These
+   keyframes replace only paint transforms, never host phase callbacks. */
+@keyframes ks-entry-arrive {
+  0% { opacity:0;transform:translateY(8px) scale(.94); }
+  30% { opacity:1;transform:translateY(8px) scale(.925); }
+  73% { opacity:1;transform:translateY(-2px) scale(1.025); }
+  100% { opacity:1;transform:none; }
+}
+@keyframes ks-result-contact {
+  0% { transform:translateY(7px) scale(.98); }
+  30% { transform:translateY(7px) scale(.97); }
+  72% { transform:translateY(-2px) scale(1.016); }
+  100% { transform:none; }
+}
+@keyframes kk-result-contact {
+  0% { transform:translateY(5px) scale(.985); }
+  30% { transform:translateY(5px) scale(.98); }
+  72% { transform:translateY(-1px) scale(1.012); }
+  100% { transform:none; }
+}
+@keyframes kf-deck-in {
+  0% { opacity:0;transform:translateY(9px) rotate(-1deg); }
+  28% { opacity:1;transform:translateY(9px) rotate(-1deg); }
+  78% { opacity:1;transform:translateY(-1px) rotate(.2deg); }
+  100% { opacity:1;transform:none; }
+}
+
+/* The settled amount stays exact. Only the earned result's ink makes a finite
+   contact; its rail, Continue target and all controls keep their layout. */
+@keyframes kk-earned-number {
+  0% { transform:translateY(4px) scale(.88); }
+  24% { transform:translateY(4px) scale(.86); }
+  60% { transform:translateY(-1px) scale(1.075); }
+  82% { transform:translateY(.5px) scale(.985); }
+  100% { transform:none; }
+}
+.kk-reel-completion:not([data-feature="getaway"])[data-result="win"] strong {
+  transform-origin:left center;
+  animation:kk-earned-number 360ms ease-in-out both;
+}
+.ks-completion[data-celebrate="true"] .ks-completion-award > strong {
+  display:inline-block;transform-origin:center;
+  animation:kk-earned-number 360ms ease-in-out both;
+}
+[data-reduced="1"] .kk-reel-completion:not([data-feature="getaway"])[data-result="win"] strong,
+.ks-completion[data-reduced="true"][data-celebrate="true"] .ks-completion-award > strong { animation:none; }
+@media(prefers-reduced-motion:reduce) {
+  .kk-reel-completion strong,.ks-completion .ks-completion-award > strong { animation:none!important; }
+}

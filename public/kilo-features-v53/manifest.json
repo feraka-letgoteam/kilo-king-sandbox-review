@@ -1,0 +1,35 @@
+{
+  "version": 53,
+  "boat": {
+    "url": "/kilo-features-v53/getaway-speedboat.webp",
+    "size": [
+      896,
+      448
+    ],
+    "anchor": [
+      0.5,
+      0.64
+    ],
+    "cargoAttachment": [
+      0.3,
+      0.34
+    ]
+  },
+  "case": {
+    "url": "/kilo-features-v53/getaway-hardcase.webp",
+    "size": [
+      384,
+      384
+    ],
+    "anchor": [
+      0.5,
+      0.53
+    ]
+  },
+  "presentation": {
+    "introMaximumMs": 1100,
+    "getawayRevealMs": 980,
+    "loop": false,
+    "payoutAuthority": "recorded feature event only"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "version": 58,
+  "character": "king",
+  "facing": "left",
+  "image": "/kilo-v58/characters/king-stage-master.webp",
+  "imageSize": {
+    "width": 1024,
+    "height": 1536
+  },
+  "canvas": {
+    "width": 512,
+    "height": 768
+  },
+  "pixelRatio": 2,
+  "anchors": {
+    "footBaseline": 755.5,
+    "bodyCenter": {
+      "x": 333,
+      "y": 413
+    },
+    "pelvis": {
+      "x": 331,
+      "y": 418
+    },
+    "sternum": {
+      "x": 353,
+      "y": 229
+    },
+    "neck": {
+      "x": 357,
+      "y": 176
+    },
+    "headCenter": {
+      "x": 354,
+      "y": 127
+    },
+    "rodGrip": {
+      "x": 229,
+      "y": 272
+    }
+  },
+  "inkBounds": {
+    "x": 7.5,
+    "y": 5.5,
+    "width": 499.5,
+    "height": 750.5
+  },
+  "blink": {
+    "image": "/kilo-v58/characters/king-stage-blink.webp",
+    "target": {
+      "x": 295.5,
+      "y": 70.5,
+      "width": 115,
+      "height": 111
+    },
+    "imageTarget": {
+      "x": 591,
+      "y": 141,
+      "width": 230,
+      "height": 222
+    },
+    "frames": {
+      "half": {
+        "x": 0,
+        "y": 0,
+        "width": 230,
+        "height": 222
+      },
+      "closed": {
+        "x": 230,
+        "y": 0,
+        "width": 230,
+        "height": 222
+      }
+    },
+    "durationsMs": [
+      45,
+      70,
+      45
+    ],
+    "notes": "Only small registered eyelid regions differ from the master. Head silhouette and all non-eye pixels are copied from the exact master crop."
+  },
+  "reaction": {
+    "image": "/kilo-v58/characters/king-stage-reaction.webp",
+    "target": {
+      "x": 295.5,
+      "y": 70.5,
+      "width": 115,
+      "height": 111
+    },
+    "imageTarget": {
+      "x": 591,
+      "y": 141,
+      "width": 230,
+      "height": 222
+    },
+    "frame": {
+      "x": 0,
+      "y": 0,
+      "width": 230,
+      "height": 222
+    },
+    "kind": "restrained raised brow",
+    "suggestedHoldMs": 280,
+    "notes": "Only the near eyebrow region changes. Use rarely for a meaningful win; do not trigger every base spin."
+  },
+  "motionGuidance": {
+    "feet": "fixed",
+    "breathing": "Localized torso deformation, not whole-body translation or scaling.",
+    "reaction": "Use one coherent body with restrained head / shoulder motion. Do not play the rejected raw redraw sheet.",
+    "reducedMotion": "neutral master; no deformation or recurring blink",
+    "noDisconnectedJoints": true
+  },
+  "excludedAssets": [
+    {
+      "file": "art/kilo-v58/characters/king-reaction-sheet-source.png",
+      "reason": "Generated six-pose sheet changes lower-body drawing and registration; review only, not runtime ready."
+    }
+  ]
+}

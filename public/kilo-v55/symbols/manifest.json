@@ -1,0 +1,685 @@
+{
+  "version": 55,
+  "kind": "illustration-assets",
+  "alphaVisibilityThreshold": 16,
+  "transformPolicy": "uniform scale + rectangular transparent-margin crop + translation; no color edits or painted masks",
+  "geometryPolicy": "original canvases and renderer fit budgets retained; live reel geometry unchanged",
+  "symbols": [
+    {
+      "name": "sym-bobber",
+      "old": "/kilo-symbols-v47/sym-bobber.webp",
+      "new": "/kilo-v55/symbols/sym-bobber.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "preservedRuntimeBounds": [
+        160,
+        66,
+        877,
+        964
+      ],
+      "visibleAlphaBounds": [
+        160,
+        67,
+        876,
+        963
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          196,
+          79,
+          1075,
+          1178
+        ],
+        "marginCrop": [
+          194,
+          77,
+          1077,
+          1180
+        ],
+        "uniformScale": 0.8156996587030717,
+        "translation": [
+          158,
+          65
+        ]
+      },
+      "bytes": 108114,
+      "sha256": "442a2a3eed30def2949c5810fa8025274563a90cd34e02665900f1b80d89a064"
+    },
+    {
+      "name": "sym-cash-roll",
+      "old": "/kilo-symbols-v47/sym-cash-roll.webp",
+      "new": "/kilo-v55/symbols/sym-cash-roll.webp",
+      "canvas": [
+        1024,
+        1024
+      ],
+      "preservedRuntimeBounds": [
+        170,
+        243,
+        840,
+        791
+      ],
+      "visibleAlphaBounds": [
+        170,
+        255,
+        840,
+        779
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          118,
+          242,
+          1190,
+          1079
+        ],
+        "marginCrop": [
+          116,
+          240,
+          1192,
+          1081
+        ],
+        "uniformScale": 0.625,
+        "translation": [
+          169,
+          254
+        ]
+      },
+      "bytes": 96456,
+      "sha256": "615d8c905e2fd602446a892887c262631502c7f298775dd5921030f30c28cdef"
+    },
+    {
+      "name": "sym-reel-v8",
+      "old": "/kilo-symbols-v47/sym-reel-v8.webp",
+      "new": "/kilo-v55/symbols/sym-reel-v8.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        147,
+        245,
+        1110,
+        1077
+      ],
+      "visibleAlphaBounds": [
+        146,
+        250,
+        1110,
+        1072
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          63,
+          164,
+          1196,
+          1132
+        ],
+        "marginCrop": [
+          61,
+          162,
+          1198,
+          1134
+        ],
+        "uniformScale": 0.8499558693733451,
+        "translation": [
+          145,
+          248
+        ]
+      },
+      "bytes": 161900,
+      "sha256": "91b7a12b794fb42a99740baf4f717a0d10b1c90ffe34381013b212e5ee501911"
+    },
+    {
+      "name": "sym-case-v8",
+      "old": "/kilo-symbols-v47/sym-case-v8.webp",
+      "new": "/kilo-v55/symbols/sym-case-v8.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        46,
+        98,
+        1232,
+        1167
+      ],
+      "visibleAlphaBounds": [
+        47,
+        98,
+        1230,
+        1167
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          37,
+          97,
+          1238,
+          1182
+        ],
+        "marginCrop": [
+          35,
+          95,
+          1240,
+          1184
+        ],
+        "uniformScale": 0.9852534562211982,
+        "translation": [
+          45,
+          96
+        ]
+      },
+      "bytes": 256132,
+      "sha256": "028a2f22be58b66985d853110513d3850e14ad32bcf3e50836f39a3b4c616e8d"
+    },
+    {
+      "name": "package-small",
+      "old": "/kilo-symbols-v47/package-small.webp",
+      "new": "/kilo-v55/symbols/package-small.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        48,
+        355,
+        1221,
+        998
+      ],
+      "visibleAlphaBounds": [
+        48,
+        391,
+        1221,
+        963
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          115,
+          166,
+          1567,
+          872
+        ],
+        "marginCrop": [
+          113,
+          164,
+          1569,
+          874
+        ],
+        "uniformScale": 0.8078512396694215,
+        "translation": [
+          46,
+          390
+        ]
+      },
+      "bytes": 219602,
+      "sha256": "5fd977b8dacf721c52c07cfd7951a8aa7f5fe7fa03fc22a52734945630bb811b"
+    },
+    {
+      "name": "package-medium",
+      "old": "/kilo-symbols-v47/package-medium.webp",
+      "new": "/kilo-v55/symbols/package-medium.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        17,
+        298,
+        1241,
+        1018
+      ],
+      "visibleAlphaBounds": [
+        17,
+        324,
+        1240,
+        990
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          42,
+          166,
+          1501,
+          960
+        ],
+        "marginCrop": [
+          40,
+          164,
+          1503,
+          962
+        ],
+        "uniformScale": 0.8389307745030843,
+        "translation": [
+          15,
+          323
+        ]
+      },
+      "bytes": 182920,
+      "sha256": "3400ce399d16b984a6aaa4e4cd0a6452576d637e59550cfc95385be90f72a38e"
+    },
+    {
+      "name": "package-trophy",
+      "old": "/kilo-symbols-v47/package-trophy.webp",
+      "new": "/kilo-v55/symbols/package-trophy.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        16,
+        239,
+        1238,
+        1079
+      ],
+      "visibleAlphaBounds": [
+        15,
+        265,
+        1237,
+        1053
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          65,
+          93,
+          1495,
+          1014
+        ],
+        "marginCrop": [
+          63,
+          91,
+          1497,
+          1016
+        ],
+        "uniformScale": 0.8545454545454545,
+        "translation": [
+          14,
+          264
+        ]
+      },
+      "bytes": 178840,
+      "sha256": "00f8e4ff620373ac1d4addcb14b3deb0004d2dfef326923f75d7a2ebe90224f1"
+    },
+    {
+      "name": "package-king",
+      "old": "/kilo-symbols-v47/package-king.webp",
+      "new": "/kilo-v55/symbols/package-king.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        8,
+        231,
+        1243,
+        1013
+      ],
+      "visibleAlphaBounds": [
+        8,
+        238,
+        1242,
+        1007
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          38,
+          98,
+          1501,
+          1008
+        ],
+        "marginCrop": [
+          36,
+          96,
+          1503,
+          1010
+        ],
+        "uniformScale": 0.8441558441558441,
+        "translation": [
+          6,
+          236
+        ]
+      },
+      "bytes": 149956,
+      "sha256": "581b4661d6a91d78fb2ea4cb943c69a3336bf643b27abb45faeb5fc173a401ed"
+    },
+    {
+      "name": "scatter-king",
+      "old": "/kilo-symbols-v47/scatter-king.webp",
+      "new": "/kilo-v55/symbols/scatter-king.webp",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "preservedRuntimeBounds": [
+        32,
+        42,
+        1224,
+        1205
+      ],
+      "visibleAlphaBounds": [
+        32,
+        43,
+        1224,
+        1203
+      ],
+      "normalization": {
+        "sourceVisibleBounds": [
+          30,
+          42,
+          1226,
+          1206
+        ],
+        "marginCrop": [
+          28,
+          40,
+          1228,
+          1208
+        ],
+        "uniformScale": 0.9966555183946488,
+        "translation": [
+          30,
+          41
+        ]
+      },
+      "bytes": 302404,
+      "sha256": "00b7165db9560a3d736b5a082f7cc1355d9a054dde88b08c9c691a43ead59f78"
+    }
+  ],
+  "reactions": [
+    {
+      "key": "sym-case-v8",
+      "url": "/kilo-v55/symbols/sym-case-v8-reaction.webp",
+      "width": 1024,
+      "height": 1024,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "bounds": [
+        18,
+        26,
+        503,
+        477
+      ],
+      "reference": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          44.0859375,
+          63.6796875,
+          1231.95703125,
+          1168.27734375
+        ]
+      },
+      "staticFitBounds": [
+        46,
+        98,
+        1232,
+        1167
+      ],
+      "registrationPolicy": "canvas registered; reference bounds are animation union in 1254px source coordinates, preventing union-refit size jumps",
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durations": [
+        70,
+        120,
+        140,
+        130,
+        100
+      ],
+      "frameVisibleBounds": [
+        [
+          19,
+          40,
+          503,
+          477
+        ],
+        [
+          18,
+          84,
+          503,
+          477
+        ],
+        [
+          19,
+          27,
+          503,
+          476
+        ],
+        [
+          19,
+          26,
+          503,
+          476
+        ]
+      ],
+      "normalization": [
+        {
+          "sourceBounds": [
+            35,
+            221,
+            1238,
+            1195
+          ],
+          "sourcePivot": [
+            636.5,
+            1195
+          ],
+          "targetPivot": [
+            260.8995215311005,
+            476.47846889952154
+          ],
+          "uniformScale": 0.40252372789451146
+        },
+        {
+          "sourceBounds": [
+            63,
+            66,
+            564,
+            531
+          ],
+          "sourcePivot": [
+            313.5,
+            531
+          ],
+          "targetPivot": [
+            260.8995215311005,
+            476.47846889952154
+          ],
+          "uniformScale": 0.9665390112916113
+        },
+        {
+          "sourceBounds": [
+            58,
+            67,
+            557,
+            531
+          ],
+          "sourcePivot": [
+            307.5,
+            531
+          ],
+          "targetPivot": [
+            260.8995215311005,
+            476.47846889952154
+          ],
+          "uniformScale": 0.9704129151444836
+        }
+      ]
+    },
+    {
+      "key": "sym-reel-v8",
+      "url": "/kilo-v55/symbols/sym-reel-v8-reaction.webp",
+      "width": 1024,
+      "height": 1024,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "bounds": [
+        46,
+        97,
+        474,
+        438
+      ],
+      "reference": {
+        "width": 1254,
+        "height": 1254,
+        "bounds": [
+          112.6640625,
+          237.57421875,
+          1160.9296875,
+          1072.7578125
+        ]
+      },
+      "staticFitBounds": [
+        147,
+        245,
+        1110,
+        1077
+      ],
+      "registrationPolicy": "canvas registered; reference bounds are animation union in 1254px source coordinates, preventing union-refit size jumps",
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "durations": [
+        70,
+        120,
+        140,
+        130,
+        100
+      ],
+      "frameVisibleBounds": [
+        [
+          60,
+          102,
+          453,
+          438
+        ],
+        [
+          46,
+          97,
+          443,
+          357
+        ],
+        [
+          112,
+          97,
+          474,
+          423
+        ],
+        [
+          79,
+          97,
+          449,
+          425
+        ]
+      ],
+      "normalization": [
+        {
+          "crop": [
+            604,
+            76,
+            1246,
+            503
+          ],
+          "sourcePivot": [
+            759,
+            292
+          ],
+          "targetPivot": [
+            140,
+            229
+          ],
+          "uniformScale": 0.628
+        },
+        {
+          "crop": [
+            63,
+            671,
+            651,
+            1203
+          ],
+          "sourcePivot": [
+            114,
+            887
+          ],
+          "targetPivot": [
+            140,
+            229
+          ],
+          "uniformScale": 0.628
+        },
+        {
+          "crop": [
+            648,
+            669,
+            1246,
+            1202
+          ],
+          "sourcePivot": [
+            750,
+            886
+          ],
+          "targetPivot": [
+            140,
+            229
+          ],
+          "uniformScale": 0.628
+        }
+      ]
+    }
+  ]
+}

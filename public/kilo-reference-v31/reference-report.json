@@ -1,0 +1,3536 @@
+{
+  "checkpoint": "e3340a9529303295e56e123eef31babf4a51f866",
+  "passed": true,
+  "method": "Source-derived layout, production CSS cascade on actual React SSR markup, font metrics and protected-runtime AST/hash checks. No browser screenshots or live interaction.",
+  "protectedSourceFiles": 90,
+  "geometry": [
+    {
+      "viewport": "1440x900",
+      "variant": "desktop",
+      "feature": false,
+      "targets": {
+        "menu": {
+          "x": 64,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 12,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 718,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "auto": {
+          "x": 668,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 824,
+          "y": 24,
+          "w": 52,
+          "h": 52
+        },
+        "bet": {
+          "x": 512,
+          "y": 18,
+          "w": 104,
+          "h": 64
+        },
+        "minus": {
+          "x": 616,
+          "y": 50,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 616,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "betPlate": {
+        "x": 512,
+        "y": 18,
+        "w": 148,
+        "h": 64
+      },
+      "actionPlate": {
+        "x": 668,
+        "y": 18,
+        "w": 100,
+        "h": 64
+      },
+      "portraitAllocation": null,
+      "bottomClearance": 0
+    },
+    {
+      "viewport": "1440x900",
+      "variant": "desktop",
+      "feature": true,
+      "targets": {
+        "menu": {
+          "x": 64,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 12,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 718,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        }
+      },
+      "betPlate": null,
+      "actionPlate": null,
+      "portraitAllocation": null,
+      "bottomClearance": 0
+    },
+    {
+      "viewport": "390x844",
+      "variant": "portrait",
+      "feature": false,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 247,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 303,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 15,
+          "y": 72,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 83,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 83,
+          "y": 60,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "betPlate": {
+        "x": 15,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "actionPlate": {
+        "x": 183,
+        "y": 72,
+        "w": 108,
+        "h": 64
+      },
+      "portraitAllocation": 160,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "390x844",
+      "variant": "portrait",
+      "feature": true,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "betPlate": null,
+      "actionPlate": null,
+      "portraitAllocation": 160,
+      "bottomClearance": 8
+    },
+    {
+      "viewport": "360x800",
+      "variant": "portrait",
+      "feature": false,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 72,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 68,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 60,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "betPlate": {
+        "x": 0,
+        "y": 72,
+        "w": 112,
+        "h": 64
+      },
+      "actionPlate": {
+        "x": 168,
+        "y": 72,
+        "w": 108,
+        "h": 64
+      },
+      "portraitAllocation": 160,
+      "bottomClearance": 4
+    },
+    {
+      "viewport": "360x800",
+      "variant": "portrait",
+      "feature": true,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 56,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "betPlate": null,
+      "actionPlate": null,
+      "portraitAllocation": 160,
+      "bottomClearance": 8
+    },
+    {
+      "viewport": "844x390",
+      "variant": "landscape",
+      "feature": false,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 160,
+          "w": 84,
+          "h": 64
+        },
+        "minus": {
+          "x": 84,
+          "y": 192,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 148,
+          "w": 44,
+          "h": 44
+        }
+      },
+      "betPlate": {
+        "x": 0,
+        "y": 160,
+        "w": 128,
+        "h": 64
+      },
+      "actionPlate": {
+        "x": 652,
+        "y": 75,
+        "w": 64,
+        "h": 100
+      },
+      "portraitAllocation": null,
+      "bottomClearance": 75
+    },
+    {
+      "viewport": "844x390",
+      "variant": "landscape",
+      "feature": true,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "betPlate": null,
+      "actionPlate": null,
+      "portraitAllocation": null,
+      "bottomClearance": 75
+    }
+  ],
+  "typography": [
+    {
+      "viewport": "1440x900",
+      "name": "balance",
+      "value": "500,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 76.29599999999999,
+      "available": 170,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "balance",
+      "value": "1,234,567,890",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 135.95999999999998,
+      "available": 170,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "win",
+      "value": "0",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 11.616,
+      "available": 170,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "win",
+      "value": "48,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 64.67999999999999,
+      "available": 170,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "win",
+      "value": "5,000,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 94.512,
+      "available": 170,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "bet",
+      "value": "1,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 53.064,
+      "available": 94,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "bet",
+      "value": "10,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 64.67999999999999,
+      "available": 94,
+      "overflow": false
+    },
+    {
+      "viewport": "1440x900",
+      "name": "bet",
+      "value": "15,000",
+      "size": 22,
+      "line": 26,
+      "weight": 700,
+      "advance": 64.67999999999999,
+      "available": 94,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "balance",
+      "value": "500,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 69.36,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "balance",
+      "value": "1,234,567,890",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 123.6,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "win",
+      "value": "0",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 10.56,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "win",
+      "value": "48,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "win",
+      "value": "5,000,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 85.92,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "bet",
+      "value": "1,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 48.239999999999995,
+      "available": 58,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "bet",
+      "value": "10,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 58.8,
+      "overflow": false
+    },
+    {
+      "viewport": "390x844",
+      "name": "bet",
+      "value": "15,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 58.8,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "balance",
+      "value": "500,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 69.36,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "balance",
+      "value": "1,234,567,890",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 123.6,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "win",
+      "value": "0",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 10.56,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "win",
+      "value": "48,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "win",
+      "value": "5,000,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 85.92,
+      "available": 144,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "bet",
+      "value": "1,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 48.239999999999995,
+      "available": 58,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "bet",
+      "value": "10,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 58.8,
+      "overflow": false
+    },
+    {
+      "viewport": "360x800",
+      "name": "bet",
+      "value": "15,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 58.8,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "balance",
+      "value": "500,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 69.36,
+      "available": 108,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "balance",
+      "value": "1,234,567,890",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 123.6,
+      "available": 108,
+      "overflow": true
+    },
+    {
+      "viewport": "844x390",
+      "name": "win",
+      "value": "0",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 10.56,
+      "available": 108,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "win",
+      "value": "48,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 108,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "win",
+      "value": "5,000,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 85.92,
+      "available": 108,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "bet",
+      "value": "1,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 48.239999999999995,
+      "available": 74,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "bet",
+      "value": "10,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 74,
+      "overflow": false
+    },
+    {
+      "viewport": "844x390",
+      "name": "bet",
+      "value": "15,000",
+      "size": 20,
+      "line": 23,
+      "weight": 700,
+      "advance": 58.8,
+      "available": 74,
+      "overflow": false
+    }
+  ],
+  "paint": [
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "idle",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "ante-on",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "maximum-ante",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "insufficient-balance",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "busy",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "auto-active",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "free-spins",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "feature",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "long-amount",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-hidden",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "1440x900",
+      "state": "restricted-disabled",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "idle",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "ante-on",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "maximum-ante",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "insufficient-balance",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "busy",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "auto-active",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "free-spins",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "feature",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "long-amount",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-hidden",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "390x844",
+      "state": "restricted-disabled",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "idle",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "ante-on",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "maximum-ante",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "insufficient-balance",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "busy",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "auto-active",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "free-spins",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "feature",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "long-amount",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-hidden",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "360x800",
+      "state": "restricted-disabled",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "idle",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "ante-on",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "maximum-ante",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "insufficient-balance",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "busy",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "auto-active",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "free-spins",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "feature",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "long-amount",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-hidden",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "turbo",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "menu",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "readouts",
+      "fill": "#01070b",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "balance",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "win",
+      "fill": "transparent",
+      "rim": "3px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "bet",
+      "fill": "#01070b",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "auto",
+      "fill": "transparent",
+      "rim": "0",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "spin-button",
+      "fill": "#020c12",
+      "rim": "8px",
+      "opacity": "1"
+    },
+    {
+      "viewport": "844x390",
+      "state": "restricted-disabled",
+      "element": "buy",
+      "fill": "#020c12",
+      "rim": "2px",
+      "opacity": "1"
+    }
+  ],
+  "cssFile": "dist/assets/review-Cxb7yNlP.css",
+  "cssSha256": "7a71a606fdafd09a6fd539382b41329ab2f4dca0b67dac8e3b26799933618f34",
+  "states": 40,
+  "featurePageCases": 5
+}

@@ -1,0 +1,2704 @@
+{
+  "baseline": "8e8c72b",
+  "method": "Production CSS cascade plus source-derived layout and actual decorative-art outer bounds. No browser execution or live screenshot verification.",
+  "passed": true,
+  "protectedSourceFiles": 90,
+  "protectedSourcePaths": [
+    "src/components/kilo/DockSkin.tsx",
+    "src/components/kilo/FishermanScene.tsx",
+    "src/components/kilo/ReelStage.tsx",
+    "src/components/kilo/StageSurround.tsx",
+    "src/components/kilo/art-map.ts",
+    "src/components/kilo/auto-spins.ts",
+    "src/components/kilo/base-dock.css",
+    "src/components/kilo/control-model.ts",
+    "src/components/kilo/control-panels.tsx",
+    "src/components/kilo/control-theme.ts",
+    "src/components/kilo/director.ts",
+    "src/components/kilo/dock-design.ts",
+    "src/components/kilo/feature-catalog.ts",
+    "src/components/kilo/feature-panel.css",
+    "src/components/kilo/fish-art.ts",
+    "src/components/kilo/fisherman-scene.css",
+    "src/components/kilo/keyboard.ts",
+    "src/components/kilo/layout.ts",
+    "src/components/kilo/marina-frame.ts",
+    "src/components/kilo/material.css",
+    "src/components/kilo/material.ts",
+    "src/components/kilo/motion-atlas.ts",
+    "src/components/kilo/paytable.tsx",
+    "src/components/kilo/pixiStage.ts",
+    "src/components/kilo/play.tsx",
+    "src/components/kilo/sprite-bounds.json",
+    "src/components/kilo/useMotionCanvas.ts",
+    "src/components/preview-host-bridge.tsx",
+    "src/components/slot-controls/README.md",
+    "src/components/slot-controls/SlotControls.tsx",
+    "src/components/slot-controls/fonts/BarlowCondensed-600.woff2",
+    "src/components/slot-controls/fonts/OFL-BarlowCondensed.txt",
+    "src/components/slot-controls/fonts/OFL-SourceSans3.txt",
+    "src/components/slot-controls/fonts/SourceSans3-600.woff2",
+    "src/components/slot-controls/fonts/SourceSans3-700.woff2",
+    "src/components/slot-controls/layout.ts",
+    "src/components/slot-controls/tokens.ts",
+    "src/components/slot-controls/typography.ts",
+    "src/lib/app-data/app-data.test.ts",
+    "src/lib/app-data/client.server.ts",
+    "src/lib/app-data/errors.ts",
+    "src/lib/app-data/index.ts",
+    "src/lib/app-data/login.ts",
+    "src/lib/app-data/readiness-schedule.test.ts",
+    "src/lib/app-data/readiness-schedule.ts",
+    "src/lib/app-data/readiness.ts",
+    "src/lib/app-data/server-only.ts",
+    "src/lib/app-data/types.ts",
+    "src/lib/app-data/use-connector-readiness.ts",
+    "src/lib/auth/client.ts",
+    "src/lib/auth/email-password.ts",
+    "src/lib/auth/gate-identity.server.ts",
+    "src/lib/auth/gate-identity.test.ts",
+    "src/lib/auth/gate-session-marker.ts",
+    "src/lib/auth/gate-session.server.ts",
+    "src/lib/auth/gates.tsx",
+    "src/lib/auth/isolation.server.ts",
+    "src/lib/auth/middleware.ts",
+    "src/lib/auth/pglite-dialect.ts",
+    "src/lib/auth/popup.server.ts",
+    "src/lib/auth/preview.ts",
+    "src/lib/auth/provider.tsx",
+    "src/lib/auth/providers.ts",
+    "src/lib/auth/server.ts",
+    "src/lib/auth/sign-in-gate.test.ts",
+    "src/lib/auth/sign-in-gate.ts",
+    "src/lib/auth/use-current-user.ts",
+    "src/lib/auth/verify.server.ts",
+    "src/lib/db.ts",
+    "src/lib/env.server.ts",
+    "src/lib/error-component.tsx",
+    "src/lib/kilo/bank.ts",
+    "src/lib/kilo/baseline.json",
+    "src/lib/kilo/engine.ts",
+    "src/lib/kilo/fixtures.json",
+    "src/lib/kilo/sound.ts",
+    "src/lib/multiplayer/index.ts",
+    "src/lib/multiplayer/p2p.ts",
+    "src/lib/og/site.json",
+    "src/lib/preview-embedder-origin.ts",
+    "src/lib/preview-host-bridge.ts",
+    "src/lib/preview-path-prefix.test.ts",
+    "src/lib/preview-path-prefix.ts",
+    "src/review-entry.tsx",
+    "src/routeTree.gen.ts",
+    "src/router.tsx",
+    "src/routes/__root.tsx",
+    "src/routes/index.tsx",
+    "src/routes/replay.tsx",
+    "src/styles.css"
+  ],
+  "productionStylesheet": "dist/assets/review-eUdhl29n.css",
+  "productionStylesheetSha256": "882ea53c7290edfc415ddd020795dac7148f96967de26032cb60f01b199aaf13",
+  "cases": [
+    {
+      "viewport": "360x800",
+      "mode": "portrait",
+      "feature": false,
+      "game": {
+        "mode": "portrait",
+        "width": 336,
+        "height": 466.4096385542169,
+        "reelWidth": 336,
+        "reelHeight": 202.40963855421688,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 336,
+        "height": 160,
+        "footerWidth": 336,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 112,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 68,
+          "h": 44
+        },
+        "minus": {
+          "x": 68,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 68,
+          "h": 44
+        },
+        "turbo": {
+          "x": 224,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 224,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 276,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 276,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 224,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 127.68,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 276,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 112,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 490.4096385542169,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 356,
+        "h": 230.40963855421688
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 336,
+        "h": 202.40963855421688
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        342.4096385542169
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10,
+      "header": {
+        "status": {
+          "x": 12,
+          "y": 82,
+          "w": 336,
+          "h": 17
+        },
+        "cabinetClearance": 3,
+        "brandHeight": 64,
+        "brandToStatusClearance": 6
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "360x800",
+      "mode": "portrait",
+      "feature": true,
+      "game": {
+        "mode": "portrait",
+        "width": 336,
+        "height": 466.4096385542169,
+        "reelWidth": 336,
+        "reelHeight": 202.40963855421688,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 336,
+        "height": 160,
+        "footerWidth": 336,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "win": {
+          "x": 172,
+          "y": 0,
+          "w": 164,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 112,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 68,
+          "h": 44
+        },
+        "minus": {
+          "x": 68,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 68,
+          "h": 44
+        },
+        "turbo": {
+          "x": 224,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 224,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 276,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 276,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 224,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 127.68,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 276,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 112,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 490.4096385542169,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 356,
+        "h": 230.40963855421688
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 336,
+        "h": 202.40963855421688
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        342.4096385542169
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10,
+      "header": null,
+      "featureHeader": {
+        "top": 32,
+        "bottom": 18,
+        "height": 54,
+        "contentHeight": 47.275000000000006,
+        "availableContentHeight": 48,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "390x844",
+      "mode": "portrait",
+      "feature": false,
+      "game": {
+        "mode": "portrait",
+        "width": 366,
+        "height": 484.48192771084337,
+        "reelWidth": 366,
+        "reelHeight": 220.4819277108434,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 366,
+        "height": 160,
+        "footerWidth": 366,
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 56,
+          "w": 124,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 80,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 80,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 80,
+          "h": 44
+        },
+        "turbo": {
+          "x": 239,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 239,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 291,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 291,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 239,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 142.68,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 291,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 3,
+          "y": 56,
+          "w": 124,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 508.48192771084337,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 386,
+        "h": 248.4819277108434
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 366,
+        "h": 220.4819277108434
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        360.48192771084337
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 9.999999999999972,
+      "header": {
+        "status": {
+          "x": 12,
+          "y": 82,
+          "w": 366,
+          "h": 17
+        },
+        "cabinetClearance": 3,
+        "brandHeight": 64,
+        "brandToStatusClearance": 6
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "390x844",
+      "mode": "portrait",
+      "feature": true,
+      "game": {
+        "mode": "portrait",
+        "width": 366,
+        "height": 484.48192771084337,
+        "reelWidth": 366,
+        "reelHeight": 220.4819277108434,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 366,
+        "height": 160,
+        "footerWidth": 366,
+        "balance": {
+          "x": 3,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 187,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 3,
+          "y": 56,
+          "w": 124,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 80,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 80,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 80,
+          "h": 44
+        },
+        "turbo": {
+          "x": 239,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 239,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 291,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 291,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 239,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 142.68,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 291,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 3,
+          "y": 56,
+          "w": 124,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 508.48192771084337,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 386,
+        "h": 248.4819277108434
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 366,
+        "h": 220.4819277108434
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        360.48192771084337
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 9.999999999999972,
+      "header": null,
+      "featureHeader": {
+        "top": 32,
+        "bottom": 18,
+        "height": 54,
+        "contentHeight": 47.275000000000006,
+        "availableContentHeight": 48,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "844x390",
+      "mode": "landscape",
+      "feature": false,
+      "game": {
+        "mode": "landscape",
+        "width": 732,
+        "height": 350,
+        "reelWidth": 488,
+        "reelHeight": 294,
+        "header": 56,
+        "dock": 350,
+        "strip": 0,
+        "side": 96,
+        "controlLeft": 128,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 10
+      },
+      "dock": {
+        "variant": "landscape",
+        "width": 732,
+        "height": 350,
+        "footerWidth": 488,
+        "balance": {
+          "x": 0,
+          "y": 52,
+          "w": 128,
+          "h": 44
+        },
+        "win": {
+          "x": 0,
+          "y": 100,
+          "w": 128,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 148,
+          "w": 128,
+          "h": 128
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 84
+        },
+        "minus": {
+          "x": 84,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 84,
+          "w": 84,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 643.68,
+          "y": 188.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 148,
+          "w": 128,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 350,
+      "cabinet": {
+        "x": 188,
+        "y": 64,
+        "w": 500,
+        "h": 310
+      },
+      "reel": {
+        "x": 194,
+        "y": 72,
+        "w": 488,
+        "h": 294
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        56,
+        16
+      ],
+      "gap": 0,
+      "minimumCabinetControlClearance": 4,
+      "header": {
+        "status": {
+          "x": 194,
+          "y": 39.7,
+          "w": 488,
+          "h": 14.3
+        },
+        "cabinetClearance": 10
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "844x390",
+      "mode": "landscape",
+      "feature": true,
+      "game": {
+        "mode": "landscape",
+        "width": 732,
+        "height": 350,
+        "reelWidth": 488,
+        "reelHeight": 294,
+        "header": 56,
+        "dock": 350,
+        "strip": 0,
+        "side": 96,
+        "controlLeft": 128,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 10
+      },
+      "dock": {
+        "variant": "landscape",
+        "width": 732,
+        "height": 350,
+        "footerWidth": 488,
+        "balance": {
+          "x": 0,
+          "y": 52,
+          "w": 128,
+          "h": 44
+        },
+        "win": {
+          "x": 0,
+          "y": 100,
+          "w": 128,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 148,
+          "w": 128,
+          "h": 128
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 84
+        },
+        "minus": {
+          "x": 84,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 84,
+          "w": 84,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 643.68,
+          "y": 188.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 148,
+          "w": 128,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 350,
+      "cabinet": {
+        "x": 188,
+        "y": 64,
+        "w": 500,
+        "h": 310
+      },
+      "reel": {
+        "x": 194,
+        "y": 72,
+        "w": 488,
+        "h": 294
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        56,
+        16
+      ],
+      "gap": 0,
+      "minimumCabinetControlClearance": 4,
+      "header": null,
+      "featureHeader": {
+        "top": 0,
+        "bottom": 10,
+        "height": 46,
+        "contentHeight": 41.35,
+        "availableContentHeight": 42,
+        "cabinetClearance": 2
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "mode": "wide",
+      "feature": false,
+      "game": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 698.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "desktop",
+        "width": 888,
+        "height": 100,
+        "footerWidth": 888,
+        "balance": {
+          "x": 112,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "win": {
+          "x": 314,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "bet": {
+          "x": 516,
+          "y": 4,
+          "w": 148,
+          "h": 92
+        },
+        "betButton": {
+          "x": 0,
+          "y": 2,
+          "w": 104,
+          "h": 44
+        },
+        "minus": {
+          "x": 104,
+          "y": 46,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 104,
+          "y": 2,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 46,
+          "w": 104,
+          "h": 44
+        },
+        "turbo": {
+          "x": 0,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 0,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 52,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 52,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 676,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 728,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "charge": {
+          "x": 736,
+          "y": 64,
+          "w": 84,
+          "h": 18
+        },
+        "buy": {
+          "x": 836,
+          "y": 24,
+          "w": 52,
+          "h": 52
+        },
+        "counter": {
+          "x": 516,
+          "y": 4,
+          "w": 148,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 730.9397590361446,
+      "cabinet": {
+        "x": 233,
+        "y": 58,
+        "w": 932,
+        "h": 578.9397590361446
+      },
+      "reel": {
+        "x": 255,
+        "y": 80,
+        "w": 888,
+        "h": 534.9397590361446
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        255,
+        646.9397590361446
+      ],
+      "gap": 32,
+      "minimumCabinetControlClearance": 10,
+      "header": {
+        "status": {
+          "x": 255,
+          "y": 38.4,
+          "w": 888,
+          "h": 15.600000000000001
+        },
+        "cabinetClearance": 4
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "1440x900",
+      "mode": "wide",
+      "feature": true,
+      "game": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 698.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "desktop",
+        "width": 888,
+        "height": 100,
+        "footerWidth": 888,
+        "balance": {
+          "x": 112,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "win": {
+          "x": 314,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "bet": {
+          "x": 516,
+          "y": 4,
+          "w": 148,
+          "h": 92
+        },
+        "betButton": {
+          "x": 0,
+          "y": 2,
+          "w": 104,
+          "h": 44
+        },
+        "minus": {
+          "x": 104,
+          "y": 46,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 104,
+          "y": 2,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 46,
+          "w": 104,
+          "h": 44
+        },
+        "turbo": {
+          "x": 0,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 0,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 52,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 52,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 676,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 728,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "charge": {
+          "x": 736,
+          "y": 64,
+          "w": 84,
+          "h": 18
+        },
+        "buy": {
+          "x": 836,
+          "y": 24,
+          "w": 52,
+          "h": 52
+        },
+        "counter": {
+          "x": 516,
+          "y": 4,
+          "w": 148,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 730.9397590361446,
+      "cabinet": {
+        "x": 233,
+        "y": 58,
+        "w": 932,
+        "h": 578.9397590361446
+      },
+      "reel": {
+        "x": 255,
+        "y": 80,
+        "w": 888,
+        "h": 534.9397590361446
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        255,
+        646.9397590361446
+      ],
+      "gap": 32,
+      "minimumCabinetControlClearance": 10,
+      "header": null,
+      "featureHeader": {
+        "top": 0,
+        "bottom": 26,
+        "height": 38,
+        "contentHeight": 34,
+        "availableContentHeight": 34,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "320x568",
+      "mode": "portrait",
+      "feature": false,
+      "game": {
+        "mode": "portrait",
+        "width": 296,
+        "height": 442.3132530120482,
+        "reelWidth": 296,
+        "reelHeight": 178.3132530120482,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 296,
+        "height": 160,
+        "footerWidth": 296,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "minus": {
+          "x": 56,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 56,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 56,
+          "h": 44
+        },
+        "turbo": {
+          "x": 196,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 196,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 248,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 196,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 114.4,
+          "y": 98.4,
+          "w": 67.2,
+          "h": 18
+        },
+        "buy": {
+          "x": 248,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 466.3132530120482,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 316,
+        "h": 206.3132530120482
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 296,
+        "h": 178.3132530120482
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        318.3132530120482
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10.000000000000028,
+      "header": {
+        "status": {
+          "x": 12,
+          "y": 82,
+          "w": 296,
+          "h": 17
+        },
+        "cabinetClearance": 3,
+        "brandHeight": 64,
+        "brandToStatusClearance": 6
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "320x568",
+      "mode": "portrait",
+      "feature": true,
+      "game": {
+        "mode": "portrait",
+        "width": 296,
+        "height": 442.3132530120482,
+        "reelWidth": 296,
+        "reelHeight": 178.3132530120482,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 296,
+        "height": 160,
+        "footerWidth": 296,
+        "balance": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "win": {
+          "x": 152,
+          "y": 0,
+          "w": 144,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 56,
+          "h": 44
+        },
+        "minus": {
+          "x": 56,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 56,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 56,
+          "h": 44
+        },
+        "turbo": {
+          "x": 196,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 196,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 248,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 248,
+          "y": 70,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 196,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 108,
+          "y": 52,
+          "w": 80,
+          "h": 80
+        },
+        "charge": {
+          "x": 114.4,
+          "y": 98.4,
+          "w": 67.2,
+          "h": 18
+        },
+        "buy": {
+          "x": 248,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 0,
+          "y": 56,
+          "w": 100,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 466.3132530120482,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 316,
+        "h": 206.3132530120482
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 296,
+        "h": 178.3132530120482
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        318.3132530120482
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10.000000000000028,
+      "header": null,
+      "featureHeader": {
+        "top": 32,
+        "bottom": 18,
+        "height": 54,
+        "contentHeight": 47.275000000000006,
+        "availableContentHeight": 48,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "485x902",
+      "mode": "portrait",
+      "feature": false,
+      "game": {
+        "mode": "portrait",
+        "width": 461,
+        "height": 541.7108433734941,
+        "reelWidth": 461,
+        "reelHeight": 277.710843373494,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 461,
+        "height": 160,
+        "footerWidth": 461,
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 56,
+          "w": 124,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 80,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 80,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 80,
+          "h": 44
+        },
+        "turbo": {
+          "x": 286.5,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 286.5,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 338.5,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 338.5,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 286.5,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 190.18,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 338.5,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 50.5,
+          "y": 56,
+          "w": 124,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 565.7108433734941,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 481,
+        "h": 305.710843373494
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 461,
+        "h": 277.710843373494
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        417.710843373494
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10,
+      "header": {
+        "status": {
+          "x": 12,
+          "y": 82,
+          "w": 461,
+          "h": 17
+        },
+        "cabinetClearance": 3,
+        "brandHeight": 64,
+        "brandToStatusClearance": 6
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "485x902",
+      "mode": "portrait",
+      "feature": true,
+      "game": {
+        "mode": "portrait",
+        "width": 461,
+        "height": 541.7108433734941,
+        "reelWidth": 461,
+        "reelHeight": 277.710843373494,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "portrait",
+        "width": 461,
+        "height": 160,
+        "footerWidth": 461,
+        "balance": {
+          "x": 50.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "win": {
+          "x": 234.5,
+          "y": 0,
+          "w": 176,
+          "h": 44
+        },
+        "bet": {
+          "x": 50.5,
+          "y": 56,
+          "w": 124,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 44
+        },
+        "minus": {
+          "x": 80,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 80,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 44,
+          "w": 80,
+          "h": 44
+        },
+        "turbo": {
+          "x": 286.5,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 286.5,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 338.5,
+          "y": 104,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 338.5,
+          "y": 78,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 286.5,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 182.5,
+          "y": 52,
+          "w": 96,
+          "h": 96
+        },
+        "charge": {
+          "x": 190.18,
+          "y": 113.44,
+          "w": 80.64,
+          "h": 18
+        },
+        "buy": {
+          "x": 338.5,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 50.5,
+          "y": 56,
+          "w": 124,
+          "h": 64
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 12,
+        "right": 12,
+        "bottom": 20,
+        "left": 12
+      },
+      "shellHeight": 565.7108433734941,
+      "cabinet": {
+        "x": 2,
+        "y": 102,
+        "w": 481,
+        "h": 305.710843373494
+      },
+      "reel": {
+        "x": 12,
+        "y": 116,
+        "w": 461,
+        "h": 277.710843373494
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        12,
+        417.710843373494
+      ],
+      "gap": 24,
+      "minimumCabinetControlClearance": 10,
+      "header": null,
+      "featureHeader": {
+        "top": 32,
+        "bottom": 18,
+        "height": 54,
+        "contentHeight": 47.275000000000006,
+        "availableContentHeight": 48,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "1920x1080",
+      "mode": "wide",
+      "feature": false,
+      "game": {
+        "mode": "wide",
+        "width": 1580,
+        "height": 790.5060240963855,
+        "reelWidth": 1040,
+        "reelHeight": 626.5060240963855,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 250,
+        "artRight": 290,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "desktop",
+        "width": 1040,
+        "height": 100,
+        "footerWidth": 1040,
+        "balance": {
+          "x": 188,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "win": {
+          "x": 390,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "bet": {
+          "x": 592,
+          "y": 4,
+          "w": 148,
+          "h": 92
+        },
+        "betButton": {
+          "x": 0,
+          "y": 2,
+          "w": 104,
+          "h": 44
+        },
+        "minus": {
+          "x": 104,
+          "y": 46,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 104,
+          "y": 2,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 46,
+          "w": 104,
+          "h": 44
+        },
+        "turbo": {
+          "x": 76,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 76,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 128,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 128,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 752,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 804,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "charge": {
+          "x": 812,
+          "y": 64,
+          "w": 84,
+          "h": 18
+        },
+        "buy": {
+          "x": 912,
+          "y": 24,
+          "w": 52,
+          "h": 52
+        },
+        "counter": {
+          "x": 592,
+          "y": 4,
+          "w": 148,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 822.5060240963855,
+      "cabinet": {
+        "x": 398,
+        "y": 58,
+        "w": 1084,
+        "h": 670.5060240963855
+      },
+      "reel": {
+        "x": 420,
+        "y": 80,
+        "w": 1040,
+        "h": 626.5060240963855
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        420,
+        738.5060240963855
+      ],
+      "gap": 32,
+      "minimumCabinetControlClearance": 10,
+      "header": {
+        "status": {
+          "x": 420,
+          "y": 38.4,
+          "w": 1040,
+          "h": 15.600000000000001
+        },
+        "cabinetClearance": 4
+      },
+      "featureHeader": null
+    },
+    {
+      "viewport": "1920x1080",
+      "mode": "wide",
+      "feature": true,
+      "game": {
+        "mode": "wide",
+        "width": 1580,
+        "height": 790.5060240963855,
+        "reelWidth": 1040,
+        "reelHeight": 626.5060240963855,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 250,
+        "artRight": 290,
+        "dockGap": 0
+      },
+      "dock": {
+        "variant": "desktop",
+        "width": 1040,
+        "height": 100,
+        "footerWidth": 1040,
+        "balance": {
+          "x": 188,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "win": {
+          "x": 390,
+          "y": 18,
+          "w": 190,
+          "h": 64
+        },
+        "bet": {
+          "x": 592,
+          "y": 4,
+          "w": 148,
+          "h": 92
+        },
+        "betButton": {
+          "x": 0,
+          "y": 2,
+          "w": 104,
+          "h": 44
+        },
+        "minus": {
+          "x": 104,
+          "y": 46,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 104,
+          "y": 2,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 46,
+          "w": 104,
+          "h": 44
+        },
+        "turbo": {
+          "x": 76,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureTurbo": {
+          "x": 76,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 128,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 128,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 752,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 804,
+          "y": 0,
+          "w": 100,
+          "h": 100
+        },
+        "charge": {
+          "x": 812,
+          "y": 64,
+          "w": 84,
+          "h": 18
+        },
+        "buy": {
+          "x": 912,
+          "y": 24,
+          "w": 52,
+          "h": 52
+        },
+        "counter": {
+          "x": 592,
+          "y": 4,
+          "w": 148,
+          "h": 60
+        },
+        "drawer": {
+          "turbo": false,
+          "auto": false,
+          "ante": false
+        }
+      },
+      "stageInsets": {
+        "top": 16,
+        "right": 16,
+        "bottom": 24,
+        "left": 16
+      },
+      "shellHeight": 822.5060240963855,
+      "cabinet": {
+        "x": 398,
+        "y": 58,
+        "w": 1084,
+        "h": 670.5060240963855
+      },
+      "reel": {
+        "x": 420,
+        "y": 80,
+        "w": 1040,
+        "h": 626.5060240963855
+      },
+      "hiddenSurround": false,
+      "dockOrigin": [
+        420,
+        738.5060240963855
+      ],
+      "gap": 32,
+      "minimumCabinetControlClearance": 10,
+      "header": null,
+      "featureHeader": {
+        "top": 0,
+        "bottom": 26,
+        "height": 38,
+        "contentHeight": 34,
+        "availableContentHeight": 34,
+        "cabinetClearance": 4
+      }
+    },
+    {
+      "viewport": "640x320",
+      "mode": "compact",
+      "feature": false,
+      "game": {
+        "mode": "landscape",
+        "compact": true,
+        "width": 503,
+        "height": 304,
+        "reelWidth": 431,
+        "reelHeight": 260,
+        "header": 0,
+        "dock": 304,
+        "strip": 0,
+        "side": 64,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 8
+      },
+      "dock": {
+        "variant": "compact",
+        "width": 503,
+        "height": 304,
+        "footerWidth": 431,
+        "balance": {
+          "x": 0,
+          "y": 260,
+          "w": 163.5,
+          "h": 44
+        },
+        "win": {
+          "x": 171.5,
+          "y": 260,
+          "w": 163.5,
+          "h": 44
+        },
+        "bet": {
+          "x": 343,
+          "y": 260,
+          "w": 88,
+          "h": 44
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 88,
+          "h": 44
+        },
+        "minus": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "plus": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "turbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "featureTurbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "menu": {
+          "x": 449,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 449,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "spin": {
+          "x": 439,
+          "y": 52,
+          "w": 64,
+          "h": 64
+        },
+        "charge": {
+          "x": 444.12,
+          "y": 89.12,
+          "w": 53.76,
+          "h": 14
+        },
+        "buy": {
+          "x": 449,
+          "y": 128,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 343,
+          "y": 260,
+          "w": 88,
+          "h": 44
+        },
+        "drawer": {
+          "turbo": true,
+          "auto": true,
+          "ante": true
+        }
+      },
+      "stageInsets": {
+        "top": 8,
+        "right": 8,
+        "bottom": 8,
+        "left": 8
+      },
+      "shellHeight": 304,
+      "cabinet": {
+        "x": 68.5,
+        "y": 8,
+        "w": 431,
+        "h": 260
+      },
+      "reel": {
+        "x": 68.5,
+        "y": 8,
+        "w": 431,
+        "h": 260
+      },
+      "hiddenSurround": true,
+      "dockOrigin": [
+        68.5,
+        8
+      ],
+      "gap": 0,
+      "minimumCabinetControlClearance": 0,
+      "header": null,
+      "featureHeader": null
+    },
+    {
+      "viewport": "640x320",
+      "mode": "compact",
+      "feature": true,
+      "game": {
+        "mode": "landscape",
+        "compact": true,
+        "width": 503,
+        "height": 304,
+        "reelWidth": 431,
+        "reelHeight": 260,
+        "header": 0,
+        "dock": 304,
+        "strip": 0,
+        "side": 64,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 8
+      },
+      "dock": {
+        "variant": "compact",
+        "width": 503,
+        "height": 304,
+        "footerWidth": 431,
+        "balance": {
+          "x": 0,
+          "y": 260,
+          "w": 163.5,
+          "h": 44
+        },
+        "win": {
+          "x": 171.5,
+          "y": 260,
+          "w": 163.5,
+          "h": 44
+        },
+        "bet": {
+          "x": 343,
+          "y": 260,
+          "w": 88,
+          "h": 44
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 88,
+          "h": 44
+        },
+        "minus": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "plus": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "turbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "featureTurbo": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "menu": {
+          "x": 449,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "featureMenu": {
+          "x": 449,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "spin": {
+          "x": 439,
+          "y": 52,
+          "w": 64,
+          "h": 64
+        },
+        "charge": {
+          "x": 444.12,
+          "y": 89.12,
+          "w": 53.76,
+          "h": 14
+        },
+        "buy": {
+          "x": 449,
+          "y": 128,
+          "w": 44,
+          "h": 44
+        },
+        "counter": {
+          "x": 343,
+          "y": 260,
+          "w": 88,
+          "h": 44
+        },
+        "drawer": {
+          "turbo": true,
+          "auto": true,
+          "ante": true
+        }
+      },
+      "stageInsets": {
+        "top": 8,
+        "right": 8,
+        "bottom": 8,
+        "left": 8
+      },
+      "shellHeight": 304,
+      "cabinet": {
+        "x": 68.5,
+        "y": 8,
+        "w": 431,
+        "h": 260
+      },
+      "reel": {
+        "x": 68.5,
+        "y": 8,
+        "w": 431,
+        "h": 260
+      },
+      "hiddenSurround": true,
+      "dockOrigin": [
+        68.5,
+        8
+      ],
+      "gap": 0,
+      "minimumCabinetControlClearance": 0,
+      "header": null,
+      "featureHeader": null
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Safe-area expressions are evaluated with zero device insets; shipped env() declarations are preserved.",
+    "Header checks cover base one-line statuses and feature-header vertical row budgets; they do not assert browser font rasterization or every possible localized string.",
+    "Full artwork bounding envelopes are conservative; transparent pixels are not used to excuse collisions.",
+    "Portrait viewport space below the fixed-size game still exists; background reframing changes its composition, not reel dimensions."
+  ]
+}

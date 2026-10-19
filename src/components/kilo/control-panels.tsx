@@ -1,4 +1,12 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { ART, ART_ROOT } from './art-map';
 import {
   ArrowLeft,
   BookOpen,
@@ -7,8 +15,6 @@ import {
   Eye,
   Minus,
   Plus,
-  Volume2,
-  VolumeX,
   X,
 } from "lucide-react";
 import { splashCost } from "@/lib/kilo/engine";
@@ -148,11 +154,13 @@ export function PanelHeader({
 export function BetPanel({
   stake,
   ante,
+  maxMode = false,
   onApply,
   onClose,
 }: {
   stake: number;
   ante: boolean;
+  maxMode?: boolean;
   onApply: (n: number) => void;
   onClose: () => void;
 }) {
@@ -208,9 +216,9 @@ export function BetPanel({
           ))}
         </div>
         <div className="kk-cost-line">
-          <span>{ante ? "Per spin · Ante on" : "Per spin"}</span>
+          <span>{maxMode ? "Per spin · Max mode" : ante ? "Per spin · Ante on" : "Per spin"}</span>
           <b>
-            {amount(splashCost(draft, ante ? "ante" : "spin"))}{" "}
+            {amount(splashCost(draft, maxMode ? "getaway" : ante ? "ante" : "spin"))}{" "}
             <small>LGC</small>
           </b>
         </div>
@@ -234,7 +242,7 @@ function ScatterMarks({ count }: { count: number }) {
       {Array.from({ length: count }, (_, i) => (
         <img
           key={i}
-          src="/kilo-contraband-v1/scatter-king.png"
+          src={ART_ROOT + ART.bars}
           alt=""
           aria-hidden="true"
         />
@@ -323,9 +331,10 @@ export function FeatureCard({
             </>
           )}
         </div>
-        <div className="kk-feature-offer">
+        <div className="kk-feature-offer" data-purchase={!!q}>
           {q ? (
             <>
+              <span className="kk-feature-price-label">Purchase price</span>
               <b>
                 {amount(q.cost)} <small>LGC</small>
               </b>
@@ -345,27 +354,41 @@ export function FeatureCard({
             </>
           )}
         </div>
-        <div className="kk-feature-availability">
-          {q?.reason && (
-            <p className="kk-unavailable" role="status">
-              {q.reason}
-            </p>
-          )}
+        <div className="kk-feature-decision" data-unavailable={!!q?.reason}>
+          <button
+            type="button"
+            className={
+              q ? "kk-feature-action is-purchase" : "kk-feature-action"
+            }
+            aria-label={
+              q
+                ? `Review ${feature.title} purchase for ${amount(q.cost)} LGC`
+                : `Preview ${feature.title}`
+            }
+            disabled={!!q && (locked || !q.allowed)}
+            aria-describedby={
+              q?.reason ? `feature-${feature.id}-reason` : undefined
+            }
+            onClick={() => onSelect(feature)}
+          >
+            {q ? "Buy feature" : "View preview"}
+            <ChevronRight size={17} />
+          </button>
+          <div
+            className="kk-feature-availability"
+            data-unavailable={!!q?.reason}
+          >
+            {q?.reason && (
+              <p
+                id={`feature-${feature.id}-reason`}
+                className="kk-unavailable"
+                role="status"
+              >
+                {q.reason}
+              </p>
+            )}
+          </div>
         </div>
-        <button
-          type="button"
-          className={q ? "kk-feature-action is-purchase" : "kk-feature-action"}
-          aria-label={
-            q
-              ? `Review ${feature.title} purchase for ${amount(q.cost)} LGC`
-              : `Preview ${feature.title}`
-          }
-          disabled={!!q && (locked || !q.allowed)}
-          onClick={() => onSelect(feature)}
-        >
-          {q ? "Buy feature" : "View preview"}
-          <ChevronRight size={17} />
-        </button>
       </div>
     </article>
   );
@@ -375,6 +398,8 @@ export function FeaturesPanel({
   stake,
   bank,
   ante,
+  anteRestriction = { hidden: false, disabled: false },
+  anteOnly = false,
   locked,
   onAnte,
   onEditBet,
@@ -385,11 +410,13 @@ export function FeaturesPanel({
   stake: number;
   bank: number;
   ante: boolean;
+  anteRestriction?: { hidden: boolean; disabled: boolean; reason?: string };
+  anteOnly?: boolean;
   locked: boolean;
   onAnte: (on: boolean) => void;
   onEditBet: () => void;
   onStake: (stake: number) => void;
-  onBuy: (mode: "buy" | "chopper") => void;
+  onBuy: (mode: import("@/lib/kilo/engine").PurchaseMode) => void;
   onClose: () => void;
 }) {
   const [choice, setChoice] = useState<BonusFeature | null>(null);
@@ -563,183 +590,195 @@ export function FeaturesPanel({
           </div>
         ) : (
           <>
-            <div
-              className="kk-feature-tabs"
-              role="tablist"
-              aria-label="Feature categories"
-            >
-              {FEATURE_GROUPS.map((item) => (
-                <button
-                  key={item.id}
-                  id={`feature-tab-${item.id}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={group === item.id}
-                  aria-controls="feature-gallery-panel"
-                  tabIndex={group === item.id ? 0 : -1}
-                  onClick={() => changeGroup(item.id)}
-                  onKeyDown={(event) => {
-                    const index = FEATURE_GROUPS.findIndex(
-                      (entry) => entry.id === group,
-                    );
-                    const next =
-                      event.key === "ArrowRight"
-                        ? (index + 1) % FEATURE_GROUPS.length
-                        : event.key === "ArrowLeft"
-                          ? (index + FEATURE_GROUPS.length - 1) %
-                            FEATURE_GROUPS.length
-                          : event.key === "Home"
-                            ? 0
-                            : event.key === "End"
-                              ? FEATURE_GROUPS.length - 1
-                              : -1;
-                    if (next < 0) return;
-                    event.preventDefault();
-                    const target = FEATURE_GROUPS[next]!;
-                    changeGroup(target.id);
-                    event.currentTarget.parentElement
-                      ?.querySelector<HTMLButtonElement>(
-                        `#feature-tab-${target.id}`,
-                      )
-                      ?.focus();
-                  }}
+            {!anteOnly && (
+              <>
+                <div
+                  className="kk-feature-tabs"
+                  role="tablist"
+                  aria-label="Feature categories"
                 >
-                  {item.title}
-                </button>
-              ))}
-            </div>
-            <section
-              id="feature-gallery-panel"
-              role="tabpanel"
-              aria-labelledby={`feature-tab-${group}`}
-              aria-busy={!artworkReady}
-              className="kk-feature-group"
-              data-group={group}
-            >
-              {!artworkReady ? (
-                <div className="kk-feature-loading" role="status">
-                  <span className="kk-art-loader" aria-hidden="true" />
-                  <strong>Loading features</strong>
-                  <span>Preparing the artwork</span>
-                </div>
-              ) : (
-                <>
-                  <div
-                    className="kk-feature-gallery"
-                    key={group}
-                    data-count={visibleFeatures.length}
-                    ref={gallery}
-                    aria-label="Bonus features"
-                    onKeyDown={(event) => {
-                      const root = gallery.current;
-                      if (!root || root.scrollWidth <= root.clientWidth + 1)
-                        return;
-                      if (
-                        event.key !== "ArrowRight" &&
-                        event.key !== "ArrowLeft"
-                      )
-                        return;
-                      event.preventDefault();
-                      showCard(
-                        Math.max(
-                          0,
-                          Math.min(
-                            visibleFeatures.length - 1,
-                            active + (event.key === "ArrowRight" ? 1 : -1),
-                          ),
-                        ),
-                        true,
-                      );
-                    }}
-                    onScroll={() => {
-                      const root = gallery.current;
-                      if (!root || root.scrollWidth <= root.clientWidth + 1)
-                        return;
-                      const first = root.children[0] as HTMLElement;
-                      const next = root.children[1] as HTMLElement;
-                      const step = next.offsetLeft - first.offsetLeft;
-                      if (step > 0)
-                        setActive(
-                          Math.min(
-                            visibleFeatures.length - 1,
-                            Math.max(0, Math.round(root.scrollLeft / step)),
-                          ),
-                        );
-                    }}
-                  >
-                    {visibleFeatures.map((feature) => (
-                      <FeatureCard
-                        key={feature.id}
-                        feature={feature}
-                        stake={stake}
-                        bank={bank}
-                        locked={locked}
-                        onSelect={select}
-                      />
-                    ))}
-                  </div>
-                  <nav className="kk-feature-pager" aria-label="Browse bonuses">
+                  {FEATURE_GROUPS.map((item) => (
                     <button
+                      key={item.id}
+                      id={`feature-tab-${item.id}`}
                       type="button"
-                      className="kk-icon-button"
-                      aria-label="Previous bonus"
-                      disabled={active === 0}
-                      onClick={() => showCard(active - 1)}
+                      role="tab"
+                      aria-selected={group === item.id}
+                      aria-controls="feature-gallery-panel"
+                      tabIndex={group === item.id ? 0 : -1}
+                      onClick={() => changeGroup(item.id)}
+                      onKeyDown={(event) => {
+                        const index = FEATURE_GROUPS.findIndex(
+                          (entry) => entry.id === group,
+                        );
+                        const next =
+                          event.key === "ArrowRight"
+                            ? (index + 1) % FEATURE_GROUPS.length
+                            : event.key === "ArrowLeft"
+                              ? (index + FEATURE_GROUPS.length - 1) %
+                                FEATURE_GROUPS.length
+                              : event.key === "Home"
+                                ? 0
+                                : event.key === "End"
+                                  ? FEATURE_GROUPS.length - 1
+                                  : -1;
+                        if (next < 0) return;
+                        event.preventDefault();
+                        const target = FEATURE_GROUPS[next]!;
+                        changeGroup(target.id);
+                        event.currentTarget.parentElement
+                          ?.querySelector<HTMLButtonElement>(
+                            `#feature-tab-${target.id}`,
+                          )
+                          ?.focus();
+                      }}
                     >
-                      <ChevronLeft size={20} />
+                      {item.title}
                     </button>
-                    <div className="kk-feature-pagination">
-                      <div className="kk-feature-dots" aria-hidden="true">
-                        {visibleFeatures.map((feature, i) => (
-                          <span
+                  ))}
+                </div>
+                <section
+                  id="feature-gallery-panel"
+                  role="tabpanel"
+                  aria-labelledby={`feature-tab-${group}`}
+                  aria-busy={!artworkReady}
+                  className="kk-feature-group"
+                  data-group={group}
+                >
+                  {!artworkReady ? (
+                    <div className="kk-feature-loading" role="status">
+                      <span className="kk-art-loader" aria-hidden="true" />
+                      <strong>Loading features</strong>
+                      <span>Preparing the artwork</span>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        className="kk-feature-gallery"
+                        key={group}
+                        data-count={visibleFeatures.length}
+                        ref={gallery}
+                        aria-label="Bonus features"
+                        onKeyDown={(event) => {
+                          const root = gallery.current;
+                          if (!root || root.scrollWidth <= root.clientWidth + 1)
+                            return;
+                          if (
+                            event.key !== "ArrowRight" &&
+                            event.key !== "ArrowLeft"
+                          )
+                            return;
+                          event.preventDefault();
+                          showCard(
+                            Math.max(
+                              0,
+                              Math.min(
+                                visibleFeatures.length - 1,
+                                active + (event.key === "ArrowRight" ? 1 : -1),
+                              ),
+                            ),
+                            true,
+                          );
+                        }}
+                        onScroll={() => {
+                          const root = gallery.current;
+                          if (!root || root.scrollWidth <= root.clientWidth + 1)
+                            return;
+                          const first = root.children[0] as HTMLElement;
+                          const next = root.children[1] as HTMLElement;
+                          const step = next.offsetLeft - first.offsetLeft;
+                          if (step > 0)
+                            setActive(
+                              Math.min(
+                                visibleFeatures.length - 1,
+                                Math.max(0, Math.round(root.scrollLeft / step)),
+                              ),
+                            );
+                        }}
+                      >
+                        {visibleFeatures.map((feature) => (
+                          <FeatureCard
                             key={feature.id}
-                            data-active={i === active ? "true" : undefined}
+                            feature={feature}
+                            stake={stake}
+                            bank={bank}
+                            locked={locked}
+                            onSelect={select}
                           />
                         ))}
                       </div>
-                      <span aria-live="polite">
-                        {active + 1} / {visibleFeatures.length}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      className="kk-icon-button"
-                      aria-label="Next bonus"
-                      disabled={active === visibleFeatures.length - 1}
-                      onClick={() => showCard(active + 1)}
-                    >
-                      <ChevronRight size={20} />
-                    </button>
-                  </nav>
-                </>
-              )}
-            </section>
+                      <nav
+                        className="kk-feature-pager"
+                        aria-label="Browse bonuses"
+                      >
+                        <button
+                          type="button"
+                          className="kk-icon-button"
+                          aria-label="Previous bonus"
+                          disabled={active === 0}
+                          onClick={() => showCard(active - 1)}
+                        >
+                          <ChevronLeft size={20} />
+                        </button>
+                        <div className="kk-feature-pagination">
+                          <div className="kk-feature-dots" aria-hidden="true">
+                            {visibleFeatures.map((feature, i) => (
+                              <span
+                                key={feature.id}
+                                data-active={i === active ? "true" : undefined}
+                              />
+                            ))}
+                          </div>
+                          <span aria-live="polite">
+                            {active + 1} / {visibleFeatures.length}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          className="kk-icon-button"
+                          aria-label="Next bonus"
+                          disabled={active === visibleFeatures.length - 1}
+                          onClick={() => showCard(active + 1)}
+                        >
+                          <ChevronRight size={20} />
+                        </button>
+                      </nav>
+                    </>
+                  )}
+                </section>
+              </>
+            )}
             <div className="kk-feature-utilities">
-              <div
-                className="kk-ante-feature"
-                data-active={ante ? "true" : undefined}
-              >
-                <div className="kk-ante-copy">
-                  <h2>Ante bet</h2>
-                  <p>
-                    1.5× base bet · {amount(splashCost(stake, "ante"))} LGC /
-                    spin
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="kk-ante-action"
-                  aria-pressed={ante}
-                  aria-label={
-                    ante ? "Deactivate ante bet" : "Activate ante bet"
-                  }
-                  disabled={locked}
-                  onClick={() => onAnte(!ante)}
+              {!anteRestriction.hidden && (
+                <div
+                  className="kk-ante-feature"
+                  data-active={ante ? "true" : undefined}
                 >
-                  <span className="kk-ante-switch" aria-hidden="true" />
-                  {ante ? "On" : "Off"}
-                </button>
-              </div>
+                  <div className="kk-ante-copy">
+                    <h2>Ante bet</h2>
+                    <p>
+                      1.5× base bet · {amount(splashCost(stake, "ante"))} LGC /
+                      spin
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="kk-ante-action"
+                    aria-pressed={ante}
+                    aria-label={
+                      ante ? "Deactivate ante bet" : "Activate ante bet"
+                    }
+                    disabled={locked || anteRestriction.disabled}
+                    title={anteRestriction.reason}
+                    onClick={() => {
+                      if (!anteRestriction.disabled) onAnte(!ante);
+                    }}
+                  >
+                    <span className="kk-ante-switch" aria-hidden="true" />
+                    {ante ? "Ante On" : "Ante Off"}
+                  </button>
+                </div>
+              )}
               <div className="kk-feature-toolbar">
                 <div className="kk-feature-balance">
                   <span>Balance</span>
@@ -799,7 +838,9 @@ export function FeaturesPanel({
               </div>
             </div>
             <p className="kk-gallery-note">
-              Purchases require confirmation. Preview cards place no bet.
+              {anteOnly
+                ? "Ante changes the cost of each spin. Your next spin uses the selected wager."
+                : "Purchases require confirmation. Preview cards place no bet."}
             </p>
           </>
         )}
@@ -835,34 +876,29 @@ export function FeaturesPanel({
 }
 
 export function SettingsPanel({
+  compactActions,
+  disabledTurbo = false,
   preferences,
   onChange,
   locked,
-  mute,
-  onMute,
-  audioAvailable,
-  musicVolume,
-  effectsVolume,
-  onVolume,
   onRules,
   onClose,
+  onBack,
 }: {
+  compactActions?: ReactNode;
+  disabledTurbo?: boolean;
   preferences: GamePreferences;
   onChange: (p: GamePreferences) => void;
   locked: boolean;
-  mute: boolean;
-  onMute: () => void;
-  audioAvailable: boolean;
-  musicVolume: number;
-  effectsVolume: number;
-  onVolume: (music: number, effects: number) => void;
   onRules: () => void;
   onClose: () => void;
+  onBack: () => void;
 }) {
   return (
     <>
-      <PanelHeader title="Settings" onClose={onClose} />
+      <PanelHeader title="Game settings" onClose={onClose} onBack={onBack} />
       <div className="kk-dialog-body kk-settings-body">
+        {compactActions}
         <fieldset disabled={locked}>
           <legend>Spin speed</legend>
           <div className="kk-segmented">
@@ -876,6 +912,7 @@ export function SettingsPanel({
               <button
                 type="button"
                 key={value}
+                disabled={disabledTurbo && value !== "normal"}
                 aria-pressed={preferences.speed === value}
                 onClick={() => onChange({ ...preferences, speed: value })}
               >
@@ -884,57 +921,13 @@ export function SettingsPanel({
             ))}
           </div>
           <p className="kk-setting-hint">
-            {locked
-              ? "Available after this round."
-              : "Faster reels. Feature results remain readable."}
+            {disabledTurbo
+              ? "Turbo speeds are unavailable in this jurisdiction."
+              : locked
+                ? "Available after this round."
+                : "Faster reels. Feature results remain readable."}
           </p>
         </fieldset>
-        <section className="kk-audio-settings">
-          <div className="kk-setting-heading">
-            <h2>Sound</h2>
-            <button
-              type="button"
-              className="kk-icon-button"
-              aria-label={mute ? "Unmute sound" : "Mute sound"}
-              aria-pressed={mute}
-              disabled={!audioAvailable}
-              onClick={onMute}
-            >
-              {mute ? <VolumeX size={21} /> : <Volume2 size={21} />}
-            </button>
-          </div>
-          {!audioAvailable && (
-            <p className="kk-setting-hint" role="status">
-              Sound unavailable
-            </p>
-          )}
-          <label className="kk-volume">
-            <span>Music</span>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="5"
-              value={musicVolume}
-              disabled={!audioAvailable || mute}
-              onChange={(e) => onVolume(Number(e.target.value), effectsVolume)}
-            />
-            <output>{musicVolume}%</output>
-          </label>
-          <label className="kk-volume">
-            <span>Effects</span>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="5"
-              value={effectsVolume}
-              disabled={!audioAvailable || mute}
-              onChange={(e) => onVolume(musicVolume, Number(e.target.value))}
-            />
-            <output>{effectsVolume}%</output>
-          </label>
-        </section>
         <fieldset disabled={locked}>
           <legend>Reduced motion</legend>
           <div className="kk-segmented">

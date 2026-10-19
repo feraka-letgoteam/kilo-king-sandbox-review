@@ -1,0 +1,358 @@
+{
+  "version": 59,
+  "kind": "authored-vs-actions-and-integrated-winner-reels",
+  "actionAtlas": {
+    "file": "actions.webp",
+    "width": 2048,
+    "height": 1024,
+    "frameWidth": 512,
+    "frameHeight": 512,
+    "columns": 4,
+    "rows": 2
+  },
+  "winnerAtlas": {
+    "file": "winner-reels.webp",
+    "width": 768,
+    "height": 1152,
+    "frameWidth": 384,
+    "frameHeight": 1152,
+    "columns": 2,
+    "rows": 1
+  },
+  "assets": [
+    {
+      "id": "king-anticipation",
+      "actor": "king",
+      "phase": "anticipation",
+      "file": "king-anticipation.webp",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 1,
+      "sourceComponentBounds": [
+        16,
+        22,
+        652,
+        627
+      ],
+      "alphaBounds": [
+        29,
+        34,
+        494,
+        478
+      ],
+      "opaquePixelCount": 134001,
+      "authoredPose": true
+    },
+    {
+      "id": "king-strike",
+      "actor": "king",
+      "phase": "strike",
+      "file": "king-strike.webp",
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 3,
+      "sourceComponentBounds": [
+        635,
+        33,
+        1243,
+        625
+      ],
+      "alphaBounds": [
+        23,
+        45,
+        468,
+        478
+      ],
+      "opaquePixelCount": 131657,
+      "authoredPose": true
+    },
+    {
+      "id": "king-recoil",
+      "actor": "king",
+      "phase": "recoil",
+      "file": "king-recoil.webp",
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 20,
+      "sourceComponentBounds": [
+        27,
+        627,
+        621,
+        1228
+      ],
+      "alphaBounds": [
+        37,
+        38,
+        472,
+        478
+      ],
+      "opaquePixelCount": 126235,
+      "authoredPose": true
+    },
+    {
+      "id": "king-winner",
+      "actor": "king",
+      "phase": "winner",
+      "file": "king-winner.webp",
+      "frame": {
+        "x": 1536,
+        "y": 0,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 20,
+      "sourceComponentBounds": [
+        626,
+        637,
+        1248,
+        1229
+      ],
+      "alphaBounds": [
+        17,
+        44,
+        472,
+        478
+      ],
+      "opaquePixelCount": 129313,
+      "authoredPose": true
+    },
+    {
+      "id": "vice-anticipation",
+      "actor": "vice",
+      "phase": "anticipation",
+      "file": "vice-anticipation.webp",
+      "frame": {
+        "x": 0,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 10,
+      "sourceComponentBounds": [
+        28,
+        21,
+        650,
+        616
+      ],
+      "alphaBounds": [
+        38,
+        43,
+        493,
+        478
+      ],
+      "opaquePixelCount": 118683,
+      "authoredPose": true
+    },
+    {
+      "id": "vice-strike",
+      "actor": "vice",
+      "phase": "strike",
+      "file": "vice-strike.webp",
+      "frame": {
+        "x": 512,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 10,
+      "sourceComponentBounds": [
+        626,
+        23,
+        1254,
+        615
+      ],
+      "alphaBounds": [
+        17,
+        44,
+        477,
+        478
+      ],
+      "opaquePixelCount": 117897,
+      "authoredPose": true
+    },
+    {
+      "id": "vice-recoil",
+      "actor": "vice",
+      "phase": "recoil",
+      "file": "vice-recoil.webp",
+      "frame": {
+        "x": 1024,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 16,
+      "sourceComponentBounds": [
+        82,
+        631,
+        632,
+        1234
+      ],
+      "alphaBounds": [
+        77,
+        36,
+        480,
+        478
+      ],
+      "opaquePixelCount": 117981,
+      "authoredPose": true
+    },
+    {
+      "id": "vice-winner",
+      "actor": "vice",
+      "phase": "winner",
+      "file": "vice-winner.webp",
+      "frame": {
+        "x": 1536,
+        "y": 512,
+        "w": 512,
+        "h": 512
+      },
+      "waistAnchor": {
+        "x": 256,
+        "y": 478
+      },
+      "waistRegistrationShift": 14,
+      "sourceComponentBounds": [
+        671,
+        618,
+        1240,
+        1237
+      ],
+      "alphaBounds": [
+        49,
+        25,
+        466,
+        478
+      ],
+      "opaquePixelCount": 122815,
+      "authoredPose": true
+    }
+  ],
+  "winnerReels": [
+    {
+      "id": "king-winner-reel",
+      "actor": "king",
+      "file": "king-winner-reel.webp",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 1152
+      },
+      "copySafe": {
+        "x": 72,
+        "y": 800,
+        "w": 240,
+        "h": 190
+      },
+      "multiplierAnchor": {
+        "x": 192,
+        "y": 858
+      },
+      "wildLabelAnchor": {
+        "x": 192,
+        "y": 958
+      },
+      "sourceCrop": {
+        "x": 24,
+        "y": 20,
+        "w": 496,
+        "h": 1488
+      }
+    },
+    {
+      "id": "vice-winner-reel",
+      "actor": "vice",
+      "file": "vice-winner-reel.webp",
+      "frame": {
+        "x": 384,
+        "y": 0,
+        "w": 384,
+        "h": 1152
+      },
+      "copySafe": {
+        "x": 72,
+        "y": 800,
+        "w": 240,
+        "h": 190
+      },
+      "multiplierAnchor": {
+        "x": 192,
+        "y": 858
+      },
+      "wildLabelAnchor": {
+        "x": 192,
+        "y": 958
+      },
+      "sourceCrop": {
+        "x": 512,
+        "y": 20,
+        "w": 496,
+        "h": 1488
+      }
+    }
+  ],
+  "artDirection": "Kilo orange vest/navy beanie faces right; Vice navy uniform/aviators faces left. Upper-left warm key, controlled blue rim. Actual authored arm/shoulder/expression drawings; no baked text.",
+  "animation": {
+    "order": [
+      "anticipation",
+      "strike",
+      "recoil OR winner"
+    ],
+    "suggestedNormalMs": {
+      "entrance": 180,
+      "anticipation": 280,
+      "strike": 160,
+      "recoilOrWinner": 220,
+      "winnerReelLock": 180,
+      "settledHold": 220
+    },
+    "rule": "Both anticipation drawings enter and hold. Both strike drawings replace them at the committed action. Only the recorded loser uses recoil; recorded winner uses winner. Reveal the matching integrated winner reel. Never loop, alternate identities, reroll or invent a multiplier.",
+    "reducedMotion": "Show anticipation briefly, then the recorded winner reel with static multiplier; no travelling actor."
+  },
+  "registration": "All action frames use one fixed 700px nominal source cell, a uniform 512/700 scale, and a shared waist anchor. Facial/head displacement is authored gesture, not frame-by-frame rescaling.",
+  "method": "Built-in image_gen.imagegen supplied all artwork. pack.py copies existing pixels, partitions overlapping source alpha fringes by nearest actor, crops/resamples and packs atlases. No repainting, synthetic anatomy or programmatically drawn art.",
+  "runtimeNotes": "Use winner reel at its full 1:3 aspect. It already contains its edge and illustrated setting. Do not add another solid plaque or crop its bust into an upper half. Runtime multiplier and WILD text belong in copySafe. Keep settled reels static.",
+  "limitations": "Four authored key poses per actor, not a full frame-by-frame performance or articulated rig. Runtime must provide bounded timing and transitions. Static proofs are not live renderer screenshots."
+}

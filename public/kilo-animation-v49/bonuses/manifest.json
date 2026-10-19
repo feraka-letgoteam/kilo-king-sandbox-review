@@ -1,0 +1,916 @@
+{
+  "version": 49,
+  "generator": "builtin image_gen.imagegen",
+  "frameOrder": "row-major",
+  "notes": [
+    "Newly drawn raster frames; original alpha preserved through mechanical extraction and resampling.",
+    "No frame contains text or amounts. Existing idle art is the reduced-motion and hold fallback.",
+    "Play once as decorative motion. Never use asset duration to gate awards or callbacks.",
+    "Visible bounds use alpha > 16; low-alpha edge pixels are retained.",
+    "Small hand-drawn shape variation remains between frames; shared transform aligns union bounds to old entry art."
+  ],
+  "assets": {
+    "entry-scatter-3": {
+      "url": "/kilo-animation-v49/bonuses/entry-scatter-3-sheet.webp",
+      "sheet": [
+        1536,
+        1024
+      ],
+      "frameSize": [
+        768,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 12,
+          "y": 36,
+          "w": 745,
+          "h": 432
+        },
+        {
+          "x": 10,
+          "y": 31,
+          "w": 748,
+          "h": 437
+        },
+        {
+          "x": 11,
+          "y": 28,
+          "w": 748,
+          "h": 439
+        },
+        {
+          "x": 10,
+          "y": 28,
+          "w": 748,
+          "h": 439
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 10,
+        "y": 28,
+        "w": 749,
+        "h": 440
+      },
+      "alphaUnionBounds": {
+        "x": 1,
+        "y": 22,
+        "w": 767,
+        "h": 485
+      },
+      "safeArea": {
+        "x": 200,
+        "y": 155,
+        "w": 368,
+        "h": 125
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        110,
+        110,
+        140,
+        160
+      ],
+      "durationMs": 520,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "method": "same source-bounds transform for every frame",
+        "scale": [
+          0.9986666666666667,
+          0.9482758620689655
+        ],
+        "translation": [
+          1.0120000000000005,
+          21.362068965517242
+        ],
+        "referenceVisibleBounds": {
+          "x": 13,
+          "y": 36,
+          "w": 975,
+          "h": 574
+        },
+        "referenceCanvas": [
+          1000,
+          667
+        ]
+      },
+      "generatedCanvas": [
+        1536,
+        1024
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "bytes": 367214,
+      "original": "art/kilo-animation-v49/bonuses/entry-scatter-3-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/entry-scatter-3-prompt.txt",
+      "idleFallback": "/kilo-scenes-v43/entry-scatter-3.webp"
+    },
+    "entry-scatter-4": {
+      "url": "/kilo-animation-v49/bonuses/entry-scatter-4-sheet.webp",
+      "sheet": [
+        1536,
+        1024
+      ],
+      "frameSize": [
+        768,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 51,
+          "y": 23,
+          "w": 664,
+          "h": 477
+        },
+        {
+          "x": 31,
+          "y": 16,
+          "w": 704,
+          "h": 483
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "w": 745,
+          "h": 484
+        },
+        {
+          "x": 10,
+          "y": 5,
+          "w": 745,
+          "h": 484
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 10,
+        "y": 5,
+        "w": 746,
+        "h": 495
+      },
+      "alphaUnionBounds": {
+        "x": 5,
+        "y": 2,
+        "w": 755,
+        "h": 499
+      },
+      "safeArea": {
+        "x": 170,
+        "y": 250,
+        "w": 428,
+        "h": 110
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        110,
+        110,
+        140,
+        160
+      ],
+      "durationMs": 520,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "method": "same source-bounds transform for every frame",
+        "scale": [
+          0.9828496042216359,
+          0.9744094488188977
+        ],
+        "translation": [
+          5.102902374670185,
+          2.076771653543307
+        ],
+        "referenceVisibleBounds": {
+          "x": 14,
+          "y": 7,
+          "w": 971,
+          "h": 645
+        },
+        "referenceCanvas": [
+          1000,
+          667
+        ]
+      },
+      "generatedCanvas": [
+        1536,
+        1024
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "bytes": 421994,
+      "original": "art/kilo-animation-v49/bonuses/entry-scatter-4-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/entry-scatter-4-prompt.txt",
+      "idleFallback": "/kilo-scenes-v43/entry-scatter-4.webp"
+    },
+    "entry-scatter-5": {
+      "url": "/kilo-animation-v49/bonuses/entry-scatter-5-sheet.webp",
+      "sheet": [
+        1536,
+        1024
+      ],
+      "frameSize": [
+        768,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 45,
+          "y": 1,
+          "w": 690,
+          "h": 501
+        },
+        {
+          "x": 36,
+          "y": 1,
+          "w": 694,
+          "h": 503
+        },
+        {
+          "x": 39,
+          "y": 3,
+          "w": 695,
+          "h": 509
+        },
+        {
+          "x": 34,
+          "y": 3,
+          "w": 695,
+          "h": 509
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 34,
+        "y": 1,
+        "w": 701,
+        "h": 511
+      },
+      "alphaUnionBounds": {
+        "x": 3,
+        "y": 0,
+        "w": 754,
+        "h": 512
+      },
+      "safeArea": {
+        "x": 225,
+        "y": 145,
+        "w": 318,
+        "h": 145
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        110,
+        110,
+        140,
+        160
+      ],
+      "durationMs": 520,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "method": "same source-bounds transform for every frame",
+        "scale": [
+          1.021865889212828,
+          1.022
+        ],
+        "translation": [
+          -7.896501457725954,
+          -5.132
+        ],
+        "referenceVisibleBounds": {
+          "x": 44,
+          "y": 1,
+          "w": 913,
+          "h": 666
+        },
+        "referenceCanvas": [
+          1000,
+          667
+        ]
+      },
+      "generatedCanvas": [
+        1536,
+        1024
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 502
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 502
+        },
+        {
+          "x": 0,
+          "y": 502,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 502,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "bytes": 425000,
+      "original": "art/kilo-animation-v49/bonuses/entry-scatter-5-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/entry-scatter-5-prompt.txt",
+      "idleFallback": "/kilo-scenes-v43/entry-scatter-5.webp"
+    },
+    "entry-chopper": {
+      "url": "/kilo-animation-v49/bonuses/entry-chopper-sheet.webp",
+      "sheet": [
+        1536,
+        1024
+      ],
+      "frameSize": [
+        768,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 45,
+          "y": 18,
+          "w": 705,
+          "h": 460
+        },
+        {
+          "x": 19,
+          "y": 17,
+          "w": 727,
+          "h": 461
+        },
+        {
+          "x": 14,
+          "y": 5,
+          "w": 748,
+          "h": 468
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "w": 752,
+          "h": 468
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 6,
+        "y": 5,
+        "w": 756,
+        "h": 473
+      },
+      "alphaUnionBounds": {
+        "x": 2,
+        "y": 0,
+        "w": 764,
+        "h": 489
+      },
+      "safeArea": {
+        "x": 215,
+        "y": 165,
+        "w": 338,
+        "h": 130
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        110,
+        110,
+        140,
+        160
+      ],
+      "durationMs": 520,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "method": "same source-bounds transform for every frame",
+        "scale": [
+          0.9947368421052631,
+          0.9874739039665971
+        ],
+        "translation": [
+          2.0210526315789474,
+          -0.9248434237995822
+        ],
+        "referenceVisibleBounds": {
+          "x": 8,
+          "y": 6,
+          "w": 984,
+          "h": 617
+        },
+        "referenceCanvas": [
+          1000,
+          667
+        ]
+      },
+      "generatedCanvas": [
+        1536,
+        1024
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 768,
+          "h": 512
+        }
+      ],
+      "bytes": 385556,
+      "original": "art/kilo-animation-v49/bonuses/entry-chopper-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/entry-chopper-prompt.txt",
+      "idleFallback": "/kilo-scenes-v43/entry-chopper.webp"
+    },
+    "retrigger-crest": {
+      "url": "/kilo-animation-v49/bonuses/retrigger-crest-sheet.webp",
+      "sheet": [
+        1024,
+        1024
+      ],
+      "frameSize": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 92,
+          "y": 73,
+          "w": 328,
+          "h": 383
+        },
+        {
+          "x": 89,
+          "y": 68,
+          "w": 332,
+          "h": 377
+        },
+        {
+          "x": 83,
+          "y": 61,
+          "w": 346,
+          "h": 381
+        },
+        {
+          "x": 83,
+          "y": 60,
+          "w": 345,
+          "h": 382
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 83,
+        "y": 60,
+        "w": 346,
+        "h": 396
+      },
+      "alphaUnionBounds": {
+        "x": 46,
+        "y": 53,
+        "w": 420,
+        "h": 420
+      },
+      "safeArea": {
+        "x": 200,
+        "y": 226,
+        "w": 112,
+        "h": 112
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        100,
+        120,
+        160,
+        180
+      ],
+      "durationMs": 560,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "ringCenter": [
+          256,
+          284
+        ],
+        "method": "constant scale, ring-center registration",
+        "scale": 0.67
+      },
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 627,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 0,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 627,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        }
+      ],
+      "bytes": 197552,
+      "original": "art/kilo-animation-v49/bonuses/retrigger-crest-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/retrigger-crest-prompt.txt",
+      "usage": "Small decorative king crest. Transparent central safe square; do not expand 3-line award copy into the ring hardware."
+    },
+    "completion-case": {
+      "url": "/kilo-animation-v49/bonuses/completion-case-sheet.webp",
+      "sheet": [
+        1024,
+        1024
+      ],
+      "frameSize": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 512,
+          "h": 512
+        }
+      ],
+      "visibleFrameBounds": [
+        {
+          "x": 54,
+          "y": 269,
+          "w": 404,
+          "h": 141
+        },
+        {
+          "x": 54,
+          "y": 198,
+          "w": 404,
+          "h": 212
+        },
+        {
+          "x": 54,
+          "y": 104,
+          "w": 404,
+          "h": 306
+        },
+        {
+          "x": 54,
+          "y": 104,
+          "w": 404,
+          "h": 306
+        }
+      ],
+      "visibleUnionBounds": {
+        "x": 54,
+        "y": 104,
+        "w": 404,
+        "h": 306
+      },
+      "alphaUnionBounds": {
+        "x": 54,
+        "y": 104,
+        "w": 404,
+        "h": 306
+      },
+      "safeArea": {
+        "x": 0,
+        "y": 430,
+        "w": 512,
+        "h": 82
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameDurationsMs": [
+        100,
+        120,
+        160,
+        180
+      ],
+      "durationMs": 560,
+      "loop": false,
+      "registration": {
+        "anchor": [
+          0.5,
+          0.5
+        ],
+        "caseCenterX": 256,
+        "caseBaseline": 410,
+        "caseWidth": 404,
+        "method": "case-body baseline and width normalization"
+      },
+      "generatedCanvas": [
+        1254,
+        1254
+      ],
+      "sourceExtractions": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 627,
+          "y": 0,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 0,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        },
+        {
+          "x": 627,
+          "y": 627,
+          "w": 627,
+          "h": 627
+        }
+      ],
+      "bytes": 134324,
+      "original": "art/kilo-animation-v49/bonuses/completion-case-source.png",
+      "prompt": "art/kilo-animation-v49/bonuses/completion-case-prompt.txt",
+      "usage": "Small case motif beside or above live total. The moving lid crosses the interior; the lower transparent band is the only shared text-safe area.",
+      "transparentTextBand": {
+        "x": 0,
+        "y": 430,
+        "w": 512,
+        "h": 82
+      }
+    }
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "version": 18,
+  "method": "Lossless atlas unpacking; original alpha retained",
+  "attachments": [
+    {
+      "name": "head-open",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "trim": null,
+      "channels": 4,
+      "runtimeSize": [
+        418,
+        418
+      ],
+      "frameRegistered": true
+    },
+    {
+      "name": "head-closed",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        418,
+        0,
+        418,
+        418
+      ],
+      "trim": null,
+      "channels": 4,
+      "runtimeSize": [
+        418,
+        418
+      ],
+      "frameRegistered": true
+    },
+    {
+      "name": "legs",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        8,
+        423,
+        400,
+        395
+      ],
+      "trim": {
+        "left": 15,
+        "top": 3,
+        "width": 379,
+        "height": 392
+      },
+      "channels": 4,
+      "runtimeSize": [
+        379,
+        392
+      ]
+    },
+    {
+      "name": "arm-left-upper",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        484,
+        437,
+        264,
+        343
+      ],
+      "trim": {
+        "left": 11,
+        "top": 11,
+        "width": 247,
+        "height": 324
+      },
+      "channels": 4,
+      "runtimeSize": [
+        247,
+        324
+      ]
+    },
+    {
+      "name": "arm-left-fore",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        944,
+        433,
+        187,
+        370
+      ],
+      "trim": {
+        "left": 5,
+        "top": 3,
+        "width": 178,
+        "height": 367
+      },
+      "channels": 4,
+      "runtimeSize": [
+        178,
+        367
+      ]
+    },
+    {
+      "name": "arm-right-upper",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        65,
+        820,
+        282,
+        385
+      ],
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 282,
+        "height": 374
+      },
+      "channels": 4,
+      "runtimeSize": [
+        282,
+        374
+      ]
+    },
+    {
+      "name": "arm-right-fore",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        418,
+        850,
+        379,
+        308
+      ],
+      "trim": {
+        "left": 3,
+        "top": 3,
+        "width": 369,
+        "height": 305
+      },
+      "channels": 4,
+      "runtimeSize": [
+        369,
+        305
+      ]
+    },
+    {
+      "name": "rod",
+      "source": "fisherman-parts-source.png",
+      "extraction": [
+        814,
+        805,
+        431,
+        423
+      ],
+      "trim": {
+        "left": 1,
+        "top": 0,
+        "width": 429,
+        "height": 423
+      },
+      "channels": 4,
+      "runtimeSize": [
+        429,
+        423
+      ]
+    },
+    {
+      "name": "torso",
+      "source": "torso-clean-source.png",
+      "extraction": [
+        0,
+        0,
+        1201,
+        1310
+      ],
+      "trim": {
+        "left": 0,
+        "top": 10,
+        "width": 1201,
+        "height": 1300
+      },
+      "channels": 4,
+      "runtimeSize": [
+        640,
+        693
+      ]
+    },
+    {
+      "name": "boat-left",
+      "source": "boats-source.png",
+      "extraction": [
+        0,
+        0,
+        1078,
+        729
+      ],
+      "trim": {
+        "left": 0,
+        "top": 13,
+        "width": 1078,
+        "height": 716
+      },
+      "channels": 4,
+      "runtimeSize": [
+        640,
+        425
+      ]
+    },
+    {
+      "name": "boat-right",
+      "source": "boats-source.png",
+      "extraction": [
+        1078,
+        0,
+        1079,
+        729
+      ],
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 1068,
+        "height": 729
+      },
+      "channels": 4,
+      "runtimeSize": [
+        640,
+        437
+      ]
+    },
+    {
+      "name": "reflection-left",
+      "source": "reflections-source.png",
+      "extraction": [
+        0,
+        0,
+        836,
+        941
+      ],
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 836,
+        "height": 941
+      },
+      "channels": 4,
+      "runtimeSize": [
+        512,
+        576
+      ]
+    },
+    {
+      "name": "reflection-right",
+      "source": "reflections-source.png",
+      "extraction": [
+        836,
+        0,
+        836,
+        941
+      ],
+      "trim": {
+        "left": 0,
+        "top": 0,
+        "width": 824,
+        "height": 941
+      },
+      "channels": 4,
+      "runtimeSize": [
+        512,
+        585
+      ]
+    },
+    {
+      "name": "foil-glint",
+      "source": "surface-fx-source.png",
+      "extraction": [
+        0,
+        0,
+        887,
+        887
+      ],
+      "trim": {
+        "left": 0,
+        "top": 36,
+        "width": 887,
+        "height": 827
+      },
+      "channels": 4,
+      "runtimeSize": [
+        256,
+        239
+      ]
+    },
+    {
+      "name": "gem-glint",
+      "source": "surface-fx-source.png",
+      "extraction": [
+        887,
+        0,
+        887,
+        887
+      ],
+      "trim": {
+        "left": 0,
+        "top": 21,
+        "width": 881,
+        "height": 842
+      },
+      "channels": 4,
+      "runtimeSize": [
+        256,
+        245
+      ]
+    }
+  ]
+}

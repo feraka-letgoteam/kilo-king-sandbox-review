@@ -1,4 +1,34 @@
+import { MAX_RIG_URLS } from './max-boat-performance';
+import { setMaxStageVisibility } from './max-stage-visibility';
+import { paintMaxStageSurface } from './max-stage-surface';
+import { MAX_BOAT_URL } from './max-spin-motion';
+import { GOD_CARD_ASSETS } from './god-card-performance';
+import { createFeatureEffects } from './feature-effects';
+import { presentCatchRespin } from './catch-respin';
+import { createReelFeatureEffects } from './reel-feature-effects';
+import { CHARACTER_RIG_URLS } from './character-rig-model';
+import { VS_ART_URLS } from './vs-art';
+import { VS_GROUP_ART_URLS, VS_MULTIPLIER_FONT } from './vs-group-art';
+import { VS_ACTOR_URLS } from './vs-actor-performance';
+import { connectionAnchor } from './connection-win';
+import { createWinNumeral, connectedNumberScale, WIN_TYPE } from './win-type';
+import { paintWinConnection } from './win-connection-paint';
+import { createConnectionAmounts, connectionTraceIndices } from './connection-amounts';
+import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
+import { KING_THROW_RELEASE, type KingToolEvent } from './stage-character-arm';
+import { featureArrivalAt } from './event-performance';
+import { articulateArt, restoreArticulation } from './articulation';
+import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
 import { SPIN_TIMING, type SpinSpeed } from "./control-model";
+import { SYMBOL_LABELS } from "./symbol-labels";
+import { anticipationAt, reelLockPose, reelTravelAt, symbolWinPose } from "./presentation-motion";
+import { collectionHold, stageReadoutLayout, collectorAmountLabels, collectionType } from "./presentation-readout";
+import { AUTHORED_CLIPS } from "./authored-clips";
+import { authoredFrameAt, type AuthoredClip } from "./authored-animation";
+// v20-art-begin
+import { createMarinaFrame } from "./marina-frame";
+import { CABINET_ART, SPOOL_ART } from "./stage-art";
+// v20-art-end
 import {
   Application,
   Assets,
@@ -20,7 +50,7 @@ import {
 } from "@/lib/kilo/engine";
 import type { ReelScene } from "./director";
 import { collectionShares, winningCells } from "./director";
-import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter, setAudioTurbo } from "@/lib/kilo/sound";
+import { scatterBuild, landStop, teaseBegin, teaseResolve, whirStart, whirStop, winSting, bonusEnter, setAudioTurbo, featureCue } from "@/lib/kilo/sound";
 import {
   ART as ART_FILES,
   SYMBOL_ALPHA,
@@ -163,51 +193,6 @@ function geomFor(w: number, h: number): Geom {
   };
 }
 
-/**
- * Premium reel travel. Time is 0–1.
- * A short spool-up, a long constant cruise, then an ease into a flush lock.
- * Speed is zero at the line. There is no overshoot.
- */
-function spinProgress(t: number) {
-  const u = Math.max(0, Math.min(1, t));
-  if (u < 0.1) return 0.069 * (u / 0.1) ** 2;
-  if (u < 0.66) return 0.069 + 0.774 * ((u - 0.1) / 0.56);
-  const s = (u - 0.66) / 0.34;
-  return 0.843 + 0.157 * (1 - (1 - s) ** 3);
-}
-
-/** 1 during the cruise, 0 at the lock. Matches the derivative of spinProgress. */
-function spinSpeed(t: number) {
-  const u = Math.max(0, Math.min(1, t));
-  if (u < 0.1) return u / 0.1;
-  if (u < 0.66) return 1;
-  const s = (u - 0.66) / 0.34;
-  return (1 - s) ** 2;
-}
-
-/**
- * Anticipation travel. Brake out of the cruise, hold a readable creep,
- * then ease to the same flush lock. Never reverses.
- */
-function crawlEase(t: number) {
-  const u = Math.max(0, Math.min(1, t));
-  if (u < 0.08) {
-    const s = u / 0.08;
-    return 0.18 * (1 - (1 - s) ** 2);
-  }
-  if (u < 0.82) return 0.18 + 0.68 * ((u - 0.08) / 0.74);
-  const s = (u - 0.82) / 0.18;
-  return 0.86 + 0.14 * (1 - (1 - s) ** 3);
-}
-
-function crawlSpeed(t: number) {
-  const u = Math.max(0, Math.min(1, t));
-  if (u < 0.08) return 1 - u / 0.08;
-  if (u < 0.82) return 0.42;
-  const s = (u - 0.82) / 0.18;
-  return 0.42 * (1 - s) ** 2;
-}
-
 export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   host.setAttribute("role", "img");
   host.setAttribute("aria-label", "Kilo King reels");
@@ -222,6 +207,16 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   host.appendChild(app.canvas);
   app.canvas.style.width = "100%";
   app.canvas.style.height = "100%";
+  // One readout on the cabinet lip. Exact values never have to compete with
+  // the collector face or the fixed values printed on the packages.
+  const readout = document.createElement("output");
+  readout.className = "kk-stage-readout";
+  readout.hidden = true;
+  let readoutActive = false;
+  const readoutLabel = document.createElement("span");
+  const readoutValue = document.createElement("strong");
+  readout.append(readoutLabel, readoutValue);
+  host.appendChild(readout);
   app.canvas.style.display = "block";
 
   const urls = [
@@ -229,40 +224,64 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       ...Object.entries(ART)
         .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
         .map(([, url]) => url),
-      artUrl("reel-well.png"),
-      artUrl("modal-panel.png"),
+      "/kilo-v79/surfaces/reel-well.webp",
+      "/kilo-v79/surfaces/modal-panel.webp",
       artUrl(TOOL_PIVOTS.hook.file),
       artUrl(TOOL_PIVOTS.dynamite.file),
       artUrl(TOOL_PIVOTS.bazooka.file),
-      artUrl("fx-burst.png"),
-      artUrl("fx-water-impact.png"),
+      "/kilo-v79/fx/fx-burst.webp",
+      "/kilo-v79/fx/fx-water-impact.webp",
       MOTION_ROOT + collectorAtlas.image,
       MOTION_ROOT + "retrigger-frame.svg",
       MOTION_ROOT + "value-plaque.svg",
       ...Object.values(PACKAGE_META).map((meta) => CONTRABAND_ROOT + meta.file),
       CONTRABAND_ROOT + SCATTER_KING.file,
-      "/kilo-ui-v11/banner-entry.webp",
-      "/kilo-ui-v11/banner-upgrade.webp",
+      "/kilo-v79/surfaces/banner.webp",
+      "/kilo-v79/surfaces/banner.webp",
+      "/kilo-features-v52/fisherman-reel-in.webp",
+      "/kilo-features-v54/fisherman-reel-in.webp",
+      "/kilo-features-v54/vice-officer.webp",
+      "/kilo-features-v52/chopper-body.webp",
+      "/kilo-features-v53/getaway-speedboat.webp",
+      "/kilo-features-v53/getaway-hardcase.webp",
+      ...CHARACTER_RIG_URLS,
+      ...VS_ART_URLS,
+      ...VS_GROUP_ART_URLS,
+      ...VS_ACTOR_URLS,
+      AUTHORED_CLIPS['entry-scatter-3'].url,
+      MAX_BOAT_URL, ...MAX_RIG_URLS,
+      ...Object.values(GOD_CARD_ASSETS),
+      "/kilo-v79/vehicles/chopper-action.webp",
+      "/kilo-v55/vehicles/getaway-action.webp",
+      "/kilo-v56/vehicles/getaway-stop.webp",
+      "/kilo-v79/surfaces/dock.webp",
+      "/kilo-v79/surfaces/yacht.webp",
+      "/kilo-v79/surfaces/route.webp",
+      "/kilo-v79/surfaces/getaway.webp",
     ]),
   ];
   await Promise.all(urls.map((url) => Assets.load(url)));
+  // v20-art-begin
+  await Promise.all([CABINET_ART, SPOOL_ART].map((url) => Assets.load(url)));
+  const marinaFrame = createMarinaFrame(Assets.get<Texture>(CABINET_ART));
+  // v20-art-end
   const tex = (file: string) => Assets.get<Texture>(artUrl(file));
   const textures = Object.fromEntries(
     Object.entries(ART)
       .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
       .map(([sym, url]) => [sym, Assets.get<Texture>(url)]),
   ) as Record<Sym, Texture>;
-  const wellTex = tex("reel-well.png");
-  const modalTex = tex("modal-panel.png");
+  const wellTex = Assets.get<Texture>("/kilo-v79/surfaces/reel-well.webp");
+  const modalTex = Assets.get<Texture>("/kilo-v79/surfaces/modal-panel.webp");
   const entryTex =
-    (Assets.get("/kilo-ui-v11/banner-entry.webp") as Texture | undefined) || modalTex;
+    (Assets.get("/kilo-v79/surfaces/banner.webp") as Texture | undefined) || modalTex;
   const upgradeTex =
-    (Assets.get("/kilo-ui-v11/banner-upgrade.webp") as Texture | undefined) || modalTex;
+    (Assets.get("/kilo-v79/surfaces/banner.webp") as Texture | undefined) || modalTex;
   const hookTex = tex(TOOL_PIVOTS.hook.file);
   const dynamiteTex = tex(TOOL_PIVOTS.dynamite.file);
   const bazookaTex = tex(TOOL_PIVOTS.bazooka.file);
-  const burstTex = tex("fx-burst.png");
-  const impactTex = tex("fx-water-impact.png");
+  const burstTex = Assets.get<Texture>("/kilo-v79/fx/fx-burst.webp");
+  const impactTex = Assets.get<Texture>("/kilo-v79/fx/fx-water-impact.webp");
   const motionTex = (file: string) => Assets.get<Texture>(MOTION_ROOT + file);
   const framesFrom = (
     file: string,
@@ -285,8 +304,50 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     ]),
   ) as Record<PackageKey, Texture>;
   const scatterTex = Assets.get<Texture>(CONTRABAND_ROOT + SCATTER_KING.file);
+  const authoredTextures = new Map<string, { clip: AuthoredClip; frames: Texture[] }>();
+  // Dock entry uses the standard ceremony, not the version-4 feature director.
+  // Decode its crest with the stage so the first entry has its authored art.
+  const dockEntryClip=AUTHORED_CLIPS['entry-scatter-3'];
+  const dockEntrySheet=Assets.get<Texture>(dockEntryClip.url);
+  authoredTextures.set('entry-scatter-3',{clip:dockEntryClip,frames:dockEntryClip.frames.map(f=>new Texture({
+    source:dockEntrySheet.source,frame:new Rectangle(f.x,f.y,f.w,f.h),
+  }))});
+  // Optional drawing packs never delay a recorded outcome or a collection.
+  // Missing packs retain the existing animation. Ready packs are used at the
+  // next reaction boundary, never injected half way through one.
+  void Promise.all(Object.entries(AUTHORED_CLIPS).filter(([key]) =>
+    !key.startsWith("entry-") && !key.startsWith("actor") && key !== "completion",
+  ).map(async ([key, clip]) => {
+    try {
+      const sheet = await Assets.load<Texture>(clip.url);
+      if (destroyed) return;
+      authoredTextures.set(key, { clip, frames: clip.frames.map(f => new Texture({
+        source: sheet.source, frame: new Rectangle(f.x,f.y,f.w,f.h),
+      })) });
+    } catch { /* Existing static artwork/reactions remain the fallback. */ }
+  }));
   const retriggerTex = motionTex("retrigger-frame.svg");
   const plaqueTex = motionTex("value-plaque.svg");
+
+  /** Decorative crown action in the banner's existing left medallion.
+   * Its clock cannot award spins or extend the retrigger ceremony. */
+  function playRetriggerArt(group: Container,x:number,y:number,w:number,h:number) {
+    const asset=authoredTextures.get("retrigger");
+    if(reduced||!asset)return ()=>{};
+    const art=new Sprite(asset.frames[0]),[l,t,r,b]=asset.clip.bounds;
+    const scale=Math.min(w*.19/(r-l),h*.66/(b-t));
+    art.anchor.set((l+r)/2/asset.clip.frames[0].w,(t+b)/2/asset.clip.frames[0].h);
+    art.scale.set(scale);art.position.set(x+w*.18,y+h*.52);group.addChild(art);
+    let raf=0,last=0,elapsed=0,closed=false;
+    const paint=(now:number)=>{
+      raf=0;if(closed||group.destroyed||art.destroyed)return;
+      if(!document.hidden){elapsed+=last?Math.min(64,now-last):0;art.texture=asset.frames[authoredFrameAt(asset.clip,elapsed/560)];}
+      last=document.hidden?0:now;
+      if(elapsed<560)raf=requestAnimationFrame(paint);
+    };
+    raf=requestAnimationFrame(paint);
+    return()=>{closed=true;cancelAnimationFrame(raf);};
+  }
 
   const world = new Container();
   app.stage.addChild(world);
@@ -300,6 +361,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const lineArt = new Container();
   const locks = new Graphics();
   const reels: { root: Container; strip: Container; mask: Graphics }[] = [];
+  let hiddenVsReels = new Set<number>();
   for (let i = 0; i < 5; i++) {
     const root = new Container();
     const mask = new Graphics();
@@ -339,6 +401,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       document.fonts.load(`400 16px "${TEXT}"`),
       document.fonts.load(`600 16px "${TEXT}"`),
       document.fonts.load(`700 28px "${TEXT}"`),
+      document.fonts.load(`700 32px "${VS_MULTIPLIER_FONT}"`),
     ]);
     await document.fonts.ready;
   };
@@ -358,7 +421,18 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   world.addChild(cabinet, well, veil, routes);
   for (const reel of reels) world.addChild(reel.root);
   world.addChild(frame);
+  // v20-art-begin
+  world.addChild(marinaFrame.root);
+  // v20-art-end
   world.addChild(fx, lineArt, locks, title, transient);
+
+  // Max covers the board with an illustrated card; it never blanks the strips.
+  // Retain the legacy water object only as an inert cached drawing.
+  const reelInterior = [cabinet, well, veil, routes, ...reels.map(r => r.root), fx, lineArt, locks];
+  const maxWater = new Graphics();maxWater.label = 'getaway-stage-water';
+  world.addChildAt(maxWater, world.children.indexOf(frame));
+  setMaxStageVisibility(reelInterior, false);
+  maxWater.visible = false;
 
   let meterWilds = 0;
   let stake = 1000;
@@ -429,21 +503,50 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     sprite.position.set(mark.size * mark.cx, mark.size * mark.cy);
   }
 
-  function playFishAck(sprite: Sprite | null) {
-    const mark = (sprite as Placed | null)?.kkPlace;
-    if (!sprite || !mark?.asset.startsWith("package-")) return Promise.resolve();
+  // Resizing rebuilds standing sprites. Rebind to the same cell and restore
+  // the current reaction phase before the next rendered frame.
+  const reactionRefresh = new Set<() => void>();
+  function playFishAck(resolveSprite: () => Sprite | null) {
+    const mine = job;
+    let phase = 0;
+    const initial = resolveSprite() as Placed | null;
+    const clip = initial?.kkPlace ? authoredTextures.get(initial.kkPlace.asset) : undefined;
+    const paint = () => {
+      const sprite = resolveSprite() as Placed | null;
+      if (mine !== job || stopped || !sprite || sprite.destroyed ||
+          !sprite.kkPlace?.asset.startsWith("package-")) return;
+      if (clip && !reduced) paintAuthored(sprite, clip, phase);
+      else applyPlace(sprite, fishReaction(phase * 420, reduced));
+      if (!reduced) articulateArt(sprite, 'brick', phase, 'haul', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
+    };
     const ms = reduced ? 0 : turbo ? Math.round(420 * 0.45) : 420;
+    reactionRefresh.add(paint);
     return tween(ms, (t) => {
-      if (sprite.destroyed) return;
-      applyPlace(sprite, fishReaction(t * 420, reduced));
-    }).then(() => {
-      if (!sprite.destroyed) applyPlace(sprite, { scale: 1, rotation: 0 });
+      phase = t;
+      paint();
+    }).finally(() => {
+      reactionRefresh.delete(paint);
+      const sprite = resolveSprite();
+      if (mine === job && !stopped && sprite && !sprite.destroyed) {
+        restoreAuthored(sprite);
+        applyPlace(sprite, { scale: 1, rotation: 0 });
+      }
     });
   }
 
   function cellView(cell: SplashCell, size: number, decor = true, printed?: number) {
     const root = new Container();
-    if (cell.s === "brick") {
+    if (cell.duel) {
+      root.label = 'duel-trigger';
+      const edge = size * .12, mid = size / 2;
+      root.addChild(new Graphics().poly([mid,edge,size-edge,size*.30,size-edge,size*.70,mid,size-edge,edge,size*.70,edge,size*.30])
+        .fill(0x07131a).stroke({color:0xd8b66f,width:Math.max(2,size*.035)}));
+      root.addChild(new Graphics().moveTo(mid+size*.08,size*.24).lineTo(mid-size*.08,size*.76).stroke({color:0x89e6d9,width:Math.max(2,size*.025)}));
+      const vs = new Text({text:'VS',style:{fontFamily:'Source Sans 3',fontWeight:'900',fontSize:size*.39,fill:0xfff8e9,stroke:{color:0x07131a,width:3}}});
+      vs.anchor.set(.5);vs.position.set(mid,mid);root.addChild(vs);
+      (root as Container & { kkSym?: string }).kkSym = cell.s;
+      return root;
+    } else if (cell.s === "brick") {
       const value = cell.v;
       let tier: ReturnType<typeof fishTier> | null = null;
       if (typeof value === "number") {
@@ -591,6 +694,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       tag.anchor.set(0.5);
       tag.position.set(size / 2, tagY + tagH / 2);
       root.addChild(back, tag);
+      back.label = "collector-tag";
+      tag.label = "collector-tag";
     }
     (root as Container & { kkSym?: string }).kkSym = cell.s;
     return root;
@@ -611,23 +716,21 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         strip.addChild(view);
       }
       strip.position.set(0, 0);
+      strip.visible = !hiddenVsReels.has(reel);
     }
   }
 
   function placeFrame() {
+    // v20-art-begin
+    marinaFrame.place(geom.dw, geom.dh, host.closest(".kk-shell")?.getAttribute("data-compact") === "true" ? "mini" : host.closest(".kk-shell")?.getAttribute("data-layout") ?? "wide");
+    // v20-art-end
     const { cab, cell, gap, gx, gy } = geom;
     const edge = frameBorders(cab);
     const gridW = cell * 5 + gap * 4;
     const gridH = cell * 3;
     const x = cab.x;
     const y = cab.y;
-    const right = x + cab.w;
-    const bottom = y + cab.h;
-    const metal = 0x142830;
-    const topMetal = 0x263b43;
     const deep = 0x08151d;
-    const brass = 0xb69a62;
-    const brassLight = 0xe2c98c;
 
     // Painted marine hardware, fitted entirely to the existing edge budget.
     // The cell rectangle and collection landing coordinates do not change.
@@ -640,94 +743,23 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       .rect(gx - 2, gy - 2, gridW + 4, gridH + 4)
       .fill(0x030c12);
 
+    // One authored frame owns the hardware; this only seals the reel aperture.
+    // It replaces the competing vector rails, raster border and CSS rim.
     frame.clear();
-    // Four solid rails leave the entire 5×3 playing area clear. The upper
-    // plane catches cool ambient light; the lower plane stays in shadow.
-    frame
-      .rect(x + 2, y + 2, cab.w - 4, edge.t - 3)
-      .fill(topMetal);
-    frame
-      .rect(x + 2, y + edge.t - 1, edge.l - 3, cab.h - edge.t - edge.b + 2)
-      .rect(right - edge.r + 1, y + edge.t - 1, edge.r - 3, cab.h - edge.t - edge.b + 2)
-      .fill(metal);
-    frame
-      .rect(x + 2, bottom - edge.b + 1, cab.w - 4, edge.b - 3)
-      .fill(0x101f27);
-    // Brushed edge lights have a physical source and remain thin. Keeping
-    // these accents inside the rails avoids a gold picture-frame silhouette.
-    frame
-      .moveTo(x + 6, y + 2.5)
-      .lineTo(right - 6, y + 2.5)
-      .stroke({ color: 0x78939a, alpha: 0.45, width: 1 });
-    frame
-      .moveTo(x + 2.5, y + 6)
-      .lineTo(x + 2.5, bottom - 6)
-      .stroke({ color: 0x506a71, alpha: 0.4, width: 1 });
-    frame
-      .moveTo(right - 2.5, y + 6)
-      .lineTo(right - 2.5, bottom - 6)
-      .moveTo(right - 6, bottom - 2.5)
-      .lineTo(x + 6, bottom - 2.5)
-      .stroke({ color: 0x030a0f, alpha: 0.95, width: 1 });
-    // A narrow brass insert is recessed against a dark gasket. Its stroke
-    // sits outside the symbol masks, even at the smallest phone geometry.
-    frame
-      .rect(gx - 1.5, gy - 1.5, gridW + 3, gridH + 3)
+    frame.rect(gx - 1.5, gy - 1.5, gridW + 3, gridH + 3)
       .stroke({ color: 0x02090e, width: 3 });
-    frame
-      .moveTo(gx - 1.5, gy + gridH + 1.5)
-      .lineTo(gx - 1.5, gy - 1.5)
-      .lineTo(gx + gridW + 1.5, gy - 1.5)
-      .stroke({ color: brass, alpha: 0.78, width: 1 });
-    frame
-      .moveTo(gx + gridW + 1.5, gy - 1.5)
-      .lineTo(gx + gridW + 1.5, gy + gridH + 1.5)
-      .lineTo(gx - 1.5, gy + gridH + 1.5)
-      .stroke({ color: brass, alpha: 0.3, width: 1 });
-
-    // Small square corner fittings and inset screw heads read as cabinet
-    // construction. Their size follows the rail, rather than the viewport.
-    const cap = Math.max(6, edge.l - 3);
-    const capInset = 1.5;
-    const screwR = Math.max(1.15, Math.min(1.8, edge.l * 0.1));
-    for (const [cx, cy] of [
-      [x + capInset, y + capInset],
-      [right - cap - capInset, y + capInset],
-      [x + capInset, bottom - cap - capInset],
-      [right - cap - capInset, bottom - cap - capInset],
-    ]) {
-      frame
-        .roundRect(cx!, cy!, cap, cap, 1.5)
-        .fill(0x34464a)
-        .stroke({ color: 0x060f15, width: 1 });
-      frame
-        .moveTo(cx! + 1.5, cy! + 1)
-        .lineTo(cx! + cap - 1.5, cy! + 1)
-        .stroke({ color: brassLight, alpha: 0.5, width: 1 });
-      const sx = cx! + cap / 2;
-      const sy = cy! + cap / 2;
-      frame
-        .circle(sx, sy, screwR + 0.7)
-        .fill(0x081219)
-        .circle(sx, sy - 0.2, screwR)
-        .fill({ color: brass, alpha: 0.8 });
-      frame
-        .moveTo(sx - screwR * 0.6, sy + screwR * 0.45)
-        .lineTo(sx + screwR * 0.6, sy - screwR * 0.45)
-        .stroke({ color: 0x142128, width: 0.8 });
-    }
 
     // The texture is only an underlying material grain. A calm blue-green
     // field keeps the illustrated symbols brighter than their surroundings.
     well.position.set(gx, gy);
     well.width = gridW;
     well.height = gridH;
-    well.tint = 0x648b91;
+    well.tint = 0x3d747d;
     well.tileScale.set(Math.max(1.2, geom.cell / 110));
     veil.clear();
     veil
       .rect(gx, gy, gridW, gridH)
-      .fill({ color: deep, alpha: 0.76 });
+      .fill({ color: 0x04151d, alpha: 0.86 });
 
     // Recess shading is behind symbols and win routes. Non-overlapping bands
     // approximate broad soft gradients without extra render filters.
@@ -772,6 +804,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   function drawCabinet() {
     const { cell, gap, gx, gy } = geom;
     placeFrame();
+    paintMaxStageSurface(maxWater, geom);
     for (let reel = 0; reel < 5; reel++) {
       const x = gx + reel * (cell + gap);
       const slot = reels[reel]!;
@@ -803,11 +836,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     pendingLayout = false;
     drawCabinet();
     paintStanding();
+    for (const paint of reactionRefresh) paint();
+    placeReadout();
     if (animating && resizeFollow) {
       host.dispatchEvent(new CustomEvent("kilo-relayout"));
       return;
     }
     placeCopy();
+    host.dispatchEvent(new CustomEvent("kilo-relayout"));
   }
 
   function phaseTarget() {
@@ -817,9 +853,39 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   function restoreSymbols() {
     for (const reel of reels)
       for (const child of reel.strip.children)
-        if (!child.destroyed) child.alpha = 1;
+        if (!child.destroyed) {
+          child.alpha = 1;
+          for (const item of [...child.children]) {
+            if (item instanceof Sprite) restoreAuthored(item);
+            if (item.label === "collector-tag") item.visible = true;
+          }
+        }
+  }
+  function placeReadout() {
+    // Tiny popouts already use the immediate footer for Balance/Win/Bet.
+    // Keep that footer clear; its WIN and the collector plaque retain values.
+    const tiny = host.closest(".kk-shell")?.getAttribute("data-compact") === "true";
+    readout.hidden = !readoutActive || tiny;
+    const b = stageReadoutLayout(geom);
+    const scale = world.scale.x;
+    Object.assign(readout.style, {
+      left: `${world.x + b.x * scale}px`, top: `${world.y + b.y * scale}px`,
+      width: `${b.width * scale}px`, height: `${b.height * scale}px`,
+      fontSize: `${b.labelSize * scale}px`,
+    });
+    readoutValue.style.fontSize = `${b.amountSize * scale}px`;
+  }
+  function showReadout(label: string, value: string, kind: 'local' | 'summary' = 'summary') {
+    readoutLabel.textContent = label;
+    readoutValue.textContent = value;
+    readout.dataset.kind = kind;
+    readoutActive = true;
+    host.setAttribute("aria-label", `Kilo King reels. ${label}: ${value}`);
+    placeReadout();
   }
   function clearPresentation() {
+    readoutActive = false;
+    readout.hidden = true;
     fx.clear();
     routes.clear();
     lineArt.removeChildren().forEach((child) => child.destroy());
@@ -882,6 +948,39 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     return sprite instanceof Sprite ? sprite : null;
   }
 
+  type AuthoredHome = { texture: Texture; ax: number; ay: number; sx: number; sy: number; x: number; y: number; rotation: number };
+  const authoredHomes = new WeakMap<Sprite, AuthoredHome>();
+  function restoreAuthored(sprite: Sprite) {
+    restoreArticulation(sprite);
+    const home = authoredHomes.get(sprite);
+    if (!home || sprite.destroyed) return;
+    sprite.texture=home.texture;sprite.anchor.set(home.ax,home.ay);
+    sprite.scale.set(home.sx,home.sy);sprite.position.set(home.x,home.y);sprite.rotation=home.rotation;
+    authoredHomes.delete(sprite);
+  }
+  function paintAuthored(sprite: Sprite, asset: { clip: AuthoredClip; frames: Texture[] }, progress: number) {
+    let home=authoredHomes.get(sprite);
+    if(!home) {
+      home={texture:sprite.texture,ax:sprite.anchor.x,ay:sprite.anchor.y,sx:sprite.scale.x,sy:sprite.scale.y,x:sprite.x,y:sprite.y,rotation:sprite.rotation};
+      authoredHomes.set(sprite,home);
+    }
+    const {clip}=asset,[l,t,r,b]=clip.registrationBounds ?? clip.bounds,[rl,rt,rr,rb]=clip.reference.bounds;
+    const physicalX=home.x+((rl+rr)/2-home.ax*clip.reference.width)*home.sx;
+    const physicalY=home.y+((rt+rb)/2-home.ay*clip.reference.height)*home.sy;
+    const scale=Math.min((rr-rl)*home.sx/(r-l),(rb-rt)*home.sy/(b-t));
+    const index=authoredFrameAt(clip,progress),frame=clip.frames[index];
+    if(!frame)return;
+    sprite.texture=asset.frames[index]!;
+    sprite.anchor.set((l+r)/2/frame.w,(t+b)/2/frame.h);
+    sprite.position.set(physicalX,physicalY);sprite.scale.set(scale);sprite.rotation=home.rotation;
+  }
+  function authoredSymbolKey(cell: SplashCell | undefined) {
+    if(!cell)return "";
+    if(cell.s==="brick"&&cell.v!=null)return fishTier(cell.v).asset;
+    const keys:Record<string,string>={"10":"sym-10",J:"sym-j",Q:"sym-q",K:"sym-k",A:"sym-a",cuffs:"sym-bobber",keys:"sym-cash-roll",lamp:"sym-reel-v8",duffel:"sym-case-v8",bars:"scatter-king",splash:"collector"};
+    return keys[cell.s]??"";
+  }
+
   function showReaction(sprite: Sprite, frames: Texture[], index: number) {
     const bust = (sprite as Sprite & {
       kkBust?: { ax: number; ay: number; scale: number; x: number; y: number };
@@ -901,23 +1000,34 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   }
 
   function playReaction(
-    sprite: Sprite | null,
+    resolveSprite: () => Sprite | null,
     frames: Texture[],
     sequence: number[],
     frameMs: number,
   ) {
-    if (!sprite) return Promise.resolve();
+    const mine = job;
+    let phase = 0;
+    const clip = authoredTextures.get("collector");
     const total = sequence.length * frameMs;
+    const paint = () => {
+      const sprite = resolveSprite();
+      if (mine !== job || stopped || !sprite || sprite.destroyed) return;
+      if (clip && !reduced) paintAuthored(sprite, clip, phase);
+      else showReaction(sprite, frames, reactionIndex(sequence, frameMs, phase * total, reduced));
+      if (!reduced) articulateArt(sprite, 'splash', phase, 'collector', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
+    };
     const ms = reduced ? 0 : turbo ? Math.round(total * 0.45) : total;
+    reactionRefresh.add(paint);
     return tween(ms, (t) => {
-      if (sprite.destroyed) return;
-      showReaction(
-        sprite,
-        frames,
-        reactionIndex(sequence, frameMs, t * total, reduced),
-      );
-    }).then(() => {
-      if (!sprite.destroyed) showReaction(sprite, frames, 0);
+      phase = t;
+      paint();
+    }).finally(() => {
+      reactionRefresh.delete(paint);
+      const sprite = resolveSprite();
+      if (mine === job && !stopped && sprite && !sprite.destroyed) {
+        restoreAuthored(sprite);
+        showReaction(sprite, frames, 0);
+      }
     });
   }
 
@@ -996,6 +1106,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     host.dispatchEvent(
       new CustomEvent("kilo-collection", { bubbles: true, detail }),
     );
+    // Presentation only: acknowledge the existing gather / transfer beats.
+    // This event never owns credit, changes a hold, or touches the ledger.
+    if (detail && detail.index > 0 && !stopped && !reduced) {
+      if (detail.phase === 'gather' && detail.subtotal === 0)
+        host.dispatchEvent(new CustomEvent('kilo-stage-action', { bubbles: true, detail: { kind: 'collect' } }));
+      else if (detail.phase === 'bank' && detail.completed > 0)
+        host.dispatchEvent(new CustomEvent('kilo-stage-action', { bubbles: true, detail: { kind: 'collect-bank' } }));
+    }
   }
   function endMotion() {
     animating = false;
@@ -1051,6 +1169,52 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const mine = job;
     animating = true;
     mark(phase);
+    if (phase === "entry") {
+      resizeFollow=true;
+      const banner=new Container();banner.label='dock-entry-banner';transient.addChild(banner);
+      const crest=authoredTextures.get('entry-scatter-3')!;
+      let arrival=0,departure=0,artProgress=0;
+      const paint=()=>{
+        if(banner.destroyed||mine!==job)return;
+        banner.removeChildren().forEach(n=>n.destroy({children:true}));
+        const width=geom.cell*5+geom.gap*4,w=width-12,artWell=Math.min(98,w*.25);
+        const parts=[eyebrow,value,detail].filter(Boolean);
+        const sizes=[Math.max(19,Math.min(27,geom.cell*.23)),Math.max(15,Math.min(24,geom.cell*.20)),14];
+        const lines=parts.map((text,i)=>{const n=new Text({text,style:{fontFamily:i===0?DISPLAY:TEXT,fontSize:sizes[i],fontWeight:'700',fill:i===0?0xffe09b:i===1?0xfff8e9:0xa6e3d7,align:'center',wordWrap:true,wordWrapWidth:w-artWell-24}});n.anchor.set(.5,0);return n;});
+        const h=Math.max(74,lines.reduce((a,n)=>a+n.height,0)+24+(lines.length-1)*5);
+        const x=geom.gx+6,y=geom.gy+(geom.cell*3-h)/2;
+        const impact=new Graphics();banner.addChild(impact);
+        paintImpact(impact,x+w*.5,y+h*.5,w*.83,h*1.55,arrival*.96,0xffcb55,1.1,reduced);
+        const ticket=new Graphics();paintEventTicket(ticket,x,y,w,h,0xffcb55);banner.addChild(ticket);
+        const drawing=crest.frames[authoredFrameAt(crest.clip,reduced?1:artProgress)];
+        const art=new Sprite(drawing);art.label='dock-entry-crest';art.anchor.set(.5);
+        art.scale.set(Math.min((artWell-3)/drawing.width,(h+7)/drawing.height));
+        art.position.set(x+artWell/2+4,y+h/2);banner.addChild(art);
+        let cy=y+12;for(const n of lines){n.position.set(x+artWell+(w-artWell)/2,cy);cy+=n.height+5;banner.addChild(n);}
+        const pose=featureArrivalAt(arrival,reduced);
+        banner.pivot.set(x+w/2,y+h/2);
+        banner.position.set(x+w/2,y+h/2+(reduced?0:h*pose.lift-departure*4));
+        banner.scale.set(pose.x,pose.y);banner.alpha=1-departure;
+      };
+      host.addEventListener('kilo-relayout',paint);paint();
+      const entrance=reduced?0:turbo?90:180,exit=reduced?0:turbo?80:120;
+      const rawReading=Math.max(0,duration-entrance-exit);
+      const reading=turbo?Math.min(rawReading,480):reduced?Math.min(rawReading,560):rawReading;
+      const resolvedDuration=entrance+reading+exit||1;
+      try {
+        await tween(entrance,t=>{arrival=t;artProgress=t*entrance/resolvedDuration;paint();});
+        if(mine!==job||stopped)return;
+        await Promise.all([holdReadable(reading),tween(reduced?0:reading,t=>{artProgress=(entrance+t*reading)/resolvedDuration;paint();})]);
+        if(mine!==job||stopped)return;
+        await tween(exit,t=>{departure=t*t;artProgress=1-exit/resolvedDuration*(1-t);paint();});
+      } finally {
+        host.removeEventListener('kilo-relayout',paint);
+        if(mine===job)resizeFollow=false;
+        if(!banner.destroyed)banner.destroy({children:true});
+        if(mine===job)endMotion();
+      }
+      return;
+    }
     const group = new Container();
     transient.addChild(group);
     const { cab } = geom;
@@ -1241,6 +1405,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       .removeChildren()
       .forEach((child) => child.destroy({ children: true }));
     animating = true;
+    if(!only)host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'spin'}}));
     if (!only) locks.clear();
     const active = only ?? [0, 1, 2, 3, 4];
     if (reduced || stopped) {
@@ -1271,13 +1436,18 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       delay: number;
       rate: number;
       progress: number;
-      phase: "spin" | "crawl" | "done";
+      phase: "spin" | "crawl" | "settle" | "done";
+      velocity: number;
+      cruiseVelocity: number;
       crawlFrom: number;
       crawlTo: number;
       crawlMs: number;
       crawlT: number;
+      crawlInitialVelocity: number;
       frame: number;
       noted: boolean;
+      landedAt: number;
+      landedArt: { sprite: Sprite; x: number; y: number; sym: string }[];
     };
     const spins: Spin[] = active.map((reel, order) => {
       const travel = timing.travel + order;
@@ -1314,12 +1484,17 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         rate: 1 / ordinary,
         progress: 0,
         phase: "spin",
+        velocity: 0,
+        cruiseVelocity: ((endY - startY) / ordinary) * reelTravelAt(0.4).velocity,
         crawlFrom: startY,
         crawlTo: endY,
         crawlMs: turbo ? 560 : 1400,
         crawlT: 0,
+        crawlInitialVelocity: 0,
         frame: 0,
         noted: false,
+        landedAt: 0,
+        landedArt: [],
       };
     });
     const scatterReels: number[] = [];
@@ -1329,7 +1504,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     if (!reduced) whirStart();
     let tickAt = 0;
     let tickStep = 0;
-    const pulses: { reel: number; at: number; scatter: boolean }[] = [];
+    const pulses: { reel: number; at: number; scatter: boolean; authored?: {clip: AuthoredClip; frames: Texture[]} }[] = [];
     let audioClosed = false;
     let lockFlash = only ? 1 : 0;
     const earlyCount = () =>
@@ -1393,15 +1568,19 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       spin.crawlTo = spin.endY;
       spin.crawlMs = budget;
       spin.crawlT = 0;
+      spin.crawlInitialVelocity =
+        (spin.velocity * budget) / Math.max(1, spin.crawlTo - spin.crawlFrom);
     };
-    const streakMax = Math.min(6.5, cell * (turbo ? 0.055 : 0.042));
+    const streakMax = Math.min(3.5, cell * (turbo ? 0.032 : 0.025));
+    const lockMs = speedMode === "super" ? 70 : turbo ? 110 : 170;
+    const scatterTailMs = speedMode === "super" ? 100 : turbo ? 180 : 300;
     const noteLand = (spin: Spin, now: number) => {
       if (spin.noted) return;
       spin.noted = true;
       const isScatter = !!grid[spin.reel]?.some((c) => c.s === "bars");
       if (isScatter) {
         scatterReels.push(spin.reel);
-        pulses.push({ reel: spin.reel, at: now, scatter: true });
+        pulses.push({ reel: spin.reel, at: now, scatter: true, authored: authoredTextures.get("scatter-king") });
       }
       landStop(isScatter);
       const early = earlyCount();
@@ -1424,6 +1603,11 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const finish = () => {
         cancelAnimationFrame(raf);
         waits.delete(finish);
+        for (const spin of spins) {
+          for (const art of spin.landedArt) {
+            if (!art.sprite.destroyed) { restoreAuthored(art.sprite);art.sprite.scale.set(art.x, art.y); }
+          }
+        }
         clearStreak();
         closeAudio();
         resolve();
@@ -1437,8 +1621,19 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       };
       let landedNow = false;
       const lockReel = (spin: Spin, now: number) => {
-        spin.phase = "done";
+        spin.phase = "settle";
+        spin.landedAt = now;
+        spin.velocity = 0;
         spin.strip.position.y = spin.endY;
+        // The recorded three cells are already at their exact stopping point.
+        // Only their illustration compresses; labels and containers stay fixed.
+        spin.landedArt = [0, 1, 2].flatMap((row) => {
+          const view = spin.strip.children[spin.pad + row];
+          const sprite = view?.children.find((child) => child instanceof Sprite);
+          return sprite instanceof Sprite
+            ? [{ sprite, x: sprite.scale.x, y: sprite.scale.y, sym: grid[spin.reel]?.[row]?.s ?? '' }]
+            : [];
+        });
         setStreak(spin.reel, 0);
         noteLand(spin, now);
         landedNow = true;
@@ -1460,12 +1655,27 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           }
           if (spin.phase === "done") continue;
           const dt = dtOf(spin, now);
+          if (spin.phase === "settle") {
+            const t = Math.min(1, (now - spin.landedAt) / lockMs);
+            const pose = reelLockPose(t);
+            if (spin.frame > 0) spin.frame = Math.max(0, 1 - t);
+            for (const art of spin.landedArt) {
+              if (!art.sprite.destroyed) {
+                art.sprite.scale.set(art.x * pose.x, art.y * pose.y);
+                articulateArt(art.sprite, art.sym, t, 'land');
+              }
+            }
+            if (t >= 1) spin.phase = "done";
+            else pending = true;
+            continue;
+          }
           if (spin.phase === "spin") {
             spin.progress = Math.min(1, spin.progress + spin.rate * dt);
-            const p = spinProgress(spin.progress);
-            spin.strip.position.y = spin.startY + (spin.endY - spin.startY) * p;
+            const profile = reelTravelAt(spin.progress);
+            spin.strip.position.y = spin.startY + (spin.endY - spin.startY) * profile.progress;
+            spin.velocity = (spin.endY - spin.startY) * profile.velocity * spin.rate;
             if (spin.progress < 1) {
-              setStreak(spin.reel, spinSpeed(spin.progress) * streakMax);
+              setStreak(spin.reel, profile.speed * streakMax);
               pending = true;
               continue;
             }
@@ -1474,11 +1684,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           } else if (spin.phase === "crawl") {
             spin.crawlT += dt;
             const u = Math.min(1, spin.crawlT / Math.max(1, spin.crawlMs));
+            const profile = anticipationAt(u, spin.crawlInitialVelocity);
             spin.strip.position.y =
-              spin.crawlFrom + (spin.crawlTo - spin.crawlFrom) * crawlEase(u);
+              spin.crawlFrom + (spin.crawlTo - spin.crawlFrom) * profile.progress;
+            spin.velocity =
+              ((spin.crawlTo - spin.crawlFrom) / Math.max(1, spin.crawlMs)) * profile.velocity;
             spin.frame = Math.min(1, spin.frame + dt / 120);
             if (u < 1) {
-              setStreak(spin.reel, crawlSpeed(u) * streakMax * 0.65);
+              setStreak(spin.reel, Math.min(1, spin.velocity / spin.cruiseVelocity) * streakMax);
               pending = true;
               building = true;
               continue;
@@ -1508,23 +1721,30 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         for (const spin of spins) {
           if (spin.frame <= 0.02) continue;
           const reelX = geom.gx + spin.reel * (cell + geom.gap);
-          const pulse = 0.55 + 0.4 * Math.sin(now / 80);
-          fx.roundRect(reelX - 5, geom.gy - 5, cell + 10, cell * 3 + 10, 12).fill({
-            color: 0x12383a,
-            alpha: 0.16 * spin.frame,
-          });
-          fx.roundRect(reelX - 4, geom.gy - 4, cell + 8, cell * 3 + 8, 10).stroke({
-            width: 4,
-            color: 0xffd56a,
-            alpha: pulse * spin.frame,
-          });
+          const arm = Math.min(18, cell * .22);
+          // Real landed scatters arm this treatment. Crisp corner brackets
+          // stay inside the reel; no pulsing box spills over adjacent columns.
+          for (const dx of [0, 1]) for (const dy of [0, 1]) {
+            const x=reelX+(dx?cell-2:2),y=geom.gy+(dy?cell*3-2:2);
+            fx.moveTo(x+(dx?-arm:arm),y).lineTo(x,y).lineTo(x,y+(dy?-arm:arm));
+          }
+          fx.stroke({width:2,color:0xffe3a0,alpha:spin.frame});
         }
         for (const pulse of pulses) {
-          const age = (now - pulse.at) / (pulse.scatter ? 420 : 220);
+          const age = (now - pulse.at) / (pulse.scatter ? scatterTailMs : lockMs);
+          if(pulse.authored) {
+            const landed=spins.find(s=>s.reel===pulse.reel)?.landedArt??[];
+            grid[pulse.reel]?.forEach((c,row)=>{
+              const art=landed[row];
+              if(c.s!=="bars"||!art||art.sprite.destroyed)return;
+              if(age>=1)restoreAuthored(art.sprite);
+              else { art.sprite.scale.set(art.x,art.y);paintAuthored(art.sprite,pulse.authored!,age); }
+            });
+          }
           if (age >= 1) continue;
           const reelX = geom.gx + pulse.reel * (cell + geom.gap);
-          fx.roundRect(reelX - 3, geom.gy - 3, cell + 6, cell * 3 + 6, 8).stroke({
-            width: pulse.scatter ? 5 : 3,
+          fx.rect(reelX + 2, geom.gy + 2, cell - 4, cell * 3 - 4).stroke({
+            width: pulse.scatter ? 2.5 : 1.5,
             color: pulse.scatter ? 0xfff1b8 : 0xffd56a,
             alpha: (1 - age) * (pulse.scatter ? 1 : 0.8),
           });
@@ -1534,7 +1754,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           tickStep += 1;
           tickAt = now;
         }
-        if (pending) raf = requestAnimationFrame(run);
+        // Stop the motor at the final lock, but let the art and crown edge
+        // finish their short landing response before the next presentation.
+        if (!spins.some((spin) => spin.phase === "spin" || spin.phase === "crawl")) closeAudio();
+        const landing = spins.some((spin) => spin.phase === "settle");
+        const tail = pulses.some((pulse) => now - pulse.at < (pulse.scatter ? scatterTailMs : lockMs));
+        if (pending || landing || tail) raf = requestAnimationFrame(run);
         else finish();
       };
       raf = requestAnimationFrame(run);
@@ -1557,66 +1782,159 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     };
   }
 
-  async function burstWin(line: SplashLine, sound = true) {
-    const cells = winningCells(line);
+  async function burstWin(line: SplashLine, sound = true, extraLines: SplashLine[] = [], preloaded = false) {
+    const cells = [...new Map([line,...extraLines].flatMap(winningCells).map(p=>[`${p.reel}:${p.row}`,p])).values()];
     const tier: 0 | 1 | 2 =
       line.pay >= stake * 15 ? 2 : line.pay >= stake * 4 ? 1 : 0;
     if (sound) winSting(tier);
     if (reduced || stopped || !cells.length) return;
-    const bits: Graphics[] = [];
-    const views: { view: Container; row: number; reel: number }[] = [];
+    const views: {
+      sprite: Sprite;
+      row: number;
+      reel: number;
+      sym: string;
+      x: number;
+      y: number;
+      rotation: number;
+      authored?: { clip: AuthoredClip; frames: Texture[] };
+    }[] = [];
     for (const spot of cells) {
-      const view = reels[spot.reel]?.strip.children[spot.row] as Container | undefined;
-      if (view && !view.destroyed) {
-        const size = geom.cell;
-        view.pivot.set(size / 2, size / 2);
-        view.position.set(size / 2, spot.row * size + size / 2);
-        views.push({ view, row: spot.row, reel: spot.reel });
+      const sprite = symbolSprite(spot.reel, spot.row);
+      if (sprite && !sprite.destroyed) {
+        views.push({
+          sprite,
+          row: spot.row,
+          reel: spot.reel,
+          sym: board[spot.reel]?.[spot.row]?.s ?? line.s,
+          x: sprite.scale.x,
+          y: sprite.scale.y,
+          rotation: sprite.rotation,
+          authored: authoredTextures.get(authoredSymbolKey(board[spot.reel]?.[spot.row])),
+        });
       }
     }
-    const count = 7 + tier * 5;
-    const origins = cells.map((spot) => cellCenter(spot.reel, spot.row));
-    for (let i = 0; i < count; i++) {
-      const origin = origins[i % origins.length]!;
-      const bit = new Graphics();
-      lineArt.addChild(bit);
-      bits.push(bit);
-      (bit as Graphics & { kk?: { ang: number; dist: number; r: number; color: number; ox: number; oy: number } }).kk = {
-        ang: (Math.PI * 2 * i) / count + (i % 2) * 0.2,
-        dist: geom.cell * (0.28 + (i % 4) * 0.1) * (1 + tier * 0.22),
-        r: 2.2 + (i % 3) + tier * 0.4,
-        color: i % 3 === 0 ? 0xfff6dd : i % 3 === 1 ? 0xffd56a : 0x7ee7ff,
-        ox: origin.x,
-        oy: origin.y,
-      };
-    }
-    const ms = turbo ? 200 : tier === 2 ? 620 : 440;
-    await tween(ms, (t) => {
-      const e = 1 - (1 - t) ** 2;
-      const pop = Math.sin(Math.min(1, t * 1.4) * Math.PI);
+    // One authored response, then restore the exact home texture/placement.
+    // Values and the enclosing cell never take part in the reaction.
+    const ms = speedMode === "super" ? 130 : turbo ? 220 : tier === 2 ? 560 : tier === 1 ? 420 : 360;
+    try {
+      await tween(ms, (t) => {
+        for (const item of views) {
+          // A resize may repaint the standing cells. Rebind to their artwork,
+          // retaining the new layout's home scale instead of a stale transform.
+          if (item.sprite.destroyed) {
+            const sprite = symbolSprite(item.reel, item.row);
+            if (!sprite || sprite.destroyed) continue;
+            item.sprite = sprite;
+            item.x = sprite.scale.x;
+            item.y = sprite.scale.y;
+            item.rotation = sprite.rotation;
+          }
+          const delay = item.reel / 4 * .16;
+          const phase = Math.max(0, Math.min(1, (t - delay) / (1 - delay)));
+          const p = preloaded ? .19 + phase * .81 : phase;
+          if(item.authored) paintAuthored(item.sprite,item.authored,p);
+          else {
+            const pose = symbolWinPose(item.sym, p, tier);
+            item.sprite.scale.set(item.x * pose.scale, item.y * pose.scale);
+            item.sprite.rotation = item.rotation + pose.rotation;
+          }
+          articulateArt(item.sprite, item.sym, p, 'hit', 1 + tier * .1,
+            item.authored?.clip.registrationBounds ?? item.authored?.clip.bounds);
+        }
+      });
+    } finally {
       for (const item of views) {
-        if (item.view.destroyed) continue;
-        item.view.scale.set(1 + pop * (0.06 + tier * 0.03));
+        if (item.sprite.destroyed) continue;
+        restoreAuthored(item.sprite);
+        item.sprite.scale.set(item.x, item.y);
+        item.sprite.rotation = item.rotation;
       }
-      for (const bit of bits) {
-        if (bit.destroyed) continue;
-        const k = (bit as Graphics & { kk: { ang: number; dist: number; r: number; color: number; ox: number; oy: number } }).kk;
-        const x = k.ox + Math.cos(k.ang) * k.dist * e;
-        const y = k.oy + Math.sin(k.ang) * k.dist * e - t * geom.cell * 0.08;
-        bit.clear().circle(x, y, k.r * (1 - t * 0.35)).fill({ color: k.color, alpha: 1 - t });
-      }
-    });
-    for (const item of views) {
-      if (item.view.destroyed) continue;
-      const size = geom.cell;
-      item.view.scale.set(1);
-      item.view.pivot.set(0, 0);
-      item.view.position.set(0, item.row * size);
     }
-    for (const bit of bits) if (!bit.destroyed) bit.destroy();
   }
 
+  const featureEffects = createFeatureEffects({
+    host, world, geom:()=>geom, cell:cellView, stake:()=>stake,
+    pace:()=>({speed:speedMode,reduced}), tween, hold:holdReadable,
+    live:()=>!stopped&&!destroyed, readout:showReadout, screen:screenOf, landing:bonusLanding,
+    bankCue:(value,capped)=>{collectionCue({phase:'bank',index:0,count:1,mult:1,subtotal:value,completed:value,capped});host.dispatchEvent(new CustomEvent('kilo-earned-win',{bubbles:true,detail:{visibleAward:value}}));},
+  });
+  const featureResponseHomes = new Map<Sprite, {x:number;y:number;rotation:number}>();
+  const restoreFeatureResponse = () => {
+    for (const [sprite,home] of featureResponseHomes) if (!sprite.destroyed) {
+      restoreAuthored(sprite); sprite.scale.set(home.x,home.y); sprite.rotation=home.rotation;
+    }
+    featureResponseHomes.clear();
+  };
+  const reelFeatureEffects = createReelFeatureEffects({
+    host, world, under: lineArt, geom: () => geom, cell: cellView, stake: () => stake,
+    pace: () => ({ speed: speedMode, reduced }), tween, hold: holdReadable,
+    live: () => !stopped && !destroyed, readout: showReadout, screen: screenOf, landing: bonusLanding,
+    show: grid => { board = grid.map(col => col.map(c => ({ ...c }))); paintStanding(); },
+    collect: spin => scene.collect(spin), highlight: (lines, onLine) => scene.highlight(lines, onLine),
+    cue: featureCue,
+    respond: (spots, progress) => {
+      if (progress === null || progress >= 1 || reduced) { restoreFeatureResponse(); return; }
+      for (const spot of spots) {
+        if (hiddenVsReels.has(spot.reel)) continue;
+        const sprite=symbolSprite(spot.reel,spot.row); if (!sprite || sprite.destroyed) continue;
+        if (!featureResponseHomes.has(sprite)) featureResponseHomes.set(sprite,{x:sprite.scale.x,y:sprite.scale.y,rotation:sprite.rotation});
+        const home=featureResponseHomes.get(sprite)!,cell=board[spot.reel]?.[spot.row],authored=authoredTextures.get(authoredSymbolKey(cell));
+        if (authored) paintAuthored(sprite,authored,progress);
+        else { const pose=symbolWinPose(cell?.s??'',progress,1);sprite.scale.set(home.x*pose.scale,home.y*pose.scale);sprite.rotation=home.rotation+pose.rotation; }
+        articulateArt(sprite,cell?.s??'',progress,'hit',1.1,authored?.clip.registrationBounds??authored?.clip.bounds);
+      }
+    },
+    conceal: indices => {
+      hiddenVsReels = new Set(indices);
+      reels.forEach((reel, index) => { reel.strip.visible = !hiddenVsReels.has(index); });
+    },
+    focus: spots => {
+      if (!spots) restoreFeatureResponse();
+      const active = new Set(spots?.map(p => `${p.reel}:${p.row}`));
+      reels.forEach((reel,ri) => reel.strip.children.forEach((child,row) => {
+        if (!child.destroyed) child.alpha = !spots || active.has(`${ri}:${row}`) ? 1 : .45;
+      }));
+    },
+    bankCue: (value, capped) => {
+      collectionCue({ phase: 'bank', index: 0, count: 1, mult: 1, subtotal: value, completed: value, capped });
+      host.dispatchEvent(new CustomEvent('kilo-earned-win', { bubbles: true, detail: { visibleAward: value } }));
+    },
+  });
   const scene: ReelScene = {
+    setBoatStage(active) {
+      // The illustrated card owns coverage. Keep the valid underlying strips
+      // and their original geometry visible everywhere outside that card.
+      setMaxStageVisibility(reelInterior, false);
+      maxWater.visible = false;
+      host.setAttribute('aria-label', active ? 'Kilo King Getaway reel card' : 'Kilo King reels');
+    },
+    setFeatureState(event, phase) {
+      featureEffects.set(event?.reel ? null : event, phase);
+      reelFeatureEffects.set(event?.reel ? event : null, phase);
+    },
+    async reelFeatureStep(event, callbacks) {
+      if (event.reel?.type === 'binary') {
+        // This is the paid spin itself, driven by the recorded horizontal
+        // super-symbol stop. Do not launch the ordinary five vertical strips.
+        stopped = false; job += 1; clearPresentation(); clearFlyers();
+      }
+      const mine = job; animating = true; resizeFollow = true; mark('feature');
+      try { await reelFeatureEffects.step(event, callbacks); }
+      finally { if (mine === job) { restoreSymbols(); resizeFollow = false; endMotion(); } }
+    },
+    async featureStep(event) {
+      const mine=job;animating=true;resizeFollow=true;mark('feature');
+      const focus=()=>{if(event.kind==='route')reels.forEach((reel,index)=>reel.strip.children.forEach(child=>child.alpha=index===event.route?1:.42));};
+      focus();host.addEventListener('kilo-relayout',focus);
+      try{await featureEffects.step(event);}finally{host.removeEventListener('kilo-relayout',focus);if(mine===job){restoreSymbols();resizeFollow=false;endMotion();}}
+    },
+    async featureIntro(round) {
+      bonusEnter(round.mode, round.feature);
+      host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'entry'}}));
+      if (round.version === 4) { await reelFeatureEffects.intro(round); return; }
+      const names={dock:'One marked package survives one more spin',yacht:'Lock cargo · dispatch shipments · improve cargo quality',route:'One column per spin · deliver every five pickups',getaway:'Load three cases · clear three checkpoints · extract'};
+      await ceremony('entry',FEATURE_NAMES[round.feature!],round.feature==='getaway'?'3 cases · 3 checkpoints':`${round.awarded} free spins`,names[round.feature!],turbo?1100:2200);
+    },
     setStake(n) {
       stake = n;
     },
@@ -1624,6 +1942,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       speedMode = speed ?? (nextTurbo ? "turbo" : "normal");
       turbo = speedMode !== "normal";
       reduced = nextReduced;
+      reelFeatureEffects.refreshMotion();
       setAudioTurbo(nextTurbo);
     },
     setMood(next) {
@@ -1670,10 +1989,32 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       stopped = false;
       await spinTo(grid, only, pace);
     },
+    async catchRespin(run,grid) {
+      let cancelled=false;
+      const cancel=()=>{cancelled=true;};
+      const startJob=job;
+      animating=true;resizeFollow=true;
+      // Skip invokes show(), which increments job. A respin increments it once
+      // itself; capture that expected generation so a restored board cannot
+      // accidentally resume the pending animation.
+      let expectedJob=startJob;
+      try {
+        await presentCatchRespin({host,world,geom:()=>geom,cell:cellView,
+          pace:()=>({speed:speedMode,reduced}),tween,
+          live:()=>!cancelled&&!destroyed&&!stopped&&job===expectedJob,
+          cue:name=>featureCue(name==='hookCast'?'reelPull':name==='hookCatch'?'vsLatch':'boatCoast'),
+          spin:async result=>{expectedJob=job+1;await spinTo(result,null,'ordinary');},
+        },run,grid);
+      } finally {cancel();resizeFollow=false;endMotion();}
+    },
     show(grid) {
+      host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'settle'}}));
+      featureEffects.cancel();
+      reelFeatureEffects.cancel();
       collectionCue(null);
       job += 1;
       animating = false;
+      resizeFollow = false;
       stopped = true;
       cancelWaits();
       board = grid.map((col) => col.map((cell) => ({ ...cell })));
@@ -1685,98 +2026,72 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       if (pendingLayout) layout();
       stopped = false;
     },
-    async highlight(lines) {
+    async highlight(lines, onLineStart) {
       clearPresentation();
       if (!lines.length || stopped) return;
-      mark("line");
-      const { cell } = geom;
-      const colors = [0xffd56a, 0x7ee7ff, 0xff9ad5, 0xc6f59a, 0xffb067];
-      const target = phaseTarget();
-      target.dataset.payline = lines
-        .map((line) => {
-          const cells = winningCells(line)
-            .map((spot) => `${spot.reel}.${spot.row}`)
-            .join("-");
-          return `${line.n}x${line.s}=${line.pay}@${cells}`;
-        })
-        .join("|");
-      const gridCenter =
-        geom.gx + (cell * 5 + geom.gap * 4) / 2;
-      const focus = (index: number) => {
-        const line = lines[index];
-        if (!line) return;
-        fx.clear();
-        routes.clear();
-        lineArt.removeChildren().forEach((child) => child.destroy());
-        const cells = winningCells(line);
-        const win = new Set(cells.map((spot) => `${spot.reel}:${spot.row}`));
-        reels.forEach((reel, ri) =>
-          reel.strip.children.forEach((child, row) => {
-            if (!child.destroyed) child.alpha = win.has(`${ri}:${row}`) ? 1 : 0.72;
-          }),
-        );
-        // The route sits behind the reels, so the symbol art stays on top of the stroke.
-        if (cells.length >= 2) {
-          const pts = cells.map((spot) => cellCenter(spot.reel, spot.row));
-          routes.moveTo(pts[0]!.x, pts[0]!.y);
-          for (let i = 1; i < pts.length; i++) routes.lineTo(pts[i]!.x, pts[i]!.y);
-          routes.stroke({
-            width: Math.max(5, cell * 0.07),
-            color: colors[index % colors.length]!,
-            alpha: 0.95,
-            cap: "round",
-            join: "round",
-          });
-        }
-        const shown = line.s === "brick" ? "package" : line.s;
-        const text =
-          lines.length > 1
-            ? `Line ${index + 1} of ${lines.length} · ${line.n} × ${shown} · ${money(line.pay)}`
-            : `${line.n} × ${shown} · ${money(line.pay)}`;
-        const label = new Text({
-          text,
-          style: {
-            fill: 0xfff6dd,
-            fontFamily: "Source Sans 3",
-            fontSize: Math.max(13, Math.min(18, Math.round(cell * 0.11))),
-            fontWeight: "700",
-          },
-        });
-        label.anchor.set(0.5, 0);
-        const plateW = label.width + 20;
-        const plateH = label.height + 8;
-        const plate = new Graphics()
-          .roundRect(-plateW / 2, 0, plateW, plateH, 8)
-          .fill({ color: 0x071018, alpha: 0.92 });
-        const edge = frameBorders(geom.cab);
-        const belowSymbols = geom.gy + cell * 3 + 4;
-        const inBezel =
-          geom.cab.y + geom.cab.h - edge.b + Math.max(0, (edge.b - plateH) / 2);
-        const y = Math.min(
-          geom.dh - plateH - 2,
-          Math.max(belowSymbols, inBezel),
-        );
-        plate.position.set(gridCenter, y);
-        label.position.set(gridCenter, y + 4);
-        lineArt.addChild(plate, label);
-        target.dataset.paylineFocus = String(index);
+      mark("line");animating=true;resizeFollow=true;
+      const target=phaseTarget(),total=lines.reduce((sum,line)=>sum+line.pay,0);
+      target.dataset.payline=lines.map(line=>`${line.n}x${line.s}=${line.pay}@${winningCells(line).map(p=>`${p.reel}.${p.row}`).join("-")}`).join("|");
+      const cells=[...new Map(lines.flatMap(winningCells).map(p=>[`${p.reel}:${p.row}`,p])).values()];
+      const localWin=createWinNumeral(money(total),Math.max(23,geom.cell*.50));
+      localWin.anchor.set(.5);transient.addChild(localWin);
+      const amountsRoot=new Container();transient.addChild(amountsRoot);
+      const components=createConnectionAmounts(amountsRoot,lines.map(line=>({pay:line.pay,spots:winningCells(line)})));
+      let trace=0,response=0,alpha=1,credited=false;
+      const publish=()=>{
+        if(credited||stopped)return;credited=true;
+        lines.forEach((line,index)=>onLineStart?.(line,index));
+        host.dispatchEvent(new CustomEvent('kilo-earned-win',{bubbles:true,detail:{visibleAward:total}}));
       };
-      if (lines.length < 2) {
-        focus(0);
+      const paint=()=>{
+        if(stopped||localWin.destroyed)return;
+        localWin.style.fontSize=Math.max(23,geom.cell*.50);
+        localWin.style.stroke={color:WIN_TYPE.ink,width:Math.max(2,Number(localWin.style.fontSize)*.055)};
+        const anchor=connectionAnchor(cells,geom,localWin.width,localWin.height);
+        localWin.position.set(anchor.x,anchor.y);localWin.alpha=trace>=1?alpha*(reduced||lines.length===1?1:Math.min(1,response*3)):0;
+        const stamped=impactStamp(response,reduced);
+        localWin.scale.set(stamped.x,stamped.y);localWin.rotation=stamped.turn*.5;
+        components.paint(geom,trace,response,alpha,anchor,reduced);
+        routes.clear();fx.clear();
+        lines.forEach((line,index)=>{
+          if(!connectionTraceIndices(lines.map(item=>({pay:item.pay,spots:winningCells(item)}))).has(index))return;
+          const points=winningCells(line).map(p=>cellCenter(p.reel,p.row));
+          const stagger=index/Math.max(1,lines.length-1)*.28;
+          paintWinConnection(routes,fx,points,geom.cell,reduced?1:Math.max(0,Math.min(1,(trace-stagger)/(1-stagger))),response,
+            {append:true,alpha,reduced,intensity:total>=stake*10?1.4:.7});
+        });
+        const winning=new Set(cells.map(p=>`${p.reel}:${p.row}`));
+        reels.forEach((reel,ri)=>reel.strip.children.forEach((child,row)=>{
+          if(!child.destroyed)child.alpha=winning.has(`${ri}:${row}`)?1:.62;
+        }));
+        if (!reduced && trace < 1) for (const spot of cells) {
+          const sprite = symbolSprite(spot.reel, spot.row);
+          if (!sprite || sprite.destroyed) continue;
+          // The connection loads each drawing as it reaches that reel. The
+          // existing reveal/bank clocks stay unchanged; contact releases this
+          // exact ready pose instead of starting another isolated animation.
+          const arrived = Math.max(0, Math.min(1, trace * 5 - spot.reel));
+          articulateArt(sprite, board[spot.reel]?.[spot.row]?.s ?? '', arrived * .19);
+        }
+      };
+      const onLayout=()=>paint();host.addEventListener('kilo-relayout',onLayout);
+      try {
+        showReadout(lines.length>1?`${lines.length} winning connections`:`${lines[0]!.n} × ${SYMBOL_LABELS[lines[0]!.s]}`,money(total),'local');
+        target.dataset.paylineFocus='board';paint();
+        await tween(reduced?0:turbo?120:240+Math.min(180,(lines.length-1)*20),t=>{trace=t;paint();});
+        if(stopped)return;trace=1;publish();
         await Promise.all([
-          holdReadable(turbo ? 420 : 900),
-          burstWin(lines[0]!),
+          burstWin({...lines[0]!,pay:total},true,lines.slice(1),true),
+          (async()=>{
+            await tween(reduced?0:turbo?90:160,t=>{response=t;paint();});
+            if(stopped)return;response=1;paint();
+            await holdReadable(reduced?240:turbo?170:total>=stake*5?400:240);
+            if(!stopped)await tween(reduced?0:turbo?80:140,t=>{alpha=1-t;paint();});
+          })(),
         ]);
-        return;
-      }
-      // Shared cells stack if every route is drawn at once. Cycle the recorded wins; pays stay as stored.
-      for (let index = 0; index < lines.length; index++) {
-        if (stopped) return;
-        focus(index);
-        await Promise.all([
-          holdReadable(turbo ? 320 : 1100),
-          burstWin(lines[index]!, index === 0),
-        ]);
+      } finally {
+        host.removeEventListener('kilo-relayout',onLayout);
+        if(!localWin.destroyed)localWin.destroy();if(!amountsRoot.destroyed)amountsRoot.destroy({children:true});resizeFollow=false;endMotion();
       }
     },
     async collect(spin) {
@@ -1818,134 +2133,46 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const chip = new Container();
       transient.addChild(chip);
       let repaint: () => void = () => {};
+      let repaintFlight: (() => void) | null = null;
       let active: { reel: number; row: number } | null = null;
       const onLayout = () => {
         if (!live() || chip.destroyed) return;
         repaint();
+        repaintFlight?.();
         if (active) focus(active);
       };
       host.addEventListener("kilo-relayout", onLayout);
-      const paintPlaque = (
-        lines: { text: string; color: number; size: number }[],
-        where:
-          | { kind: "collector"; reel: number; row: number }
-          | { kind: "total" },
-      ) => {
-        if (chip.destroyed) return { x: 0, y: 0, top: 0, height: 0, width: 0 };
+      const paintPlaque = (amount: number, where: { reel: number; row: number }) => {
+        if (chip.destroyed) return;
         chip.removeChildren().forEach((child) => child.destroy());
-        const nodes = lines.map((line) => {
-          const node = new Text({
-            text: line.text,
-            style: {
-              fill: line.color,
-              fontFamily: "Source Sans 3",
-              fontWeight: "700",
-              fontSize: line.size,
-              align: "center",
-            },
-          });
-          node.anchor.set(0.5, 0);
-          return node;
-        });
-        const metrics = () => {
-          let width = 1;
-          let height = 0;
-          nodes.forEach((node, index) => {
-            width = Math.max(width, node.width);
-            height += node.height + (index ? 3 : 0);
-          });
-          return { width, height };
-        };
-        const cellNow = geom.cell;
-        const edgeNow = frameBorders(geom.cab);
-        // Inset from the canvas bottom so the award clears the footer seam.
-        const seamPad = Math.max(8, Math.round(Math.min(14, cellNow * 0.08)));
-        const bezelTop = geom.cab.y + geom.cab.h - edgeNow.b + 2;
-        const bezelBot = Math.min(
-          geom.dh - seamPad,
-          geom.cab.y + geom.cab.h - seamPad,
+        const cell = geom.cell;
+        const node = createWinNumeral(money(amount),collectionType(cell).subtotal);
+        node.label='collector-subtotal';
+        const maxW = cell * 0.86 - 8;
+        // Prefer the exact full number at the larger size. Only long totals
+        // use exact shorthand, with the full value retained in the readout.
+        for (const text of collectorAmountLabels(amount, money(amount))) {
+          node.text = text;
+          node.style.fontSize = collectionType(cell).subtotal;
+          while (node.width > maxW && Number(node.style.fontSize) > 12)
+            node.style.fontSize = Number(node.style.fontSize) - 1;
+          if (node.width <= maxW) break;
+        }
+        // Extremely small popouts still keep an exact number inside the cell.
+        if (node.width > maxW) node.style.fontSize = Number(node.style.fontSize) * maxW / node.width;
+        node.anchor.set(0.5, 0.5);
+        const width = Math.min(cell * 0.94, node.width + 8);
+        const height = Math.max(18, node.height + 4);
+        // A small painted underline anchors the value to the collector's
+        // reserved lower area. There is no freestanding opaque UI box.
+        const back = new Graphics().moveTo(-width*.30,height-1).lineTo(width*.30,height-1)
+          .stroke({color:0x85b4a6,width:1.5});
+        node.position.set(0, height / 2);
+        chip.addChild(back, node);
+        chip.position.set(
+          geom.gx + where.reel * (cell + geom.gap) + cell / 2,
+          geom.gy + (where.row + 1) * cell - height - 2,
         );
-        const bezelH = Math.max(14, bezelBot - bezelTop);
-        // Bottom of the bust is left open (the face uses the top 80%).
-        const bandH = cellNow * 0.18;
-        const maxW =
-          where.kind === "total"
-            ? Math.min(geom.cab.w * 0.7, cellNow * 4.4)
-            : cellNow * 0.9;
-        const maxH =
-          where.kind === "total"
-            ? Math.max(bezelH, Math.min(36, Math.round(cellNow * 0.32)))
-            : bandH;
-        const padX = Math.max(6, Math.round(cellNow * 0.03));
-        const padY = where.kind === "total" ? 3 : 2;
-        const limitW = Math.max(10, maxW - padX * 2);
-        const limitH = Math.max(10, maxH - padY * 2);
-        let box = metrics();
-        for (let guard = 0; guard < 16; guard++) {
-          let changed = false;
-          for (const node of nodes) {
-            if (node.width > limitW && Number(node.style.fontSize) > 9) {
-              const fit = Math.min(0.88, (limitW / Math.max(1, node.width)) * 0.96);
-              node.style.fontSize = Math.max(
-                9,
-                Math.floor(Number(node.style.fontSize) * fit),
-              );
-              changed = true;
-            }
-          }
-          box = metrics();
-          if (box.height > limitH) {
-            const fit = Math.min(0.88, limitH / Math.max(1, box.height));
-            nodes.forEach((node) => {
-              node.style.fontSize = Math.max(
-                9,
-                Math.floor(Number(node.style.fontSize) * fit),
-              );
-            });
-            changed = true;
-            box = metrics();
-          }
-          if (!changed) break;
-        }
-        const boxW = box.width + padX * 2;
-        const boxH = box.height + padY * 2;
-        const back = new Graphics()
-          .roundRect(-boxW / 2, 0, boxW, boxH, 8)
-          .fill({ color: 0x071820, alpha: 0.94 })
-          .stroke({ color: 0xe5c17a, width: 2 });
-        chip.addChild(back);
-        let cursor = padY;
-        for (const node of nodes) {
-          node.position.set(0, cursor);
-          cursor += node.height + 2;
-          chip.addChild(node);
-        }
-        if (where.kind === "total") {
-          const centerX = geom.gx + (cellNow * 5 + geom.gap * 4) / 2;
-          const frameTop = geom.cab.y + geom.cab.h - edgeNow.b;
-          let y = bezelTop + Math.max(0, (bezelBot - bezelTop - boxH) / 2);
-          if (y + boxH > bezelBot) y = bezelBot - boxH;
-          // A short phone lip cannot hold the award. Sit it above the frame
-          // instead of letting the clamp drop it onto the footer seam.
-          if (y < bezelTop) y = frameTop - boxH - 2;
-          const faceLimit = geom.gy + cellNow * 3 - cellNow * 0.28;
-          if (y < faceLimit) y = faceLimit;
-          chip.position.set(centerX, y);
-        } else {
-          const top = geom.gy + where.row * cellNow;
-          const bandTop = top + cellNow * 0.8;
-          const bandBot = top + cellNow - Math.max(3, cellNow * 0.02);
-          const homeX =
-            geom.gx + where.reel * (cellNow + geom.gap) + cellNow / 2;
-          chip.position.set(homeX, Math.max(bandTop, bandBot - boxH));
-        }
-        return {
-          x: chip.position.x,
-          y: chip.position.y + boxH / 2,
-          top: chip.position.y,
-          height: boxH,
-          width: boxW,
-        };
       };
       const focus = (wild: { reel: number; row: number }) => {
         fx.clear();
@@ -1955,20 +2182,16 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         ]);
         reels.forEach((reel, ri) =>
           reel.strip.children.forEach((child, row) => {
-            if (!child.destroyed) child.alpha = hot.has(`${ri}:${row}`) ? 1 : 0.48;
+            if (!child.destroyed) {
+              child.alpha = hot.has(`${ri}:${row}`) ? 1 : 0.48;
+              for (const item of child.children)
+                if (item.label === "collector-tag") item.visible = !(ri === wild.reel && row === wild.row);
+            }
           }),
         );
       };
-      const showCollector = (
-        lines: { text: string; color: number; size: number }[],
-        wild: { reel: number; row: number },
-      ) => {
-        repaint = () =>
-          paintPlaque(lines, {
-            kind: "collector",
-            reel: wild.reel,
-            row: wild.row,
-          });
+      const showCollector = (amount: number, wild: { reel: number; row: number }) => {
+        repaint = () => paintPlaque(amount, wild);
         repaint();
       };
       const flyFish = async (
@@ -1976,30 +2199,21 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         value: number,
         wild: { reel: number; row: number },
       ) => {
-        const label = new Text({
-          text: money(value),
-          style: {
-            fill: 0xffefbc,
-            fontFamily: "Source Sans 3",
-            fontWeight: "700",
-            fontSize: Math.max(15, Math.round(geom.cell * 0.15)),
-            stroke: { color: 0x031920, width: Math.max(3, geom.cell * 0.02) },
-          },
-        });
+        const label = createWinNumeral(money(value),collectionType(geom.cell).travelling);
+        const trace = new Graphics();
         label.anchor.set(0.5);
         label.alpha = 0;
-        transient.addChild(label);
-        const mix = (
-          a: { x: number; y: number },
-          b: { x: number; y: number },
-          u: number,
-        ) => {
-          const e = u * u * (3 - 2 * u);
-          return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e };
-        };
-        await tween(pace(500), (t) => {
+        transient.addChild(trace,label);
+        let progress = 0;
+        const paintFlight = () => {
           if (label.destroyed) return;
+          const t = progress;
           const cellNow = geom.cell;
+          const type = collectionType(cellNow);
+          if (label.style.fontSize !== type.travelling) {
+            label.style.fontSize = type.travelling;
+            label.style.stroke = { color: 0x031920, width: type.stroke };
+          }
           const gap = geom.gap;
           const at = (reel: number, row: number, fx: number, fy: number) => ({
             x: geom.gx + reel * (cellNow + gap) + cellNow * fx,
@@ -2015,12 +2229,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           const crossed = { x: at(wild.reel, wild.row, 0.5, 0).x, y: laneY };
           // Dissolve at the top of the collector, before the face and the plaque.
           const sink = at(wild.reel, wild.row, 0.5, 0.28);
-          let pos =
-            t < 0.2
-              ? mix(start, lifted, t / 0.2)
-              : t < 0.58
-                ? mix(lifted, crossed, (t - 0.2) / 0.38)
-                : mix(crossed, sink, Math.min(1, (t - 0.58) / 0.42));
+          // One continuous haul, not three separate ease-to-zero moves.
+          // Cubic tangents carry the value through the overhead lane; the
+          // stationary cash plaques below remain protected by the bounds test.
+          const u=t*t*(3-2*t),v=1-u;
+          let pos = {
+            x:v*v*v*start.x+3*v*v*u*lifted.x+3*v*u*u*crossed.x+u*u*u*sink.x,
+            y:v*v*v*start.y+3*v*v*u*lifted.y+3*v*u*u*crossed.y+u*u*u*sink.y,
+          };
           const halfW = label.width / 2 + 6;
           const halfH = label.height / 2 + 4;
           for (const other of fish) {
@@ -2048,11 +2264,30 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             }
           }
           label.position.set(pos.x, pos.y);
+          label.scale.set(t<.24?connectedNumberScale(t/.24,reduced):1);
+          // One short water-coloured tether follows the active value. It
+          // forms at the package and contracts into the collector, then ends.
+          trace.clear();
+          const tail=Math.max(0,t-.13),tu=tail*tail*(3-2*tail),tv=1-tu;
+          const tailPos={x:tv*tv*tv*start.x+3*tv*tv*tu*lifted.x+3*tv*tu*tu*crossed.x+tu*tu*tu*sink.x,
+            y:tv*tv*tv*start.y+3*tv*tv*tu*lifted.y+3*tv*tu*tu*crossed.y+tu*tu*tu*sink.y};
+          if(t>.08&&t<.77)trace.moveTo(tailPos.x,tailPos.y).lineTo(pos.x,pos.y)
+            .stroke({color:0x86c9b9,width:Math.max(1.5,cellNow*.016),alpha:.65*Math.sin(Math.PI*t),cap:'round'});
           const fadeIn = Math.min(1, t / 0.08);
           const fadeOut = t < 0.7 ? 1 : Math.max(0, 1 - (t - 0.7) / 0.18);
           label.alpha = fadeIn * fadeOut;
-        });
-        if (!label.destroyed) label.destroy();
+        };
+        repaintFlight = paintFlight;
+        try {
+          await tween(pace(500), (t) => {
+            progress = t;
+            paintFlight();
+          });
+        } finally {
+          repaintFlight = null;
+          if (!label.destroyed) label.destroy();
+          if (!trace.destroyed) trace.destroy();
+        }
       };
       try {
         step("gather");
@@ -2062,107 +2297,80 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           focus(wild);
           if (!chip.destroyed)
             chip.removeChildren().forEach((child) => child.destroy());
-          const reactions = Promise.all([
-            playReaction(
-              symbolSprite(wild.reel, wild.row),
+          const reaction = playReaction(
+              () => symbolSprite(wild.reel, wild.row),
               collectorFrames,
               collectorAtlas.sequence,
               collectorAtlas.frameMs,
-            ),
-            ...fish.map((spot) => playFishAck(symbolSprite(spot.reel, spot.row))),
-          ]);
+            );
           const share = (table[wi] ?? []).reduce((sum, value) => sum + value, 0);
           const beforeCap = printed * spin.mult;
           const credited = even ? beforeCap : share;
-          const amountSize = Math.max(18, Math.round(geom.cell * 0.22));
-          const eqSize = Math.max(16, Math.round(geom.cell * 0.17));
           let shown = 0;
-          const publish = () =>
-            collectionCue({
-              index: wi + 1,
-              count: collectors.length,
-              mult: spin.mult,
-              subtotal: shown,
-              completed: 0,
-              phase: "gather",
-              capped,
-            });
-          if (reduced) {
-            shown = credited;
-            if (capped || credited !== beforeCap) {
-              showCollector(
-                [
-                  { text: "BEFORE CAP", color: 0x9ef0e6, size: Math.max(11, geom.cell * 0.1) },
-                  { text: money(beforeCap), color: 0xffefbc, size: eqSize },
-                  { text: money(credited), color: 0xfff6dd, size: amountSize },
-                ],
-                wild,
-              );
-            } else showCollector([{ text: money(credited), color: 0xfff6dd, size: amountSize }], wild);
+          const collectorLabel = `Collector ${wi + 1}/${collectors.length}`;
+          const publish = () => collectionCue({
+            index: wi + 1, count: collectors.length, mult: spin.mult,
+            subtotal: shown, completed: 0, phase: "gather", capped,
+          });
+          const readable = (ms: number) => holdReadable(collectionHold(ms, speedMode, reduced));
+          // Reset all three displays together before the next fish takes off.
+          // This also replaces the resize closure for the previous collector.
+          showCollector(0, wild);
+          showReadout(collectorLabel, money(0), 'local');
+          publish();
+          for (let index = 0; index < fish.length && live(); index++) {
+            const spot = fish[index]!;
+            const value = faces[index] ?? 0;
+            if (!reduced) await Promise.all([
+              flyFish(spot, value, wild),
+              playFishAck(() => symbolSprite(spot.reel, spot.row)),
+            ]);
+            if (!live()) break;
+            shown += value;
+            showCollector(shown, wild);
+            showReadout(collectorLabel, money(shown), 'local');
             publish();
-          } else {
-            for (let index = 0; index < fish.length && live(); index++) {
-              const spot = fish[index]!;
-              const value = faces[index] ?? 0;
-              await flyFish(spot, value, wild);
-              if (!live()) break;
-              shown += value;
-              showCollector([{ text: money(shown), color: 0xfff6dd, size: amountSize }], wild);
-              publish();
-              await sleep(pace(340));
-            }
-            if (live() && shown > 0 && spin.mult > 1) {
-              showCollector(
-                [{ text: `${money(shown)} ×${spin.mult}`, color: 0xffefbc, size: eqSize }],
-                wild,
-              );
-              publish();
-              await sleep(pace(720));
-            }
-            if (live() && (capped || credited !== beforeCap)) {
-              showCollector(
-                [
-                  { text: "BEFORE CAP", color: 0x9ef0e6, size: Math.max(11, geom.cell * 0.1) },
-                  { text: money(beforeCap), color: 0xffefbc, size: eqSize },
-                ],
-                wild,
-              );
-              publish();
-              await sleep(pace(640));
-            }
-            if (live()) {
-              showCollector(
-                [{ text: money(credited), color: 0xfff6dd, size: amountSize }],
-                wild,
-              );
-              shown = credited;
-              publish();
-              await sleep(pace(640));
-            }
+            await Promise.all([readable(340),tween(pace(260),t=>{
+              const number=chip.children.find(child=>child.label==='collector-subtotal');
+              if(number&&!number.destroyed)number.scale.set(reduced?1:1+Math.sin(Math.PI*t)*.08);
+            })]);
           }
-          await reactions;
+          if (live() && shown > 0 && spin.mult > 1) {
+            showReadout(`${money(shown)} ×${spin.mult} →`, money(beforeCap));
+            await readable(720);
+          }
+          if (live() && (capped || credited !== beforeCap)) {
+            showReadout("BEFORE CAP", money(beforeCap));
+            await readable(640);
+          }
+          if (live()) {
+            shown = credited;
+            showCollector(credited, wild);
+            showReadout(capped ? `${collectorLabel} · credited` : collectorLabel, money(credited), capped ? 'summary' : 'local');
+            publish();
+            await readable(640);
+          }
+          await reaction;
         }
         if (live()) {
           step("total");
-          const totalSize = Math.max(26, Math.round(geom.cell * 0.28));
-          const totalLines = capped
-            ? [
-                { text: "BEFORE CAP", color: 0x9ef0e6, size: Math.max(12, Math.round(geom.cell * 0.11)) },
-                { text: money(illustrated), color: 0xffefbc, size: Math.max(14, Math.round(geom.cell * 0.14)) },
-                { text: "MAX WIN REACHED", color: 0xffd56a, size: Math.max(12, Math.round(geom.cell * 0.11)) },
-                { text: money(spin.got), color: 0xfff6dd, size: totalSize },
-              ]
-            : [{ text: money(spin.got), color: 0xfff6dd, size: totalSize }];
+          active = null;
+          repaint = () => {};
+          chip.removeChildren().forEach((child) => child.destroy());
+          restoreSymbols();
+          if (capped) {
+            showReadout("Combined before cap", money(illustrated));
+            await holdReadable(collectionHold(720, speedMode, reduced));
+          }
           let awardSpot: { x: number; y: number } | null = null;
           let showAward = true;
           repaint = () => {
-            const spot = paintPlaque(totalLines, { kind: "total" });
-            awardSpot = { x: spot.x, y: spot.y };
-            if (!showAward && !chip.destroyed)
-              chip.removeChildren().forEach((child) => child.destroy());
+            const b = stageReadoutLayout(geom);
+            awardSpot = { x: b.x + b.width / 2, y: b.y + b.height / 2 };
+            if (showAward) showReadout(capped ? "MAX WIN REACHED" : "Collected", money(spin.got));
           };
           repaint();
-          await sleep(pace(720));
+          await holdReadable(collectionHold(720, speedMode, reduced));
           if (live() && !reduced && spin.got > 0) {
             step("transfer");
             const el = document.createElement("div");
@@ -2186,6 +2394,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             const start0 = origin();
             placeFly(start0.x, start0.y, 1, 1);
             showAward = false;
+            readoutActive = false;
+            readout.hidden = true;
             if (!chip.destroyed)
               chip.removeChildren().forEach((child) => child.destroy());
             await tween(pace(780), (t) => {
@@ -2228,11 +2438,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         if (mine === job) step(null);
         if (mine === job) {
           if (!chip.destroyed) chip.destroy({ children: true });
-          reels.forEach((reel) =>
-            reel.strip.children.forEach((child) => {
-              if (!child.destroyed) child.alpha = 1;
-            }),
-          );
+          restoreSymbols();
+          readoutActive = false;
+          readout.hidden = true;
           fx.clear();
           collectionCue(null);
           endMotion();
@@ -2270,7 +2478,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           ? "kk-fly-portrait is-source"
           : "kk-fly-portrait";
         el.alt = "";
-        el.src = "/kilo-motion-v7/collector-idle.png";
+        el.src = "/kilo-v79/characters/collector-idle.webp";
         document.body.appendChild(el);
         flyers.add(el);
         await tween(reduced ? 0 : turbo ? 160 : motionMs.portraitFlight, (t) => {
@@ -2295,6 +2503,10 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     async tool(spin) {
       if (!spin.tool) return;
       const mine = job;
+      const actorTool=(kind:'cast'|'throw',progress:number)=>{
+        const detail:KingToolEvent={kind,progress};
+        host.dispatchEvent(new CustomEvent('kilo-stage-tool',{bubbles:true,detail}));return detail;
+      };
       clearPresentation();
       animating = true;
       mark(spin.tool === "hook" ? "hook" : spin.tool);
@@ -2375,17 +2587,23 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           });
         };
         hook.rotation = -0.25;
+        hook.alpha=0;
+        actorTool('cast',0);
         await tween(turbo ? 180 : 360, (t) => {
           if (!hook || hook.destroyed) return;
-          const e = 1 - (1 - t) ** 3;
-          const swing = Math.sin(t * Math.PI);
+          actorTool('cast',t);
+          // The rod loads and casts before the hook begins its original descent.
+          const descend=Math.max(0,(t-.45)/.55);
+          const e = 1 - (1 - descend) ** 3;
+          const swing = Math.sin(descend * Math.PI);
+          hook.alpha=descend>0?1:0;
           hook.position.set(
             x + swing * cell * 0.14,
             approach + (eye - approach) * e,
           );
-          hook.rotation = -0.25 * (1 - t);
+          hook.rotation = -0.25 * (1 - descend);
           hook.scale.set(s * (1 + swing * 0.08));
-          rope(2.5);
+          if(descend>0)rope(2.5);else fx.clear();
         });
         if (mine === job && !stopped) await sleep(turbo ? 40 : 90);
         if (mine === job && !stopped)
@@ -2483,17 +2701,36 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         burst.scale.set(0.2);
         burst.alpha = 0;
         transient.addChild(burst);
+        let thrown:HTMLImageElement|null=null;
+        if(spin.tool==='dynamite'&&!reduced&&!stopped){
+          const start=actorTool('throw',0);
+          if(start.hand){
+            thrown=document.createElement('img');thrown.src=TOOL_PIVOTS.dynamite.file;
+            thrown.className='kk-character-tool-flight';thrown.setAttribute('aria-hidden','true');
+            Object.assign(thrown.style,{position:'fixed',pointerEvents:'none',zIndex:'16',width:`${start.handSize??28}px`,height:'auto',left:`${start.hand.x}px`,top:`${start.hand.y}px`,transform:'translate(-50%,-50%)'});
+            document.body.appendChild(thrown);flyers.add(thrown);prop.alpha=0;
+          }
+        }
         await tween(turbo ? 260 : 600, (t) => {
           fx.clear();
           const bomb = spin.tool === "dynamite";
-          const wind = bomb ? t < 0.32 : t < 0.28;
+          const actor=bomb?actorTool('throw',t):null;
+          const bombImpact=thrown ? .64 : .32;
+          const wind = bomb ? t < bombImpact : t < 0.28;
           const impact = wind
             ? 0
             : bomb
-              ? (t - 0.32) / 0.68
+              ? (t - bombImpact) / (1-bombImpact)
               : (t - 0.28) / 0.72;
           if (!prop.destroyed) {
             if (bomb) {
+              if(thrown&&actor?.hand&&actor.releaseHand){
+                const flight=Math.max(0,Math.min(1,(t-KING_THROW_RELEASE)/(.64-KING_THROW_RELEASE)));
+                const start=actor.releaseHand,end=screenOf(at.x,at.y),arc=Math.min(100,Math.hypot(end.x-start.x,end.y-start.y)*.24);
+                const point=t<KING_THROW_RELEASE?actor.hand:{x:start.x+(end.x-start.x)*flight,y:start.y+(end.y-start.y)*flight-Math.sin(Math.PI*flight)*arc};
+                Object.assign(thrown.style,{left:`${point.x}px`,top:`${point.y}px`,width:`${(actor.handSize??28)*(1+flight*.22)}px`,transform:`translate(-50%,-50%) rotate(${t<KING_THROW_RELEASE?-12:flight*220}deg)`,opacity:t<.64?'1':'0'});
+                prop.alpha=0;
+              }else{
               const shake = wind ? Math.sin(t * 70) * geom.cell * 0.035 : 0;
               prop.position.set(
                 at.x + shake,
@@ -2501,6 +2738,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
               );
               prop.rotation = wind ? Math.sin(t * 46) * 0.12 : (t - 0.32) * 0.6;
               prop.alpha = t < 0.74 ? 1 : 1 - (t - 0.74) / 0.26;
+              }
             } else {
               const travel = Math.min(1, t / 0.34);
               const e = 1 - (1 - travel) ** 3;
@@ -2520,16 +2758,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           for (const hit of changed) {
             if (impact <= 0) continue;
             const p = cellCenter(hit.reel, hit.row);
-            fx.circle(p.x, p.y, geom.cell * (0.08 + 0.34 * impact)).stroke({
-              color: bomb ? 0xffbb5b : 0x5eddd7,
-              width: 4,
-              alpha: Math.max(0, 1 - impact * 1.35),
-            });
-            fx.circle(p.x, p.y, geom.cell * (0.03 + 0.16 * impact)).stroke({
-              color: 0xfff1c4,
-              width: 2,
-              alpha: Math.max(0, (1 - impact * 1.35) * 0.9),
-            });
+            paintImpact(fx,p.x,p.y,geom.cell*.67,geom.cell*.62,impact,
+              bomb?0xffbd48:0x79f0da,bomb?1.3:1,reduced,false);
           }
           if (!burst.destroyed) {
             burst.alpha =
@@ -2557,10 +2787,13 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             }
           }
         });
+        if(thrown){thrown.remove();flyers.delete(thrown);}
+        if(spin.tool==='dynamite')actorTool('throw',1);
         if (!prop.destroyed) prop.destroy();
         if (!burst.destroyed) burst.destroy();
       }
       if (mine !== job) {
+        actorTool(spin.tool==='hook'?'cast':'throw',1);
         if (hook && !hook.destroyed) hook.destroy();
         return;
       }
@@ -2596,6 +2829,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         if (!box.destroyed) box.destroy();
       }
       if (hook && !hook.destroyed) hook.destroy();
+      if(spin.tool==='hook')actorTool('cast',1);
       if (mine === job) endMotion();
     },
     async intro(round) {
@@ -2606,18 +2840,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         extraSpins: "+2 spins",
         level2: "Starts one level higher",
       };
-      const label = round.mode === "chopper" ? "Chopper" : "Free spins";
+      const label = round.mode === "chopper" ? "Chopper" : "Dockside Catch";
       bonusEnter(round.mode);
-      if (!reduced && !stopped) {
-        const flash = new Graphics();
-        transient.addChild(flash);
-        await tween(turbo ? 100 : 200, (t) => {
-          if (flash.destroyed) return;
-          const a = t < 0.42 ? t / 0.42 : 1 - (t - 0.42) / 0.58;
-          flash.clear().rect(0, 0, geom.dw, geom.dh).fill({ color: 0xfff6dd, alpha: 0.34 * a });
-        });
-        if (!flash.destroyed) flash.destroy();
-      }
+      host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'entry'}}));
       await ceremony(
         "entry",
         label,
@@ -2625,11 +2850,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         round.mods.length
           ? round.mods.map((mod) => names[mod] ?? mod).join(" · ")
           : "",
-        turbo ? 780 : 1500,
+        turbo ? 780 : 1100,
       );
     },
     async retrigger(extra, nextMult, onAward) {
       const mine = job;
+      animating=true;resizeFollow=true;
       mark("upgrade");
       await ensureType();
       const root = host.closest(".kk-app") ?? document.body;
@@ -2658,7 +2884,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           fill: 0xffe2a0,
           fontFamily: TEXT,
           fontWeight: "700",
-          fontSize: Math.max(18, Math.min(48, w * 0.15)),
+          fontSize: Math.max(21, Math.min(34, w * 0.068)),
           align: "center",
         },
       });
@@ -2668,7 +2894,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           fill: 0xe3f0e7,
           fontFamily: DISPLAY,
           fontWeight: "600",
-          fontSize: Math.max(14, Math.min(22, w * 0.052)),
+          fontSize: Math.max(14, Math.min(20, w * 0.042)),
           align: "center",
         },
       });
@@ -2688,37 +2914,65 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       while (next.width > w * 0.78 && Number(next.style.fontSize) > 10) {
         next.style.fontSize = Number(next.style.fontSize) - 1;
       }
-      spins.position.set(x + w / 2, y + h * 0.43);
-      free.position.set(x + w / 2, y + h * 0.64);
-      next.position.set(x + w / 2, y + h * 0.82);
-      content.addChild(spins, free, next);
-      group.addChild(dim, modal, content);
+      // One award line fits the banner's shallow central recess. A separate
+      // quiet inset carries the next multiplier without touching that line.
+      const copyGap=6;
+      spins.position.set(x+w/2-(free.width+copyGap)/2,y+h*.51);
+      free.position.set(x+w/2+(spins.width+copyGap)/2,y+h*.51);
+      next.position.set(x+w/2,y+h*.88);
+      const nextBack=new Graphics().roundRect(x+w/2-next.width/2-8,y+h*.88-next.height/2-3,next.width+16,next.height+6,3)
+        .fill(0x07131a).stroke({color:0x719b92,width:1});
+      content.addChild(spins, free, nextBack, next);
+      const presentation=new Container();presentation.addChild(modal,content);
+      const contactArt=new Graphics();contactArt.label='retrigger-threshold-impact';
+      group.addChild(dim,contactArt,presentation);
+      const stopAuthoredArt = playRetriggerArt(presentation,x,y,w,h);
+      let contact=0;
+      const follow=()=>{
+        if(group.destroyed)return;
+        const gw=geom.cell*5+geom.gap*4,gh=geom.cell*3;
+        const nw=Math.min(gw*.92,560),scale=nw/w,nh=h*scale,pose=featureArrivalAt(contact,reduced);
+        dim.clear().rect(geom.gx,geom.gy,gw,gh).fill({color:0x010c12,alpha:.4});
+        presentation.pivot.set(x+w/2,y+h/2);
+        presentation.scale.set(scale*pose.x,scale*pose.y);
+        presentation.position.set(geom.gx+gw/2,geom.gy+gh/2+nh*pose.lift);
+        paintImpact(contactArt,geom.gx+gw/2,geom.gy+gh/2,gw*.78,gh*.58,contact*.96,0xffcb55,1.3,reduced);
+      };
+      host.addEventListener('kilo-relayout',follow);follow();
       const fade = reduced ? 0 : turbo ? 90 : 160;
       const half = Math.max(0, motionMs.retriggerAnnouncement / 2 - fade);
       group.alpha = 0;
       try {
         await tween(fade, (t) => {
-          if (!group.destroyed) group.alpha = t;
+          if (!group.destroyed) { group.alpha = t;contact=t;follow(); }
         });
         await holdReadable(turbo ? 200 : half);
         if (mine !== job || stopped) return;
         onAward?.();
-        await holdReadable(turbo ? 200 : half);
+        host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'retrigger'}}));
+        // The grant still happens at the original threshold. The number's
+        // contact/recovery fits inside the existing post-award reading hold.
+        await Promise.all([holdReadable(turbo ? 200 : half),tween(reduced?0:Math.min(200,turbo?200:half),t=>{
+          if (!group.destroyed) spins.scale.set(connectedNumberScale(t,reduced));
+        })]);
         if (mine === job && !stopped && fade > 0)
           await tween(fade, (t) => {
             if (!group.destroyed) group.alpha = 1 - t;
           });
       } finally {
+        host.removeEventListener('kilo-relayout',follow);
+        stopAuthoredArt();
         if (!group.destroyed) group.destroy({ children: true });
         bonus?.classList.remove("is-awarding");
+        if(mine===job){resizeFollow=false;endMotion();}
       }
     },
     symbolCompare() {
       const samples: { name: string; cell: SplashCell; reaction: boolean }[] = [
-        { name: "Small package", cell: { s: "brick", v: 2, w: 1, h: 1 }, reaction: true },
-        { name: "Medium package", cell: { s: "brick", v: 25, w: 1, h: 1 }, reaction: true },
-        { name: "Trophy package", cell: { s: "brick", v: 200, w: 1, h: 1 }, reaction: true },
-        { name: "King package", cell: { s: "brick", v: 5000, w: 1, h: 1 }, reaction: true },
+        { name: "Dime bag", cell: { s: "brick", v: 2, w: 1, h: 1 }, reaction: true },
+        { name: "Kilo brick", cell: { s: "brick", v: 25, w: 1, h: 1 }, reaction: true },
+        { name: "Kilo bundle", cell: { s: "brick", v: 200, w: 1, h: 1 }, reaction: true },
+        { name: "Bulk kilos", cell: { s: "brick", v: 5000, w: 1, h: 1 }, reaction: true },
         { name: "KING scatter", cell: { s: "bars" }, reaction: false },
         { name: "Fisherman", cell: { s: "splash" }, reaction: true },
         { name: "Reel", cell: { s: "lamp" }, reaction: false },
@@ -2841,7 +3095,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             sample.cell,
             slot.size,
             true,
-            sample.name === "King package" ? 50_000_000 : undefined,
+            sample.name === "Bulk kilos" ? 50_000_000 : undefined,
           );
           const sprite = view.children.find((child) => child instanceof Sprite);
           if (sprite instanceof Sprite && sample.cell.s === "brick" && slot.state === "peak") {
@@ -2892,6 +3146,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       ]),
     ),
     destroy() {
+      featureEffects.destroy();
+      reelFeatureEffects.destroy();
       if (destroyed) return;
       collectionCue(null);
       stopped = true;
@@ -2901,6 +3157,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       destroyed = true;
       observer.disconnect();
       app.destroy(true, { children: true });
+      for (const asset of authoredTextures.values()) for (const texture of asset.frames) texture.destroy(false);
+      authoredTextures.clear();
       host.replaceChildren();
     },
   } as ReelScene & { destroy(): void };

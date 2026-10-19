@@ -1,0 +1,587 @@
+/* Standalone control system. Geometry comes only from layout.ts. */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("./fonts/SourceSans3-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("./fonts/SourceSans3-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("./fonts/BarlowCondensed-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+.sc-system {
+  /* Opaque base planes and borders. Glass reflections are contained paint
+     layers, independent of the control geometry and numeric contrast. */
+  position: relative;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: var(--sc-text);
+  font-family: var(--sc-numericFont);
+  font-variant-numeric: tabular-nums;
+  isolation: isolate;
+  pointer-events: none;
+}
+.sc-system *,
+.sc-system *::before,
+.sc-system *::after {
+  box-sizing: border-box;
+}
+.sc-system .sc-module-group {
+  display: contents;
+}
+.sc-system .sc-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  min-height: 0;
+  color: var(--sc-text);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition:
+    border-color 120ms ease,
+    box-shadow 90ms ease;
+}
+/* Beat host button:hover/active rules even on touch devices. Paint must not
+   depend on the host's CSS import order or brightness/disabled defaults. */
+.sc-system[data-variant] .sc-button {
+  appearance: none;
+  opacity: 1;
+  filter: none;
+  backdrop-filter: none;
+}
+.sc-system .sc-circle,
+.sc-system .sc-spin {
+  border: var(--sc-secondary-rim) solid transparent;
+  border-radius: 50%;
+  background: var(--sc-face);
+  border-color: var(--sc-edge);
+  /* All edge paint stays inside the measured target. */
+  box-shadow: inset 0 0 0 1px var(--sc-well);
+  isolation: isolate;
+}
+/* A restrained clearcoat: a small light catch and a sharp inner reflection.
+   The underlying face remains solid. These layers sit behind all content,
+   do not blur the marina, and cannot expand the target or painted bounds. */
+.sc-system .sc-circle::after,
+.sc-system .sc-spin::after,
+.sc-system .sc-well::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    145deg,
+    var(--sc-glassHighlight, #ffffff12) 0%,
+    #ffffff00 46%
+  );
+  box-shadow:
+    inset 0 1px 0 var(--sc-glassEdge, #ffffff26),
+    inset 0 -1px 0 var(--sc-glassHighlight, #ffffff12);
+}
+.sc-system .sc-readout::after {
+  display: none;
+}
+.sc-system .sc-well::after {
+  background: linear-gradient(
+    180deg,
+    var(--sc-glassHighlight, #ffffff12) 0%,
+    #ffffff00 32%
+  );
+}
+.sc-system .sc-circle[aria-pressed="true"] {
+  background: var(--sc-face);
+  border-color: var(--sc-accent);
+  color: var(--sc-emphasis, var(--sc-text));
+}
+.sc-system .sc-circle[data-captioned="true"] {
+  flex-direction: column;
+  gap: 1px;
+}
+.sc-system .sc-circle[data-captioned="true"] > .sc-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.sc-system .sc-control-caption {
+  color: var(--sc-iconInk, #fff);
+  font: 700 9px/10px var(--sc-numericFont);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.sc-system .sc-icon {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.sc-system .sc-circle .sc-icon,
+.sc-system .sc-spin .sc-icon {
+  color: var(--sc-iconInk, #fff);
+  opacity: 1;
+}
+.sc-system .sc-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 3;
+}
+.sc-system .sc-icon svg [stroke] {
+  /* Supplied themed icons may declare a thinner path-level presentation
+     attribute. Keep those strokes at the same weight as the other controls. */
+  stroke-width: inherit;
+}
+.sc-system .sc-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 3px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid var(--sc-edge);
+  background: var(--sc-well);
+  color: var(--sc-emphasis, var(--sc-text));
+  font: 700 12px/1 var(--sc-numericFont);
+}
+.sc-system .sc-badge-speed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 28px;
+}
+.sc-system .sc-badge-speed .sc-icon svg {
+  width: 10px;
+  height: 10px;
+}
+.sc-system .sc-badge[data-active="true"] {
+  background: var(--sc-selected);
+  color: var(--sc-emphasis, var(--sc-text));
+  border-color: var(--sc-accent);
+}
+.sc-system .sc-restriction-mark {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--sc-edge);
+  border-radius: 50%;
+  background: var(--sc-well);
+  color: var(--sc-edgeLight);
+}
+.sc-system .sc-restriction-mark svg {
+  width: 11px;
+  height: 11px;
+}
+.sc-system .sc-control-reason {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  visibility: hidden;
+  padding: 8px;
+  border: var(--sc-secondary-rim) solid transparent;
+  border-radius: var(--sc-radius);
+  background: var(--sc-face);
+  border-color: var(--sc-edge);
+  box-shadow: 0 2px 0 var(--sc-well);
+  color: var(--sc-text);
+  font: 600 12px/1.35 var(--sc-numericFont);
+  text-align: center;
+  white-space: normal;
+  pointer-events: none;
+}
+.sc-system .sc-button[aria-disabled="true"]:is(:hover, :focus) {
+  z-index: 5;
+  filter: none;
+}
+.sc-system
+  .sc-button[aria-disabled="true"]:is(:hover, :focus)
+  > .sc-control-reason {
+  visibility: visible;
+}
+.sc-system[data-variant] .sc-well {
+  position: absolute;
+  margin: 0;
+  border: var(--sc-well-rim) solid transparent;
+  border-radius: var(--sc-radius);
+  background: var(--sc-well);
+  border-color: var(--sc-well);
+  box-shadow:
+    inset 0 1px 0 var(--sc-edgeShade),
+    inset 0 -1px 0 var(--sc-faceLight);
+  pointer-events: auto;
+  isolation: isolate;
+}
+.sc-system[data-variant] .sc-readout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  padding: 0 7px;
+  /* Both readouts share one surface; retain their measured content boxes. */
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+  align-items: flex-start;
+  text-align: left;
+}
+.sc-system[data-variant] .sc-readout-card {
+  pointer-events: none;
+}
+.sc-system[data-variant] .sc-readout[data-module="win"] {
+  align-items: flex-end;
+  text-align: right;
+}
+.sc-system[data-variant="landscape"] .sc-readout[data-module="win"] {
+  align-items: flex-start;
+  text-align: left;
+}
+.sc-system .sc-readout .sc-label,
+.sc-system .sc-bet-value .sc-label {
+  font-family: var(--sc-numericFont);
+  font-weight: 700;
+  letter-spacing: 0.15px;
+}
+.sc-system .sc-label {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--sc-muted);
+  font: 600 var(--sc-label-size)/1 var(--sc-headingFont);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sc-system .sc-label small {
+  color: var(--sc-muted);
+  font: 600 9px/1 var(--sc-numericFont);
+  letter-spacing: 0;
+}
+.sc-system .sc-well strong {
+  color: var(--sc-emphasis, var(--sc-text));
+  font: 700 28px/1 var(--sc-numericFont);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+.sc-system [data-module="win"] strong {
+  color: var(--sc-emphasis, var(--sc-text));
+}
+.sc-system .sc-number {
+  display: block;
+  flex: 0 0 auto;
+  max-width: 100%;
+  font-synthesis: none;
+}
+/* Very long values retain their full size and exact value. Read-only native
+   text navigation avoids ellipses, abbreviation, and overlapping modules. */
+.sc-system .sc-overflow-amount {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 1lh;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+  opacity: 1;
+  appearance: none;
+}
+.sc-system .sc-overflow-amount:focus-visible {
+  outline: 1px solid var(--sc-accent);
+  outline-offset: -1px;
+}
+.sc-system .sc-bet-number {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sc-system[data-variant] .sc-bet {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  isolation: isolate;
+}
+.sc-system .sc-bet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border: var(--sc-well-rim) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--sc-well);
+  border-color: var(--sc-well);
+  box-shadow:
+    inset 0 1px 0 var(--sc-edgeShade),
+    inset 0 -1px 0 var(--sc-faceLight);
+}
+.sc-system .sc-bet-value {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 3px;
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+}
+.sc-system[data-variant="desktop"] .sc-bet-value {
+  gap: 1px;
+}
+.sc-system .sc-step {
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--sc-emphasis, var(--sc-text));
+  box-shadow: none;
+}
+.sc-system .sc-step .sc-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.sc-system .sc-spin-group {
+  position: absolute;
+}
+.sc-system .sc-spin {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-width: var(--sc-spin-rim);
+  background: var(--sc-face);
+  border-color: var(--sc-edge);
+  /* One continuous brass ring. Different side colors formed four wedges
+     that looked like a partially filled progress indicator on phones. */
+  box-shadow: inset 0 0 0 1px var(--sc-well);
+}
+.sc-system .sc-spin .sc-icon {
+  position: absolute;
+  /* Keep the arrow's visual size as the thinner rim opens up the face. */
+  width: 68%;
+  height: 68%;
+  top: 16%;
+  left: 16%;
+}
+.sc-system .sc-spin .sc-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 3.5;
+}
+.sc-system .sc-spin .sc-icon .sc-spin-arrow {
+  stroke-width: 5;
+}
+.sc-system[data-variant] .sc-action-plate {
+  background: var(--sc-face);
+  border: var(--sc-secondary-rim) solid var(--sc-edgeShade);
+  pointer-events: none;
+}
+.sc-system .sc-action-plate[data-join="left"] {
+  border-radius: var(--sc-radius) 0 0 var(--sc-radius);
+}
+.sc-system .sc-action-plate[data-join="right"] {
+  border-radius: 0 var(--sc-radius) var(--sc-radius) 0;
+}
+.sc-system .sc-action-plate[data-join="top"] {
+  border-radius: var(--sc-radius) var(--sc-radius) 0 0;
+}
+.sc-system[data-variant] .sc-auto-joined {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.sc-system .sc-auto-joined::after {
+  display: none;
+}
+.sc-system .sc-auto-joined > .sc-icon {
+  transform: translate(var(--sc-auto-ink-x, 0px), var(--sc-auto-ink-y, 0px));
+}
+.sc-system .sc-auto-letter {
+  position: absolute;
+  top: calc(50% + var(--sc-auto-ink-y, 0px));
+  left: calc(50% + var(--sc-auto-ink-x, 0px));
+  transform: translate(-50%, -50%);
+  color: var(--sc-iconInk, #fff);
+  font: 700 9px/1 var(--sc-numericFont);
+  pointer-events: none;
+}
+.sc-system .sc-feature-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.sc-system .sc-feature-counter strong {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 24px;
+}
+.sc-system .sc-feature-counter small {
+  color: var(--sc-muted);
+  font-size: 12px;
+}
+.sc-system .sc-feature-counter em {
+  font-size: 18px;
+  font-style: normal;
+  color: var(--sc-accent);
+  margin-left: 6px;
+}
+.sc-system .sc-button:is(:disabled, [aria-disabled="true"]) {
+  cursor: default;
+  opacity: 1;
+  filter: none;
+}
+.sc-system .sc-button:is(:disabled, [aria-disabled="true"]) .sc-icon {
+  color: var(--sc-iconInk, #fff);
+  opacity: 1;
+}
+.sc-system .sc-button:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  /* The focus indicator cannot consume the separation between modules. */
+  outline-offset: -3px;
+}
+.sc-system .sc-bet .sc-button:focus-visible {
+  outline-offset: -3px;
+}
+.sc-system .sc-button:not(:disabled):not([aria-disabled="true"]):active {
+  /* Keep the full hit target stationary; the inset edge supplies feedback. */
+  transform: none;
+  filter: none;
+  box-shadow: inset 0 2px 0 var(--sc-edgeShade);
+}
+.sc-system .sc-spin:not(:disabled):active {
+  box-shadow: inset 0 3px 0 var(--sc-edgeShade);
+}
+.sc-system [data-landed="true"] {
+  box-shadow:
+    inset 0 0 0 2px var(--sc-accent),
+    inset 0 3px 0 #000;
+}
+.sc-system[data-variant="compact"] .sc-label {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.sc-system[data-variant="portrait"] .sc-label {
+  font-size: 14px;
+  letter-spacing: 0.2px;
+}
+/* Portrait uses solid instruments. Keep the inherited clearcoat and its
+   reflections out of these small faces; desktop/landscape paint is unchanged. */
+.sc-system[data-variant="portrait"] .sc-circle::after,
+.sc-system[data-variant="portrait"] .sc-spin::after,
+.sc-system[data-variant="portrait"] .sc-well::after {
+  content: none;
+  display: none;
+  background: none;
+  box-shadow: none;
+}
+.sc-system[data-variant="compact"] .sc-label small {
+  display: none;
+}
+.sc-system[data-variant="compact"] .sc-readout {
+  padding-inline: 1px;
+}
+.sc-system[data-variant="compact"] .sc-feature-counter strong {
+  gap: 2px;
+  font-size: 16px;
+}
+.sc-system[data-variant="compact"] .sc-feature-counter em {
+  margin: 0;
+  font-size: 14px;
+}
+.sc-system[data-variant="compact"] .sc-feature-counter small {
+  display: none;
+}
+.sc-system .sc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (hover: hover) {
+  .sc-system
+    .sc-button:not(:disabled):not([aria-disabled="true"]):hover:not(:active) {
+    filter: none;
+  }
+  .sc-system .sc-circle:not(:disabled):not([aria-disabled="true"]):hover,
+  .sc-system .sc-spin:not(:disabled):hover {
+    border-color: var(--sc-edgeLight);
+  }
+  .sc-system
+    .sc-circle[aria-pressed="true"]:not(:disabled):not(
+      [aria-disabled="true"]
+    ):hover {
+    border-color: var(--sc-accent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sc-system .sc-button {
+    transition: none;
+  }
+}
+.sc-system[data-reduced="true"] .sc-button {
+  transition: none;
+}
+
+/* Wide desktop dimensions come from layout.ts; paint cannot enlarge targets. */
+.sc-system[data-wide="true"] .sc-circle > .sc-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.sc-system[data-wide="true"] .sc-circle[data-captioned="true"] > .sc-icon svg {
+  width: 28px;
+  height: 28px;
+}
+.sc-system[data-wide="true"] .sc-control-caption {
+  font-size: 10px;
+  line-height: 12px;
+}
+.sc-system[data-wide="true"] .sc-badge {
+  min-width: 22px;
+  height: 22px;
+  font-size: 14px;
+}
+.sc-system[data-wide="true"] .sc-auto-letter {
+  font-size: 12px;
+}
+.sc-system[data-wide="true"] .sc-readout {
+  padding-inline: 12px;
+  gap: 4px;
+}
+.sc-system[data-wide="true"] .sc-bet-value {
+  gap: 4px;
+}

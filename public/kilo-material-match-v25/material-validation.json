@@ -1,0 +1,13 @@
+{
+  "checkpoint": "3a27dc206eefda28c0a4b4da1667b7aeb2706ea1",
+  "paintCases": 44,
+  "recoveredRegression": "Inline face color used as first layered background image",
+  "unchangedGeometryRules": 62,
+  "unchangedControlTokens": true,
+  "protectedFiles": 19,
+  "disabledRimUndimmed": true,
+  "solidFallbacks": true,
+  "browserQA": false,
+  "screenshots": [],
+  "limitation": "CSS token/AST, source identity and markup checks only. Live rendering remains unverified."
+}

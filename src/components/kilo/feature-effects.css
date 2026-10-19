@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "VS Display";
+  src: url("/kilo-ui-v11/fonts/SourceSans3-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+.kk-feature-progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  color: #fff5de;
+  line-height: 1.15;
+  font-family: "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.kk-feature-progress > span {
+  font-size: clamp(10px, 1vw, 13px);
+  color: #9de8df;
+  font-weight: 700;
+}
+.kk-feature-progress > strong {
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 800;
+}
+.kk-feature-progress > small {
+  font-size: clamp(9px, 0.85vw, 12px);
+  text-align: center;
+  color: #e8d4a3;
+}
+.kk-feature-transfer {
+  position: fixed;
+  z-index: 140;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  font:
+    800 clamp(20px, 3vw, 32px)/1 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: #fff4cf;
+  text-shadow:
+    0 2px 0 #021019,
+    -1px 0 #021019,
+    1px 0 #021019;
+  white-space: nowrap;
+}
+.kk-reel-completion {
+  position:fixed; z-index:145; display:grid; grid-template-columns:minmax(0,1fr) 80px;
+  gap:10px; align-items:center; padding:10px 12px; border:2px solid #c8ab72;
+  border-radius:6px; background:#07131a; color:#fff8e9;
+  font:600 14px/1.2 'Source Sans 3',sans-serif; font-variant-numeric:tabular-nums;
+}
+.kk-reel-completion p { display:flex; align-items:center; gap:5px; margin:0 0 3px; color:#a6e3d7; font-size:14px; }
+.kk-reel-completion p img { flex:0 0 22px; width:22px; height:22px; object-fit:contain; }
+.kk-completion-crest { position:relative; flex:0 0 38px; width:38px; height:30px; }
+.kk-reel-completion[data-feature="route"] { border-color:#89e6d9; }
+.kk-reel-completion[data-feature="getaway"][data-result="loss"] { border-color:#c68773; }
+.kk-reel-completion strong { display:block; font-size:25px; font-weight:800; overflow-wrap:anywhere; }
+.kk-reel-completion small { display:block; font-size:12px; margin-top:3px; color:#d2dad3; }
+.kk-reel-completion button { min-height:44px; width:80px; background:#d1b273; border:1px solid #f1d69a; color:#17170f; border-radius:4px; font:700 14px/18px 'Source Sans 3',sans-serif; padding:7px; }
+/* The stopped Getaway boat remains above this rail, including on 360px phones. */
+.kk-reel-completion[data-feature="getaway"][data-result="win"] { padding:6px 10px; }
+.kk-reel-completion[data-feature="getaway"][data-result="win"] p { font-size:12px; line-height:14px; margin-bottom:2px; }
+.kk-reel-completion[data-feature="getaway"][data-result="win"] p img { display:none; }
+.kk-reel-completion[data-feature="getaway"][data-result="win"] strong { font-size:24px; line-height:26px; }
+.kk-reel-completion[data-feature="getaway"][data-result="win"] small { margin-top:2px; line-height:14px; }
+/* Feature lighting supports the existing geometry. No alternate scene or
+   all-feature particle layer competes with the symbols. */
+.kk-shell[data-reel-feature="true"] > .kk-integrated-scene { filter:none; }
+.kk-shell[data-feature-kind="yacht"] > .kk-integrated-scene { filter:none; }
+.kk-shell[data-feature-kind="route"] > .kk-integrated-scene { filter:none; }
+.kk-shell[data-feature-kind="getaway"] > .kk-integrated-scene { filter:none; }
+.kk-shell[data-reel-feature="true"] .kk-scene-brand { opacity:.85; }
+.kk-shell[data-reel-feature="true"] .kk-bonus { background:#07131a; }
+
+/* Finite contact/settle, then static. Completion never loops or counts again. */
+@keyframes kk-result-contact { from { transform:translateY(5px); } 70% { transform:translateY(-.5px); } to { transform:translateY(0); } }
+.kk-reel-completion { animation:kk-result-contact 220ms cubic-bezier(.2,.75,.25,1) both; }
+[data-reduced="1"] .kk-reel-completion { animation:none; }
+@media (prefers-reduced-motion:reduce) { .kk-reel-completion { animation:none; } }
+@font-face {
+  font-family: "Kilo Win";
+  src: url("/kilo-ui-v11/KiloDisplay.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}

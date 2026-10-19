@@ -1,0 +1,664 @@
+{
+  "checkpoint": "9d83f8ee5d69ba34589c5746c849ac407b1824ea",
+  "checks": {
+    "layouts": 412,
+    "targets": 3532,
+    "overlaps": 13574,
+    "amounts": 4120,
+    "auto": 17,
+    "keyboard": 9,
+    "unchangedRenderer": 1,
+    "effectLayerOrder": 1
+  },
+  "failures": [],
+  "screens": [
+    {
+      "viewport": {
+        "w": 360,
+        "h": 800
+      },
+      "fit": {
+        "mode": "portrait",
+        "width": 336,
+        "height": 466.4096385542169,
+        "reelWidth": 336,
+        "reelHeight": 202.40963855421688,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "width": 336,
+        "height": 160,
+        "offset": 0,
+        "variant": "phone",
+        "turbo": {
+          "x": 0,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 50,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 10,
+          "y": 0,
+          "w": 148,
+          "h": 36
+        },
+        "win": {
+          "x": 178,
+          "y": 0,
+          "w": 148,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 44,
+          "w": 188,
+          "h": 56
+        },
+        "betButton": {
+          "x": 44,
+          "y": 0,
+          "w": 100,
+          "h": 56
+        },
+        "minus": {
+          "x": 0,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 144,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 100,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 204,
+          "y": 36,
+          "w": 76,
+          "h": 76
+        },
+        "charge": {
+          "x": 0,
+          "y": 102,
+          "w": 188,
+          "h": 12
+        },
+        "feature": {
+          "x": 292,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 150,
+          "y": 116,
+          "w": 186,
+          "h": 44
+        },
+        "steps": true
+      }
+    },
+    {
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "fit": {
+        "mode": "portrait",
+        "width": 366,
+        "height": 484.48192771084337,
+        "reelWidth": 366,
+        "reelHeight": 220.4819277108434,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "width": 366,
+        "height": 160,
+        "offset": 0,
+        "variant": "phone",
+        "turbo": {
+          "x": 0,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 50,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 10,
+          "y": 0,
+          "w": 163,
+          "h": 36
+        },
+        "win": {
+          "x": 193,
+          "y": 0,
+          "w": 163,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 44,
+          "w": 218,
+          "h": 56
+        },
+        "betButton": {
+          "x": 44,
+          "y": 0,
+          "w": 130,
+          "h": 56
+        },
+        "minus": {
+          "x": 0,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 174,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 100,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 234,
+          "y": 36,
+          "w": 76,
+          "h": 76
+        },
+        "charge": {
+          "x": 0,
+          "y": 102,
+          "w": 218,
+          "h": 12
+        },
+        "feature": {
+          "x": 322,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 150,
+          "y": 116,
+          "w": 216,
+          "h": 44
+        },
+        "steps": true
+      }
+    },
+    {
+      "viewport": {
+        "w": 844,
+        "h": 390
+      },
+      "fit": {
+        "mode": "landscape",
+        "width": 732,
+        "height": 350,
+        "reelWidth": 488,
+        "reelHeight": 294,
+        "header": 56,
+        "dock": 350,
+        "strip": 0,
+        "side": 96,
+        "controlLeft": 128,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 10
+      },
+      "dock": {
+        "width": 732,
+        "height": 350,
+        "offset": 0,
+        "variant": "side",
+        "turbo": {
+          "x": 662,
+          "y": 220,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 8,
+          "y": 52,
+          "w": 112,
+          "h": 36
+        },
+        "win": {
+          "x": 8,
+          "y": 94,
+          "w": 112,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 140,
+          "w": 128,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 84,
+          "h": 88
+        },
+        "minus": {
+          "x": 84,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 662,
+          "y": 72,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 640,
+          "y": 124,
+          "w": 88,
+          "h": 88
+        },
+        "charge": {
+          "x": 636,
+          "y": 266,
+          "w": 96,
+          "h": 12
+        },
+        "feature": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 0,
+          "y": 236,
+          "w": 128,
+          "h": 44
+        },
+        "steps": true
+      }
+    },
+    {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "fit": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 698.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 0
+      },
+      "dock": {
+        "width": 888,
+        "height": 100,
+        "offset": 0,
+        "variant": "inline",
+        "turbo": {
+          "x": 4,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 56,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 112,
+          "y": 24,
+          "w": 204,
+          "h": 48
+        },
+        "win": {
+          "x": 316,
+          "y": 24,
+          "w": 204,
+          "h": 48
+        },
+        "bet": {
+          "x": 532,
+          "y": 0,
+          "w": 144,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 88
+        },
+        "minus": {
+          "x": 100,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 100,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 684,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 736,
+          "y": 0,
+          "w": 88,
+          "h": 88
+        },
+        "charge": {
+          "x": 718,
+          "y": 88,
+          "w": 124,
+          "h": 12
+        },
+        "feature": {
+          "x": 832,
+          "y": 22,
+          "w": 56,
+          "h": 56
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "steps": true
+      }
+    },
+    {
+      "viewport": {
+        "w": 360,
+        "h": 800
+      },
+      "fit": {
+        "mode": "portrait",
+        "width": 336,
+        "height": 466.4096385542169,
+        "reelWidth": 336,
+        "reelHeight": 202.40963855421688,
+        "header": 104,
+        "dock": 160,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 0,
+        "artRight": 0,
+        "dockGap": 0
+      },
+      "dock": {
+        "width": 336,
+        "height": 160,
+        "offset": 0,
+        "variant": "phone",
+        "turbo": {
+          "x": 0,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 50,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 10,
+          "y": 0,
+          "w": 148,
+          "h": 36
+        },
+        "win": {
+          "x": 178,
+          "y": 0,
+          "w": 148,
+          "h": 36
+        },
+        "bet": {
+          "x": 0,
+          "y": 44,
+          "w": 188,
+          "h": 56
+        },
+        "betButton": {
+          "x": 44,
+          "y": 0,
+          "w": 100,
+          "h": 56
+        },
+        "minus": {
+          "x": 0,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 144,
+          "y": 6,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 100,
+          "y": 116,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 204,
+          "y": 36,
+          "w": 76,
+          "h": 76
+        },
+        "charge": {
+          "x": 0,
+          "y": 102,
+          "w": 188,
+          "h": 12
+        },
+        "feature": {
+          "x": 292,
+          "y": 52,
+          "w": 44,
+          "h": 44
+        },
+        "ante": {
+          "x": 150,
+          "y": 116,
+          "w": 186,
+          "h": 44
+        },
+        "steps": true
+      }
+    },
+    {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "fit": {
+        "mode": "wide",
+        "width": 1408,
+        "height": 698.9397590361446,
+        "reelWidth": 888,
+        "reelHeight": 534.9397590361446,
+        "header": 64,
+        "dock": 100,
+        "strip": 0,
+        "side": 0,
+        "controlLeft": 0,
+        "artLeft": 239,
+        "artRight": 281,
+        "dockGap": 0
+      },
+      "dock": {
+        "width": 888,
+        "height": 100,
+        "offset": 0,
+        "variant": "inline",
+        "turbo": {
+          "x": 4,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "menu": {
+          "x": 56,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "balance": {
+          "x": 112,
+          "y": 24,
+          "w": 204,
+          "h": 48
+        },
+        "win": {
+          "x": 316,
+          "y": 24,
+          "w": 204,
+          "h": 48
+        },
+        "bet": {
+          "x": 532,
+          "y": 0,
+          "w": 144,
+          "h": 88
+        },
+        "betButton": {
+          "x": 0,
+          "y": 0,
+          "w": 100,
+          "h": 88
+        },
+        "minus": {
+          "x": 100,
+          "y": 44,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 100,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "auto": {
+          "x": 684,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 736,
+          "y": 0,
+          "w": 88,
+          "h": 88
+        },
+        "charge": {
+          "x": 718,
+          "y": 88,
+          "w": 124,
+          "h": 12
+        },
+        "feature": {
+          "x": 832,
+          "y": 22,
+          "w": 56,
+          "h": 56
+        },
+        "ante": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "steps": true
+      }
+    }
+  ],
+  "protectedPaths": [
+    "src/lib/kilo/engine.ts",
+    "src/lib/kilo/bank.ts",
+    "src/lib/kilo/fixtures.json",
+    "src/components/kilo/director.ts",
+    "src/components/kilo/motion-atlas.ts",
+    "src/components/kilo/FishermanScene.tsx",
+    "src/components/kilo/MarinaBackdrop.tsx",
+    "src/components/kilo/control-model.ts"
+  ],
+  "browserQA": false,
+  "scope": "Source geometry, real font advances, finite scheduling and protected-file identity. Not browser screenshots or interaction QA."
+}

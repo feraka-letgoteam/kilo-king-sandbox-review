@@ -1,0 +1,1216 @@
+{
+  "sourceCommit": "3a27dc206eefda28c0a4b4da1667b7aeb2706ea1",
+  "rootTokens": {
+    "--sc-metal": "linear-gradient(\n    145deg,\n    var(--sc-edgeLight),\n    var(--sc-edge) 30%,\n    var(--sc-edgeShade) 66%,\n    var(--sc-edge)\n  )",
+    "--sc-face": "linear-gradient(150deg, var(--sc-faceLight), var(--sc-face))"
+  },
+  "circleBackground": "var(--sc-face) padding-box,\n    var(--sc-metal) border-box",
+  "cssGeometry": [
+    [
+      ".sc-system",
+      [
+        [
+          "position",
+          "relative"
+        ],
+        [
+          "border",
+          "0"
+        ],
+        [
+          "padding",
+          "0"
+        ],
+        [
+          "margin",
+          "0"
+        ],
+        [
+          "font-family",
+          "var(--sc-numericFont)"
+        ],
+        [
+          "font-variant-numeric",
+          "tabular-nums"
+        ],
+        [
+          "isolation",
+          "isolate"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system *, .sc-system *::before, .sc-system *::after",
+      [
+        [
+          "box-sizing",
+          "border-box"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-module-group",
+      [
+        [
+          "display",
+          "contents"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "align-items",
+          "center"
+        ],
+        [
+          "justify-content",
+          "center"
+        ],
+        [
+          "margin",
+          "0"
+        ],
+        [
+          "padding",
+          "0"
+        ],
+        [
+          "min-width",
+          "0"
+        ],
+        [
+          "min-height",
+          "0"
+        ],
+        [
+          "font",
+          "inherit"
+        ],
+        [
+          "font-variant-numeric",
+          "tabular-nums"
+        ],
+        [
+          "cursor",
+          "pointer"
+        ],
+        [
+          "pointer-events",
+          "auto"
+        ],
+        [
+          "touch-action",
+          "manipulation"
+        ],
+        [
+          "transition",
+          "filter 120ms ease, transform 90ms ease, box-shadow 120ms ease"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-circle, .sc-system .sc-spin",
+      [
+        [
+          "border",
+          "var(--sc-secondary-rim) solid transparent"
+        ],
+        [
+          "border-radius",
+          "50%"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-icon",
+      [
+        [
+          "display",
+          "grid"
+        ],
+        [
+          "place-items",
+          "center"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-icon svg",
+      [
+        [
+          "width",
+          "24px"
+        ],
+        [
+          "height",
+          "24px"
+        ],
+        [
+          "stroke-width",
+          "2"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-badge",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "top",
+          "-3px"
+        ],
+        [
+          "right",
+          "-3px"
+        ],
+        [
+          "min-width",
+          "18px"
+        ],
+        [
+          "height",
+          "18px"
+        ],
+        [
+          "padding",
+          "0 3px"
+        ],
+        [
+          "display",
+          "grid"
+        ],
+        [
+          "place-items",
+          "center"
+        ],
+        [
+          "border-radius",
+          "10px"
+        ],
+        [
+          "border",
+          "1px solid var(--sc-edge)"
+        ],
+        [
+          "font",
+          "700 12px/1 var(--sc-numericFont)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-badge-speed",
+      [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "align-items",
+          "center"
+        ],
+        [
+          "justify-content",
+          "center"
+        ],
+        [
+          "gap",
+          "1px"
+        ],
+        [
+          "min-width",
+          "28px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-badge-speed .sc-icon svg",
+      [
+        [
+          "width",
+          "10px"
+        ],
+        [
+          "height",
+          "10px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-restriction-mark",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "top",
+          "-2px"
+        ],
+        [
+          "right",
+          "-2px"
+        ],
+        [
+          "display",
+          "grid"
+        ],
+        [
+          "place-items",
+          "center"
+        ],
+        [
+          "width",
+          "18px"
+        ],
+        [
+          "height",
+          "18px"
+        ],
+        [
+          "border",
+          "1px solid var(--sc-edge)"
+        ],
+        [
+          "border-radius",
+          "50%"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-restriction-mark svg",
+      [
+        [
+          "width",
+          "11px"
+        ],
+        [
+          "height",
+          "11px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-control-reason",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "display",
+          "block"
+        ],
+        [
+          "z-index",
+          "1"
+        ],
+        [
+          "visibility",
+          "hidden"
+        ],
+        [
+          "padding",
+          "8px"
+        ],
+        [
+          "border",
+          "var(--sc-secondary-rim) solid transparent"
+        ],
+        [
+          "border-radius",
+          "var(--sc-radius)"
+        ],
+        [
+          "font",
+          "600 12px/1.35 var(--sc-numericFont)"
+        ],
+        [
+          "text-align",
+          "center"
+        ],
+        [
+          "white-space",
+          "normal"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button[aria-disabled=\"true\"]:is(:hover, :focus)",
+      [
+        [
+          "z-index",
+          "5"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button[aria-disabled=\"true\"]:is(:hover, :focus) > .sc-control-reason",
+      [
+        [
+          "visibility",
+          "visible"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant] .sc-well",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "margin",
+          "0"
+        ],
+        [
+          "border",
+          "var(--sc-well-rim) solid transparent"
+        ],
+        [
+          "border-radius",
+          "var(--sc-radius)"
+        ],
+        [
+          "pointer-events",
+          "auto"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant] .sc-readout",
+      [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "flex-direction",
+          "column"
+        ],
+        [
+          "align-items",
+          "flex-start"
+        ],
+        [
+          "justify-content",
+          "center"
+        ],
+        [
+          "gap",
+          "2px"
+        ],
+        [
+          "padding",
+          "0 7px"
+        ],
+        [
+          "text-align",
+          "left"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-label",
+      [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "align-items",
+          "baseline"
+        ],
+        [
+          "gap",
+          "5px"
+        ],
+        [
+          "font",
+          "600 var(--sc-label-size)/1 var(--sc-headingFont)"
+        ],
+        [
+          "letter-spacing",
+          "0.6px"
+        ],
+        [
+          "text-transform",
+          "uppercase"
+        ],
+        [
+          "white-space",
+          "nowrap"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-label small",
+      [
+        [
+          "font",
+          "600 9px/1 var(--sc-numericFont)"
+        ],
+        [
+          "letter-spacing",
+          "0"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-well strong",
+      [
+        [
+          "font",
+          "700 28px/1 var(--sc-numericFont)"
+        ],
+        [
+          "font-variant-numeric",
+          "tabular-nums"
+        ],
+        [
+          "white-space",
+          "nowrap"
+        ],
+        [
+          "letter-spacing",
+          "0"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant] .sc-bet",
+      [
+        [
+          "border",
+          "0"
+        ],
+        [
+          "isolation",
+          "isolate"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant] .sc-bet:has(.sc-ante[aria-disabled=\"true\"]:is(:hover, :focus))",
+      [
+        [
+          "z-index",
+          "5"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-bet::before",
+      [
+        [
+          "content",
+          "\"\""
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "inset",
+          "0"
+        ],
+        [
+          "z-index",
+          "-1"
+        ],
+        [
+          "border",
+          "var(--sc-well-rim) solid transparent"
+        ],
+        [
+          "border-radius",
+          "inherit"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-bet-value",
+      [
+        [
+          "flex-direction",
+          "column"
+        ],
+        [
+          "gap",
+          "3px"
+        ],
+        [
+          "border",
+          "0"
+        ],
+        [
+          "border-radius",
+          "5px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-step",
+      [
+        [
+          "border",
+          "0"
+        ],
+        [
+          "border-radius",
+          "5px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-step .sc-icon svg",
+      [
+        [
+          "width",
+          "20px"
+        ],
+        [
+          "height",
+          "20px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-ante",
+      [
+        [
+          "gap",
+          "8px"
+        ],
+        [
+          "border",
+          "0"
+        ],
+        [
+          "border-radius",
+          "5px"
+        ],
+        [
+          "font",
+          "700 12px/1 var(--sc-numericFont)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-ante b",
+      [
+        [
+          "display",
+          "grid"
+        ],
+        [
+          "place-items",
+          "center"
+        ],
+        [
+          "min-width",
+          "36px"
+        ],
+        [
+          "height",
+          "22px"
+        ],
+        [
+          "border",
+          "1px solid var(--sc-edge)"
+        ],
+        [
+          "border-radius",
+          "12px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"portrait\"] .sc-ante",
+      [
+        [
+          "gap",
+          "4px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"portrait\"] .sc-ante b",
+      [
+        [
+          "min-width",
+          "32px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-ante[data-tight=\"true\"]",
+      [
+        [
+          "flex-direction",
+          "column"
+        ],
+        [
+          "gap",
+          "2px"
+        ],
+        [
+          "font-size",
+          "11px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-ante[data-tight=\"true\"] b",
+      [
+        [
+          "height",
+          "18px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-spin-group",
+      [
+        [
+          "position",
+          "absolute"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-spin",
+      [
+        [
+          "inset",
+          "0"
+        ],
+        [
+          "width",
+          "100%"
+        ],
+        [
+          "height",
+          "100%"
+        ],
+        [
+          "border-width",
+          "var(--sc-spin-rim)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-spin .sc-icon",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "48%"
+        ],
+        [
+          "height",
+          "48%"
+        ],
+        [
+          "top",
+          "10%"
+        ],
+        [
+          "left",
+          "26%"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-spin .sc-icon svg",
+      [
+        [
+          "width",
+          "100%"
+        ],
+        [
+          "height",
+          "100%"
+        ],
+        [
+          "stroke-width",
+          "2.5"
+        ]
+      ]
+    ],
+    [
+      ".sc-system [data-stacked-charge=\"true\"] .sc-spin .sc-icon",
+      [
+        [
+          "width",
+          "42%"
+        ],
+        [
+          "height",
+          "42%"
+        ],
+        [
+          "top",
+          "8%"
+        ],
+        [
+          "left",
+          "29%"
+        ]
+      ]
+    ],
+    [
+      ".sc-system [data-stacked-charge=\"true\"][data-narrow=\"true\"] .sc-spin .sc-icon",
+      [
+        [
+          "width",
+          "32%"
+        ],
+        [
+          "height",
+          "32%"
+        ],
+        [
+          "top",
+          "5%"
+        ],
+        [
+          "left",
+          "34%"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-charge",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "align-items",
+          "center"
+        ],
+        [
+          "justify-content",
+          "center"
+        ],
+        [
+          "gap",
+          "3px"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ],
+        [
+          "white-space",
+          "nowrap"
+        ],
+        [
+          "font",
+          "700 12px/1 var(--sc-numericFont)"
+        ],
+        [
+          "font-variant-numeric",
+          "tabular-nums"
+        ],
+        [
+          "transition",
+          "transform 90ms ease"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-charge small",
+      [
+        [
+          "font",
+          "600 10px/1 var(--sc-numericFont)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-charge[data-stacked=\"true\"]",
+      [
+        [
+          "flex-direction",
+          "column"
+        ],
+        [
+          "gap",
+          "1px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-charge b",
+      [
+        [
+          "font-weight",
+          "700"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-action-reason",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "top",
+          "20%"
+        ],
+        [
+          "left",
+          "12%"
+        ],
+        [
+          "width",
+          "76%"
+        ],
+        [
+          "font",
+          "700 12px/1.15 var(--sc-numericFont)"
+        ],
+        [
+          "text-align",
+          "center"
+        ],
+        [
+          "text-wrap",
+          "balance"
+        ],
+        [
+          "pointer-events",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-feature-counter",
+      [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "flex-direction",
+          "column"
+        ],
+        [
+          "align-items",
+          "center"
+        ],
+        [
+          "justify-content",
+          "center"
+        ],
+        [
+          "gap",
+          "5px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-feature-counter strong",
+      [
+        [
+          "display",
+          "flex"
+        ],
+        [
+          "align-items",
+          "baseline"
+        ],
+        [
+          "gap",
+          "6px"
+        ],
+        [
+          "font-size",
+          "24px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-feature-counter small",
+      [
+        [
+          "font-size",
+          "12px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-feature-counter em",
+      [
+        [
+          "font-size",
+          "18px"
+        ],
+        [
+          "font-style",
+          "normal"
+        ],
+        [
+          "margin-left",
+          "6px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button:is(:disabled, [aria-disabled=\"true\"])",
+      [
+        [
+          "cursor",
+          "default"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button:focus-visible",
+      [
+        [
+          "outline",
+          "2px solid var(--sc-accent)"
+        ],
+        [
+          "outline-offset",
+          "3px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-bet .sc-button:focus-visible",
+      [
+        [
+          "outline-offset",
+          "-3px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button:not(:disabled):not([aria-disabled=\"true\"]):active",
+      [
+        [
+          "transform",
+          "translateY(2px)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-spin:not(:disabled):active + .sc-charge",
+      [
+        [
+          "transform",
+          "translateY(2px)"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-label",
+      [
+        [
+          "font-size",
+          "10px"
+        ],
+        [
+          "letter-spacing",
+          "0"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-label small, .sc-system[data-variant=\"compact\"] .sc-charge small",
+      [
+        [
+          "display",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-readout",
+      [
+        [
+          "padding-inline",
+          "1px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-spin",
+      [
+        [
+          "border-width",
+          "4px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-feature-counter strong",
+      [
+        [
+          "gap",
+          "2px"
+        ],
+        [
+          "font-size",
+          "16px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-feature-counter em",
+      [
+        [
+          "margin",
+          "0"
+        ],
+        [
+          "font-size",
+          "14px"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-variant=\"compact\"] .sc-feature-counter small",
+      [
+        [
+          "display",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-sr-only",
+      [
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "width",
+          "1px"
+        ],
+        [
+          "height",
+          "1px"
+        ],
+        [
+          "padding",
+          "0"
+        ],
+        [
+          "overflow",
+          "hidden"
+        ],
+        [
+          "clip-path",
+          "inset(50%)"
+        ],
+        [
+          "white-space",
+          "nowrap"
+        ]
+      ]
+    ],
+    [
+      ".sc-system .sc-button, .sc-system .sc-charge",
+      [
+        [
+          "transition",
+          "none"
+        ]
+      ]
+    ],
+    [
+      ".sc-system[data-reduced=\"true\"] .sc-button, .sc-system[data-reduced=\"true\"] .sc-charge",
+      [
+        [
+          "transition",
+          "none"
+        ]
+      ]
+    ]
+  ],
+  "controlTokens": {
+    "target": 44,
+    "gap": 8,
+    "moduleGap": 12,
+    "desktopSpin": 100,
+    "mobileSpin": 96,
+    "narrowSpin": 80,
+    "portraitGroup": 360,
+    "portraitReadout": 44,
+    "compactSpin": 64,
+    "secondaryRim": 2,
+    "wellRim": 3,
+    "spinRim": 8,
+    "wellRadius": 7,
+    "numericInset": 10,
+    "labelSize": 14,
+    "amountSize": 28,
+    "reasonWidth": 176
+  },
+  "protectedFiles": {
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/lib/kilo/fixtures.json": "184a133e9f5d4018fed8d2fa791837fdd464d5fec00602bc4eead8591475e505",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/ReelStage.tsx": "f1c323e44e313a2cfa9d945d1989f77b17534b0de362bb74ca07da0173cc28af",
+    "src/components/kilo/motion-atlas.ts": "1d8c1b0a5ea57f7593a734d236d1aaa7fda0ab5ee553a03afd2e59e0fa9a6661",
+    "src/components/kilo/FishermanScene.tsx": "b5c98842d986f8ea59deb5deb01ee65590055753745648162fff24163fd3b4e7",
+    "src/components/kilo/MarinaBackdrop.tsx": "757f30040ac70cc4eee0513933d4f3082c29c6480dc78f842c780520fd431f16",
+    "src/components/kilo/control-model.ts": "0fb93db011808cf45436fc5e81e4cf68ac95e0249f25f3fd228469752085fa34",
+    "src/components/kilo/auto-spins.ts": "09c5e7b5338bec1eb5b4962792b36dafca57dcf33c7e1bff59164d30bec8e203",
+    "src/components/kilo/keyboard.ts": "7d4ab73e414f0e119b219fdf974be75f2edb9ab6d2a314256c5fb77e0c476ad1",
+    "src/components/kilo/control-panels.tsx": "ba654dec2c3c650f98e90d63ce759e5f923832bba668194c19ea1fba305cc426",
+    "src/components/slot-controls/SlotControls.tsx": "bc3d9d0b7186bc3032acb0542f252852baa38a73f666d25c9f3c74b247b0ee06",
+    "src/components/slot-controls/layout.ts": "21c08002a2fd1f3ba71165c96c6e6d49788e8a5cf859fd4027acc945be429e27",
+    "src/components/kilo/play.tsx": "6ad6b7c1a5f9ea8b4bee69774cc7d351639bc86a63632b5a82e36b596e152b86",
+    "src/components/kilo/modular-controls.css": "430f41b3864dbb8c78a4e8a8e360852a89d68d098b8ac927fe3c553f371268ec",
+    "src/styles.css": "510f0c70a16b9f2bc6ad5535f9d09cc2bc3c37ae1ce75e5439b03cc51e0913d2"
+  }
+}

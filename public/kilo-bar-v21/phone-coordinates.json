@@ -1,0 +1,242 @@
+{
+  "name": "phone",
+  "kind": "static design proof, not a browser screenshot",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "stageInsets": {
+    "top": 12,
+    "right": 12,
+    "bottom": 20,
+    "left": 12
+  },
+  "available": {
+    "width": 366,
+    "height": 812
+  },
+  "layout": {
+    "mode": "portrait",
+    "width": 366,
+    "height": 484.48192771084337,
+    "reelWidth": 366,
+    "reelHeight": 220.4819277108434,
+    "header": 104,
+    "dock": 160,
+    "strip": 0,
+    "side": 0,
+    "controlLeft": 0,
+    "artLeft": 0,
+    "artRight": 0,
+    "dockGap": 0
+  },
+  "shell": {
+    "x": 12,
+    "y": 175.75903614457832,
+    "width": 366,
+    "height": 484.48192771084337
+  },
+  "reelHost": {
+    "x": 12,
+    "y": 279.7590361445783,
+    "width": 366,
+    "height": 220.4819277108434
+  },
+  "cabinet": {
+    "x": 14,
+    "y": 280.7590361445783,
+    "width": 362,
+    "height": 218
+  },
+  "reelGeometry": {
+    "cell": 66,
+    "gap": 3,
+    "gx": 12,
+    "gy": 11,
+    "statusY": 214,
+    "cab": {
+      "x": 2,
+      "y": 1,
+      "w": 362,
+      "h": 218
+    },
+    "dw": 366,
+    "dh": 220
+  },
+  "controlGroup": {
+    "x": 12,
+    "y": 500.2409638554217,
+    "width": 366,
+    "height": 160
+  },
+  "dock": {
+    "width": 366,
+    "height": 160,
+    "offset": 0,
+    "variant": "phone",
+    "turbo": {
+      "x": 0,
+      "y": 116,
+      "w": 44,
+      "h": 44
+    },
+    "menu": {
+      "x": 50,
+      "y": 116,
+      "w": 44,
+      "h": 44
+    },
+    "balance": {
+      "x": 0,
+      "y": 0,
+      "w": 179,
+      "h": 36
+    },
+    "win": {
+      "x": 187,
+      "y": 0,
+      "w": 179,
+      "h": 36
+    },
+    "bet": {
+      "x": 0,
+      "y": 44,
+      "w": 218,
+      "h": 56
+    },
+    "betButton": {
+      "x": 44,
+      "y": 0,
+      "w": 130,
+      "h": 56
+    },
+    "minus": {
+      "x": 0,
+      "y": 6,
+      "w": 44,
+      "h": 44
+    },
+    "plus": {
+      "x": 174,
+      "y": 6,
+      "w": 44,
+      "h": 44
+    },
+    "auto": {
+      "x": 100,
+      "y": 116,
+      "w": 44,
+      "h": 44
+    },
+    "spin": {
+      "x": 230,
+      "y": 36,
+      "w": 80,
+      "h": 80
+    },
+    "charge": {
+      "x": 238,
+      "y": 85.6,
+      "w": 64,
+      "h": 16
+    },
+    "feature": {
+      "x": 322,
+      "y": 52,
+      "w": 44,
+      "h": 44
+    },
+    "ante": {
+      "x": 150,
+      "y": 116,
+      "w": 216,
+      "h": 44
+    },
+    "steps": true,
+    "readInset": 8
+  },
+  "logoBox": {
+    "x": 27,
+    "y": 87.75903614457832,
+    "width": 168,
+    "height": 178
+  },
+  "characterBox": {
+    "x": 202,
+    "y": 87.75903614457832,
+    "width": 168,
+    "height": 178,
+    "viewBox": [
+      160,
+      110,
+      1140,
+      1170
+    ]
+  },
+  "board": [
+    [
+      {
+        "s": "A"
+      },
+      {
+        "s": "cuffs"
+      },
+      {
+        "s": "10"
+      }
+    ],
+    [
+      {
+        "s": "brick",
+        "v": 5,
+        "w": 1,
+        "h": 1
+      },
+      {
+        "s": "Q"
+      },
+      {
+        "s": "keys"
+      }
+    ],
+    [
+      {
+        "s": "K"
+      },
+      {
+        "s": "lamp"
+      },
+      {
+        "s": "bars"
+      }
+    ],
+    [
+      {
+        "s": "duffel"
+      },
+      {
+        "s": "J"
+      },
+      {
+        "s": "brick",
+        "v": 10,
+        "w": 1,
+        "h": 1
+      }
+    ],
+    [
+      {
+        "s": "10"
+      },
+      {
+        "s": "bars"
+      },
+      {
+        "s": "splash"
+      }
+    ]
+  ],
+  "stake": 1000,
+  "balance": 500000,
+  "win": 0
+}

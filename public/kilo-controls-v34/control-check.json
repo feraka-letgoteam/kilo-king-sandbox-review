@@ -1,0 +1,562 @@
+{
+  "passed": true,
+  "checkpoint": "66f30ee02bfa29e550570301ed7a3844b1570103",
+  "method": "React server render, compiled CSS cascade and source geometry; no live browser verification",
+  "changedSource": [
+    "src/components/slot-controls/SlotControls.tsx",
+    "src/components/slot-controls/controls.css",
+    "src/components/slot-controls/tokens.ts"
+  ],
+  "cssFile": "dist/assets/review-CGAL0Lzn.css",
+  "rows": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "idle",
+      "spin": {
+        "diameter": 100,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 3,
+          "y": 0
+        },
+        "transform": "translate(3px, 0px)",
+        "letter": {
+          "left": "calc(50% + 3px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 693,
+          "y": 50
+        },
+        "visiblePanelCenter": {
+          "x": 693,
+          "y": 50
+        },
+        "hitArea": {
+          "x": 668,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "disabled",
+      "spin": {
+        "diameter": 100,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 3,
+          "y": 0
+        },
+        "transform": "translate(3px, 0px)",
+        "letter": {
+          "left": "calc(50% + 3px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 693,
+          "y": 50
+        },
+        "visiblePanelCenter": {
+          "x": 693,
+          "y": 50
+        },
+        "hitArea": {
+          "x": 668,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "auto",
+      "spin": {
+        "diameter": 100,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 3,
+          "y": 0
+        },
+        "transform": "translate(3px, 0px)",
+        "letter": null,
+        "center": {
+          "x": 693,
+          "y": 50
+        },
+        "visiblePanelCenter": {
+          "x": 693,
+          "y": 50
+        },
+        "hitArea": {
+          "x": 668,
+          "y": 28,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "state": "feature",
+      "spin": {
+        "diameter": 100,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "idle",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": {
+          "left": "calc(50% + -8px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 261,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 261,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 247,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "disabled",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": {
+          "left": "calc(50% + -8px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 261,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 261,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 247,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "auto",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": null,
+        "center": {
+          "x": 261,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 261,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 247,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "state": "feature",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "state": "idle",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": {
+          "left": "calc(50% + -8px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 246,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 246,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "state": "disabled",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": {
+          "left": "calc(50% + -8px)",
+          "top": "calc(50% + 0px)"
+        },
+        "center": {
+          "x": 246,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 246,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "state": "auto",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160,
+      "auto": {
+        "offset": {
+          "x": -8,
+          "y": 0
+        },
+        "transform": "translate(-8px, 0px)",
+        "letter": null,
+        "center": {
+          "x": 246,
+          "y": 104
+        },
+        "visiblePanelCenter": {
+          "x": 246,
+          "y": 104
+        },
+        "hitArea": {
+          "x": 232,
+          "y": 82,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "state": "feature",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "portraitAllocation": 160
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "idle",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 0,
+          "y": 4
+        },
+        "transform": "translate(0px, 4px)",
+        "letter": {
+          "left": "calc(50% + 0px)",
+          "top": "calc(50% + 4px)"
+        },
+        "center": {
+          "x": 684,
+          "y": 101
+        },
+        "visiblePanelCenter": {
+          "x": 684,
+          "y": 101
+        },
+        "hitArea": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "disabled",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 0,
+          "y": 4
+        },
+        "transform": "translate(0px, 4px)",
+        "letter": {
+          "left": "calc(50% + 0px)",
+          "top": "calc(50% + 4px)"
+        },
+        "center": {
+          "x": 684,
+          "y": 101
+        },
+        "visiblePanelCenter": {
+          "x": 684,
+          "y": 101
+        },
+        "hitArea": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "auto",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      },
+      "auto": {
+        "offset": {
+          "x": 0,
+          "y": 4
+        },
+        "transform": "translate(0px, 4px)",
+        "letter": null,
+        "center": {
+          "x": 684,
+          "y": 101
+        },
+        "visiblePanelCenter": {
+          "x": 684,
+          "y": 101
+        },
+        "hitArea": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "glyphInsideTarget": true
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "state": "feature",
+      "spin": {
+        "diameter": 96,
+        "rim": "3px",
+        "fill": "#020c12",
+        "opacity": "1",
+        "shadow": "inset 0 0 0 1px #01070b",
+        "iconSize": "68%"
+      }
+    }
+  ],
+  "cssSha256": "3f7e34c63189b720c75db959bca565fa6c5335659dd77e9b671285362bdead4f"
+}

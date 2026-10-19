@@ -1,0 +1,3416 @@
+{
+  "checkpoint": "2a36ec04a8aae5e5438811ba7fec70297dc01cdf",
+  "generatedAt": "2026-10-18T04:06:41.378Z",
+  "method": "Source/AST comparison, local image decoding and calculations from the real layout functions. No browser automation, screenshots, server or deployment.",
+  "checks": [
+    {
+      "name": "Byte-identical protected source: src/components/kilo/DockSkin.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/EnvironmentScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/FishermanScene.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/MarinaBackdrop.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/ReelStage.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/StageSurround.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/auto-spins.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/base-dock.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/base-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-model.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-overlays-layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-overlays.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-overlays.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-panels.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/control-theme.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/director.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/dock-design.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/environment-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/feature-catalog.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/feature-panel.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/feature-takeover.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/fisherman-scene.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/info-panel.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/info-panel.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/keyboard.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/marina-backdrop.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/marina-frame.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/material.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/material.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/modular-controls.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/motion-atlas.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/paytable.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/pixiStage.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/portrait-framing.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/scene-system.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/sprite-bounds.json",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/stage-art.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/stage-theme.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/kilo/useMotionCanvas.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/README.md",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/SlotControls.tsx",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/controls.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/BarlowCondensed-600.woff2",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/OFL-BarlowCondensed.txt",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/OFL-SourceSans3-900.txt",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/OFL-SourceSans3.txt",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/SourceSans3-600.woff2",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/SourceSans3-700.woff2",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/fonts/SourceSans3-900.woff2",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/layout.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/tokens.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/components/slot-controls/typography.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/lib/kilo/bank.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/lib/kilo/baseline.json",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/lib/kilo/engine.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/lib/kilo/fixtures.json",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/lib/kilo/sound.ts",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/styles.css",
+      "passed": true
+    },
+    {
+      "name": "Byte-identical protected source: src/review-entry.tsx",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-ui-v11/logo-kilo-king.webp",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-scene-v15/logo-stacked.webp",
+      "passed": true
+    },
+    {
+      "name": "Original logo unchanged: public/kilo-night-v3/logo-kilo-king.png",
+      "passed": true
+    },
+    {
+      "name": "art-map changes are confined to approved bobber/can artwork entries",
+      "passed": true
+    },
+    {
+      "name": "fish-art functions, ladder, budgets and other artwork remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "SlotControls complete JSX, props and callbacks are unchanged",
+      "passed": true
+    },
+    {
+      "name": "Host engine, bank, settlement, presentation and control calls are unchanged",
+      "passed": true
+    },
+    {
+      "name": "Feature offers and purchase confirmation differ only in backdrop artwork",
+      "passed": true
+    },
+    {
+      "name": "Old pier, cargo, character cutout and environment renderer are not mounted",
+      "passed": true
+    },
+    {
+      "name": "New presentation CSS is scoped away from controls: src/components/kilo/integrated-scene.css",
+      "passed": true
+    },
+    {
+      "name": "New presentation CSS is scoped away from controls: src/components/kilo/integrated-composition.css",
+      "passed": true
+    },
+    {
+      "name": "New presentation CSS is scoped away from controls: src/components/kilo/scene-entry.css",
+      "passed": true
+    },
+    {
+      "name": "New presentation CSS is scoped away from controls: src/components/kilo/scene-screens.css",
+      "passed": true
+    },
+    {
+      "name": "Entry remains a nonblocking viewport takeover with recorded awards",
+      "passed": true
+    },
+    {
+      "name": "All eight selected symbol URLs, canvases and bounds match their manifest",
+      "passed": true
+    },
+    {
+      "name": "Only explicitly registered animation support is required",
+      "passed": true
+    },
+    {
+      "name": "All 20 scene plates, four crests, eight symbols and defined support assets decode",
+      "passed": true
+    },
+    {
+      "name": "Four viewport calculations preserve reels, control targets and feature positions",
+      "passed": true
+    },
+    {
+      "name": "Decoded scene aspect ratios are preserved without moving the reel opening",
+      "passed": true
+    },
+    {
+      "name": "Required typecheck and presentation gates match the current source",
+      "passed": true
+    }
+  ],
+  "protectedSources": {
+    "src/components/kilo/DockSkin.tsx": "69b1605fa1890c1c0561c183e6078f51483eaf66e1e59f65fa651db1b4f87e74",
+    "src/components/kilo/EnvironmentScene.tsx": "cd9461c2f6415fb726baebbf801e1ded04d1d99d5e5dcfbaf37080fd1586201d",
+    "src/components/kilo/FishermanScene.tsx": "b5c98842d986f8ea59deb5deb01ee65590055753745648162fff24163fd3b4e7",
+    "src/components/kilo/MarinaBackdrop.tsx": "6eebcdea4ad17057ca05cc2258174ba88403da72761b0b848792d133092e8d12",
+    "src/components/kilo/ReelStage.tsx": "f1c323e44e313a2cfa9d945d1989f77b17534b0de362bb74ca07da0173cc28af",
+    "src/components/kilo/StageSurround.tsx": "dcbd09fb08824735789c3f5cd08d32669e30a0ad80fa797f1be1b4d94e1f5589",
+    "src/components/kilo/auto-spins.ts": "579da984beea904bfe24d093b74d9a737026af0c8afaff44018ab5909ce3a3c4",
+    "src/components/kilo/base-dock.css": "fc086406c33b365844cda5ec0038b90644de47f7b7705196f578c2d5b207551d",
+    "src/components/kilo/base-scene.css": "51d42aa29765dc1f1dcd1b2900bf5bb617879310626952b478a4bd67b144752c",
+    "src/components/kilo/control-model.ts": "0fb93db011808cf45436fc5e81e4cf68ac95e0249f25f3fd228469752085fa34",
+    "src/components/kilo/control-overlays-layout.ts": "878ac0d5237e1a1e86cf5e67c414a4262b6c1a31c8a421922574bfb798d2c924",
+    "src/components/kilo/control-overlays.css": "9fc1ca8289c171503c3bf279f3c90b8521dad783b3efb45a0299a6908fb39f89",
+    "src/components/kilo/control-overlays.tsx": "43fe4784a1023246eb0f3ff6d7ba728bc74a9813f421a2d4e75065f196d767e6",
+    "src/components/kilo/control-panels.tsx": "14abeaf8f0d16b9e594b1e4fc4fd0734ceb012f138f3d15c18534772785c4eb8",
+    "src/components/kilo/control-theme.ts": "2a30f022c4f73a0213b2c1ce1fc21b0d742445c29e3ae1b42081a8c80a6bf857",
+    "src/components/kilo/director.ts": "d8756cc68ca373d253cebd7b9dc63c9e17bc233fd782191d6bbea70452f7253e",
+    "src/components/kilo/dock-design.ts": "71ae29d2674914d5931dd9e799d4745f623c50f24f152e5b0b15c26bb7d18a8a",
+    "src/components/kilo/environment-scene.css": "6aa0ecc80c56d3401260e564747d27e8d7c7dbc91fcfa19bef50b6a63465c659",
+    "src/components/kilo/feature-catalog.ts": "a70bb95d490940d8653c2f5a3835b3d0c083a0c84996277ab1b8a6a06bfc74d0",
+    "src/components/kilo/feature-panel.css": "c7823bef45ba9a8073079e1313bf07cafdd824bbc24eb65f7abec2182f1026de",
+    "src/components/kilo/feature-takeover.css": "52d053a8c1b7e206635b576691397f521067c99d1dec8ef92b1b3f355e80bf41",
+    "src/components/kilo/fisherman-scene.css": "e4a86065e6fda6e4cf3e547b34f29e7e55eb20de197789373ab9b7c2fefb5040",
+    "src/components/kilo/info-panel.css": "2ece83bcdeca6d5b981d9e082e7f432ad565522780c235a0b79b1ab6346c62e1",
+    "src/components/kilo/info-panel.tsx": "f7ab30144a50c0dfe11a43cbb63ca45d5e5ef33c3bf10809d25c2b65ee02d350",
+    "src/components/kilo/keyboard.ts": "7d4ab73e414f0e119b219fdf974be75f2edb9ab6d2a314256c5fb77e0c476ad1",
+    "src/components/kilo/layout.ts": "20fc85f0dd2716caf5b5ee1020cc59c5de06a02359cefb62b5c73222031f1c06",
+    "src/components/kilo/marina-backdrop.css": "58a8b7c86444988c017af33dd69ce8d9036e19d934708d5f7510e13dacb16049",
+    "src/components/kilo/marina-frame.ts": "038c1de88bf7bc369db9845fc74cee231450752a51c542ef708dccf158e837a3",
+    "src/components/kilo/material.css": "68ba8d43369308c9f68dfac9768c5e08d6ec69ef17fecb93705fce63caa044cd",
+    "src/components/kilo/material.ts": "58af51fead26955c2374d13455e02fe2fbc1d3c228b209d6ac5aea04ea840b40",
+    "src/components/kilo/modular-controls.css": "574103db980ce276dc652e23e32374c03515b2c1d7c87975db797e7225b5ef88",
+    "src/components/kilo/motion-atlas.ts": "1d8c1b0a5ea57f7593a734d236d1aaa7fda0ab5ee553a03afd2e59e0fa9a6661",
+    "src/components/kilo/paytable.tsx": "f65cf9926d09bfe3484fe0394e8f492d44437f4b59f4ffb78da98935cfc68718",
+    "src/components/kilo/pixiStage.ts": "7d98c607a2ca1dda1303b74f073707c53daf5118b0c13b3910db55c00f7fe9ee",
+    "src/components/kilo/portrait-framing.css": "abb2ac9713b705309aedb7d570b48917567353e0547afccdc5133d8e95dd6f93",
+    "src/components/kilo/scene-system.ts": "3930a95846ee24000327d504904d5538d1f1eb25c486b8c5671c465d4e52672c",
+    "src/components/kilo/sprite-bounds.json": "d1a02c8ca57721cfff311d9efe8fe5f7e5a76efe294bc981a1f7e3ee3a3e00b4",
+    "src/components/kilo/stage-art.ts": "65c7c0ae809a5032deba2dfd9e3a3d28572ddbd445cf21626bfc8d156d37dea8",
+    "src/components/kilo/stage-theme.css": "08672d137e1b345d7f2c0cce19b483edcfdf98e82e0228e53dc1aecbc12e78e9",
+    "src/components/kilo/useMotionCanvas.ts": "8497a1265ac2909f58e79ad17f7635873e3a696e49593071fc26abc86566a5a8",
+    "src/components/slot-controls/README.md": "3db2d7df6ef6ed7270d36d56bbcf057a9074cabc6e7e8a02b167992ab7db9d72",
+    "src/components/slot-controls/SlotControls.tsx": "87b4d6bb0b40439e374da72f83fbfa15eb8f091016fffc470497ffa90c3db46a",
+    "src/components/slot-controls/controls.css": "7418a5817409b92001433706d78a2c0ec007b2a9ad3b719bc424ce6e9931f1a2",
+    "src/components/slot-controls/fonts/BarlowCondensed-600.woff2": "2120ccb0d16322a130664ee7aedeebeb05dcd76117b287573d77878f4e259b1d",
+    "src/components/slot-controls/fonts/OFL-BarlowCondensed.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "src/components/slot-controls/fonts/OFL-SourceSans3-900.txt": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328",
+    "src/components/slot-controls/fonts/OFL-SourceSans3.txt": "18aabf190848725e2576eefb5c29ba06aac1029d02132252a7f312eac2e50cf3",
+    "src/components/slot-controls/fonts/SourceSans3-600.woff2": "6a4765c81093ca1c2e2b602ced84ee842b9511459d32f169725cfe7a1eb6ceee",
+    "src/components/slot-controls/fonts/SourceSans3-700.woff2": "1261a6a379cbf194650c5211c606c5cdd60813ee0e182850f19ebef1691894f5",
+    "src/components/slot-controls/fonts/SourceSans3-900.woff2": "579ccebb76a304adac9f91802067a56c0563104858ca6cebcc89fd3b92bd900f",
+    "src/components/slot-controls/layout.ts": "978a0d8cfbe237f2f3746044503e5e643f3b4c1a663b8a1f9d0c0e4931f8c527",
+    "src/components/slot-controls/tokens.ts": "43c7a8a5d34d75c2023770d536ebc331913dd5c5a9d6690683a9b980fefa4e35",
+    "src/components/slot-controls/typography.ts": "9138b0a857374f306ab0476a15852b581d669875d06541470ac804936903b51d",
+    "src/lib/kilo/bank.ts": "445eec53123b54010fd0ded7b085bc6a04b8fefd11b1fc9a89f3c80b4af30504",
+    "src/lib/kilo/baseline.json": "eb27ec26439f47f9a87f7cc0f6cb0fda4dfe603bc7cc019d6e0cbebdc9e6f216",
+    "src/lib/kilo/engine.ts": "7f858c685015593c6938b86808c2e628cce1c3aa459ab7d6fe22f5e6955c9add",
+    "src/lib/kilo/fixtures.json": "184a133e9f5d4018fed8d2fa791837fdd464d5fec00602bc4eead8591475e505",
+    "src/lib/kilo/sound.ts": "e5996edc2db60307c236121e307d3a1edb22a14bd24207f198e0d084667a02c1",
+    "src/styles.css": "f398593b5c5bba75a230b7a53878a6d21f9e4cbd0baf81295818efb3cbc511f9",
+    "src/review-entry.tsx": "15a00e9eb1255c9184168d6bbb4814d5396641b07af09d0f4f53f651b002e621"
+  },
+  "originalLogos": {
+    "public/kilo-ui-v11/logo-kilo-king.webp": "62fd89ff7cf11954309772011ad7be6117cbe539f1d9b9d73de216308a43d407",
+    "public/kilo-scene-v15/logo-stacked.webp": "4ee4f8a90bed98f193392b23a5efd5e3a645810fbaa12aab2d97ad567f5d9407",
+    "public/kilo-night-v3/logo-kilo-king.png": "1c2fdda041b4943b24cbfc1eb8075bc5fe440a8729b35580058ce1a145f80582"
+  },
+  "permittedArtworkRegistryChanges": [
+    "art-map ART/SYMBOL_ALPHA cuffs/keys only",
+    "fish-art CONTRABAND_ROOT, PACKAGE_META, SCATTER_KING source metadata and V8_META sym-reel-v8 only; all functions and fit budgets unchanged"
+  ],
+  "stylesheetSources": {
+    "src/components/kilo/integrated-scene.css": "6677d2a78e249a3c6735ea6d37721f7e20775848fa69183626665fa17c1109dd",
+    "src/components/kilo/integrated-composition.css": "b3a261521873d514b7e69dd2394ddb72cfcde09ef24b584bd68473a504aa413d",
+    "src/components/kilo/scene-entry.css": "d33866ec15539b60d69deba2667f5386bc2a87cbd235e7fa2f8bf2e1f6725fa8",
+    "src/components/kilo/scene-screens.css": "6c723b58caeee770facd3aedf5315f3ddd503b99017a0870cd82e305078dde9a"
+  },
+  "masters": {
+    "desktop": {
+      "width": 1920,
+      "height": 1080,
+      "opening": {
+        "x": 300,
+        "y": 120,
+        "width": 1050,
+        "height": 632.5301204819277
+      }
+    },
+    "portrait": {
+      "width": 1080,
+      "height": 2400,
+      "opening": {
+        "x": 60,
+        "y": 280,
+        "width": 960,
+        "height": 578
+      }
+    }
+  },
+  "selectedSymbolManifestSha256": "c0c72707837ff52519280942441c1816c112c7a6df677f86782f11c2645be898",
+  "assets": [
+    {
+      "role": "wide scene",
+      "scene": "loading",
+      "file": "public/kilo-scenes-v43/loading.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 205568,
+      "sha256": "ab231241b52df98249c2812b3cede0703c50052877ef9743560d05426551dcae"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "loading",
+      "file": "public/kilo-scenes-v43/loading-portrait.webp",
+      "width": 768,
+      "height": 1800,
+      "mode": "RGB",
+      "bytes": 184444,
+      "sha256": "13664745c5a66376cf980bc0a192dfcdb0ffe3cbab3232376d7dbf226676daef"
+    },
+    {
+      "role": "wide scene",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGB",
+      "bytes": 459824,
+      "sha256": "c43be45a573b7116a14ddcee2db75ebd526d79cbe97266132050a600b9dd6884"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 417484,
+      "sha256": "12180ae2a9f3acd64f4fbc6e262ff4baf66193ede3381949d7d1dae061525c75"
+    },
+    {
+      "role": "wide scene",
+      "scene": "scatter-3",
+      "file": "public/kilo-scenes-v43/scatter-3.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 204392,
+      "sha256": "4b6dbc1e6eca297d0c334dde9c93e637c68376a557f0dbc53ad553776d4b28a3"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "scatter-3",
+      "file": "public/kilo-scenes-v43/scatter-3-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 175722,
+      "sha256": "141f1846f36af7a8f0f4735fa304da5e7cb1a96de1b29739f5c0936ee5da2db2"
+    },
+    {
+      "role": "wide scene",
+      "scene": "scatter-4",
+      "file": "public/kilo-scenes-v43/scatter-4.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 211466,
+      "sha256": "7da87ff9bd8f56b09e267983e2e7ec276fb213700cd56274afa054f25100cabf"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "scatter-4",
+      "file": "public/kilo-scenes-v43/scatter-4-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 170976,
+      "sha256": "84a30f0a2763e014c39d0594dbf5964451e0168ec680c775e34af2c5815590e0"
+    },
+    {
+      "role": "wide scene",
+      "scene": "scatter-5",
+      "file": "public/kilo-scenes-v43/scatter-5.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 185136,
+      "sha256": "7ce38484192a639b8ddbf07885c903551729ad84ee7032fb7bc936840a301f98"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "scatter-5",
+      "file": "public/kilo-scenes-v43/scatter-5-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 170882,
+      "sha256": "42e8b106da23b94e2d806346b9f3d5dc8e40b18f5950dc532d54f77535594a34"
+    },
+    {
+      "role": "wide scene",
+      "scene": "chopper",
+      "file": "public/kilo-scenes-v43/chopper.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 176994,
+      "sha256": "076d4d2b3ad0821cfe7eafe6f89198964cf2fe93f140cf80bce877e51d06f574"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "chopper",
+      "file": "public/kilo-scenes-v43/chopper-portrait.webp",
+      "width": 768,
+      "height": 1800,
+      "mode": "RGB",
+      "bytes": 167442,
+      "sha256": "53ab125b614ebde08ebc639b9370e039bcd7d72519c8ff218931ca0d9f96cfeb"
+    },
+    {
+      "role": "wide scene",
+      "scene": "mystery",
+      "file": "public/kilo-scenes-v43/mystery.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 126814,
+      "sha256": "8fa1925ea6f251c73a12b2810d6bdc73782c1b779db3dcbdfeaf02e7a42fd792"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "mystery",
+      "file": "public/kilo-scenes-v43/mystery-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 117908,
+      "sha256": "f42e69dc062bb4a17cda4a8282afd126a685f67ecea15716b5452e620f5bec84"
+    },
+    {
+      "role": "wide scene",
+      "scene": "god-mode",
+      "file": "public/kilo-scenes-v43/god-mode.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 192658,
+      "sha256": "233d8c91788bfa95a99a6cb997f7e53c76b1209d69064c03fa63500ee3a1c7ca"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "god-mode",
+      "file": "public/kilo-scenes-v43/god-mode-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 185300,
+      "sha256": "861e0453d4ecf45f5d3ca31473aa4dae8ee07bfdda5b72b76e3753c0fe2ed5a1"
+    },
+    {
+      "role": "wide scene",
+      "scene": "max-win",
+      "file": "public/kilo-scenes-v43/max-win.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 184834,
+      "sha256": "67ebf73a5a7641e831edaebbbc626266e4b279da027768e876dc4a2e1a51b25a"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "max-win",
+      "file": "public/kilo-scenes-v43/max-win-portrait.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 175926,
+      "sha256": "fc9e4f5d7c8d7d23b5af94b6bee0c8b58f51535d21a75f3c118bb1aec8db7fc1"
+    },
+    {
+      "role": "wide scene",
+      "scene": "completion",
+      "file": "public/kilo-scenes-v43/completion.webp",
+      "width": 1600,
+      "height": 900,
+      "mode": "RGB",
+      "bytes": 234316,
+      "sha256": "0a8c289069a6e65d0fa3777fd18aa6385bd635620029aab9ac255c28348facc4"
+    },
+    {
+      "role": "portrait scene",
+      "scene": "completion",
+      "file": "public/kilo-scenes-v43/completion-portrait.webp",
+      "width": 768,
+      "height": 1800,
+      "mode": "RGB",
+      "bytes": 204366,
+      "sha256": "4e40b3dcddf2e37a0af35a73f48a410ae2571e6ad90a588fad1922e398c27470"
+    },
+    {
+      "role": "entry crest",
+      "scene": "scatter-3",
+      "file": "public/kilo-scenes-v43/entry-scatter-3.webp",
+      "width": 1000,
+      "height": 667,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 82102,
+      "sha256": "7be05b26efa93ada8aee95ac0b235a06ece353cc01dc46690fc39286bbc13bc9"
+    },
+    {
+      "role": "entry crest",
+      "scene": "scatter-4",
+      "file": "public/kilo-scenes-v43/entry-scatter-4.webp",
+      "width": 1000,
+      "height": 667,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 101238,
+      "sha256": "77f8d4c0e4ba4ace1ae648e2cb0b336d4a5e8ea701b3f04002a16ba41d34df04"
+    },
+    {
+      "role": "entry crest",
+      "scene": "scatter-5",
+      "file": "public/kilo-scenes-v43/entry-scatter-5.webp",
+      "width": 1000,
+      "height": 667,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 112678,
+      "sha256": "137776d454b971ed0831ca232194817de895cbaaab517e5b7383322b0db666a2"
+    },
+    {
+      "role": "entry crest",
+      "scene": "chopper",
+      "file": "public/kilo-scenes-v43/entry-chopper.webp",
+      "width": 1000,
+      "height": 667,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 93544,
+      "sha256": "42ace07a23bbbbc1be983a5097ddd43ab12424c43473de571b6086ca3a1278e9"
+    },
+    {
+      "role": "registered cleanUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-clean.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGB",
+      "bytes": 468910,
+      "sha256": "605cbaf8c6c8968a38b528839a3e23398d8760e3174e74306affe4e8a7c78abb"
+    },
+    {
+      "role": "registered actorUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-actor.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 102026,
+      "sha256": "cb4d6e31e3e1e3c18358ad12e5f9685d43f6dd72e7bb5a88aaa9713beee5fbfa"
+    },
+    {
+      "role": "registered eyelid drawing",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-actor-blink.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 111836,
+      "sha256": "8b0a45347481f30131c236c65ba8bbf24d7c90e805d3ae3708a50fc79d9c81ce"
+    },
+    {
+      "role": "registered cleanUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait-clean.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 387920,
+      "sha256": "575d7126e85151fe7f6fb0232e92524b81f2767687fb360f13aa9736f9e2a7ce"
+    },
+    {
+      "role": "registered actorUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait-actor.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 88512,
+      "sha256": "7fa3b12ff35ecde650f67bc144337a02bcd538cdc6d611d9774dc90bd176c3cf"
+    },
+    {
+      "role": "registered eyelid drawing",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait-actor-blink.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 89108,
+      "sha256": "a7a02f892010c0a3a2dda12be10bc3734d123b98aaa00c599173eba8c0ed0388"
+    },
+    {
+      "role": "declared support base.desktopClouds.url",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-clouds.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        254
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 456706,
+      "sha256": "58d6c4cf8cf1ebcf577055f4cbdb4e13ed001e7521024c4a9e0412bb733efe67"
+    },
+    {
+      "role": "declared support base.desktopClouds.cleanUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-sky-clean.webp",
+      "width": 1920,
+      "height": 1080,
+      "mode": "RGB",
+      "bytes": 525274,
+      "sha256": "7c8d4cd17244b8373503af4424333e855bbdbb7aead64e305962a3cddbd3c908"
+    },
+    {
+      "role": "declared support base.portraitClouds.url",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait-clouds.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "bytes": 302372,
+      "sha256": "b03f06d00ceacbcc59060f907cf377d3b1e964e96ea326706b37d4be4d676901"
+    },
+    {
+      "role": "declared support base.portraitClouds.cleanUrl",
+      "scene": "base",
+      "file": "public/kilo-scenes-v43/base-portrait-sky-clean.webp",
+      "width": 768,
+      "height": 1708,
+      "mode": "RGB",
+      "bytes": 357222,
+      "sha256": "c163e0b9350271c581a8c56a1e774715c2469bf6b5799a5d7fdbba58329b2948"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "sym-bobber",
+      "file": "public/kilo-symbols-illustrated-v43/sym-bobber.webp",
+      "declaredCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "declaredBounds": [
+        128,
+        65,
+        909,
+        965
+      ],
+      "alphaThreshold": 64,
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        128,
+        65,
+        909,
+        965
+      ],
+      "bytes": 173792,
+      "sha256": "00aaefacfa23cca943093d3c952b5ba8d4361e15f81c6cedd6af5b580f253414"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "sym-can",
+      "file": "public/kilo-symbols-illustrated-v43/sym-can.webp",
+      "declaredCanvas": {
+        "width": 1024,
+        "height": 1024
+      },
+      "declaredBounds": [
+        169,
+        66,
+        841,
+        967
+      ],
+      "alphaThreshold": 64,
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        169,
+        66,
+        841,
+        967
+      ],
+      "bytes": 241940,
+      "sha256": "9a7aa846c052fb16ef1eac28d4d928d2ecf1c9e05f84cdd0867f14d14119b6de"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "package-small",
+      "file": "public/kilo-symbols-illustrated-v43/package-small.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        47,
+        331,
+        1222,
+        1021
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        47,
+        331,
+        1222,
+        1021
+      ],
+      "bytes": 206434,
+      "sha256": "1b0c338e46b1f732abfb6b82ad2a68626ccdaf97224c948a322b39d6e125f793"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "package-medium",
+      "file": "public/kilo-symbols-illustrated-v43/package-medium.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        16,
+        289,
+        1242,
+        1026
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        16,
+        289,
+        1242,
+        1026
+      ],
+      "bytes": 226334,
+      "sha256": "6980b688e45eed9236a38a11a4f3c9b785074a9cbfeefc1eda48bda18d32095c"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "package-trophy",
+      "file": "public/kilo-symbols-illustrated-v43/package-trophy.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        14,
+        200,
+        1240,
+        1117
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        14,
+        200,
+        1240,
+        1117
+      ],
+      "bytes": 333186,
+      "sha256": "adecad377fec3043d0219cc5ca1ce882d3bd822a233128ac2bb4146c4510e3b8"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "package-king",
+      "file": "public/kilo-symbols-illustrated-v43/package-king.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        6,
+        148,
+        1245,
+        1096
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        6,
+        148,
+        1245,
+        1096
+      ],
+      "bytes": 361014,
+      "sha256": "bf928ab6149f56b75b68017af9f98f9f34e57b248b2f4f294f0689d9cfd8eb9a"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "scatter-king",
+      "file": "public/kilo-symbols-illustrated-v43/scatter-king.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        29,
+        24,
+        1226,
+        1222
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "measuredMainBounds": [
+        29,
+        24,
+        1226,
+        1222
+      ],
+      "bytes": 439838,
+      "sha256": "b2019fa721d86808bf9d51e6180d4be4941dff12ebcff8d39ec15101a1334421"
+    },
+    {
+      "role": "selected symbol",
+      "symbol": "sym-reel-v8",
+      "file": "public/kilo-symbols-illustrated-v43/sym-reel-v8.webp",
+      "declaredCanvas": {
+        "width": 1254,
+        "height": 1254
+      },
+      "declaredBounds": [
+        31,
+        244,
+        1226,
+        1078
+      ],
+      "alphaThreshold": 64,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "measuredMainBounds": [
+        31,
+        244,
+        1226,
+        1078
+      ],
+      "bytes": 270418,
+      "sha256": "5aa0a87bddeec050a6062562032256b781266a73b844243291bcab17707fd005"
+    }
+  ],
+  "layouts": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.35,
+        "left": -21,
+        "top": 6,
+        "width": 378,
+        "height": 840
+      },
+      "heightResidual": -0.10963855421690027,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 68,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.35,
+        "left": -21,
+        "top": 6,
+        "width": 378,
+        "height": 840
+      },
+      "heightResidual": -0.10963855421690027,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.35,
+        "left": -21,
+        "top": 6,
+        "width": 378,
+        "height": 840
+      },
+      "heightResidual": -0.10963855421690027,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 232,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 288,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 68,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 68,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 336,
+        "height": 202.40963855421688
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.35,
+        "left": -21,
+        "top": 6,
+        "width": 378,
+        "height": 840
+      },
+      "heightResidual": -0.10963855421690027,
+      "targets": {
+        "menu": {
+          "x": 288,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 232,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 120,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.38125,
+        "left": -22.875,
+        "top": -2.75,
+        "width": 411.75,
+        "height": 915
+      },
+      "heightResidual": -0.11942771084341075,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 247,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 303,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 15,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 83,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 83,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.38125,
+        "left": -22.875,
+        "top": -2.75,
+        "width": 411.75,
+        "height": 915
+      },
+      "heightResidual": -0.11942771084341075,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "feature": false,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.38125,
+        "left": -22.875,
+        "top": -2.75,
+        "width": 411.75,
+        "height": 915
+      },
+      "heightResidual": -0.11942771084341075,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 112,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 247,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 303,
+          "y": 56,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 15,
+          "y": 74,
+          "w": 68,
+          "h": 64
+        },
+        "minus": {
+          "x": 83,
+          "y": 106,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 83,
+          "y": 62,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "feature": true,
+      "mode": "portrait",
+      "reel": {
+        "x": 0,
+        "y": 104,
+        "width": 366,
+        "height": 220.4819277108434
+      },
+      "dockHeight": 160,
+      "camera": {
+        "portrait": true,
+        "master": {
+          "width": 1080,
+          "height": 2400,
+          "opening": {
+            "x": 60,
+            "y": 280,
+            "width": 960,
+            "height": 578
+          }
+        },
+        "scale": 0.38125,
+        "left": -22.875,
+        "top": -2.75,
+        "width": 411.75,
+        "height": 915
+      },
+      "heightResidual": -0.11942771084341075,
+      "targets": {
+        "menu": {
+          "x": 303,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 247,
+          "y": 84,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 135,
+          "y": 58,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "feature": false,
+      "mode": "landscape",
+      "reel": {
+        "x": 138,
+        "y": 56,
+        "width": 488,
+        "height": 294
+      },
+      "dockHeight": 350,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.46476190476190476,
+        "left": -1.4285714285714164,
+        "top": 0.22857142857142776,
+        "width": 892.3428571428572,
+        "height": 501.9428571428571
+      },
+      "heightResidual": -0.024096385542179632,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 662,
+          "y": 75,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 160,
+          "w": 84,
+          "h": 64
+        },
+        "minus": {
+          "x": 84,
+          "y": 192,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 148,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "feature": true,
+      "mode": "landscape",
+      "reel": {
+        "x": 138,
+        "y": 56,
+        "width": 488,
+        "height": 294
+      },
+      "dockHeight": 350,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.46476190476190476,
+        "left": -1.4285714285714164,
+        "top": 0.22857142857142776,
+        "width": 892.3428571428572,
+        "height": 501.9428571428571
+      },
+      "heightResidual": -0.024096385542179632,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 662,
+          "y": 231,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 636,
+          "y": 127,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "feature": false,
+      "mode": "landscape",
+      "reel": {
+        "x": 138,
+        "y": 56,
+        "width": 415,
+        "height": 250
+      },
+      "dockHeight": 306,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.3952380952380952,
+        "left": 19.42857142857143,
+        "top": 8.571428571428577,
+        "width": 758.8571428571428,
+        "height": 426.85714285714283
+      },
+      "heightResidual": 0,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 589,
+          "y": 209,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 563,
+          "y": 105,
+          "w": 96,
+          "h": 96
+        },
+        "auto": {
+          "x": 589,
+          "y": 53,
+          "w": 44,
+          "h": 44
+        },
+        "buy": {
+          "x": 84,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "bet": {
+          "x": 0,
+          "y": 160,
+          "w": 84,
+          "h": 64
+        },
+        "minus": {
+          "x": 84,
+          "y": 192,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 84,
+          "y": 148,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "feature": true,
+      "mode": "landscape",
+      "reel": {
+        "x": 138,
+        "y": 56,
+        "width": 415,
+        "height": 250
+      },
+      "dockHeight": 306,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.3952380952380952,
+        "left": 19.42857142857143,
+        "top": 8.571428571428577,
+        "width": 758.8571428571428,
+        "height": 426.85714285714283
+      },
+      "heightResidual": 0,
+      "targets": {
+        "menu": {
+          "x": 0,
+          "y": 0,
+          "w": 44,
+          "h": 44
+        },
+        "turbo": {
+          "x": 589,
+          "y": 209,
+          "w": 44,
+          "h": 44
+        },
+        "spin": {
+          "x": 563,
+          "y": 105,
+          "w": 96,
+          "h": 96
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "feature": false,
+      "mode": "wide",
+      "reel": {
+        "x": 239,
+        "y": 64,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.8457142857142858,
+        "left": -14.714285714285722,
+        "top": -37.485714285714295,
+        "width": 1623.7714285714287,
+        "height": 913.3714285714286
+      },
+      "heightResidual": 1.1368683772161603e-13,
+      "targets": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        "auto": {
+          "x": 981.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "buy": {
+          "x": 1189.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "bet": {
+          "x": 769.12,
+          "y": 20,
+          "w": 152,
+          "h": 88
+        },
+        "minus": {
+          "x": 921.12,
+          "y": 64,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 921.12,
+          "y": 20,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "feature": true,
+      "mode": "wide",
+      "reel": {
+        "x": 239,
+        "y": 64,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.8457142857142858,
+        "left": -14.714285714285722,
+        "top": -37.485714285714295,
+        "width": 1623.7714285714287,
+        "height": 913.3714285714286
+      },
+      "heightResidual": 1.1368683772161603e-13,
+      "targets": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "feature": false,
+      "mode": "wide",
+      "reel": {
+        "x": 239,
+        "y": 64,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.8457142857142858,
+        "left": -14.714285714285722,
+        "top": -37.485714285714295,
+        "width": 1623.7714285714287,
+        "height": 913.3714285714286
+      },
+      "heightResidual": 1.1368683772161603e-13,
+      "targets": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        "auto": {
+          "x": 981.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "buy": {
+          "x": 1189.12,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "bet": {
+          "x": 769.12,
+          "y": 20,
+          "w": 152,
+          "h": 88
+        },
+        "minus": {
+          "x": 921.12,
+          "y": 64,
+          "w": 44,
+          "h": 44
+        },
+        "plus": {
+          "x": 921.12,
+          "y": 20,
+          "w": 44,
+          "h": 44
+        }
+      }
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "feature": true,
+      "mode": "wide",
+      "reel": {
+        "x": 239,
+        "y": 64,
+        "width": 888,
+        "height": 534.9397590361446
+      },
+      "dockHeight": 128,
+      "camera": {
+        "portrait": false,
+        "master": {
+          "width": 1920,
+          "height": 1080,
+          "opening": {
+            "x": 300,
+            "y": 120,
+            "width": 1050,
+            "height": 632.5301204819277
+          }
+        },
+        "scale": 0.8457142857142858,
+        "left": -14.714285714285722,
+        "top": -37.485714285714295,
+        "width": 1623.7714285714287,
+        "height": 913.3714285714286
+      },
+      "heightResidual": 1.1368683772161603e-13,
+      "targets": {
+        "menu": {
+          "x": 230.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "turbo": {
+          "x": 154.88,
+          "y": 32,
+          "w": 64,
+          "h": 64
+        },
+        "spin": {
+          "x": 1053.12,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      }
+    }
+  ],
+  "sourceAspectCases": [
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "loading",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "base",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "scatter-3",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "scatter-4",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "scatter-5",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "chopper",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "mystery",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "god-mode",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "max-win",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": false,
+      "scene": "completion",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "loading",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "base",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "scatter-3",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "scatter-4",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "scatter-5",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "chopper",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "mystery",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "god-mode",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "max-win",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        360,
+        800
+      ],
+      "review": true,
+      "scene": "completion",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "loading",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "base",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "scatter-3",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "scatter-4",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "scatter-5",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "chopper",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "mystery",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "god-mode",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "max-win",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": false,
+      "scene": "completion",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "loading",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "base",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "scatter-3",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "scatter-4",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "scatter-5",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "chopper",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "mystery",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "god-mode",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "max-win",
+      "source": {
+        "width": 768,
+        "height": 1708
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "review": true,
+      "scene": "completion",
+      "source": {
+        "width": 768,
+        "height": 1800
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "loading",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "base",
+      "source": {
+        "width": 1920,
+        "height": 1080
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "scatter-3",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "scatter-4",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "scatter-5",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "chopper",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "mystery",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "god-mode",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "max-win",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": false,
+      "scene": "completion",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "loading",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "base",
+      "source": {
+        "width": 1920,
+        "height": 1080
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "scatter-3",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "scatter-4",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "scatter-5",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "chopper",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "mystery",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "god-mode",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "max-win",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        844,
+        390
+      ],
+      "review": true,
+      "scene": "completion",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 0
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "loading",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "base",
+      "source": {
+        "width": 1920,
+        "height": 1080
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "scatter-3",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "scatter-4",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "scatter-5",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "chopper",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "mystery",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "god-mode",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "max-win",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": false,
+      "scene": "completion",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "loading",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "base",
+      "source": {
+        "width": 1920,
+        "height": 1080
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "scatter-3",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "scatter-4",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "scatter-5",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "chopper",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "mystery",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "god-mode",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "max-win",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    },
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "review": true,
+      "scene": "completion",
+      "source": {
+        "width": 1600,
+        "height": 900
+      },
+      "aspectResidual": 2.220446049250313e-16
+    }
+  ],
+  "gateInputsHash": "e584ffe0bf830ee3abc247c1991014e8f2f906f15b800406f5429a1a948b0bc0",
+  "gates": [
+    {
+      "command": "npm run typecheck:kilo",
+      "passed": true,
+      "inputHash": "e584ffe0bf830ee3abc247c1991014e8f2f906f15b800406f5429a1a948b0bc0",
+      "inputPaths": [
+        "scripts/verify-presentation.mjs",
+        "src/components/kilo/BonusEntryScene.tsx",
+        "src/components/kilo/DockSkin.tsx",
+        "src/components/kilo/EnvironmentScene.tsx",
+        "src/components/kilo/FishermanScene.tsx",
+        "src/components/kilo/IntegratedScene.tsx",
+        "src/components/kilo/MarinaBackdrop.tsx",
+        "src/components/kilo/ReelStage.tsx",
+        "src/components/kilo/SceneScreens.tsx",
+        "src/components/kilo/StageSurround.tsx",
+        "src/components/kilo/art-map.ts",
+        "src/components/kilo/auto-spins.ts",
+        "src/components/kilo/control-model.ts",
+        "src/components/kilo/control-overlays-layout.ts",
+        "src/components/kilo/control-overlays.tsx",
+        "src/components/kilo/control-panels.tsx",
+        "src/components/kilo/control-theme.ts",
+        "src/components/kilo/director.ts",
+        "src/components/kilo/dock-design.ts",
+        "src/components/kilo/feature-catalog.ts",
+        "src/components/kilo/feature-takeover.tsx",
+        "src/components/kilo/fish-art.ts",
+        "src/components/kilo/info-panel.tsx",
+        "src/components/kilo/integrated-scene-model.ts",
+        "src/components/kilo/keyboard.ts",
+        "src/components/kilo/layout.ts",
+        "src/components/kilo/marina-frame.ts",
+        "src/components/kilo/material.ts",
+        "src/components/kilo/motion-atlas.ts",
+        "src/components/kilo/paytable.tsx",
+        "src/components/kilo/pixiStage.ts",
+        "src/components/kilo/play.tsx",
+        "src/components/kilo/scene-system.ts",
+        "src/components/kilo/sprite-bounds.json",
+        "src/components/kilo/stage-art.ts",
+        "src/components/kilo/useMotionCanvas.ts",
+        "src/components/slot-controls/SlotControls.tsx",
+        "src/components/slot-controls/layout.ts",
+        "src/components/slot-controls/tokens.ts",
+        "src/components/slot-controls/typography.ts",
+        "src/lib/kilo/bank.ts",
+        "src/lib/kilo/baseline.json",
+        "src/lib/kilo/engine.ts",
+        "src/lib/kilo/fixtures.json",
+        "src/lib/kilo/sound.ts",
+        "src/review-entry.tsx",
+        "tsconfig.json",
+        "tsconfig.kilo.json"
+      ],
+      "reused": false,
+      "exitCode": 0,
+      "durationMs": 3314,
+      "output": "\n> typecheck:kilo\n> tsc --noEmit -p tsconfig.kilo.json\n\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "npm run test:kilo",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 19467,
+      "output": "\n> test:kilo\n> node scripts/verify-presentation.mjs\n\nPASS: 216 fixture/skip/speed cases across 18 saved rounds and three speed profiles.\nVerified totals, cap, final boards, collector timing, remaining-spin timing and script immutability.\nVerified payline cells, duplicate grouping, and event-preview restoration.\nBazooka threshold states checked:\n  spin 15 free-spin: wilds 7, filled 3, ×2, holding false, left 5\n  spin 15 collect: wilds 7, filled 3, ×2, holding false, left 4\n  spin 15 deliver#0: wilds 8, filled 4, ×2, holding true, left 4\n  spin 15 deliver#1: wilds 9, filled 4, ×2, holding true, left 4\n  spin 15 before-award: wilds 9, filled 4, ×2, holding true, left 4\n  spin 15 on-award: wilds 9, filled 4, ×2, holding true, left 14\n  spin 15 after-award: wilds 9, filled 1, ×3, holding false, left 14\n  spin 16 free-spin: wilds 9, filled 1, ×3, holding false, left 14\n  spin 16 collect: wilds 9, filled 1, ×3, holding false, left 13\n  spin 20 free-spin: wilds 11, filled 3, ×3, holding false, left 10\n  spin 20 collect: wilds 11, filled 3, ×3, holding false, left 9\n  spin 20 deliver#0: wilds 12, filled 4, ×3, holding true, left 9\n  spin 20 before-award: wilds 12, filled 4, ×3, holding true, left 9\n  spin 20 on-award: wilds 12, filled 4, ×3, holding true, left 19\n  spin 20 after-award: wilds 12, filled 4, ×10, holding false, left 19\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nkilo-audio [TypeError: Failed to parse URL from /kilo-audio/sfx.json] {\n  [cause]: TypeError: Invalid URL\n      at new URL (node:internal/url:840:25)\n      at new Request (node:internal/deps/undici/undici:12072:25)\n      at fetch (node:internal/deps/undici/undici:12997:25)\n      at fetch (node:internal/deps/undici/undici:17708:10)\n      at fetch (node:internal/bootstrap/web/exposed-window-or-worker:83:12)\n      at file:///workspace/sites/kilo-king-material-publish/src/lib/kilo/sound.ts:143:30\n      at preloadAudio (file:///workspace/sites/kilo-king-material-publish/src/lib/kilo/sound.ts:162:7)\n      at primeAudio (file:///workspace/sites/kilo-king-material-publish/src/lib/kilo/sound.ts:170:8)\n      at whirStart (file:///workspace/sites/kilo-king-material-publish/src/lib/kilo/sound.ts:349:3)\n      at cue (file:///workspace/sites/kilo-king-material-publish/src/lib/kilo/sound.ts:466:24) {\n    code: 'ERR_INVALID_URL',\n    input: '/kilo-audio/sfx.json'\n  }\n}\n",
+      "inputHash": "5855a71fed41ed4745bf03f5642e9b07d826e1480b31ee3e31a482f60b76cdb1",
+      "inputPaths": [
+        "src/components/kilo/director.ts",
+        "src/components/kilo/control-model.ts",
+        "src/components/kilo/pixiStage.ts",
+        "src/lib/kilo/engine.ts",
+        "src/lib/kilo/bank.ts",
+        "src/lib/kilo/sound.ts",
+        "src/lib/kilo/fixtures.json",
+        "scripts/verify-presentation.mjs"
+      ],
+      "reused": true
+    }
+  ],
+  "limitations": [
+    "No live browser visual or interaction verification was performed.",
+    "Image decode success does not prove illustration quality, character registration, clean animation seams or animation cadence on a device.",
+    "Calculated bounds are not browser-computed layout; source CSS and accepted controls remain protected against the checkpoint.",
+    "This report does not claim Stake Engine approval or certification."
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "version": 51,
+  "id": "getaway-case",
+  "generator": "builtin image_gen.imagegen",
+  "url": "/kilo-features-v51/getaway-case-sheet.webp",
+  "still": "/kilo-features-v51/getaway-case-still.webp",
+  "sheet": [
+    1536,
+    1024
+  ],
+  "frameSize": [
+    512,
+    512
+  ],
+  "frameOrder": "row-major",
+  "frames": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 512,
+      "h": 512,
+      "name": "closed"
+    },
+    {
+      "x": 512,
+      "y": 0,
+      "w": 512,
+      "h": 512,
+      "name": "latch-release"
+    },
+    {
+      "x": 1024,
+      "y": 0,
+      "w": 512,
+      "h": 512,
+      "name": "opening"
+    },
+    {
+      "x": 0,
+      "y": 512,
+      "w": 512,
+      "h": 512,
+      "name": "open"
+    },
+    {
+      "x": 512,
+      "y": 512,
+      "w": 512,
+      "h": 512,
+      "name": "fully-open"
+    },
+    {
+      "x": 1024,
+      "y": 512,
+      "w": 512,
+      "h": 512,
+      "name": "closing"
+    }
+  ],
+  "visibleFrameBounds": [
+    {
+      "x": 54,
+      "y": 239,
+      "w": 404,
+      "h": 172
+    },
+    {
+      "x": 54,
+      "y": 213,
+      "w": 404,
+      "h": 197
+    },
+    {
+      "x": 53,
+      "y": 160,
+      "w": 405,
+      "h": 250
+    },
+    {
+      "x": 53,
+      "y": 115,
+      "w": 405,
+      "h": 295
+    },
+    {
+      "x": 54,
+      "y": 53,
+      "w": 404,
+      "h": 357
+    },
+    {
+      "x": 54,
+      "y": 142,
+      "w": 404,
+      "h": 268
+    }
+  ],
+  "visibleUnionBounds": {
+    "x": 53,
+    "y": 53,
+    "w": 405,
+    "h": 358
+  },
+  "alphaUnionBounds": {
+    "x": 50,
+    "y": 50,
+    "w": 412,
+    "h": 365
+  },
+  "registration": {
+    "anchor": [
+      0.5,
+      0.80078125
+    ],
+    "anchorPixels": [
+      256.0,
+      410
+    ],
+    "caseWidth": 404,
+    "caseBaseline": 410,
+    "method": "uniform scale per drawing, shared body width and baseline; source alpha retained"
+  },
+  "sequences": {
+    "open": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "durationsMs": [
+        110,
+        90,
+        100,
+        110,
+        240
+      ],
+      "loop": false
+    },
+    "close": {
+      "frames": [
+        4,
+        3,
+        5,
+        2,
+        1,
+        0
+      ],
+      "durationsMs": [
+        100,
+        75,
+        75,
+        75,
+        90,
+        160
+      ],
+      "loop": false
+    },
+    "extract": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        4,
+        3,
+        5,
+        2,
+        1,
+        0
+      ],
+      "durationsMs": [
+        110,
+        90,
+        100,
+        110,
+        200,
+        180,
+        75,
+        75,
+        75,
+        90,
+        160
+      ],
+      "loop": false
+    }
+  },
+  "reducedMotionFrame": 4,
+  "textSafeArea": {
+    "x": 0,
+    "y": 436,
+    "w": 512,
+    "h": 76
+  },
+  "source": "art/kilo-features-v51/getaway-case-source.png",
+  "prompt": "art/kilo-features-v51/getaway-case-prompt.txt",
+  "sourceExtractions": [
+    {
+      "x": 9,
+      "y": 284,
+      "w": 496,
+      "h": 216
+    },
+    {
+      "x": 521,
+      "y": 254,
+      "w": 495,
+      "h": 246
+    },
+    {
+      "x": 1033,
+      "y": 192,
+      "w": 494,
+      "h": 308
+    },
+    {
+      "x": 8,
+      "y": 591,
+      "w": 500,
+      "h": 368
+    },
+    {
+      "x": 519,
+      "y": 517,
+      "w": 500,
+      "h": 442
+    },
+    {
+      "x": 1030,
+      "y": 625,
+      "w": 499,
+      "h": 334
+    }
+  ],
+  "transforms": [
+    {
+      "scale": 0.831275720164609,
+      "translation": [
+        50,
+        235
+      ],
+      "sourceVisibleBounds": {
+        "x": 14,
+        "y": 289,
+        "w": 486,
+        "h": 206
+      }
+    },
+    {
+      "scale": 0.8329896907216495,
+      "translation": [
+        50,
+        209
+      ],
+      "sourceVisibleBounds": {
+        "x": 14,
+        "y": 259,
+        "w": 485,
+        "h": 236
+      }
+    },
+    {
+      "scale": 0.8347107438016529,
+      "translation": [
+        50,
+        157
+      ],
+      "sourceVisibleBounds": {
+        "x": 14,
+        "y": 197,
+        "w": 484,
+        "h": 298
+      }
+    },
+    {
+      "scale": 0.8244897959183674,
+      "translation": [
+        50,
+        111
+      ],
+      "sourceVisibleBounds": {
+        "x": 13,
+        "y": 84,
+        "w": 490,
+        "h": 358
+      }
+    },
+    {
+      "scale": 0.8244897959183674,
+      "translation": [
+        50,
+        50
+      ],
+      "sourceVisibleBounds": {
+        "x": 12,
+        "y": 10,
+        "w": 490,
+        "h": 432
+      }
+    },
+    {
+      "scale": 0.8261758691206544,
+      "translation": [
+        50,
+        138
+      ],
+      "sourceVisibleBounds": {
+        "x": 11,
+        "y": 118,
+        "w": 489,
+        "h": 324
+      }
+    }
+  ],
+  "references": [
+    "public/kilo-symbols-v47/sym-case-v8.webp",
+    "public/kilo-animation-v49/bonuses/completion-case-still.webp"
+  ],
+  "notes": [
+    "Separate optional feature illustration; does not replace approved reel symbol art.",
+    "Six authored drawings, not a continuous skeletal rig. Intended for a short one-shot reveal or close; do not use as a continuous idle loop.",
+    "All amounts and multipliers remain live text outside the case; no baked lettering or numerical payout.",
+    "Minor generated shape variation remains in handle and cargo perspective across frames. Registration removes baseline and scale drift, not drawing variance.",
+    "Alpha is preserved from generation; source alpha max is 254. No chroma-key or artistic Python retouch was used.",
+    "Use reducedMotionFrame for reduced motion. Animation must never gate credit, collection or settlement callbacks.",
+    "The supplied alpha-correction variant was not selected: its drawings cross the nominal row boundary; the selected original has correct separate cells and clean true alpha."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "decodeDelay": 1200,
+  "clipDuration": 640,
+  "paintedFrames": 21,
+  "firstFrame": 1233.3333333333333,
+  "lastFrame": 1899.9999999999984,
+  "restoredStatic": true,
+  "method": "Actual AuthoredArt effect and native Canvas drawing, simulated 1200ms decode. Not browser layout."
+}

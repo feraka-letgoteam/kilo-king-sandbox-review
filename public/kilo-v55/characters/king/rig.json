@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "id": "king",
+  "canvas": {
+    "width": 384,
+    "height": 576
+  },
+  "baseline": 552,
+  "atlas": "/kilo-v55/characters/king/parts.webp",
+  "source": "art/kilo-v55/characters/king-rig-source.png",
+  "parts": {
+    "hips": {
+      "frame": {
+        "x": 8,
+        "y": 8,
+        "w": 244,
+        "h": 244
+      },
+      "pivot": [
+        122,
+        23
+      ],
+      "position": [
+        192,
+        331
+      ],
+      "rotation": 0,
+      "parent": null,
+      "zOrder": 0,
+      "sourceCrop": [
+        47,
+        30,
+        446,
+        429
+      ]
+    },
+    "torso": {
+      "frame": {
+        "x": 264,
+        "y": 8,
+        "w": 190,
+        "h": 212
+      },
+      "pivot": [
+        95,
+        192
+      ],
+      "position": [
+        0,
+        0
+      ],
+      "rotation": 0,
+      "parent": "hips",
+      "zOrder": 3,
+      "sourceCrop": [
+        471,
+        42,
+        815,
+        427
+      ]
+    },
+    "head": {
+      "frame": {
+        "x": 520,
+        "y": 8,
+        "w": 137,
+        "h": 151
+      },
+      "pivot": [
+        68,
+        140
+      ],
+      "position": [
+        0,
+        -156
+      ],
+      "rotation": 0,
+      "parent": "torso",
+      "zOrder": 5,
+      "sourceCrop": [
+        877,
+        75,
+        1174,
+        402
+      ]
+    },
+    "upperArmL": {
+      "frame": {
+        "x": 8,
+        "y": 264,
+        "w": 75,
+        "h": 122
+      },
+      "pivot": [
+        39,
+        24
+      ],
+      "position": [
+        -69,
+        -141
+      ],
+      "rotation": -0.12,
+      "parent": "torso",
+      "zOrder": 4,
+      "sourceCrop": [
+        119,
+        455,
+        326,
+        790
+      ]
+    },
+    "forearmL": {
+      "frame": {
+        "x": 264,
+        "y": 264,
+        "w": 68,
+        "h": 124
+      },
+      "pivot": [
+        28,
+        23
+      ],
+      "position": [
+        -4,
+        81
+      ],
+      "rotation": -0.98,
+      "parent": "upperArmL",
+      "zOrder": 7,
+      "sourceCrop": [
+        551,
+        449,
+        741,
+        797
+      ]
+    },
+    "upperArmR": {
+      "frame": {
+        "x": 520,
+        "y": 264,
+        "w": 77,
+        "h": 118
+      },
+      "pivot": [
+        39,
+        24
+      ],
+      "position": [
+        67,
+        -137
+      ],
+      "rotation": 0.08,
+      "parent": "torso",
+      "zOrder": 1,
+      "sourceCrop": [
+        917,
+        449,
+        1140,
+        790
+      ]
+    },
+    "forearmR": {
+      "frame": {
+        "x": 8,
+        "y": 520,
+        "w": 68,
+        "h": 124
+      },
+      "pivot": [
+        37,
+        24
+      ],
+      "position": [
+        1,
+        80
+      ],
+      "rotation": 0.76,
+      "parent": "upperArmR",
+      "zOrder": 6,
+      "sourceCrop": [
+        119,
+        819,
+        324,
+        1198
+      ]
+    },
+    "prop": {
+      "frame": {
+        "x": 264,
+        "y": 520,
+        "w": 68,
+        "h": 161
+      },
+      "pivot": [
+        16,
+        143
+      ],
+      "position": [
+        8,
+        83
+      ],
+      "rotation": 1.28,
+      "parent": "forearmL",
+      "zOrder": 8,
+      "sourceCrop": [
+        553,
+        805,
+        734,
+        1233
+      ],
+      "optional": true
+    },
+    "headWin": {
+      "frame": {
+        "x": 520,
+        "y": 520,
+        "w": 137,
+        "h": 151
+      },
+      "pivot": [
+        68,
+        140
+      ],
+      "position": [
+        0,
+        -156
+      ],
+      "rotation": 0,
+      "parent": "torso",
+      "zOrder": 5,
+      "sourceCrop": [
+        876,
+        864,
+        1176,
+        1194
+      ],
+      "optional": true
+    }
+  },
+  "defaultHead": "head",
+  "alternateHead": "headWin",
+  "defaultProp": true,
+  "coordinateNotes": "All pivots, positions, and frame sizes are logical pixels. position is relative to the parent joint, before child rotation. rotation is radians. Sort visible sprites by zOrder; hierarchy transforms apply even when sprites are globally sorted. Mirror actor at container level if needed, never swap arm labels. L/R are viewer-left/viewer-right.",
+  "diagnosticPoses": {
+    "rest": {},
+    "action": {
+      "torso": -0.07,
+      "head": 0.06,
+      "upperArmL": -0.18,
+      "forearmL": -0.25,
+      "upperArmR": 0.06,
+      "forearmR": -0.24,
+      "prop": 0.5
+    }
+  }
+}

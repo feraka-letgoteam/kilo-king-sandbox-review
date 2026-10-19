@@ -1,0 +1,37 @@
+{
+  "checkpoint": "1ec507a91638fdbd7cd31ec3f1e6307bdeecf421",
+  "paintCases": 44,
+  "recoveredRegression": "Inline face color used as first layered background image",
+  "unchangedGeometryRules": 62,
+  "unchangedControlTokens": true,
+  "protectedFiles": 18,
+  "unchangedControlStructureOutsideReadoutTypography": true,
+  "disabledRimUndimmed": true,
+  "flatOpaqueFaces": true,
+  "opaqueBorderRims": true,
+  "unblurredEdges": true,
+  "iconStrokeWidth": {
+    "secondary": 3,
+    "spin": 3.5
+  },
+  "labels": {
+    "size": 14,
+    "color": "#b6c6be"
+  },
+  "contrastRatios": {
+    "numbersOnWell": 18.65,
+    "previousNumbersOnLightestWell": 13.81,
+    "previousWinOnLightestWell": 11.36,
+    "labelsOnWell": 11.1,
+    "iconsAndReasonOnFace": 17.1,
+    "iconsOnSelectedFace": 6.6,
+    "disabledIconsOnFace": 10.18,
+    "disabledIconsOnSelectedFace": 3.93,
+    "costLabelOnFace": 10.18,
+    "brassRimOnFace": 5.82
+  },
+  "spacing": "Layout and gap tokens unchanged; hard 1px outer edges reduce the visible open space without moving modules.",
+  "browserQA": false,
+  "screenshots": [],
+  "limitation": "CSS token/AST, source identity and markup checks only. Live rendering remains unverified."
+}

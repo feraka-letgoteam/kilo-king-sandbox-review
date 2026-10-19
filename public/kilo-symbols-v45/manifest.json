@@ -1,0 +1,340 @@
+{
+  "version": 45,
+  "status": "selected-runtime-art",
+  "style": "Clean illustrated cartoon volume; shaped material lighting and refined edges",
+  "alphaThreshold": 64,
+  "assets": {
+    "sym-10": {
+      "file": "sym-10.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        143,
+        201,
+        883,
+        822
+      ],
+      "previousFitBox": [
+        82,
+        200,
+        942,
+        823
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "7a4ead4018f24b02ed0c05242fb4475b9d73122770e0cbfab6a9affd05ce3a8d",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-10.png",
+      "sourceSha256": "c08a846dd1060e564a825b09061b2215791095145fdefadc7e1f8806da443872"
+    },
+    "sym-j": {
+      "file": "sym-j.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        162,
+        84,
+        863,
+        940
+      ],
+      "previousFitBox": [
+        117,
+        82,
+        907,
+        942
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "28a95dce2e2f279bbb68eb1034701a8978911ebaea11ae6a790ce9ef47fd5faf",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-j.png",
+      "sourceSha256": "c969ff9dea54d114c708fa2a2f06a0dc643028869875321e00c5c3ce87abf77b"
+    },
+    "sym-q": {
+      "file": "sym-q.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        136,
+        111,
+        889,
+        914
+      ],
+      "previousFitBox": [
+        82,
+        109,
+        942,
+        915
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "3059b96a0a3f5de8bc12dd3f9b26c9fe07309141e05c3090d7ff9644f7a01b32",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-q.png",
+      "sourceSha256": "b3fb994b4aca7e36ea4455abd3ec6ca172dbebdf7b371336e7b2f40c24269c32"
+    },
+    "sym-k": {
+      "file": "sym-k.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        162,
+        162,
+        863,
+        862
+      ],
+      "previousFitBox": [
+        82,
+        161,
+        942,
+        863
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "0a44c1b880ada638852f38ac18907c58db3c897943c6bbd08213e619849cf21f",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-k.png",
+      "sourceSha256": "59e36f064cfd82e927c7f9661dd110a753871cbdf4716553921bf67e23d98d1b"
+    },
+    "sym-a": {
+      "file": "sym-a.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        120,
+        152,
+        905,
+        873
+      ],
+      "previousFitBox": [
+        82,
+        150,
+        942,
+        874
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "719aeb218d4ed3114208adaa830b5bdba00def8be014792c2b9a28320aafa3b2",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-a.png",
+      "sourceSha256": "6cb522fc9908c2da25a75bce725e9881f6899f3663d4bda62a71a5a513e30702"
+    },
+    "sym-bobber": {
+      "file": "sym-bobber.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        129,
+        103,
+        907,
+        927
+      ],
+      "previousFitBox": [
+        128,
+        65,
+        909,
+        965
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "e6c148e388b69ff78d11ff8a16a8074675a04153beceb96af876032fa74ff71f",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-bobber.png",
+      "sourceSha256": "2db3790f873825d475bb9ea74b5ca57e8d9818894a2578c85b35c39a6ce85d30"
+    },
+    "sym-cash-roll": {
+      "file": "sym-cash-roll.webp",
+      "width": 1024,
+      "height": 1024,
+      "bounds": [
+        170,
+        201,
+        840,
+        832
+      ],
+      "previousFitBox": [
+        169,
+        66,
+        841,
+        967
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "ee63202cc127e60794873db1fc5e7b6e7173dae3cc6f3b04a09efcce921e464c",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-cash-roll.png",
+      "sourceSha256": "3a0ce6d7413bcf22b0a8deaa3e569f338f876f29178aa1b03111958ba5f31ca0"
+    },
+    "sym-reel-v8": {
+      "file": "sym-reel-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        113,
+        246,
+        1144,
+        1076
+      ],
+      "previousFitBox": [
+        31,
+        244,
+        1226,
+        1078
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "1fb7878796b12dd218116704a4ab9fbfcc0c5d31fef9bce2ec88ca7e73085eeb",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-reel-v8.png",
+      "sourceSha256": "2f99e8bb19eedcc467d477a2b4032322911374239b1eb884697b2e1e21454bc0"
+    },
+    "sym-case-v8": {
+      "file": "sym-case-v8.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        62,
+        58,
+        1218,
+        1208
+      ],
+      "previousFitBox": [
+        44,
+        56,
+        1234,
+        1209
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "fb76951fc314ba011475916f9158569e0e0e610c1f65c1699d4d0b3d2e3df56f",
+      "sourceFile": "art/kilo-symbols-v45/originals/sym-case-v8.png",
+      "sourceSha256": "2fa3ff14e18c5a6548613b2ff3f0cfb2fac7f05ce1acc66a2fc41844b9755509"
+    },
+    "package-small": {
+      "file": "package-small.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        343,
+        332,
+        926,
+        1020
+      ],
+      "previousFitBox": [
+        47,
+        331,
+        1222,
+        1021
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "c4bb09b1583f1d47241b3ee6ede5ef38cd57688a2440f0dcc311e9486cba2a9c",
+      "sourceFile": "art/kilo-symbols-v45/originals/package-small.png",
+      "sourceSha256": "b8cb0fe30a133aa7bf8eaa8a5d7a1dedd6ad62f279233d967f249f33c2c4393d"
+    },
+    "package-medium": {
+      "file": "package-medium.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        59,
+        291,
+        1200,
+        1024
+      ],
+      "previousFitBox": [
+        16,
+        289,
+        1242,
+        1026
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "e68a6575da6cb4bbb9e355a2033753ccb8bf98b142acbf4711b517aac2945f08",
+      "sourceFile": "art/kilo-symbols-v45/originals/package-medium.png",
+      "sourceSha256": "8e1d1beb0e4195452b34e852dc5bf0172d0ff88d11cba6ba52f515c7f0ce8651"
+    },
+    "package-trophy": {
+      "file": "package-trophy.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        31,
+        202,
+        1223,
+        1115
+      ],
+      "previousFitBox": [
+        14,
+        200,
+        1240,
+        1117
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "6fb9649e9b015fad16913c68951c9213394728d86f79c0f9d023d7856043287b",
+      "sourceFile": "art/kilo-symbols-v45/originals/package-trophy.png",
+      "sourceSha256": "5f0f34948675d6db02f170e94f5eabe061a207340b39f38d7a20203aad33a40f"
+    },
+    "package-king": {
+      "file": "package-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        8,
+        178,
+        1244,
+        1067
+      ],
+      "previousFitBox": [
+        6,
+        148,
+        1245,
+        1096
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "347a6c60412cca82e75bc50446e5e111cbd9d90f73486da3230e47c30fb81f39",
+      "sourceFile": "art/kilo-symbols-v45/originals/package-king.png",
+      "sourceSha256": "4231773dfcf9d167d41685d7effb9f4af10c587e04d2b8c1d6c0434d618642e0"
+    },
+    "scatter-king": {
+      "file": "scatter-king.webp",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        31,
+        35,
+        1225,
+        1212
+      ],
+      "previousFitBox": [
+        29,
+        24,
+        1226,
+        1222
+      ],
+      "sourceCropAlphaThreshold": 64,
+      "sourceCropPadding": 2,
+      "sha256": "7ccfc2d0753f9a9b880f16d297d0aaaaa66fabcd2592e334cf5399a25f961660",
+      "sourceFile": "art/kilo-symbols-v45/originals/scatter-king.png",
+      "sourceSha256": "6c94dbc4482d08d63663e368a876153a9bf6151cde6e3f0d7a59ec52ba939366"
+    },
+    "collector-idle": {
+      "file": "collector-idle.png",
+      "width": 444,
+      "height": 444,
+      "sha256": "684834bf8137fa1170bc8e3a575168b7600bdca906f29a5a7f0030f287d27a57",
+      "bounds": [
+        10,
+        46,
+        424,
+        392
+      ]
+    },
+    "collector-reaction-atlas": {
+      "file": "collector-reaction-atlas.png",
+      "width": 1774,
+      "height": 887,
+      "sha256": "27f7a461ae95c8d4a61a2b626922e9a5560199b8d9fa94519ac84a4db317d138",
+      "bounds": [
+        10,
+        46,
+        1754,
+        836
+      ]
+    }
+  }
+}

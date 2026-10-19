@@ -1,0 +1,12 @@
+{
+  "version": 56,
+  "kind": "feature-hero-illustrations",
+  "canvas": { "width": 768, "height": 512 },
+  "fit": "contain",
+  "assets": {
+    "dock": "/kilo-v56/features/dock.webp",
+    "yacht": "/kilo-v56/features/yacht.webp",
+    "getaway": "/kilo-v56/features/getaway.webp",
+    "route": "/kilo-v56/features/route.webp"
+  }
+}

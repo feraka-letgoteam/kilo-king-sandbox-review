@@ -1,871 +1,640 @@
-/* One painted-metal instrument rail with its feature launcher beside it. */
+/* v19: navy instrument plate, inset stake module and a raised reel dial.
+   Geometry is shared with the proof renderer in dock-design.ts. */
 .kk-app .kk-shell .kk-control-group {
   position: relative;
-  min-width: 0;
-  height: var(--dock-height);
-}
-
-.kk-app .kk-shell .kk-control-group > .kk-feature-button {
-  border: 1px solid #d1b377;
-  border-top-color: #e2c98c;
-  border-bottom-color: #726041;
-  border-radius: 7px;
-  background: linear-gradient(155deg, #eed7a0, #d1b274 48%, #bd9655);
-  box-shadow:
-    inset 0 0 0 3px #e8cd8e38,
-    inset 0 2px 0 #fff3d0b0,
-    inset 0 -3px 0 #674d2a66,
-    0 5px 9px #0008;
-  color: #132c35;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 15px;
-  line-height: 1;
-  letter-spacing: 0.6px;
-  font-weight: 600;
-  gap: 7px;
-  margin: 0;
-  grid-area: auto;
-  justify-self: center;
-  align-self: center;
-}
-
-.kk-app .kk-shell .kk-control-group > .kk-feature-button:disabled {
-  opacity: 0.62;
-  filter: saturate(0.45);
-}
-
-.kk-app .kk-shell .kk-control-group > .kk-feature-button:focus-visible {
-  outline: 2px solid #f2d99b;
-  outline-offset: 3px;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-control-group {
+  display: block;
   width: var(--reel-width);
-  height: 120px;
+  height: var(--dock-height);
+  min-width: 0;
   justify-self: center;
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  column-gap: 12px;
 }
-
-.kk-app .kk-shell[data-layout="wide"] .kk-control-group > .kk-feature-button {
-  width: 72px;
-  height: 82px;
-}
-
 .kk-app .kk-shell[data-framing="sides"] .kk-control-group {
   grid-area: 2 / 2;
-  display: block;
 }
-
-.kk-app .kk-shell[data-framing="sides"] .kk-control-group > .kk-feature-button {
+.kk-app .kk-shell .kk-control-group .kk-feature-button {
   position: absolute;
-  top: 19px;
-  left: -84px;
+  z-index: 4;
+  margin: 0;
+  padding: 4px;
+  gap: 6px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #f0d39b;
+  font:
+    600 14px/1 "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  isolation: isolate;
+  filter: drop-shadow(0 5px 4px #0008);
+  transition:
+    transform 130ms ease,
+    filter 130ms ease;
 }
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-control-group {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  column-gap: 8px;
-  width: 100%;
-  height: 144px;
+.kk-app .kk-shell .kk-control-group .kk-feature-button::before,
+.kk-app .kk-shell .kk-control-group .kk-feature-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
 }
-
+.kk-app .kk-shell .kk-control-group .kk-feature-button::before {
+  inset: 0;
+  background: linear-gradient(
+    140deg,
+    #fff0bc,
+    #bfa16a 35%,
+    #6c512c 70%,
+    #d6b774
+  );
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button::after {
+  inset: 3px;
+  background: radial-gradient(
+    ellipse at 50% 15%,
+    #36505a,
+    #122833 65%,
+    #071821
+  );
+  box-shadow: inset 0 1px #e8d09b6b;
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button svg {
+  width: 27px;
+  height: 27px;
+  stroke-width: 1.7;
+  filter: drop-shadow(0 1px 1px #000a);
+}
 .kk-app
   .kk-shell[data-layout="portrait"]
   .kk-control-group
   > .kk-feature-button {
-  width: 56px;
-  height: 74px;
-  margin-top: 42px;
-  font-size: 13px;
-  gap: 6px;
-  padding: 4px;
+  font-size: 12px;
+  gap: 5px;
 }
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-control-group {
-  grid-area: 1 / 2;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(214px, 1fr) 44px;
-  gap: 8px;
-  height: 100%;
-  align-self: stretch;
+.kk-app
+  .kk-shell[data-layout="portrait"]
+  .kk-control-group
+  > .kk-feature-button
+  svg {
+  width: 23px;
+  height: 23px;
 }
-
 .kk-app
   .kk-shell[data-layout="landscape"]
   .kk-control-group
   > .kk-feature-button {
-  grid-area: 2 / 1;
-  width: 100%;
-  height: 44px;
   flex-direction: row;
 }
-
-.kk-app
-  .kk-shell[data-layout="landscape"]
-  .kk-control-group
-  > .kk-feature-button
-  svg {
-  width: 22px;
-  height: 22px;
-}
 .kk-app .kk-shell[data-layout] .kk-console {
-  --rail-edge: #b69a6259;
-  --rail-ink: var(--kk-text, #f2efdf);
-  --rail-muted: var(--kk-muted, #a5b6bc);
+  position: absolute;
+  display: block;
+  top: 0;
   margin: 0;
-  border: 1px solid var(--rail-edge);
-  border-top-color: #e2c98c99;
-  border-bottom-color: #020a0f;
-  border-radius: 8px;
-  background: linear-gradient(
-    180deg,
-    var(--kk-metal-top, #263b43),
-    var(--kk-metal, #142830) 25%,
-    var(--kk-metal-deep, #08151d)
-  );
-  box-shadow:
-    inset 0 1px 0 #fff1bc14,
-    inset 0 -3px 0 #020a0f99,
-    0 7px 14px #0005;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
   isolation: isolate;
+  overflow: visible;
 }
-
-.kk-app .kk-shell[data-layout] .kk-console::before {
+.kk-app .kk-shell[data-layout] .kk-console::before,
+.kk-app .kk-shell[data-layout] .kk-console::after {
   content: none;
 }
-
+.kk-dock-skin {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: visible;
+  filter: drop-shadow(0 6px 5px #0007);
+}
 .kk-app .kk-shell .kk-console .kk-menu-button,
-.kk-app .kk-shell .kk-console .kk-stake-step {
-  border: 1px solid #b69a6259;
-  background: linear-gradient(180deg, #2d434a, #172b34 70%, #11232c);
-  box-shadow:
-    inset 0 1px 0 #edf2e817,
-    inset 0 -2px 0 #06111980,
-    0 2px 4px #0003;
-  color: var(--kk-brass-light, #e2c98c);
-  transition:
-    border-color 120ms ease,
-    background-color 120ms ease,
-    transform 120ms ease;
-}
-
-.kk-app .kk-shell .kk-console .kk-menu-button {
-  width: 44px;
-  height: 44px;
-  margin: 0;
-  border-radius: 5px;
-  color: #c6d0cf;
-}
-
-.kk-app .kk-shell .kk-console .kk-stake-step {
-  border-color: #a5b6bc40;
-  background: linear-gradient(180deg, #213740, #0d202a);
-  color: #c6d0cf;
-}
-
-.kk-app .kk-shell .kk-console .kk-speed-dot {
-  border: 1px solid #b69a6273;
-  background: #253c43;
-  color: #e2c98c;
-  font-family: "Source Sans 3", sans-serif;
-}
-
-.kk-app .kk-shell .kk-console .kk-read {
-  min-width: 0;
-  border-radius: 0;
-}
-
-.kk-app .kk-shell .kk-console .kk-read .kk-eyebrow,
-.kk-app .kk-shell .kk-console .kk-bet-button .kk-eyebrow,
-.kk-app .kk-shell .kk-console .kk-feature-context .kk-eyebrow {
-  color: var(--rail-muted);
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 12px;
-  letter-spacing: 0.9px;
-  text-transform: uppercase;
-}
-
-.kk-app .kk-shell .kk-console .kk-read .kk-eyebrow small {
-  color: #8499a2;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 9px;
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.kk-app .kk-shell .kk-console .kk-read strong,
-.kk-app .kk-shell .kk-console .kk-bet-value b,
-.kk-app .kk-shell .kk-console .kk-feature-context strong {
-  color: var(--rail-ink);
-  font-family: "Source Sans 3", sans-serif;
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.25px;
-  white-space: nowrap;
-}
-
-.kk-app .kk-shell .kk-console .kk-balance strong {
-  font-size: 22px;
-}
-
-.kk-app .kk-shell .kk-console .kk-bonus-win .kk-eyebrow,
-.kk-app .kk-shell .kk-console .kk-last-win .kk-eyebrow {
-  color: var(--kk-brass-light, #e2c98c);
-}
-
-.kk-app .kk-shell .kk-console .kk-bonus-win strong,
-.kk-app .kk-shell .kk-console .kk-last-win strong {
-  color: #f5dfaa;
-  font-size: 24px;
-}
-
+.kk-app .kk-shell .kk-console .kk-read,
+.kk-app .kk-shell .kk-console .kk-stake-control,
+.kk-app .kk-shell .kk-console .kk-feature-context,
+.kk-app .kk-shell .kk-console .kk-spin-area,
 .kk-app .kk-shell .kk-console .kk-bet-button,
-.kk-app .kk-shell .kk-console .kk-feature-context {
-  border: 1px solid #b69a624a;
-  border-top-color: #040e15;
-  border-bottom-color: #b9c1b32b;
-  border-radius: 5px;
-  background: linear-gradient(180deg, #071821, #122a34);
-  box-shadow: inset 0 2px 5px #0005;
-}
-
-.kk-app .kk-shell .kk-console .kk-bet-button em {
-  color: #d9c692;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 9px;
-}
-
-.kk-app .kk-shell .kk-console .kk-bet-value b {
-  font-size: 22px;
-}
-
-.kk-app .kk-shell .kk-console .kk-bet-value svg {
-  flex: 0 0 auto;
-  color: var(--kk-brass, #b69a62);
-}
-
+.kk-app .kk-shell .kk-console .kk-stake-step,
 .kk-app .kk-shell .kk-console .kk-charge {
-  color: #a5b6bc;
-  font-family: "Source Sans 3", sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0;
+  position: absolute;
+  margin: 0;
 }
-
-/* A machined brass rim and enamel center replace the unrelated raster coin. */
-.kk-app .kk-shell .kk-console .kk-spin {
-  position: relative;
+.kk-app .kk-shell .kk-console .kk-menu-button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #a8bab529;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #294553, #0c202e);
+  color: #d6e2e3;
+  box-shadow:
+    inset 0 1px #abc3bf26,
+    0 2px 4px #0006;
+}
+.kk-app .kk-shell .kk-console .kk-speed-dot {
+  top: -2px;
+  right: -2px;
+  background: #dfc183;
+  border: 2px solid #122a39;
+  color: #092130;
+  font:
+    700 10px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-app .kk-shell .kk-console .kk-read {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 3px;
-  isolation: isolate;
-  border: 1px solid #efd9a0;
-  border-bottom-color: #79613b;
-  background: linear-gradient(
-    155deg,
-    #f0d99d,
-    #b59a62 33%,
-    #7d6744 70%,
-    #c1a571
-  );
-  box-shadow:
-    inset 0 1px 0 #fff4cfbf,
-    inset 0 -2px 0 #40311a,
-    0 4px 7px #0008;
-  color: var(--kk-brass-light, #e2c98c);
-  transition:
-    transform 100ms ease,
-    filter 100ms ease;
-}
-
-.kk-app .kk-shell .kk-console .kk-spin::before {
-  position: absolute;
-  z-index: -1;
-  inset: 6px;
-  border: 1px solid #eed39980;
-  border-bottom-color: #b1945e;
-  border-radius: 50%;
-  background: linear-gradient(155deg, #31484b, #172f36 55%, #0b202a);
-  box-shadow:
-    inset 0 2px 4px #020a0faa,
-    0 1px 0 #fae4ad88;
-  content: "";
-}
-
-.kk-app .kk-shell .kk-console .kk-spin-icon {
-  width: 30px;
-  height: 30px;
-  flex: 0 0 auto;
-  stroke-width: 2.4;
-  color: #f0d69a;
-}
-
-.kk-app .kk-shell .kk-console .kk-spin span {
-  color: #f1dfa9;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 15px;
-  letter-spacing: 1.1px;
-  text-shadow: 0 1px 1px #020a0f;
-}
-
-.kk-app .kk-shell .kk-console button:focus-visible {
-  outline: 2px solid #f2d99b;
-  outline-offset: 2px;
-}
-
-/* Focus stays inside the rim and does not collide with the cost caption. */
-.kk-app .kk-shell .kk-console .kk-spin:focus-visible {
-  outline-offset: -5px;
-}
-
-@media (hover: hover) {
-  .kk-app .kk-shell .kk-control-group > .kk-feature-button:not(:disabled):hover,
-  .kk-app .kk-shell .kk-console .kk-menu-button:not(:disabled):hover,
-  .kk-app .kk-shell .kk-console .kk-bet-button:not(:disabled):hover,
-  .kk-app .kk-shell .kk-console .kk-stake-step:not(:disabled):hover {
-    border-color: #dfc58a;
-  }
-
-  .kk-app .kk-shell .kk-console .kk-spin:not(:disabled):hover {
-    filter: brightness(1.08);
-  }
-}
-
-/* Compact desktop: fixed targets, paired totals, and a bounded bet input. */
-.kk-app .kk-shell[data-layout="wide"] .kk-console {
-  width: 100%;
-  justify-self: center;
-  height: 120px;
-  grid-template-columns: 44px minmax(128px, 1fr) minmax(140px, 1fr) 104px;
-  grid-template-rows: 46px 58px;
-  grid-template-areas: "menu balance win spin" "menu bet bet spin";
-  gap: 8px;
-  padding: 2px 12px;
-}
-
-.kk-app .kk-shell[data-framing="sides"] .kk-console {
-  grid-area: auto;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-balance,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win {
-  align-self: center;
   align-items: flex-start;
-  justify-content: center;
-  height: 46px;
+  gap: 4px;
   padding: 0;
-  gap: 3px;
+  border: 0;
+  border-radius: 0;
   text-align: left;
+  min-width: 0;
+  background: none;
 }
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win {
+.kk-app .kk-shell .kk-console .kk-last-win,
+.kk-app .kk-shell .kk-console .kk-bonus-win {
   align-items: flex-end;
   text-align: right;
 }
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-button,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-feature-context {
-  width: min(180px, 100%);
-  height: 48px;
-  justify-self: center;
-  flex-direction: row;
+.kk-app .kk-shell .kk-console[data-dock-layout="inline"] .kk-last-win,
+.kk-app .kk-shell .kk-console[data-dock-layout="inline"] .kk-bonus-win {
   align-items: center;
-  justify-content: space-between;
-  padding: 7px 12px;
-  gap: 12px;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-value {
-  width: auto;
-  gap: 8px;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin-area {
-  grid-template-columns: 100px;
-  grid-template-rows: 100px 12px;
-  row-gap: 2px;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin {
-  grid-area: 1 / 1;
-  width: 100px;
-  height: 100px;
-}
-
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-stake-step {
-  display: none;
-}
-
-/* Chosen from reel width, not the wider scene including its character columns. */
-.kk-app .kk-shell[data-layout="wide"] .kk-console[data-dock-layout="inline"] {
-  grid-template-columns: 44px minmax(152px, 1fr) minmax(154px, 1fr) 124px 196px;
-  grid-template-rows: 114px;
-  grid-template-areas: "menu balance win bet spin";
-  column-gap: 12px;
-  padding-inline: 14px;
-}
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-balance,
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-bonus-win,
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-last-win {
-  align-items: center;
-  height: 64px;
-  padding-inline: 8px;
-  border-left: 1px solid #b69a6233;
   text-align: center;
+}
+.kk-app .kk-shell .kk-console .kk-eyebrow {
+  display: flex;
+  align-items: baseline;
   gap: 5px;
+  color: #afc2cb;
+  font:
+    600 12px/12px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-bet-button,
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-feature-context {
-  width: 100%;
-  height: 64px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 8px 10px;
-  gap: 6px;
+.kk-app .kk-shell .kk-console .kk-eyebrow small {
+  color: #829ca9;
+  font:
+    400 9px/1 "Source Sans 3",
+    sans-serif;
+  letter-spacing: 0;
 }
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-bet-value {
-  width: 100%;
-  gap: 4px;
+.kk-app .kk-shell .kk-console .kk-read strong,
+.kk-app .kk-shell .kk-console .kk-bet-value b,
+.kk-app .kk-shell .kk-console .kk-feature-context strong {
+  color: #f4f2e9;
+  font:
+    600 26px/1 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-shadow: 0 2px 2px #0005;
 }
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-spin-area {
-  grid-template-columns: 44px 100px 44px;
-  column-gap: 4px;
-}
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-spin {
-  grid-area: 1 / 2;
-}
-
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-stake-step {
-  display: grid;
-}
-
-/* Desktop instruments read at the same distance as the large reel art. */
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-read .kk-eyebrow,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-button .kk-eyebrow {
-  font-size: 13px;
-  line-height: 13px;
-  color: #b8c8cd;
-}
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-balance strong {
-  font-size: 26px;
-}
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bonus-win strong,
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-last-win strong {
-  font-size: 28px;
+.kk-app .kk-shell .kk-console .kk-last-win strong,
+.kk-app .kk-shell .kk-console .kk-bonus-win strong {
+  color: #f7dca0;
   font-weight: 700;
 }
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-bet-value b {
-  font-size: 24px;
+.kk-app .kk-shell .kk-console .kk-stake-control,
+.kk-app .kk-shell .kk-console .kk-feature-context {
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #04111c, #0b2230);
+  box-shadow:
+    inset 0 2px 4px #0008,
+    inset 0 0 0 1px #728f9940,
+    0 1px #c3b58826;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  gap: 6px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+}
+.kk-app .kk-shell .kk-console .kk-bet-value {
+  width: auto;
+  gap: 5px;
+}
+.kk-app .kk-shell .kk-console .kk-bet-value svg {
+  color: #d1b575;
+  flex-shrink: 0;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button em {
+  color: #e9c987;
+  font:
+    600 9px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-app .kk-shell .kk-console .kk-stake-step {
+  display: grid;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #d1c69f;
+}
+.kk-app .kk-shell .kk-console[data-dock-layout="inline"] .kk-stake-step {
+  border-left: 1px solid #9aab9f24;
 }
 .kk-app
-  .kk-shell[data-layout="wide"]
+  .kk-shell
   .kk-console[data-dock-layout="inline"]
-  .kk-balance
-  strong {
-  font-size: 28px;
+  .kk-stake-step.is-plus {
+  border-bottom: 1px solid #9aab9f24;
 }
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-bonus-win
-  strong,
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-last-win
-  strong {
-  font-size: 32px;
+.kk-app .kk-shell .kk-console .kk-feature-context {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 2px;
 }
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout="inline"]
-  .kk-bet-value
-  b {
-  font-size: 26px;
+.kk-app .kk-shell .kk-console .kk-spin-area {
+  display: block;
 }
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout]
-  [data-long-amount="true"]
-  strong {
-  font-size: 24px;
-}
-.kk-app
-  .kk-shell[data-layout="wide"]
-  .kk-console[data-dock-layout]
-  [data-extra-long-amount="true"]
-  strong {
-  font-size: 20px;
-}
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin-icon {
-  width: 36px;
-  height: 36px;
-}
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-spin span {
-  font-size: 18px;
-  line-height: 18px;
-}
-.kk-app .kk-shell[data-layout="wide"] .kk-console .kk-charge {
-  font-size: 11px;
-  line-height: 12px;
-  color: #bdcbd0;
-}
-
-/* Phone: 38px totals + 4px separation + 88px controls inside a 144px rail. */
-.kk-app .kk-shell[data-layout="portrait"] .kk-console {
+.kk-app .kk-shell .kk-console .kk-spin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   width: 100%;
-  justify-self: center;
-  height: 144px;
-  padding: 6px;
-  grid-template-columns: 44px minmax(68px, 1fr) 80px;
-  grid-template-rows: 38px 88px;
-  grid-template-areas: "balance win win" "menu bet spin";
-  gap: 4px;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console::after {
-  position: absolute;
-  top: 47px;
-  right: 12px;
-  left: 12px;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    #b69a6200,
-    #b69a624a 20%,
-    #b69a624a 80%,
-    #b69a6200
+  height: 100%;
+  padding: 0;
+  gap: 2px;
+  border: 2px solid #ddc88b;
+  border-bottom-color: #75603a;
+  border-radius: 50%;
+  isolation: isolate;
+  background: conic-gradient(
+    from -35deg,
+    #f9e5ab,
+    #b99556 16%,
+    #e2c681 27%,
+    #6c542f 47%,
+    #d9ba77 67%,
+    #8e713e 79%,
+    #fae8b7
   );
+  box-shadow:
+    0 0 0 3px #091c28,
+    inset 0 0 0 1px #fce8b55c,
+    0 6px 9px #0009;
+  transition:
+    transform 110ms ease,
+    filter 150ms ease;
+}
+.kk-app .kk-shell .kk-console .kk-spin::before {
   content: "";
-  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  inset: 5px;
+  border: 1px solid #ecdca466;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      #d4bf8744 0deg 2deg,
+      transparent 2deg 15deg
+    ),
+    linear-gradient(150deg, #1d3849, #061723);
+  box-shadow: inset 0 2px 5px #0009;
 }
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance,
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win,
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win {
-  grid-area: 1 / 1 / 2 / -1;
-  width: calc(50% - 3px);
-  height: 38px;
-  padding: 0 2px;
+.kk-app .kk-shell .kk-console .kk-spin::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 12px;
+  border: 1px solid #9abcc02e;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 35% 18%,
+    #31515e,
+    #102a39 62%,
+    #071a27
+  );
+}
+.kk-app .kk-shell .kk-console .kk-spin-icon {
+  width: 41px;
+  height: 41px;
+  color: #f3e4b5;
+  stroke-width: 2.7;
+  filter: drop-shadow(0 2px 1px #0008);
+}
+.kk-app .kk-shell .kk-console .kk-spin span {
+  color: #e4d3a5;
+  font:
+    600 13px/13px "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 1.6px;
+  text-shadow: 0 1px 1px #000;
+}
+.kk-app .kk-shell .kk-console .kk-charge {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  color: #b8c8d0;
+  font:
+    600 11px/12px "Source Sans 3",
+    sans-serif;
+  text-shadow: 0 1px 3px #000;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-read,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-read {
   gap: 1px;
-  align-self: center;
 }
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance {
-  justify-self: start;
-  align-items: flex-start;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win,
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win {
-  justify-self: end;
-  align-items: flex-end;
-  text-align: right;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-read .kk-eyebrow {
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-eyebrow,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-eyebrow {
   font-size: 11px;
   line-height: 11px;
   letter-spacing: 0.7px;
 }
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance strong {
-  font-size: 24px;
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value b {
+  font-size: 22px;
 }
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win strong,
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win strong {
-  font-size: 26px;
-  font-weight: 700;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-button,
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-feature-context {
-  height: 56px;
-  padding: 5px 3px;
-  gap: 4px;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value {
-  gap: 2px;
-}
-
-.kk-app
-  .kk-shell[data-layout="portrait"]
-  .kk-console
-  .kk-bet-button
-  .kk-eyebrow {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin-area {
-  grid-template-columns: 76px;
-  grid-template-rows: 76px 10px;
-  row-gap: 2px;
-}
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin {
-  width: 76px;
-  height: 76px;
-  gap: 1px;
-}
-
 .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin-icon {
-  width: 27px;
-  height: 27px;
+  width: 31px;
+  height: 31px;
 }
-
 .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-spin span {
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 11px;
+  line-height: 11px;
+  letter-spacing: 1px;
 }
-
-.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-charge {
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-charge,
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-charge {
+  font-size: 10px;
   line-height: 10px;
 }
-
-/* Keep full balances legible; only unusually long figures use a smaller size. */
-.kk-app
-  .kk-shell[data-layout="portrait"]
-  .kk-console
-  [data-long-amount="true"]
-  strong {
-  font-size: 22px;
-  font-weight: 600;
-}
-@container game (max-width: 372px) {
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-extra-long-amount="true"]
-    strong {
-    font-size: 22px;
-  }
-}
-
-@container game (max-width: 348px) {
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win strong,
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win strong {
-    font-size: 24px;
-  }
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-extra-long-amount="true"]
-    strong {
-    font-size: 20px;
-  }
-}
-
-@container game (max-width: 340px) {
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value svg {
-    display: none;
-  }
-
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    strong[data-long-amount="true"],
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-long-amount="true"]
-    strong {
-    font-size: 20px;
-    letter-spacing: -0.4px;
-  }
-
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-extra-long-amount="true"]
-    strong {
-    font-size: 18px;
-    letter-spacing: -0.5px;
-  }
-}
-
-/* The renderer's 280px minimum is also used in very short portrait windows. */
-@container game (max-width: 294px) {
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance strong,
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win strong,
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win strong {
-    font-size: 22px;
-  }
-}
-
-@container game (max-width: 294px) {
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-long-amount="true"]
-    strong {
-    font-size: 18px;
-    letter-spacing: -0.4px;
-  }
-
-  .kk-app
-    .kk-shell[data-layout="portrait"]
-    .kk-console
-    [data-extra-long-amount="true"]
-    strong {
-    font-size: 16px;
-    letter-spacing: -0.5px;
-  }
-}
-
-/* Tablets retain the same material and align the full rail to their reels. */
-@container game (min-width: 560px) {
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console {
-    grid-template-columns: 44px minmax(128px, 1fr) minmax(140px, 1fr) 94px;
-    grid-template-areas: "menu balance win spin" "menu bet bet spin";
-    column-gap: 8px;
-  }
-
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console::after {
-    left: 64px;
-    right: 112px;
-  }
-
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-balance {
-    grid-area: balance;
-    width: 100%;
-  }
-
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bonus-win,
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-last-win {
-    grid-area: win;
-    width: 100%;
-  }
-
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-button,
-  .kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-feature-context {
-    width: min(180px, 100%);
-    justify-self: center;
-  }
-}
-
-/* The 172px side group retains its full 266px minimum including the launcher. */
-.kk-app .kk-shell[data-layout="landscape"] .kk-console {
-  grid-area: 1 / 1;
-  height: 100%;
-  padding: 8px 10px;
-  grid-template-rows: 36px 36px 44px 80px;
-  grid-template-areas: "balance balance" "win win" "bet menu" "spin spin";
-}
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-balance,
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bonus-win,
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-last-win {
-  flex-direction: column;
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-read {
   align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 0;
   text-align: center;
 }
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-read .kk-eyebrow {
-  font-size: 12px;
-  line-height: 12px;
-  letter-spacing: 0.5px;
-}
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bet-button,
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-feature-context {
-  height: 44px;
-  padding: 3px 4px;
-  flex-direction: column;
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bet-button {
   gap: 2px;
 }
-
-.kk-app
-  .kk-shell[data-layout="landscape"]
-  .kk-console
-  .kk-bet-button
-  .kk-eyebrow {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bet-value b {
+  font-size: 20px;
 }
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-bet-button em {
-  line-height: 1;
-}
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-spin-area {
-  grid-template-rows: 70px 10px;
-  row-gap: 0;
-}
-
 .kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-spin-icon {
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 }
-
 .kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-spin span {
-  font-size: 13px;
-  line-height: 13px;
-}
-
-.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-charge {
+  font-size: 10px;
   line-height: 10px;
+  letter-spacing: 0.7px;
 }
-
+.kk-app .kk-shell .kk-console button:disabled,
+.kk-app .kk-shell .kk-control-group .kk-feature-button:disabled {
+  opacity: 0.48;
+  filter: saturate(0.4);
+  cursor: default;
+}
+.kk-app .kk-shell .kk-console button:focus-visible,
+.kk-app .kk-shell .kk-control-group .kk-feature-button:focus-visible {
+  outline: 2px solid #f3dea8;
+  outline-offset: 3px;
+}
+.kk-app .kk-shell .kk-console .kk-spin:focus-visible {
+  outline-offset: 5px;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button:focus-visible,
+.kk-app .kk-shell .kk-console .kk-stake-step:focus-visible {
+  outline-offset: -3px;
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button:not(:disabled):active,
+.kk-app .kk-shell .kk-console button:not(:disabled):active {
+  transform: translateY(1px);
+}
+@media (hover: hover) {
+  .kk-app .kk-shell .kk-control-group .kk-feature-button:not(:disabled):hover,
+  .kk-app .kk-shell .kk-console .kk-spin:not(:disabled):hover {
+    filter: brightness(1.14);
+  }
+  .kk-app .kk-shell .kk-console .kk-bet-button:not(:disabled):hover,
+  .kk-app .kk-shell .kk-console .kk-stake-step:not(:disabled):hover,
+  .kk-app .kk-shell .kk-console .kk-menu-button:not(:disabled):hover {
+    background-color: #b4c6ce14;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .kk-app .kk-shell .kk-console button {
+  .kk-app .kk-shell .kk-control-group button {
     transition: none;
   }
 }
-
-.kk-app[data-reduced="1"] .kk-shell .kk-console button {
+.kk-app[data-reduced="1"] .kk-shell .kk-control-group button {
   transition: none;
+}
+/* Shared coordinate model places the eight controls; these rules only paint. */
+.kk-app .kk-stage .kk-shell[data-layout="landscape"] {
+  grid-template-columns: var(--control-left) var(--reel-width) var(--side-width);
+  grid-template-rows: var(--game-height);
+  column-gap: var(--dock-gap);
+}
+.kk-app .kk-stage .kk-shell[data-layout="landscape"] .kk-playfield {
+  grid-area: 1 / 2;
+  align-self: start;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-control-group {
+  grid-area: 1 / 1 / 2 / -1;
+  align-self: start;
+  pointer-events: none;
+  z-index: 3;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-control-group button {
+  pointer-events: auto;
+}
+.kk-app .kk-shell .kk-console .kk-utility-button,
+.kk-app .kk-shell .kk-console .kk-dock-ante {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid #829b963b;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #17343f, #071820);
+  color: #cededa;
+  box-shadow:
+    inset 0 1px #c3d8d21c,
+    0 2px 4px #0005;
+}
+.kk-app .kk-shell .kk-console .kk-turbo-button[data-speed="turbo"],
+.kk-app .kk-shell .kk-console .kk-turbo-button[data-speed="super"] {
+  color: #e6c681;
+  border-color: #c1a56880;
+}
+.kk-app .kk-shell .kk-console .kk-auto-button[aria-pressed="true"] {
+  color: #70d1c4;
+  border-color: #5ebca8;
+}
+.kk-app .kk-shell .kk-console .kk-auto-count {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  padding: 2px 4px;
+  border-radius: 8px;
+  background: #163e40;
+  color: #b7f1dc;
+  font:
+    600 11px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante {
+  flex-direction: column;
+  gap: 3px;
+  border-radius: 4px;
+  border-color: transparent;
+  background: none;
+  box-shadow: none;
+  font:
+    600 12px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante small {
+  color: #9ab1b9;
+  font:
+    400 10px/1 "Source Sans 3",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.kk-app .kk-shell .kk-console .kk-dock-ante[aria-pressed="true"] {
+  color: #f0d59a;
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button::before,
+.kk-app .kk-shell .kk-control-group .kk-feature-button::after {
+  clip-path: none;
+  border-radius: 50%;
+}
+.kk-app .kk-shell .kk-control-group .kk-feature-button svg {
+  width: 27px;
+  height: 27px;
+  color: #e4c378;
+}
+.kk-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button {
+  gap: 4px;
+}
+.kk-app .kk-shell .kk-console .kk-bet-button .kk-eyebrow {
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.kk-app .kk-shell .kk-console[data-dock-layout="side"] .kk-stake-step {
+  border-left: 1px solid #9aab9f24;
+}
+.kk-app .kk-shell .kk-console[data-dock-layout="side"] .kk-stake-step.is-plus {
+  border-bottom: 1px solid #9aab9f24;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-read {
+  gap: 1px;
+}
+.kk-app .kk-shell[data-layout="portrait"] .kk-console .kk-bet-value svg {
+  display: none;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-spin-icon {
+  width: 36px;
+  height: 36px;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-spin span {
+  font-size: 12px;
+  line-height: 12px;
+}
+.kk-app .kk-shell[data-layout="landscape"] .kk-console .kk-feature-context {
+  gap: 5px;
+}
+.kk-app .kk-summary-line strong,
+.kk-app .kk-purchase-confirm .kk-confirm-price,
+.kk-app .kk-auto-quote dd {
+  font-family: "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.kk-app .kk-auto-dialog {
+  width: min(420px, calc(100vw - 24px));
+}
+.kk-auto-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+}
+.kk-auto-options button,
+.kk-auto-actions button {
+  min-height: 44px;
+  border: 1px solid #708e9260;
+  border-radius: 5px;
+  background: #0b2733;
+  color: #dce9e5;
+  font:
+    600 16px/1 "Source Sans 3",
+    sans-serif;
+}
+.kk-auto-options button[aria-pressed="true"] {
+  color: #f0d79e;
+  border-color: #d4b777;
+  background: #27433f;
+}
+.kk-auto-quote {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+.kk-auto-quote div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.kk-auto-quote dt {
+  color: #98afb9;
+}
+.kk-auto-quote dd {
+  margin: 0;
+  color: #edf0e4;
+}
+.kk-auto-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+.kk-auto-actions button:last-child {
+  color: #132a32;
+  background: #d4b777;
+  border-color: #e3cb92;
+}
+.kk-auto-actions button:disabled {
+  opacity: 0.4;
+}
+.kk-app .kk-confirm-cost strong,
+.kk-app .kk-confirm-wallet dd {
+  font-family: "Source Sans 3", sans-serif;
+  font-variant-numeric: tabular-nums;
 }

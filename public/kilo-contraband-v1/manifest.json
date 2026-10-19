@@ -1,0 +1,227 @@
+{
+  "version": "kilo-contraband-v1",
+  "baseUrl": "/kilo-contraband-v1/",
+  "boundsConvention": "left,top,right,bottom; right and bottom exclusive; main visible bounds use alpha >12, preserve full source alpha",
+  "assets": {
+    "package-small": {
+      "file": "package-small.png",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        50,
+        335,
+        1211,
+        992
+      ],
+      "alphaBounds": [
+        25,
+        29,
+        1214,
+        1254
+      ],
+      "anchorPx": [
+        630.5,
+        663.5
+      ],
+      "bytes": 1141564,
+      "sha256": "180d2643f469dbfc2a5c10bd89fbbadd3b567d061391f71a2570a1a5e80f0bbc"
+    },
+    "package-medium": {
+      "file": "package-medium.png",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        27,
+        292,
+        1237,
+        1016
+      ],
+      "alphaBounds": [
+        0,
+        32,
+        1240,
+        1254
+      ],
+      "anchorPx": [
+        632.0,
+        654.0
+      ],
+      "bytes": 1379135,
+      "sha256": "8d18b857c34d0104245780fab078f1a7cf85fb98ad9bb109946b6a99c6c0163b"
+    },
+    "package-trophy": {
+      "file": "package-trophy.png",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        20,
+        203,
+        1236,
+        1113
+      ],
+      "alphaBounds": [
+        0,
+        9,
+        1240,
+        1254
+      ],
+      "anchorPx": [
+        628.0,
+        658.0
+      ],
+      "bytes": 1957986,
+      "sha256": "8ca2eaf0eb11884a1f574ea5d98dea87ace15f893686eea821f7a4f392c93729"
+    },
+    "package-king": {
+      "file": "package-king.png",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        15,
+        152,
+        1237,
+        1095
+      ],
+      "alphaBounds": [
+        0,
+        9,
+        1240,
+        1254
+      ],
+      "anchorPx": [
+        626.0,
+        623.5
+      ],
+      "bytes": 2079745,
+      "sha256": "38e0093898b483f0645cb6070a1566f1297c2f392c237454832585ac1313df3e"
+    },
+    "scatter-king": {
+      "file": "scatter-king.png",
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        32,
+        26,
+        1223,
+        1220
+      ],
+      "alphaBounds": [
+        0,
+        21,
+        1236,
+        1254
+      ],
+      "anchorPx": [
+        627.5,
+        623.0
+      ],
+      "bytes": 2229024,
+      "sha256": "379f284ce68a55325a85fb14fbbb94b85d569b9cb58c3b1ba7bd5f6440daf14a"
+    },
+    "feature-stash": {
+      "file": "feature-stash.png",
+      "width": 1536,
+      "height": 1024,
+      "bounds": [
+        178,
+        6,
+        1359,
+        849
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        1506,
+        952
+      ],
+      "anchorPx": [
+        768.5,
+        427.5
+      ],
+      "bytes": 2162953,
+      "sha256": "c559d097e8c5321352da40b9029fa46d60b72f3ca93cc01cab62e9c9b1cbb890"
+    },
+    "feature-chopper": {
+      "file": "feature-chopper.png",
+      "width": 1536,
+      "height": 1024,
+      "bounds": [
+        66,
+        75,
+        1489,
+        906
+      ],
+      "alphaBounds": [
+        0,
+        19,
+        1530,
+        1008
+      ],
+      "anchorPx": [
+        777.5,
+        490.5
+      ],
+      "bytes": 1958841,
+      "sha256": "47dd63dc8435b531c2d232508f2c3323b4edf937d0a3047599c2aea69fbb2cf1"
+    }
+  },
+  "tiers": [
+    {
+      "key": "small",
+      "values": [
+        2,
+        5
+      ],
+      "asset": "package-small",
+      "box": [
+        0.64,
+        0.46
+      ],
+      "centerY": 0.37
+    },
+    {
+      "key": "medium",
+      "values": [
+        10,
+        15,
+        20,
+        25
+      ],
+      "asset": "package-medium",
+      "box": [
+        0.74,
+        0.56
+      ],
+      "centerY": 0.37
+    },
+    {
+      "key": "trophy",
+      "values": [
+        50,
+        100,
+        200
+      ],
+      "asset": "package-trophy",
+      "box": [
+        0.8,
+        0.7
+      ],
+      "centerY": 0.37
+    },
+    {
+      "key": "king",
+      "values": [
+        500,
+        1000,
+        2000,
+        5000
+      ],
+      "asset": "package-king",
+      "box": [
+        0.92,
+        0.72
+      ],
+      "centerY": 0.37
+    }
+  ]
+}

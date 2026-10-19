@@ -1,20 +1,21 @@
 /* Feature room: one opaque surface, a small choice set and full-width artwork. */
 .kk-app .kk-dialog.kk-purchases {
   width: min(920px, 100%);
-  border: 1px solid #b69a6270;
-  border-top-color: #dec68c99;
+  border: 2px solid #ad925b;
+  border-top-color: #e4cb92;
   border-radius: 12px;
-  background: #08151d;
+  background: #071820;
   box-shadow:
     0 24px 80px #000b,
-    inset 0 1px #f5e8bd18;
+    inset 0 0 0 3px #020d13,
+    inset 0 4px #98b7a63b;
 }
 .kk-app .kk-dialog.kk-purchases .kk-dialog-head {
   height: 60px;
   min-height: 60px;
   padding: 7px 20px;
   border-bottom: 1px solid #b69a622e;
-  background: #152830;
+  background: linear-gradient(#20383d, #10262d);
   text-shadow: none;
 }
 .kk-app .kk-dialog.kk-purchases .kk-dialog-head strong {
@@ -86,9 +87,9 @@
 }
 .kk-app .kk-purchases .kk-feature-card {
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--feature-accent) 42%, #162b33);
+  border: 1px solid #a48b55;
   border-radius: 8px;
-  background: #0d2029;
+  background: #0b2028;
   box-shadow:
     inset 0 1px #fff2,
     0 5px 14px #0005;
@@ -196,7 +197,12 @@
   font-size: 29px;
 }
 .kk-app .kk-purchases .kk-feature-card-copy {
+  display: grid;
+  grid-template-rows: auto auto minmax(32px, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
   padding: 0 16px 14px;
+  background: linear-gradient(#0d2029, #071820);
   text-align: left;
   font-family: "Source Sans 3", sans-serif;
 }
@@ -204,6 +210,7 @@
   min-height: 40px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 2px 10px;
@@ -223,16 +230,39 @@
   font-variant-numeric: tabular-nums;
 }
 .kk-app .kk-purchases .kk-feature-offer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   min-height: 52px;
   align-items: flex-start;
   justify-content: center;
   margin: 0;
   gap: 2px;
 }
+.kk-app .kk-purchases .kk-feature-offer[data-purchase="true"] {
+  min-height: 84px;
+  padding: 9px 12px;
+  border: 1px solid #a48b558f;
+  border-radius: 5px;
+  background: linear-gradient(#040e14, #0c222a);
+  box-shadow:
+    inset 0 2px 2px #0008,
+    0 1px #e8d1a124;
+}
+.kk-app .kk-purchases .kk-feature-price-label {
+  color: #d8e2d6;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
 .kk-app .kk-purchases .kk-feature-offer > b {
   color: #ffe7b4;
-  font-size: 28px;
-  line-height: 30px;
+  font-size: clamp(22px, 6vw, 28px);
+  line-height: 32px;
+  white-space: normal;
+  overflow-wrap: anywhere;
   font-variant-numeric: tabular-nums;
 }
 .kk-app .kk-purchases .kk-feature-offer small {
@@ -244,15 +274,18 @@
   color: #a5b6bc;
 }
 .kk-app .kk-purchases .kk-feature-availability {
-  min-height: 24px;
-  padding-block: 3px;
+  min-height: 32px;
+  padding-block: 0;
+  align-self: start;
 }
+
 .kk-app .kk-purchases .kk-feature-availability .kk-unavailable {
   margin: 0;
-  color: #e7bfb0;
-  font-size: 12px;
-  line-height: 16px;
-  overflow-wrap: anywhere;
+  color: #e8d5bc;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .kk-app .kk-purchases .kk-feature-action {
   min-height: 46px;
@@ -314,7 +347,7 @@
 }
 .kk-app .kk-purchases .kk-ante-feature {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 94px;
+  grid-template-columns: minmax(0, 1fr) 124px;
   min-height: 58px;
   gap: 12px;
   margin: 0;
@@ -339,6 +372,7 @@
   color: #a5b6bc;
 }
 .kk-app .kk-purchases .kk-ante-action {
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -524,7 +558,7 @@
     min-height: 370px;
   }
   .kk-app .kk-purchases .kk-ante-feature {
-    grid-template-columns: minmax(0, 1fr) 78px;
+    grid-template-columns: minmax(0, 1fr) 104px;
     gap: 8px;
     margin-top: 0;
     padding: 6px 8px;
@@ -603,4 +637,113 @@
 }
 .kk-app[data-reduced="1"] .kk-purchases .kk-feature-card {
   transition: none;
+}
+
+/* Responsive live finish. Keep illustration, price and decision separate;
+   panel content scrolls while its header and confirmation footer stay fixed. */
+.kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-card {
+  background: #071820;
+  border-color: var(--kk-brass-shade);
+  border-top-color: var(--kk-brass);
+  box-shadow: inset 0 0 0 1px #020c12;
+}
+.kk-app[data-material="marina"]
+  .kk-dialog.kk-purchases
+  .kk-feature-offer[data-purchase="true"] {
+  background: #020c12;
+  box-shadow: inset 0 1px #203c40;
+}
+.kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-utilities {
+  background: #10262d;
+  border-color: var(--kk-brass-shade);
+  box-shadow: none;
+}
+.kk-app[data-material="marina"]
+  .kk-dialog.kk-purchases
+  :is(.kk-feature-action, .kk-feature-tabs button[aria-selected="true"]) {
+  background: #174438;
+  border-color: var(--kk-teal);
+  color: #fff8e8;
+}
+.kk-app[data-material="marina"]
+  .kk-dialog.kk-purchases
+  .kk-feature-action:disabled {
+  background: #071820;
+  border-color: var(--kk-brass);
+  color: #e5ce9e;
+  box-shadow: none;
+}
+@media (max-width: 620px) {
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-hero {
+    height: clamp(128px, 22dvh, 180px);
+    min-height: 128px;
+  }
+  .kk-app[data-material="marina"]
+    .kk-dialog.kk-purchases
+    .kk-feature-card-copy {
+    padding: 3px 12px 12px;
+    gap: 10px;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-tabs {
+    margin-bottom: 10px;
+  }
+  .kk-app[data-material="marina"]
+    .kk-dialog.kk-purchases
+    .kk-feature-utilities {
+    margin-top: 10px;
+    padding: 8px;
+  }
+}
+@media (max-width: 390px) {
+  .kk-app[data-material="marina"]
+    .kk-dialog.kk-purchases
+    .kk-feature-decision[data-unavailable="true"] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-features-body {
+    padding: 10px 12px;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-tabs {
+    margin-bottom: 8px;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-gallery {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-hero {
+    height: 100%;
+    min-height: 180px;
+    margin: 0;
+  }
+  .kk-app[data-material="marina"]
+    .kk-dialog.kk-purchases
+    .kk-feature-card-copy {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-feature-pager {
+    display: flex;
+    min-height: 44px;
+    margin-top: 6px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .kk-app[data-material="marina"] .kk-dialog.kk-purchases .kk-confirm-art {
+    height: 100px;
+  }
 }

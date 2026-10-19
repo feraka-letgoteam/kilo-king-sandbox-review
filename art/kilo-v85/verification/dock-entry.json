@@ -1,0 +1,102 @@
+{
+  "sourceFingerprint": "e4396d0638ddf2cbf24ef9e7e314b18c67cdb69e82f1edda63edfaafac5dda1e",
+  "method": "Actual entry controller, instrumented Pixi; no browser-layout claim.",
+  "results": [
+    {
+      "speed": "normal",
+      "reduced": false,
+      "action": "resize",
+      "authoredFrames": 5,
+      "durationMs": 1136,
+      "passed": true
+    },
+    {
+      "speed": "normal",
+      "reduced": false,
+      "action": "skip",
+      "authoredFrames": 2,
+      "durationMs": 144,
+      "passed": true
+    },
+    {
+      "speed": "normal",
+      "reduced": true,
+      "action": "resize",
+      "authoredFrames": 1,
+      "durationMs": 576,
+      "passed": true
+    },
+    {
+      "speed": "normal",
+      "reduced": true,
+      "action": "skip",
+      "authoredFrames": 1,
+      "durationMs": 144,
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "reduced": false,
+      "action": "resize",
+      "authoredFrames": 5,
+      "durationMs": 672,
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "reduced": false,
+      "action": "skip",
+      "authoredFrames": 2,
+      "durationMs": 144,
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "reduced": true,
+      "action": "resize",
+      "authoredFrames": 1,
+      "durationMs": 496,
+      "passed": true
+    },
+    {
+      "speed": "turbo",
+      "reduced": true,
+      "action": "skip",
+      "authoredFrames": 1,
+      "durationMs": 144,
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "reduced": false,
+      "action": "resize",
+      "authoredFrames": 5,
+      "durationMs": 672,
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "reduced": false,
+      "action": "skip",
+      "authoredFrames": 2,
+      "durationMs": 144,
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "reduced": true,
+      "action": "resize",
+      "authoredFrames": 1,
+      "durationMs": 496,
+      "passed": true
+    },
+    {
+      "speed": "super",
+      "reduced": true,
+      "action": "skip",
+      "authoredFrames": 1,
+      "durationMs": 144,
+      "passed": true
+    }
+  ]
+}
