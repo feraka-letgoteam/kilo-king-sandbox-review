@@ -1,0 +1,21 @@
+name: Restore verified Kilo King v85 source
+on:
+  push:
+    branches: [main]
+    paths: [checkpoints/v85/manifest.json]
+permissions:
+  contents: write
+concurrency:
+  group: kilo-v85-source-import
+  cancel-in-progress: false
+jobs:
+  restore:
+    if: github.repository == 'feraka-letgoteam/kilo-king-sandbox-review'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+      - name: Restore exact source and preserve Git history
+        run: python3 checkpoints/v85/finalize.py
