@@ -31,6 +31,7 @@ export const GENERAL_DISCLAIMER =
 
 type Text = (value: string) => string;
 type Text2 = (a: string, b: string) => string;
+type Text4 = (a: string, b: string, c: string, d: string) => string;
 
 export const COPY = {
   // Shared units and labels
@@ -369,6 +370,52 @@ export const COPY = {
     "One spin. Floor it: max win or nothing.",
   ),
   "card.tapToContinue": pair("TAP TO CONTINUE", "TAP TO CONTINUE"),
+  // Server (RGS) errors. Shown in a modal; keep each to one short sentence.
+  "rgs.error.session": pair(
+    "Your session has expired. Reload the game to continue.",
+    "Your session has expired. Reload the game to continue.",
+  ),
+  "rgs.error.balance": pair(
+    "Not enough balance for this bet.",
+    "Not enough balance for this play.",
+  ),
+  "rgs.error.rateLimited": pair(
+    "Too many requests. Wait a moment, then try again.",
+    "Too many requests. Wait a moment, then try again.",
+  ),
+  "rgs.error.paused": pair(
+    "Play is paused right now. Please try again later.",
+    "Play is paused right now. Please try again later.",
+  ),
+  "rgs.error.generic": pair(
+    "Something went wrong. Reload the game to finish any unfinished round.",
+    "Something went wrong. Reload the game to finish any unfinished round.",
+  ),
+  "rgs.error.badLaunch": pair(
+    "This game link is not valid. Relaunch the game from the lobby.",
+    "This game link is not valid. Relaunch the game from the lobby.",
+  ),
+  // Bet Replay (replay=true). No path into live play from these screens.
+  "replay.play": pair("PLAY", "PLAY"),
+  "replay.playAgain": pair("PLAY AGAIN", "PLAY AGAIN"),
+  "replay.loading": pair("Loading replay…", "Loading replay…"),
+  /** (mode, base amount, real cost, win), amounts already formatted with the server currency. */
+  "replay.result": pair<Text4>(
+    (mode, base, cost, win) => `${mode}: ${base} · REAL COST: ${cost} · WIN: ${win}`,
+    (mode, base, cost, win) => `${mode}: ${base} · REAL COST: ${cost} · WIN: ${win}`,
+  ),
+  "replay.error.notFound": pair(
+    "This round could not be found.",
+    "This round could not be found.",
+  ),
+  "replay.error.unavailable": pair(
+    "Replay unavailable. Please try again.",
+    "Replay unavailable. Please try again.",
+  ),
+  "replay.error.incomplete": pair(
+    "This replay link is incomplete.",
+    "This replay link is incomplete.",
+  ),
 } satisfies Record<string, CopyPair<unknown>>;
 
 export type CopyKey = keyof typeof COPY;
