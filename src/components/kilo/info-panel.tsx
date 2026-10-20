@@ -180,14 +180,10 @@ export function InfoPanel({
               <p>{t("info.freeSpins")}</p>
             </FeatureRow>
             <FeatureRow
-              title="Collector meter & retriggers"
+              title={t("info.meter.title")}
               image={artUrl(ART.splash)}
             >
-              <p>
-                In Dockside Catch, every fisherman advances the meter after its spin. At 4, 8 and
-                12 total collectors, each milestone adds 10 free spins and
-                raises the multiplier for the next spin.
-              </p>
+              <p>{t("info.meter.body")}</p>
               <ol
                 className="kk-info-ladder"
                 aria-label="Collection multiplier progression"
@@ -199,11 +195,10 @@ export function InfoPanel({
                   </li>
                 ))}
               </ol>
-              <p>
-                A milestone reached during a collection does not increase that
-                collection. No further retriggers are awarded after ×10. The
-                meter resets when the feature ends.
-              </p>
+              <p>{t("info.meter.after")}</p>
+            </FeatureRow>
+            <FeatureRow title={t("info.upgrades.title")} image={artUrl(ART.splash)}>
+              <p>{t("info.upgrades.body")}</p>
             </FeatureRow>
             <FeatureRow title="Marked cargo" image={CONTRABAND_ROOT + PACKAGE_META["package-king"].file}>
               <p>When a Dockside Catch spin has packages but no fisherman, the highest-value eligible package may be marked. Its position and printed value survive exactly one additional spin. A collector on that spin collects it normally; otherwise it expires. The same package cannot renew its hold; a different package may then be marked. The hook does not shift a reserved package.</p>
@@ -298,7 +293,7 @@ export function InfoPanel({
               <p className="kk-info-muted">{t("info.rtp.note")}</p>
               <h3>Maximum win</h3>
               <p>
-                The overall maximum total round payout is{" "}
+                {t("info.max.overall")}{" "}
                 <strong>
                   {amount(SPLASH_MAX_MULT)}
                   {t("info.max.theBaseBet")}
@@ -316,11 +311,8 @@ export function InfoPanel({
                 ))}
               </dl>
               <p>
-                {t("info.max.atCurrent")} <strong>{amount(stake)}</strong>,
-                the overall maximum total round payout is <strong>{amount(cap)}</strong>
-                . This includes all line wins, scatter wins and collections.
-                Reaching the mode's cap ends the round, including remaining free spins,
-                and awards no more than the cap.
+                {t("info.max.atCurrent")} <strong>{amount(stake)}</strong>{t("info.max.atCurrentTail")} <strong>{amount(cap)}</strong>
+                . {t("info.max.includes")}
               </p>
               <h3>Round breakdown</h3>
               <dl className="kk-info-breakdown">
@@ -355,12 +347,16 @@ export function InfoPanel({
             className="kk-info-section"
             aria-labelledby="kk-info-controls-title"
           >
-            <h2 id="kk-info-controls-title">Controls</h2>
+            <h2 id="kk-info-controls-title">{t("info.controls.title")}</h2>
             <dl className="kk-info-controls">
+              <div>
+                <dt>{t("info.controls.readouts.label")}</dt>
+                <dd>{t("info.controls.readouts")}</dd>
+              </div>
               <div>
                 <dt>
                   <RotateCw aria-hidden="true" />
-                  Spin / Spacebar
+                  {t("info.controls.spin.label")}
                 </dt>
                 <dd>{t("info.controls.spin")}</dd>
               </div>
@@ -374,57 +370,44 @@ export function InfoPanel({
               <div>
                 <dt>
                   <RefreshCw aria-hidden="true" />
-                  Auto
+                  {t("info.controls.auto.label")}
                 </dt>
                 <dd>{t("info.controls.auto")}</dd>
               </div>
               <div>
                 <dt>
                   <Zap aria-hidden="true" />
-                  Speed
+                  {t("info.controls.speed.label")}
                 </dt>
-                <dd>
-                  Normal, Turbo and Super turbo change presentation speed only.
-                  Use the lightning control, Auto screen or Game settings.
-                </dd>
+                <dd>{t("info.controls.speed")}</dd>
               </div>
               <div>
                 <dt>
                   <FeatureMark />
-                  Features
+                  {t("info.controls.features.label")}
                 </dt>
                 <dd>{t("info.controls.features")}</dd>
               </div>
               <div>
                 <dt>
                   <Menu aria-hidden="true" />
-                  Menu
+                  {t("info.controls.menu.label")}
                 </dt>
-                <dd>
-                  Opens Info, Music and Sound. Music and Sound have separate
-                  controls. Game settings includes speed and motion preferences.
-                </dd>
+                <dd>{t("info.controls.menu")}</dd>
               </div>
               <div>
                 <dt>
                   <Volume2 aria-hidden="true" />
-                  Audio
+                  {t("info.controls.audio.label")}
                 </dt>
-                <dd>
-                  Toggle music and sound effects independently in the menu.
-                  Unavailable audio controls remain disabled until audio is
-                  ready.
-                </dd>
+                <dd>{t("info.controls.audio")}</dd>
               </div>
               <div>
                 <dt>
                   <Settings2 aria-hidden="true" />
-                  Availability
+                  {t("info.controls.availability.label")}
                 </dt>
-                <dd>
-                  Some controls can be unavailable for your session. Small
-                  popout views keep Auto and speed options in Game settings.
-                </dd>
+                <dd>{t("info.controls.availability")}</dd>
               </div>
             </dl>
             <button

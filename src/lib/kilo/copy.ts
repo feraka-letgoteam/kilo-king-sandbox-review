@@ -116,7 +116,7 @@ export const COPY = {
   ),
   "feature.getawayDetail": pair(
     "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base bet, starts fresh and pays either 25,000× or zero. No free spins, secondary gamble or partial award. Activation itself is free; exit between spins.",
-    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base play, starts fresh and wins either 25,000× or zero. No free spins, second chance or partial award. Activation itself is free; exit between spins.",
+    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base play, starts fresh and wins either 25,000× or zero. No free spins, second chance or partial award. Activation itself is free; exit after any spin.",
   ),
   "feature.mysteryDetail": pair<Text>(
     (odds) => `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base bet. Super Yacht Stash opens with a ×25 VS that always wins its reel. ${odds}.`,
@@ -130,7 +130,7 @@ export const COPY = {
   ),
   "takeover.getawayConfirmation": pair(
     "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base bet and returns either 25,000× or zero. Each spin starts fresh. Exit the mode at any time between spins.",
-    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base play and returns either 25,000× or zero. Each spin starts fresh. Exit the mode at any time between spins.",
+    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base play and returns either 25,000× or zero. Each spin starts fresh. Exit the mode after any spin.",
   ),
   "takeover.mysteryConfirmation": pair<Text>(
     (odds) => `Super Yacht opens with a ×25 VS that always wins its reel. ${odds}. One purchase; no additional charge for the selected bonus.`,
@@ -218,7 +218,7 @@ export const COPY = {
   ),
   "info.modeDesc.getaway": pair(
     "Activate the mode at no charge, then press Spin for each paid attempt. Each spin costs 1,000× the base bet and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A boat that stalls short pays zero and resets, so every spin starts fresh with nothing carried over; a full boat pays the max win. No free spins or partial prize. Exit the mode between spins.",
-    "Activate the mode at no charge, then press Spin for each attempt. Each spin costs 1,000× the base play and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A boat that stalls short wins zero and resets, so every spin starts fresh with nothing carried over; a full boat earns the max win. No free spins or partial prize. Exit the mode between spins.",
+    "Activate the mode at no charge, then press Spin for each attempt. Each spin costs 1,000× the base play and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A boat that stalls short wins zero and resets, so every spin starts fresh with nothing carried over; a full boat earns the max win. No free spins or partial prize. Exit the mode after any spin.",
   ),
   "info.wild.substitutes": pair(
     "In the base game and Dockside Catch, the fisherman substitutes for every paying line symbol, but never for a KING scatter. A full line of fishermen pays the tackle-case award.",
@@ -238,7 +238,7 @@ export const COPY = {
   ),
   "info.scatter.anywhere": pair(
     "The KING crown is the only scatter. Each reel can count once. Scatter wins pay anywhere on the final base-game screen, independently of paylines.",
-    "The KING crown is the only scatter. Each reel can count once. Scatter wins count anywhere on the final base-game screen, independently of paylines.",
+    "The KING crown is the only scatter. Each reel can count once. Scatter wins count anywhere on the final base-game screen, independently of win lines.",
   ),
   "info.scatter.respin": pair(
     "Exactly two scatter reels lock while the other three reels respin once. The final screen determines the line wins, scatter award and any free spins. Purchased features do not pay scatter awards.",
@@ -246,7 +246,7 @@ export const COPY = {
   ),
   "info.freeSpins": pair(
     "Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature opens with a ×25 VS on reel one that always wins its reel. Dockside Catch and Yacht Stash have direct buys; Super Yacht is available through five scatters or a Mystery Bonus buy. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
-    "Features use the triggering base play with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature opens with a ×25 VS on reel one that always wins its reel. Dockside Catch and Yacht Stash can be started directly as feature plays; Super Yacht is available through five scatters or a Mystery Bonus feature play. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
+    "Features use the triggering base play with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature opens with a ×25 VS on reel one that always wins its reel. Dockside Catch and Yacht Stash can be started directly as feature plays; Super Yacht is available through five scatters or a Mystery Bonus feature play. Yacht uses the existing ten win lines with sticky VS wilds. The Getaway has a single binary result.",
   ),
   "info.vs.progression": pair(
     "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead opens the very first spin with a ×25 VS on reel one that always wins its reel; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× payout. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.",
@@ -306,6 +306,58 @@ export const COPY = {
     "The crown-and-hook control opens the feature catalogue and Ante setting. Review the price and confirm before buying a feature.",
     "The crown-and-hook control opens the feature catalogue and Ante setting. Review the price and confirm before playing a feature.",
   ),
+  // Collector meter, retriggers and entry upgrades (D7).
+  "info.meter.title": pair("Collector meter & retriggers", "Collector meter & retriggers"),
+  "info.meter.body": pair(
+    "In Dockside Catch, every fisherman advances the meter after its spin. At 4, 8 and 12 total collectors, each milestone is a retrigger: it adds 10 free spins and raises the multiplier for the next spin.",
+    "In Dockside Catch, every fisherman advances the meter after its spin. At 4, 8 and 12 total collectors, each milestone is a retrigger: it adds 10 free spins and raises the multiplier for the next spin.",
+  ),
+  "info.meter.after": pair(
+    "A milestone reached during a collection does not increase that collection. No further retriggers are awarded after ×10. The meter resets when the feature ends.",
+    "A milestone reached during a collection does not increase that collection. No further retriggers are awarded after ×10. The meter resets when the feature ends.",
+  ),
+  "info.upgrades.title": pair("Feature upgrades", "Feature upgrades"),
+  "info.upgrades.body": pair(
+    "Dockside Catch can start with upgrades, shown on its intro card: More packages, More fishermen, More tools, Starts one level higher and +2 spins. +2 spins adds 2 spins to the starting award and 2 more to every retrigger, so each milestone then adds 12 free spins instead of 10. Upgrades last only for that feature and are part of the recorded result.",
+    "Dockside Catch can start with upgrades, shown on its intro card: More packages, More fishermen, More tools, Starts one level higher and +2 spins. +2 spins adds 2 spins to the starting award and 2 more to every retrigger, so each milestone then adds 12 free spins instead of 10. Upgrades last only for that feature and are part of the recorded result.",
+  ),
+  // Maximum win paragraph (social: no "payout").
+  "info.max.overall": pair("The overall maximum total round payout is", "The overall maximum total round win is"),
+  "info.max.atCurrentTail": pair(", the overall maximum total round payout is", ", the overall maximum total round win is"),
+  "info.max.includes": pair(
+    "This includes all line wins, scatter wins and collections. Reaching the mode's cap ends the round, including remaining free spins, and awards no more than the cap.",
+    "This includes all line wins, scatter wins and collections. Reaching the mode's cap ends the round, including remaining free spins, and awards no more than the cap.",
+  ),
+  // Controls (D8).
+  "info.controls.title": pair("Controls", "Controls"),
+  "info.controls.readouts.label": pair("Balance & Win", "Balance & Win"),
+  "info.controls.readouts": pair(
+    "BALANCE shows your available balance. WIN shows the total won in the current round and counts up to the final amount.",
+    "BALANCE shows your available balance. WIN shows the total won in the current round and counts up to the final amount.",
+  ),
+  "info.controls.speed.label": pair("Speed", "Speed"),
+  "info.controls.speed": pair(
+    "Normal, Turbo and Super turbo change presentation speed only. Use the lightning control, Auto screen or Game settings.",
+    "Normal, Turbo and Super turbo change presentation speed only. Use the lightning control, Auto screen or Game settings.",
+  ),
+  "info.controls.menu.label": pair("Menu", "Menu"),
+  "info.controls.menu": pair(
+    "Opens Info, Music and Sound. Music and Sound have separate controls. Game settings includes speed and motion preferences.",
+    "Opens Info, Music and Sound. Music and Sound have separate controls. Game settings includes speed and motion preferences.",
+  ),
+  "info.controls.audio.label": pair("Audio", "Audio"),
+  "info.controls.audio": pair(
+    "Toggle music and sound effects independently in the menu. Unavailable audio controls remain disabled until audio is ready.",
+    "Toggle music and sound effects independently in the menu. Unavailable audio controls remain disabled until audio is ready.",
+  ),
+  "info.controls.availability.label": pair("Availability", "Availability"),
+  "info.controls.availability": pair(
+    "Some controls can be unavailable for your session. Small popout views keep Auto and speed options in Game settings.",
+    "Some controls can be unavailable for your session. Small popout views keep Auto and speed options in Game settings.",
+  ),
+  "info.controls.features.label": pair("Features", "Features"),
+  "info.controls.auto.label": pair("Auto", "Auto"),
+  "info.controls.spin.label": pair("Spin / Spacebar", "Spin / Spacebar"),
   // Return to player (info screen). Candidate targets, not certified Engine RTP.
   "info.rtp.intro": pair(
     "Verified theoretical RTP is not yet available for this sandbox.",
