@@ -139,7 +139,7 @@
   #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { height:56px; }
   #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:42px; }
   #kilo-features-takeover .kf-card-copy { padding-top:6px; }
-  #kilo-features-takeover .kf-kicker { font-size:9px; line-height:11px; margin-bottom:2px; }
+  #kilo-features-takeover .kf-kicker { font-size:10px; line-height:12px; margin-bottom:2px; }
   #kilo-features-takeover .kf-card h2 { font-size:22px; line-height:23px; }
   #kilo-features-takeover .kf-summary { font-size:11px; line-height:14px; margin-top:4px; }
   #kilo-features-takeover .kf-purchase-row { padding-top:5px; gap:5px; }
@@ -168,4 +168,77 @@
   #kilo-features-takeover [data-reduced=false] .kf-card:nth-child(2) { animation-delay:35ms; }
   #kilo-features-takeover [data-reduced=false] .kf-card:nth-child(3) { animation-delay:70ms; }
   @keyframes kf-deck-in { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+}
+/* v88 batch 3b: legibility floor. Kickers are never under 10px. */
+/* v88 batch 3b: 1024x576-class desktop. Shorter art so price + Play are above the fold. */
+@media(min-width:601px) and (min-height:501px) and (max-height:640px) {
+  #kilo-features-takeover .kf-shell { gap:10px; padding-top:12px; padding-bottom:12px; }
+  #kilo-features-takeover .kf-ante { min-height:64px; padding-block:2px; }
+  #kilo-features-takeover .kf-ante-emblem { height:64px; }
+  #kilo-features-takeover .kf-ante-emblem img { height:76px; }
+  #kilo-features-takeover .kf-card { grid-template-rows:84px minmax(80px,auto) auto; }
+  #kilo-features-takeover .kf-art, #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { height:84px; }
+  #kilo-features-takeover .kf-art-title { font-size:44px; }
+  #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:52px; }
+  #kilo-features-takeover .kf-card-copy { padding-top:8px; }
+  #kilo-features-takeover .kf-card h2 { font-size:24px; line-height:25px; }
+  #kilo-features-takeover .kf-summary { font-size:13px; line-height:16px; margin-top:4px; }
+  #kilo-features-takeover .kf-purchase-row { padding-top:8px; gap:6px; }
+  #kilo-features-takeover .kf-price strong { font-size:22px; line-height:24px; }
+}
+/* v88 batch 3b: popout S (400x225). One card per view with Prev/Next; no
+ * summaries; the confirm dialog drops its art and starts at the top. */
+#kilo-features-takeover .kf-pager { display:none; }
+@media(max-height:260px) {
+  #kilo-features-takeover .kf-shell { padding:4px 8px; gap:4px; }
+  #kilo-features-takeover .kf-header h1 { font-size:20px; }
+  #kilo-features-takeover .kf-catalogue { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; grid-template-rows:1fr; gap:6px; align-items:stretch; height:100%; }
+  #kilo-features-takeover .kf-catalogue > .kf-ante, #kilo-features-takeover .kf-catalogue > .kf-grid { grid-column:2; grid-row:1; }
+  #kilo-features-takeover .kf-catalogue[data-page=ante] > .kf-grid, #kilo-features-takeover .kf-catalogue:not([data-page=ante]) > .kf-ante { display:none; }
+  #kilo-features-takeover .kf-pager { display:contents; }
+  #kilo-features-takeover .kf-pager > button:first-of-type { grid-column:1; grid-row:1; align-self:center; }
+  #kilo-features-takeover .kf-pager > button:last-of-type { grid-column:3; grid-row:1; align-self:center; }
+  #kilo-features-takeover .kf-pager > button { width:44px; height:44px; display:grid; place-items:center; border:1px solid #7d898a; border-radius:50%; background:#111b21; color:#fff8ed; padding:0; }
+  #kilo-features-takeover .kf-pager > button:disabled { opacity:.35; }
+  #kilo-features-takeover .kf-pager-status { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+  #kilo-features-takeover .kf-grid { display:block; min-width:0; }
+  #kilo-features-takeover .kf-card { display:none; }
+  #kilo-features-takeover .kf-card[data-current=true] { display:grid; grid-template-columns:72px minmax(0,1fr) auto; grid-template-rows:1fr; align-items:center; gap:8px; height:100%; padding:4px 8px 4px 0; animation:none; }
+  #kilo-features-takeover .kf-card .kf-art-wrap { margin:0; height:100%; align-self:stretch; display:flex; align-items:center; }
+  #kilo-features-takeover .kf-card .kf-art, #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art { height:84px; width:100%; margin:0; }
+  #kilo-features-takeover .kf-card .kf-art-title, #kilo-features-takeover .kf-card[data-feature=getaway] .kf-art-title { font-size:26px; }
+  #kilo-features-takeover .kf-card-copy { padding-top:0; text-align:left; }
+  #kilo-features-takeover .kf-card h2 { font-size:18px; line-height:19px; }
+  #kilo-features-takeover .kf-summary { display:none; }
+  #kilo-features-takeover .kf-purchase-row { padding-top:0; gap:4px; min-width:84px; }
+  #kilo-features-takeover .kf-price strong { font-size:16px; line-height:18px; }
+  #kilo-features-takeover .kf-price span { font-size:10px; line-height:12px; }
+  #kilo-features-takeover .kf-action { min-height:44px; font-size:14px; padding:4px 8px; }
+  #kilo-features-takeover .kf-action:disabled { font-size:10px; line-height:12px; }
+  #kilo-features-takeover .kf-ante { grid-template-columns:56px minmax(0,1fr) auto; grid-template-rows:auto auto; gap:2px 8px; padding:4px 8px; text-align:left; height:100%; align-content:center; }
+  #kilo-features-takeover .kf-ante-emblem { grid-row:1/3; height:56px; }
+  #kilo-features-takeover .kf-ante-emblem img { height:64px; width:100%; transform:none; }
+  #kilo-features-takeover .kf-ante-copy { grid-column:2; grid-row:1; }
+  #kilo-features-takeover .kf-ante-copy strong { font-size:18px; line-height:19px; }
+  #kilo-features-takeover .kf-ante-copy span { font-size:10px; line-height:12px; }
+  #kilo-features-takeover .kf-ante-cost { grid-column:2; grid-row:2; text-align:left; flex-direction:row; gap:4px; align-items:baseline; }
+  #kilo-features-takeover .kf-ante-cost strong { font-size:16px; line-height:18px; }
+  #kilo-features-takeover .kf-ante-cost span { font-size:10px; }
+  #kilo-features-takeover .kf-ante-toggle { grid-column:3; grid-row:1/3; font-size:12px; padding:4px 8px; }
+  #kilo-features-takeover .kf-ante .kf-reason { grid-column:1/-1; font-size:10px; }
+  #kilo-features-takeover .kf-footer { flex-basis:44px; }
+  #kilo-features-takeover [data-confirming=true] .kf-footer { display:none; }
+  #kilo-features-takeover .kf-confirm-shade { align-items:flex-start; }
+  #kilo-features-takeover .kf-confirm { width:min(100%,384px); grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:4px 10px; padding:6px 10px; text-align:left; }
+  #kilo-features-takeover .kf-confirm-hero { display:none; }
+  #kilo-features-takeover .kf-confirm-copy { grid-column:1; grid-row:1; }
+  #kilo-features-takeover .kf-confirm-copy h2 { font-size:18px; line-height:19px; }
+  #kilo-features-takeover .kf-confirm-copy .kf-summary { display:none; }
+  #kilo-features-takeover .kf-confirm-detail { font-size:10px; line-height:12px; margin-top:2px; }
+  #kilo-features-takeover .kf-confirm-wallet { grid-column:2; grid-row:1; padding:4px 8px; font-size:11px; line-height:14px; align-self:start; }
+  #kilo-features-takeover .kf-confirm-wallet dt { white-space:nowrap; }
+  #kilo-features-takeover .kf-confirm-cost { font-size:14px; line-height:16px; padding-top:2px; margin-top:0; }
+  #kilo-features-takeover .kf-confirm-actions { grid-column:1/-1; grid-row:2; display:grid; grid-template-columns:1fr 1fr; gap:2px 8px; }
+  #kilo-features-takeover .kf-confirm-note { grid-column:1/-1; font-size:10px; line-height:12px; margin:0; }
+  #kilo-features-takeover .kf-cancel { margin:0; }
 }

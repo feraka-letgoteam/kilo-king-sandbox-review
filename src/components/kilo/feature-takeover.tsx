@@ -1,5 +1,5 @@
 import { useContext, useRef, useState, type CSSProperties, type Ref } from 'react';
-import { ArrowLeft, Minus, Plus, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Minus, Plus, X } from 'lucide-react';
 import { splashCost, isPurchaseMode, type PurchaseMode } from '@/lib/kilo/engine';
 import { STAKES, purchaseQuote } from './control-model';
 import { FEATURES, type BonusFeature } from './feature-catalog';
@@ -23,6 +23,7 @@ export type FeatureTakeoverProps = {
 /** Catalogue changes never bypass the existing quote + explicit confirmation. */
 export function FeatureTakeover(props: FeatureTakeoverProps) {
   const [view, setView] = useState<FeatureView>('features');
+  const [pageIndex, setPageIndex] = useState(0);
   const submitted = useRef(false), contentRef = useRef<HTMLDivElement>(null);
   const dismiss = useContext(PanelDismissContext) ?? props.onClose;
   const navigate = (next: FeatureView) => {
@@ -38,11 +39,13 @@ export function FeatureTakeover(props: FeatureTakeoverProps) {
     }
     submitted.current = true; props.onBuy(view);
   };
-  return <FeatureTakeoverView {...props} view={view} onView={navigate} onConfirm={confirm} onClose={dismiss} contentRef={contentRef}/>;
+  return <FeatureTakeoverView {...props} view={view} onView={navigate} onConfirm={confirm} onClose={dismiss} contentRef={contentRef} pageIndex={pageIndex} onPage={setPageIndex}/>;
 }
 export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hidden: false, disabled: false }, anteOnly = false,
   locked, onAnte, onStake, onEditBet, onClose, view, onView, onConfirm, contentRef, reducedMotion = false, maxActive = false, onMaxMode,
-}: FeatureTakeoverProps & { view: FeatureView; onView: (view: FeatureView) => void; onConfirm: () => void; contentRef?: Ref<HTMLDivElement> }) {
+  pageIndex = 0, onPage,
+}: FeatureTakeoverProps & { view: FeatureView; onView: (view: FeatureView) => void; onConfirm: () => void; contentRef?: Ref<HTMLDivElement>;
+  pageIndex?: number; onPage?: (page: number) => void }) {
   const index = STAKES.indexOf(stake as typeof STAKES[number]);
   const purchases = FEATURES.filter((f): f is PurchaseFeature => f.kind === 'purchase' && f.mode !== 'chopper');
   const selected = purchases.find(f => f.mode === view);
@@ -50,6 +53,10 @@ export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hid
   const selectedArt = selected ? PURCHASE_PRESENTATION[selected.mode] : null;
   const anteCost = splashCost(stake, 'ante');
   const confirmReason = anteOnly ? 'Unavailable in this jurisdiction' : quote?.reason;
+  // Popout S (very short viewports) shows one page at a time with Prev/Next;
+  // larger layouts hide the pager in CSS and show every card as before.
+  const pages: string[] = [...(anteRestriction.hidden ? [] : ['ante']), ...(anteOnly ? [] : purchases.map(f => f.mode))];
+  const page = Math.min(pageIndex, Math.max(0, pages.length - 1)), current = pages[page];
   return <div className="kf-shell" data-reduced={reducedMotion} data-confirming={!!selected}>
     <header className="kf-header">
       {selected && <button className="kf-back" onClick={() => onView('features')} aria-label="Back to features"><ArrowLeft/></button>}
@@ -57,7 +64,7 @@ export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hid
       <button className="kf-close" onClick={onClose} aria-label="Close features"><X/></button>
     </header>
     <div className="kf-content" ref={contentRef} tabIndex={-1} data-view={view}>
-      <div className="kf-catalogue" aria-hidden={selected ? true : undefined} inert={selected ? true : undefined}>
+      <div className="kf-catalogue" data-page={current} aria-hidden={selected ? true : undefined} inert={selected ? true : undefined}>
         {!anteRestriction.hidden && <div className="kf-ante" role="group" aria-label={t('label.anteBet')}>
           <div className="kf-ante-emblem" aria-hidden="true"><img src={PURCHASE_PRESENTATION.buy.art} alt=""/></div>
           <div className="kf-ante-copy"><strong>Bonus chance</strong><span>{t('takeover.anteSubtitle')}</span></div>
@@ -68,7 +75,7 @@ export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hid
         {!anteOnly && <div className="kf-grid">
           {purchases.map(feature => {
             const q = purchaseQuote(stake, feature.mode, bank), visual = PURCHASE_PRESENTATION[feature.mode];
-            return <article className="kf-card" data-feature={feature.mode} key={feature.id} style={{ '--feature-accent': visual.accent } as CSSProperties}>
+            return <article className="kf-card" data-feature={feature.mode} data-current={feature.mode === current || undefined} key={feature.id} style={{ '--feature-accent': visual.accent } as CSSProperties}>
               <div className="kf-art-wrap"><img className="kf-art" src={visual.art} alt="" decoding="async"/><span className="kf-art-title" aria-hidden="true">{feature.mode === 'getaway' ? 'MAX' : feature.mode === 'yacht' ? 'VS' : feature.mode === 'mystery' ? '?' : 'CATCH'}</span></div>
               <div className="kf-card-copy"><span className="kf-kicker">{visual.kicker}</span><h2>{feature.title}</h2><p className={feature.mode === 'getaway' ? 'kf-summary kf-warning' : 'kf-summary'}>{visual.summary}</p></div>
               <div className="kf-purchase-row">
@@ -78,6 +85,11 @@ export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hid
             </article>;
           })}
         </div>}
+        {pages.length > 1 && <nav className="kf-pager" aria-label="Browse features">
+          <button type="button" aria-label="Previous feature" disabled={page <= 0} onClick={() => onPage?.(page - 1)}><ChevronLeft size={22}/></button>
+          <span className="kf-pager-status" aria-live="polite">{page + 1} / {pages.length}</span>
+          <button type="button" aria-label="Next feature" disabled={page >= pages.length - 1} onClick={() => onPage?.(page + 1)}><ChevronRight size={22}/></button>
+        </nav>}
 
       </div>
       {selected && quote && selectedArt && <div className="kf-confirm-shade"><section className="kf-confirm" data-feature={selected.mode} data-testid="purchase-confirmation" style={{ '--feature-accent': selectedArt.accent } as CSSProperties}>
