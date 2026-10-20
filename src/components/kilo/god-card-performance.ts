@@ -415,7 +415,9 @@ export async function runGodCardPresentation(record: BinaryReels, a: GodCardAdap
       const p = view.amountOrigin(); return a.screen(p.x, p.y);
     });
     if (!a.live()) return;
-    await a.motion(GOD_CARD_CLOCK.release, t => { fade = t; draw(); });
+    // Hard cut, not a crossfade: the result card holds fully opaque for the same
+    // release time, then is removed in one frame, so card and reels never blend.
+    await a.hold(GOD_CARD_CLOCK.release);
   } finally {
     a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:null}));
     view.destroy();
