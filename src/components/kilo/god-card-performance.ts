@@ -87,7 +87,11 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
   }
   const bow = new Graphics(); bow.label = 'god-card-braking-water'; painting.addChild(bow);
   const rim = new Graphics(); rim.label = 'god-card-hard-frame'; painting.addChild(rim);
-  root.addChild(painting);
+  // The card is anchored to reel 1 and revealed to the right; a loss never
+  // reveals the full five-reel (win) card. Presentation only.
+  const reveal = new Graphics(); reveal.label = 'god-card-anchored-reveal';
+  root.addChild(painting, reveal); painting.mask = reveal;
+  let revealLimit = 5;
   const entryPressure=new Graphics();entryPressure.label='god-visible-entry-pressure';root.addChild(entryPressure);
   const speedCuts=new Graphics();speedCuts.label='god-card-speed-cuts';painting.addChild(speedCuts);
   const result = new Container(); result.label = 'god-card-result';
@@ -128,11 +132,16 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       const width = g.cell * 5 + g.gap * 4, height = g.cell * 3;
       const stage=performanceStage??(beat==='anticipate'?Math.floor(segment)+1:Math.max(1,Math.ceil(segment)));
       const pose = godCardPose(beat, progress,stage), x = godCardOffset(width, segment);
+      // Anchored card: the painting never slides; its visible width grows with
+      // the recorded segment count and is capped below five reels on a loss.
+      const cardW = Math.max(0, Math.min(revealLimit, segment)) * width / 5;
+      const edge = Math.max(0, segment) * width / 5;
       const now=performance.now(),dt=lastPaint===null?0:Math.max(0,Math.min(80,now-lastPaint))/1000;
       lastPaint=now;
       if(!reduced)flow+=dt*(.45+1.8*pose.spray);
       root.position.set(g.gx, g.gy);
-      painting.position.set(x, 0);
+      painting.position.set(0, 0);
+      reveal.clear(); if (cardW > .5) reveal.rect(0, 0, cardW, height).fill(0xffffff);
       entryPressure.clear();speedCuts.clear();
       metadata.entryPressure=0;
       // At segment zero the illustration is entirely offscreen. The pressure
@@ -170,12 +179,18 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
         strip.width=width;strip.height=height*.60/20+.3;
         strip.visible=!reduced&&pose.wake>.001;
       });
-      rim.clear().rect(1.5, 1.5, width - 3, height - 3).stroke({ color: 0xe3ba74, width: 3 });
+      if (cardW > 4) rim.clear().rect(1.5, 1.5, cardW - 3, height - 3).stroke({ color: 0xe3ba74, width: 3 });
+      else rim.clear();
       // Matching canvases share the exact registration. Rider rotates around
       // the cockpit waist and is drawn behind the near gunwale in authored art.
       const nativeW = textures.hull?.width || 1600, nativeH = textures.hull?.height || 960;
-      const scale = width * .76 / nativeW;
-      vessel.scale.set(scale); vessel.position.set(width * .52 + pose.surge * scale, height * .67);
+      // The boat rides the leading edge of the revealed card, so it is on the
+      // card from the first segment. A narrow card frames the rider (cropped
+      // bow and stern) and widens to the full boat by about segment 2.5.
+      const boatW = Math.max(width * .2, Math.min(width * .76, Math.max(cardW, width / 5) * 1.6));
+      const scale = boatW / nativeW;
+      const vx = Math.max(Math.max(cardW, width / 5) / 2, edge - boatW * .5 - width * .04);
+      vessel.scale.set(scale); vessel.position.set(vx + pose.surge * scale, height * .67);
       hull.pivot.set(nativeW * .52, nativeH * .74);
       hull.position.set(0, pose.heave); hull.rotation = pose.pitch;
       if (hullArt) { hullArt.width = nativeW; hullArt.height = nativeH; }
@@ -198,13 +213,13 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       }
 
       const waterY = height * .80;
-      contact.clear().ellipse(width * .52, waterY, width * .31, height * .017).fill({ color: 0x00111c, alpha: .22 });
+      contact.clear().ellipse(vx, waterY, boatW * .41, height * .017).fill({ color: 0x00111c, alpha: .22 });
       // Project the authored stern contact through the hull's actual rotation.
       // The wake stays on the water plane and is never a detached ribbon below
       // the boat; its dense right-hand propwash meets the outboard's waterline.
       const sx = nativeW * (.133 - .52), sy = nativeH * (.535 - .74);
       const cosine = Math.cos(pose.pitch), sine = Math.sin(pose.pitch);
-      const sternX = width * .52 + (sx * cosine - sy * sine + pose.surge) * scale;
+      const sternX = vx + (sx * cosine - sy * sine + pose.surge) * scale;
       const sternY = height * .67 + (sx * sine + sy * cosine + pose.heave) * scale;
       wake.position.set(sternX, sternY);
       wake.width = width * .43 * pose.wakeLength;
@@ -214,7 +229,7 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       // Bow-water contact is the lower tip of the authored hull, not the
       // upper deck. Registering to the deck makes the contour float above it.
       const bx = nativeW * (.918 - .52), by = nativeH * (.885 - .74);
-      const prow = { x: width * .52 + (bx * cosine - by * sine + pose.surge) * scale,
+      const prow = { x: vx + (bx * cosine - by * sine + pose.surge) * scale,
         y: height * .67 + (bx * sine + by * cosine + pose.heave) * scale };
       // Integrate a continuous water clock. segment*3+progress previously
       // raced four ribbon cycles through a 430ms advance, producing chatter.
@@ -233,37 +248,39 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       root.alpha = outcome?.fade === undefined ? 1 : 1 - outcome.fade;
       if (outcome) {
         // Result remains aligned to the aperture, including partial-card loss.
-        const size = Math.min(height * .25, width * (outcome.won ? .105 : .125));
+        // The result sits on the card itself, never over live symbols beside it.
+        const cw = Math.max(width / 5, cardW), cx = cw / 2;
+        const size = Math.min(height * .25, cw * (outcome.won ? .105 : .125) * (cw < width ? 1.9 : 1), width * (outcome.won ? .105 : .125));
         headline.text = headlineShadow.text = outcome.won ? 'MAX WIN' : 'NO WIN';
         headline.style.fontSize = headlineShadow.style.fontSize = size;
         headline.style.fill = outcome.won ? GOLD : WHITE;
-        headlineShadow.position.set(width / 2, height * .745 + Math.max(2, height * .012));
-        headline.position.set(width / 2, height * .745);
+        headlineShadow.position.set(cx, height * .745 + Math.max(2, height * .012));
+        headline.position.set(cx, height * .745);
         headline.scale.set(godCardResultScale(outcome.impact)); headlineShadow.scale.set(godCardResultScale(outcome.impact));
         const titleArt = outcome.won ? maxTitle : lossTitle;
         headline.visible = headlineShadow.visible = !titleArt;
         if (maxTitle) maxTitle.visible = outcome.won;
         if (lossTitle) lossTitle.visible = !outcome.won;
         if (titleArt) {
-          const fit = Math.min(width * .54 / titleArt.texture.width, height * .215 / titleArt.texture.height);
-          titleArt.position.set(width / 2, height * .745);
+          const fit = Math.min(Math.min(width * .54, cw * .92) / titleArt.texture.width, height * .215 / titleArt.texture.height);
+          titleArt.position.set(cx, height * .745);
           titleArt.scale.set(fit * godCardResultScale(outcome.impact));
         }
         amount.text = outcome.won ? money(outcome.amount) : '';
         amount.style.fontSize = Math.min(height * .125, width * .067);
-        amount.position.set(width / 2, height * .925); amount.visible = !amountHidden && outcome.won;
+        amount.position.set(cx, height * .925); amount.visible = !amountHidden && outcome.won;
         amount.scale.set(1 + .06 * Math.sin(Math.PI * outcome.impact));
         caption.text = outcome.won && outcome.beforeCap > outcome.amount ? 'ROUND LIMIT REACHED' : '';
-        caption.style.fontSize = Math.max(10, height * .045); caption.position.set(width / 2, height * .08);
+        caption.style.fontSize = Math.max(10, height * .045); caption.position.set(cx, height * .08);
         contactFlash.clear();
-        paintImpact(contactFlash,width*.5,height*.745,width*.72,height*.55,
+        paintImpact(contactFlash,cx,height*.745,cw*.72,height*.55,
           outcome.impact,outcome.won?0xffcb55:0x79b9c4,outcome.won?1.5:.75,reduced,false);
-        if (outcome.impact < .38) contactFlash.rect(2, 2, width - 4, height - 4)
+        if (outcome.impact < .38) contactFlash.rect(2, 2, cw - 4, height - 4)
           .stroke({ color: outcome.won ? GOLD : 0xe6b7a3, width: 2 + 6 * (1 - outcome.impact / .38), alpha: 1 - outcome.impact / .38 });
         if (outcome.impact > 0 && outcome.impact < 1) {
-          const hit = Math.sin(Math.PI * outcome.impact), reach = width * (.05 + .12 * outcome.impact);
+          const hit = Math.sin(Math.PI * outcome.impact), reach = cw * (.05 + .12 * outcome.impact);
           for (const side of [-1, 1]) {
-            const anchor = width / 2 + side * width * .30, y = height * .745;
+            const anchor = cx + side * cw * .30, y = height * .745;
             contactFlash.poly([anchor, y, anchor + side * reach, y - height * .012,
               anchor + side * reach * .68, y + height * .008])
               .fill({ color: outcome.won ? GOLD : WHITE, alpha: hit * .8 });
@@ -274,6 +291,8 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
         wake: pose.wake, surge: pose.surge, boardWidth: width, boardHeight: height, won: outcome?.won ?? false,performanceStage:stage,
         settled: beat === 'result' || beat === 'rest' });
     },
+    /** A loss never reveals the full five-reel card (it would read as a win). */
+    limitReveal(segments: number) { revealLimit = Math.max(0, Math.min(5, segments)); },
     hideAmount() { amountHidden = true; amount.visible = false; },
     amountOrigin() { return { x: lastGeometry.gx + (lastGeometry.cell * 5 + lastGeometry.gap * 4) / 2,
       y: lastGeometry.gy + lastGeometry.cell * 3 * .925 }; },
@@ -289,6 +308,8 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
 /** No math, RNG, control, wallet or geometry mutation exists in this sequence. */
 export async function runGodCardPresentation(record: BinaryReels, a: GodCardAdapter) {
   const outcome = godCardOutcome(record), view = createGodCardView(a.parent, a.textures());
+  // Recorded loss: the overshooting boat runs past the card edge; the card stays below five reels.
+  if (!record.won) view.limitReveal(outcome.overshoot ? 4.35 : outcome.segments);
   let segment = 0, beat: GodCardBeat = 'rest', progress = 1, impact: number | null = null,performanceStage=1;
   let fade = 0;
   const draw = () => {
