@@ -1,5 +1,6 @@
 node_modules/
 dist-review/
+dist-stake/
 dist/
 .sites-runtime/
 .site-archives/

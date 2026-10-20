@@ -21,6 +21,7 @@
     "format": "prettier --write .",
     "dev:review": "vite --config vite.review.config.ts",
     "build:review": "vite build --config vite.review.config.ts",
+    "build:stake": "vite build --config vite.stake.config.ts",
     "typecheck:kilo": "tsc --noEmit -p tsconfig.kilo.json",
     "check:social-copy": "node scripts/check-social-copy.mjs --sources",
     "test:kilo": "node scripts/verify-presentation.mjs --features-v51",
