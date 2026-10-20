@@ -29,6 +29,7 @@ import { authoredFrameAt } from './authored-animation';
 import { paintImpact, paintEventTicket, clamp01, impactStamp } from './impact-language';
 import { vsArenaAt, connectionClock } from './vs-choreography';
 import { t } from '@/lib/kilo/copy';
+import { paintSmokeBurst } from './smoke-burst';
 
 type Geometry = { gx: number; gy: number; cell: number; gap: number };
 type Callbacks = { award: (value: number) => void; state: (e: FeatureEvent) => void; reelsSettled?: Promise<void> };
@@ -297,44 +298,6 @@ export function createReelFeatureEffects(a: Adapter) {
     if (mine === generation) { clear(fx); repaint = () => {}; }
   }
 
-  /** Opaque procedural smoke/dust burst. `cover` 0..1 grows it to a fully
-   * opaque block; `clear` 0..1 dissolves it outward. Fixed pattern, no RNG:
-   * presentation only, it hides swaps so no crossfade ghost is ever visible. */
-  function paintSmokeBurst(gfx: Graphics, x0: number, y0: number, x1: number, y1: number,
-    cover: number, clearing: number, tone: number) {
-    gfx.clear();
-    if (cover <= 0 || clearing >= 1) return;
-    const w = x1 - x0, h = y1 - y0, cx = x0 + w / 2, cy = y0 + h / 2, r = Math.max(w, h) * .62;
-    const grow = cover < 1 ? 1 - (1 - cover) ** 3 : 1, fade = 1 - clearing;
-    const puffs: [number, number, number][] = [];
-    const cols = Math.max(3, Math.round(w / Math.max(18, h / 5))), rows = 5;
-    for (let i = 0; i <= cols; i++) for (let j = 0; j <= rows; j++) {
-      const jx = ((i * 37 + j * 11) % 7) / 7 - .5, jy = ((i * 13 + j * 29) % 5) / 5 - .5;
-      puffs.push([x0 + w * (i / cols) + jx * w / cols * .6, y0 + h * (j / rows) + jy * h / rows * .6,
-        Math.max(w / cols, h / rows) * (.62 + ((i + j) % 3) * .09)]);
-    }
-    if (clearing <= 0) {
-      // Fully opaque core while covered: nothing underneath can show through.
-      if (cover >= 1) gfx.rect(x0, y0, w, h).fill({ color: 0x18242c, alpha: 1 });
-      for (const [px, py, pr] of puffs) {
-        const d = Math.hypot(px - cx, py - cy) / r;
-        const k = clamp01((grow - d * .75) / .25);
-        if (k > 0) gfx.circle(px, py, pr * k).fill({ color: 0x18242c, alpha: 1 });
-      }
-      for (const [px, py, pr] of puffs) {
-        const d = Math.hypot(px - cx, py - cy) / r, k = clamp01((grow - d * .75) / .25);
-        if (k > 0) gfx.circle(px - pr * .18, py - pr * .22, pr * .55 * k).fill({ color: 0x3f4f59, alpha: 1 });
-      }
-      if (cover < 1) gfx.circle(cx, cy, r * .22 * (1 - grow)).fill({ color: tone, alpha: 1 - grow });
-      return;
-    }
-    // Dissolve: puffs drift outward and thin. The swap underneath is complete.
-    for (const [px, py, pr] of puffs) {
-      const dx = px - cx, dy = py - cy, k = 1 + clearing * .55;
-      gfx.circle(cx + dx * k, cy + dy * k, pr * (1 - clearing * .65)).fill({ color: 0x2a3842, alpha: fade * .92 });
-    }
-  }
-
   async function duelReveal(v: VsConversion, motion: (ms: number, draw: (t: number) => void) => Promise<void>, live: () => boolean, wide?: VsGroup) {
     a.host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'vs'}}));
     const duel=v.duel!,action=new Container();action.label='yacht-duel';fx.addChild(action);
@@ -386,8 +349,8 @@ export function createReelFeatureEffects(a: Adapter) {
       const center=p.x+g.cell*.5,openCenter=center+(dx+dw*.5-center)*arena.arrival;
       // Hard cut from the VS symbol to the full-reel duel (no scale-up).
       void openCenter;const ow=dw,oh=h-6,ox=dx,oy=dy;
-      // Opaque burst: covers .74-.86, the swap happens underneath at .80.
-      const swapped=reduced||t>=.80,cover=reduced?0:clamp01((t-.72)/.04),clearing=reduced?1:clamp01((t-.86)/.07);
+      // Opaque burst: covers .74-.86, the swap happens underneath at .80; the smoke drifts clear by .98.
+      const swapped=reduced||t>=.80,cover=reduced?0:clamp01((t-.72)/.04),clearing=reduced?1:clamp01((t-.86)/.12);
       arenaClip.clear().rect(ox,oy,ow,oh).fill(WHITE);
       ticket.clear().rect(ox,oy,ow,oh).fill(0x0b1720).stroke({color:GOLD,width:2});
       const border=dx+dw*(.53+arena.pressure*(duel.winner==='king'?1:-1));
@@ -509,7 +472,7 @@ export function createReelFeatureEffects(a: Adapter) {
         });
         const band=g.cell*1.05;
         paintSmokeBurst(smoke,x+2,g.gy+g.cell*3-band,x+width-2,g.gy+g.cell*3-2,
-          reducedMerge?0:clamp01((t-.56)/.05),reducedMerge?1:clamp01((t-.74)/.10),next.side==='king'?0xffcb55:0x79f0da);
+          reducedMerge?0:clamp01((t-.56)/.05),reducedMerge?1:clamp01((t-.74)/.16),next.side==='king'?0xffcb55:0x79f0da);
         const tone=next.side==='king'?0xffcb55:0x79f0da;
         paintImpact(contact,center,g.gy+g.cell*2.52,width*.72,g.cell*.85,clamp01((t-.48)/.46),tone,Math.min(1.5,next.width*.32),a.pace().reduced);
         for(const [at,name] of [[.18,'vsPull'],[.48,'vsImpact'],[.70,'vsLock']] as const){
