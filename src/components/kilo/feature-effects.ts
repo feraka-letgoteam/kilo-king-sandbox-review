@@ -352,39 +352,9 @@ export function createFeatureEffects(a: Adapter) {
           e.beforeCap,
           `EXTRACTION ×${e.multiplier}`,
         );
-      } else if (
-        e.action === "carry" ||
-        e.action === "expire" ||
-        e.action === "hold"
-      ) {
+      } else if (e.action === "hold") {
         local.visible = false;
         caption.visible = false;
-        if(e.kind==='dock'){
-          // A held package is a board change, not another detached award.
-          // Latch the actual package once, then let its quiet one-spin marker
-          // carry the persistent state into the next reel movement.
-          set(e,'after');
-          const parcels=e.heldAfter.length?e.heldAfter:e.heldBefore;
-          const retaining=e.heldAfter.length>0;
-          let t=0;
-          const latch=()=>{
-            if(!live())return;
-            const g=a.geom();beam.clear();
-            for(const p of parcels){
-              const center=point(p.reel,p.row),s=g.cell;
-              const reach=s*.20,edge=s*(.43+(retaining?.06*(1-ease(t)):.06*t));
-              for(const[x,y]of [[-1,-1],[1,-1],[-1,1],[1,1]]){
-                const cx=center.x+x*edge,cy=center.y+y*edge;
-                beam.moveTo(cx-x*reach,cy).lineTo(cx,cy).lineTo(cx,cy-y*reach)
-                  .stroke({color:retaining?teal:0x809a9b,width:Math.max(2,s*.035),alpha:retaining?1:1-t});
-              }
-            }
-          };
-          repaint=latch;
-          await a.tween(pace(retaining?380:210),progress=>{t=progress;latch();});
-          a.host.setAttribute('aria-label',retaining?'Highest eligible package held for one more spin':'Marked package expired');
-          return;
-        }
         for (const parcel of e.sources) {
           if (!live()) return;
           active = parcel;

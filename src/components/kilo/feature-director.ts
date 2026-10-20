@@ -24,10 +24,9 @@ export function cargoNote(e: FeatureEvent) {
       return `Checkpoint ${e.checkpoint}/3 · case ${(e.targetCase ?? 0) + 1} doubled`;
     case "extract":
       return `Getaway complete · ${money(e.credited)}`;
-    case "expire":
-      return "Held package expired";
-    case "carry":
-      return "Marked package · one more spin";
+    default:
+      // Marked cargo (carry/expire) was removed from the math in Dockside M1.
+      return "";
   }
 }
 function hudFor(
