@@ -86,6 +86,8 @@ export interface ReelScene {
   setFeatureState?(event:FeatureEvent|null,phase?:'before'|'after'):void;
   featureStep?(event:FeatureEvent,grid:SplashCell[][]):Promise<void>;
   featureIntro?(round:SplashScript):Promise<void>;
+  /** Presentation only: scatter build-up and burst before a feature entry. */
+  triggerBuild?(grid:SplashCell[][]):Promise<void>;
   catchRespin?(run:NonNullable<SplashDrop['catchRun']>,grid:SplashCell[][]):Promise<void>;
   setStake(stake: number): void;
   setPace(turbo: boolean, reduced: boolean, speed?: SpinSpeed): void;
@@ -350,6 +352,8 @@ export async function presentScript(
     return;
   }
 
+  await scene.triggerBuild?.(round.base.grid);
+  if (interrupted()) return;
   spinLine = 0;
   publish(
     `${round.awarded} free spins · starts at ×${collectMult(wilds)}`,

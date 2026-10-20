@@ -1451,6 +1451,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     for (let reel = 0; reel < 4; reel++) {
       if (!activeSet.has(reel) && board[reel]?.some((c) => c.s === "bars")) lockedEarly += 1;
     }
+    // Presentation only. The recorded grid already holds three or more
+    // scatters, so the bonus is decided before the reels move. The remaining
+    // reels then slow one at a time instead of landing together. Misses keep
+    // the short shared tease. Nothing here reads randomness or changes a cell.
+    const decided =
+      anticipate && grid.filter((col) => col?.some((c) => c.s === "bars")).length >= 3;
     type Spin = {
       reel: number;
       strip: Container;
@@ -1525,6 +1531,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     let teaseLive = false;
     const target = phaseTarget();
     target.dataset.anticipation = "off";
+    delete target.dataset.anticipationDecided;
     if (!reduced) whirStart();
     let tickAt = 0;
     let tickStep = 0;
@@ -1555,8 +1562,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const armCrawl = (spin: Spin, slot: number) => {
       const top = -spin.strip.position.y / cell;
       const cellsLeft = top - spin.pad;
-      const extraCells = turbo ? 6 : 10;
-      const budget = (turbo ? 560 : 1400) + slot * (turbo ? 80 : 150);
+      const extraCells = decided
+        ? (turbo ? 8 : 12) + slot * (turbo ? 3 : 5)
+        : turbo ? 6 : 10;
+      const budget = decided
+        ? (turbo ? 760 : 1700) + slot * (turbo ? 320 : 700)
+        : (turbo ? 560 : 1400) + slot * (turbo ? 80 : 150);
       if (cellsLeft > extraCells * 0.45) {
         const insertAt = Math.max(spin.pad + 3, Math.floor(top));
         if (top - insertAt > 0.2) {
@@ -1629,6 +1640,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       if (isScatter && anticipate && spin.reel < 4 && early === 2 && !teaseLive) {
         teaseLive = true;
         target.dataset.anticipation = "build";
+        if (decided) target.dataset.anticipationDecided = "true";
         teaseBegin();
         let slot = 0;
         for (const other of spins) {
@@ -1766,6 +1778,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           if (spin.frame <= 0.02) continue;
           const reelX = geom.gx + spin.reel * (cell + geom.gap);
           const arm = Math.min(18, cell * .22);
+          if (decided && spin.phase === "crawl") {
+            // A held gold wash inside the slowing reel only, breathing with the tick.
+            const breathe = 0.6 + 0.4 * Math.sin(now / 130);
+            fx.rect(reelX + 2, geom.gy + 2, cell - 4, cell * 3 - 4)
+              .fill({ color: 0xffd56a, alpha: 0.10 * spin.frame * breathe });
+          }
           // Real landed scatters arm this treatment. Crisp corner brackets
           // stay inside the reel; no pulsing box spills over adjacent columns.
           for (const dx of [0, 1]) for (const dy of [0, 1]) {
@@ -1971,6 +1989,119 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const focus=()=>{if(event.kind==='route')reels.forEach((reel,index)=>reel.strip.children.forEach(child=>child.alpha=index===event.route?1:.42));};
       focus();host.addEventListener('kilo-relayout',focus);
       try{await featureEffects.step(event);}finally{host.removeEventListener('kilo-relayout',focus);if(mine===job){restoreSymbols();resizeFollow=false;endMotion();}}
+    },
+    async triggerBuild(grid) {
+      // Presentation only: a build-up on the recorded scatters, then one burst,
+      // so the board hands off to the feature instead of hard cutting. It reads
+      // the recorded grid, draws on its own layer and restores every sprite.
+      if (reduced || stopped || speedMode === "super") return;
+      const spots = grid.flatMap((col, reel) =>
+        col.flatMap((c, row) => (c.s === "bars" ? [{ reel, row }] : [])),
+      );
+      if (spots.length < 3) return;
+      clearPresentation();
+      const mine = job;
+      animating = true; resizeFollow = true; mark("trigger");
+      const layer = new Container(); layer.label = "trigger-build";
+      const shade = new Graphics(), glow = new Graphics(), burst = new Graphics();
+      layer.addChild(shade, glow, burst); transient.addChild(layer);
+      const homes = spots.map((spot) => {
+        const sprite = symbolSprite(spot.reel, spot.row);
+        return sprite && !sprite.destroyed
+          ? { sprite, x: sprite.scale.x, y: sprite.scale.y, rotation: sprite.rotation }
+          : null;
+      });
+      const easeIn = (t: number) => t * t;
+      const easeOut = (t: number) => 1 - (1 - t) ** 3;
+      const paint = (build: number, pop: number) => {
+        if (layer.destroyed || mine !== job) return;
+        const { cell, gap, gx, gy } = geom;
+        const width = cell * 5 + gap * 4, height = cell * 3;
+        const centers = spots.map((p) => cellCenter(p.reel, p.row));
+        const fade = 1 - pop;
+        shade.clear(); glow.clear(); burst.clear();
+        // Everything that is not a scatter steps back while the scatters charge.
+        const dim = 0.42 * easeOut(build) * fade;
+        if (dim > 0.01)
+          for (let reel = 0; reel < 5; reel++)
+            for (let row = 0; row < 3; row++) {
+              if (spots.some((p) => p.reel === reel && p.row === row)) continue;
+              shade.rect(gx + reel * (cell + gap), gy + row * cell, cell, cell)
+                .fill({ color: 0x05060c, alpha: dim });
+            }
+        // Halos and repeating rings on each scatter, tightening as the charge grows.
+        centers.forEach((c, i) => {
+          const r = cell * 0.5;
+          const beat = 0.75 + 0.25 * Math.sin(build * Math.PI * (4 + build * 6) + i);
+          glow.circle(c.x, c.y, r * (0.95 + 0.12 * build))
+            .fill({ color: 0xffd56a, alpha: (0.08 + 0.20 * build) * beat * fade });
+          for (const offset of [0, 0.5]) {
+            const f = (build * (2 + build * 2) + offset + i * 0.17) % 1;
+            glow.circle(c.x, c.y, r * (0.65 + f * 0.65))
+              .stroke({ width: 2, color: 0xfff1b8, alpha: (1 - f) * 0.7 * build * fade });
+          }
+        });
+        // A gold thread draws through the scatters from left to right.
+        const ordered = centers.map((c, i) => ({ ...c, reel: spots[i]!.reel }))
+          .sort((a, b) => a.reel - b.reel || a.y - b.y);
+        const legs = ordered.length - 1, drawn = Math.min(1, build * 1.25) * legs;
+        if (legs > 0 && drawn > 0) {
+          glow.moveTo(ordered[0]!.x, ordered[0]!.y);
+          for (let i = 0; i < legs && i < drawn; i++) {
+            const a = ordered[i]!, b = ordered[i + 1]!, u = Math.min(1, drawn - i);
+            glow.lineTo(a.x + (b.x - a.x) * u, a.y + (b.y - a.y) * u);
+          }
+          glow.stroke({ width: 3, color: 0xffe3a0, alpha: 0.85 * fade });
+        }
+        // Scatter art swells with the charge, then kicks once on the burst.
+        const kick = pop > 0 ? Math.sin(Math.min(1, pop / 0.55) * Math.PI) * 0.16 : 0;
+        const k = 1 + 0.10 * easeIn(build) * (1 - easeOut(pop)) + 0.025 * Math.sin(build * Math.PI * 8) * build * fade + kick;
+        homes.forEach((home) => {
+          if (!home || home.sprite.destroyed) return;
+          home.sprite.scale.set(home.x * k, home.y * k);
+          home.sprite.rotation = home.rotation + Math.sin(build * Math.PI * 10) * 0.025 * build * fade;
+        });
+        if (pop <= 0) return;
+        // The burst: a warm flash, rays from the board centre, a ring per scatter, sparks.
+        const flash = pop < 0.12 ? pop / 0.12 : (1 - pop) / 0.88;
+        burst.rect(gx, gy, width, height).fill({ color: 0xfff3c4, alpha: 0.5 * flash * flash });
+        const cx = gx + width / 2, cy = gy + height / 2, reach = Math.hypot(width, height) * 0.55 * easeOut(pop);
+        for (let i = 0; i < 16; i++) {
+          const a = (i / 16) * Math.PI * 2 + pop * 0.35, spread = 0.07;
+          burst.poly([cx, cy,
+            cx + Math.cos(a - spread) * reach, cy + Math.sin(a - spread) * reach,
+            cx + Math.cos(a + spread) * reach, cy + Math.sin(a + spread) * reach,
+          ]).fill({ color: 0xffd56a, alpha: 0.28 * fade });
+        }
+        centers.forEach((c, i) => {
+          burst.circle(c.x, c.y, cell * (0.5 + 2.0 * easeOut(pop)))
+            .stroke({ width: Math.max(1, 5 * fade), color: 0xfff1b8, alpha: fade });
+          for (let j = 0; j < 10; j++) {
+            const a = (j / 10) * Math.PI * 2 + i * 0.9, spread = 0.7 + 0.3 * (((j * 37 + i * 11) % 10) / 10);
+            const d = cell * (0.35 + 1.5 * easeOut(pop)) * spread;
+            burst.circle(c.x + Math.cos(a) * d, c.y + Math.sin(a) * d + cell * 0.25 * pop * pop, Math.max(0.5, 3.2 * fade))
+              .fill({ color: j % 3 ? 0xffe3a0 : 0xffffff, alpha: fade });
+          }
+        });
+      };
+      try {
+        const buildMs = turbo ? 420 : 950, tickMs = turbo ? 105 : 150;
+        let step = 0, last = 0;
+        await tween(buildMs, (t) => {
+          paint(t, 0);
+          if (t * buildMs - last >= tickMs && t < 1) { scatterBuild(step++); last = t * buildMs; }
+        });
+        if (mine !== job || stopped) return;
+        teaseResolve(true);
+        await tween(turbo ? 280 : 560, (t) => paint(1, t));
+      } finally {
+        homes.forEach((home) => {
+          if (!home || home.sprite.destroyed) return;
+          home.sprite.scale.set(home.x, home.y); home.sprite.rotation = home.rotation;
+        });
+        if (!layer.destroyed) layer.destroy({ children: true });
+        if (mine === job) { resizeFollow = false; endMotion(); }
+      }
     },
     async featureIntro(round) {
       bonusEnter(round.mode, round.feature);

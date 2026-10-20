@@ -73,6 +73,7 @@ export async function presentReelFeature(scene: ReelScene, round: SplashScript, 
       }
     }
     if (round.feature !== 'getaway') {
+      await scene.triggerBuild?.(round.base.grid); if (snap()) return;
       publish(round.awarded, `${FEATURE_NAMES[round.feature!]} · ${round.awarded} free spins`, undefined, true);
       await scene.featureIntro?.(round); if (snap()) return;
     }
