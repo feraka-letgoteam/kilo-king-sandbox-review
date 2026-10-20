@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createCharacterMotionLoop } from './character-motion-loop';
-import { STAGE_KING, paintStageKing, kingToolFrame, createStageKingPlayback, type StageKingFrame, type StageReaction } from './stage-character-life';
+import { STAGE_KING, STAGE_REACTIONS, paintStageKing, kingToolFrame, createStageKingPlayback, type StageKingFrame, type StageReaction } from './stage-character-life';
 import { KING_ARM_ASSETS, KING_STAGE_CANVAS, KING_THROW_RELEASE, kingLeftArmPose, kingRightRodPose, type KingArmImages, type KingToolAction, type KingToolEvent } from './stage-character-arm';
 import type { IntegratedCharacterPose, IntegratedMaster } from './integrated-scene-model';
 
@@ -47,9 +47,11 @@ export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=fal
     loop.current=createCharacterMotionLoop(node,dt=>draw.current(dt),()=>ready&&!settings.current.reduced&&!settings.current.paused,node.closest('.kk-shell'));
     const shell=node.closest('.kk-shell');let actionId=0;
     const action=(event:Event)=>{
-      const kind=(event as CustomEvent<{kind:StageReaction|'settle'}>).detail?.kind;
+      const detail=(event as CustomEvent<{kind:StageReaction|'settle';big?:boolean}>).detail;
+      // A banked collection of >= 10 stakes (flagged by the renderer from the recorded bank) laughs.
+      const kind=detail?.kind==='collect-bank'&&detail.big?'collect-big':detail?.kind;
       if(kind==='settle'||settings.current.reduced||settings.current.paused){playback.current.settle();tool=null;}
-      else if(['spin','collect','collect-bank','entry','retrigger','vs','vs-win','vs-loss','max','max-stop','max-loss','win'].includes(kind))playback.current.react(`${kind}:${++actionId}`,kind as StageReaction);
+      else if(STAGE_REACTIONS.includes(kind as StageReaction))playback.current.react(`${kind}:${++actionId}`,kind as StageReaction);
       draw.current(0);loop.current?.refresh();
     };
     shell?.addEventListener('kilo-stage-action',action);

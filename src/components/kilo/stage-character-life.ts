@@ -1,14 +1,16 @@
 import definition from '../../../public/kilo-v79/characters/king-stage.json';
 import { paintKingMesh, kingMeshPoint } from './stage-character-mesh';
-import { KING_ARM_ASSETS, KING_STAGE_CANVAS, curve as toolCurve, paintKingLeftArm, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
+import { KING_ARM_ASSETS, KING_STAGE_CANVAS, curve as toolCurve, kingHipShift, paintKingLeftArm, paintKingLowerBody, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
 
 export const STAGE_KING = definition;
 export const STAGE_KING_URLS = [definition.image, definition.blink.image, definition.reaction.image, ...Object.values(KING_ARM_ASSETS)] as const;
-export type StageReaction = 'spin' | 'collect' | 'collect-bank' | 'entry' | 'retrigger' | 'vs' | 'vs-win' | 'vs-loss' | 'max' | 'max-stop' | 'max-loss' | 'win';
+export type StageReaction = 'spin' | 'collect' | 'collect-bank' | 'collect-big' | 'near-miss' | 'entry' | 'retrigger' | 'vs' | 'vs-win' | 'vs-loss' | 'max' | 'max-stop' | 'max-loss' | 'win';
+/** Reactions the actor accepts from 'kilo-stage-action' (all dispatched from recorded results). */
+export const STAGE_REACTIONS:readonly StageReaction[]=['spin','collect','collect-bank','collect-big','near-miss','entry','retrigger','vs','vs-win','vs-loss','max','max-stop','max-loss','win'];
 export const STAGE_REACTION_MS = { spin: 680, vs: 960, 'vs-win': 760, 'vs-loss': 700,
   max: 1040, 'max-stop': 1100, 'max-loss': 780, win: 1100,
-  collect: 1140, 'collect-bank': 700, entry: 840, retrigger: 1000 } as const;
-const REACTION_PRIORITY:Record<StageReaction,number>={spin:0,collect:1,'collect-bank':2,entry:2,retrigger:3,win:1,vs:2,max:2,'vs-win':3,'vs-loss':3,'max-stop':4,'max-loss':4};
+  collect: 1140, 'collect-bank': 700, 'collect-big': 1300, 'near-miss': 900, entry: 840, retrigger: 1000 } as const;
+const REACTION_PRIORITY:Record<StageReaction,number>={spin:0,collect:1,'collect-bank':2,'collect-big':3,'near-miss':1,entry:2,retrigger:3,win:1,vs:2,max:2,'vs-win':3,'vs-loss':3,'max-stop':4,'max-loss':4};
 export type StageKingFrame = { elapsed: number; breath: number; nod: number; sway:number;look:number;rod:number; brace:number; blink: 'open' | 'half' | 'closed' | 'brow';reaction?:StageReaction;reactionProgress?:number };
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
 export type StageFocus = {kind:'max'|'vs';progress:number;stage?:number;beat?:string};
@@ -56,6 +58,19 @@ function motionFrameAt(elapsed:number,reactionElapsed=Infinity,reduced=false,kin
   const hit=active?(resultKind?smooth((reaction-.09)/.18)*(1-smooth((reaction-.55)/.45)):
     smooth(reaction/.20)*(1-smooth((reaction-.40)/.60))):0;
   const returnBeat=active?Math.sin(Math.PI*clamp((reaction-.42)/.58))*(1-reaction):0;
+  if(kind==='near-miss'){
+    // Recoil: head snaps back, weight rocks onto the back foot, then settles.
+    const jolt=active?smooth(reaction/.12)*(1-smooth((reaction-.45)/.55)):0;
+    return {elapsed,breath,blink,nod:-1.4*jolt+.4*returnBeat,sway:Math.sin(phase*.5)*.65,
+      look:Math.sin(phase-.4)*.55+1.6*jolt,rod:Math.sin(phase-.65)*.8-1.6*jolt,brace:2.6*jolt-.8*returnBeat};
+  }
+  if(kind==='collect-big'){
+    // Laughing: three shoulder bounces over a planted stance.
+    const body=active?smooth(reaction/.15)*(1-smooth((reaction-.7)/.3)):0;
+    const bounce=Math.abs(Math.sin(Math.PI*3*reaction))*body;
+    return {elapsed,breath,blink,nod:-1.5*body+1.1*bounce,sway:Math.sin(phase*.5)*.65,
+      look:Math.sin(phase-.4)*.55-1.2*body,rod:Math.sin(phase-.65)*.8+2.2*body,brace:-2.4*body+1.4*bounce};
+  }
   if (['collect','collect-bank','entry','retrigger'].includes(kind)) {
     const haul=kind==='collect',bank=kind==='collect-bank',reward=kind==='retrigger';
     const pull=active?smooth((reaction-.12)/.22)*(1-smooth((reaction-.56)/.44)):0;
@@ -112,13 +127,17 @@ export function kingToolFrame(frame:StageKingFrame,tool:KingToolAction|null,redu
     look:frame.look+toolCurve(t,[[0,0],[.33,-.2],[.42,-.6],[.62,-.5],[1,0]])};
 }
 
-/** Six registered expressions: neutral, strain, joy, loss, half blink, blink.
+/** Expression indices 0-5 are the stage-heads sheet (neutral, strain, joy,
+ * loss, half blink, blink); 6-8 are the v88 shocked, shouting and laughing heads.
  * Expression changes are opaque on authored beats; the independent head joint
  * supplies continuous motion, never a double-face opacity morph. */
 export function stageKingExpression(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
   if(reduced)return 0;
   if(tool&&tool.progress>.13&&tool.progress<.72)return 1;
   const p=frame.reactionProgress??1;
+  if(frame.reaction==='near-miss'&&p>.04&&p<.78)return 6;
+  if(frame.reaction==='vs'&&p>.16&&p<.82)return 7;
+  if(frame.reaction==='collect-big'&&p>.08&&p<.86)return 8;
   if(p>.16&&p<.82){
     if(['win','vs-win','max-stop','retrigger'].includes(frame.reaction??''))return 2;
     if(['vs-loss','max-loss'].includes(frame.reaction??''))return 3;
@@ -126,12 +145,17 @@ export function stageKingExpression(frame:StageKingFrame,tool:KingToolAction|nul
   }
   return frame.blink==='closed'?5:frame.blink==='half'?4:0;
 }
-export function paintStageKingHead(ctx:CanvasRenderingContext2D,heads:CanvasImageSource,frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
-  const actual=kingToolFrame(frame,tool,reduced),base={x:361,y:190};
+export function paintStageKingHead(ctx:CanvasRenderingContext2D,heads:CanvasImageSource,frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false,extra?:{shocked:CanvasImageSource;shouting:CanvasImageSource;laughing:CanvasImageSource}){
+  const actual=kingToolFrame(frame,tool,reduced),base={x:361,y:190},hip=kingHipShift(actual,reduced);
   const neck=kingMeshPoint(base.x,base.y,{...actual,nod:0,look:0,rod:0});
   const angle=reduced?0:actual.look*.029+actual.nod*.046;
-  ctx.save();ctx.translate(neck.x,neck.y);ctx.rotate(angle);
-  ctx.drawImage(heads,stageKingExpression(frame,tool,reduced)*256,0,256,256,-80,-123,128,128);ctx.restore();
+  ctx.save();ctx.translate(neck.x+hip.x,neck.y+hip.y);ctx.rotate(angle);
+  const expression=stageKingExpression(frame,tool,reduced);
+  // Same 256px registration and neck pivot (160,246) as the sheet.
+  const single=expression===6?extra?.shocked:expression===7?extra?.shouting:expression===8?extra?.laughing:undefined;
+  if(single)ctx.drawImage(single,0,0,256,256,-80,-123,128,128);
+  else ctx.drawImage(heads,(expression===6?3:expression===7?1:expression===8?2:expression)*256,0,256,256,-80,-123,128,128);
+  ctx.restore();
 }
 
 /** Shared browser/offline Canvas painter. Source art is composited once per
@@ -141,12 +165,17 @@ export function paintStageKing(ctx:CanvasRenderingContext2D,source:CanvasImageSo
   ctx.setTransform(1.5,0,0,1.5,padX*1.5,padY*1.5);ctx.clearRect(-padX,-padY,arms?KING_STAGE_CANVAS.width:512,arms?KING_STAGE_CANVAS.height:768);
   ctx.fillStyle='rgba(4,14,20,.25)';ctx.beginPath();ctx.ellipse(333,756,171,7,0,0,Math.PI*2);ctx.fill();
   const actual=kingToolFrame(frame,tool,still);
-  const torso=arms?.heads?arms.body:source;
+  const jointed=!!arms?.torso;
+  const torso=jointed?arms!.torso:arms?.heads?arms.body:source;
+  // v88: hips and legs are separate pieces; the torso drawing ends at the vest hem.
+  const hip=jointed?paintKingLowerBody(ctx,arms!,actual,still):{x:0,y:0};
+  ctx.save();ctx.translate(hip.x,hip.y);
   if(still)ctx.drawImage(torso,0,0,1024,1536,0,0,512,768);
   else paintKingMesh(ctx,torso,arms?{...actual,rod:0}:actual);
+  ctx.restore();
   if(arms)paintKingRightRod(ctx,arms,actual,tool,still);
   if(arms)paintKingLeftArm(ctx,arms,actual,tool,still);
-  if(arms?.heads)paintStageKingHead(ctx,arms.heads,frame,tool,still);
+  if(arms?.heads)paintStageKingHead(ctx,arms.heads,frame,tool,still,arms.headShocked?{shocked:arms.headShocked,shouting:arms.headShouting,laughing:arms.headLaughing}:undefined);
   else if(arms&&frame.reaction==='max-stop'&&(frame.reactionProgress??1)<1){
     // Raised arm passes behind the head, never through the face. The same head
     // mesh is repainted through this authored silhouette mask, not a pose swap.
