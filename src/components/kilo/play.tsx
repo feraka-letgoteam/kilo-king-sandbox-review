@@ -994,14 +994,14 @@ export function KiloTable({
   async function playReelReview(name: string) {
     if (busyRef.current || !sceneRef.current || !ready) return;
     try {
-      const response = await fetch(`/kilo-features-v54/replays/${name}.json`);
+      const response = await fetch(`${name.startsWith('super-yacht-') ? '/kilo-v86/replays' : '/kilo-features-v54/replays'}/${name}.json`);
       if (!response.ok) throw new Error("Replay file unavailable");
       const script = await response.json() as SplashScript;
       if (script.version !== 4 || !script.free.every(spin => spin.mechanic?.reel)) throw new Error("Invalid reel-feature record");
       if (busyRef.current) return;
       setSummary(null);
       setMode('spin');
-      setNote("Recorded feature · v61 VS presentation. No balance changes.");
+      setNote("Recorded feature replay. No balance changes.");
       await run(script, true);
     } catch (error) {
       console.error("Kilo reel review failed", error);
@@ -1683,7 +1683,7 @@ export function KiloTable({
             onClose={() => setPanel(false)}
           >
             <div className="kk-dialog-head">
-              <strong>Review scenes · v57</strong>
+              <strong>Review scenes · v86</strong>
               <button
                 type="button"
                 aria-label="Close"
@@ -1700,6 +1700,8 @@ export function KiloTable({
               <div className="mb-3 flex flex-col gap-2">
                 {[
                   ["yacht-sticky-vs", "Yacht — pure VS, permanent multiplier reels"],
+                  ["super-yacht-natural", "5 scatters — guaranteed opening ×25 on reel 1"],
+                  ["super-yacht-mystery", "Mystery Bonus — Super Yacht with ×25 combining"],
                   ["vs-complete-encounter-v61", "VS — ×3 duel and 25,000 connection (spin 9)"],
                   ["getaway-max", "Getaway — 25,000× result"],
                   ["getaway-loss", "Getaway — no win"],

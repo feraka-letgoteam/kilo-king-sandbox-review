@@ -1,8 +1,10 @@
 import type { PurchaseMode } from '@/lib/kilo/engine';
+import { MYSTERY_ODDS_COPY } from '@/lib/kilo/mystery-bonus';
 
 /** Presentation only. Prices, outcomes and eligibility come from the engine. */
 export const FEATURE_ART = {
   dock: '/kilo-v79/surfaces/dock.webp', yacht: '/kilo-v79/surfaces/yacht.webp',
+  yacht25: '/kilo-v79/surfaces/yacht.webp',
   route: '/kilo-v79/surfaces/route.webp', getaway: '/kilo-v79/surfaces/getaway.webp',
 } as const;
 export const PURCHASE_PRESENTATION: Record<Exclude<PurchaseMode, 'chopper'>, {
@@ -17,5 +19,8 @@ export const PURCHASE_PRESENTATION: Record<Exclude<PurchaseMode, 'chopper'>, {
   getaway: { art: FEATURE_ART.getaway, kicker: 'MAX SPINS',
     summary: '1 spin. Max win or nothing.',
     confirmation: 'Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base bet and returns either 25,000× or zero. Exit the mode at any time between spins.', accent: '#f5d679' },
+  mystery: { art: '/kilo-features-v12/mystery.webp', kicker: '3 · 4 · 5 SCATTERS',
+    summary: 'A random bonus. Chance at Super Yacht’s opening ×25 VS.',
+    confirmation: `Super Yacht guarantees a winning ×25 on reel one of spin one. ${MYSTERY_ODDS_COPY}. One purchase; no additional charge for the selected bonus.`, accent: '#d4b5ff' },
 };
 export const FEATURE_ART_URLS = Object.values(FEATURE_ART);

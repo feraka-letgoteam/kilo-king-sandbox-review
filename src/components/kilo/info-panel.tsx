@@ -51,6 +51,7 @@ const MODES: { id: SplashMode; title: string; description: string }[] = [
       "Direct entry with 10 free spins, starting at ×1. No base-game line or scatter award is paid on entry.",
   },
   {id:"yacht",title:"Yacht Stash buy",description:"15 free spins. Every VS becomes a sticky wild reel. Its duel multiplier remains through the final spin. Wins use paylines only."},
+  {id:"mystery",title:"Mystery Bonus buy",description:"One purchase randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a guaranteed winning ×25 VS on reel one in spin one."},
   {id:"getaway",title:"Max spins · The Getaway",description:"Activate the mode at no charge, then press Spin for each paid attempt. Each spin costs 1,000× the base bet and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A partial boat pays zero and stays in place until the next spin; a full boat pays the max win. No free spins or partial prize. Exit the mode between spins."},
 ];
 
@@ -206,7 +207,7 @@ export function InfoPanel({
                 )}
               </div>
               <p>
-                Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four or five start Yacht Stash (15 spins). Both can be purchased. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.
+                Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature guarantees a winning ×25 VS on reel one in spin one. Dockside Catch and Yacht Stash have direct buys; Super Yacht is available through five scatters or a Mystery Bonus buy. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.
               </p>
             </FeatureRow>
             <FeatureRow
@@ -240,8 +241,8 @@ export function InfoPanel({
             </FeatureRow>
             {FEATURES.filter(feature=>feature.kind!=='preview'&&feature.id!=='scatter-3').map(feature=><FeatureRow key={feature.id} title={feature.title} image={feature.art}><p>{feature.detail}</p></FeatureRow>)}
             <FeatureRow title="VS progression & multipliers" image={CONTRABAND_ROOT + PACKAGE_META["package-king"].file}>
-              <p>Yacht starts with an opening ×2 VS in the first two spins. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.</p>
-              <p>The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht stays inside its base or Ante round’s 25,000× total payout limit. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.</p>
+              <p>Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead guarantees a winning ×25 VS on reel one in the very first spin; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× payout. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.</p>
+              <p>The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total payout limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.</p>
               <p>The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. In this local candidate distribution the max-win probability is 3.82% and loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Stake Engine return.</p>
             </FeatureRow>
             <FeatureRow title="Hook" image={ART_ROOT + TOOL_PIVOTS.hook.file}>

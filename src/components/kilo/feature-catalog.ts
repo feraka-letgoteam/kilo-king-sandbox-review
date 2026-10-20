@@ -1,4 +1,5 @@
 import type { PurchaseMode } from "@/lib/kilo/engine";
+import { MYSTERY_PRICE, MYSTERY_ODDS_COPY } from '@/lib/kilo/mystery-bonus';
 /** Presentation catalogue. A preview deliberately has no purchasable engine mode. */
 type FeatureBase = {
   id: string;
@@ -45,7 +46,7 @@ export const FEATURES: readonly BonusFeature[] = [
     mode: "yacht",
     multiple: 200,
     title: "Yacht Stash",
-    subtitle: "4+ scatters",
+    subtitle: "4 scatters",
     tone: "amber",
     scatters: 4,
     spins: 15,
@@ -53,6 +54,18 @@ export const FEATURES: readonly BonusFeature[] = [
     art: "/kilo-v79/surfaces/yacht.webp",
     detail:
       "15 free spins. VS encounters develop across the opening, middle and closing spins. Each winning ×2–×10 reel stays locked. Adjacent reels of the same side merge into one larger wild and their multipliers multiply. Separate participating groups add; each group product is counted once. No cash collection.",
+  },
+  {
+    id: "scatter-5",
+    kind: "trigger",
+    title: "Super Yacht Stash",
+    subtitle: "5 scatters · guaranteed ×25",
+    tone: "gold",
+    scatters: 5,
+    spins: 15,
+    multiplier: 25,
+    art: "/kilo-v79/surfaces/yacht.webp",
+    detail: "15 free spins with a guaranteed winning ×25 VS on reel one of the first spin. It stays sticky, and adjacent same-side reels merge using their multiplier product. All other Yacht Stash rules apply. Trigger with five scatters or receive it from Mystery Bonus. No direct purchase.",
   },
   {
     id: "god-mode",
@@ -70,12 +83,16 @@ export const FEATURES: readonly BonusFeature[] = [
   },
   {
     id: "mystery",
-    kind: "preview",
+    kind: "purchase",
+    mode: "mystery",
+    multiple: MYSTERY_PRICE,
+    spins: 0,
+    multiplier: 1,
     title: "Mystery Bonus",
-    subtitle: "In development",
+    subtitle: "3, 4 or 5-scatter bonus",
     tone: "violet",
     art: "/kilo-features-v12/mystery.webp",
-    detail: "Artwork preview. This feature cannot be played or purchased yet.",
+    detail: `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base bet. Super Yacht Stash guarantees a winning ×25 VS on reel one of spin one. ${MYSTERY_ODDS_COPY}.`,
   },
 ];
 

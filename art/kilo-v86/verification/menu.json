@@ -1,0 +1,139 @@
+{
+  "method": "Actual React SSR and conservative font-measured box model from authoritative breakpoint rules. Not computed browser CSS/DOM layout; live browser confirmation remains required.",
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "stake": 1000,
+      "bank": 1000000,
+      "columns": 4,
+      "cardWidth": 234,
+      "estimatedMenuHeight": 700,
+      "remainingHeight": 200,
+      "minimumButton": 44
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stake": 1000,
+      "bank": 0,
+      "columns": 4,
+      "cardWidth": 234,
+      "estimatedMenuHeight": 700,
+      "remainingHeight": 200,
+      "minimumButton": 44
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "stake": 100000,
+      "bank": 1000000,
+      "columns": 4,
+      "cardWidth": 234,
+      "estimatedMenuHeight": 702,
+      "remainingHeight": 198,
+      "minimumButton": 44
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stake": 1000,
+      "bank": 1000000,
+      "columns": 2,
+      "cardWidth": 178.5,
+      "estimatedMenuHeight": 750,
+      "remainingHeight": 94,
+      "minimumButton": 44
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stake": 1000,
+      "bank": 0,
+      "columns": 2,
+      "cardWidth": 178.5,
+      "estimatedMenuHeight": 750,
+      "remainingHeight": 94,
+      "minimumButton": 44
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "stake": 100000,
+      "bank": 1000000,
+      "columns": 2,
+      "cardWidth": 178.5,
+      "estimatedMenuHeight": 750,
+      "remainingHeight": 94,
+      "minimumButton": 44
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stake": 1000,
+      "bank": 1000000,
+      "columns": 2,
+      "cardWidth": 163.5,
+      "estimatedMenuHeight": 764,
+      "remainingHeight": 36,
+      "minimumButton": 44
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stake": 1000,
+      "bank": 0,
+      "columns": 2,
+      "cardWidth": 163.5,
+      "estimatedMenuHeight": 764,
+      "remainingHeight": 36,
+      "minimumButton": 44
+    },
+    {
+      "width": 360,
+      "height": 800,
+      "stake": 100000,
+      "bank": 1000000,
+      "columns": 2,
+      "cardWidth": 163.5,
+      "estimatedMenuHeight": 764,
+      "remainingHeight": 36,
+      "minimumButton": 44
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stake": 1000,
+      "bank": 1000000,
+      "columns": 4,
+      "cardWidth": 160,
+      "estimatedMenuHeight": 355,
+      "remainingHeight": 35,
+      "minimumButton": 44
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stake": 1000,
+      "bank": 0,
+      "columns": 4,
+      "cardWidth": 160,
+      "estimatedMenuHeight": 355,
+      "remainingHeight": 35,
+      "minimumButton": 44
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "stake": 100000,
+      "bank": 1000000,
+      "columns": 4,
+      "cardWidth": 160,
+      "estimatedMenuHeight": 355,
+      "remainingHeight": 35,
+      "minimumButton": 44
+    }
+  ],
+  "confirmation": true,
+  "jurisdictionHidesAllBuys": true
+}

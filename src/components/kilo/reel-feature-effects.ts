@@ -261,8 +261,8 @@ export function createReelFeatureEffects(a: Adapter) {
       panel.addChild(new Graphics().poly([x+13,y+5,x+h*.85,y+5,x+h*.63,y+h-8,x+13,y+h-8])
         .fill({color:accent,alpha:.12}));
       const artX=x+h*.56, artY=y+h*.51;
-      const clip=AUTHORED_CLIPS[feature==='yacht'?'entry-scatter-4':'entry-scatter-3'];
-      const animated=entryFrames.get(feature);
+      const clip=AUTHORED_CLIPS[feature==='yacht'||feature==='yacht25'?'entry-scatter-4':'entry-scatter-3'];
+      const animated=entryFrames.get(feature==='yacht25'?'yacht':feature);
       const texture=animated&&clip&&!a.pace().reduced?animated[authoredFrameAt(clip,artProgress)]:entryArt.get(feature);
       const arrival=featureArrivalAt(reveal,a.pace().reduced);
       if(texture){const sprite=new Sprite(texture);sprite.anchor.set(.5);const s=Math.min(h*1.05/texture.width,h*.90/texture.height);sprite.scale.set(s);sprite.rotation=arrival.turn;sprite.position.set(artX,artY);panel.addChild(sprite);}
@@ -270,7 +270,8 @@ export function createReelFeatureEffects(a: Adapter) {
       const title=createWinNumeral(FEATURE_NAMES[feature].toUpperCase(),Math.max(19,g.cell*.26));
       if(title.width>w-h-16)title.style.fontSize=Number(title.style.fontSize)*(w-h-16)/title.width;
       title.position.set(copyX,y+h*.36);panel.addChild(title);
-      const copy=label(feature==='getaway'?'1 SPIN · MAX WIN OR NOTHING':`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
+      const copy=label(feature==='getaway'?'1 SPIN · MAX WIN OR NOTHING':feature==='yacht25'?`${round.awarded} SPINS · REEL 1 STARTS ×25`:`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
+      if(copy.width>w-h-12)copy.style.fontSize=Number(copy.style.fontSize)*(w-h-12)/copy.width;
       copy.position.set(copyX,y+h*.73);panel.addChild(copy);
       panel.pivot.set(x+w/2,y+h/2);
       panel.position.set(x+w/2,y+h/2+(a.pace().reduced?0:h*arrival.lift-leaving*4));

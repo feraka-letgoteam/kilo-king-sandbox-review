@@ -1,0 +1,102 @@
+{
+  "checkpoint": "7e6105e6975e6a6a9128eb4f0f13d13d41bf3bab",
+  "guaranteed": 12831,
+  "stickyChecks": 191333,
+  "sides": [
+    "king",
+    "vice"
+  ],
+  "widths": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "oldComparisons": 900,
+  "baseChecks": [
+    {
+      "mode": "spin",
+      "outcomes": 40002,
+      "expected": 0.9550000000763014,
+      "returnOverCost": 0.9550000000763014,
+      "naturalFiveCarriers": 1
+    },
+    {
+      "mode": "ante",
+      "outcomes": 40000,
+      "expected": 1.4325000000435912,
+      "returnOverCost": 0.9550000000290608,
+      "naturalFiveCarriers": 1
+    }
+  ],
+  "mysteryChecks": [
+    {
+      "feature": "dock",
+      "stake": 100,
+      "cost": 20000,
+      "payout": 4560
+    },
+    {
+      "feature": "dock",
+      "stake": 1000,
+      "cost": 200000,
+      "payout": 45600
+    },
+    {
+      "feature": "dock",
+      "stake": 5000,
+      "cost": 1000000,
+      "payout": 228000
+    },
+    {
+      "feature": "yacht",
+      "stake": 100,
+      "cost": 20000,
+      "payout": 2040
+    },
+    {
+      "feature": "yacht",
+      "stake": 1000,
+      "cost": 200000,
+      "payout": 20400
+    },
+    {
+      "feature": "yacht",
+      "stake": 5000,
+      "cost": 1000000,
+      "payout": 102000
+    },
+    {
+      "feature": "yacht25",
+      "stake": 100,
+      "cost": 20000,
+      "payout": 682880
+    },
+    {
+      "feature": "yacht25",
+      "stake": 1000,
+      "cost": 200000,
+      "payout": 6828800
+    },
+    {
+      "feature": "yacht25",
+      "stake": 5000,
+      "cost": 1000000,
+      "payout": 34144000
+    }
+  ],
+  "protectedFiles": [
+    "src/lib/kilo/bank.ts",
+    "src/lib/kilo/vs-groups.ts",
+    "src/lib/kilo/vs-outcome-catalogue.ts",
+    "src/components/kilo/control-model.ts",
+    "src/components/kilo/layout.ts",
+    "src/components/slot-controls/layout.ts",
+    "src/components/kilo/director.ts",
+    "src/components/kilo/god-card-performance.ts",
+    "src/components/kilo/god-card-motion.ts",
+    "src/components/kilo/feature-environments.ts"
+  ],
+  "collectionChoreographyUnchanged": true
+}

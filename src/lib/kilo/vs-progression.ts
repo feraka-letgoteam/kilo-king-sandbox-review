@@ -27,3 +27,16 @@ export function planVsProgression(rng: Rng): VsArrival[] {
     rival: pick([2, 2, 3, 3, 4, 5, 6, 8, 10], rng),
   }));
 }
+
+/** Five-scatter upgrade: the first actual encounter wins at ×25 on reel one,
+ * spin one. Swap reel identities so no later arrival can overwrite it. The
+ * remaining arrival count, timing and same-side rules retain the VS rhythm. */
+export function planSuperVsProgression(rng: Rng): VsArrival[] {
+  const plan = planVsProgression(rng);
+  const openingReel = plan[0]!.reel;
+  return plan.map((arrival, index) => ({
+    ...arrival,
+    reel: arrival.reel === openingReel ? 0 : arrival.reel === 0 ? openingReel : arrival.reel,
+    ...(index === 0 ? { spin: 0, multiplier: 25 } : {}),
+  }));
+}

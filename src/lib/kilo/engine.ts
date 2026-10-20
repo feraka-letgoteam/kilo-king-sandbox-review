@@ -2,13 +2,14 @@ import { FEATURE_PROFILE, featureEvent, cargoAt, FEATURE_SPINS, type FeatureKind
 import { runReelFeature, REEL_FEATURE_SPINS } from './reel-feature-math.ts';
 import { vsSeeded } from './vs-progression.ts';
 import { EXPERIENCE_CATALOGUES, EXPERIENCE_WEIGHT_TOTAL } from './experience-outcome-catalogue.ts';
+import { MYSTERY_PRICE, selectMysteryBonus, type MysteryFeature } from './mystery-bonus.ts';
 const CASINO_MIN_STAKE = 100;
 const CASINO_MAX_STAKE = 100_000;
 /** Sandbox outcome generator. Version 4 records on-reel features before presentation; legacy generation remains for regression and saved-round compatibility. */
 
-export type PurchaseMode = 'buy' | 'yacht' | 'chopper' | 'getaway';
+export type PurchaseMode = 'buy' | 'yacht' | 'chopper' | 'getaway' | 'mystery';
 export type SplashMode = "spin" | "ante" | PurchaseMode;
-export function isPurchaseMode(mode:string):mode is PurchaseMode { return ['buy','yacht','chopper','getaway'].includes(mode); }
+export function isPurchaseMode(mode:string):mode is PurchaseMode { return ['buy','yacht','chopper','getaway','mystery'].includes(mode); }
 
 export type Sym =
   | "10"
@@ -84,7 +85,9 @@ export interface SplashFree extends SplashDrop {
 
 export interface SplashScript {
   catalogueSeed?:number;
-  generation?:'experience-v83';
+  generation?:'experience-v83' | 'experience-v86';
+  /** The selected bonus is committed before charging/presentation. */
+  mystery?: { version: 'mystery-v86'; selected: MysteryFeature };
   version?: 3 | 4;
   feature?: FeatureKind;
   mode: SplashMode;
@@ -112,6 +115,7 @@ export const SPLASH_MODE_MAX_MULT: Record<SplashMode, number> = {
   yacht: 18_000,
   chopper: SPLASH_MAX_MULT,
   getaway: SPLASH_MAX_MULT,
+  mystery: SPLASH_MAX_MULT,
 };
 export const SPLASH_COST_MAX = 1_000_000;
 
@@ -265,6 +269,7 @@ export function splashCost(stake: number, mode: SplashMode): number {
   if (mode === "buy") return stake * 100;
   if (mode === "chopper") return stake * 250;
   if (mode === 'yacht') return stake * 200;
+  if (mode === 'mystery') return stake * MYSTERY_PRICE;
   if (mode === 'getaway') return stake * 1000;
   return stake;
 }
@@ -806,14 +811,30 @@ export function cosmeticCell(rng: Rng = Math.random, reel = 2, feature = false):
   return s === "brick" ? { s, v: pick(rng, MONEY), w: 1, h: 1 } : { s };
 }
 
-export const SPLASH_MODES: SplashMode[] = ["spin", "ante", "buy", 'yacht', 'getaway'];
+export const SPLASH_MODES: SplashMode[] = ["spin", "ante", "buy", 'yacht', 'getaway', 'mystery'];
 
 /** All feature decisions are recorded before presentation. v3 replays remain supported. */
 export function generateSplashCandidate(
   stake: number,
   mode: SplashMode,
   rng: Rng = Math.random,
+  superRng?: Rng,
 ): SplashScript {
+  if (mode === 'mystery') {
+    if (!splashStakeOk(stake, mode)) throw new Error('Invalid Kilo bet');
+    const selected = selectMysteryBonus(rng);
+    // Reuse each purchased feature's existing distribution and cap. The
+    // selection never triggers a second wallet charge or an extra paid spin.
+    const round = selected === 'yacht25'
+      ? generateSplashRound(stake, mode, rng, selected)
+      : playSplash(stake, selected === 'dock' ? 'buy' : 'yacht', rng);
+    return { ...round, mode, cost: splashCost(stake, mode),
+      mystery: { version: 'mystery-v86', selected } };
+  }
+  return generateSplashRound(stake, mode, rng, undefined, superRng);
+}
+
+function generateSplashRound(stake: number, mode: SplashMode, rng: Rng, selected?: 'yacht25', superRng?: Rng): SplashScript {
   if (!SPLASH_MODES.includes(mode) || !splashStakeOk(stake, mode))
     throw new Error("Invalid Kilo bet");
   if (mode === 'chopper') throw new Error('Chopper Route has been retired.');
@@ -828,19 +849,19 @@ export function generateSplashCandidate(
   ]);
   const grid = fillGrid(rng, bought ? BASE_QUIET : baseTable, MONEY, false);
   if (bought && mode !== 'getaway')
-    forceBars(rng, grid, mode === "yacht" ? 4 : 3);
+    forceBars(rng, grid, selected === 'yacht25' ? 5 : mode === "yacht" ? 4 : 3);
   const hooked = bought ? null : hookRespin(rng, grid, MONEY);
   const scatters = scatterReels(grid);
   const feature: FeatureKind | undefined =
-    mode === "getaway"
+    selected ?? (mode === "getaway"
       ? "getaway"
       : mode === "yacht"
         ? "yacht"
         : bought || scatters === 3
             ? "dock"
-            : scatters >= 4
-              ? "yacht"
-                : undefined;
+            : scatters === 5
+              ? "yacht25"
+              : scatters === 4 ? "yacht" : undefined);
   // A real, recorded base collector. Only on non-feature landings with cargo.
   if (
     !bought &&
@@ -899,7 +920,7 @@ export function generateSplashCandidate(
             [],
             true,
           )
-        : runReelFeature(feature, stake, rng, cap - baseSum)
+        : runReelFeature(feature, stake, feature === 'yacht25' ? superRng ?? rng : rng, cap - baseSum)
       : { free: [] as SplashFree[], total: 0, capped: false };
   return {
     version: feature && feature !== 'dock' ? 4 : 3,
@@ -927,8 +948,10 @@ export function generateSplashCandidate(
   };
 }
 
-/** Weighted whole recorded outcomes. Input speed, balance and previous rounds
- * are never inputs to selection. Presentation cannot redraw an outcome. */
+/** Weighted recorded outcomes. Natural five-scatter carriers independently
+ * select a complete Super VS book before the debit, rather than repeating
+ * one rare carrier's feature forever. Both seeds are recorded. Input speed,
+ * balance and previous rounds are never inputs; presentation cannot redraw. */
 export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):SplashScript{
   if(!SPLASH_MODES.includes(mode)||!splashStakeOk(stake,mode))throw new Error('Invalid Kilo bet');
   const catalogue=EXPERIENCE_CATALOGUES[mode as keyof typeof EXPERIENCE_CATALOGUES];
@@ -937,5 +960,5 @@ export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):Spl
   let low=0,high=catalogue.length/2-1;
   while(low<high){const mid=(low+high)>>>1;if(draw<catalogue[mid*2+1]!)high=mid;else low=mid+1;}
   const seed=catalogue[low*2]!;
-  return {...generateSplashCandidate(stake,mode,vsSeeded(seed)),catalogueSeed:seed,generation:'experience-v83'};
+  return {...generateSplashCandidate(stake,mode,vsSeeded(seed),rng),catalogueSeed:seed,generation:mode === 'buy' ? 'experience-v83' : 'experience-v86'};
 }

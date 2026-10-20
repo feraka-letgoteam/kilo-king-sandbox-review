@@ -68,7 +68,7 @@ export function FeatureTakeoverView({ stake, bank, ante, anteRestriction = { hid
           {purchases.map(feature => {
             const q = purchaseQuote(stake, feature.mode, bank), visual = PURCHASE_PRESENTATION[feature.mode];
             return <article className="kf-card" data-feature={feature.mode} key={feature.id} style={{ '--feature-accent': visual.accent } as CSSProperties}>
-              <div className="kf-art-wrap"><img className="kf-art" src={visual.art} alt="" decoding="async"/><span className="kf-art-title" aria-hidden="true">{feature.mode === 'getaway' ? 'MAX' : feature.mode === 'yacht' ? 'VS' : 'CATCH'}</span></div>
+              <div className="kf-art-wrap"><img className="kf-art" src={visual.art} alt="" decoding="async"/><span className="kf-art-title" aria-hidden="true">{feature.mode === 'getaway' ? 'MAX' : feature.mode === 'yacht' ? 'VS' : feature.mode === 'mystery' ? '?' : 'CATCH'}</span></div>
               <div className="kf-card-copy"><span className="kf-kicker">{visual.kicker}</span><h2>{feature.title}</h2><p className={feature.mode === 'getaway' ? 'kf-summary kf-warning' : 'kf-summary'}>{visual.summary}</p></div>
               <div className="kf-purchase-row">
                 <div className="kf-price"><strong>{amount(q.cost)}</strong><span>{feature.multiple.toLocaleString('en-US')}× base bet{feature.mode === 'getaway' ? ' / spin' : ''}</span></div>

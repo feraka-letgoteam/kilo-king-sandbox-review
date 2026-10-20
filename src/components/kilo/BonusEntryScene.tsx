@@ -69,10 +69,10 @@ export function BonusEntryScene({
           </div>
         </div>
         <h2 className="ks-entry-heading">{round.feature==='getaway'?'Cases · three checkpoints':'Free spins'}</h2>
-        {round.version===3&&round.feature&&round.feature!=='dock'?<p className="ks-entry-modifiers">{({yacht:"Lock cargo · dispatch shipments · improve the next load",route:"Follow the pickup column · build ×5 delivery routes",getaway:"Double the cases · reveal your extraction multiplier"} as const)[round.feature]}</p>:<p className="ks-entry-multiplier">
-          <span>Starting multiplier</span>
+        {round.version===3&&round.feature&&round.feature!=='dock'?<p className="ks-entry-modifiers">{({yacht:"Lock cargo · dispatch shipments · improve the next load",yacht25:"Reel one starts with a winning ×25 VS",route:"Follow the pickup column · build ×5 delivery routes",getaway:"Double the cases · reveal your extraction multiplier"} as const)[round.feature]}</p>:<p className="ks-entry-multiplier">
+          <span>{round.feature==='yacht25'?'Reel 1 · first spin':'Starting multiplier'}</span>
           <strong data-testid="entry-multiplier">
-            ×{collectMult(round.banked)}
+            ×{round.feature==='yacht25'?25:collectMult(round.banked)}
           </strong>
         </p>}
         {modifiers && (

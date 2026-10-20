@@ -7,7 +7,7 @@ export function FeatureProgress({ event: e }: { event: FeatureEvent }) {
     const r = e.reel;
     const largest = r.type === 'vs' ? vsGroupsFor(r).sort((a,b)=>b.width-a.width||b.multiplier-a.multiplier)[0] : null;
     return <div className="kk-feature-progress" data-kind={e.kind}>
-      <span>{r.type === 'vs' ? 'Kilo King VS' : r.type === 'tumble' ? 'Chopper Route' : 'The Getaway'}</span>
+      <span>{r.type === 'vs' ? e.kind === 'yacht25' ? 'Super Yacht VS' : 'Kilo King VS' : r.type === 'tumble' ? 'Chopper Route' : 'The Getaway'}</span>
       <strong>{r.type === 'vs' ? largest ? `${largest.width}-reel ×${largest.multiplier.toLocaleString('en-US')}` : 'VS ready' : r.type === 'tumble' ? `×${r.globalAfter}` : '1 spin'}</strong>
       <small>{r.type === 'binary' ? 'Max win or nothing' : r.type === 'vs' && r.rules === 'pure-vs' ? `${r.after.length} / 5 reels locked` : `${e.heldAfter.length} cash locked`}</small>
     </div>;

@@ -1932,7 +1932,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       bonusEnter(round.mode, round.feature);
       host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'entry'}}));
       if (round.version === 4) { await reelFeatureEffects.intro(round); return; }
-      const names={dock:'One marked package survives one more spin',yacht:'Lock cargo · dispatch shipments · improve cargo quality',route:'One column per spin · deliver every five pickups',getaway:'Load three cases · clear three checkpoints · extract'};
+      const names={dock:'One marked package survives one more spin',yacht:'Lock cargo · dispatch shipments · improve cargo quality',yacht25:'Reel one starts with a winning ×25 VS',route:'One column per spin · deliver every five pickups',getaway:'Load three cases · clear three checkpoints · extract'};
       await ceremony('entry',FEATURE_NAMES[round.feature!],round.feature==='getaway'?'3 cases · 3 checkpoints':`${round.awarded} free spins`,names[round.feature!],turbo?1100:2200);
     },
     setStake(n) {

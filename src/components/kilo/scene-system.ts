@@ -328,7 +328,7 @@ export const SCENES: Readonly<Record<SceneId, SceneDefinition>> = {
 /** Never infer the tier from awarded spins: a recorded modifier may add two. */
 export function sceneForRound(round: SplashScript | null | undefined): SceneId {
   if (!round?.free.length) return "base";
-  if((round.version===3||round.version===4)&&round.feature)return ({dock:"scatter-3",yacht:"scatter-4",route:"chopper",getaway:"max-win"} as const)[round.feature];
+  if((round.version===3||round.version===4)&&round.feature)return ({dock:"scatter-3",yacht:"scatter-4",yacht25:"scatter-4",route:"chopper",getaway:"max-win"} as const)[round.feature];
   if (round.mode === "chopper") return "chopper";
   if (round.mode === "buy") return "scatter-3";
   if (round.base.scatters >= 5) return "scatter-5";

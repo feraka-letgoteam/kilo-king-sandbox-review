@@ -1,0 +1,68 @@
+{
+  "checkpoint": "7e6105e6975e6a6a9128eb4f0f13d13d41bf3bab",
+  "stake": 1000,
+  "localCandidate": true,
+  "super": {
+    "outcomes": 12831,
+    "meanMultiple": 3966.7468178071954,
+    "capMultiple": 25000,
+    "capProbability": 0.00592075
+  },
+  "mystery": {
+    "cost": 200,
+    "weights": {
+      "dock": 500000000,
+      "yacht": 487353573,
+      "yacht25": 12646427
+    },
+    "totalWeight": 1000000000,
+    "returnOverCost": 0.9550000075771031
+  },
+  "base": [
+    {
+      "mode": "spin",
+      "price": 1,
+      "expected": 0.9550000000763103,
+      "returnOverCost": 0.9550000000763103,
+      "naturalFive": [
+        {
+          "seed": 83015248,
+          "weight": 3230,
+          "oldExpected": 240,
+          "newExpected": 4165.560209361695,
+          "triggerMultiple": 200
+        }
+      ],
+      "fiveProbability": 0.00000323,
+      "originalUnrebalancedReturn": 0.9676795594763028,
+      "lineOnlyWeight": 185000000,
+      "changedLineSeeds": 5902,
+      "allOtherWeightsUnchanged": true
+    },
+    {
+      "mode": "ante",
+      "price": 1.5,
+      "expected": 1.4325000000435466,
+      "returnOverCost": 0.9550000000290311,
+      "naturalFive": [
+        {
+          "seed": 93018744,
+          "weight": 7850,
+          "oldExpected": 288.4,
+          "newExpected": 4165.560209361695,
+          "triggerMultiple": 200
+        }
+      ],
+      "fiveProbability": 0.00000785,
+      "originalUnrebalancedReturn": 0.9752904717623362,
+      "lineOnlyWeight": 185000000,
+      "changedLineSeeds": 5766,
+      "allOtherWeightsUnchanged": true
+    }
+  ],
+  "caveats": [
+    "Local candidate, not certified or published Stake Engine math.",
+    "Mystery price and odds are proposed sandbox defaults, not an operator-approved commercial configuration.",
+    "Natural five-scatter rounds compose a recorded base carrier and independent weighted Super VS record; a production outcome book must flatten and publish that contract."
+  ]
+}

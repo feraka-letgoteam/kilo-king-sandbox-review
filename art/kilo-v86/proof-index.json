@@ -1,0 +1,115 @@
+{
+  "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+  "proofs": [
+    {
+      "id": "entry-super-1440x900",
+      "file": "proofs/entry-super-1440x900.mp4",
+      "sha256": "ff7f74c16be83c8fae7e29beb05d3a370884e43ab7e201f01f491be1a4377d17",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        1440,
+        900
+      ],
+      "fps": "15/1",
+      "durationMs": 2266.6666666666656,
+      "finalWin": 0,
+      "credits": [],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    },
+    {
+      "id": "entry-super-390x844",
+      "file": "proofs/entry-super-390x844.mp4",
+      "sha256": "481d0d001ac9e15a26a1f2a44c528a11aaf653defd72f8dedbebb2ff00469d18",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        390,
+        844
+      ],
+      "fps": "15/1",
+      "durationMs": 2266.6666666666656,
+      "finalWin": 0,
+      "credits": [],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    },
+    {
+      "id": "vs-super-opening-1440x900",
+      "file": "proofs/vs-super-opening-1440x900.mp4",
+      "sha256": "63b3c0342cf17acc651ea13034dc8b642cb372f8b317c1d84da1c1e909f59205",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        1440,
+        900
+      ],
+      "fps": "15/1",
+      "durationMs": 3833.3333333333394,
+      "finalWin": 5000,
+      "credits": [
+        {
+          "value": 5000,
+          "ms": 3033.3333333333358
+        }
+      ],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    },
+    {
+      "id": "vs-super-opening-390x844",
+      "file": "proofs/vs-super-opening-390x844.mp4",
+      "sha256": "6a6698d9a287a2a266cfd1bd4a2364c0dd0fd2d3b41ac2835b3db84edebf9d61",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        390,
+        844
+      ],
+      "fps": "15/1",
+      "durationMs": 3833.3333333333394,
+      "finalWin": 5000,
+      "credits": [
+        {
+          "value": 5000,
+          "ms": 3033.3333333333358
+        }
+      ],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    },
+    {
+      "id": "vs-super-merge-1440x900",
+      "file": "proofs/vs-super-merge-1440x900.mp4",
+      "sha256": "156aa0877730800d4a2f166b96683c4bafe5b0d05cecd7b3bbbdddb5368ed22c",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        1440,
+        900
+      ],
+      "fps": "15/1",
+      "durationMs": 4833.333333333334,
+      "finalWin": 1670000,
+      "credits": [
+        {
+          "value": 1475000,
+          "ms": 4033.3333333333403
+        }
+      ],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    },
+    {
+      "id": "vs-super-merge-390x844",
+      "file": "proofs/vs-super-merge-390x844.mp4",
+      "sha256": "ecd081e58478ea41d4fc3c7f8ebee3b72eb5b2408ae9e385c7a3486e410c2f9e",
+      "sourceFingerprint": "0bfae4a1b7bf1b34b312c000b5b5c280f01c06357c205e9aaa8f9be62780595c",
+      "viewport": [
+        390,
+        844
+      ],
+      "fps": "15/1",
+      "durationMs": 4833.333333333334,
+      "finalWin": 1670000,
+      "credits": [
+        {
+          "value": 1475000,
+          "ms": 4033.3333333333403
+        }
+      ],
+      "method": "Offline production controller + CPU canvas, silent, instrumented WIN target; not live browser or complete React UI."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import type { Rng, SplashCell, SplashFree } from "./engine";
 import type { ReelFeature } from "./reel-feature-math";
 
-export type FeatureKind = "dock" | "yacht" | "route" | "getaway";
+export type FeatureKind = "dock" | "yacht" | "yacht25" | "route" | "getaway";
 export type Cargo = { id: number; reel: number; row: number; value: number };
 export type FeatureEvent = {
   /** v52 reel-based features. Historical events retain their v51 contract. */
@@ -43,12 +43,14 @@ export type FeatureEvent = {
 export const FEATURE_NAMES: Record<FeatureKind, string> = {
   dock: "Dockside Catch",
   yacht: "Yacht Stash",
+  yacht25: "Super Yacht Stash",
   route: "Chopper Route",
   getaway: "The Getaway",
 };
 export const FEATURE_SPINS = {
   dock: 10,
   yacht: 15,
+  yacht25: 15,
   route: 20,
   getaway: 5,
 } as const;
@@ -172,7 +174,7 @@ export function featureEvent(kind: FeatureKind, id: string): FeatureEvent {
 }
 /** A complete finite recorded feature. No state escapes this paid round. */
 export function runCargoFeature(
-  kind: Exclude<FeatureKind, "dock">,
+  kind: Exclude<FeatureKind, "dock" | "yacht25">,
   stake: number,
   rng: Rng,
   room: number,

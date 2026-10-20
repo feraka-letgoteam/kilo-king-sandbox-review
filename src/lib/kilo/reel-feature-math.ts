@@ -2,7 +2,7 @@ import { PAYLINES, lineHit, type Rng, type SplashCell, type SplashFree, type Spl
 import { featureEvent, weighted, type Cargo, type FeatureEvent } from './feature-math.ts';
 import { maxRevealFromDraw, type MaxReveal } from './max-spin-reveal.ts';
 import { groupVsReels, vsLineMultiplier, VS_COMBINING_RULE, type VsCombiningRule, type VsGroup } from './vs-groups.ts';
-import { planVsProgression, vsSeeded } from './vs-progression.ts';
+import { planVsProgression, planSuperVsProgression, vsSeeded } from './vs-progression.ts';
 import { VS_OUTCOME_CATALOGUE, VS_CATALOGUE_TOTAL_WEIGHT, VS_CATALOGUE_VERSION } from './vs-outcome-catalogue.ts';
 
 export type Grid = SplashCell[][];
@@ -19,7 +19,7 @@ export type Cascade = {
   marksBefore: number[][]; marksAfter: number[][];
 };
 export type YachtReels = {
-  distribution?: 'pacing-v60' | 'progression-v82';
+  distribution?: 'pacing-v60' | 'progression-v82' | 'super-vs-v86';
   catalogueSeed?: number;
   /** Absent on historical additive-per-reel records; never infer from sides. */
   combining?: VsCombiningRule;
@@ -52,7 +52,7 @@ export const REEL_FEATURE_PROFILE = {
 };
 export const TUMBLE_MAX_MULTIPLIER = 128;
 export const TUMBLE_MAX_LOCKS = 4;
-export const REEL_FEATURE_SPINS = { yacht: 15, route: 20, getaway: 1 } as const;
+export const REEL_FEATURE_SPINS = { yacht: 15, yacht25: 15, route: 20, getaway: 1 } as const;
 export const CLUSTER_SYMBOLS: Sym[] = ['10', 'J', 'Q', 'K', 'A', 'duffel'];
 function clusterSymbol(rng: Rng, lead = 0): Sym {
   const index = weighted(rng, REEL_FEATURE_PROFILE.clusterWeights.map((weight, index) => [index, weight]));
@@ -149,8 +149,8 @@ export function refillTumble(before: Grid, cleared: Spot[], rng: Rng, lead = 0):
 }
 
 /** Complete immutable feature record. RNG never runs in the renderer or after settlement. */
-export function runReelFeature(kind: 'yacht' | 'route' | 'getaway', stake: number, rng: Rng, room: number) {
-  if (kind !== 'yacht') return runReelFeatureCandidate(kind, stake, rng, room);
+export function runReelFeature(kind: 'yacht' | 'yacht25' | 'route' | 'getaway', stake: number, rng: Rng, room: number) {
+  if (kind !== 'yacht' && kind !== 'yacht25') return runReelFeatureCandidate(kind, stake, rng, room);
   const draw = Math.min(VS_CATALOGUE_TOTAL_WEIGHT - 1, Math.floor(rng() * VS_CATALOGUE_TOTAL_WEIGHT));
   let lo = 0, hi = VS_OUTCOME_CATALOGUE.length / 2 - 1;
   while (lo < hi) { const mid = (lo + hi) >>> 1;
@@ -162,7 +162,7 @@ export function runReelFeature(kind: 'yacht' | 'route' | 'getaway', stake: numbe
 }
 
 /** Offline catalogue producer and deterministic replay. No payout scaling or outcome mutation. */
-export function runReelFeatureCandidate(kind: 'yacht' | 'route' | 'getaway', stake: number, rng: Rng, room: number) {
+export function runReelFeatureCandidate(kind: 'yacht' | 'yacht25' | 'route' | 'getaway', stake: number, rng: Rng, room: number) {
   const bank = budget(room), free: SplashFree[] = [];
   if (kind === 'getaway') {
     const outcomeDraw = rng();
@@ -184,7 +184,7 @@ export function runReelFeatureCandidate(kind: 'yacht' | 'route' | 'getaway', sta
   let marks = Array.from({ length: 5 }, () => [1, 1, 1]);
   const count = REEL_FEATURE_SPINS[kind];
   // Opening, development and closing encounters are committed together.
-  const arrivals = kind === 'yacht' ? planVsProgression(rng) : [];
+  const arrivals = kind === 'yacht25' ? planSuperVsProgression(rng) : kind === 'yacht' ? planVsProgression(rng) : [];
   for (let spin = 0; spin < count && !bank.capped; spin++) {
     const e = featureEvent(kind, `${kind}:reels:${spin}`), startTotal = bank.total;
     e.heldBefore = clone(held); e.pendingBefore = sum(held); e.final = spin === count - 1;
@@ -194,7 +194,7 @@ export function runReelFeatureCandidate(kind: 'yacht' | 'route' | 'getaway', sta
     const lead = kind === 'route' ? weighted(rng, REEL_FEATURE_PROFILE.clusterLeadWeights) : 0;
     const landed = normalGrid(rng, kind === 'route', lead);
     held.forEach(p => putCash(landed, p, stake));
-    if (kind === 'yacht') {
+    if (kind === 'yacht' || kind === 'yacht25') {
       const before = clone(wilds), conversions: VsConversion[] = [];
       putWilds(landed, wilds);
       for (let reel = 0; reel < 5; reel++) {
@@ -230,7 +230,7 @@ export function runReelFeatureCandidate(kind: 'yacht' | 'route' | 'getaway', sta
         lineBeforeCap += award.beforeCap;
         if (award.credited) lines.push({ i: index, s: hit.s, n: hit.n, pay: award.credited });
       });
-      e.reel = { type: 'vs', distribution: VS_CATALOGUE_VERSION, rules: 'pure-vs', before, after: clone(wilds), conversions, collectGrid,
+      e.reel = { type: 'vs', distribution: kind === 'yacht25' ? 'super-vs-v86' : VS_CATALOGUE_VERSION, rules: 'pure-vs', before, after: clone(wilds), conversions, collectGrid,
         combining: VS_COMBINING_RULE, groupsBefore: groupVsReels(before), groupsAfter: groupVsReels(wilds),
         collectors, collection, finalCash, finalSources, lines, lineBeforeCap, finalGrid };
       e.action = 'duel'; e.sources = [];
