@@ -1,4 +1,4 @@
-import { Container, Sprite, type Text, type Ticker } from 'pixi.js';
+import { Container, Graphics, Sprite, type Text, type Ticker } from 'pixi.js';
 import { createWinNumeral, connectedNumberScale } from './win-type';
 
 /**
@@ -251,4 +251,78 @@ export function createWinFeel(host: WinFeelHost) {
       touched.clear();
     },
   };
+}
+
+/** Per-symbol landing accents, played on the cell container the moment its
+ * reel locks. Self-contained (own tween, own restore), so anticipation or a
+ * slow-down can wrap around it without sharing state. Reuses the landed
+ * drawing; no new art. Every length is capped by the caller's window. */
+export const LAND_ACCENT = {
+  /** Fish/value packages: a small rotational flop. */
+  flopMs: 160, flopTurn: 0.07,
+  /** Bobber: a dip-and-rise bob, fraction of a cell. */
+  bobMs: 160, bobDepth: 0.045,
+  /** King scatter / collector wild: pop peak, glow alpha, lengths. */
+  popScale: 1.07, glowAlpha: 0.5, scatterMs: 260, wildMs: 170,
+  /** King scatter shine band: width as a fraction of the cell. */
+  shineWidth: 0.2,
+} as const;
+
+export type LandAccent = 'flop' | 'bob' | 'scatter' | 'wild';
+export function landAccentKind(sym: string | undefined): LandAccent | null {
+  return sym === 'brick' ? 'flop' : sym === 'cuffs' ? 'bob' : sym === 'bars' ? 'scatter' : sym === 'splash' ? 'wild' : null;
+}
+
+type Tween = (ms: number, step: (t: number) => void) => Promise<void>;
+const copyPose = (to: Sprite, from: Sprite) => {
+  to.texture = from.texture; to.anchor.copyFrom(from.anchor); to.scale.copyFrom(from.scale);
+  to.position.copyFrom(from.position); to.rotation = from.rotation;
+};
+
+export function playLandAccent(view: Container, sym: string | undefined, cell: number, maxMs: number, tween: Tween) {
+  const kind = landAccentKind(sym);
+  if (!kind || view.destroyed || view.label === 'duel-trigger') return Promise.resolve();
+  const source = view.children.find((c): c is Sprite => c instanceof Sprite);
+  const home = { y: view.y, rotation: view.rotation, sx: view.scale.x, sy: view.scale.y };
+  const base = kind === 'flop' ? LAND_ACCENT.flopMs : kind === 'bob' ? LAND_ACCENT.bobMs
+    : kind === 'scatter' ? LAND_ACCENT.scatterMs : LAND_ACCENT.wildMs;
+  const ms = Math.min(base, maxMs);
+  const extras: Container[] = [];
+  let glow: Sprite | null = null, band: Graphics | null = null;
+  const peak = kind === 'scatter' || kind === 'wild' ? fitScale(view, cell, LAND_ACCENT.popScale) : 1;
+  if ((kind === 'scatter' || kind === 'wild') && source) {
+    glow = new Sprite(source.texture); glow.blendMode = 'add'; glow.alpha = 0; glow.eventMode = 'none';
+    view.addChild(glow); extras.push(glow);
+  }
+  if (kind === 'scatter' && source) {
+    // A light band masked to the crown's own silhouette sweeps across it.
+    const mask = new Sprite(source.texture); copyPose(mask, source);
+    band = new Graphics(); band.blendMode = 'add'; band.eventMode = 'none';
+    const w = cell * LAND_ACCENT.shineWidth;
+    for (let i = 0; i < 6; i++) {
+      const a = Math.sin(Math.PI * (i + .5) / 6) * .55;
+      band.rect(-w / 2 + i * w / 6, -cell, w / 6 + .5, cell * 2).fill({ color: 0xfff3c4, alpha: a });
+    }
+    band.rotation = 0.42; band.mask = mask;
+    view.addChild(mask, band); extras.push(mask, band);
+  }
+  return tween(ms, (t) => {
+    if (view.destroyed) return;
+    if (t >= 1) {
+      view.y = home.y; view.rotation = home.rotation; view.scale.set(home.sx, home.sy);
+      for (const item of extras) if (!item.destroyed) item.destroy();
+      return;
+    }
+    if (kind === 'flop') view.rotation = home.rotation + LAND_ACCENT.flopTurn * Math.sin(3 * Math.PI * t) * (1 - t);
+    else if (kind === 'bob') view.y = home.y + cell * LAND_ACCENT.bobDepth * Math.sin(2 * Math.PI * t) * (1 - t);
+    else {
+      const s = 1 + (peak - 1) * Math.sin(Math.PI * t);
+      view.scale.set(home.sx * s, home.sy * s);
+      if (glow && source && !glow.destroyed && !source.destroyed) {
+        copyPose(glow, source); glow.scale.set(source.scale.x * (1 + .12 * t), source.scale.y * (1 + .12 * t));
+        glow.alpha = LAND_ACCENT.glowAlpha * (1 - t);
+      }
+      if (band && !band.destroyed) band.x = cell * (-0.1 + 1.2 * t);
+    }
+  });
 }

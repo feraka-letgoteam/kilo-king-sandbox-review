@@ -18,7 +18,7 @@ import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
 import { KING_THROW_RELEASE, KING_DYNAMITE_STICK, KING_PARTS_USE, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
 import { articulateArt, restoreArticulation } from './articulation';
-import { createWinFeel, amountSpots, REEL_BOUNCE, reelBounceAt } from './reel-feel';
+import { createWinFeel, amountSpots, REEL_BOUNCE, reelBounceAt, playLandAccent } from './reel-feel';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
 import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import { SYMBOL_LABELS } from "./symbol-labels";
@@ -1605,6 +1605,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     // A reel landed with no cells above it (pad 0) skips it rather than
     // showing an empty strip edge.
     const bounceMs = REEL_BOUNCE.ms[speedMode], bounceDepth = cell * REEL_BOUNCE.depth[speedMode];
+    // Reel-feel: per-symbol land accents (fish flop, bobber bob, crown and
+    // wild pop + glow, crown shine), each inside this reel's lock window.
+    const landAccents = (spin: Spin) => {
+      for (let row = 0; row < 3; row++) {
+        const view = spin.strip.children[spin.pad + row] as Container | undefined;
+        const sym = grid[spin.reel]?.[row]?.s;
+        if (view) void playLandAccent(view, sym, cell, sym === "bars" ? scatterTailMs : lockMs, tween);
+      }
+    };
     const landBounce = (spin: Spin, now: number) =>
       spin.pad > 0 && bounceMs > 0 ? bounceDepth * reelBounceAt((now - spin.landedAt) / bounceMs) : 0;
     const noteLand = (spin: Spin, now: number) => {
@@ -1668,6 +1677,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             : [];
         });
         setStreak(spin.reel, 0);
+        landAccents(spin);
         noteLand(spin, now);
         landedNow = true;
       };
