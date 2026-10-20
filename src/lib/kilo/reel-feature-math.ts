@@ -150,16 +150,22 @@ export function refillTumble(before: Grid, cleared: Spot[], rng: Rng, lead = 0):
 }
 
 /** Complete immutable feature record. RNG never runs in the renderer or after settlement. */
-export function runReelFeature(kind: 'yacht' | 'yacht25' | 'route' | 'getaway', stake: number, rng: Rng, room: number) {
+export function runReelFeature(kind: 'yacht' | 'yacht25' | 'route' | 'getaway', stake: number, rng: Rng, room: number, vsSeed?: number) {
   if (kind !== 'yacht' && kind !== 'yacht25') return runReelFeatureCandidate(kind, stake, rng, room);
+  // Phase 2: a book entry may name its VS seed directly (bought Yacht, Mystery picks).
+  const seed = vsSeed ?? drawVsSeed(rng);
+  const record = runReelFeatureCandidate(kind, stake, vsSeeded(seed), room);
+  for (const spin of record.free) if (spin.mechanic?.reel?.type === 'vs') spin.mechanic.reel.catalogueSeed = seed;
+  return record;
+}
+
+/** Weighted draw of one VS book seed. */
+export function drawVsSeed(rng: Rng): number {
   const draw = Math.min(VS_CATALOGUE_TOTAL_WEIGHT - 1, Math.floor(rng() * VS_CATALOGUE_TOTAL_WEIGHT));
   let lo = 0, hi = VS_OUTCOME_CATALOGUE.length / 2 - 1;
   while (lo < hi) { const mid = (lo + hi) >>> 1;
     if (draw < VS_OUTCOME_CATALOGUE[mid * 2 + 1]!) hi = mid; else lo = mid + 1; }
-  const seed = VS_OUTCOME_CATALOGUE[lo * 2]!;
-  const record = runReelFeatureCandidate(kind, stake, vsSeeded(seed), room);
-  for (const spin of record.free) if (spin.mechanic?.reel?.type === 'vs') spin.mechanic.reel.catalogueSeed = seed;
-  return record;
+  return VS_OUTCOME_CATALOGUE[lo * 2]!;
 }
 
 /** Offline catalogue producer and deterministic replay. No payout scaling or outcome mutation. */

@@ -6,8 +6,8 @@ export const MYSTERY_PRICE = 200;
 export const MYSTERY_WEIGHT_TOTAL = 1_000_000_000;
 export const MYSTERY_BONUSES = [
   { feature: 'dock', weight: 500_000_000 },
-  { feature: 'yacht', weight: 487353573 },
-  { feature: 'yacht25', weight: 12646427 },
+  { feature: 'yacht', weight: 487016278 },
+  { feature: 'yacht25', weight: 12983722 },
 ] as const;
 export type MysteryFeature = (typeof MYSTERY_BONUSES)[number]['feature'];
 export function selectMysteryBonus(rng: Rng): MysteryFeature {

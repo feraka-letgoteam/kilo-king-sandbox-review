@@ -1,8 +1,9 @@
 import { FEATURE_PROFILE, cargoAt, FEATURE_SPINS, type FeatureKind, type FeatureEvent, type Cargo } from './feature-math.ts';
-import { runReelFeature, REEL_FEATURE_SPINS } from './reel-feature-math.ts';
+import { runReelFeature, drawVsSeed, REEL_FEATURE_SPINS } from './reel-feature-math.ts';
 import { vsSeeded } from './vs-progression.ts';
 import { EXPERIENCE_CATALOGUES, EXPERIENCE_WEIGHT_TOTAL } from './experience-outcome-catalogue.ts';
 import { MYSTERY_PRICE, selectMysteryBonus, type MysteryFeature } from './mystery-bonus.ts';
+import { MYSTERY_OUTCOME_CATALOGUES, MYSTERY_COMPONENT_TOTAL } from './mystery-outcome-catalogue.ts';
 const CASINO_MIN_STAKE = 100;
 const CASINO_MAX_STAKE = 100_000;
 /** Sandbox outcome generator. Version 4 records on-reel features before presentation; legacy generation remains for regression and saved-round compatibility. */
@@ -87,7 +88,7 @@ export interface SplashScript {
   catalogueSeed?:number;
   generation?:'experience-v83' | 'experience-v86' | 'experience-p2';
   /** The selected bonus is committed before charging/presentation. */
-  mystery?: { version: 'mystery-v86'; selected: MysteryFeature };
+  mystery?: { version: 'mystery-v86' | 'mystery-p2'; selected: MysteryFeature };
   version?: 3 | 4;
   feature?: FeatureKind;
   mode: SplashMode;
@@ -802,19 +803,15 @@ export function generateSplashCandidate(
 ): SplashScript {
   if (mode === 'mystery') {
     if (!splashStakeOk(stake, mode)) throw new Error('Invalid Kilo bet');
+    // Phase 2: Mystery is its own book. Pick the feature, then one recorded entry of
+    // that feature's Mystery catalogue. No second wallet charge or extra paid spin.
     const selected = selectMysteryBonus(rng);
-    // Reuse each purchased feature's existing distribution and cap. The
-    // selection never triggers a second wallet charge or an extra paid spin.
-    const round = selected === 'yacht25'
-      ? generateSplashRound(stake, mode, rng, selected)
-      : playSplash(stake, selected === 'dock' ? 'buy' : 'yacht', rng);
-    return { ...round, mode, cost: splashCost(stake, mode),
-      mystery: { version: 'mystery-v86', selected } };
+    return mysteryRound(stake, selected, drawCatalogueSeed(MYSTERY_OUTCOME_CATALOGUES[selected], MYSTERY_COMPONENT_TOTAL, rng));
   }
   return generateSplashRound(stake, mode, rng, undefined, superRng);
 }
 
-function generateSplashRound(stake: number, mode: SplashMode, rng: Rng, selected?: 'yacht25', superRng?: Rng): SplashScript {
+function generateSplashRound(stake: number, mode: SplashMode, rng: Rng, selected?: 'yacht25', superRng?: Rng, vsSeed?: number): SplashScript {
   if (!SPLASH_MODES.includes(mode) || !splashStakeOk(stake, mode))
     throw new Error("Invalid Kilo bet");
   if (mode === 'chopper') throw new Error('Chopper Route has been retired.');
@@ -900,7 +897,7 @@ function generateSplashRound(stake: number, mode: SplashMode, rng: Rng, selected
             [],
             true,
           )
-        : runReelFeature(feature, stake, feature === 'yacht25' ? superRng ?? rng : rng, cap - baseSum)
+        : runReelFeature(feature, stake, feature === 'yacht25' ? superRng ?? rng : rng, cap - baseSum, vsSeed)
       : { free: [] as SplashFree[], total: 0, capped: false };
   return {
     version: feature && feature !== 'dock' ? 4 : 3,
@@ -934,6 +931,7 @@ function generateSplashRound(stake: number, mode: SplashMode, rng: Rng, selected
  * balance and previous rounds are never inputs; presentation cannot redraw. */
 export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):SplashScript{
   if(!SPLASH_MODES.includes(mode)||!splashStakeOk(stake,mode))throw new Error('Invalid Kilo bet');
+  if(mode==='yacht')return yachtRound(stake,drawVsSeed(rng));
   const catalogue=EXPERIENCE_CATALOGUES[mode as keyof typeof EXPERIENCE_CATALOGUES];
   if(!catalogue?.length)return generateSplashCandidate(stake,mode,rng);
   const draw=Math.min(EXPERIENCE_WEIGHT_TOTAL-1,Math.floor(rng()*EXPERIENCE_WEIGHT_TOTAL));
@@ -943,6 +941,28 @@ export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):Spl
   // Phase 2: a natural five-scatter round is one book entry with its own fixed
   // Super VS seed. Nothing after the catalogue draw consumes the live RNG.
   return {...generateSplashCandidate(stake,mode,vsSeeded(seed),vsSeeded(naturalSuperSeed(seed))),catalogueSeed:seed,generation:'experience-p2'};
+}
+/** Binary search of an interleaved [seed, cumulative weight] catalogue. */
+export function drawCatalogueSeed(catalogue: ArrayLike<number>, total: number, rng: Rng): number {
+  const draw = Math.min(total - 1, Math.floor(rng() * total));
+  let low = 0, high = catalogue.length / 2 - 1;
+  while (low < high) { const mid = (low + high) >>> 1; if (draw < catalogue[mid * 2 + 1]!) high = mid; else low = mid + 1; }
+  return catalogue[low * 2]!;
+}
+/** One bought-Yacht book entry: trigger grid and VS record both fixed by the VS seed. */
+export function yachtRound(stake: number, vsSeed: number): SplashScript {
+  return { ...generateSplashRound(stake, 'yacht', vsSeeded(vsSeed), undefined, undefined, vsSeed), catalogueSeed: vsSeed, generation: 'experience-p2' };
+}
+/** One Mystery book entry, fully determined by (feature, seed). */
+export function mysteryRound(stake: number, selected: MysteryFeature, seed: number): SplashScript {
+  if (!splashStakeOk(stake, 'mystery')) throw new Error('Invalid Kilo bet');
+  const round = selected === 'dock'
+    ? generateSplashCandidate(stake, 'buy', vsSeeded(seed), vsSeeded(naturalSuperSeed(seed)))
+    : selected === 'yacht'
+      ? generateSplashRound(stake, 'yacht', vsSeeded(seed), undefined, undefined, seed)
+      : generateSplashRound(stake, 'mystery', vsSeeded(seed), 'yacht25', undefined, seed);
+  return { ...round, mode: 'mystery', cost: splashCost(stake, 'mystery'), catalogueSeed: seed, generation: 'experience-p2',
+    mystery: { version: 'mystery-p2', selected } };
 }
 /** Fixed Super VS seed paired with a natural five-scatter base seed. */
 export function naturalSuperSeed(seed:number):number{return (Math.imul(seed>>>0,0x9E3779B1)^0x5EED2501)>>>0;}
