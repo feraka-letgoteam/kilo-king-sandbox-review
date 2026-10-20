@@ -1,6 +1,6 @@
 import definition from '../../../public/kilo-v79/characters/king-stage.json';
 import { paintKingMesh, kingMeshPoint } from './stage-character-mesh';
-import { KING_ARM_ASSETS, KING_STAGE_CANVAS, paintKingLeftArm, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
+import { KING_ARM_ASSETS, KING_STAGE_CANVAS, curve as toolCurve, paintKingLeftArm, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
 
 export const STAGE_KING = definition;
 export const STAGE_KING_URLS = [definition.image, definition.blink.image, definition.reaction.image, ...Object.values(KING_ARM_ASSETS)] as const;
@@ -101,12 +101,15 @@ export function kingToolFrame(frame:StageKingFrame,tool:KingToolAction|null,redu
   if(!tool||reduced)return frame;
   const t=clamp(tool.progress),s=(v:number)=>{const n=clamp(v);return n*n*(3-2*n);};
   if(tool.kind==='cast'){
-    const load=s(t/.26),release=s((t-.26)/.22),recover=s((t-.54)/.46);
     return {...frame,
-      brace:frame.brace+1.3*load-2.1*release+.8*recover,nod:frame.nod-.45*load+.7*release-.25*recover};
+      brace:frame.brace+toolCurve(t,[[0,0],[.24,1.3],[.33,-.8],[.6,-.6],[.9,1.0],[1,0]]),
+      nod:frame.nod+toolCurve(t,[[0,0],[.24,-.45],[.33,.25],[.6,.2],[.9,-.3],[1,0]])};
   }
-  const effort=Math.sin(Math.PI*t)**2;
-  return {...frame,brace:frame.brace-.8*effort,nod:frame.nod-.45*effort,look:frame.look-.4*effort};
+  // Lean back into the reach-back, drive forward through release, settle.
+  return {...frame,
+    brace:frame.brace+toolCurve(t,[[0,0],[.33,.9],[.42,-1.2],[.62,-.9],[1,0]]),
+    nod:frame.nod+toolCurve(t,[[0,0],[.33,-.35],[.42,.45],[.62,.3],[1,0]]),
+    look:frame.look+toolCurve(t,[[0,0],[.33,-.2],[.42,-.6],[.62,-.5],[1,0]])};
 }
 
 /** Six registered expressions: neutral, strain, joy, loss, half blink, blink.

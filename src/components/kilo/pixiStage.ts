@@ -2618,7 +2618,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         actorTool('cast',0);
         await tween(turbo ? 180 : 360, (t) => {
           if (!hook || hook.destroyed) return;
-          actorTool('cast',t);
+          actorTool('cast',t*.6);
           // The rod loads and casts before the hook begins its original descent.
           const descend=Math.max(0,(t-.45)/.55);
           const e = 1 - (1 - descend) ** 3;
@@ -2638,11 +2638,13 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             if (!hook || hook.destroyed) return;
             const e = t * t * (3 - 2 * t);
             const pull = (up ? -1 : 1) * cell * e;
+            actorTool('cast',.6+.4*t);
             strip.y = pull;
             hook.position.set(x, eye + pull * 0.28);
             hook.rotation = 0;
             rope(3);
           });
+        actorTool('cast',1);
         strip.scale.set(1);
         if (mine === job) {
           const kids = strip.children.slice();

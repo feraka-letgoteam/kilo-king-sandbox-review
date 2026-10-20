@@ -19,17 +19,23 @@ export const KING_STAGE_CANVAS={width:672,height:864,offsetX:96,offsetY:96} as c
 type Point={x:number;y:number};
 const clamp=(v:number)=>Math.min(1,Math.max(0,v));
 const smooth=(v:number)=>{const t=clamp(v);return t*t*(3-2*t);};
-function curve(t:number,keys:readonly(readonly[number,number])[]){
+export function curve(t:number,keys:readonly(readonly[number,number])[]){
   for(let i=1;i<keys.length;i++){const a=keys[i-1]!,b=keys[i]!;if(t<=b[0])return a[1]+(b[1]-a[1])*smooth((t-a[0])/(b[0]-a[0]));}
   return keys.at(-1)![1];
 }
 const offset=(p:Point,angle:number,length:number)=>({x:p.x+Math.cos(angle)*length,y:p.y+Math.sin(angle)*length});
 export const KING_LEFT_ARM = {shoulder:{x:441,y:223},upperLength:100,forearmLength:143,handLength:31} as const;
-export const KING_THROW_RELEASE=.30;
+/** Throw beats as fractions of the renderer's existing tool tween (600 ms
+ * normal, 260 ms turbo): reach-back to .33, whip/release .33-.47 (snap at .40),
+ * follow-through peak .62, recovery to rest by 1. Event length is unchanged. */
+export const KING_THROW_RELEASE=.40;
+/** Hook cast beats, across the descent (0-.6) and pull (.6-1) tweens:
+ * rod back (load), snap forward, hold on the line, pull back with the reel. */
+export const KING_CAST_ROD=[[0,0],[.24,.45],[.33,-.30],[.6,-.18],[.9,.28],[1,0]] as const;
 export function kingRightRodPose(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
   const pivot={x:274,y:219},shoulder=kingMeshPoint(pivot.x,pivot.y,{...frame,rod:0});
   let angle=reduced?0:frame.rod*.013;
-  if(tool?.kind==='cast'&&!reduced)angle+=curve(tool.progress,[[0,0],[.26,.45],[.48,-.23],[.64,-.14],[1,0]]);
+  if(tool?.kind==='cast'&&!reduced)angle+=curve(tool.progress,KING_CAST_ROD);
   const point=(p:Point)=>({x:shoulder.x+Math.cos(angle)*(p.x-pivot.x)-Math.sin(angle)*(p.y-pivot.y),y:shoulder.y+Math.sin(angle)*(p.x-pivot.x)+Math.cos(angle)*(p.y-pivot.y)});
   return{pivot,shoulder,angle,point,tip:point({x:14,y:12}),butt:point({x:278,y:323})};
 }
@@ -56,10 +62,11 @@ export function kingLeftArmPose(frame:StageKingFrame,tool:KingToolAction|null=nu
   let open=0,handAngle=lower;
   if(tool?.kind==='throw'&&!reduced){
     const p=clamp(tool.progress),u0=upper,l0=lower;
-    upper=curve(p,[[0,u0],[.15,1.43],[.30,2.15],[.43,2.30],[.58,2.16],[.82,1.64],[1,u0]]);
-    lower=curve(p,[[0,l0],[.15,2.42],[.30,3.83],[.43,3.72],[.58,3.60],[.82,3.30],[1,l0]]);
-    handAngle=lower+curve(p,[[0,0],[.15,.1],[.30,-.08],[.43,-.2],[.75,-.1],[1,0]]);
-    open=smooth((p-KING_THROW_RELEASE)/.035)*(1-smooth((p-.73)/.19));
+    // Underarm lob: reach back past the hip, whip through, follow up high, recover.
+    upper=curve(p,[[0,u0],[.08,u0+.06],[.33,.78],[.40,2.45],[.47,2.78],[.62,3.02],[.82,2.30],[1,u0]]);
+    lower=curve(p,[[0,l0],[.08,l0+.04],[.33,1.30],[.40,3.45],[.47,3.82],[.62,4.06],[.82,3.20],[1,l0]]);
+    handAngle=lower+curve(p,[[0,0],[.33,.35],[.40,-.08],[.62,-.25],[.85,-.08],[1,0]]);
+    open=smooth((p-KING_THROW_RELEASE)/.035)*(1-smooth((p-.80)/.15));
   }else if(!tool&&['max-stop','win','vs-win','retrigger'].includes(frame.reaction??'')&&!reduced){
     const full=frame.reaction!=='win';
     const p=frame.reactionProgress??1,weight=curve(p,[[0,0],[.12,-.06],[.32,1],[.43,1.035],[.64,.97],[.84,.27],[1,0]]);
