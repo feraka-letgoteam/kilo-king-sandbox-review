@@ -2742,3 +2742,79 @@ button:not(:disabled):active {
     min-height: 44px;
   }
 }
+
+/* v88 batch 3b: very short viewports (popout S, 400x225). Apply sits in the
+ * header row so the steppers and value are never covered. Layout only. */
+@media (max-height: 260px) {
+  .kk-bet-dialog {
+    position: relative;
+  }
+  .kk-bet-dialog .kk-dialog-head {
+    min-height: 48px;
+    padding: 2px 6px 2px 12px;
+    padding-right: calc(6px + 44px + 8px + var(--kk-bet-apply-w, 150px));
+  }
+  .kk-bet-dialog .kk-dialog-head strong {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+  .kk-bet-dialog .kk-dialog-head > button {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+  }
+  .kk-bet-dialog .kk-dialog-foot {
+    position: absolute;
+    top: 2px;
+    right: 58px;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .kk-bet-dialog .kk-dialog-foot > .kk-primary {
+    min-height: 44px;
+    width: var(--kk-bet-apply-w, 150px);
+    padding: 0 10px;
+    font-size: 15px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .kk-bet-dialog .kk-dialog-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 10px;
+    padding: 8px 12px;
+    text-align: center;
+  }
+  .kk-bet-dialog .kk-field-label {
+    grid-column: 1;
+    font-size: 11px;
+  }
+  .kk-bet-dialog .kk-bet-adjust {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 4px 0;
+    padding: 4px;
+    gap: 4px;
+  }
+  .kk-bet-dialog .kk-bet-adjust output {
+    font-size: 22px;
+  }
+  .kk-bet-dialog .kk-denominations {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: center;
+    gap: 4px;
+  }
+  .kk-bet-dialog .kk-denominations button {
+    min-height: 44px;
+    font-size: 13px;
+    padding-inline: 2px;
+  }
+  .kk-bet-dialog .kk-cost-line {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: 12px;
+  }
+}
