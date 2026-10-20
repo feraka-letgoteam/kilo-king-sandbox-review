@@ -19,6 +19,7 @@ import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
 import { KING_THROW_RELEASE, KING_DYNAMITE_STICK, KING_PARTS_USE, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
 import { articulateArt, restoreArticulation } from './articulation';
+import { createWinFeel } from './reel-feel';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
 import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import { SYMBOL_LABELS } from "./symbol-labels";
@@ -455,6 +456,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   let pendingLayout = false;
   let resizeFollow = false;
   const waits = new Set<() => void>();
+  // Reel-feel: persistent win dimming (presentation only, see reel-feel.ts).
+  const winFeel = createWinFeel({
+    view: (reel, row) => (hiddenVsReels.has(reel) ? null : (reels[reel]?.strip.children[row] as Container | undefined) ?? null),
+    pace: () => ({ turbo, reduced }),
+    ticker: app.ticker,
+  });
 
   type PlaceMark = {
     asset: PackageKey | "scatter-king" | "sym-reel-v8" | "sym-case-v8";
@@ -895,6 +902,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     lineArt.removeChildren().forEach((child) => child.destroy());
     delete phaseTarget().dataset.payline;
     delete phaseTarget().dataset.paylineFocus;
+    winFeel.clear();
     restoreSymbols();
   }
 
@@ -2047,6 +2055,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const target=phaseTarget(),total=lines.reduce((sum,line)=>sum+line.pay,0);
       target.dataset.payline=lines.map(line=>`${line.n}x${line.s}=${line.pay}@${winningCells(line).map(p=>`${p.reel}.${p.row}`).join("-")}`).join("|");
       const cells=[...new Map(lines.flatMap(winningCells).map(p=>[`${p.reel}:${p.row}`,p])).values()];
+      winFeel.start(cells);
       const localWin=createWinNumeral(money(total),Math.max(23,geom.cell*.50));
       localWin.anchor.set(.5);transient.addChild(localWin);
       const amountsRoot=new Container();transient.addChild(amountsRoot);
@@ -2074,10 +2083,6 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           paintWinConnection(routes,fx,points,geom.cell,reduced?1:Math.max(0,Math.min(1,(trace-stagger)/(1-stagger))),response,
             {append:true,alpha,reduced,intensity:total>=stake*10?1.4:.7});
         });
-        const winning=new Set(cells.map(p=>`${p.reel}:${p.row}`));
-        reels.forEach((reel,ri)=>reel.strip.children.forEach((child,row)=>{
-          if(!child.destroyed)child.alpha=winning.has(`${ri}:${row}`)?1:.62;
-        }));
         if (!reduced && trace < 1) for (const spot of cells) {
           const sprite = symbolSprite(spot.reel, spot.row);
           if (!sprite || sprite.destroyed) continue;
