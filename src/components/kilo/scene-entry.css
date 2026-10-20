@@ -162,6 +162,67 @@
     line-height: 18px;
   }
 }
+/* Short landscape (Stake 400x225 popout): the stacked entry is taller than
+   the viewport, so the hero art sits beside the copy. Scoped to <=260px tall
+   so 800x450 and larger keep the stacked layout above. The bottom padding
+   keeps the copy clear of the fixed Skip intro button. */
+@media (max-height: 260px) and (orientation: landscape) {
+  .ks-entry-copy {
+    width: min(96vw, 560px);
+    max-height: 100dvh;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 1fr repeat(4, auto) 1fr;
+    align-items: center;
+    justify-items: start;
+    column-gap: 14px;
+    row-gap: 3px;
+    padding: 8px 4px 52px;
+    text-align: left;
+  }
+  /* Copy column (destination, heading, multiplier, modifiers) is centred
+     as one block beside the art; DOM order is unchanged. */
+  .ks-entry-copy > :nth-child(1) { grid-row: 2; }
+  .ks-entry-copy > :nth-child(3) { grid-row: 3; }
+  .ks-entry-copy > :nth-child(4) { grid-row: 4; }
+  .ks-entry-copy > :nth-child(5) { grid-row: 5; }
+  .ks-entry-destination {
+    grid-column: 2;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.4px;
+  }
+  .ks-entry-hero {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: min(50vw, 300px, calc((100dvh - 60px) * 1.5));
+    align-self: center;
+  }
+  .ks-entry-award > strong {
+    font-size: 52px;
+  }
+  .ks-entry-heading {
+    grid-column: 2;
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 1px;
+  }
+  .ks-entry-multiplier {
+    grid-column: 2;
+    justify-content: start;
+    gap: 2px 8px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .ks-entry-multiplier strong {
+    font-size: 20px;
+  }
+  .ks-entry-modifiers {
+    grid-column: 2;
+    width: 100%;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
 .ks-bonus-entry[data-reduced="true"] .ks-entry-hero,
 .ks-bonus-entry[data-immediate="true"] .ks-entry-hero,
 .kk-app[data-reduced="1"] .ks-entry-hero {
