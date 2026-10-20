@@ -15,7 +15,35 @@ export const GOD_CARD_ASSETS = {
   wake: '/kilo-v79/god/wake.webp',
   maxTitle: '/kilo-v79/god/max-win-title.webp',
   lossTitle: '/kilo-v79/god/no-win-title.webp',
+  // v62 driver sheet: calm / acceleration brace / braking brace, each
+  // 512x405 at x = 0/512/1024, y = 128 (see max-boat-rig.ts registration).
+  riderPoses: '/kilo-v62/max/performance-parts.png',
 } as const;
+/** The three v62 whole-rider poses, re-registered onto the v79 card hull
+ * (native 1585x992): seated in the cockpit behind the windshield, with the
+ * fists at the gunwale line so the existing front-gunwale occlusion holds. */
+export const GOD_RIDER_POSE_FRAMES = [0, 1, 2].map(i => [i * 512, 128, 512, 405] as const);
+export const GOD_RIDER_POSE_PLACEMENT = { x: 453, y: -9, width: 554, height: 439 } as const;
+export type GodRiderPose = 0 | 1 | 2;
+/** Calm at rest, brace forward on thrust, brace back on braking / the stall. */
+export function godRiderPose(beat: GodCardBeat, progress: number): GodRiderPose {
+  if (beat === 'stall') return 2;
+  if (beat === 'advance') return progress >= .68 ? 2 : progress >= .06 ? 1 : 0;
+  if (beat === 'overshoot') return 1;
+  if (beat === 'settle') return progress < .45 ? 2 : 0;
+  return 0;
+}
+/** Continuous water bob for holds (rest / anticipate / result) and an extra
+ * nose dip on the stall. Clock-driven, deterministic, presentation only. */
+export function godBoatBob(beat: GodCardBeat, progress: number, now: number, reduced = false) {
+  if (reduced) return { heave: 0, pitch: 0 };
+  const idle = beat === 'rest' || beat === 'anticipate' || beat === 'result' || beat === 'settle';
+  const bob = idle ? 1 : beat === 'stall' ? .5 : 0;
+  const heave = bob * (Math.sin(now / 1400 * Math.PI * 2) * 9 + Math.sin(now / 610 * Math.PI * 2) * 3);
+  let pitch = bob * Math.sin(now / 2100 * Math.PI * 2 + .7) * .022;
+  if (beat === 'stall') pitch += .085 * Math.sin(Math.PI * Math.max(0, Math.min(1, progress / .7)));
+  return { heave, pitch };
+}
 export type GodCardTextures = Partial<Record<keyof typeof GOD_CARD_ASSETS, Texture>>;
 export const GOD_RESULT_INK_FRAMES = {
   maxTitle: [11, 129, 2052, 486],
@@ -77,6 +105,10 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
   const rider = new Container(); rider.label = 'god-card-seated-rider'; hull.addChild(rider);
   const riderArt = textures.rider ? new Sprite(textures.rider) : null;
   if (riderArt) rider.addChild(riderArt);
+  const riderPoseTextures = textures.riderPoses ? GOD_RIDER_POSE_FRAMES.map(([x, y, w, h]) =>
+    new Texture({ source: textures.riderPoses!.source, frame: new Rectangle(x, y, w, h) })) : [];
+  const riderPose = riderPoseTextures.length ? new Sprite(riderPoseTextures[0]) : null;
+  if (riderPose) { riderPose.label = 'god-card-rider-pose'; rider.addChild(riderPose); if (riderArt) riderArt.visible = false; }
   // Rear seat is behind the driver; the near windshield and gunwale are in
   // front. This registered foreground occlusion keeps the seated body inside
   // the cockpit while its upper torso counter-leans independently.
@@ -192,11 +224,17 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       const vx = Math.max(Math.max(cardW, width / 5) / 2, edge - boatW * .5 - width * .04);
       vessel.scale.set(scale); vessel.position.set(vx + pose.surge * scale, height * .67);
       hull.pivot.set(nativeW * .52, nativeH * .74);
-      hull.position.set(0, pose.heave); hull.rotation = pose.pitch;
+      const bob = godBoatBob(beat, progress, now, reduced);
+      hull.position.set(0, pose.heave + bob.heave); hull.rotation = pose.pitch + bob.pitch;
       if (hullArt) { hullArt.width = nativeW; hullArt.height = nativeH; }
       rider.pivot.set(nativeW * .442, nativeH * .403);
       rider.position.set(nativeW * .442, nativeH * .403); rider.rotation = pose.lean;
-      if (riderArt) {
+      if (riderPose) {
+        const kx = nativeW / 1585, ky = nativeH / 992, at = GOD_RIDER_POSE_PLACEMENT;
+        riderPose.texture = riderPoseTextures[godRiderPose(beat, progress)]!;
+        riderPose.position.set(at.x * kx, at.y * ky);
+        riderPose.width = at.width * kx; riderPose.height = at.height * ky;
+      } else if (riderArt) {
         riderArt.width = nativeW * .58; riderArt.height = nativeH * .58;
         riderArt.position.set(nativeW * .1672, nativeH * .0252);
         const p=beat==='anticipate'?.19*clamp01((progress-.22)/.78):
@@ -301,6 +339,7 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
       if (!root.destroyed) root.destroy({ children: true });
       titleTextures.forEach(texture => texture.destroy(false));
       waterTextures.forEach(texture => texture.destroy(false));
+      riderPoseTextures.forEach(texture => texture.destroy(false));
     },
   };
 }
