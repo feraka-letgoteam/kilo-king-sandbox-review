@@ -253,12 +253,12 @@ export const COPY = {
     "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead opens the very first spin with a ×25 VS on reel one that always wins its reel; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× win. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its win limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no coin collection.",
   ),
   "info.vs.limits": pair(
-    "The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total payout limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.",
-    "The Yacht feature win limit remains 18,000× base play. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total win limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× feature price; it is not a certified or published Engine return. All feature state resets at the end of the round.",
+    "The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total payout limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate has a 96.7% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.",
+    "The Yacht feature win limit remains 18,000× base play. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total win limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate has a 96.7% return against the 200× feature price; it is not a certified or published Engine return. All feature state resets at the end of the round.",
   ),
   "info.vs.getaway": pair(
-    "The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.82% (about 1 in 26) and the loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Stake Engine return.",
-    "The Getaway plays exactly one spin for 1,000× base play. Its only results are 25,000× or zero; no second chance is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.82% (about 1 in 26) and the loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Engine return.",
+    "The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.868% (about 1 in 26) and the loss probability is 96.132%. The candidate return is 96.7%; this is not a certified or published Stake Engine return.",
+    "The Getaway plays exactly one spin for 1,000× base play. Its only results are 25,000× or zero; no second chance is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.868% (about 1 in 26) and the loss probability is 96.132%. The candidate return is 96.7%; this is not a certified or published Engine return.",
   ),
   "info.modes.title": pair("Bet modes", "Play modes"),
   "info.modes.atThisBet": pair("at this bet", "at this play"),
@@ -360,13 +360,13 @@ export const COPY = {
   "info.controls.spin.label": pair("Spin / Spacebar", "Spin / Spacebar"),
   // Return to player (info screen). Candidate targets, not certified Engine RTP.
   "info.rtp.intro": pair(
-    "Verified theoretical RTP is not yet available for this sandbox.",
-    "Verified theoretical RTP is not yet available for this sandbox.",
+    "Every mode has a 96.7% return. These are local candidate figures, not a certified or published Stake Engine return.",
+    "Every mode has a 96.7% return. These are local candidate figures, not a certified or published Engine return.",
   ),
-  "info.rtp.value": pair("Not verified", "Not verified"),
+  "info.rtp.value": pair("96.7%", "96.7%"),
   "info.rtp.note": pair(
-    "RTP describes an expected return over many plays, not the return from any individual session. This preview does not publish a theoretical percentage.",
-    "RTP describes an expected return over many plays, not the return from any individual session. This preview does not publish a theoretical percentage.",
+    "RTP describes an expected return over many plays, not the return from any individual session.",
+    "RTP describes an expected return over many plays, not the return from any individual session.",
   ),
 
   // Feature cards (playful heist tone). Feature names stay fixed.
