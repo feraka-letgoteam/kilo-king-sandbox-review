@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "assetPack": "Kilo King / current v82 stage art / new parts 2026-10-20",
+  "sourceCheckpoint": "54ac58e0c9aabe7259eb037b3f77826fa5fe9933",
+  "coordinateSystem": {
+    "units": "source/body pixels",
+    "origin": "top-left",
+    "positiveX": "right",
+    "positiveY": "down",
+    "referenceBodyCanvas": [
+      1024,
+      1536
+    ],
+    "currentLogicalCanvas": [
+      512,
+      768
+    ],
+    "logicalScale": 0.5,
+    "pivotConvention": "Each PNG has its own local pivot. Do not apply source-crop offsets again.",
+    "rotation": "clockwise degrees in screen coordinates"
+  },
+  "anatomy": {
+    "right": "character anatomical right; rod arm on viewer-left",
+    "left": "character anatomical left; dynamite hand on viewer-right",
+    "v55Warning": "v55 L/R names are screen-side. Use topology only; do not copy its source-pixel pivots."
+  },
+  "referenceBodyAnchors": {
+    "rightShoulder": [
+      548,
+      438
+    ],
+    "leftShoulder": [
+      882,
+      446
+    ],
+    "neck": [
+      722,
+      380
+    ],
+    "pelvis": [
+      662,
+      836
+    ],
+    "footBaseline": 1511
+  },
+  "parts": [
+    {
+      "id": "right-upper-arm",
+      "file": "parts/right-upper-arm.png",
+      "size": [
+        111,
+        271
+      ],
+      "pivot": [
+        58.299,
+        32.983
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "right",
+      "parent": "torso",
+      "joints": {
+        "elbow": [
+          63.897,
+          233.002
+        ]
+      },
+      "source": {
+        "file": "raw/right-upper-arm.png",
+        "crop": [
+          237,
+          79,
+          812,
+          1484
+        ],
+        "scale": [
+          0.19304347826086957,
+          0.19288256227758008
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "right-forearm",
+      "file": "parts/right-forearm.png",
+      "size": [
+        142,
+        338
+      ],
+      "pivot": [
+        97.64,
+        37.775
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "right",
+      "parent": "right-upper-arm",
+      "joints": {
+        "wrist": [
+          36.429,
+          316.767
+        ]
+      },
+      "source": {
+        "file": "raw/right-forearm.png",
+        "crop": [
+          263,
+          67,
+          836,
+          1436
+        ],
+        "scale": [
+          0.24781849912739964,
+          0.2468955441928415
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "right-hand-rod-grip",
+      "file": "parts/right-hand-rod-grip.png",
+      "size": [
+        115,
+        133
+      ],
+      "pivot": [
+        88.528,
+        113.731
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "right",
+      "parent": "right-forearm",
+      "joints": {
+        "rodGrip": [
+          41.95,
+          58.097
+        ],
+        "fingertips": [
+          18.516,
+          38.973
+        ]
+      },
+      "source": {
+        "file": "raw/right-hand-rod-grip.png",
+        "crop": [
+          240,
+          155,
+          1035,
+          1073
+        ],
+        "scale": [
+          0.14465408805031446,
+          0.144880174291939
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "fishing-rod",
+      "file": "parts/fishing-rod.png",
+      "size": [
+        458,
+        684
+      ],
+      "pivot": [
+        380.883,
+        584.876
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": null,
+      "parent": "right-hand-rod-grip",
+      "joints": {
+        "tip": [
+          15.047,
+          16.912
+        ],
+        "butt": [
+          436.37,
+          664.739
+        ],
+        "lineExit": [
+          15.517,
+          23.489
+        ]
+      },
+      "source": {
+        "file": "raw/fishing-rod.png",
+        "crop": [
+          29,
+          39,
+          1003,
+          1495
+        ],
+        "scale": [
+          0.4702258726899384,
+          0.4697802197802198
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "hips",
+      "file": "parts/hips.png",
+      "size": [
+        420,
+        201
+      ],
+      "pivot": [
+        215.1,
+        53.32
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": null,
+      "parent": "root",
+      "joints": {
+        "rightHip": [
+          126.6,
+          111.733
+        ],
+        "leftHip": [
+          306.6,
+          111.733
+        ]
+      },
+      "source": {
+        "file": "raw/hips-refined.png",
+        "crop": [
+          68,
+          162,
+          1468,
+          833
+        ],
+        "scale": [
+          0.3,
+          0.2995529061102832
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "right-leg",
+      "file": "parts/right-leg.png",
+      "size": [
+        371,
+        689
+      ],
+      "pivot": [
+        286.0,
+        61.0
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "right",
+      "parent": "hips",
+      "joints": {
+        "knee": [
+          211.5,
+          273.0
+        ],
+        "ankle": [
+          181.5,
+          482.5
+        ],
+        "heel": [
+          230.0,
+          653.0
+        ],
+        "toe": [
+          54.0,
+          657.0
+        ]
+      },
+      "source": {
+        "file": "raw/right-leg.png",
+        "crop": [
+          119,
+          74,
+          861,
+          1452
+        ],
+        "scale": [
+          0.5,
+          0.5
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "left-leg",
+      "file": "parts/left-leg.png",
+      "size": [
+        351,
+        672
+      ],
+      "pivot": [
+        106.93,
+        62.355
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "left",
+      "parent": "hips",
+      "joints": {
+        "knee": [
+          142.893,
+          261.893
+        ],
+        "ankle": [
+          161.115,
+          476.3
+        ],
+        "heel": [
+          106.93,
+          627.392
+        ],
+        "toe": [
+          296.336,
+          632.188
+        ]
+      },
+      "source": {
+        "file": "raw/left-leg.png",
+        "crop": [
+          212,
+          32,
+          944,
+          1433
+        ],
+        "scale": [
+          0.47950819672131145,
+          0.4796573875802998
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "left-hand-dynamite",
+      "file": "parts/left-hand-dynamite.png",
+      "size": [
+        163,
+        212
+      ],
+      "pivot": [
+        122.25,
+        172.59
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "left",
+      "parent": "existing-left-forearm",
+      "joints": {
+        "grip": [
+          69.954,
+          117.721
+        ],
+        "fuseTip": [
+          15.96,
+          21.744
+        ]
+      },
+      "source": {
+        "file": "raw/left-hand-dynamite.png",
+        "crop": [
+          113,
+          12,
+          1073,
+          1260
+        ],
+        "scale": [
+          0.16979166666666667,
+          0.16987179487179488
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "left-hand-backswing",
+      "file": "parts/left-hand-backswing.png",
+      "size": [
+        148,
+        179
+      ],
+      "pivot": [
+        57.773,
+        144.289
+      ],
+      "pivotUnits": "native PNG pixels, top-left origin",
+      "anatomicalSide": "left",
+      "parent": "existing-left-forearm",
+      "joints": {
+        "palm": [
+          83.091,
+          90.181
+        ],
+        "fingerTip": [
+          96.514,
+          5.955
+        ]
+      },
+      "source": {
+        "file": "raw/left-hand-backswing.png",
+        "crop": [
+          235,
+          85,
+          1106,
+          1137
+        ],
+        "scale": [
+          0.16991963260619977,
+          0.17015209125475286
+        ],
+        "upscaled": false
+      }
+    },
+    {
+      "id": "head-shocked",
+      "file": "parts/heads/shocked/complete.png",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        160,
+        246
+      ],
+      "parent": "torso",
+      "bodyCanvasTopLeft": [
+        562,
+        134
+      ],
+      "bodyNeckAnchor": [
+        722,
+        380
+      ],
+      "anatomicalSide": null,
+      "layerOrderBottomToTop": [
+        "base",
+        "eyes",
+        "mouth"
+      ],
+      "layers": {
+        "base": {
+          "file": "parts/heads/shocked/base.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "eyes": {
+          "file": "parts/heads/shocked/eyes.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "mouth": {
+          "file": "parts/heads/shocked/mouth.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "source": {
+        "file": "raw/head-shocked.png",
+        "crop": [
+          99,
+          21,
+          1183,
+          1233
+        ],
+        "normalizedInkHeight": 245,
+        "upscaled": false
+      },
+      "note": "Use complete.png OR base+eyes+mouth. Never display the backing layer alone. Mouth is above beard backing."
+    },
+    {
+      "id": "head-shouting",
+      "file": "parts/heads/shouting/complete.png",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        160,
+        246
+      ],
+      "parent": "torso",
+      "bodyCanvasTopLeft": [
+        562,
+        134
+      ],
+      "bodyNeckAnchor": [
+        722,
+        380
+      ],
+      "anatomicalSide": null,
+      "layerOrderBottomToTop": [
+        "base",
+        "eyes",
+        "mouth"
+      ],
+      "layers": {
+        "base": {
+          "file": "parts/heads/shouting/base.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "eyes": {
+          "file": "parts/heads/shouting/eyes.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "mouth": {
+          "file": "parts/heads/shouting/mouth.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "source": {
+        "file": "raw/head-shouting.png",
+        "crop": [
+          118,
+          44,
+          1143,
+          1177
+        ],
+        "normalizedInkHeight": 245,
+        "upscaled": false
+      },
+      "note": "Use complete.png OR base+eyes+mouth. Never display the backing layer alone. Mouth is above beard backing."
+    },
+    {
+      "id": "head-laughing",
+      "file": "parts/heads/laughing/complete.png",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        160,
+        246
+      ],
+      "parent": "torso",
+      "bodyCanvasTopLeft": [
+        562,
+        134
+      ],
+      "bodyNeckAnchor": [
+        722,
+        380
+      ],
+      "anatomicalSide": null,
+      "layerOrderBottomToTop": [
+        "base",
+        "eyes",
+        "mouth"
+      ],
+      "layers": {
+        "base": {
+          "file": "parts/heads/laughing/base.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "eyes": {
+          "file": "parts/heads/laughing/eyes.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        },
+        "mouth": {
+          "file": "parts/heads/laughing/mouth.png",
+          "pivot": [
+            160,
+            246
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "source": {
+        "file": "raw/head-laughing.png",
+        "crop": [
+          124,
+          41,
+          1143,
+          1181
+        ],
+        "normalizedInkHeight": 245,
+        "upscaled": false
+      },
+      "note": "Use complete.png OR base+eyes+mouth. Never display the backing layer alone. Mouth is above beard backing."
+    }
+  ],
+  "scope": "Artwork, registration and layer package. No new runtime rig, animation clips, gameplay changes or deployment.",
+  "limitations": [
+    "New joint pivots are authored registration points, not runtime-tested skin weights.",
+    "Legs are separate full trouser-and-boot pieces; knee and ankle markers are supplied, but those joints are not separately cut.",
+    "Facial patches include matching surrounding skin/beard for coverage. Large face deformations need additional cleanup or drawings.",
+    "Lit dynamite is drawn with the left hand; it is not a separately rigged fuse or prop in this pack.",
+    "The body and current head scale are preserved. The existing character proportions were not stretched to force a heads-tall ratio."
+  ]
+}
