@@ -1,4 +1,5 @@
-import { Container, Sprite, type Ticker } from 'pixi.js';
+import { Container, Sprite, type Text, type Ticker } from 'pixi.js';
+import { createWinNumeral, connectedNumberScale } from './win-type';
 
 /**
  * Reel-feel presentation pass (w Bo). Pure presentation: nothing here reads
@@ -22,7 +23,44 @@ export const REEL_FEEL = {
   glowAlpha: 0.22,
   /** Fraction of the cell the popped cell content may fill (reel mask safety). */
   fitInset: 0.99,
+  /** On-symbol amounts: size as a fraction of the cell, CSS-px floor, and the
+   * label centre below the cell centre (fraction of the cell). */
+  amountCell: 0.19,
+  amountMinCss: 12,
+  amountDrop: 0.33,
+  /** Dark outlined plate behind each amount (fill alpha, padding in ems). */
+  plateAlpha: 0.84,
+  platePadX: 0.32,
+  platePadY: 0.08,
+  /** Stamp-in length for the amounts (ms); static with reduced motion. */
+  amountMs: 260,
 } as const;
+
+/**
+ * Where each recorded line's amount sits: on the last winning symbol of that
+ * line (a non-wild one when the line has one, so the WILD tag stays clear).
+ * Lines ending on the same symbol share one label showing their sum, so
+ * every label is a component of the recorded total and the labels add up to
+ * it exactly. Amounts are bare numbers; the caller formats them.
+ */
+export function amountSpots<L extends { pay: number }>(
+  lines: readonly L[],
+  cellsOf: (line: L) => readonly Spot[],
+  symAt: (reel: number, row: number) => string | undefined,
+) {
+  const out = new Map<string, Spot & { value: number }>();
+  for (const line of lines) {
+    if (!(line.pay > 0)) continue;
+    const spots = cellsOf(line);
+    const plain = spots.filter(p => symAt(p.reel, p.row) !== 'splash');
+    const at = (plain.length ? plain : spots).at(-1);
+    if (!at) continue;
+    const key = `${at.reel}:${at.row}`;
+    const hit = out.get(key) ?? { reel: at.reel, row: at.row, value: 0 };
+    hit.value += line.pay; out.set(key, hit);
+  }
+  return [...out.values()];
+}
 
 const unit = (n: number) => Math.max(0, Math.min(1, n));
 export const easeOutCubic = (t: number) => 1 - (1 - unit(t)) ** 3;
@@ -67,6 +105,13 @@ export type WinFeelHost = {
   view: (reel: number, row: number) => Container | null;
   pace: () => { turbo: boolean; reduced: boolean };
   cell: () => number;
+  /** Cell centre in world units, the grid's x extent, and world→CSS scale. */
+  center: (reel: number, row: number) => { x: number; y: number };
+  gridX: () => { left: number; right: number };
+  cssScale: () => number;
+  /** Parent for the on-symbol amounts (cleared with the presentation). */
+  labels: () => Container;
+  format: (value: number) => string;
   ticker: Ticker;
 };
 
@@ -78,6 +123,29 @@ export type WinFeelHost = {
 export function createWinFeel(host: WinFeelHost) {
   let active: { winners: Set<string>; t0: number; popAt: number | null } | null = null;
   const touched = new Set<Container>();
+  let tags: { root: Container; plate: Graphics; text: Text; reel: number; row: number; at: number }[] = [];
+  const paintTags = (now: number, reduced: boolean) => {
+    const cell = host.cell(), size = Math.max(REEL_FEEL.amountMinCss / Math.max(.01, host.cssScale()), cell * REEL_FEEL.amountCell);
+    const { left, right } = host.gridX();
+    for (const tag of tags) {
+      const n = tag.text;
+      if (n.destroyed || tag.root.destroyed) continue;
+      if (n.style.fontSize !== size) {
+        n.style.fontSize = size;
+        n.style.stroke = { color: 0x28130c, width: Math.max(2, size * .12), join: 'round' };
+        // A small dark plate keeps the amount readable over any drawing and
+        // stops it reading as part of the symbol (motion check items 6-7).
+        const w = n.width + size * REEL_FEEL.platePadX * 2, h = size * (1 + REEL_FEEL.platePadY * 2);
+        tag.plate.clear().roundRect(-w / 2, -h / 2, w, h, h / 2)
+          .fill({ color: 0x07131a, alpha: REEL_FEEL.plateAlpha })
+          .stroke({ color: 0xe7c56a, alpha: 0.9, width: Math.max(1, size * .07) });
+      }
+      const c = host.center(tag.reel, tag.row), half = tag.plate.width / 2 + 1;
+      // Bottom of the winning cell, clamped inside the grid.
+      tag.root.position.set(Math.max(left + half, Math.min(right - half, c.x)), c.y + cell * REEL_FEEL.amountDrop);
+      tag.root.scale.set(reduced ? 1 : connectedNumberScale(unit((now - tag.at) / REEL_FEEL.amountMs)));
+    }
+  };
   const homes = new WeakMap<Container, Home>();
   const art = (view: Container) => view.children.find((c): c is Sprite => c instanceof Sprite && c.label !== 'kk-win-glow');
   const lift = (view: Container) => {
@@ -110,6 +178,7 @@ export function createWinFeel(host: WinFeelHost) {
     if (!active) return;
     const now = performance.now();
     const { turbo, reduced } = host.pace();
+    paintTags(now, reduced);
     const level = reduced ? REEL_FEEL.dimLevel
       : dimLevelAt(now - active.t0, turbo ? REEL_FEEL.dimTurboMs : REEL_FEEL.dimMs);
     for (let reel = 0; reel < 5; reel++) for (let row = 0; row < 3; row++) {
@@ -143,7 +212,23 @@ export function createWinFeel(host: WinFeelHost) {
     pop() {
       if (active && active.popAt === null) active.popAt = performance.now();
     },
+    /** Show each line's recorded amount on its winning symbol. */
+    amounts(spots: readonly (Spot & { value: number })[]) {
+      if (!active) return;
+      const parent = host.labels(), now = performance.now();
+      for (const spot of spots) {
+        const root = new Container(), plate = new Graphics();
+        const text = createWinNumeral(host.format(spot.value), 16, 0xfff1c6);
+        text.style.dropShadow = false;
+        root.label = 'kk-symbol-amount'; root.eventMode = 'none';
+        root.addChild(plate, text); parent.addChild(root);
+        tags.push({ root, plate, text, reel: spot.reel, row: spot.row, at: now });
+      }
+      paintTags(now, host.pace().reduced);
+    },
     clear() {
+      for (const tag of tags) if (!tag.root.destroyed) tag.root.destroy({ children: true });
+      tags = [];
       if (active) host.ticker.remove(frame);
       active = null;
       for (const view of touched) { drop(view); if (!view.destroyed) view.tint = 0xffffff; }

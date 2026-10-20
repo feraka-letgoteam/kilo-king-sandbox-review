@@ -10,16 +10,15 @@ import { CHARACTER_RIG_URLS } from './character-rig-model';
 import { VS_ART_URLS } from './vs-art';
 import { VS_GROUP_ART_URLS, VS_MULTIPLIER_FONT } from './vs-group-art';
 import { VS_ACTOR_URLS } from './vs-actor-performance';
-import { connectionAnchor } from './connection-win';
-import { createWinNumeral, connectedNumberScale, WIN_TYPE } from './win-type';
+import { createWinNumeral, connectedNumberScale } from './win-type';
 import { paintWinConnection } from './win-connection-paint';
-import { createConnectionAmounts, connectionTraceIndices } from './connection-amounts';
+import { connectionTraceIndices } from './connection-amounts';
 import { connectionClock } from './vs-choreography';
 import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
 import { KING_THROW_RELEASE, KING_DYNAMITE_STICK, KING_PARTS_USE, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
 import { articulateArt, restoreArticulation } from './articulation';
-import { createWinFeel } from './reel-feel';
+import { createWinFeel, amountSpots } from './reel-feel';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
 import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import { SYMBOL_LABELS } from "./symbol-labels";
@@ -461,6 +460,11 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     view: (reel, row) => (hiddenVsReels.has(reel) ? null : (reels[reel]?.strip.children[row] as Container | undefined) ?? null),
     pace: () => ({ turbo, reduced }),
     cell: () => geom.cell,
+    center: (reel, row) => cellCenter(reel, row),
+    gridX: () => ({ left: geom.gx, right: geom.gx + geom.cell * 5 + geom.gap * 4 }),
+    cssScale: () => world.scale.x || 1,
+    labels: () => lineArt,
+    format: money,
     ticker: app.ticker,
   });
 
@@ -2057,10 +2061,6 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       target.dataset.payline=lines.map(line=>`${line.n}x${line.s}=${line.pay}@${winningCells(line).map(p=>`${p.reel}.${p.row}`).join("-")}`).join("|");
       const cells=[...new Map(lines.flatMap(winningCells).map(p=>[`${p.reel}:${p.row}`,p])).values()];
       winFeel.start(cells);
-      const localWin=createWinNumeral(money(total),Math.max(23,geom.cell*.50));
-      localWin.anchor.set(.5);transient.addChild(localWin);
-      const amountsRoot=new Container();transient.addChild(amountsRoot);
-      const components=createConnectionAmounts(amountsRoot,lines.map(line=>({pay:line.pay,spots:winningCells(line)})));
       let trace=0,response=0,alpha=1,credited=false;
       const publish=()=>{
         if(credited||stopped)return;credited=true;
@@ -2068,14 +2068,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         host.dispatchEvent(new CustomEvent('kilo-earned-win',{bubbles:true,detail:{visibleAward:total}}));
       };
       const paint=()=>{
-        if(stopped||localWin.destroyed)return;
-        localWin.style.fontSize=Math.max(23,geom.cell*.50);
-        localWin.style.stroke={color:WIN_TYPE.ink,width:Math.max(2,Number(localWin.style.fontSize)*.055)};
-        const anchor=connectionAnchor(cells,geom,localWin.width,localWin.height);
-        localWin.position.set(anchor.x,anchor.y);localWin.alpha=trace>=1?alpha*(reduced||lines.length===1?1:Math.max(0,Math.min(1,(response-.27)/.48))):0;
-        const stamped=impactStamp(response,reduced);
-        localWin.scale.set(stamped.x,stamped.y);localWin.rotation=stamped.turn*.5;
-        components.paint(geom,trace,response,alpha,anchor,reduced);
+        if(stopped)return;
         routes.clear();fx.clear();
         lines.forEach((line,index)=>{
           if(!connectionTraceIndices(lines.map(item=>({pay:item.pay,spots:winningCells(item)}))).has(index))return;
@@ -2103,6 +2096,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         const clock=connectionClock(lines.length,total>=stake*5);
         await tween(reduced?0:turbo?160:clock.trace,t=>{trace=t;paint();});
         if(stopped)return;trace=1;publish();winFeel.pop();
+        // Amounts sit on the winning symbols; the bar's WIN keeps the total.
+        winFeel.amounts(amountSpots(lines,winningCells,(r,row)=>board[r]?.[row]?.s));
         if(clock.read&&!reduced)await holdReadable(turbo?90:clock.read);
         if(stopped)return;
         await Promise.all([
@@ -2116,7 +2111,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         ]);
       } finally {
         host.removeEventListener('kilo-relayout',onLayout);
-        if(!localWin.destroyed)localWin.destroy();if(!amountsRoot.destroyed)amountsRoot.destroy({children:true});resizeFollow=false;endMotion();
+        resizeFollow=false;endMotion();
       }
     },
     async collect(spin) {
