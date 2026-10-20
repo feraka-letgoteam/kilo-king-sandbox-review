@@ -2301,6 +2301,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const pace = (ms: number) =>
         reduced ? 0 : turbo ? Math.max(80, Math.round(ms * 0.4)) : ms;
       const chip = new Container();
+      const chipMain = chip;
       transient.addChild(chip);
       let repaint: () => void = () => {};
       let repaintFlight: (() => void) | null = null;
@@ -2308,11 +2309,17 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       const onLayout = () => {
         if (!live() || chip.destroyed) return;
         repaint();
+        for (const b of banked) paintPlaque(b.amount, b.wild, b.plate);
         repaintFlight?.();
         if (active) focus(active);
       };
       host.addEventListener("kilo-relayout", onLayout);
-      const paintPlaque = (amount: number, where: { reel: number; row: number }) => {
+      // Each fisherman keeps the share it banked on its own plaque until the
+      // transfer carries it on to WIN. Presentation only: the amounts come
+      // from the recorded award table above.
+      const banked: { wild: { reel: number; row: number }; amount: number; plate: Container }[] = [];
+      const paintPlaque = (amount: number, where: { reel: number; row: number }, into?: Container) => {
+        const chip = into ?? chipMain;
         if (chip.destroyed) return;
         chip.removeChildren().forEach((child) => child.destroy());
         const cell = geom.cell;
@@ -2355,10 +2362,35 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             if (!child.destroyed) {
               child.alpha = hot.has(`${ri}:${row}`) ? 1 : 0.48;
               for (const item of child.children)
-                if (item.label === "collector-tag") item.visible = !(ri === wild.reel && row === wild.row);
+                if (item.label === "collector-tag")
+                  item.visible = !((ri === wild.reel && row === wild.row) ||
+                    banked.some((b) => b.wild.reel === ri && b.wild.row === row));
             }
           }),
         );
+      };
+      const hideBankedTags = () => {
+        for (const b of banked) {
+          const child = reels[b.wild.reel]?.strip.children[b.wild.row];
+          if (child && !child.destroyed)
+            for (const item of child.children)
+              if (item.label === "collector-tag") item.visible = false;
+        }
+      };
+      // A short code-drawn ring where a value lands, so each arrival reads.
+      const arrivalRing = (wild: { reel: number; row: number }) => {
+        if (reduced) return Promise.resolve();
+        const ring = new Graphics();
+        transient.addChild(ring);
+        return tween(pace(240), (t) => {
+          if (ring.destroyed) return;
+          const cellNow = geom.cell;
+          const x = geom.gx + wild.reel * (cellNow + geom.gap) + cellNow / 2;
+          const y = geom.gy + wild.row * cellNow + cellNow * 0.3;
+          const e = 1 - (1 - t) ** 3;
+          ring.clear().circle(x, y, cellNow * (0.1 + 0.26 * e))
+            .stroke({ color: 0xfff1bb, width: Math.max(1.5, cellNow * 0.022 * (1 - t)), alpha: 0.85 * (1 - t) });
+        }).finally(() => { if (!ring.destroyed) ring.destroy(); });
       };
       const showCollector = (amount: number, wild: { reel: number; row: number }) => {
         repaint = () => paintPlaque(amount, wild);
@@ -2504,6 +2536,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
               playFishAck(() => symbolSprite(spot.reel, spot.row)),
             ]);
             if (!live()) break;
+            void arrivalRing(wild);
             shown += value;
             showCollector(shown, wild);
             showReadout(collectorLabel, money(shown), 'local');
@@ -2526,9 +2559,23 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             showCollector(credited, wild);
             showReadout(capped ? `${collectorLabel} · credited` : collectorLabel, money(credited), capped ? 'summary' : 'local');
             publish();
-            // The last collector's share is carried by the flyer into WIN.
-            if (wi < collectors.length - 1) showSubtotal(bankedShown + credited);
+            // With motion, every fisherman keeps its share on its plaque and
+            // the transfer carries each one on to WIN in collector order.
+            // Reduced motion has no transfer, so WIN steps up here instead.
+            if (reduced) {
+              if (wi < collectors.length - 1) showSubtotal(bankedShown + credited);
+            }
             await readable(640);
+            if (!reduced && live() && credited > 0) {
+              const plate = new Container();
+              plate.label = "collector-banked";
+              transient.addChild(plate);
+              banked.push({ wild, amount: credited, plate });
+              paintPlaque(credited, wild, plate);
+              repaint = () => {};
+              if (!chip.destroyed)
+                chip.removeChildren().forEach((child) => child.destroy());
+            }
           }
           await reaction;
         }
@@ -2538,6 +2585,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           repaint = () => {};
           chip.removeChildren().forEach((child) => child.destroy());
           restoreSymbols();
+          hideBankedTags();
           if (capped) {
             showReadout("Combined before cap", money(illustrated));
             await holdReadable(collectionHold(720, speedMode, reduced));
@@ -2551,7 +2599,70 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           };
           repaint();
           await holdReadable(collectionHold(720, speedMode, reduced));
-          if (live() && !reduced && spin.got > 0) {
+          if (live() && !reduced && spin.got > 0 && banked.length > 0) {
+            step("transfer");
+            showAward = false;
+            readoutActive = false;
+            readout.hidden = true;
+            // Each fisherman's banked share lifts off its plaque and flies on
+            // to WIN, in the order the collectors gathered. WIN steps up as
+            // each one arrives and ends exactly on the recorded award.
+            let landed = 0;
+            const flights = banked.map(async (b, i) => {
+              await new Promise<void>((r) => window.setTimeout(r, pace(170) * i));
+              if (!live()) return;
+              const el = document.createElement("div");
+              el.className = "kk-award-fly";
+              el.textContent = money(b.amount);
+              el.setAttribute("aria-hidden", "true");
+              document.body.appendChild(el);
+              flyers.add(el);
+              const from = () => {
+                const cellNow = geom.cell;
+                const x = geom.gx + b.wild.reel * (cellNow + geom.gap) + cellNow / 2;
+                const y = geom.gy + (b.wild.row + 1) * cellNow - cellNow * 0.16;
+                return screenOf(x, y);
+              };
+              const s0 = from();
+              el.style.left = `${s0.x}px`;
+              el.style.top = `${s0.y}px`;
+              el.style.transform = "translate(-50%, -50%) scale(0.9)";
+              if (!b.plate.destroyed) b.plate.destroy({ children: true });
+              let counted = false;
+              try {
+                await tween(pace(720), (t) => {
+                  const start = from();
+                  const half = (el.offsetHeight || 40) / 2;
+                  const dest = bonusLanding(el.offsetHeight || 40);
+                  const landX = dest ? dest.x : start.x;
+                  const landY = dest ? dest.y : start.y - 60;
+                  const numberTop = dest?.numberTop ?? landY + half + 16;
+                  const e = t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+                  const x = start.x + (landX - start.x) * e;
+                  // A lift off the fisherman, then an easing onto WIN.
+                  let y = start.y + (landY - start.y) * e + Math.sin(Math.PI * e) * -42;
+                  const limit = numberTop - half - 10;
+                  if (y > limit && e > 0.5) y = limit;
+                  let alpha = Math.min(1, t / 0.08);
+                  if (!counted && t >= 0.6) {
+                    counted = true;
+                    landed += b.amount;
+                    showSubtotal(i === banked.length - 1 ? spin.got : landed);
+                  }
+                  if (t > 0.7) alpha = Math.max(0, 1 - (t - 0.7) / 0.24);
+                  const scale = t < 0.18 ? 0.9 + 0.22 * (t / 0.18) : 1.12 - 0.14 * ((t - 0.18) / 0.82);
+                  el.style.left = `${x}px`;
+                  el.style.top = `${y}px`;
+                  el.style.opacity = String(alpha);
+                  el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                });
+              } finally {
+                el.remove();
+                flyers.delete(el);
+              }
+            });
+            await Promise.all(flights);
+          } else if (live() && !reduced && spin.got > 0) {
             step("transfer");
             const el = document.createElement("div");
             el.className = "kk-award-fly";
@@ -2618,6 +2729,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         }
       } finally {
         host.removeEventListener("kilo-relayout", onLayout);
+        for (const b of banked) if (!b.plate.destroyed) b.plate.destroy({ children: true });
         resizeFollow = false;
         if (mine === job) step(null);
         if (mine === job) {
