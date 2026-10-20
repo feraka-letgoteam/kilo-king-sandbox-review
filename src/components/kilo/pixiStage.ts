@@ -18,7 +18,7 @@ import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
 import { KING_THROW_RELEASE, KING_DYNAMITE_STICK, KING_PARTS_USE, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
 import { articulateArt, restoreArticulation } from './articulation';
-import { createWinFeel, amountSpots } from './reel-feel';
+import { createWinFeel, amountSpots, REEL_BOUNCE, reelBounceAt } from './reel-feel';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
 import { SPIN_TIMING, type SpinSpeed } from "./control-model";
 import { SYMBOL_LABELS } from "./symbol-labels";
@@ -1601,6 +1601,12 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const streakMax = Math.min(3.5, cell * (turbo ? 0.032 : 0.025));
     const lockMs = speedMode === "super" ? 70 : turbo ? 110 : 170;
     const scatterTailMs = speedMode === "super" ? 100 : turbo ? 180 : 300;
+    // Reel-feel: each reel overshoots past rest and springs back as it stops.
+    // A reel landed with no cells above it (pad 0) skips it rather than
+    // showing an empty strip edge.
+    const bounceMs = REEL_BOUNCE.ms[speedMode], bounceDepth = cell * REEL_BOUNCE.depth[speedMode];
+    const landBounce = (spin: Spin, now: number) =>
+      spin.pad > 0 && bounceMs > 0 ? bounceDepth * reelBounceAt((now - spin.landedAt) / bounceMs) : 0;
     const noteLand = (spin: Spin, now: number) => {
       if (spin.noted) return;
       spin.noted = true;
@@ -1685,6 +1691,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           if (spin.phase === "settle") {
             const t = Math.min(1, (now - spin.landedAt) / lockMs);
             const pose = reelLockPose(t);
+            spin.strip.position.y = spin.endY + landBounce(spin, now);
             if (spin.frame > 0) spin.frame = Math.max(0, 1 - t);
             for (const art of spin.landedArt) {
               if (!art.sprite.destroyed) {

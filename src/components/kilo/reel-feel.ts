@@ -79,6 +79,22 @@ export function dimLevelAt(elapsed: number, ms: number) {
 
 type Spot = { reel: number; row: number };
 
+/** Reel stop overshoot. Depth is a fraction of a symbol height; length is
+ * kept inside the existing lock window (170 / 110 / 70 ms) so no reel stops
+ * later and the stop order and spin clock are unchanged. Super speed: off. */
+export const REEL_BOUNCE = {
+  depth: { normal: 0.09, turbo: 0.05, super: 0 },
+  ms: { normal: 170, turbo: 80, super: 0 },
+} as const;
+const springRaw = (t: number) => Math.exp(-3 * t) * Math.sin(2 * Math.PI * 0.75 * t) * (1 - t);
+const SPRING_PEAK = Math.max(...Array.from({ length: 201 }, (_, i) => springRaw(i / 200)));
+/** Damped spring: 0 at the stop, +1 at the overshoot peak (~t 0.25), a small
+ * undershoot on the way back, exactly 0 again at t = 1. Positive = past rest
+ * in the direction of travel. */
+export function reelBounceAt(t: number) {
+  return t <= 0 || t >= 1 ? 0 : springRaw(t) / SPRING_PEAK;
+}
+
 /** Largest scale about the cell centre that keeps `view`'s current content
  * inside its own cell, so a pop never clips on the reel mask or covers a
  * neighbouring cell. Measured at the view's home (unscaled) pose. */
