@@ -201,9 +201,9 @@ export const COPY = {
     "Kilo King paytable, features and game information",
     "Kilo King win table, features and game information",
   ),
-  "info.modeTitle.buy": pair("Dockside Catch buy", "Dockside Catch feature"),
-  "info.modeTitle.yacht": pair("Yacht Stash buy", "Yacht Stash feature"),
-  "info.modeTitle.mystery": pair("Mystery Bonus buy", "Mystery Bonus feature"),
+  "info.modeTitle.buy": pair("Dockside Catch", "Dockside Catch"),
+  "info.modeTitle.yacht": pair("Yacht Stash", "Yacht Stash"),
+  "info.modeTitle.mystery": pair("Mystery Bonus", "Mystery Bonus"),
   "info.modeDesc.ante": pair(
     "One spin with increased scatter frequency. Turn Ante On or Off on the Features page. Payouts still use the base bet.",
     "One spin with increased scatter frequency. Turn Ante On or Off on the Features page. Wins still use the base play.",
