@@ -207,10 +207,27 @@ export function createRgsClient(baseUrl: string, opts: RgsClientOptions = {}) {
 
 export type RgsClient = ReturnType<typeof createRgsClient>;
 
-/** True when the round still needs /wallet/end-round. */
+/**
+ * The only way boot code should get a client: from a parsed launch. A launch error (bad or missing
+ * rgs_url, host not allowed, bad device ...) or a sandbox launch returns no client, so no request
+ * can be made; the caller shows the error screen for `error.reason`.
+ */
+export function clientForLaunch(
+  launch: { kind: "live" | "replay"; rgsUrl: string } | { kind: "sandbox" } | { kind: "error"; reason: string; detail?: string },
+  opts: RgsClientOptions = {},
+): { client: RgsClient; error: null } | { client: null; error: { kind: "error"; reason: string; detail?: string } | null } {
+  if (launch.kind === "error") return { client: null, error: launch };
+  if (launch.kind === "sandbox") return { client: null, error: null };
+  return { client: createRgsClient(launch.rgsUrl, opts), error: null };
+}
+
+/**
+ * True when the round needs /wallet/end-round: any round paying more than 0x (prompt [221]).
+ * `active` is deliberately ignored: a paying round reported as active:false still gets end-round
+ * until a real Stake session confirms what active:false means. A 0x round is closed by the RGS.
+ */
 export function needsEndRound(round: Pick<RgsRound, "payoutMultiplier" | "active">): boolean {
-  if (round.active === false) return false;
-  return round.payoutMultiplier > 0;
+  return typeof round.payoutMultiplier === "number" && Number.isFinite(round.payoutMultiplier) && round.payoutMultiplier > 0;
 }
 
 /** Server-side win in micro-units for a base amount, rounded to the nearest micro-unit. */

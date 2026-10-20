@@ -216,7 +216,7 @@ function handle(method, url, body) {
       const cost = Math.round(amount * MODES[mode].cost);
       if (cost > s.balance) return fail(400, "ERR_IPB", "Insufficient player balance.");
       s.events = [];
-      const book = s.force && s.force[0] === mode ? bookById(mode, s.force[1]) ?? pickBook(mode) : pickBook(mode);
+      const book = s.force && modeKey(s.force[0]) === mode ? bookById(mode, s.force[1]) ?? pickBook(mode) : pickBook(mode);
       s.balance -= cost;
       s.round = roundFor(mode, book, amount);
       if (!s.round.active) { s.lastRound = s.round; s.round = null; }

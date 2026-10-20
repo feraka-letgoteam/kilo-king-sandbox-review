@@ -1,7 +1,7 @@
 /**
  * The one amount formatter for server money. Input is integer micro-units.
  * Real-money mode shows the server currency's symbol and placement.
- * Social mode (stake.us, `social: true`): only the SC/GC suffixes are ever drawn. Any other code,
+ * Social mode (stake.us, `social: true`): only the SC/GC suffixes are ever drawn (XSC/XEC -> SC, XGC -> GC). Any other code,
  * real-money or unknown, is shown as a bare number, so "$", "€" etc. can never appear.
  * Unknown codes warn once per code (console.warn); `strict: true` throws instead.
  */
@@ -9,7 +9,7 @@ import { MICRO } from "./types.ts";
 
 type Style = { symbol: string; decimals: number; position: "prefix" | "suffix" };
 
-/** Reviewer currencies (USD, EUR, CAD, MXN, JPY, XSC, XGC) plus common extras. */
+/** Reviewer currencies (USD, EUR, CAD, MXN, JPY, XSC, XEC, XGC) plus common extras. */
 const STYLES: Record<string, Style> = {
   USD: { symbol: "$", decimals: 2, position: "prefix" },
   EUR: { symbol: "€", decimals: 2, position: "prefix" },
@@ -23,6 +23,8 @@ const STYLES: Record<string, Style> = {
   KRW: { symbol: "₩", decimals: 0, position: "prefix" },
   INR: { symbol: "₹", decimals: 2, position: "prefix" },
   XSC: { symbol: "SC", decimals: 2, position: "suffix" },
+  /** Engine's prompt currency table: "XEC 10.00 SC 2" (an alias shown as SC). */
+  XEC: { symbol: "SC", decimals: 2, position: "suffix" },
   XGC: { symbol: "GC", decimals: 2, position: "suffix" },
 };
 
@@ -38,7 +40,7 @@ export type FormatOptions = {
 };
 
 /** Codes that are safe to label in social mode. */
-const SOCIAL_CODES: ReadonlySet<string> = new Set(["XSC", "XGC"]);
+const SOCIAL_CODES: ReadonlySet<string> = new Set(["XSC", "XEC", "XGC"]);
 
 export class CurrencyError extends Error {
   readonly code: string;

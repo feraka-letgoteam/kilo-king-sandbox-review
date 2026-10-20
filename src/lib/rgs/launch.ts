@@ -58,23 +58,30 @@ function flag(raw: string | null): boolean {
 }
 
 /**
- * RGS host allow-list. Nothing is hardcoded: production builds read VITE_RGS_HOSTS at build time
- * (exact hosts and "*.suffix" patterns), and an empty or unset list rejects every rgs_url (fail closed).
- * The real host gets filled in from Feraka's first Stake session. For reference only (not defaults):
- * engineio/docs examples use rgs.stake-engine.com, and engineio/ts-client mentions rgs-us.stake-engine.com,
- * but Engine's live AI review prompt now shows launch hosts on engine.io, so the docs examples may be stale.
+ * RGS host allow-list (fail closed: any host not matching is refused).
+ * In-code default: the two Engine suffixes from Stake's sources, `*.live.engine.io` (Engine's self-review
+ * prompt) and `*.live.stake-engine.com` (engineio/docs url-structure). Builder 4's `build:stake` sets
+ * VITE_RGS_HOSTS="*.live.engine.io,*.live.stake-engine.com" (comma-separated exact hosts and `*.suffix`);
+ * the env value ADDS to these defaults, duplicates are dropped. Unconfirmed until a real Stake session.
  */
+export const DEFAULT_RGS_HOSTS: readonly string[] = Object.freeze(["*.live.engine.io", "*.live.stake-engine.com"]);
+
 const HOST_PATTERN = /^(\*\.)?[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 
 /**
- * Parses a comma/space separated host list ("rgs.example.com, *.example.com").
+ * Parses a comma-separated host list ("rgs.example.com,*.example.com"; spaces tolerated).
  * Entries are exact hosts or "*.suffix" (any subdomain of suffix, not suffix itself).
- * Empty/missing input -> [] (rejects everything). Invalid entries throw, so a bad build config fails loudly.
+ * Empty/missing input -> []. Invalid entries throw, so a bad build config fails loudly.
  */
 export function rgsHostsFrom(raw: string | null | undefined): readonly string[] {
   const list = (raw ?? "").split(/[\s,]+/).map((h) => h.trim().toLowerCase()).filter(Boolean);
   for (const h of list) if (!HOST_PATTERN.test(h)) throw new Error(`invalid RGS host pattern: ${h}`);
-  return Object.freeze(list);
+  return Object.freeze([...new Set(list)]);
+}
+
+/** DEFAULT_RGS_HOSTS plus whatever VITE_RGS_HOSTS adds, de-duplicated. */
+export function allowedRgsHosts(viteRgsHosts: string | null | undefined): readonly string[] {
+  return Object.freeze([...new Set([...DEFAULT_RGS_HOSTS, ...rgsHostsFrom(viteRgsHosts)])]);
 }
 
 /** Exact match, or "*.suffix" matching a strict subdomain on a label boundary. */
@@ -128,12 +135,12 @@ function checkRgsUrl(
 
 /**
  * Launch options for a build. Sandbox (local dev/review) builds: sandbox and localhost http allowed,
- * no host check. Every other build: host allow-list from the build-time string, failing closed when empty.
+ * no host check. Every other build: DEFAULT_RGS_HOSTS + VITE_RGS_HOSTS; any other host is refused.
  * Boot code calls e.g. launchOptionsFor({ sandboxBuild: import.meta.env.DEV, rgsHosts: import.meta.env.VITE_RGS_HOSTS }).
  */
 export function launchOptionsFor(build: { sandboxBuild: boolean; rgsHosts?: string | null }): LaunchOptions {
   if (build.sandboxBuild) return { allowSandbox: true, allowLocalHttp: true };
-  return { allowedHosts: rgsHostsFrom(build.rgsHosts) };
+  return { allowedHosts: allowedRgsHosts(build.rgsHosts) };
 }
 
 export type LaunchOptions = {

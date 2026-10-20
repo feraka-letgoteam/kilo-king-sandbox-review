@@ -8,7 +8,8 @@ import { gameModesFrom } from "./client.ts";
 import {
   roundStateToScript, BookAdapterError, winMatchesServer, splashModeFor, scriptUnitsToMicro, animatedWinMicro, engineModeForRecord,
 } from "./book-adapter.ts";
-import { rgsHostsFrom, hostAllowed, launchOptionsFor } from "./launch.ts";
+import { rgsHostsFrom, hostAllowed, launchOptionsFor, DEFAULT_RGS_HOSTS, allowedRgsHosts } from "./launch.ts";
+import { clientForLaunch } from "./client.ts";
 import { CurrencyError, resetCurrencyWarnings, isKnownCurrency } from "./currency.ts";
 import {
   controlsFromJurisdiction, toControlJurisdiction, spinShortcutAllowed, slamStopAllowed, superTurboAllowed, turboAllowed,
@@ -84,7 +85,7 @@ test("client: error mapping and helpers", () => {
   assert.equal(errorCodeFor(502, "x"), "ERR_GEN");
   assert.equal(needsEndRound({ payoutMultiplier: 0 }), false);
   assert.equal(needsEndRound({ payoutMultiplier: 2.5 }), true);
-  assert.equal(needsEndRound({ payoutMultiplier: 2.5, active: false }), false);
+  assert.equal(needsEndRound({ payoutMultiplier: 2.5, active: false }), true);
   assert.equal(winFor(1_000_000, 2.5), 2_500_000);
   assert.equal(costFor(100_000, 1.5), 150_000);
   assert.ok(winMatchesServer(2_500_000, 1_000_000, 2.5));
@@ -316,14 +317,10 @@ test("launch: RGS host allow-list (build-time config, fail closed)", () => {
   assert.equal(parseLaunch("replay=true&game=g&version=1&mode=base&event=1&rgs_url=evil.com", prod).kind, "error");
   assert.equal((parseLaunch("sessionID=a&rgs_url=http://rgs.stake-engine.com", prod) as { reason?: string }).reason, "invalid-rgs-url");
   assert.equal(parseLaunch("", prod).kind, "error"); // no sandbox outside sandbox builds
-  // Unset / empty build config: every host is refused.
-  for (const rgsHosts of [undefined, "", "  "]) {
-    const closed = launchOptionsFor({ sandboxBuild: false, rgsHosts });
-    assert.deepEqual(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", closed), {
-      kind: "error", reason: "rgs-hosts-unconfigured", detail: "rgs.stake-engine.com",
-    });
-    assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", closed).kind, "error");
-  }
+  // An explicit empty list refuses every host.
+  assert.deepEqual(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", { allowedHosts: [] }), {
+    kind: "error", reason: "rgs-hosts-unconfigured", detail: "rgs.stake-engine.com",
+  });
   // Production never takes localhost; sandbox dev keeps http://localhost behind allowLocalHttp.
   assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", prod).kind, "error");
   assert.equal(parseLaunch("sessionID=a&rgs_url=https://localhost:8105", prod).kind, "error");
@@ -333,6 +330,64 @@ test("launch: RGS host allow-list (build-time config, fail closed)", () => {
   assert.deepEqual(parseLaunch("", dev), { kind: "sandbox" });
   assert.equal(normaliseRgsUrl("rgs.example.com", false, hosts), null);
   assert.equal(normaliseRgsUrl("rgs.stake-engine.com", false, hosts), "https://rgs.stake-engine.com");
+});
+
+test("launch: default Engine suffixes + VITE_RGS_HOSTS (build:stake)", () => {
+  assert.deepEqual([...DEFAULT_RGS_HOSTS], ["*.live.engine.io", "*.live.stake-engine.com"]);
+  assert.deepEqual([...allowedRgsHosts(undefined)], ["*.live.engine.io", "*.live.stake-engine.com"]);
+  assert.deepEqual([...allowedRgsHosts("")], ["*.live.engine.io", "*.live.stake-engine.com"]);
+  // build:stake's exact value: duplicates are harmless.
+  assert.deepEqual([...allowedRgsHosts("*.live.engine.io,*.live.stake-engine.com")], ["*.live.engine.io", "*.live.stake-engine.com"]);
+  assert.deepEqual([...allowedRgsHosts("rgs.stake-engine.com,*.live.engine.io")], ["*.live.engine.io", "*.live.stake-engine.com", "rgs.stake-engine.com"]);
+  assert.throws(() => allowedRgsHosts("https://x.com"));
+  for (const rgsHosts of [undefined, "", "*.live.engine.io,*.live.stake-engine.com"]) {
+    const o = launchOptionsFor({ sandboxBuild: false, rgsHosts });
+    const kind = (u: string) => parseLaunch(`sessionID=a&rgs_url=${encodeURIComponent(u)}`, o).kind;
+    assert.equal(kind("acme-games.live.engine.io"), "live");
+    assert.equal(kind("acme-games.live.stake-engine.com"), "live");
+    assert.equal(kind("https://acme-games.live.engine.io/rgs"), "live");
+    for (const bad of [
+      "live.engine.io", "live.stake-engine.com", "live.engine.io.evil.com", "acme.live.engine.io.evil.com", "evillive.engine.io",
+      "acme.evillive.stake-engine.com", "rgs.engine.io", "rgs.stake-engine.com", "http://acme.live.engine.io", "http://localhost:8105",
+      "acme.live.engine.io@evil.com", "https://acme.live.engine.io/?x=1",
+    ]) assert.equal(kind(bad), "error", bad);
+  }
+  // Exact hosts added through VITE_RGS_HOSTS.
+  const extra = launchOptionsFor({ sandboxBuild: false, rgsHosts: "rgs.stake-engine.com" });
+  assert.equal(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", extra).kind, "live");
+  assert.equal(parseLaunch("sessionID=a&rgs_url=rgs-us.stake-engine.com", extra).kind, "error");
+});
+
+test("launch: bad or missing rgs_url -> typed error, no client, no requests", async () => {
+  let calls = 0;
+  const spy = (async () => { calls += 1; return new Response("{}"); }) as unknown as typeof fetch;
+  const prod = launchOptionsFor({ sandboxBuild: false });
+  const cases: Array<[string, string]> = [
+    ["sessionID=a", "missing-rgs-url"],
+    ["sessionID=a&rgs_url=", "missing-rgs-url"],
+    ["sessionID=a&rgs_url=%20", "missing-rgs-url"],
+    ["sessionID=a&rgs_url=http://acme.live.engine.io", "invalid-rgs-url"],
+    ["sessionID=a&rgs_url=https://", "invalid-rgs-url"],
+    ["sessionID=a&rgs_url=ftp://acme.live.engine.io", "invalid-rgs-url"],
+    ["sessionID=a&rgs_url=example.com", "rgs-host-not-allowed"],
+    ["replay=true&game=g&version=1&mode=base&event=1", "missing-rgs-url"],
+    ["replay=true&game=g&version=1&mode=base&event=1&rgs_url=example.com", "rgs-host-not-allowed"],
+    ["", "missing-rgs-url"],
+  ];
+  for (const [q, reason] of cases) {
+    const launch = parseLaunch(q, prod);
+    assert.equal(launch.kind, "error", q);
+    assert.equal((launch as { reason?: string }).reason, reason, q);
+    const got = clientForLaunch(launch, { fetch: spy });
+    assert.equal(got.client, null, q);
+    assert.equal(got.error?.reason, reason);
+  }
+  assert.equal(calls, 0);
+  // Sandbox: no client either. A good launch gets a client, and only then can requests happen.
+  assert.deepEqual(clientForLaunch(parseLaunch("", launchOptionsFor({ sandboxBuild: true }))), { client: null, error: null });
+  const ok = clientForLaunch(parseLaunch("sessionID=a&rgs_url=acme.live.engine.io", prod), { fetch: spy });
+  assert.ok(ok.client);
+  assert.equal(calls, 0);
 });
 
 test("launch: device values", () => {
@@ -348,8 +403,11 @@ test("launch: device values", () => {
 });
 
 test("client: needsEndRound edge cases", () => {
-  assert.equal(needsEndRound({ payoutMultiplier: 2.5, active: false }), false);
-  assert.equal(needsEndRound({ payoutMultiplier: 0.01, active: false }), false);
+  // active:false + positive => end-round anyway (until a real Stake session confirms active:false semantics).
+  assert.equal(needsEndRound({ payoutMultiplier: 2.5, active: false }), true);
+  assert.equal(needsEndRound({ payoutMultiplier: 0.01, active: false }), true);
+  assert.equal(needsEndRound({ payoutMultiplier: NaN }), false);
+  assert.equal(needsEndRound({ payoutMultiplier: -1 }), false);
   assert.equal(needsEndRound({ payoutMultiplier: 2.5, active: true }), true);
   assert.equal(needsEndRound({ payoutMultiplier: 0.01 }), true);
   for (const active of [undefined, true, false]) {
@@ -368,6 +426,9 @@ test("currency: social mode never shows a real-money symbol", (t) => {
   assert.equal(formatAmount(1235 * M, "JPY", { social: true }), "1,235");
   assert.equal(formatAmount(1234_560_000, "XSC", { social: true }), "1,234.56 SC");
   assert.equal(formatAmount(1234_560_000, "XGC", { social: true }), "1,234.56 GC");
+  assert.equal(formatAmount(1234_560_000, "XEC", { social: true }), "1,234.56 SC");
+  assert.equal(formatAmount(10 * M, "xec"), "10.00 SC");
+  assert.doesNotThrow(() => formatAmount(M, "XEC", { social: true, strict: true }));
   assert.equal(formatAmount(-2_500_000, "USD", { social: true }), "-2.50");
   assert.equal(glyphsNeeded(["USD", "CAD", "XSC"], true).includes("$"), false);
   // Warn once per code, not per call.
