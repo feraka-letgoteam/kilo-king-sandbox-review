@@ -125,7 +125,7 @@
 }
 .sc-system .sc-control-caption {
   color: var(--sc-iconInk, #fff);
-  font: 700 9px/10px var(--sc-numericFont);
+  font: 700 10px/11px var(--sc-numericFont);
   letter-spacing: 0.5px;
   text-transform: uppercase;
   pointer-events: none;
@@ -279,7 +279,7 @@
 }
 .sc-system .sc-label small {
   color: var(--sc-muted);
-  font: 600 9px/1 var(--sc-numericFont);
+  font: 600 10px/1 var(--sc-numericFont);
   letter-spacing: 0;
 }
 .sc-system .sc-well strong {
@@ -431,7 +431,7 @@
   left: calc(50% + var(--sc-auto-ink-x, 0px));
   transform: translate(-50%, -50%);
   color: var(--sc-iconInk, #fff);
-  font: 700 9px/1 var(--sc-numericFont);
+  font: 700 10px/1 var(--sc-numericFont);
   pointer-events: none;
 }
 .sc-system .sc-feature-counter {
