@@ -308,7 +308,13 @@ export function createReelFeatureEffects(a: Adapter) {
     sound('vsReady');
     // motion() applies the speed factor; undo it so each duel lasts VS_DUEL_MS.
     const speed=a.pace().speed,duelMs=VS_DUEL_MS[speed]/{normal:1,turbo:.55,super:.32}[speed];
-    await motion(duelMs,t=>{
+    // Burst schedule in real milliseconds so it holds at any duel length:
+    // the first burst frame already covers fully (no panel leak), it stays
+    // opaque >= 100 ms (3+ frames), then clears; the action before it is
+    // squeezed into what is left. `t` is the old 0..1 action clock.
+    const D=VS_DUEL_MS[speed],hold=Math.min(100,D*.34),fade=Math.min(130,D*.33),S=D-hold-fade;
+    await motion(duelMs,raw=>{
+      const ms=raw*D,t=ms<S?ms/S*.72:.72+(ms-S)/(hold+fade)*.28;
       if(!a.pace().reduced){if(t>=VS_BEATS.pull)sound('vsPull');if(t>=VS_BEATS.contact)sound('vsImpact');if(t>=.66)sound('vsLatch');}
       if(t>=VS_BEATS.lock){sound('vsLock');if(!reacted){reacted=true;
         a.host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:duel.winner==='king'?'vs-win':'vs-loss'}}));}}
@@ -351,8 +357,8 @@ export function createReelFeatureEffects(a: Adapter) {
       const center=p.x+g.cell*.5,openCenter=center+(dx+dw*.5-center)*arena.arrival;
       // Hard cut from the VS symbol to the full-reel duel (no scale-up).
       void openCenter;const ow=dw,oh=h-6,ox=dx,oy=dy;
-      // Opaque burst: covers .74-.86, the swap happens underneath at .80; the smoke drifts clear by .98.
-      const swapped=reduced||t>=.80,cover=reduced?0:clamp01((t-.72)/.04),clearing=reduced?1:clamp01((t-.86)/.12);
+      // Opaque burst: fully covering from its first frame (S), swap mid-hold, then the smoke drifts clear.
+      const swapped=reduced||ms>=S+hold*.5,cover=reduced?0:(ms>=S?1:0),clearing=reduced?1:clamp01((ms-S-hold)/fade);
       arenaClip.clear().rect(ox,oy,ow,oh).fill(WHITE);
       ticket.clear().rect(ox,oy,ow,oh).fill(0x0b1720).stroke({color:GOLD,width:2});
       const border=dx+dw*(.53+arena.pressure*(duel.winner==='king'?1:-1));
@@ -360,8 +366,10 @@ export function createReelFeatureEffects(a: Adapter) {
         .poly([dx,dy,border+dw*.12,dy,border-dw*.12,dy+h,dx,dy+h]).fill(0x6d2a17)
         .moveTo(border+dw*.12,dy).lineTo(border-dw*.12,dy+h).stroke({color:0xffdca0,width:Math.max(2,g.cell*.018),alpha:.65});
       const arrival=1-ease(clamp01((t-.10)/.18));
-      ticket.alpha=1;ticket.visible=!swapped;
-      opponents.alpha=1;opponents.visible=!swapped;void resolve;
+      // The brown duel panel is hidden on the very frame the burst starts.
+      const hidden=swapped||cover>=1;
+      ticket.alpha=1;ticket.visible=!hidden;territory.visible=!hidden;
+      opponents.alpha=1;opponents.visible=!hidden;void resolve;
       a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:{kind:'vs',progress:t}}));
       for(const item of portraits){
         const isKing=item.kind==='king',direction=isKing?1:-1,losing=item.kind!==duel.winner;
@@ -385,7 +393,7 @@ export function createReelFeatureEffects(a: Adapter) {
       winner.pivot.set(0,0);winner.position.set(0,0);winner.scale.set(1);
       // A joining arrival's product appears in the merge, once it is whole.
       for(const art of winner.children){const number=art.children.find(node=>node.label==='vs-group-multiplier');
-        if(number){number.alpha=wide?0:(reduced||t>=.86?1:0);number.scale.set(1);}}
+        if(number){number.alpha=wide?0:(reduced||clearing>=1?1:0);number.scale.set(1);}}
       const wx=wide?g.gx+wide.start*(g.cell+g.gap):p.x,ww=wide?wide.width*g.cell+(wide.width-1)*g.gap:g.cell;
       winnerClip.clear().rect(wx+2,p.y+2,ww-4,h-4).fill(WHITE);
       // One-frame recoil / small shake on the hit, then the opaque burst.

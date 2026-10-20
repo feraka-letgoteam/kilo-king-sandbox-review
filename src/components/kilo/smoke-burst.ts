@@ -40,7 +40,7 @@ export function paintSmokeBurst(g: Target, x0: number, y0: number, x1: number, y
   g.clear();
   if (cover <= 0 || clearing >= 1) return;
   const w = x1 - x0, h = y1 - y0, cx = x0 + w / 2, cy = y0 + h * .56, reach = Math.hypot(w, h) * .5;
-  const grow = cover < 1 ? 1 - (1 - cover) ** 3 : 1, fade = (1 - clearing) ** 1.3;
+  const grow = cover < 1 ? 1 - (1 - cover) ** 3 : 1, fade = (1 - clearing) ** .75;
   const rows = 5, cols = Math.max(3, Math.round(w / (h / rows))), step = Math.max(w / cols, h / rows);
   const puffs: Puff[] = [];
   // Back billows: few, large, dark.
@@ -66,7 +66,7 @@ export function paintSmokeBurst(g: Target, x0: number, y0: number, x1: number, y
   const place = (p: Puff) => {
     const d = Math.hypot(p.x - cx, p.y - cy) / reach, k = clamp01((grow - d * .7) / .3);
     // Clearing: up and out, swell, thin; the outside clears before the middle.
-    const thin = clamp01(fade * (1.3 - d * .6 * clearing) - clearing * .15);
+    const thin = clamp01(fade * (1.3 - d * .45 * clearing) - clearing * .06);
     return { x: cx + (p.x - cx) * spread + (p.seed - .5) * step * .6 * clearing, y: cy + (p.y - cy) * spread - lift * (.5 + p.seed),
       r: p.r * (.35 + .65 * k) * (1 + clearing * (.3 + p.seed * .4)), a: thin * Math.min(1, k * 1.6), d };
   };

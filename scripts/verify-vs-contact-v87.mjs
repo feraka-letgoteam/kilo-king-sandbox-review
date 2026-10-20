@@ -35,7 +35,7 @@ for(const [winner,event] of Object.entries(fixtures))for(const cell of [60,130])
   assert(distance<cell*.12,'Ink impact is at physical prop contact');
   results.push({winner,cell,phase,intersection:contact,ink,distanceInCells:distance/cell,u,v});
  };
- const a={host,world,geom:()=>g,cell:()=>new r.pixi.Container(),stake:()=>1000,pace:()=>({speed:'normal',reduced:false}),live:()=>true,show(){},collect:async()=>{},highlight:async()=>{},readout(){},screen:(x,y)=>({x,y}),landing:()=>({x:200,y:500}),focus(){},conceal(){},bankCue(){},cue:name=>{phase=name;},hold:async()=>{},tween:async(ms,paint)=>{for(const t of[0,.24,.36,.49,.60,.82,1]){paint(t);if(ms===500&&t===.49)inspect();/* v88: duel clock is VS_DUEL_MS.normal (was VS_REVEAL_MS 1920) */}}};
+ const a={host,world,geom:()=>g,cell:()=>new r.pixi.Container(),stake:()=>1000,pace:()=>({speed:'normal',reduced:false}),live:()=>true,show(){},collect:async()=>{},highlight:async()=>{},readout(){},screen:(x,y)=>({x,y}),landing:()=>({x:200,y:500}),focus(){},conceal(){},bankCue(){},cue:name=>{phase=name;},hold:async()=>{},tween:async(ms,paint)=>{const R=.49/.72*(270/500);for(const t of[0,.24,.36,R,.60,.82,1]){paint(t);if(ms===500&&t===R)inspect();/* v88: duel clock is VS_DUEL_MS.normal (was VS_REVEAL_MS 1920); action beat .49 now lands at raw .49/.72*(S=270ms/500ms) because the burst schedule is in ms */}}};
  const ctl=r.load('src/components/kilo/reel-feature-effects.ts').createReelFeatureEffects(a);ctl.set(event,'before');await ctl.step(event,{award:v=>paid+=v,state(){}});assert.equal(paid,event.credited);ctl.destroy();
 }
 assert(results.length>=4);assert.equal(sourceFingerprint(),fingerprint);
