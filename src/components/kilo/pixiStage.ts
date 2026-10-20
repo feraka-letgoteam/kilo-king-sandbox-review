@@ -1052,10 +1052,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   }
   function bonusLanding(flyerHeight: number) {
     const root = host.closest(".kk-app") ?? document;
-    const number = root
-      .querySelector("[data-testid=bonus-win]")
-      ?.getBoundingClientRect();
-    const block = root.querySelector(".kk-bonus-win")?.getBoundingClientRect();
+    // Feature rounds land on BONUS WIN; base-game collections land on WIN.
+    const numberEl =
+      root.querySelector("[data-testid=bonus-win]") ??
+      root.querySelector("[data-testid=last-win]");
+    const number = numberEl?.getBoundingClientRect();
+    const block = (
+      root.querySelector(".kk-bonus-win") ?? numberEl?.closest(".sc-well")
+    )?.getBoundingClientRect();
     const half = Math.max(18, flyerHeight / 2);
     const numberTop =
       number && number.height > 1
@@ -2295,6 +2299,14 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           if (!trace.destroyed) trace.destroy();
         }
       };
+      // Display only: the WIN subtotal steps up as each collector banks its
+      // share and reaches the recorded award when the flyer lands.
+      let bankedShown = 0;
+      const showSubtotal = (amount: number) => {
+        if (!live()) return;
+        bankedShown = Math.max(bankedShown, Math.min(spin.got, amount));
+        spin.onSubtotal?.(bankedShown);
+      };
       try {
         step("gather");
         for (const [wi, wild] of collectors.entries()) {
@@ -2354,6 +2366,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             showCollector(credited, wild);
             showReadout(capped ? `${collectorLabel} · credited` : collectorLabel, money(credited), capped ? 'summary' : 'local');
             publish();
+            // The last collector's share is carried by the flyer into WIN.
+            if (wi < collectors.length - 1) showSubtotal(bankedShown + credited);
             await readable(640);
           }
           await reaction;
@@ -2418,6 +2432,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
               const limit = numberTop - half - 10;
               if (y > limit) y = limit;
               let alpha = 1;
+              // The flyer is ~85% of the way onto WIN here: start the WIN roll
+              // now so it reaches the recorded award before the round settles.
+              if (t >= 0.6) showSubtotal(spin.got);
               if (t > 0.68) alpha = Math.max(0, 1 - (t - 0.68) / 0.24);
               const clearance = numberTop - (y + half);
               if (clearance < 22) alpha = Math.min(alpha, Math.max(0, clearance / 22));
@@ -2427,6 +2444,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             flyers.delete(el);
           }
           if (live()) {
+            showSubtotal(spin.got);
             collectionCue({
               index: collectors.length,
               count: collectors.length,

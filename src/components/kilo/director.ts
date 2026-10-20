@@ -127,6 +127,9 @@ export interface ReelScene {
     mult: number;
     got: number;
     wilds: number;
+    /** Display only: the running share of `got` already shown to the player.
+     * It never exceeds `got` and never owns credit. */
+    onSubtotal?: (shown: number) => void;
   }): Promise<void>;
   /** Flies one marker per newly landed collector. Optional so tests can omit it. */
   deliverCollectors?(
@@ -319,9 +322,17 @@ export async function presentScript(
   if (interrupted()) return;
   if(round.base.collect?.got){
     publish('Dockside Deal',false,null);
-    await scene.collect({grid:round.base.grid,mult:1,got:round.base.collect.got,wilds:round.base.collect.collectors??1});
+    // WIN follows the collection as it is shown. The recorded award is
+    // unchanged: the subtotal is clamped to it and settles on it below.
+    const got=round.base.collect.got,collectBefore=collect;
+    await scene.collect({grid:round.base.grid,mult:1,got,wilds:round.base.collect.collectors??1,
+      onSubtotal:shown=>{
+        if(opts.skipped())return;
+        spinCollect=Math.max(0,Math.min(got,shown));collect=collectBefore+spinCollect;
+        publish(`Dockside Deal · ${money(spinCollect)}`,false,null);
+      }});
     if(interrupted())return;
-    collect+=round.base.collect.got;spinCollect=round.base.collect.got;
+    collect=collectBefore+got;spinCollect=got;
     publish(`Dockside Deal · ${money(spinCollect)}`,false,null);
   }
   if (!round.free.length) {
