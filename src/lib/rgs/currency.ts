@@ -1,7 +1,9 @@
 /**
  * The one amount formatter for server money. Input is integer micro-units.
  * Real-money mode shows the server currency's symbol and placement.
- * Social mode (stake.us) follows New Bot's copy guide; use unit "none" or the SC/GC suffix there, never "$".
+ * Social mode (stake.us, `social: true`): only the SC/GC suffixes are ever drawn. Any other code,
+ * real-money or unknown, is shown as a bare number, so "$", "€" etc. can never appear.
+ * Unknown codes warn once per code (console.warn); `strict: true` throws instead.
  */
 import { MICRO } from "./types.ts";
 
@@ -29,11 +31,61 @@ export type FormatOptions = {
   unit?: "symbol" | "none";
   /** Show a leading minus for negatives (net position). Default true. */
   signed?: boolean;
+  /** Social mode: never show a real-money symbol, whatever code arrives. */
+  social?: boolean;
+  /** Throw CurrencyError on an unknown code (and on a real-money code in social mode) instead of warning. */
+  strict?: boolean;
 };
 
-function styleFor(currency: string): Style {
+/** Codes that are safe to label in social mode. */
+const SOCIAL_CODES: ReadonlySet<string> = new Set(["XSC", "XGC"]);
+
+export class CurrencyError extends Error {
+  readonly code: string;
+  constructor(code: string, message: string) {
+    super(message);
+    this.name = "CurrencyError";
+    this.code = code;
+  }
+}
+
+const warned = new Set<string>();
+function warnOnce(key: string, message: string): void {
+  if (warned.has(key)) return;
+  warned.add(key);
+  console.warn(message);
+}
+/** Tests only: forget which codes already warned. */
+export function resetCurrencyWarnings(): void {
+  warned.clear();
+}
+
+export function isKnownCurrency(currency: string): boolean {
+  return Object.prototype.hasOwnProperty.call(STYLES, currency.trim().toUpperCase());
+}
+
+/** Warns (or throws when strict) about codes we can't label safely. */
+function vet(currency: string, opts: FormatOptions): void {
   const code = currency.trim().toUpperCase();
-  const known = STYLES[code];
+  if (!isKnownCurrency(code)) {
+    const msg = `[rgs] unknown currency code "${code}"`;
+    if (opts.strict) throw new CurrencyError(code, msg);
+    warnOnce(`unknown:${code}`, msg);
+  } else if (opts.social && !SOCIAL_CODES.has(code)) {
+    const msg = `[rgs] real-money currency "${code}" in social mode; showing amount without a symbol`;
+    if (opts.strict) throw new CurrencyError(code, msg);
+    warnOnce(`social:${code}`, msg);
+  }
+}
+
+function styleFor(currency: string, social = false): Style {
+  const code = currency.trim().toUpperCase();
+  const known = isKnownCurrency(code) ? STYLES[code] : undefined;
+  if (social) {
+    // Only SC/GC may be labelled; everything else keeps its decimals but loses the symbol.
+    if (known && SOCIAL_CODES.has(code)) return known;
+    return { symbol: "", decimals: known?.decimals ?? 2, position: "suffix" };
+  }
   if (known) return known;
   // Unknown codes: the code after the amount with two decimals.
   return { symbol: code || "", decimals: 2, position: "suffix" };
@@ -72,18 +124,19 @@ export function formatNumber(micro: number, currency: string): string {
 }
 
 export function formatAmount(micro: number, currency: string, opts: FormatOptions = {}): string {
-  const { unit = "symbol", signed = true } = opts;
+  const { unit = "symbol", signed = true, social = false } = opts;
+  vet(currency, opts);
   const body = formatNumber(micro, currency);
   const minus = signed && micro < 0 ? "-" : "";
   if (unit === "none") return `${minus}${body}`;
-  const style = styleFor(currency);
+  const style = styleFor(currency, social);
   if (!style.symbol) return `${minus}${body}`;
   return style.position === "prefix" ? `${minus}${style.symbol}${body}` : `${minus}${body} ${style.symbol}`;
 }
 
 /** Characters a Pixi numeral font must contain to draw any formatted amount. */
-export function glyphsNeeded(currencies: readonly string[]): string {
+export function glyphsNeeded(currencies: readonly string[], social = false): string {
   const set = new Set("0123456789,.- ");
-  for (const c of currencies) for (const ch of styleFor(c).symbol) set.add(ch);
+  for (const c of currencies) for (const ch of styleFor(c, social).symbol) set.add(ch);
   return [...set].sort().join("");
 }

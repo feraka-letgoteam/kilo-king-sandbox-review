@@ -8,7 +8,8 @@
  * book payoutMultiplier is in hundredths of the BASE amount. The RGS returns state = events and
  * payoutMultiplier as a float multiple.
  *
- * The script is never rescaled or edited. Script amounts are in script units; to show money,
+ * The script's amounts are never rescaled or edited; only `mode` is mapped to the engine name
+ * (dockside -> buy, base -> spin) and Mystery gets `mystery.selected` from `landed`, on a shallow copy. Script amounts are in script units; to show money,
  * multiply by `unitScale` (micro-units per script unit) and pass to formatAmount().
  */
 import type { SplashMode, SplashScript } from "@/lib/kilo/engine";
@@ -25,7 +26,55 @@ export const RGS_MODE_TO_SPLASH: Readonly<Record<string, SplashMode>> = {
 };
 
 export function splashModeFor(rgsMode: string): SplashMode | null {
-  return RGS_MODE_TO_SPLASH[rgsMode.toLowerCase()] ?? null;
+  const key = rgsMode.toLowerCase();
+  return Object.prototype.hasOwnProperty.call(RGS_MODE_TO_SPLASH, key) ? RGS_MODE_TO_SPLASH[key]! : null;
+}
+
+/**
+ * record.mode values accepted for each RGS mode. New books (Bot 3, Oct 20) write the RGS name
+ * (base, dockside, mystery ...); current books still write the engine name (spin, buy). Mystery
+ * accepts only "mystery": a Mystery round labelled with the landed feature's mode is rejected.
+ */
+export const RECORD_MODES_FOR_RGS: Readonly<Record<string, readonly string[]>> = {
+  base: ["base", "spin"],
+  ante: ["ante"],
+  dockside: ["dockside", "buy"],
+  yacht: ["yacht"],
+  mystery: ["mystery"],
+  getaway: ["getaway"],
+};
+
+const ENGINE_MODES: ReadonlySet<string> = new Set(["spin", "ante", "buy", "yacht", "getaway", "mystery"]);
+
+/** A record.mode (new RGS name or legacy engine name) -> the engine's SplashMode, or null. */
+export function engineModeForRecord(recordMode: string): SplashMode | null {
+  return splashModeFor(recordMode) ?? (ENGINE_MODES.has(recordMode) ? (recordMode as SplashMode) : null);
+}
+
+type MysteryInfo = NonNullable<SplashScript["mystery"]>;
+/** New Mystery books: landed = the RGS mode of the feature it landed on. */
+const LANDED_TO_SELECTED: Readonly<Record<string, MysteryInfo["selected"]>> = { dockside: "dock", yacht: "yacht" };
+/** Which landed value each engine selection is consistent with (yacht25 is the Super Yacht variant). */
+const SELECTED_FAMILY: Readonly<Record<string, string>> = { dock: "dockside", yacht: "yacht", yacht25: "yacht" };
+
+/**
+ * The engine shows a Mystery round from script.mystery.selected. New books carry landed instead,
+ * so build it from that; keep an existing mystery block if the record has one and it agrees.
+ */
+function mysteryFor(record: Record<string, unknown>): MysteryInfo {
+  const existing = record.mystery as MysteryInfo | undefined;
+  const landed = record.landed;
+  if (landed !== undefined && (typeof landed !== "string" || !(landed in LANDED_TO_SELECTED))) {
+    throw new BookAdapterError("bad-record", `mystery landed ${String(landed)}`);
+  }
+  if (existing && typeof existing === "object" && typeof existing.selected === "string" && existing.selected in SELECTED_FAMILY) {
+    if (landed !== undefined && SELECTED_FAMILY[existing.selected] !== landed) {
+      throw new BookAdapterError("bad-record", `mystery landed ${landed} vs selected ${existing.selected}`);
+    }
+    return existing;
+  }
+  if (landed === undefined) throw new BookAdapterError("bad-record", "mystery record without landed feature");
+  return { version: "mystery-v86", selected: LANDED_TO_SELECTED[landed as string]! };
 }
 
 export class BookAdapterError extends Error {
@@ -90,10 +139,13 @@ export function roundStateToScript(
   if (!event) throw new BookAdapterError("no-round-event");
   const record = event.record;
   if (!isScript(record)) throw new BookAdapterError("bad-record");
+  const recordMode = record.mode as string;
+  const engineMode = engineModeForRecord(recordMode);
+  if (!engineMode) throw new BookAdapterError("bad-record", `unknown record mode ${recordMode}`);
   if (rgsMode != null) {
-    const expected = splashModeFor(rgsMode);
-    if (!expected || expected !== record.mode) {
-      throw new BookAdapterError("mode-mismatch", `${rgsMode} vs ${record.mode}`);
+    const accepted = RECORD_MODES_FOR_RGS[rgsMode.toLowerCase()];
+    if (!accepted || !accepted.includes(recordMode)) {
+      throw new BookAdapterError("mode-mismatch", `${rgsMode} vs ${recordMode}`);
     }
   }
   // The animated total must equal what the server settles: payout / stake === payoutMultiplier.
@@ -101,8 +153,11 @@ export function roundStateToScript(
   if (Math.abs(animated - payoutMultiplier) > 1e-9) {
     throw new BookAdapterError("payout-mismatch", `${animated} vs ${payoutMultiplier}`);
   }
+  // Shallow copy: the engine sees its own mode names; the input record is never mutated.
+  const script: SplashScript = { ...record, mode: engineMode };
+  if (engineMode === "mystery") script.mystery = mysteryFor(record as unknown as Record<string, unknown>);
   return {
-    script: record,
+    script,
     unitScale: amount / record.stake,
     win: winFor(amount, payoutMultiplier),
     key: event.key ?? null,
@@ -112,6 +167,11 @@ export function roundStateToScript(
 /** Script units (e.g. a line amount of 200 at stake 1000) to micro-units for formatAmount(). */
 export function scriptUnitsToMicro(units: number, unitScale: number): number {
   return Math.round(units * unitScale);
+}
+
+/** The final win the animation shows, in micro-units: the script's total payout at the player's amount. */
+export function animatedWinMicro(round: Pick<AdaptedRound, "script" | "unitScale">): number {
+  return scriptUnitsToMicro(round.script.payout, round.unitScale);
 }
 
 /**

@@ -1,10 +1,11 @@
 /**
  * Turns the authenticate config into what the controls need: bet levels, mode
  * costs and restriction flags. The front end must use these and never hardcode them.
- * Read-only mapping; it changes no control behaviour until patch 4 wires it in.
+ * Read-only mapping; it changes no control behaviour until a later wiring patch calls controls.ts.
  */
 import type { ControlJurisdiction } from "@/components/slot-controls/tokens";
-import type { RgsConfig, RgsJurisdiction } from "./types.ts";
+import type { RgsConfig } from "./types.ts";
+import { controlsFromJurisdiction, toControlJurisdiction, type JurisdictionControls } from "./controls.ts";
 
 export type SessionRules = {
   betLevels: number[];
@@ -15,18 +16,11 @@ export type SessionRules = {
   modeCost: Record<string, number>;
   /** Mode name -> highest base amount allowed in that mode, when the server sets one. */
   modeMaxBet: Record<string, number>;
+  /** Existing control-bar subset (turbo, autoplay, buy feature), for controlState(). */
   controls: ControlJurisdiction;
-  extra: {
-    disabledFullscreen: boolean;
-    disabledSuperTurbo: boolean;
-    disabledSlamstop: boolean;
-    disabledSpacebar: boolean;
-    displayNetPosition: boolean;
-    displayRTP: boolean;
-    displaySessionTimer: boolean;
-    minimumRoundDurationMs: number;
-    social: boolean;
-  };
+  /** Every jurisdiction flag, typed. Use the helpers in controls.ts to act on them. */
+  jurisdiction: JurisdictionControls;
+  social: boolean;
 };
 
 export function rulesFromConfig(config: RgsConfig, launchSocial = false): SessionRules {
@@ -39,7 +33,7 @@ export function rulesFromConfig(config: RgsConfig, launchSocial = false): Sessio
     if (typeof m?.costMultiplier === "number" && m.costMultiplier > 0) modeCost[name] = m.costMultiplier;
     if (typeof m?.maxBet === "number" && m.maxBet > 0) modeMaxBet[name] = m.maxBet;
   }
-  const j: RgsJurisdiction = config.jurisdiction ?? {};
+  const jurisdiction = controlsFromJurisdiction(config.jurisdiction, launchSocial);
   return {
     betLevels,
     defaultBet,
@@ -47,22 +41,9 @@ export function rulesFromConfig(config: RgsConfig, launchSocial = false): Sessio
     maxBet: config.maxBet,
     modeCost,
     modeMaxBet,
-    controls: {
-      disabledTurbo: !!j.disabledTurbo,
-      disabledAutoplay: !!j.disabledAutoplay,
-      disabledBuyFeature: !!j.disabledBuyFeature,
-    },
-    extra: {
-      disabledFullscreen: !!j.disabledFullscreen,
-      disabledSuperTurbo: !!j.disabledSuperTurbo,
-      disabledSlamstop: !!j.disabledSlamstop,
-      disabledSpacebar: !!j.disabledSpacebar,
-      displayNetPosition: !!j.displayNetPosition,
-      displayRTP: !!j.displayRTP,
-      displaySessionTimer: !!j.displaySessionTimer,
-      minimumRoundDurationMs: Math.max(0, Number(j.minimumRoundDuration) || 0),
-      social: launchSocial || !!j.socialCasino,
-    },
+    controls: toControlJurisdiction(jurisdiction),
+    jurisdiction,
+    social: jurisdiction.social,
   };
 }
 
