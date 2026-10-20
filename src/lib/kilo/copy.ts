@@ -18,7 +18,7 @@ const pair = <T>(standard: T, social: T): CopyPair<T> => ({ standard, social });
 /** `social=true` (case-insensitive) selects social copy; anything else is standard. */
 export function readSocialFlag(search?: string): boolean {
   const query =
-    search ?? (typeof window === "undefined" ? "" : window.location.search);
+    search ?? (typeof window === "undefined" ? "" : (window.location?.search ?? ""));
   return new URLSearchParams(query).get("social")?.toLowerCase() === "true";
 }
 
