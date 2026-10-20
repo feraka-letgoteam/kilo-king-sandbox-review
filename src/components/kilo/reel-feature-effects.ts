@@ -12,7 +12,7 @@ import { createCharacterRig } from './character-rig';
 import { createCharacterMotionLoop } from './character-motion-loop';
 import { timedPerformanceFrameAt } from './rig-performance';
 import { FEATURE_ART } from './feature-presentation';
-import { vsMotionAt, VS_REVEAL_MS } from './feature-motion';
+import { vsMotionAt, VS_DUEL_MS } from './feature-motion';
 import { VS_PORTRAITS, VS_STRIPS, vsActionIndex, vsWinnerIndex } from './vs-art';
 import { VS_BEATS, VS_WIN_TIMING, vsWinningBoard, vsPhysicalAt } from './vs-encounter';
 import { vsGroupsFor, type VsGroup } from '@/lib/kilo/vs-groups';
@@ -306,7 +306,9 @@ export function createReelFeatureEffects(a: Adapter) {
     let reacted=false;const sounded=new Set<string>();
     const sound=(name:FeatureCueName)=>{if(!sounded.has(name)){sounded.add(name);a.cue?.(name);}};
     sound('vsReady');
-    await motion(VS_REVEAL_MS,t=>{
+    // motion() applies the speed factor; undo it so each duel lasts VS_DUEL_MS.
+    const speed=a.pace().speed,duelMs=VS_DUEL_MS[speed]/{normal:1,turbo:.55,super:.32}[speed];
+    await motion(duelMs,t=>{
       if(!a.pace().reduced){if(t>=VS_BEATS.pull)sound('vsPull');if(t>=VS_BEATS.contact)sound('vsImpact');if(t>=.66)sound('vsLatch');}
       if(t>=VS_BEATS.lock){sound('vsLock');if(!reacted){reacted=true;
         a.host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:duel.winner==='king'?'vs-win':'vs-loss'}}));}}
