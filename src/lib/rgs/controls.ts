@@ -48,12 +48,24 @@ export function controlsFromJurisdiction(j: RgsJurisdiction | null | undefined, 
   };
 }
 
-/** The subset the existing control bar already understands (controlState() in slot-controls/tokens). */
+/**
+ * Every Stake flag, in the control bar's ControlJurisdiction (slot-controls/tokens). controlAvailability()
+ * still reads only turbo/autoplay/buy; the rest ride along for the wiring patches (Builder 4: control flags,
+ * Builder 2: display flags). `social` is not a control flag and stays on SessionRules.
+ */
 export function toControlJurisdiction(c: JurisdictionControls): ControlJurisdiction {
   return {
     disabledTurbo: c.disabledTurbo,
     disabledAutoplay: c.disabledAutoplay,
     disabledBuyFeature: c.disabledBuyFeature,
+    disabledSuperTurbo: c.disabledSuperTurbo,
+    disabledSlamstop: c.disabledSlamstop,
+    disabledSpacebar: c.disabledSpacebar,
+    disabledFullscreen: c.disabledFullscreen,
+    minimumRoundDurationMs: c.minimumRoundDurationMs,
+    displayRTP: c.displayRTP,
+    displayNetPosition: c.displayNetPosition,
+    displaySessionTimer: c.displaySessionTimer,
   };
 }
 

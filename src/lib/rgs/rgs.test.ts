@@ -249,7 +249,21 @@ test("controls: every jurisdiction flag is typed and consumable", () => {
   assert.equal(controlsFromJurisdiction({ disabledSpacebar: "true" as unknown as boolean }).disabledSpacebar, false);
   assert.equal(controlsFromJurisdiction(null).social, false);
   assert.equal(controlsFromJurisdiction({}, true).social, true);
-  assert.deepEqual(toControlJurisdiction(on), { disabledTurbo: true, disabledAutoplay: true, disabledBuyFeature: true });
+  // Every Stake flag passes through, under the same names (Builder 4 / Builder 2 wire them).
+  assert.deepEqual(toControlJurisdiction(on), {
+    disabledTurbo: true, disabledAutoplay: true, disabledBuyFeature: true, disabledSuperTurbo: true, disabledSlamstop: true,
+    disabledSpacebar: true, disabledFullscreen: true, minimumRoundDurationMs: 2500, displayRTP: true, displayNetPosition: true,
+    displaySessionTimer: true,
+  });
+  assert.deepEqual(toControlJurisdiction(off), {
+    disabledTurbo: false, disabledAutoplay: false, disabledBuyFeature: false, disabledSuperTurbo: false, disabledSlamstop: false,
+    disabledSpacebar: false, disabledFullscreen: false, minimumRoundDurationMs: 0, displayRTP: false, displayNetPosition: false,
+    displaySessionTimer: false,
+  });
+  assert.equal(toControlJurisdiction(controlsFromJurisdiction({ disabledSpacebar: true })).disabledSpacebar, true);
+  assert.equal(toControlJurisdiction(controlsFromJurisdiction({ minimumRoundDuration: 1200 })).minimumRoundDurationMs, 1200);
+  assert.equal("disabledAnte" in toControlJurisdiction(on), false); // Stake has no ante flag
+  assert.equal("social" in toControlJurisdiction(on), false);
 });
 
 test("controls: minimum round duration", () => {

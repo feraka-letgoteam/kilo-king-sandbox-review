@@ -42,6 +42,17 @@ export type ControlJurisdiction = {
   disabledAnte?: boolean;
   /** Hide restricted actions by default. Disable keeps the rim and a reason. */
   restrictedPresentation?: "hide" | "disable";
+  // Stake jurisdiction flags passed through by src/lib/rgs/controls.ts toControlJurisdiction().
+  // Optional and not read by controlAvailability(); consumers are added by the wiring patches.
+  disabledSuperTurbo?: boolean;
+  disabledSlamstop?: boolean;
+  disabledSpacebar?: boolean;
+  disabledFullscreen?: boolean;
+  /** Whole milliseconds; 0 = no minimum. */
+  minimumRoundDurationMs?: number;
+  displayRTP?: boolean;
+  displayNetPosition?: boolean;
+  displaySessionTimer?: boolean;
 };
 export type RestrictedControl = "turbo" | "auto" | "buy" | "ante";
 export function controlAvailability(
