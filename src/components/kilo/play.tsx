@@ -91,7 +91,7 @@ import {
 import { KILO_CONTROL_THEME } from "./control-theme";
 import "./modular-controls.css";
 import { FeatureMark, StageSurround } from "./StageSurround";
-import { acceptsSpinShortcut } from "./keyboard";
+import { acceptsSpinShortcut, isGameControlSpaceTarget } from "./keyboard";
 import { createAutoSpins } from "./auto-spins";
 import { AutoSpinsPanel, QuickSettings } from "./control-overlays";
 import fixtures from "@/lib/kilo/fixtures.json";
@@ -1027,23 +1027,43 @@ export function KiloTable({
     autoPanel ||
     summary != null;
   useEffect(() => {
+    const isBlocked = () =>
+      !booted || !ready || modalOpen || panel || document.hidden;
     const onSpace = (event: KeyboardEvent) => {
       const target = event.target;
+      const blocked = isBlocked();
+      // A focused control-bar button must not take Space (e.g. bet +):
+      // with no panel open, Space is the spin key there too.
+      const controlBar =
+        event.code === "Space" && !blocked && isGameControlSpaceTarget(target);
       const interactive =
+        !controlBar &&
         target instanceof Element &&
         !!target.closest(
           "button, input, textarea, select, a, summary, [contenteditable], [role=button]",
         );
-      const blocked =
-        !booted || !ready || modalOpen || panel || document.hidden;
       if (event.code === "Space" && !blocked && !interactive)
         event.preventDefault();
       if (!acceptsSpinShortcut(event, blocked, interactive)) return;
       // Reuse the same disabled state, purchase flow and Skip/Stop handler.
       spinButton.current?.click();
     };
+    // Buttons activate on keyup, so the focused control-bar button is
+    // stopped there as well.
+    const onSpaceUp = (event: KeyboardEvent) => {
+      if (
+        event.code === "Space" &&
+        !isBlocked() &&
+        isGameControlSpaceTarget(event.target)
+      )
+        event.preventDefault();
+    };
     document.addEventListener("keydown", onSpace);
-    return () => document.removeEventListener("keydown", onSpace);
+    document.addEventListener("keyup", onSpaceUp);
+    return () => {
+      document.removeEventListener("keydown", onSpace);
+      document.removeEventListener("keyup", onSpaceUp);
+    };
   }, [booted, ready, modalOpen, panel]);
   useEffect(() => {
     if (
