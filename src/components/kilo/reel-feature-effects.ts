@@ -543,7 +543,10 @@ export function createReelFeatureEffects(a: Adapter) {
       else await a.tween(pace(ms), t => { progress = t; paint(); });
       if (live()) repaint = paint;
     };
-    const transfer = async (award: Award, refresh?: () => void, origin?: () => { x: number; y: number }) => {
+    const credit = (award: Award) => {
+      if(live()&&award.credited>0){a.bankCue(award.credited,award.beforeCap>award.credited);callbacks.award(award.credited);}
+    };
+    const transfer = async (award: Award, refresh?: () => void, origin?: () => { x: number; y: number }, credited = false) => {
       if(!live() || award.credited<=0)return;
       if(!a.pace().reduced) {
         const el=document.createElement('div');el.className='kk-feature-transfer';el.textContent=money(award.credited);
@@ -556,7 +559,7 @@ export function createReelFeatureEffects(a: Adapter) {
           el.style.opacity=String(t>.65?Math.max(0,(1-t)/.35):1);
         }); } finally {el.remove();flyers.delete(el);}
       }
-      if(live()){a.bankCue(award.credited,award.beforeCap>award.credited);callbacks.award(award.credited);}
+      if(!credited)credit(award);
     };
     const cascadeWin = async (cascade: Cascade) => {
       const cells=cascade.clusters.flatMap(c=>c.cells);
@@ -638,7 +641,8 @@ export function createReelFeatureEffects(a: Adapter) {
           pace: a.pace, motion, hold: a.hold, live, cue: a.cue,
           react: kind => a.host.dispatchEvent(new CustomEvent('kilo-stage-action', { bubbles: true, detail: { kind } })),
           readout: a.readout, screen: a.screen,
-          transfer: (award, refresh, origin) => transfer(award, refresh, origin),
+          transfer: (award, refresh, origin, credited) => transfer(award, refresh, origin, credited),
+          credit,
         });
         return;
       }

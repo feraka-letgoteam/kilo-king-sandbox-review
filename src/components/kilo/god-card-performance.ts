@@ -63,7 +63,9 @@ type GodCardAdapter = {
   react: (kind: 'max' | 'max-stop' | 'max-loss') => void;
   readout: (label: string, value: string) => void;
   screen: (x: number, y: number) => { x: number; y: number };
-  transfer: (award: Award, refresh: () => void, origin: () => { x: number; y: number }) => Promise<void>;
+  transfer: (award: Award, refresh: () => void, origin: () => { x: number; y: number }, credited?: boolean) => Promise<void>;
+  /** Display only: hands the recorded award to WIN so it can count up under the banner. */
+  credit?: (award: Award) => void;
 };
 const GOLD = 0xf5ca79, WHITE = 0xfff8e9, TEAL = 0x9be2dc;
 const money = (value: number) => Math.round(value).toLocaleString('en-US');
@@ -409,11 +411,15 @@ export async function runGodCardPresentation(record: BinaryReels, a: GodCardAdap
     await a.motion(GOD_CARD_CLOCK.impact, t => { impact = t; draw(); });
     if (!a.live()) return;
     impact = 1; draw();
+    // Display only: WIN starts counting the recorded award as the banner
+    // lands, so it climbs under MAX WIN instead of jumping after it fades.
+    const early = record.won && !a.pace().reduced && !!a.credit;
+    if (early) a.credit!(record.result);
     await a.hold(a.pace().reduced ? 240 : Math.max(240, GOD_CARD_CLOCK.resultHold * { normal: 1, turbo: .55, super: .32 }[a.pace().speed]));
     if (!a.live()) return;
     if (record.won) await a.transfer(record.result, () => { view.hideAmount(); draw(); }, () => {
       const p = view.amountOrigin(); return a.screen(p.x, p.y);
-    });
+    }, early);
     if (!a.live()) return;
     // Hard cut, not a crossfade: the result card holds fully opaque for the same
     // release time, then is removed in one frame, so card and reels never blend.

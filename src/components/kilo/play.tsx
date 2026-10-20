@@ -379,7 +379,9 @@ export function KiloTable({
     busy && hud ? hud.total : win,
     rollMotion,
     turbo,
-    260,
+    // The Getaway credits WIN as its banner lands; the longer roll spans the
+    // banner hold and flight instead of snapping in after it (display only).
+    busy && hud?.mechanic?.reel?.type === "binary" ? 860 : 260,
   );
   const shownBonus = useRoll(
     hud?.bonusWin ?? 0,
