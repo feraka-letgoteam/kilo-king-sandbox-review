@@ -460,6 +460,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const winFeel = createWinFeel({
     view: (reel, row) => (hiddenVsReels.has(reel) ? null : (reels[reel]?.strip.children[row] as Container | undefined) ?? null),
     pace: () => ({ turbo, reduced }),
+    cell: () => geom.cell,
     ticker: app.ticker,
   });
 
@@ -2101,7 +2102,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         target.dataset.paylineFocus='board';paint();
         const clock=connectionClock(lines.length,total>=stake*5);
         await tween(reduced?0:turbo?160:clock.trace,t=>{trace=t;paint();});
-        if(stopped)return;trace=1;publish();
+        if(stopped)return;trace=1;publish();winFeel.pop();
         if(clock.read&&!reduced)await holdReadable(turbo?90:clock.read);
         if(stopped)return;
         await Promise.all([
