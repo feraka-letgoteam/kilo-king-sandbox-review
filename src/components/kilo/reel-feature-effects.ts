@@ -428,9 +428,9 @@ export function createReelFeatureEffects(a: Adapter) {
   }
 
   async function mergeGroup(previous: VsGroup[], next: VsGroup,
-    motion: (ms: number, draw: (t: number) => void) => Promise<void>, live: () => boolean) {
+    motion: (ms: number, draw: (t: number) => void) => Promise<void>, live: () => boolean, onReveal?: () => void) {
     const layer = new Container(); layer.label = 'vs-group-merge'; fx.addChild(layer);
-    let key = '', old: Container[] = [], incoming: Container, factors: Text[] = [], seams: Graphics, contact: Graphics, smoke: Graphics;
+    let key = '', old: Container[] = [], incoming: Container, factors: Text[] = [], seams: Graphics, contact: Graphics, smoke: Graphics, smokeClip: Graphics;
     const mergeCues=new Set<string>();
     mergingReels = new Set(next.reels); paintHeld();
     try {
@@ -449,6 +449,9 @@ export function createReelFeatureEffects(a: Adapter) {
           factors=previous.map(unit=>{const factor=createVsMultiplierLabel(`×${unit.multiplier}`,g.cell*.38);
             factor.label='vs-merge-factor';layer.addChild(factor);return factor;});
           smoke=new Graphics();smoke.label='vs-merge-opaque-burst';layer.addChild(smoke);
+          // The burst stays on the wild reel(s): masked to the joined group's cells.
+          smokeClip=new Graphics();smokeClip.label='vs-merge-burst-clip';layer.addChild(smokeClip);smoke.mask=smokeClip;
+          smokeClip.rect(x,g.gy,width,g.cell*3).fill(WHITE);
         }
         const beat = vsMergeAt(t, a.pace().reduced), center = x + width / 2;
         old.forEach((art, i) => {
@@ -485,6 +488,9 @@ export function createReelFeatureEffects(a: Adapter) {
           reducedMerge?0:clamp01((t-.56)/.05),reducedMerge?1:clamp01((t-.74)/.16),next.side==='king'?0xffcb55:0x79f0da);
         const tone=next.side==='king'?0xffcb55:0x79f0da;
         paintImpact(contact,center,g.gy+g.cell*2.52,width*.72,g.cell*.85,clamp01((t-.48)/.46),tone,Math.min(1.5,next.width*.32),a.pace().reduced);
+        // The header switches to the product as the burst starts to clear,
+        // on the same beat the reel first shows it (not after the merge ends).
+        if((reducedMerge||t>=.74)&&onReveal&&!mergeCues.has('reveal')){mergeCues.add('reveal');onReveal();}
         for(const [at,name] of [[.18,'vsPull'],[.48,'vsImpact'],[.70,'vsLock']] as const){
           if(t>=at&&!mergeCues.has(name)){mergeCues.add(name);a.cue?.(name);}
         }
@@ -657,7 +663,8 @@ export function createReelFeatureEffects(a: Adapter) {
                 members:[{reel:conversion.reel,multiplier:conversion.multiplier,duelist:conversion.duelist}]};
               const previous = [...beforeGroups.filter(group => group.reels.some(reel => afterGroup.reels.includes(reel))), fresh]
                 .sort((left,right) => left.start-right.start);
-              await mergeGroup(previous,afterGroup,motion,live);if(!live())return;
+              // publish() reports the already-recorded post-arrival state (no new values).
+              await mergeGroup(previous,afterGroup,motion,live,publish);if(!live())return;
             }
             paintHeld();publish();a.focus?.(null);
           }
