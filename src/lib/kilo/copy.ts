@@ -468,6 +468,27 @@ export const COPY = {
     "This replay link is incomplete.",
     "This replay link is incomplete.",
   ),
+  "replay.error.unplayable": pair(
+    "This round can't be shown.",
+    "This round can't be shown.",
+  ),
+  /** Badge line in the BALANCE cell. The base amount label reuses `label.betShort`. */
+  "replay.badge": pair("REPLAY", "REPLAY"),
+  "replay.realCost": pair("REAL COST", "REAL COST"),
+  /** Plate text before Play is pressed. */
+  "replay.ready": pair("REPLAY READY", "REPLAY READY"),
+  /** Caption when the link has no amount, so values show as multipliers. */
+  "replay.noAmount": pair(
+    "Amounts are shown as multiples of the base bet.",
+    "Amounts are shown as multiples of the base play.",
+  ),
+  // Replay mode titles: same names as the feature titles (no "buy" in any mode).
+  "replay.mode.base": pair("Base Game", "Base Game"),
+  "replay.mode.ante": pair("Ante", "Ante"),
+  "replay.mode.dockside": pair("Dockside Catch", "Dockside Catch"),
+  "replay.mode.yacht": pair("Yacht Stash", "Yacht Stash"),
+  "replay.mode.mystery": pair("Mystery Bonus", "Mystery Bonus"),
+  "replay.mode.getaway": pair("The Getaway", "The Getaway"),
 } satisfies Record<string, CopyPair<unknown>>;
 
 export type CopyKey = keyof typeof COPY;
