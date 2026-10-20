@@ -45,7 +45,8 @@ export type ReelFeature = YachtReels | TumbleReels | BinaryReels;
 export const REEL_FEATURE_PROFILE = {
   // VS uses the versioned weighted catalogue; these remaining parameters
   // preserve Max and historical Chopper replay generation.
-  getawayWinChance: 955 / 25000,
+  // The Getaway: 1,000x cost, 25,000x or zero. RTP = 25000 * p / 1000 = 96.7%.
+  getawayWinChance: 967 / 25000,
   clusterWeights: [64, 15, 8, 6, 4, 3],
   clusterLeadWeights: [[0, 4], [1, 4], [2, 2]] as [number, number][],
   tumbleCargoValues: [[0.5, 44], [1, 48], [2, 7], [5, 0.8], [10, 0.18], [25, 0.02]] as [number, number][],
