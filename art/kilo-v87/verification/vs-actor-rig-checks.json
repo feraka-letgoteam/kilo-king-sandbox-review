@@ -1,0 +1,59 @@
+{
+  "method": "Production pose helper and original part images; decoded shipping atlases shown at 129 px phone sprite width. No browser or audio claim.",
+  "frameCount": 64,
+  "frameSize": 256,
+  "samples": 4004,
+  "clamped": 0,
+  "maxBoneError": 9.947598300641403e-14,
+  "maxGripError": 0,
+  "maxJointStepAt1000Samples": 9.528654863657112,
+  "elbowBendDegrees": [
+    66.97739706344741,
+    166.2755260318158
+  ],
+  "primaryContact": 0.49,
+  "counter": [
+    0.59,
+    0.61
+  ],
+  "decisivePush": 0.68,
+  "result": [
+    0.715,
+    0.94
+  ],
+  "atlases": [
+    {
+      "side": "king",
+      "outcome": "win",
+      "url": "/kilo-v87/vs/king-win.webp",
+      "bytes": 1271044,
+      "uniqueRasterFrames": 52,
+      "frameCount": 64
+    },
+    {
+      "side": "king",
+      "outcome": "loss",
+      "url": "/kilo-v87/vs/king-loss.webp",
+      "bytes": 1274420,
+      "uniqueRasterFrames": 52,
+      "frameCount": 64
+    },
+    {
+      "side": "vice",
+      "outcome": "win",
+      "url": "/kilo-v87/vs/vice-win.webp",
+      "bytes": 1272288,
+      "uniqueRasterFrames": 52,
+      "frameCount": 64
+    },
+    {
+      "side": "vice",
+      "outcome": "loss",
+      "url": "/kilo-v87/vs/vice-loss.webp",
+      "bytes": 1262866,
+      "uniqueRasterFrames": 52,
+      "frameCount": 64
+    }
+  ],
+  "contactModel": "Extended tools at king(370,290), vice(134,290); restrained chest and head drive."
+}

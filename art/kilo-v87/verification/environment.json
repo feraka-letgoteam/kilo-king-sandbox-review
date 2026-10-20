@@ -1,0 +1,91 @@
+{
+  "method": "Production source geometry and offline native Canvas, not live browser FPS",
+  "rows": [
+    {
+      "scene": "base",
+      "portrait": false,
+      "draws": 429,
+      "priorDraws": 896,
+      "drawReductionPercent": 52.1,
+      "minJacobian": 0.6318426191916812,
+      "maxJacobian": 1.3428106111657552,
+      "maxScreenTravel": 30.55522654470683
+    },
+    {
+      "scene": "base",
+      "portrait": true,
+      "draws": 402,
+      "priorDraws": 896,
+      "drawReductionPercent": 55.1,
+      "minJacobian": 0.6365915315606017,
+      "maxJacobian": 1.3265163887428568,
+      "maxScreenTravel": 12.201463104598853
+    },
+    {
+      "scene": "scatter-3",
+      "portrait": false,
+      "draws": 448,
+      "priorDraws": 896,
+      "drawReductionPercent": 50,
+      "minJacobian": 0.7447934513114723,
+      "maxJacobian": 1.3099856742970006,
+      "maxScreenTravel": 11.453160776012227
+    },
+    {
+      "scene": "scatter-3",
+      "portrait": true,
+      "draws": 271,
+      "priorDraws": 896,
+      "drawReductionPercent": 69.8,
+      "minJacobian": 0.6983227323588409,
+      "maxJacobian": 1.2944081173942725,
+      "maxScreenTravel": 7.710851138805257
+    },
+    {
+      "scene": "scatter-4",
+      "portrait": false,
+      "draws": 336,
+      "priorDraws": 896,
+      "drawReductionPercent": 62.5,
+      "minJacobian": 0.7894597144272806,
+      "maxJacobian": 1.2553150604270227,
+      "maxScreenTravel": 7.638043121359702
+    },
+    {
+      "scene": "scatter-4",
+      "portrait": true,
+      "draws": 309,
+      "priorDraws": 896,
+      "drawReductionPercent": 65.5,
+      "minJacobian": 0.6362978914907242,
+      "maxJacobian": 1.4190541207491618,
+      "maxScreenTravel": 6.919640339445577
+    },
+    {
+      "scene": "max-win",
+      "portrait": false,
+      "draws": 351,
+      "priorDraws": 896,
+      "drawReductionPercent": 60.8,
+      "minJacobian": 0.7598357622858544,
+      "maxJacobian": 1.2852440858647283,
+      "maxScreenTravel": 13.808220832811848
+    },
+    {
+      "scene": "max-win",
+      "portrait": true,
+      "draws": 297,
+      "priorDraws": 896,
+      "drawReductionPercent": 66.9,
+      "minJacobian": 0.6935213512452715,
+      "maxJacobian": 1.3017565351723903,
+      "maxScreenTravel": 10.546681309615641
+    }
+  ],
+  "rootAndBoundaryDisplacement": 0,
+  "phoneSeamMinimumAlpha": 255,
+  "windPeriodMs": 96000,
+  "cloudMotion": "forward integrated shared gust",
+  "artAndRegistrationPreserved": true,
+  "reducedMotionStatic": true
+}

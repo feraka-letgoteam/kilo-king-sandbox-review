@@ -14,6 +14,7 @@ import { connectionAnchor } from './connection-win';
 import { createWinNumeral, connectedNumberScale, WIN_TYPE } from './win-type';
 import { paintWinConnection } from './win-connection-paint';
 import { createConnectionAmounts, connectionTraceIndices } from './connection-amounts';
+import { connectionClock } from './vs-choreography';
 import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
 import { KING_THROW_RELEASE, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
@@ -1914,8 +1915,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     },
     async reelFeatureStep(event, callbacks) {
       if (event.reel?.type === 'binary') {
-        // This is the paid spin itself, driven by the recorded horizontal
-        // super-symbol stop. Do not launch the ordinary five vertical strips.
+        // The director has just stopped the one recorded reel spin. The
+        // horizontal card now presents its outcome without starting a second spin.
         stopped = false; job += 1; clearPresentation(); clearFlyers();
       }
       const mine = job; animating = true; resizeFollow = true; mark('feature');
@@ -2048,7 +2049,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         localWin.style.fontSize=Math.max(23,geom.cell*.50);
         localWin.style.stroke={color:WIN_TYPE.ink,width:Math.max(2,Number(localWin.style.fontSize)*.055)};
         const anchor=connectionAnchor(cells,geom,localWin.width,localWin.height);
-        localWin.position.set(anchor.x,anchor.y);localWin.alpha=trace>=1?alpha*(reduced||lines.length===1?1:Math.min(1,response*3)):0;
+        localWin.position.set(anchor.x,anchor.y);localWin.alpha=trace>=1?alpha*(reduced||lines.length===1?1:Math.max(0,Math.min(1,(response-.27)/.48))):0;
         const stamped=impactStamp(response,reduced);
         localWin.scale.set(stamped.x,stamped.y);localWin.rotation=stamped.turn*.5;
         components.paint(geom,trace,response,alpha,anchor,reduced);
@@ -2076,14 +2077,19 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       };
       const onLayout=()=>paint();host.addEventListener('kilo-relayout',onLayout);
       try {
-        showReadout(lines.length>1?`${lines.length} winning connections`:`${lines[0]!.n} × ${SYMBOL_LABELS[lines[0]!.s]}`,money(total),'local');
+        // The on-board amount owns the result. A second detached caption was
+        // competing with the same number and obscuring the source-to-WIN flow.
+        host.setAttribute('aria-label',`Kilo King reels. ${lines.length} winning connections: ${money(total)}`);
         target.dataset.paylineFocus='board';paint();
-        await tween(reduced?0:turbo?120:240+Math.min(180,(lines.length-1)*20),t=>{trace=t;paint();});
+        const clock=connectionClock(lines.length,total>=stake*5);
+        await tween(reduced?0:turbo?160:clock.trace,t=>{trace=t;paint();});
         if(stopped)return;trace=1;publish();
+        if(clock.read&&!reduced)await holdReadable(turbo?90:clock.read);
+        if(stopped)return;
         await Promise.all([
           burstWin({...lines[0]!,pay:total},true,lines.slice(1),true),
           (async()=>{
-            await tween(reduced?0:turbo?90:160,t=>{response=t;paint();});
+            await tween(reduced?0:turbo?120:clock.reveal,t=>{response=t;paint();});
             if(stopped)return;response=1;paint();
             await holdReadable(reduced?240:turbo?170:total>=stake*5?400:240);
             if(!stopped)await tween(reduced?0:turbo?80:140,t=>{alpha=1-t;paint();});

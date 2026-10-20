@@ -53,6 +53,11 @@ export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=fal
       draw.current(0);loop.current?.refresh();
     };
     shell?.addEventListener('kilo-stage-action',action);
+    const focusAction=(event:Event)=>{
+      playback.current.focus(settings.current.reduced?null:(event as CustomEvent).detail??null);
+      draw.current(0);
+    };
+    shell?.addEventListener('kilo-stage-focus',focusAction);
     const toolAction=(event:Event)=>{
       const detail=(event as CustomEvent<KingToolEvent>).detail;if(!detail)return;
       tool=detail.progress>=1||settings.current.reduced?null:{kind:detail.kind,progress:detail.progress};
@@ -70,7 +75,7 @@ export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=fal
     const loaded=()=>{if(disposed)return;ready=Object.values(arms).every(img=>img.complete&&img.naturalWidth>0);lastFace='';draw.current(0);loop.current?.refresh();};
     for(const[key,img]of Object.entries(arms)){img.onload=loaded;img.src=KING_ARM_ASSETS[key as keyof typeof KING_ARM_ASSETS];}
     eyes.onload=loaded;reaction.onload=loaded;eyes.src=STAGE_KING.blink.image;reaction.src=STAGE_KING.reaction.image;
-    return()=>{disposed=true;shell?.removeEventListener('kilo-stage-action',action);shell?.removeEventListener('kilo-stage-tool',toolAction);for(const img of Object.values(arms))img.onload=null;eyes.onload=null;reaction.onload=null;loop.current?.destroy();loop.current=null;draw.current=()=>{};};
+    return()=>{disposed=true;shell?.removeEventListener('kilo-stage-action',action);shell?.removeEventListener('kilo-stage-focus',focusAction);shell?.removeEventListener('kilo-stage-tool',toolAction);for(const img of Object.values(arms))img.onload=null;eyes.onload=null;reaction.onload=null;loop.current?.destroy();loop.current=null;draw.current=()=>{};};
   },[]);
   useEffect(()=>{
     settings.current={reduced,paused};

@@ -70,19 +70,54 @@ export function environmentFoliage(scene:SceneId,portrait:boolean,width:number,h
   return patches;
 }
 
-/** Long, coherent breeze with branch lag and much smaller distal flutter.
- * Every harmonic closes at 96 seconds. Wind is never tied to spin speed. */
+const TAU=Math.PI*2,WIND_CYCLE_MS=96000;
+type WindClock={gust:number;travel:number;swaySin:number;swayCos:number;flutterSin:number;flutterCos:number;tipSin:number;tipCos:number};
+let lastWindTime=NaN,lastWind:WindClock;
+function windClockAt(elapsed:number):WindClock {
+  if(elapsed===lastWindTime)return lastWind;
+  const t=elapsed/WIND_CYCLE_MS*TAU;
+  // A broad gust reaches all crowns together. The integral changes cloud
+  // speed continuously and remains forward-moving, with an exact 96s join.
+  const gust=.68+.20*Math.sin(t*4-.6)+.12*Math.sin(t*2+.8);
+  const travel=elapsed+WIND_CYCLE_MS/TAU*(.20/4*(Math.cos(-.6)-Math.cos(t*4-.6))
+    +.12/2*(Math.cos(.8)-Math.cos(t*2+.8)));
+  lastWindTime=elapsed;
+  return lastWind={gust,travel,swaySin:Math.sin(t*8),swayCos:Math.cos(t*8),
+    flutterSin:Math.sin(t*12),flutterCos:Math.cos(t*12),tipSin:Math.sin(t*24),tipCos:Math.cos(t*24)};
+}
+
+/** One world-time wind field for crowns and the existing atmospheric layers.
+ * A stable gust envelope gives the scene common weather; local phase supplies
+ * only the small branch lag. The extra values can also drive surface response. */
+export function environmentWindAt(elapsed:number,phase=0) {
+  const w=windClockAt(elapsed);
+  return {gust:w.gust,travel:w.travel,
+    sway:(w.swaySin*Math.cos(phase)-w.swayCos*Math.sin(phase))*w.gust,
+    flutter:(w.flutterSin*Math.cos(phase*.75)-w.flutterCos*Math.sin(phase*.75))*.18};
+}
+type WindBinding={swayCos:number;swaySin:number;flutterCos:number;flutterSin:number;tipCos:number;tipSin:number};
+function windBinding(branch:number,depth:number):WindBinding {
+  const lag=branch*.21+depth*.56;
+  return {swayCos:Math.cos(lag),swaySin:Math.sin(lag),flutterCos:Math.cos(lag*.75),
+    flutterSin:Math.sin(lag*.75),tipCos:Math.cos(lag*1.8),tipSin:Math.sin(lag*1.8)};
+}
+function frondAngle(w:WindClock,b:WindBinding,depth:number,stiffness:number) {
+  const sway=(w.swaySin*b.swayCos-w.swayCos*b.swaySin)*w.gust;
+  const flutter=(w.flutterSin*b.flutterCos-w.flutterCos*b.flutterSin)*.18;
+  const tip=(w.tipSin*b.tipCos-w.tipCos*b.tipSin)*.0035*depth*depth;
+  return (sway+flutter)*.056/stiffness+tip;
+}
+
+/** Rooted pressure, delayed tip and a much smaller distal flutter. Every
+ * harmonic closes at 96 seconds. Wind is never tied to gameplay speed. */
 export function frondWindAt(elapsed:number,branch:number,depth:number,stiffness=1) {
-  const t=elapsed/96000*Math.PI*2,lag=branch*.21+depth*.56;
-  const gust=.62+.20*Math.sin(t*2-.6)+.18*Math.sin(t*3+.8);
-  return (Math.sin(t*8-lag)*gust+.22*Math.sin(t*12-lag*.75))*.047/stiffness
-    +Math.sin(t*24-lag*1.8)*.004*depth*depth;
+  return frondAngle(windClockAt(elapsed),windBinding(branch,depth),depth,stiffness);
 }
 function segment(x:number,y:number,a:Point,b:Point){
   const dx=b[0]-a[0],dy=b[1]-a[1],t=clamp(((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy||1));
   return {t,d:Math.hypot(x-a[0]-dx*t,y-a[1]-dy*t)};
 }
-type Binding={branch:number;depth:number;weight:number};
+type Binding={branch:number;depth:number;weight:number;dx:number;dy:number;wind:WindBinding};
 type Vertex={x:number;y:number;bindings:Binding[]};
 function bind(x:number,y:number,patch:FoliagePatch):Vertex{
   const margin=Math.min(patch.width,patch.height)*.18;
@@ -97,54 +132,86 @@ function bind(x:number,y:number,patch:FoliagePatch):Vertex{
     }
     const influence=1-smooth((distance-f.radius*.35)/(f.radius*1.2));
     const weight=influence*smooth((depth-.10)/.76)*pin;
-    if(weight>.00001)bindings.push({branch,depth,weight});
+    if(weight>.00001)bindings.push({branch,depth,weight,dx:x-f.root[0],dy:y-f.root[1],wind:windBinding(f.phase+patch.phase,depth)});
   });
   const sum=bindings.reduce((s,b)=>s+b.weight,0);if(sum>1)for(const b of bindings)b.weight/=sum;
   return{x,y,bindings};
 }
-function deform(v:Vertex,patch:FoliagePatch,elapsed:number){
+function deform(v:Vertex,patch:FoliagePatch,wind:WindClock,out={x:v.x,y:v.y}){
   let x=v.x,y=v.y;
   for(const b of v.bindings){
-    const f=patch.fronds[b.branch]!,angle=frondWindAt(elapsed,f.phase+patch.phase,b.depth,f.stiffness)*patch.gain;
-    const dx=v.x-f.root[0],dy=v.y-f.root[1],cos=Math.cos(angle),sin=Math.sin(angle);
-    x+=(dx*cos-dy*sin-dx)*b.weight;y+=(dx*sin+dy*cos-dy)*b.weight;
+    const f=patch.fronds[b.branch]!,angle=frondAngle(wind,b.wind,b.depth,f.stiffness)*patch.gain;
+    const cos=Math.cos(angle),sin=Math.sin(angle);
+    x+=(b.dx*cos-b.dy*sin-b.dx)*b.weight;y+=(b.dx*sin+b.dy*cos-b.dy)*b.weight;
   }
-  return{x,y};
+  out.x=x;out.y=y;return out;
 }
-export const foliagePoint=(x:number,y:number,patch:FoliagePatch,elapsed:number)=>deform(bind(x,y,patch),patch,elapsed);
-type Mesh={vertices:Vertex[];triangles:number[][]};
+export const foliagePoint=(x:number,y:number,patch:FoliagePatch,elapsed:number)=>deform(bind(x,y,patch),patch,windClockAt(elapsed));
+type Triangle={i0:number;i1:number;i2:number;sx1:number;sy1:number;sx2:number;sy2:number;inverse:number;left:number;top:number;right:number;bottom:number};
+type Mesh={vertices:Vertex[];triangles:number[][];moving:Triangle[];fixed:Triangle[];posed:{x:number;y:number}[]};
 const meshes=new Map<string,Mesh>();
 export function foliageMesh(patch:FoliagePatch):Mesh{
   const key=`${patch.id}-${patch.x}-${patch.y}-${patch.width}-${patch.height}`;
   const saved=meshes.get(key);if(saved)return saved;
-  const nx=16,ny=14,vertices:Vertex[]=[],triangles:number[][]=[];
+  // 240 shared triangles instead of 448. The low-frequency deformation needs
+  // smooth joints, not a dense per-pixel mesh; authored leaf detail is intact.
+  const nx=12,ny=10,vertices:Vertex[]=[],triangles:number[][]=[],moving:Triangle[]=[],fixed:Triangle[]=[];
   for(let y=0;y<=ny;y++)for(let x=0;x<=nx;x++)vertices.push(bind(patch.x+x*patch.width/nx,patch.y+y*patch.height/ny,patch));
   for(let y=0;y<ny;y++)for(let x=0;x<nx;x++){
     const a=y*(nx+1)+x,b=a+1,c=a+nx+1,d=c+1;
-    // Include pinned cells: the alpha layer contains static crown roots too.
-    for(const ids of [[a,b,c],[b,d,c]])triangles.push(ids);
+    // Pinned cells still contain authored roots. Batch their union in one
+    // untransformed draw, rather than repainting each fixed triangle.
+    for(const ids of [[a,b,c],[b,d,c]]){
+      triangles.push(ids);
+      const [i0,i1,i2]=ids as [number,number,number],s0=vertices[i0]!,s1=vertices[i1]!,s2=vertices[i2]!;
+      const sx1=s1.x-s0.x,sy1=s1.y-s0.y,sx2=s2.x-s0.x,sy2=s2.y-s0.y;
+      const triangle={i0,i1,i2,sx1,sy1,sx2,sy2,inverse:1/(sx1*sy2-sx2*sy1),
+        left:Math.max(0,Math.min(s0.x,s1.x,s2.x)-8),top:Math.max(0,Math.min(s0.y,s1.y,s2.y)-8),
+        right:Math.max(s0.x,s1.x,s2.x)+8,bottom:Math.max(s0.y,s1.y,s2.y)+8};
+      (s0.bindings.length||s1.bindings.length||s2.bindings.length?moving:fixed).push(triangle);
+    }
   }
-  const mesh={vertices,triangles};meshes.set(key,mesh);return mesh;
+  const mesh={vertices,triangles,moving,fixed,posed:vertices.map(v=>({x:v.x,y:v.y}))};meshes.set(key,mesh);return mesh;
 }
-export function foliageVertices(patch:FoliagePatch,elapsed:number){return foliageMesh(patch).vertices.map(v=>deform(v,patch,elapsed));}
+export function foliageVertices(patch:FoliagePatch,elapsed:number){const wind=windClockAt(elapsed);return foliageMesh(patch).vertices.map(v=>deform(v,patch,wind));}
+
+function trianglePoint(ctx:CanvasRenderingContext2D,previous:{x:number;y:number},p:{x:number;y:number},next:{x:number;y:number},overdraw:number,move=false){
+  const ax=p.x-previous.x,ay=p.y-previous.y,bx=next.x-p.x,by=next.y-p.y;
+  const al=Math.hypot(ax,ay)||1,bl=Math.hypot(bx,by)||1;
+  const nx=ay/al+by/bl,ny=-ax/al-bx/bl;
+  const offset=overdraw/Math.max(.04,1+(ax*bx+ay*by)/(al*bl));
+  const x=p.x+nx*offset,y=p.y+ny*offset;
+  if(move)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+}
+function trianglePath(ctx:CanvasRenderingContext2D,d0:{x:number;y:number},d1:{x:number;y:number},d2:{x:number;y:number},overdraw:number){
+  trianglePoint(ctx,d2,d0,d1,overdraw,true);trianglePoint(ctx,d0,d1,d2,overdraw);trianglePoint(ctx,d1,d2,d0,overdraw);ctx.closePath();
+}
 
 /** Shared vertices plus a fractional overdraw close antialias cracks. Input
  * must be an isolated alpha canopy, never the flattened environment plate. */
 export function paintFoliage(ctx:CanvasRenderingContext2D,image:CanvasImageSource,patch:FoliagePatch,elapsed:number,sourceWidth:number,sourceHeight:number){
-  const mesh=foliageMesh(patch),dest=foliageVertices(patch,elapsed);
-  for(const ids of mesh.triangles){
-    const [s0,s1,s2]=ids.map(i=>mesh.vertices[i]!),[d0,d1,d2]=ids.map(i=>dest[i]!);
-    const sx1=s1!.x-s0!.x,sy1=s1!.y-s0!.y,sx2=s2!.x-s0!.x,sy2=s2!.y-s0!.y,det=sx1*sy2-sx2*sy1;
-    const dx1=d1!.x-d0!.x,dy1=d1!.y-d0!.y,dx2=d2!.x-d0!.x,dy2=d2!.y-d0!.y;
-    const a=(dx1*sy2-dx2*sy1)/det,b=(dy1*sy2-dy2*sy1)/det,c=(sx1*dx2-sx2*dx1)/det,d=(sx1*dy2-sx2*dy1)/det;
-    const cx=(d0!.x+d1!.x+d2!.x)/3,cy=(d0!.y+d1!.y+d2!.y)/3;
-    ctx.save();ctx.beginPath();[d0!,d1!,d2!].forEach((p,i)=>{
-      const length=Math.hypot(p.x-cx,p.y-cy)||1,x=p.x+(p.x-cx)*.35/length,y=p.y+(p.y-cy)*.35/length;
-      if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);
-    });ctx.closePath();ctx.clip();
-    ctx.transform(a,b,c,d,d0!.x-a*s0!.x-c*s0!.y,d0!.y-b*s0!.x-d*s0!.y);
-    const left=Math.max(0,s0!.x<s1!.x?Math.min(s0!.x,s2!.x)-2:Math.min(s1!.x,s2!.x)-2),top=Math.max(0,Math.min(s0!.y,s1!.y,s2!.y)-2);
-    const w=Math.min(sourceWidth,Math.max(s0!.x,s1!.x,s2!.x)+2)-left,h=Math.min(sourceHeight,Math.max(s0!.y,s1!.y,s2!.y)+2)-top;
-    ctx.drawImage(image,left,top,w,h,left,top,w,h);ctx.restore();
+  const mesh=foliageMesh(patch),dest=mesh.posed,wind=windClockAt(elapsed);
+  const transform=ctx.getTransform(),scale=Math.max(.25,Math.min(Math.hypot(transform.a,transform.b),Math.hypot(transform.c,transform.d)));
+  // Preserve subpixel coverage in the output viewport. A fixed source-space
+  // overlap shrank below a fifth of a pixel on phones and exposed mesh seams.
+  const overdraw=.6/scale;
+  for(let i=0;i<mesh.vertices.length;i++)deform(mesh.vertices[i]!,patch,wind,dest[i]!);
+  if(mesh.fixed.length){
+    ctx.save();ctx.beginPath();
+    for(const t of mesh.fixed)trianglePath(ctx,dest[t.i0]!,dest[t.i1]!,dest[t.i2]!,overdraw);
+    ctx.clip();
+    const left=Math.max(0,patch.x-8),top=Math.max(0,patch.y-8);
+    const width=Math.min(sourceWidth,patch.x+patch.width+8)-left,height=Math.min(sourceHeight,patch.y+patch.height+8)-top;
+    ctx.drawImage(image,left,top,width,height,left,top,width,height);ctx.restore();
+  }
+  for(const t of mesh.moving){
+    const s0=mesh.vertices[t.i0]!,d0=dest[t.i0]!,d1=dest[t.i1]!,d2=dest[t.i2]!;
+    const dx1=d1.x-d0.x,dy1=d1.y-d0.y,dx2=d2.x-d0.x,dy2=d2.y-d0.y;
+    const a=(dx1*t.sy2-dx2*t.sy1)*t.inverse,b=(dy1*t.sy2-dy2*t.sy1)*t.inverse,
+      c=(t.sx1*dx2-t.sx2*dx1)*t.inverse,d=(t.sx1*dy2-t.sx2*dy1)*t.inverse;
+    ctx.save();ctx.beginPath();trianglePath(ctx,d0,d1,d2,overdraw);ctx.clip();
+    ctx.transform(a,b,c,d,d0.x-a*s0.x-c*s0.y,d0.y-b*s0.x-d*s0.y);
+    const w=Math.min(sourceWidth,t.right)-t.left,h=Math.min(sourceHeight,t.bottom)-t.top;
+    ctx.drawImage(image,t.left,t.top,w,h,t.left,t.top,w,h);ctx.restore();
   }
 }

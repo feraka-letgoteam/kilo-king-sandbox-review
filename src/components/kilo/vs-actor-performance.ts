@@ -9,8 +9,8 @@ export const VS_ACTOR_FRAME_COUNT=64;
 export const VS_ACTOR_COLUMNS=8;
 export const VS_ACTOR_ROWS=8;
 export const VS_ACTOR_ATLASES={
-  king:{win:'/kilo-v85/vs/king-win.webp',loss:'/kilo-v85/vs/king-loss.webp'},
-  vice:{win:'/kilo-v85/vs/vice-win.webp',loss:'/kilo-v85/vs/vice-loss.webp'},
+  king:{win:'/kilo-v87/vs/king-win.webp',loss:'/kilo-v87/vs/king-loss.webp'},
+  vice:{win:'/kilo-v87/vs/vice-win.webp',loss:'/kilo-v87/vs/vice-loss.webp'},
 } as const;
 export const VS_ACTOR_URLS=Object.values(VS_ACTOR_ATLASES).flatMap(item=>Object.values(item));
 export function vsActorFrameIndex(progress:number,reduced=false){
@@ -34,32 +34,43 @@ function arm(shoulder:Point,hand:Point,bend:number){
 
 export function vsActorPoseAt(side:VsActorSide,outcome:VsActorOutcome,progress:number){
   const t=clamp(progress),king=side==='king',won=outcome==='win',sign=king?1:-1;
-  // Hold the loaded shape before committing. The drive and recoil change the
-  // arms/head independently; silhouette change is not a whole-card scale.
+  // Hands carry the attack into the shared gap while heads and chests stay
+  // behind it. A short release gives the eventual loser a counter before the final
+  // push at .68. Arms, chest and head own different parts of that pressure;
+  // no whole-body crossfade substitutes for a connected performance.
   const load=curve(t,[[0,0],[.14,0],[.27,1],[.35,1],[.48,0],[1,0]]);
-  const drive=curve(t,[[0,0],[.35,0],[.49,1],[.535,.88],[.63,0],[1,0]]);
-  const recoil=curve(t,[[0,0],[.50,0],[.59,1],[.72,.15],[.86,0],[1,0]]);
-  const result=curve(t,[[0,0],[.63,0],[.76,1],[.86,.92],[1,1]]);
-  const torsoAngle=sign*(-.105*load+.155*drive+(won?-.065:-.17)*recoil+(won?-.04:.085)*result);
-  const torsoOffset={x:sign*(-18*load+28*drive-(won?7:23)*recoil),y:15*load-13*drive+13*recoil+(won?-8:10)*result};
+  const drive=curve(t,[[0,0],[.35,0],[.49,1],[.535,.88],[.555,.18],[.59,.72],[.615,.62],[.68,1],[.715,.90],[.79,0],[1,0]]);
+  const recoil=curve(t,[[0,0],[.50,0],[.555,1],[.59,.14],[.615,.18],[.68,0],[.755,1],[.85,.12],[.94,0],[1,0]]);
+  const counter=curve(t,[[0,0],[.54,0],[.59,1],[.61,1],[.66,0],[1,0]]);
+  const finish=curve(t,[[0,0],[.62,0],[.68,1],[.715,1],[.78,0],[1,0]]);
+  const result=curve(t,[[0,0],[.715,0],[.84,1],[.92,.96],[1,1]]);
+  const torsoAngle=sign*(-.105*load+.035*drive+(won?-.065:-.17)*recoil+
+    (won?-.055:.075)*counter+(won?-.015:-.045)*finish+(won?-.04:.11)*result);
+  const torsoOffset={x:sign*(-18*load+6*drive-(won?7:23)*recoil+
+    (won?-9:10)*counter+(won?-2:-8)*finish),
+    y:15*load-4*drive+13*recoil+(won?5:-4)*counter+(won?-2:5)*finish+(won?-8:14)*result};
   const torsoPivot={x:256,y:450};
   const bodyPoint=(p:Point)=>{const q=rotate(p,torsoAngle,torsoPivot);return{x:q.x+torsoOffset.x,y:q.y+torsoOffset.y};};
   const shoulderA=bodyPoint({x:king?130:146,y:king?303:290}),shoulderB=bodyPoint({x:king?365:366,y:king?284:291});
-  // Both props reach y=290 at the shared contact. The close-up uses one
-  // horizontal confrontation space: retaining the old stacked-panel heights
-  // made the rod pass below the cuffs instead of meeting them.
-  const tool={x:256+sign*(-28*load+29*drive-24*recoil),y:(king?408:392)+(king?-36:-27)*load+(king?-118:-102)*drive+(king?-15:27)*recoil+(won?(king?-21:-20):18)*result,
-    angle:sign*(-.18*load+.21*drive-(won?.045:.15)*recoil)+(won?sign*-.12:sign*.15)*result};
+  // Both tools meet at y=290, reaching toward the opponent rather than
+  // rising against the actor's chest. The original 150/110 grip spacing and
+  // 96/122 bones remain fixed; the extended hands are reachable throughout.
+  const tool={x:256+sign*(-28*load+(king?114:122)*drive-24*recoil+(won?-9:9)*counter),
+    y:(king?408:392)+(king?-36:-27)*load+(king?-118:-102)*drive+(king?-15:27)*recoil+
+      (won?7:-5)*counter+(won?(king?-21:-20):22)*result,
+    angle:sign*(-.18*load+.21*drive-(won?.045:.15)*recoil+(won?-.07:.07)*counter)+
+      (won?sign*-.12:sign*.18)*result};
   const gripDistance=king?150:110;
   const handA=rotate({x:tool.x-gripDistance/2,y:tool.y},tool.angle,tool),handB=rotate({x:tool.x+gripDistance/2,y:tool.y},tool.angle,tool);
   const left=arm(shoulderA,handA,1),right=arm(shoulderB,handB,-1);
   const headBase=bodyPoint({x:king?282:258,y:228});
-  const faceFollow=curve(t,[[0,0],[.59,0],[.73,1],[.84,.82],[1,.82]]);
+  const faceFollow=curve(t,[[0,0],[.72,0],[.85,1],[.94,.88],[1,.88]]);
   const head={x:headBase.x+sign*(won?3:-7)*faceFollow,
-    y:headBase.y+4*load-9*drive+10*recoil+(won?-8:10)*faceFollow,
-    angle:torsoAngle+sign*(.11*load-.16*drive+(won?-.09:.22)*recoil+(won?-.07:.11)*result+(won?-.12:.15)*faceFollow),
-    expression:(t<.27?'ready':t<.57?'effort':won&&t>=.66?'win':!won?'loss':'effort') as 'ready'|'effort'|'win'|'loss'};
-  return{side,outcome,progress:t,load,drive,recoil,result,torsoAngle,torsoOffset,torsoPivot,tool,left,right,head};
+    y:headBase.y+4*load-3*drive+10*recoil+(won?5:-4)*counter+(won?-8:13)*faceFollow,
+    angle:torsoAngle+sign*(.11*load-.055*drive+(won?-.09:.22)*recoil+
+      (won?.09:-.07)*counter+(won?-.07:.14)*result+(won?-.12:.18)*faceFollow),
+    expression:(t<.27?'ready':t<(won?.79:.74)?'effort':won?'win':'loss') as 'ready'|'effort'|'win'|'loss'};
+  return{side,outcome,progress:t,load,drive,recoil,counter,finish,result,torsoAngle,torsoOffset,torsoPivot,tool,left,right,head};
 }
 
 export type VsActorParts=Record<'torso'|'head-ready'|'head-effort'|'head-win'|'head-loss'|'upper'|'forearm-left'|'forearm-right'|'tool',CanvasImageSource>;

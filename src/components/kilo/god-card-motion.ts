@@ -52,7 +52,7 @@ export function godCardPose(beat: GodCardBeat, progress: number, stage=1) {
   const preload = smooth((t - .25) / .75);
   let pitch = 0, lean = 0, heave = 0, wake = 0, wakeLength = 1, spray = 0, surge = 0;
   if (beat === 'anticipate') {
-    const rev=Math.sin(t*Math.PI*12)*Math.sin(Math.PI*t)**2*preload;
+    const rev=Math.sin(t*Math.PI*3)*Math.sin(Math.PI*t)**2*preload;
     pitch = (.105 * preload+.009*rev)*intensity;
     lean = (.105 * preload-.015*rev)*intensity;
     heave = (19 * preload+2*rev)*intensity;

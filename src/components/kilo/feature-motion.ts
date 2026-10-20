@@ -2,7 +2,7 @@
 const clamp = (n: number) => Math.max(0, Math.min(1, n));
 const easeOut = (n: number) => 1 - (1 - clamp(n)) ** 3;
 export const GETAWAY_REVEAL_MS = 1600;
-export const VS_REVEAL_MS = 1480;
+export const VS_REVEAL_MS = 1920;
 /** Registered artwork envelope; the five-by-three game geometry is untouched. */
 export const GETAWAY_ART = { widthCells: 5.75, centerYCells: 1.80, awardYCells: 2.32, awardHeightCells: .62 } as const;
 
@@ -20,6 +20,6 @@ export function getawayMotionAt(t: number, won: boolean, reduced = false) {
 export function vsMotionAt(t: number, reduced = false) {
   t = reduced ? 1 : clamp(t);
   return { expand: easeOut(t / .19), challenge: clamp((t - .18) / .48),
-    resolve: clamp((t - .60) / .22), lock: easeOut((t - .82) / .18),
-    candidates: t >= .16 && t < .82, winner: t >= .60 };
+    resolve: clamp((t - .72) / .18), lock: easeOut((t - .90) / .10),
+    candidates: t >= .10 && t < .90, winner: t >= .72 };
 }

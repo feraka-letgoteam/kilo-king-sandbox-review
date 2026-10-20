@@ -1,5 +1,4 @@
 import type { Graphics } from 'pixi.js';
-import { paintImpact } from './impact-language';
 
 type Point = { x: number; y: number };
 const unit = (n: number) => Math.max(0, Math.min(1, n));
@@ -24,7 +23,7 @@ export function paintWinConnection(path: Graphics, accents: Graphics, points: Po
     const b=wild.has(i+1)?{x:to.x-dx/length*inset,y:to.y-dy/length*inset}:to;
     if (u <= 0) continue;
     const end = { x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u };
-    for (const [width, color, opacity] of [[.080, 0x21140e, .96], [.050, 0xf6a43a, 1], [.024, 0xffe89b, 1], [.009, 0xfffbed, 1]]) {
+    for (const [width, color, opacity] of [[.044, 0x28170d, .90], [.024, 0xf7b342, 1], [.010, 0xfff5d5, 1]]) {
       path.moveTo(a.x, a.y).lineTo(end.x, end.y).stroke({ width: Math.max(1, cell * width!),
         color, alpha: opacity! * alpha * energy * (1 - .77 * smoothResponse(response)), cap: 'round', join: 'round' });
     }
@@ -48,7 +47,12 @@ export function paintWinConnection(path: Graphics, accents: Graphics, points: Po
       accents.moveTo(x-side*span,y-1).lineTo(x,y-1).lineTo(x,y-side*span)
         .stroke({color:0xffd15e,width:Math.max(1.3,cell*.026),alpha:opacity,join:'bevel'});
     }
-    if(intensity>=1.3&&!reduced)paintImpact(accents,p.x,p.y,cell*.68,cell*.65,
-      unit((reached+response*.8)*.75),0xffd15e,intensity,false,false);
+    // One source-local glint on the material's edge, not a radial burst on
+    // every cell. The illustration and component amount retain priority.
+    if(intensity>=1.3&&!reduced&&pulse>.01){
+      const x=p.x+cell*.24,y=p.y-cell*.27,r=cell*.055*pulse;
+      accents.poly([x-r*1.8,y,x-r*.24,y-r*.24,x,y-r*1.5,x+r*.24,y-r*.24,
+        x+r*1.8,y,x+r*.24,y+r*.24,x,y+r*1.5,x-r*.24,y+r*.24]).fill({color:0xfff3b5,alpha:opacity});
+    }
   }
 }

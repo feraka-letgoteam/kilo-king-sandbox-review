@@ -1,0 +1,510 @@
+{
+  "method": "Production renderer and real show/cancel/ResizeObserver paths under instrumented Pixi; no browser or wallet integration claims.",
+  "sourceFingerprint": "cc3477a644547f6493375abe2e6cd76a7b13c22f06d7d1fae250ef5209930de6",
+  "results": [
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "action": "resize",
+      "phase": "gather",
+      "from": [
+        1440,
+        900
+      ],
+      "to": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "action": "resize",
+      "phase": "transfer",
+      "from": [
+        390,
+        844
+      ],
+      "to": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "action": "skip",
+      "phase": "gather",
+      "from": [
+        390,
+        844
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "action": "skip",
+      "phase": "transfer",
+      "from": [
+        1440,
+        900
+      ],
+      "bank": null,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "normal",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "turbo",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "tool-bazooka",
+      "index": 15,
+      "speed": "super",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 48000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "normal",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "turbo",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "reduced": true,
+      "viewport": [
+        1440,
+        900
+      ],
+      "bank": 4770000,
+      "passed": true
+    },
+    {
+      "id": "capped-ante",
+      "index": 25,
+      "speed": "super",
+      "reduced": true,
+      "viewport": [
+        390,
+        844
+      ],
+      "bank": 4770000,
+      "passed": true
+    }
+  ]
+}

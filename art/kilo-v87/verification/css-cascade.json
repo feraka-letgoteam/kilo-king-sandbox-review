@@ -1,0 +1,188 @@
+{
+  "method": "Static relevant-selector/cascade analysis of production CSS. Actual classes/attributes from retained markup; not browser paint or layout verification.",
+  "file": "review-f3QYAPd6.css",
+  "results": [
+    {
+      "target": "card",
+      "localReduced": false,
+      "prefReduced": false,
+      "resolvedAnimation": ".35s ease-out both kf-impact-arrive",
+      "winner": "#kilo-features-takeover .kf-shell[data-reduced=false] .kf-card",
+      "specificity": [
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "target": "card",
+      "localReduced": true,
+      "prefReduced": false,
+      "resolvedAnimation": "none",
+      "winner": "CSS initial value"
+    },
+    {
+      "target": "card",
+      "localReduced": false,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".kf-shell .kf-card",
+      "specificity": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "target": "card",
+      "localReduced": true,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".kf-shell .kf-card",
+      "specificity": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "target": "rail",
+      "localReduced": false,
+      "prefReduced": false,
+      "resolvedAnimation": ".42s ease-out both kk-result-ink",
+      "winner": ".kk-reel-completion[data-feature][data-result=win] strong",
+      "specificity": [
+        0,
+        3,
+        1
+      ]
+    },
+    {
+      "target": "rail",
+      "localReduced": true,
+      "prefReduced": false,
+      "resolvedAnimation": "none",
+      "winner": ".kk-reel-completion[data-reduced=true][data-feature][data-result=win] strong",
+      "specificity": [
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "target": "rail",
+      "localReduced": false,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".kk-reel-completion strong",
+      "specificity": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "target": "rail",
+      "localReduced": true,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".kk-reel-completion strong",
+      "specificity": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "target": "full",
+      "localReduced": false,
+      "prefReduced": false,
+      "resolvedAnimation": ".42s ease-out both kk-result-ink",
+      "winner": ".ks-completion[data-celebrate=true] .ks-completion-award>strong",
+      "specificity": [
+        0,
+        3,
+        1
+      ]
+    },
+    {
+      "target": "full",
+      "localReduced": true,
+      "prefReduced": false,
+      "resolvedAnimation": "none",
+      "winner": ".ks-completion[data-reduced=true][data-celebrate=true] .ks-completion-award>strong",
+      "specificity": [
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "target": "full",
+      "localReduced": false,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".ks-completion .ks-completion-award>strong",
+      "specificity": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "target": "full",
+      "localReduced": true,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".ks-completion .ks-completion-award>strong",
+      "specificity": [
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "target": "logo",
+      "localReduced": false,
+      "prefReduced": false,
+      "resolvedAnimation": ".54s ease-out both kk-logo-commit",
+      "winner": ".ks-loading[data-reduced=false] .ks-loading-logo",
+      "specificity": [
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "target": "logo",
+      "localReduced": true,
+      "prefReduced": false,
+      "resolvedAnimation": "none",
+      "winner": "CSS initial value"
+    },
+    {
+      "target": "logo",
+      "localReduced": false,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".ks-loading .ks-loading-logo",
+      "specificity": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "target": "logo",
+      "localReduced": true,
+      "prefReduced": true,
+      "resolvedAnimation": "none",
+      "winner": ".ks-loading .ks-loading-logo",
+      "specificity": [
+        0,
+        2,
+        0
+      ]
+    }
+  ]
+}

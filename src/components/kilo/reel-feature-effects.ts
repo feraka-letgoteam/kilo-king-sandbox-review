@@ -21,12 +21,13 @@ import { featureArrivalAt, wildArtAt, connectionPerformanceAt } from './event-pe
 import { VS_MERGE_MS, vsMergeAt, vsMultiplierPunch } from './vs-merge-motion';
 import { createWinNumeral, connectedNumberScale, WIN_TYPE } from './win-type';
 import { paintWinConnection } from './win-connection-paint';
-import { createConnectionAmounts, connectionTraceIndices } from './connection-amounts';
+import { createConnectionAmounts, connectionTraceIndices, connectionAmountAnchor } from './connection-amounts';
 import { GOD_CARD_ASSETS, runGodCardPresentation, type GodCardTextures } from './god-card-performance';
-import { VS_ACTOR_ATLASES, VS_ACTOR_FRAME_COUNT, VS_ACTOR_FRAME_SIZE, VS_ACTOR_COLUMNS, vsActorFrameIndex } from './vs-actor-performance';
+import { VS_ACTOR_ATLASES, VS_ACTOR_FRAME_COUNT, VS_ACTOR_FRAME_SIZE, VS_ACTOR_COLUMNS, vsActorFrameIndex, vsActorPoseAt } from './vs-actor-performance';
 import { AUTHORED_CLIPS } from './authored-clips';
 import { authoredFrameAt } from './authored-animation';
 import { paintImpact, paintEventTicket, clamp01, impactStamp } from './impact-language';
+import { vsArenaAt, connectionClock } from './vs-choreography';
 
 type Geometry = { gx: number; gy: number; cell: number; gap: number };
 type Callbacks = { award: (value: number) => void; state: (e: FeatureEvent) => void; reelsSettled?: Promise<void> };
@@ -234,6 +235,7 @@ export function createReelFeatureEffects(a: Adapter) {
   }
   function cancel() {
     generation++; repaint = () => {}; clear(fx);
+    a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:null}));
     for (const art of held.children) performVsGroupArt(art, a.geom());
     mergingReels.clear(); incomingVsReels.clear();
     if(current?.reel?.type==='vs'&&current.reel.rules==='pure-vs') concealVs(); else a.conceal?.([]);
@@ -247,36 +249,40 @@ export function createReelFeatureEffects(a: Adapter) {
     cancel(); const mine = generation; let reveal = 0, leaving = 0, artProgress = 0;
     const feature = round.feature!, accent = feature === 'route' ? TEAL : GOLD;
     const panel = new Container(); fx.addChild(panel);
+    let layoutKey='',hero:Sprite|undefined,contact:Graphics,title:Text,copy:Text;
     const draw = () => {
-      if (mine !== generation || disposed) return; clear(panel);
-      const g = a.geom(), width = g.cell * 5 + g.gap * 4, h = Math.min(88, g.cell * 1.12);
-      const x = g.gx + 6, y = g.gy + g.cell * 1.32 - h / 2, w = width - 12;
-      // Cut metal corners, not a full-screen panel. Each feature owns its
-      // emblem; the surrounding reel symbols stay visible throughout entry.
-      const contact=new Graphics();panel.addChild(contact);
-      paintImpact(contact,x+w*.5,y+h*.5,w*.85,h*1.7,clamp01(reveal*.95),accent,1.1,a.pace().reduced);
-      const ticket=new Graphics();paintEventTicket(ticket,x,y,w,h,accent);panel.addChild(ticket);
-      // A hard diagonal colour cut belongs to the mode's illustration, rather
-      // than another generic outlined information modal.
-      panel.addChild(new Graphics().poly([x+13,y+5,x+h*.85,y+5,x+h*.63,y+h-8,x+13,y+h-8])
-        .fill({color:accent,alpha:.12}));
-      const artX=x+h*.56, artY=y+h*.51;
+      if (mine !== generation || disposed) return;
+      const g=a.geom(),width=g.cell*5+g.gap*4,h=Math.min(88,g.cell*1.12);
+      const x=g.gx+6,y=g.gy+g.cell*1.32-h/2,w=width-12,key=`${x}:${y}:${w}:${h}`;
       const clip=AUTHORED_CLIPS[feature==='yacht'||feature==='yacht25'?'entry-scatter-4':'entry-scatter-3'];
       const animated=entryFrames.get(feature==='yacht25'?'yacht':feature);
       const texture=animated&&clip&&!a.pace().reduced?animated[authoredFrameAt(clip,artProgress)]:entryArt.get(feature);
-      const arrival=featureArrivalAt(reveal,a.pace().reduced);
-      if(texture){const sprite=new Sprite(texture);sprite.anchor.set(.5);const s=Math.min(h*1.05/texture.width,h*.90/texture.height);sprite.scale.set(s);sprite.rotation=arrival.turn;sprite.position.set(artX,artY);panel.addChild(sprite);}
-      const copyX=x+h+(w-h)/2-3;
-      const title=createWinNumeral(FEATURE_NAMES[feature].toUpperCase(),Math.max(19,g.cell*.26));
-      if(title.width>w-h-16)title.style.fontSize=Number(title.style.fontSize)*(w-h-16)/title.width;
-      title.position.set(copyX,y+h*.36);panel.addChild(title);
-      const copy=label(feature==='getaway'?'1 SPIN · MAX WIN OR NOTHING':feature==='yacht25'?`${round.awarded} SPINS · REEL 1 STARTS ×25`:`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
-      if(copy.width>w-h-12)copy.style.fontSize=Number(copy.style.fontSize)*(w-h-12)/copy.width;
-      copy.position.set(copyX,y+h*.73);panel.addChild(copy);
-      panel.pivot.set(x+w/2,y+h/2);
-      panel.position.set(x+w/2,y+h/2+(a.pace().reduced?0:h*arrival.lift-leaving*4));
-      panel.scale.set(arrival.x,arrival.y);
-      panel.alpha=1-leaving;
+      if(key!==layoutKey){
+        layoutKey=key;clear(panel);hero=undefined;
+        const ticket=new Graphics();paintEventTicket(ticket,x,y,w,h,accent);panel.addChild(ticket);
+        ticket.poly([x+8,y+4,x+h*.94,y+4,x+h*.73,y+h-4,x+8,y+h-4]).fill({color:accent,alpha:.13});
+        contact=new Graphics();contact.label='feature-entry-edge-contact';panel.addChild(contact);
+        title=createWinNumeral(FEATURE_NAMES[feature].toUpperCase(),Math.max(19,g.cell*.26));
+        if(title.width>w-h-20)title.style.fontSize=Number(title.style.fontSize)*(w-h-20)/title.width;
+        title.label='feature-entry-title';panel.addChild(title);
+        copy=label(feature==='getaway'?'1 SPIN · MAX WIN OR NOTHING':feature==='yacht25'?`${round.awarded} SPINS · REEL 1 STARTS ×25`:`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
+        if(copy.width>w-h-16)copy.style.fontSize=Number(copy.style.fontSize)*(w-h-16)/copy.width;
+        panel.addChild(copy);
+      }
+      if(texture&&!hero){hero=new Sprite(texture);hero.label='feature-entry-illustration';hero.anchor.set(.5);panel.addChild(hero);}
+      const reduced=a.pace().reduced,arrival=featureArrivalAt(reveal,reduced),show=reduced?1:ease(clamp01(reveal));
+      if(hero&&texture){hero.texture=texture;const scale=Math.min(h*1.40/texture.width,h*1.34/texture.height);
+        hero.scale.set(scale*arrival.x,scale*arrival.y);hero.rotation=arrival.turn*.55;
+        hero.position.set(x+h*.52,y+h*.48+h*arrival.lift*.5);}
+      const copyX=x+h+(w-h)/2+1;
+      title.position.set(copyX+(reduced?0:12*(1-show)),y+h*.36);title.alpha=show;
+      copy.position.set(copyX,y+h*.73+(reduced?0:4*(1-show)));copy.alpha=reduced?1:clamp01((reveal-.20)/.65);
+      contact.clear();
+      if(!reduced&&reveal<1){const edge=x+w*show;
+        contact.moveTo(x+8,y+2).lineTo(Math.max(x+8,edge-6),y+2).stroke({color:0xffe2a0,width:2});}
+      // Stable, level copy; only the illustration loads and releases. The old
+      // code recreated/rasterized every text node each RAF and tilted the copy.
+      panel.position.set(0,reduced?0:5*(1-show)-leaving*4);panel.alpha=1-leaving;
     };
     repaint = draw; draw();
     // Short contact, stable reading interval, then a finite release (1.1s).
@@ -293,13 +299,13 @@ export function createReelFeatureEffects(a: Adapter) {
   async function duelReveal(v: VsConversion, motion: (ms: number, draw: (t: number) => void) => Promise<void>, live: () => boolean) {
     a.host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:'vs'}}));
     const duel=v.duel!,action=new Container();action.label='yacht-duel';fx.addChild(action);
-    let key='',ticket:Graphics,impact:Graphics,opponents:Container,challenge:Text,winner:Container,winnerClip:Graphics;
+    let key='',ticket:Graphics,impact:Graphics,opponents:Container,challenge:Text,winner:Container,winnerClip:Graphics,arenaClip:Graphics,territory:Graphics;
     let portraits:{kind:'king'|'vice';sprite:Sprite;body:Container;number:Text}[]=[];
     let reacted=false;const sounded=new Set<string>();
     const sound=(name:FeatureCueName)=>{if(!sounded.has(name)){sounded.add(name);a.cue?.(name);}};
     sound('vsReady');
     await motion(VS_REVEAL_MS,t=>{
-      if(!a.pace().reduced){if(t>=VS_BEATS.pull)sound('vsPull');if(t>=VS_BEATS.contact)sound('vsImpact');}
+      if(!a.pace().reduced){if(t>=VS_BEATS.pull)sound('vsPull');if(t>=VS_BEATS.contact)sound('vsImpact');if(t>=.66)sound('vsLatch');}
       if(t>=VS_BEATS.lock){sound('vsLock');if(!reacted){reacted=true;
         a.host.dispatchEvent(new CustomEvent('kilo-stage-action',{bubbles:true,detail:{kind:duel.winner==='king'?'vs-win':'vs-loss'}}));}}
       const g=a.geom(),p=at({reel:v.reel,row:0}),h=g.cell*3,boardW=g.cell*5+g.gap*4;
@@ -311,11 +317,8 @@ export function createReelFeatureEffects(a: Adapter) {
         key=k;clear(action);portraits=[];
         ticket=new Graphics();ticket.label='vs-confrontation-ticket';action.addChild(ticket);
         opponents=new Container();opponents.label='vs-confrontation-closeup';action.addChild(opponents);
-        const clip=new Graphics().poly([dx+7,dy+4,dx+dw-7,dy+4,dx+dw,dy+14,dx+dw-4,dy+h-12,dx+dw-14,dy+h-5,dx+8,dy+h-5,dx,dy+h-15,dx,dy+12]).fill(WHITE);
-        action.addChild(clip);opponents.mask=clip;
-        opponents.addChild(new Graphics().poly([dx,dy,dx+dw,dy,dx+dw,dy+h,dx,dy+h]).fill(0x0c1c28)
-          .poly([dx,dy,dx+dw*.66,dy,dx+dw*.40,dy+h,dx,dy+h]).fill(0x71351e)
-          .poly([dx+dw*.66,dy,dx+dw,dy,dx+dw,dy+h,dx+dw*.40,dy+h]).fill(0x17505b));
+        arenaClip=new Graphics();action.addChild(arenaClip);opponents.mask=arenaClip;
+        territory=new Graphics();territory.label='vs-contested-territory';opponents.addChild(territory);
         const print=new Graphics();opponents.addChild(print);
         for(let i=0;i<5;i++){const yy=dy+h*(.12+i*.17);print.poly([dx,yy,dx+dw,yy-h*.18,dx+dw,yy-h*.14,dx,yy+h*.04])
           .fill({color:i%2?0x79f0da:0xffcb55,alpha:.09});}
@@ -324,32 +327,45 @@ export function createReelFeatureEffects(a: Adapter) {
           const performance=vsActors.get(`${kind}:${kind===duel.winner?'win':'loss'}`);
           const texture=performance?.[0]??vsPortraits[vsActionIndex(kind,0)];if(!texture)continue;
           const sprite=new Sprite(texture);sprite.label=`vs-${kind}-portrait`;sprite.anchor.set(.5,1);
-          sprite.width=g.cell*2.15;sprite.height=g.cell*2.15;body.addChild(sprite);opponents.addChild(body);
+          sprite.width=g.cell*1.75;sprite.height=g.cell*1.75;body.addChild(sprite);opponents.addChild(body);
           const number=createVsMultiplierLabel(`×${kind==='king'?duel.kingMultiplier:duel.viceMultiplier}`,g.cell*.43);
-          number.label=`vs-${kind}-contender-multiplier`;opponents.addChild(number);
+          number.label=`vs-${kind}-contender-multiplier`;action.addChild(number);
           portraits.push({kind,sprite,body,number});
         }
         challenge=createWinNumeral('VS',g.cell*.70);challenge.label='vs-clash-title';opponents.addChild(challenge);
         winner=new Container();winner.label='yacht-sticky-winner';paintWild(winner,v);action.addChild(winner);
         winnerClip=new Graphics();action.addChild(winnerClip);winner.mask=winnerClip;
         impact=new Graphics();impact.label='vs-contact-ink';action.addChild(impact);
+        // The winning factor travels in front of the resolving composition.
+        for(const item of portraits){action.removeChild(item.number);action.addChild(item.number);}
       }
-      const reduced=a.pace().reduced,beat=vsMotionAt(t,reduced),physical=vsPhysicalAt(t,reduced),resolve=physical.resolve;
-      ticket.clear();paintEventTicket(ticket,dx,dy,dw,h-6,duel.winner==='king'?0xffcb55:0x79f0da);
+      const reduced=a.pace().reduced,beat=vsMotionAt(t,reduced),physical=vsPhysicalAt(t,reduced),arena=vsArenaAt(t,reduced),resolve=physical.resolve;
+      const center=p.x+g.cell*.5,openCenter=center+(dx+dw*.5-center)*arena.arrival;
+      const ow=dw*arena.openX,oh=(h-6)*arena.openY,ox=openCenter-ow*.5,oy=dy+(h-6-oh)*.5;
+      arenaClip.clear().rect(ox,oy,ow,oh).fill(WHITE);
+      ticket.clear().rect(ox,oy,ow,oh).fill(0x0b1720).stroke({color:GOLD,width:2});
+      const border=dx+dw*(.53+arena.pressure*(duel.winner==='king'?1:-1));
+      territory.clear().rect(dx,dy,dw,h).fill(0x103b4b)
+        .poly([dx,dy,border+dw*.12,dy,border-dw*.12,dy+h,dx,dy+h]).fill(0x6d2a17)
+        .moveTo(border+dw*.12,dy).lineTo(border-dw*.12,dy+h).stroke({color:0xffdca0,width:Math.max(2,g.cell*.018),alpha:.65});
       const arrival=1-ease(clamp01((t-.10)/.18));
       ticket.alpha=(1-resolve)*ease(clamp01(t/.12));
-      opponents.alpha=(1-resolve)*ease(clamp01(t/.12));opponents.visible=resolve<1;
+      opponents.alpha=1-resolve;opponents.visible=resolve<1;
+      a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:{kind:'vs',progress:t}}));
       for(const item of portraits){
         const isKing=item.kind==='king',direction=isKing?1:-1,losing=item.kind!==duel.winner;
         const performance=vsActors.get(`${item.kind}:${losing?'loss':'win'}`);
         if(performance)item.sprite.texture=performance[vsActorFrameIndex(t,reduced)]!;
-        const home=dx+dw*(isKing?.28:.73);
-        item.body.position.set(home+direction*g.cell*(-.23*arrival-.12*physical.ready+.15*physical.drive-(losing?.21:.08)*physical.recoil),
-          dy+h*.84+g.cell*(.07*physical.ready-.06*physical.drive+(losing?.08:-.025)*physical.recoil));
-        item.body.rotation=direction*(-.09*physical.ready+.105*physical.drive-(losing?.15:.05)*physical.recoil);
+        const home=dx+dw*(isKing?.16:.84);
+        item.body.position.set(home+direction*g.cell*(-.23*arrival-.12*physical.ready+.15*physical.drive-(losing?.075:.04)*physical.recoil
+          +(losing?-.08:.075)*arena.counter+(losing?-.18:.10)*arena.finish),
+          dy+h*.84+g.cell*(.07*physical.ready-.06*physical.drive+(losing?.08:-.025)*physical.recoil+(losing?.035:-.025)*arena.finish));
+        item.body.rotation=direction*(-.09*physical.ready+.105*physical.drive-(losing?.06:.04)*physical.recoil);
         item.body.scale.set(1+.025*physical.drive,1-.055*physical.ready+.035*physical.drive);
-        item.number.position.set(dx+dw*(isKing?.24:.76),dy+g.cell*.31);
-        item.number.alpha=1-clamp01((t-.38)/.16);
+        const u=losing?0:arena.factorTravel,homeX=dx+dw*(isKing?.24:.76),homeY=dy+g.cell*.31;
+        item.number.position.set(homeX+(center-homeX)*u,homeY+(p.y+g.cell*2.565-homeY)*u);
+        item.number.alpha=losing?arena.arrival*(1-clamp01((t-.67)/.08)):arena.arrival*(1-clamp01((t-.94)/.06));
+        item.number.scale.set(reduced?1:1+(!losing?.16*arena.finish:0)+.12*u);
       }
       challenge.position.set(dx+dw*.5,dy+g.cell*.82);challenge.rotation=-.12;
       challenge.scale.set(reduced?1:.86+.14*(1-arrival));challenge.alpha=1-clamp01((t-.34)/.14);
@@ -358,19 +374,31 @@ export function createReelFeatureEffects(a: Adapter) {
       winner.pivot.set(p.x+g.cell/2,pivotY);winner.position.set(p.x+g.cell/2,pivotY);
       winner.scale.set(1,.78+.22*resolve+.015*physical.settle);
       for(const art of winner.children){const number=art.children.find(node=>node.label==='vs-group-multiplier');
-        if(number)number.scale.set(reduced?1:vsMultiplierPunch((t-.74)/.26));}
+        if(number){number.alpha=clamp01((t-.94)/.06);number.scale.set(reduced?1:vsMultiplierPunch((t-.88)/.12));}}
       winnerClip.clear().rect(p.x+2,p.y+2,g.cell-4,h-4).fill(WHITE);
       impact.clear();
-      if(t>=VS_BEATS.contact&&t<.71){const u=(t-VS_BEATS.contact)/(.71-VS_BEATS.contact),cx=dx+dw*.51,cy=dy+h*.51;
+      if(t>=VS_BEATS.contact&&t<.75){const second=t>=.66,u=second?(t-.66)/.09:(t-VS_BEATS.contact)/.13;
+        // Register the contact to the actual finite prop segments. Wider
+        // shoulder separation keeps the faces distinct on a phone.
+        const props=portraits.map(item=>{
+          const pose=vsActorPoseAt(item.kind,item.kind===duel.winner?'win':'loss',vsActorFrameIndex(t,reduced)/(VS_ACTOR_FRAME_COUNT-1));
+          const radius=item.kind==='king'?142:126,c=Math.cos(item.body.rotation),s=Math.sin(item.body.rotation);
+          return [-1,1].map(sign=>{const qx=pose.tool.x+sign*radius*Math.cos(pose.tool.angle),qy=pose.tool.y+sign*radius*Math.sin(pose.tool.angle);
+            const x=(qx/512-.5)*item.sprite.width*item.body.scale.x,y=(qy/512-1)*item.sprite.height*item.body.scale.y;
+            return {x:item.body.x+x*c-y*s,y:item.body.y+x*s+y*c};});
+        });
+        let cx=dx+dw*.5,cy=dy+h*.60;
+        if(props.length===2){const [p0,p1]=props[0]!,[q0,q1]=props[1]!,ax=p1!.x-p0!.x,ay=p1!.y-p0!.y,bx=q1!.x-q0!.x,by=q1!.y-q0!.y,den=ax*by-ay*bx;
+          if(Math.abs(den)>.001){const hit=clamp01(((q0!.x-p0!.x)*by-(q0!.y-p0!.y)*bx)/den);cx=p0!.x+hit*ax;cy=p0!.y+hit*ay;}}
         Object.assign(impact,{vsContact:{x:cx,y:cy}});
-        paintImpact(impact,cx,cy,dw*.8,h*.56,u,duel.winner==='king'?0xffcb55:0x79f0da,1.4,reduced,false);
-        if(u<.45)impact.poly([dx+4,dy+h*.69,dx+dw-5,dy+h*.33,dx+dw-5,dy+h*.37,dx+4,dy+h*.73])
+        paintImpact(impact,cx,cy,dw*(second?.65:.40),h*.40,clamp01(u),duel.winner==='king'?0xffcb55:0x79f0da,second?1.2:.75,reduced,false);
+        if(u>=0&&u<.45)impact.poly([cx-g.cell*.23,cy+g.cell*.08,cx+g.cell*.23,cy-g.cell*.08,cx+g.cell*.23,cy-g.cell*.05,cx-g.cell*.23,cy+g.cell*.11])
           .fill({color:0xfff2cb,alpha:1-u/.45});
       }
       if(beat.lock>0&&beat.lock<1)for(const x of[p.x+3,p.x+g.cell-3])impact.moveTo(x,p.y+4).lineTo(x,p.y+4+(h-8)*beat.lock)
         .stroke({color:duel.winner==='king'?0xffcb55:0x79f0da,width:3});
     });
-    if(live()){clear(fx);repaint=()=>{};}
+    if(live()){a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:null}));clear(fx);repaint=()=>{};}
   }
 
   async function mergeGroup(previous: VsGroup[], next: VsGroup,
@@ -612,11 +640,7 @@ export function createReelFeatureEffects(a: Adapter) {
                 value=createWinNumeral(money(connection.credited),Math.max(24,g.cell*.50));value.label='vs-award-amount';
                 const pw=Math.min(w-12,Math.max(g.cell*1.1,value.width+12)),ph=Math.max(36,g.cell*.48);
                 const wildReels=new Set(connection.groups.flatMap(unit=>unit.reels));
-                const clearPoints=centers.filter((_,i)=>!wildReels.has(connection.spots[i]!.reel));
-                const focus=clearPoints.length?clearPoints:centers;
-                const mean=focus.reduce((n,p)=>n+p.y,0)/focus.length;
-                origin={x:Math.max(g.gx+pw/2+6,Math.min(g.gx+w-pw/2-6,focus.reduce((n,p)=>n+p.x,0)/focus.length)),
-                  y:clearPoints.length?Math.max(g.gy+ph/2+7,Math.min(g.gy+g.cell*2.20,mean-g.cell*.27)):g.gy+g.cell*.34};
+                origin=connectionAmountAnchor(g,connection.spots,Math.max(value.width+12,pw),ph,[...wildReels]);
                 amount.position.set(origin.x,origin.y);amount.addChild(value);
                 if(capped){const limit=createWinNumeral('LIMIT',Math.max(10,g.cell*.12),0xe2d3a8);
                   limit.label='vs-limit-note';limit.position.set(0,ph*.53);amount.addChild(limit);}
@@ -650,8 +674,8 @@ export function createReelFeatureEffects(a: Adapter) {
                 const pressure=Math.sin(Math.PI*trace),reach=g.cell*.14*pressure;
                 source.poly([p.x+3,cy,p.x+3+reach,cy-g.cell*.08*pressure,p.x+3+reach*.5,cy+g.cell*.08*pressure])
                   .fill({color:unit.side==='vice'?TEAL:GOLD,alpha:pressure*.8});}
-              amount.visible=trace===1;amount.alpha=amountAlpha*(a.pace().reduced||connection.connections.length===1?1:Math.min(1,reveal*3));
-              components.paint(g,trace,reveal,amountAlpha,origin,a.pace().reduced);
+              amount.visible=trace===1;amount.alpha=amountAlpha*(a.pace().reduced||connection.connections.length===1?1:clamp01((reveal-.27)/.48));
+              components.paint(g,trace,reveal,amountAlpha,origin,a.pace().reduced,[...participatingReels]);
               amount.position.y=origin.y+(a.pace().reduced?0:g.cell*.055*(1-ease(reveal)));
               // Full credited value stamps in. Counting changing digits here
               // obscured the link between the known hit and its earned award.
@@ -660,9 +684,11 @@ export function createReelFeatureEffects(a: Adapter) {
               value.scale.set(stamped.x,stamped.y);value.rotation=stamped.turn*.5;
             };
             a.cue?.('vsConnect');
-            await motion(VS_WIN_TIMING.connect+Math.min(220,(connection.connections.length-1)*24),t=>{trace=t;draw();});if(!live())return;
+            const clock=connectionClock(connection.connections.length,connection.credited>=a.stake()*20);
+            await motion(clock.trace,t=>{trace=t;draw();});if(!live())return;
+            if(clock.read)await readable(clock.read);if(!live())return;
             a.cue?.('vsAmount');
-            await motion(VS_WIN_TIMING.amount,t=>{reveal=t;draw();});if(!live())return;
+            await motion(clock.reveal,t=>{reveal=t;draw();});if(!live())return;
             // The on-reel number owns the visible amount. Do not also open the
             // legacy detached DOM readout underneath the same award.
             a.host.setAttribute?.('aria-label',`Kilo King reels. ${connection.credited<connection.beforeCap?'Round limit · credited':'Line win'}: ${money(connection.credited)}`);

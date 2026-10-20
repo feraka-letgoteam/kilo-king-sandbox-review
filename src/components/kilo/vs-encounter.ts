@@ -10,7 +10,7 @@ export const VS_KING_FRAMES = Array.from({ length: 8 }, (_, i) => {
   return { x, y: row ? 460 : 0, width: right - x, height: row ? 427 : 460,
     baseline: row ? 387 : 446 };
 });
-export const VS_BEATS = { brace: .24, pull: .36, contact: .49, lock: .82 } as const;
+export const VS_BEATS = { brace: .24, pull: .36, contact: .49, lock: .90 } as const;
 const unit=(t:number)=>Math.max(0,Math.min(1,t));
 const smooth=(t:number)=>{const u=unit(t);return u*u*(3-2*u);};
 /** Both opponents share one contact clock. Offsets are in cell units. */
@@ -23,8 +23,8 @@ export function vsPhysicalAt(t:number,reduced=false) {
   // Opponents never oscillate or carry a second idle cycle into the result.
   const drive=smooth((t-.36)/.13)*(1-smooth((t-.535)/.075));
   const recoil=Math.sin(Math.PI*unit((t-.535)/.145))**.8;
-  const resolve=smooth((t-.60)/.22);
-  const settle=t>=.82?Math.sin(unit((t-.82)/.18)*Math.PI*2)*(1-unit((t-.82)/.18))**2:0;
+  const resolve=smooth((t-.72)/.18);
+  const settle=t>=.90?Math.sin(unit((t-.90)/.10)*Math.PI*2)*(1-unit((t-.90)/.10))**2:0;
   return {ready,drive,recoil,resolve,settle};
 }
 export function kingActionFrame(t: number, won: boolean) {

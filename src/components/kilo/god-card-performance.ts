@@ -297,6 +297,8 @@ export async function runGodCardPresentation(record: BinaryReels, a: GodCardAdap
       won: record.won, amount: record.result.credited, beforeCap: record.result.beforeCap, impact, fade },performanceStage,a.pace().reduced);
     a.host.dataset.maxSegment = String(segment);
     a.host.dataset.maxPhase = beat;
+    a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:impact===null?
+      {kind:'max',stage:performanceStage,beat,progress}:null}));
   };
   const motion = async (ms: number, phase: GodCardBeat, paint?: (t: number) => void, floor = 0) => {
     beat = phase;
@@ -355,6 +357,7 @@ export async function runGodCardPresentation(record: BinaryReels, a: GodCardAdap
     if (!a.live()) return;
     await a.motion(GOD_CARD_CLOCK.release, t => { fade = t; draw(); });
   } finally {
+    a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:null}));
     view.destroy();
     if (a.host.dataset) { delete a.host.dataset.maxSegment; delete a.host.dataset.maxPhase; }
   }

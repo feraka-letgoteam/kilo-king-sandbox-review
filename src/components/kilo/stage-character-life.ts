@@ -11,6 +11,26 @@ export const STAGE_REACTION_MS = { spin: 680, vs: 960, 'vs-win': 760, 'vs-loss':
 const REACTION_PRIORITY:Record<StageReaction,number>={spin:0,collect:1,'collect-bank':2,entry:2,retrigger:3,win:1,vs:2,max:2,'vs-win':3,'vs-loss':3,'max-stop':4,'max-loss':4};
 export type StageKingFrame = { elapsed: number; breath: number; nod: number; sway:number;look:number;rod:number; brace:number; blink: 'open' | 'half' | 'closed' | 'brow';reaction?:StageReaction;reactionProgress?:number };
 const clamp = (n:number) => Math.max(0,Math.min(1,n));
+export type StageFocus = {kind:'max'|'vs';progress:number;stage?:number;beat?:string};
+/** Renderer-owned attention: follows the action at every speed, rather than
+ * restarting a one-second independent animation on each new reel. */
+export function focusedKingFrame(frame:StageKingFrame,focus:StageFocus|null,reduced=false):StageKingFrame{
+  if(!focus||reduced)return frame;
+  const t=clamp(focus.progress),smooth=(n:number)=>{const u=clamp(n);return u*u*(3-2*u);};
+  if(focus.kind==='vs'){
+    if(t>=.90)return frame;
+    const ready=smooth((t-.14)/.16),release=smooth((t-.40)/.09),counter=Math.sin(Math.PI*clamp((t-.53)/.15));
+    return {...frame,reaction:'vs',reactionProgress:.40,look:-1.6-ready*.65,
+      brace:-1.2*ready-1.35*release+.8*counter,nod:-.5*ready+.65*release,rod:-1.3*ready+.7*counter};
+  }
+  const strength=.75+.10*Math.min(5,focus.stage??1);
+  const load=focus.beat==='anticipate'?smooth((t-.25)/.75):focus.beat==='advance'?1-smooth(t/.20):0;
+  const thrust=focus.beat==='advance'?Math.sin(Math.PI*t):0;
+  const brake=focus.beat==='settle'?(1-t)**2:focus.beat==='stall'?Math.sin(Math.PI*t):0;
+  return {...frame,reaction:'max',reactionProgress:.40,
+    look:-2.2-strength*load+.45*thrust,nod:-.45*load+.8*thrust+.7*brake,
+    brace:strength*(-2.0*load+.8*thrust+1.15*brake),rod:-1.7*load+1.2*thrust-.8*brake};
+}
 
 /** A continuous painted silhouette. The lower body, feet and contact shadows
  * never move; there are no independent cutout joints to separate. */
@@ -136,18 +156,20 @@ export function paintStageKing(ctx:CanvasRenderingContext2D,source:CanvasImageSo
 
 export function createStageKingPlayback(){
   let elapsed=0,reactionStart=-Infinity,lastReaction='',kind:StageReaction='win',frame=stageKingFrameAt(0);
+  let focus:StageFocus|null=null;
   return {
+    focus(next:StageFocus|null){focus=next;},
     react(key:string,next:StageReaction='win'){
       // An earned-amount notification cannot cut off a still-active encounter
       // result. A real newer success/failure may replace its own anticipation.
       if(elapsed-reactionStart<STAGE_REACTION_MS[kind]&&REACTION_PRIORITY[next]<REACTION_PRIORITY[kind])return;
       if(key!==lastReaction){lastReaction=key;reactionStart=elapsed;kind=next;}
     },
-    settle(){reactionStart=-Infinity;},
+    settle(){reactionStart=-Infinity;focus=null;},
     advance(delta:number,reduced=false,paused=false){
       if(paused)return frame;
       if(!reduced)elapsed+=Math.max(0,Math.min(80,delta));
-      frame=stageKingFrameAt(elapsed,elapsed-reactionStart,reduced,kind);return frame;
+      frame=focusedKingFrame(stageKingFrameAt(elapsed,elapsed-reactionStart,reduced,kind),focus,reduced);return frame;
     },
     get frame(){return frame;}, get elapsed(){return elapsed;},
   };

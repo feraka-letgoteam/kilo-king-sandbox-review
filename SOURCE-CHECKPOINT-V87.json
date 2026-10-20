@@ -1,0 +1,23 @@
+{
+  "version": "v87",
+  "source_commit": "54ac58e0c9aabe7259eb037b3f77826fa5fe9933",
+  "site_project": "appgprj_6ad29fae58348191b5ba67be43db9733",
+  "site_version": 59,
+  "preview_url": "https://kilo-king-review.navymap4.chatgpt.site",
+  "runtime_fingerprint": "cc3477a644547f6493375abe2e6cd76a7b13c22f06d7d1fae250ef5209930de6",
+  "source_scope": "Runnable game source and runtime assets match the private Sites source checkpoint. Historical source assets and the full proof movies remain in the complete private Sites source repository.",
+  "proofs": {
+    "index": "art/kilo-v87/proof-index.json",
+    "count": 15,
+    "complete_source_location": "Private Sites source commit 54ac58e0c9aabe7259eb037b3f77826fa5fe9933: art/kilo-v87/",
+    "method": "Instrumented offline production renderer; not live browser/WebGL or device latency verification."
+  },
+  "protected": [
+    "math and recorded outcomes",
+    "wallet and settlement",
+    "control layout",
+    "reel geometry",
+    "collection arithmetic and single credit",
+    "5-scatter opening ×25 and Mystery logic"
+  ]
+}

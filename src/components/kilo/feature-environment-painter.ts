@@ -1,6 +1,6 @@
 import { illustratedEnvironment } from './illustrated-environment';
 import { FEATURE_ENVIRONMENTS, featureArtworkTransform, type FeatureEnvironmentId } from './feature-environments';
-import { ATMOSPHERE_CYCLE_MS, paintFeatureAtmosphere, type AtmosphereImages } from './feature-atmosphere';
+import { ATMOSPHERE_CYCLE_MS, paintFeatureAtmosphere, ambientWindAt, type AtmosphereImages } from './feature-atmosphere';
 import { separatedEnvironmentLayers } from './environment-layers';
 
 export const FEATURE_AMBIENT_LOOP_MS = ATMOSPHERE_CYCLE_MS;
@@ -29,8 +29,9 @@ export function compositeEnvironmentFrames(ctx:CanvasRenderingContext2D,
 export function waterDisplacementAt(y:number,top:number,bottom:number,elapsed:number,amplitude:number,speed=1) {
   const depth=(y-top)/Math.max(1,bottom-top),edge=Math.sin(Math.PI*depth)**2;
   const a=elapsed/8000*Math.PI*2*speed,b=elapsed/16000*Math.PI*2;
+  const pressure=.82+.26*ambientWindAt(elapsed-350).gust;
   return {
-    x:(Math.sin(a+depth*12)*.68+Math.sin(b-depth*21)*.32)*amplitude*(.5+depth)*edge,
+    x:(Math.sin(a+depth*12)*.68+Math.sin(b-depth*21)*.32)*amplitude*pressure*(.5+depth)*edge,
     y:Math.sin(elapsed/12000*Math.PI*2+depth*13)*Math.min(2.6,amplitude*.36)*edge,
   };
 }

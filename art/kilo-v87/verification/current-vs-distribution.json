@@ -1,0 +1,10 @@
+{
+  "outcomes": 12831,
+  "weight": 1000000000,
+  "meanArrivals": 3.003644477,
+  "meanPayoutX": 191.00060533779998,
+  "group3OrMore": 0.180000026,
+  "group5": 0.00050004,
+  "meanLongestNoArrival": 5.559853204,
+  "method": "Aggregate retained v82 weighted-candidate records; catalogue unchanged at v86. No independent simulation or certified RTP claim."
+}

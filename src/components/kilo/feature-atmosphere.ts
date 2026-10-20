@@ -1,6 +1,6 @@
 import type { FeatureEnvironmentId } from './feature-environments';
 import { illustratedEnvironment } from './illustrated-environment';
-import { paintFoliage, foliagePoint, type FoliagePatch } from './environment-foliage';
+import { paintFoliage, foliagePoint, environmentWindAt, type FoliagePatch } from './environment-foliage';
 import { ENVIRONMENT_LAYER_URLS, separatedEnvironmentLayers } from './environment-layers';
 
 type Point = readonly [number, number];
@@ -19,16 +19,22 @@ export const ATMOSPHERE_CYCLE_MS = 96000;
 export const AMBIENT_CLOUD_SOURCE = {x:0,y:70,width:1536,height:280} as const;
 
 /** Hand-fitted source regions share registration with the water painter. */
+const atmosphereDefinitions=new Map<string,Atmosphere>();
 export function featureAtmosphere(scene: FeatureEnvironmentId, portrait: boolean): Atmosphere {
-  return illustratedEnvironment(scene, portrait).atmosphere;
+  const key=scene+(portrait?'-portrait':'');
+  let definition=atmosphereDefinitions.get(key);
+  if(!definition){definition=illustratedEnvironment(scene,portrait).atmosphere;atmosphereDefinitions.set(key,definition);}
+  return definition;
 }
 const smooth=(t:number)=>{const v=Math.max(0,Math.min(1,t));return v*v*(3-2*v);};
 const fade=(u:number)=>smooth(u/.08)*smooth((1-u)/.08);
-/** Keep whole cloud silhouettes inside the registered sky. Moving an oversized
- * strip through a hard sky mask cut a visible vertical edge into the drawing. */
-export function ambientCloudRects(def:Atmosphere,sourceWidth:number,elapsed:number) {
-  const phase=elapsed/48000*def.cloudSpeed;
-  return [
+type CloudBand={left:number;top:number;span:number;width:number;height:number;opacity:number;offset:number;sourceY:number};
+const cloudRegistrations=new WeakMap<Atmosphere,Map<number,CloudBand[]>>();
+function cloudBands(def:Atmosphere,sourceWidth:number) {
+  let widths=cloudRegistrations.get(def);
+  if(!widths){widths=new Map();cloudRegistrations.set(def,widths);}
+  const saved=widths.get(sourceWidth);if(saved)return saved;
+  const bands=[
     {y:def.cloudY,band:def.cloudHeight,fraction:.70,opacity:def.cloudOpacity,offset:.27,sourceY:def.cloudSpeed===1.5?690:70},
     {y:def.cloudY+def.cloudHeight*.38,band:def.cloudHeight*.74,fraction:.51,opacity:def.cloudOpacity*.62,offset:.73,sourceY:390},
   ].flatMap(layer=>{
@@ -48,11 +54,21 @@ export function ambientCloudRects(def:Atmosphere,sourceWidth:number,elapsed:numb
     const span=right-left;if(span<=0)return [];
     const ratio=AMBIENT_CLOUD_SOURCE.width/AMBIENT_CLOUD_SOURCE.height;
     const width=Math.min(span*layer.fraction,layer.band*ratio),height=width/ratio;
+    return [{left,top,span,width,height,opacity:layer.opacity,offset:layer.offset,sourceY:layer.sourceY}];
+  });
+  widths.set(sourceWidth,bands);return bands;
+}
+/** Whole silhouettes stay inside the registered sky. Static mask intersections
+ * are cached; a shared gust changes only forward drift, never the cloud shape. */
+export function ambientCloudRects(def:Atmosphere,sourceWidth:number,elapsed:number) {
+  const phase=environmentWindAt(elapsed).travel/48000*def.cloudSpeed;
+  return cloudBands(def,sourceWidth).map(layer=>{
     const progress=((phase+layer.offset)%1+1)%1;
     // Consistent down-wind travel at two apparent depths; no ping-pong turn.
     // The silhouette dissolves at its safe sky margin before the seamless wrap.
     const visibility=smooth(progress/.14)*smooth((1-progress)/.14);
-    return [{x:left+(span-width)*progress,y:top,width,height,opacity:layer.opacity*visibility,source:{...AMBIENT_CLOUD_SOURCE,y:layer.sourceY}}];
+    return {x:layer.left+(layer.span-layer.width)*progress,y:layer.top,width:layer.width,height:layer.height,
+      opacity:layer.opacity*visibility,source:{...AMBIENT_CLOUD_SOURCE,y:layer.sourceY}};
   });
 }
 /** Small distant traffic makes one deliberate pass every 32 seconds. */
@@ -62,12 +78,10 @@ export function ambientTrafficAt(elapsed:number) {
   return {progress,opacity:progress>=0&&progress<=1?fade(progress)*.66:0,
     pitch:Math.sin(local/1600*Math.PI*2)*.018,heave:Math.sin(local/3200*Math.PI*2)*.62};
 }
-/** Continuous wind with a long gust and a smaller tip lag. Every term closes
- * exactly within 96 s; hard foreground geometry is never displaced. */
+/** The same wind used by rooted crowns and cloud advection. Surface painters
+ * may use gust for their existing reflections without adding a new effect. */
 export function ambientWindAt(elapsed:number,phase=0) {
-  const slow=elapsed/12000*Math.PI*2,fast=elapsed/8000*Math.PI*2;
-  const gust=.72+.28*Math.sin(elapsed/24000*Math.PI*2+phase);
-  return { sway:Math.sin(slow+phase)*gust, flutter:Math.sin(fast+phase*.7)*.2 };
+  return environmentWindAt(elapsed,phase);
 }
 export function ambientBirdAt(elapsed:number,bird:Atmosphere['bird'],index:number) {
   const local=((elapsed+bird.delay-index*750)%16000+16000)%16000;

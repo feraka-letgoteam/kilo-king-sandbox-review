@@ -56,3 +56,12 @@ __pycache__/
 /art/kilo-v85/qa/
 /art/kilo-v85/qa2/
 /art/kilo-v85/qa3/
+
+## v87 generated proof intermediates; final bytes are stored as verified parts.
+/art/kilo-v87/proofs/*.mp4
+/art/kilo-v87/proofs/.*.mp4.*
+/art/kilo-v87/proofs/*.audio.f32
+/art/kilo-v87/qa/
+/art/kilo-v87/qa2/
+/art/kilo-v87/qa3/
+/art/kilo-v87/proofs/*.log

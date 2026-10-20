@@ -1,0 +1,286 @@
+{
+  "method": "Actual decoder + IntegratedScene JSX/effect execution; mock image decoder and effect scheduler. Not browser paint.",
+  "checkpoint": "7fc3e57",
+  "before": {
+    "cacheResult": "loading",
+    "imageLoads": 11,
+    "rows": [
+      {
+        "mode": "base",
+        "portrait": false,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "loading"
+      },
+      {
+        "mode": "scatter-3",
+        "portrait": false,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "scatter-3"
+      },
+      {
+        "mode": "scatter-4",
+        "portrait": false,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "scatter-4"
+      },
+      {
+        "mode": "max-win",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "max-win"
+      },
+      {
+        "mode": "completion",
+        "portrait": false,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "loading"
+      },
+      {
+        "mode": "base",
+        "portrait": false,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "loading"
+      },
+      {
+        "mode": "base",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      },
+      {
+        "mode": "scatter-3",
+        "portrait": true,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "scatter-3"
+      },
+      {
+        "mode": "scatter-4",
+        "portrait": true,
+        "actorCount": 0,
+        "actorProps": [],
+        "scene": "scatter-4"
+      },
+      {
+        "mode": "max-win",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "max-win"
+      },
+      {
+        "mode": "completion",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      },
+      {
+        "mode": "base",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      }
+    ]
+  },
+  "after": {
+    "cacheResult": "base",
+    "imageLoads": 12,
+    "rows": [
+      {
+        "mode": "base",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      },
+      {
+        "mode": "scatter-3",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "scatter-3"
+      },
+      {
+        "mode": "scatter-4",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "scatter-4"
+      },
+      {
+        "mode": "max-win",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "max-win"
+      },
+      {
+        "mode": "completion",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "completion"
+      },
+      {
+        "mode": "base",
+        "portrait": false,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": false,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      },
+      {
+        "mode": "base",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      },
+      {
+        "mode": "scatter-3",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "scatter-3"
+      },
+      {
+        "mode": "scatter-4",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "scatter-4"
+      },
+      {
+        "mode": "max-win",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "max-win"
+      },
+      {
+        "mode": "completion",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "completion"
+      },
+      {
+        "mode": "base",
+        "portrait": true,
+        "actorCount": 1,
+        "actorProps": [
+          {
+            "portrait": true,
+            "paused": false,
+            "reduced": false
+          }
+        ],
+        "scene": "base"
+      }
+    ]
+  }
+}

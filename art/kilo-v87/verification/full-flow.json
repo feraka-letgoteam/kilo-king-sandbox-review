@@ -1,0 +1,246 @@
+{
+  "method": "Whole production director + stage, instrumented offline runtime; not browser/WebGL.",
+  "results": [
+    {
+      "route": "natural",
+      "speed": "normal",
+      "action": "finish",
+      "frames": 1556,
+      "durationMs": 51866.66666666758,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "normal",
+      "action": "reduced",
+      "frames": 151,
+      "durationMs": 5033.333333333332,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "normal",
+      "action": "skip",
+      "frames": 175,
+      "durationMs": 5833.333333333325,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "natural",
+      "speed": "normal",
+      "action": "resize",
+      "frames": 1556,
+      "durationMs": 51866.66666666758,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "natural",
+      "speed": "turbo",
+      "action": "finish",
+      "frames": 792,
+      "durationMs": 26399.999999999756,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "turbo",
+      "action": "reduced",
+      "frames": 151,
+      "durationMs": 5033.333333333332,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "turbo",
+      "action": "skip",
+      "frames": 84,
+      "durationMs": 2800.0000000000014,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "natural",
+      "speed": "turbo",
+      "action": "resize",
+      "frames": 792,
+      "durationMs": 26399.999999999756,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "natural",
+      "speed": "super",
+      "action": "finish",
+      "frames": 488,
+      "durationMs": 16266.666666666784,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "super",
+      "action": "reduced",
+      "frames": 151,
+      "durationMs": 5033.333333333332,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "natural",
+      "speed": "super",
+      "action": "skip",
+      "frames": 39,
+      "durationMs": 1299.9999999999998,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "natural",
+      "speed": "super",
+      "action": "resize",
+      "frames": 488,
+      "durationMs": 16266.666666666784,
+      "total": 1783600,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "normal",
+      "action": "finish",
+      "frames": 1720,
+      "durationMs": 57333.333333334645,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "normal",
+      "action": "reduced",
+      "frames": 191,
+      "durationMs": 6366.666666666653,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "normal",
+      "action": "skip",
+      "frames": 144,
+      "durationMs": 4800.000000000001,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "normal",
+      "action": "resize",
+      "frames": 1720,
+      "durationMs": 57333.333333334645,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "turbo",
+      "action": "finish",
+      "frames": 891,
+      "durationMs": 29699.999999999636,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "turbo",
+      "action": "reduced",
+      "frames": 191,
+      "durationMs": 6366.666666666653,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "turbo",
+      "action": "skip",
+      "frames": 69,
+      "durationMs": 2299.999999999999,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "turbo",
+      "action": "resize",
+      "frames": 891,
+      "durationMs": 29699.999999999636,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "super",
+      "action": "finish",
+      "frames": 579,
+      "durationMs": 19300.000000000015,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "super",
+      "action": "reduced",
+      "frames": 191,
+      "durationMs": 6366.666666666653,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": false
+    },
+    {
+      "route": "mystery",
+      "speed": "super",
+      "action": "skip",
+      "frames": 39,
+      "durationMs": 1299.9999999999998,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    },
+    {
+      "route": "mystery",
+      "speed": "super",
+      "action": "resize",
+      "frames": 579,
+      "durationMs": 19300.000000000015,
+      "total": 24090000,
+      "firstLock": true,
+      "changed": true
+    }
+  ],
+  "chargeCreditAndCompletionBodiesUnchanged": true
+}
