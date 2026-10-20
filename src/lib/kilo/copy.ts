@@ -110,34 +110,30 @@ export const COPY = {
     "15 free spins. VS encounters develop across the opening, middle and closing spins. Each winning ×2–×10 reel stays locked. Adjacent reels of the same side merge into one larger wild and their multipliers multiply. Separate participating groups add; each group product is counted once. No coin collection.",
   ),
   "feature.superYachtDetail": pair(
-    "15 free spins with a guaranteed winning ×25 VS on reel one of the first spin. It stays sticky, and adjacent same-side reels merge using their multiplier product. All other Yacht Stash rules apply. Trigger with five scatters or receive it from Mystery Bonus. No direct purchase.",
-    "15 free spins with a guaranteed winning ×25 VS on reel one of the first spin. It stays sticky, and adjacent same-side reels merge using their multiplier product. All other Yacht Stash rules apply. Trigger with five scatters or receive it from Mystery Bonus. No direct feature play.",
+    "15 free spins. Reel one of the first spin opens with a ×25 VS that always wins its reel. It stays sticky, and adjacent same-side reels merge using their multiplier product. All other Yacht Stash rules apply. Trigger with five scatters or receive it from Mystery Bonus. No direct purchase.",
+    "15 free spins. Reel one of the first spin opens with a ×25 VS that always wins its reel. It stays sticky, and adjacent same-side reels merge using their multiplier product. All other Yacht Stash rules apply. Trigger with five scatters or receive it from Mystery Bonus. No direct feature play.",
   ),
   "feature.getawayDetail": pair(
-    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base bet and pays either 25,000× or zero. No free spins, secondary gamble or partial award. Activation itself is free; exit between spins.",
-    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base play and wins either 25,000× or zero. No free spins, second chance or partial award. Activation itself is free; exit between spins.",
+    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base bet, starts fresh and pays either 25,000× or zero. No free spins, secondary gamble or partial award. Activation itself is free; exit between spins.",
+    "Activate Max spins, then press Spin for each attempt. Every spin costs 1,000× the base play, starts fresh and wins either 25,000× or zero. No free spins, second chance or partial award. Activation itself is free; exit between spins.",
   ),
   "feature.mysteryDetail": pair<Text>(
-    (odds) => `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base bet. Super Yacht Stash guarantees a winning ×25 VS on reel one of spin one. ${odds}.`,
-    (odds) => `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base play. Super Yacht Stash guarantees a winning ×25 VS on reel one of spin one. ${odds}.`,
+    (odds) => `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base bet. Super Yacht Stash opens with a ×25 VS that always wins its reel. ${odds}.`,
+    (odds) => `Awards Dockside Catch, Yacht Stash or Super Yacht Stash. One charge, then the selected bonus plays at the current base play. Super Yacht Stash opens with a ×25 VS that always wins its reel. ${odds}.`,
   ),
 
   // Feature takeover presentation
-  "takeover.dockSummary": pair(
-    "10 free spins. Collect cash and build your multiplier.",
-    "10 free spins. Collect coins and build your multiplier.",
-  ),
   "takeover.yachtConfirmation": pair(
     "Every VS stays wild through the final spin. Adjacent King reels merge with King; Cop reels merge with Cop. A merged group multiplies its individual values and applies that product once. No cash collection.",
     "Every VS stays wild through the final spin. Adjacent King reels merge with King; Cop reels merge with Cop. A merged group multiplies its individual values and applies that product once. No coin collection.",
   ),
   "takeover.getawayConfirmation": pair(
-    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base bet and returns either 25,000× or zero. Exit the mode at any time between spins.",
-    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base play and returns either 25,000× or zero. Exit the mode at any time between spins.",
+    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base bet and returns either 25,000× or zero. Each spin starts fresh. Exit the mode at any time between spins.",
+    "Activate the mode, then press Spin for each attempt. Every spin costs 1,000× your base play and returns either 25,000× or zero. Each spin starts fresh. Exit the mode at any time between spins.",
   ),
   "takeover.mysteryConfirmation": pair<Text>(
-    (odds) => `Super Yacht guarantees a winning ×25 on reel one of spin one. ${odds}. One purchase; no additional charge for the selected bonus.`,
-    (odds) => `Super Yacht guarantees a winning ×25 on reel one of spin one. ${odds}. One feature play; no additional charge for the selected bonus.`,
+    (odds) => `Super Yacht opens with a ×25 VS that always wins its reel. ${odds}. One purchase; no additional charge for the selected bonus.`,
+    (odds) => `Super Yacht opens with a ×25 VS that always wins its reel. ${odds}. One feature play; no additional charge for the selected bonus.`,
   ),
   "takeover.anteSubtitle": pair("Ante bet · more scatters", "Ante play · more scatters"),
   "takeover.buy": pair("Buy", "Play"),
@@ -216,12 +212,12 @@ export const COPY = {
     "Direct entry with 10 free spins, starting at ×1. No base-game line or scatter award is given on entry.",
   ),
   "info.modeDesc.mystery": pair(
-    "One purchase randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a guaranteed winning ×25 VS on reel one in spin one.",
-    "One feature play randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a guaranteed winning ×25 VS on reel one in spin one.",
+    "One purchase randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a ×25 VS on reel one that always wins its reel.",
+    "One feature play randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a ×25 VS on reel one that always wins its reel.",
   ),
   "info.modeDesc.getaway": pair(
-    "Activate the mode at no charge, then press Spin for each paid attempt. Each spin costs 1,000× the base bet and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A partial boat pays zero and stays in place until the next spin; a full boat pays the max win. No free spins or partial prize. Exit the mode between spins.",
-    "Activate the mode at no charge, then press Spin for each attempt. Each spin costs 1,000× the base play and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A partial boat wins zero and stays in place until the next spin; a full boat wins the max win. No free spins or partial prize. Exit the mode between spins.",
+    "Activate the mode at no charge, then press Spin for each paid attempt. Each spin costs 1,000× the base bet and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A boat that stalls short pays zero and resets, so every spin starts fresh with nothing carried over; a full boat pays the max win. No free spins or partial prize. Exit the mode between spins.",
+    "Activate the mode at no charge, then press Spin for each attempt. Each spin costs 1,000× the base play and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A boat that stalls short wins zero and resets, so every spin starts fresh with nothing carried over; a full boat earns the max win. No free spins or partial prize. Exit the mode between spins.",
   ),
   "info.wild.substitutes": pair(
     "In the base game and Dockside Catch, the fisherman substitutes for every paying line symbol, but never for a KING scatter. A full line of fishermen pays the tackle-case award.",
@@ -248,20 +244,20 @@ export const COPY = {
     "Exactly two scatter reels lock while the other three reels respin once. The final screen determines the line wins, scatter award and any free spins. Instantly triggered features do not award scatter wins.",
   ),
   "info.freeSpins": pair(
-    "Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature guarantees a winning ×25 VS on reel one in spin one. Dockside Catch and Yacht Stash have direct buys; Super Yacht is available through five scatters or a Mystery Bonus buy. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
-    "Features use the triggering base play with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature guarantees a winning ×25 VS on reel one in spin one. Dockside Catch and Yacht Stash can be started directly as feature plays; Super Yacht is available through five scatters or a Mystery Bonus feature play. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
+    "Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature opens with a ×25 VS on reel one that always wins its reel. Dockside Catch and Yacht Stash have direct buys; Super Yacht is available through five scatters or a Mystery Bonus buy. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
+    "Features use the triggering base play with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature opens with a ×25 VS on reel one that always wins its reel. Dockside Catch and Yacht Stash can be started directly as feature plays; Super Yacht is available through five scatters or a Mystery Bonus feature play. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.",
   ),
   "info.vs.progression": pair(
-    "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead guarantees a winning ×25 VS on reel one in the very first spin; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× payout. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.",
-    "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead guarantees a winning ×25 VS on reel one in the very first spin; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× win. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its win limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no coin collection.",
+    "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead opens the very first spin with a ×25 VS on reel one that always wins its reel; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× payout. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.",
+    "Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead opens the very first spin with a ×25 VS on reel one that always wins its reel; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× win. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its win limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no coin collection.",
   ),
   "info.vs.limits": pair(
     "The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total payout limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.",
     "The Yacht feature win limit remains 18,000× base play. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total win limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× feature price; it is not a certified or published Engine return. All feature state resets at the end of the round.",
   ),
   "info.vs.getaway": pair(
-    "The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. In this local candidate distribution the max-win probability is 3.82% and loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Stake Engine return.",
-    "The Getaway plays exactly one spin for 1,000× base play. Its only results are 25,000× or zero; no second chance is offered. In this local candidate distribution the max-win probability is 3.82% and loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Engine return.",
+    "The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.82% (about 1 in 26) and the loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Stake Engine return.",
+    "The Getaway plays exactly one spin for 1,000× base play. Its only results are 25,000× or zero; no second chance is offered. Each spin starts fresh; nothing carries over from a stalled boat. In this local candidate distribution the max-win probability is 3.82% (about 1 in 26) and the loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Engine return.",
   ),
   "info.modes.title": pair("Bet modes", "Play modes"),
   "info.modes.atThisBet": pair("at this bet", "at this play"),
@@ -278,8 +274,8 @@ export const COPY = {
     ". A feature play above that limit, or above your available balance, is unavailable.",
   ),
   "info.modes.mysteryNote": pair(
-    "Mystery Bonus is an artwork preview in development and cannot currently be played or purchased. The Getaway is the playable Max spins mode. Activating it does not charge the balance; each press of Spin buys one attempt at the displayed cost.",
-    "Mystery Bonus is an artwork preview in development and cannot currently be played. The Getaway is the playable Max spins mode. Activating it does not charge the balance; each press of Spin plays one attempt at the displayed price.",
+    "Mystery Bonus is charged once at 200× the base bet; the bonus it picks then plays at no extra charge. The Getaway is the playable Max spins mode. Activating it does not charge the balance; each press of Spin buys one attempt at the displayed cost.",
+    "Mystery Bonus is charged once at 200× the base play; the bonus it picks then plays at no extra charge. The Getaway is the playable Max spins mode. Activating it does not charge the balance; each press of Spin plays one attempt at the displayed price.",
   ),
   "info.max.theBaseBet": pair("× the base bet", "× the base play"),
   "info.max.basis": pair(
@@ -309,6 +305,70 @@ export const COPY = {
     "The crown-and-hook control opens the feature catalogue and Ante setting. Review the price and confirm before buying a feature.",
     "The crown-and-hook control opens the feature catalogue and Ante setting. Review the price and confirm before playing a feature.",
   ),
+  // Return to player (info screen). Candidate targets, not certified Engine RTP.
+  "info.rtp.intro": pair(
+    "Verified theoretical RTP is not yet available for this sandbox.",
+    "Verified theoretical RTP is not yet available for this sandbox.",
+  ),
+  "info.rtp.value": pair("Not verified", "Not verified"),
+  "info.rtp.note": pair(
+    "RTP describes an expected return over many plays, not the return from any individual session. This preview does not publish a theoretical percentage.",
+    "RTP describes an expected return over many plays, not the return from any individual session. This preview does not publish a theoretical percentage.",
+  ),
+
+  // Feature cards (playful heist tone). Feature names stay fixed.
+  // Buy card: name, one line, price, button.
+  "card.buy.dock": pair(
+    "Fish are biting. 10 free spins to haul in the cash.",
+    "Fish are biting. 10 free spins to haul in the coins.",
+  ),
+  "card.buy.yacht": pair(
+    "The King’s got a boat to catch. 15 free spins, sticky VS wilds.",
+    "The King’s got a boat to catch. 15 free spins, sticky VS wilds.",
+  ),
+  "card.buy.getaway": pair(
+    "Floor it. One spin: max win or nothing.",
+    "Floor it. One spin: max win or nothing.",
+  ),
+  "card.buy.mystery": pair(
+    "One crate, three bonuses. Maybe the ×25 opener.",
+    "One crate, three bonuses. Maybe the ×25 opener.",
+  ),
+  "card.scatter.superYacht": pair("5 scatters · ×25 opener", "5 scatters · ×25 opener"),
+  // Trigger card line under the feature name (≤8 words with the name, auto-advances).
+  "card.trigger.dock": pair<Text>(
+    (spins) => `${spins} FREE SPINS · REEL ’EM IN`,
+    (spins) => `${spins} FREE SPINS · REEL ’EM IN`,
+  ),
+  "card.trigger.yacht": pair<Text>(
+    (spins) => `${spins} FREE SPINS · ALL ABOARD`,
+    (spins) => `${spins} FREE SPINS · ALL ABOARD`,
+  ),
+  "card.trigger.superYacht": pair<Text>(
+    (spins) => `${spins} FREE SPINS · ×25 OPENER`,
+    (spins) => `${spins} FREE SPINS · ×25 OPENER`,
+  ),
+  "card.trigger.getaway": pair("FLOOR IT · MAX WIN OR NOTHING", "FLOOR IT · MAX WIN OR NOTHING"),
+  // Intro card hook (≤10 words with the name, then TAP TO CONTINUE). Not wired yet:
+  // the v4 flow has no tap-to-continue intro card; ready for the trigger build-up.
+  "card.intro.dock": pair(
+    "Fish are biting. Every fisherman hauls the catch.",
+    "Fish are biting. Every fisherman hauls the catch.",
+  ),
+  "card.intro.yacht": pair("THE KING’S GOT A BOAT TO CATCH", "THE KING’S GOT A BOAT TO CATCH"),
+  "card.intro.superYacht": pair(
+    "×25 opener that always wins its reel.",
+    "×25 opener that always wins its reel.",
+  ),
+  "card.intro.mystery": pair(
+    "One crate, three bonuses. Maybe the ×25 opener.",
+    "One crate, three bonuses. Maybe the ×25 opener.",
+  ),
+  "card.intro.getaway": pair(
+    "One spin. Floor it: max win or nothing.",
+    "One spin. Floor it: max win or nothing.",
+  ),
+  "card.tapToContinue": pair("TAP TO CONTINUE", "TAP TO CONTINUE"),
 } satisfies Record<string, CopyPair<unknown>>;
 
 export type CopyKey = keyof typeof COPY;

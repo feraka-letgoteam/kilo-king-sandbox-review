@@ -730,8 +730,11 @@ export function KiloTable({
       if (isMaxSpinRound(script)) {
         // The saved result and credit path above are unchanged. Max has no
         // free-spin completion screen: the next explicit Spin buys one attempt.
+        // Stateless: nothing from this round (HUD, boat/card feature state) is
+        // parked for the next attempt. Every Max round starts from a fresh board.
         setSummary(null);
-        setHud(current => current ? { ...current, active: false, left: null, phase: undefined } : current);
+        setHud(null);
+        sceneRef.current?.setFeatureState?.(null);
         if (!reviewMode) setMode('getaway');
       } else if (done.feature) {
         setMode("spin");

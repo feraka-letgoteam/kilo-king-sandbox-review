@@ -286,22 +286,16 @@ export function InfoPanel({
             <h2 id="kk-info-information-title">Info</h2>
             <div className="kk-info-centered kk-info-facts">
               <h3>Return to player</h3>
-              <p>
-                Verified theoretical RTP is not yet available for this sandbox.
-              </p>
+              <p>{t("info.rtp.intro")}</p>
               <dl className="kk-info-rtp">
                 {MODES.map((mode) => (
                   <div key={mode.id}>
                     <dt>{mode.title}</dt>
-                    <dd>Not verified</dd>
+                    <dd>{t("info.rtp.value")}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="kk-info-muted">
-                RTP describes an expected return over many plays, not the return
-                from any individual session. This preview does not publish a
-                theoretical percentage.
-              </p>
+              <p className="kk-info-muted">{t("info.rtp.note")}</p>
               <h3>Maximum win</h3>
               <p>
                 The overall maximum total round payout is{" "}

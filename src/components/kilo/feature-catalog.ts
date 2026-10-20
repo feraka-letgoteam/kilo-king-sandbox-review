@@ -59,7 +59,7 @@ export const FEATURES: readonly BonusFeature[] = [
     id: "scatter-5",
     kind: "trigger",
     title: "Super Yacht Stash",
-    subtitle: "5 scatters · guaranteed ×25",
+    subtitle: t("card.scatter.superYacht"),
     tone: "gold",
     scatters: 5,
     spins: 15,

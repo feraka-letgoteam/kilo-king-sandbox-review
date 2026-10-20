@@ -5,6 +5,7 @@ import type { FeatureCueName } from '@/lib/kilo/sound';
 import type { SplashCell, SplashLine, SplashScript } from '@/lib/kilo/engine';
 import type { SpinSpeed } from './control-model';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
+import { t as copyText } from '@/lib/kilo/copy';
 import assetPack from '../../../public/kilo-features-v52/manifest.json';
 import legacyVehiclePack from '../../../public/kilo-v55/vehicles/manifest.json';
 const vehiclePack = { ...legacyVehiclePack, chopper: { ...legacyVehiclePack.chopper, url: '/kilo-v79/vehicles/chopper-action.webp' } };
@@ -267,7 +268,7 @@ export function createReelFeatureEffects(a: Adapter) {
         title=createWinNumeral(FEATURE_NAMES[feature].toUpperCase(),Math.max(19,g.cell*.26));
         if(title.width>w-h-20)title.style.fontSize=Number(title.style.fontSize)*(w-h-20)/title.width;
         title.label='feature-entry-title';panel.addChild(title);
-        copy=label(feature==='getaway'?'1 SPIN · MAX WIN OR NOTHING':feature==='yacht25'?`${round.awarded} SPINS · REEL 1 STARTS ×25`:`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
+        copy=label(feature==='getaway'?copyText('card.trigger.getaway'):feature==='yacht25'?copyText('card.trigger.superYacht')(String(round.awarded)):feature==='yacht'?copyText('card.trigger.yacht')(String(round.awarded)):feature==='dock'?copyText('card.trigger.dock')(String(round.awarded)):`${round.awarded} FREE SPINS`,Math.max(12,g.cell*.13),accent);
         if(copy.width>w-h-16)copy.style.fontSize=Number(copy.style.fontSize)*(w-h-16)/copy.width;
         panel.addChild(copy);
       }
