@@ -1596,6 +1596,17 @@ export function KiloTable({
             onClose={() => setSettingsOpen(false)}
             onResetBalance={resetPreviewBalance}
             resetBalanceDisabled={resetBalanceDisabled}
+            {...(dock.drawer.auto && !hud?.active && !autoPolicy.hidden && !jurisdiction.disabledAutoplay
+              ? {
+                  onAuto: () => {
+                    if (autoPolicy.disabled || controlsLocked || !ready) return;
+                    setSettingsOpen(false);
+                    setAutoPanel(true);
+                  },
+                  autoDisabled: controlsLocked || !ready || autoPolicy.disabled,
+                  autoTitle: autoPolicy.reason,
+                }
+              : {})}
           />
         )}
         {preferencesOpen && (

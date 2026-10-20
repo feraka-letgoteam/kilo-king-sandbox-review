@@ -10,6 +10,7 @@ import {
 import {
   Check,
   Info,
+  Repeat,
   Music2,
   RotateCcw,
   Volume2,
@@ -121,6 +122,11 @@ type QuickSettingsContentProps = {
   onInfo: () => void;
   onResetBalance?: () => void;
   resetBalanceDisabled?: boolean;
+  /** Short layouts fold Auto spins out of the dock; this row opens the same
+   * Auto spins confirmation panel. Absent when the dock shows the button. */
+  onAuto?: () => void;
+  autoDisabled?: boolean;
+  autoTitle?: string;
   onClose: () => void;
 };
 
@@ -135,6 +141,9 @@ export function QuickSettings({
   onClose,
   onResetBalance,
   resetBalanceDisabled,
+  onAuto,
+  autoDisabled,
+  autoTitle,
 }: QuickSettingsContentProps & {
   anchorRef: RefObject<HTMLButtonElement | null>;
   anchorKey: string;
@@ -181,7 +190,7 @@ export function QuickSettings({
           { x: a.left, y: a.top, width: a.width, height: a.height },
           !!expanded,
           avoid,
-          onResetBalance ? 1 : 0,
+          (onResetBalance ? 1 : 0) + (onAuto ? 1 : 0),
         ),
       );
     };
@@ -200,7 +209,7 @@ export function QuickSettings({
       window.visualViewport?.removeEventListener("resize", update);
       window.visualViewport?.removeEventListener("scroll", update);
     };
-  }, [anchorRef, anchorKey, expanded, onResetBalance]);
+  }, [anchorRef, anchorKey, expanded, onResetBalance, !!onAuto]);
   useEffect(() => {
     const panel = root.current,
       anchor = anchorRef.current;
@@ -275,6 +284,9 @@ export function QuickSettings({
       onClose={onClose}
       onResetBalance={onResetBalance}
       resetBalanceDisabled={resetBalanceDisabled}
+      onAuto={onAuto}
+      autoDisabled={autoDisabled}
+      autoTitle={autoTitle}
     />
   );
 }
@@ -293,6 +305,9 @@ export function QuickSettingsView({
   onClose,
   onResetBalance,
   resetBalanceDisabled,
+  onAuto,
+  autoDisabled,
+  autoTitle,
 }: QuickSettingsContentProps & {
   rootRef?: RefObject<HTMLDivElement | null>;
   placement: ReturnType<typeof quickMenuLayout> | null;
@@ -332,6 +347,20 @@ export function QuickSettingsView({
           <Info aria-hidden="true" />
           <span>Info</span>
         </button>
+        {onAuto && (
+          <button
+            type="button"
+            className="kk-quick-row"
+            data-testid="quick-auto-spins"
+            aria-label="Auto spins: choose a finite count"
+            disabled={autoDisabled}
+            title={autoTitle}
+            onClick={onAuto}
+          >
+            <Repeat aria-hidden="true" />
+            <span>Auto spins</span>
+          </button>
+        )}
         {(
           [
             ["music", "Music"],
