@@ -17,10 +17,25 @@ export function sceneActorBox(master:IntegratedMaster,portrait:boolean) {
  * `bottom` = viewport bottom, `top` = lowest point the hat may rise to (just over
  * the control dock), `right` = viewport right. The whole 512x768 box (rod tip to
  * boots) is scaled down about the boots and lifted so it stays fully in frame. */
-export type ActorFrameLimits={top:number;bottom:number;right:number};
+export type ActorFrameLimits={top:number;bottom:number;right:number;clear?:number};
+/** Resting rod tip and right boot heel, in 512-wide box units (measured from
+ * the idle frame). Used by the desktop fit so the rod stays clear of reel 5. */
+export const KING_REST_ROD_TIP_X=10,KING_RIGHT_EXTENT_X=490;
 export function fitActorBox(box:ReturnType<typeof sceneActorBox>,limits:ActorFrameLimits|null){
   if(!limits)return box;
   const boxBottom=box.top+box.height,cx=STAGE_KING.anchors.bodyCenter.x/512;
+  if(limits.clear!==undefined){
+    // Desktop: the resting rod sits fully right of the reel frame (never over
+    // reel 5) and the boots stay on screen; scale about the planted boots.
+    const tip=KING_REST_ROD_TIP_X/512,extent=KING_RIGHT_EXTENT_X/512;
+    if(box.left+box.width*tip>=limits.clear&&box.left+box.width*extent<=limits.right)return box;
+    // Narrow desktops (e.g. 1024x576) have no room beside the frame: keep the
+    // original placement there rather than shrink the King below ~3/4.
+    const need=(limits.right-limits.clear)/(box.width*(extent-tip));if(need<.74)return box;
+    const k=Math.min(1,need);
+    const height=box.height*k,width=box.width*k;
+    return {left:limits.clear-width*tip,top:boxBottom-height,width,height};
+  }
   if(boxBottom<=limits.bottom&&box.left+box.width<=limits.right)return box;
   const k=Math.max(.45,Math.min(1,(limits.bottom-limits.top)/box.height));
   const height=box.height*k,width=box.width*k,top=Math.min(boxBottom,limits.bottom)-height;
@@ -36,21 +51,25 @@ export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=fal
   const loop=useRef<ReturnType<typeof createCharacterMotionLoop>|null>(null);
   const draw=useRef<(delta:number)=>void>(()=>{});
   const [limits,setLimits]=useState<ActorFrameLimits|null>(null);
-  const box=fitActorBox(sceneActorBox(master,portrait),portrait?limits:null);
+  const box=fitActorBox(sceneActorBox(master,portrait),limits);
   useLayoutEffect(()=>{
-    if(!portrait){setLimits(null);return;}
     const node=canvas.current,plane=node?.parentElement,shell=node?.closest('.kk-shell');
     if(!node||!plane)return;
     const measure=()=>{
       const p=plane.getBoundingClientRect();if(!p.height)return;
       // The game shell ends at the control dock; the frame is the viewport.
       const s=p.height/master.height,dock=shell?.querySelector('.kk-modular-controls')?.getBoundingClientRect();
+      const reel=shell?.querySelector('[data-testid="reel-host"]')?.getBoundingClientRect();
       const bottom=innerHeight-4,right=innerWidth-2;
       const top=dock?dock.bottom-34:bottom-p.height;
-      const next={top:(top-p.top)/s,bottom:(bottom-p.top)/s,right:(right-p.left)/s};
-      setLimits(old=>old&&Math.abs(old.top-next.top)<.5&&Math.abs(old.bottom-next.bottom)<.5&&Math.abs(old.right-next.right)<.5?old:next);
+      // Desktop: clear the painted frame rail (~13 px past the reel host) by a few px.
+      const clear=!portrait&&reel&&reel.width?(reel.right+18-p.left)/s:undefined;
+      const next:ActorFrameLimits={top:(top-p.top)/s,bottom:(bottom-p.top)/s,right:(right-p.left)/s,...(clear===undefined?{}:{clear})};
+      const same=(a?:number,b?:number)=>a===b||(a!==undefined&&b!==undefined&&Math.abs(a-b)<.5);
+      setLimits(old=>old&&same(old.top,next.top)&&same(old.bottom,next.bottom)&&same(old.right,next.right)&&same(old.clear,next.clear)?old:next);
     };
     measure();const ro=new ResizeObserver(measure);ro.observe(plane);if(shell)ro.observe(shell);
+    const host=shell?.querySelector('[data-testid="reel-host"]');if(host)ro.observe(host);
     addEventListener('resize',measure);
     return()=>{ro.disconnect();removeEventListener('resize',measure);};
   },[master,portrait]);
