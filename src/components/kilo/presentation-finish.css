@@ -80,19 +80,25 @@
 .kk-fly-portrait,.kk-fly-portrait.is-source {filter:drop-shadow(0 2px 0 #07131a);}
 .kk-bonus-win.is-landed strong {text-shadow:none;}
 
-.kk-scene-presence {position:fixed;inset:0;z-index:90;pointer-events:none;opacity:1;transition:opacity 220ms cubic-bezier(.2,.7,.2,1);}
-.kk-scene-presence[data-visible="false"] {opacity:0;}
-.kk-scene-presence[data-reduced="true"] {transition:none;}
+/* Feature transitions are opaque cuts: the entry wipes on and off as one solid
+   sheet, so the reels and the entry art are never blended in the same frame. */
+.kk-scene-presence {position:fixed;inset:0;z-index:90;pointer-events:none;opacity:1;clip-path:inset(0);transition:clip-path 200ms cubic-bezier(.55,0,.7,.25);}
+.kk-scene-presence[data-visible="true"] {animation:kk-sheet-wipe-in 200ms cubic-bezier(.3,.05,.2,1) both;}
+.kk-scene-presence[data-visible="false"] {clip-path:inset(0 0 0 100%);}
+.kk-scene-presence[data-reduced="true"] {transition:none;animation:none;}
 .ks-entry-shade {background:#05121c92;}
 .ks-bonus-entry .ks-entry-copy {animation:kk-scene-copy-in 280ms cubic-bezier(.2,.7,.25,1) both;}
 .ks-bonus-entry .ks-entry-destination {color:#e9dfbf;}
 .ks-bonus-entry .ks-entry-award {color:#fff1bb;text-shadow:0 3px #07131a,2px 0 #07131a,-2px 0 #07131a;}
 .ks-bonus-entry[data-immediate="true"] .ks-entry-copy,
 .ks-bonus-entry[data-reduced="true"] .ks-entry-copy {animation:none;}
-@keyframes kk-scene-copy-in {from{opacity:0;transform:translateY(9px)}70%{opacity:1;transform:translateY(-1px)}to{opacity:1;transform:none}}
+@keyframes kk-scene-copy-in {from{transform:translateY(9px)}70%{transform:translateY(-1px)}to{transform:none}}
+/* The hero keeps its contact squash but no longer fades through the backdrop. */
+.ks-bonus-entry .ks-entry-hero {animation-name:kk-entry-hero-contact;}
+@keyframes kk-entry-hero-contact {0%,30%{transform:translateY(8px) scale(.93)}73%{transform:translateY(-2px) scale(1.025)}to{transform:none}}
 @media(prefers-reduced-motion:reduce) {
   .kk-dockside-header .dock-portrait,.ks-bonus-entry .ks-entry-copy {animation:none;}
-  .kk-scene-presence {transition:none;}
+  .kk-scene-presence {transition:none;animation:none;}
 }
 
 /* v84: one finite, hard-ink performance across the DOM ceremony surfaces.
@@ -143,4 +149,25 @@
   .kk-reel-completion strong,.ks-completion .ks-completion-award > strong,
   .kf-shell .kf-card,.ks-loading .ks-loading-logo { animation:none!important; }
   #kilo-features-takeover .kf-shell .kf-art { transition:none;transform:none!important; }
+}
+
+/* Bonus complete takes over as an opaque sheet wiped across the board, then wipes
+   off the same way. The scrim and panel no longer fade, so "Bonus complete" is
+   never seen half-transparent over the live reels. Timings stay inside the host's
+   existing 160 ms close delay; no phase or input timing changes. */
+#kilo-completion-takeover {animation:kk-sheet-wipe-in 200ms cubic-bezier(.3,.05,.2,1) both;}
+#kilo-completion-takeover .kk-scrim,
+#kilo-completion-takeover [role="dialog"],
+#kilo-completion-takeover.is-closing .kk-scrim,
+#kilo-completion-takeover.is-closing [role="dialog"] {animation:none;opacity:1;}
+#kilo-completion-takeover.is-closing {animation:kk-sheet-wipe-out 150ms cubic-bezier(.55,0,.7,.25) both;}
+.kk-app[data-reduced="1"] #kilo-completion-takeover {animation:none;}
+@keyframes kk-sheet-wipe-in {from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes kk-sheet-wipe-out {from{clip-path:inset(0)}to{clip-path:inset(0 0 0 100%)}}
+/* The ink burst stays behind the amount, but "Total return" keeps a hard-ink
+   outline and sits above it, so the yellow rays never wash the label out. */
+.ks-completion-award > span {position:relative;z-index:1;text-shadow:0 2px #07131a,2px 0 #07131a,-2px 0 #07131a,0 -1px #07131a;}
+@media(prefers-reduced-motion:reduce) {
+  #kilo-completion-takeover,#kilo-completion-takeover.is-closing {animation:none;}
+  .ks-bonus-entry .ks-entry-hero {animation:none;}
 }
