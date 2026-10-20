@@ -16,7 +16,7 @@ import { paintWinConnection } from './win-connection-paint';
 import { createConnectionAmounts, connectionTraceIndices } from './connection-amounts';
 import { connectionClock } from './vs-choreography';
 import { paintImpact, paintEventTicket, impactStamp } from './impact-language';
-import { KING_THROW_RELEASE, type KingToolEvent } from './stage-character-arm';
+import { KING_THROW_RELEASE, KING_DYNAMITE_STICK, type KingToolEvent } from './stage-character-arm';
 import { featureArrivalAt } from './event-performance';
 import { articulateArt, restoreArticulation } from './articulation';
 import { FEATURE_NAMES } from '@/lib/kilo/feature-math';
@@ -2740,9 +2740,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         if(spin.tool==='dynamite'&&!reduced&&!stopped){
           const start=actorTool('throw',0);
           if(start.hand){
-            thrown=document.createElement('img');thrown.src=TOOL_PIVOTS.dynamite.file;
+            thrown=document.createElement('img');thrown.src=KING_DYNAMITE_STICK;
             thrown.className='kk-character-tool-flight';thrown.setAttribute('aria-hidden','true');
-            Object.assign(thrown.style,{position:'fixed',pointerEvents:'none',zIndex:'16',width:`${start.handSize??28}px`,height:'auto',left:`${start.hand.x}px`,top:`${start.hand.y}px`,transform:'translate(-50%,-50%)',opacity:'0'});
+            Object.assign(thrown.style,{position:'fixed',pointerEvents:'none',zIndex:'16',width:`${(start.handSize??28)*.5}px`,height:'auto',left:`${start.hand.x}px`,top:`${start.hand.y}px`,transform:'translate(-50%,-50%)',opacity:'0'});
             document.body.appendChild(thrown);flyers.add(thrown);prop.alpha=0;
           }
         }
@@ -2764,7 +2764,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
                 const start=actor.releaseHand,end=screenOf(at.x,at.y),arc=Math.min(100,Math.hypot(end.x-start.x,end.y-start.y)*.24);
                 const point=t<KING_THROW_RELEASE?actor.hand:{x:start.x+(end.x-start.x)*flight,y:start.y+(end.y-start.y)*flight-Math.sin(Math.PI*flight)*arc};
                 // Before release the actor's own lit-dynamite hand shows the stick.
-                Object.assign(thrown.style,{left:`${point.x}px`,top:`${point.y}px`,width:`${(actor.handSize??28)*(1+flight*.22)}px`,transform:`translate(-50%,-50%) rotate(${t<KING_THROW_RELEASE?-12:flight*220}deg)`,opacity:t>=KING_THROW_RELEASE&&t<.64?'1':'0'});
+                Object.assign(thrown.style,{left:`${point.x}px`,top:`${point.y}px`,width:`${(actor.handSize??28)*.5*(1+flight*.22)}px`,transform:`translate(-50%,-50%) rotate(${t<KING_THROW_RELEASE?-12:flight*220}deg)`,opacity:t>=KING_THROW_RELEASE&&t<.64?'1':'0'});
                 prop.alpha=0;
               }else{
               const shake = wind ? Math.sin(t * 70) * geom.cell * 0.035 : 0;

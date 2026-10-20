@@ -11,6 +11,7 @@ export const KING_ARM_ASSETS = {
   forearm: '/kilo-v81/characters/left-forearm.webp',
   grip: '/kilo-v81/characters/left-grip.webp',
   release: '/kilo-v81/characters/left-release.webp',
+  rightRod: '/kilo-v81/characters/king-body-left-socket.webp',
   /** v88 parts pack (pivots.json beside the files). Source-body pixels, drawn at 0.5. */
   torso: `${KING_PARTS}stage-upper.webp`,
   rightUpper: `${KING_PARTS}right-upper-arm.webp`,
@@ -46,17 +47,24 @@ export const KING_LEFT_ARM = {shoulder:{x:441,y:223},upperLength:100,forearmLeng
 export const KING_THROW_RELEASE=.40;
 type V=readonly[number,number];
 /** pivots.json joints, source-body pixels (local to each PNG). */
+/** Outline pad added around each re-inked part (see SOURCE.md); upper arm also has a 25 px taller cap. */
+const pad=(v:V,n:number,dy=0):V=>[v[0]+n,v[1]+n+dy];
 export const KING_PARTS_RIG={
-  rightShoulder:[548,438] as V,pelvis:[662+24,836] as V,
-  rightUpper:{pivot:[58.299,32.983] as V,end:[63.897,233.002] as V},
-  rightForearm:{pivot:[97.64,37.775] as V,end:[36.429,316.767] as V},
-  rightHand:{pivot:[88.528,113.731] as V,grip:[41.95,58.097] as V},
-  rod:{pivot:[380.883,584.876] as V,tip:[15.047,16.912] as V,butt:[436.37,664.739] as V,lineExit:[15.517,23.489] as V},
-  hips:{pivot:[215.1,53.32] as V,rightHip:[126.6,111.733] as V,leftHip:[306.6,111.733] as V},
-  rightLeg:{pivot:[286,61] as V,ankle:[181.5,482.5] as V},
-  leftLeg:{pivot:[106.93,62.355] as V,ankle:[161.115,476.3] as V},
-  dynamiteHand:{pivot:[122.25,172.59] as V,grip:[69.954,117.721] as V},
-  backswingHand:{pivot:[57.773,144.289] as V,palm:[83.091,90.181] as V},
+  rightShoulder:[548,418] as V,
+  /** w Bo's fit: hips pivot at (690.2,828.5) turned -9.74 deg; legs +14.7 / +10.7 deg to the hips. */
+  pelvis:[690.2,828.5] as V,hipsTilt:-9.74,rightLegTurn:14.7,leftLegTurn:10.7,
+  rightUpper:{pivot:pad([58.299,32.983],5,25),end:pad([63.897,233.002],5,25)},
+  rightForearm:{pivot:pad([97.64,37.775],4),end:pad([36.429,316.767],4)},
+  rightHand:{pivot:pad([88.528,113.731],5),grip:pad([41.95,58.097],5)},
+  /** Rod pivot moved ~80 px toward the tip (t ~ .77, like the v81 fist). */
+  rod:{pivot:[338,518] as V,tip:[15.047,16.912] as V,butt:[436.37,664.739] as V,lineExit:[15.517,23.489] as V},
+  hips:{pivot:pad([215.1,53.32],4),rightHip:pad([126.6,111.733],4),leftHip:pad([306.6,111.733],4)},
+  rightLeg:{pivot:pad([286,61],4),ankle:pad([181.5,482.5],4)},
+  leftLeg:{pivot:pad([106.93,62.355],4),ankle:pad([161.115,476.3],4)},
+  dynamiteHand:{pivot:pad([122.25,172.59],4),grip:pad([69.954,117.721],4)},
+  backswingHand:{pivot:pad([57.773,144.289],4),palm:pad([83.091,90.181],4),scale:.87},
+  /** Wrist overlap: the hand seats 3 source px further up the forearm. */
+  wristOverlap:3,
 } as const;
 const deg=Math.PI/180;
 const dirOf=(a:V,b:V)=>Math.atan2(b[1]-a[1],b[0]-a[0]);
@@ -74,27 +82,36 @@ export function kingHipShift(frame:StageKingFrame,reduced=false){
   return{x,y,tilt:-x*.4*deg};
 }
 
-/** Rest pose: arm hangs from the shoulder, forearm carries the rod butt forward,
- * the rod angles up-left. Angles are bone directions in degrees (screen, y down). */
+/** v81 rod arm: one registered drawing (sleeve, fist and rod) rotated about the
+ * shoulder. It is the idle/rest arm; the jointed chain below cannot reach this
+ * grip (it would need a ~157 deg elbow fold). */
+export const KING_CAST_ROD=[[0,0],[.24,.45],[.33,-.30],[.6,-.18],[.9,.28],[1,0]] as const;
+export function kingSocketRodPose(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
+  const hip=kingHipShift(frame,reduced),pivot={x:274,y:219},mesh=kingMeshPoint(pivot.x,pivot.y,{...frame,rod:0}),shoulder=plus(mesh,hip);
+  let angle=reduced?0:frame.rod*.013;
+  if(tool?.kind==='cast'&&!reduced)angle+=curve(tool.progress,KING_CAST_ROD);
+  const point=(p:Point)=>({x:shoulder.x+Math.cos(angle)*(p.x-pivot.x)-Math.sin(angle)*(p.y-pivot.y),y:shoulder.y+Math.sin(angle)*(p.x-pivot.x)+Math.cos(angle)*(p.y-pivot.y)});
+  return{pivot,shoulder,angle,point,tip:point({x:14,y:12}),butt:point({x:278,y:323})};
+}
+
+/** The jointed chain is used only for the extended cast frames: from the snap
+ * (.27) through the release and the held line, back to the v81 arm at .75
+ * as the pull starts. Both swaps happen on fast motion, at similar rod angles. */
+export const KING_CAST_CHAIN={from:.27,to:.75} as const;
+export const kingCastChainActive=(tool:KingToolAction|null,reduced=false)=>
+  !reduced&&tool?.kind==='cast'&&tool.progress>=KING_CAST_CHAIN.from&&tool.progress<KING_CAST_CHAIN.to;
+/** Extended pose: forearm reaching forward-up, rod up-left. Angles are bone
+ * directions in degrees (screen, y down); the beats are offsets from it. */
 const ARM_REST={upper:95,forearm:-142,rod:-122};
-/** Cast beats across the descent (0-.6) and pull (.6-1) tweens: wind-up (rod
- * back over the shoulder), wrist snap, release on the line, pull with the reel.
- * Rod flex is the rod rotating against the hand: it lags the snap, then whips. */
-const CAST_UPPER=[[0,0],[.24,32],[.30,-4],[.36,-10],[.6,-6],[.9,14],[1,0]] as const;
-const CAST_FOREARM=[[0,0],[.24,46],[.30,-6],[.36,-22],[.6,-12],[.9,14],[1,0]] as const;
-const CAST_WRIST=[[0,0],[.24,24],[.29,-26],[.36,-16],[.6,-8],[.9,4],[1,0]] as const;
-const CAST_FLEX=[[0,0],[.20,5],[.27,14],[.31,-13],[.36,5],[.44,-2],[.6,0],[.75,5],[.9,7],[1,0]] as const;
-export const KING_CAST_ROD=CAST_FOREARM;
+const CAST_UPPER=[[.27,10],[.31,-4],[.36,-10],[.6,-6],[.75,0]] as const;
+const CAST_FOREARM=[[.27,17],[.31,-8],[.36,-22],[.6,-12],[.75,0]] as const;
+const CAST_WRIST=[[.27,-6],[.31,-26],[.36,-16],[.6,-8],[.75,-2]] as const;
+/** Rod flex = the rod rotating against the fist: lags the wrist snap, whips through, settles. */
+const CAST_FLEX=[[.27,0],[.29,10],[.31,-13],[.36,5],[.44,-2],[.6,0],[.75,4]] as const;
 export function kingRightArmPose(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
   const R=KING_PARTS_RIG,hip=kingHipShift(frame,reduced),s=R.rightShoulder;
   const shoulder=plus(kingMeshPoint(s[0]/2,s[1]/2,{...frame,rod:0}),hip);
-  const idle=reduced?0:frame.rod*.75;
-  let ua=ARM_REST.upper,fa=ARM_REST.forearm+idle*.4,wrist=idle*.6,flex=0;
-  if(!tool&&frame.reaction==='collect'&&!reduced){
-    // Two short hauls on the rod: forearm lifts, the rod loads and recovers.
-    const p=frame.reactionProgress??1,haul=Math.sin(Math.PI*2*Math.min(1,Math.max(0,(p-.08)/.8)))**2*(1-smooth((p-.7)/.3));
-    fa+=18*haul;flex+=7*haul;
-  }
+  let ua=ARM_REST.upper,fa=ARM_REST.forearm,wrist=0,flex=0;
   if(tool?.kind==='cast'&&!reduced){
     const t=clamp(tool.progress);
     ua+=curve(t,CAST_UPPER);fa+=curve(t,CAST_FOREARM);wrist+=curve(t,CAST_WRIST);flex+=curve(t,CAST_FLEX);
@@ -102,7 +119,7 @@ export function kingRightArmPose(frame:StageKingFrame,tool:KingToolAction|null=n
   const a1=ua*deg-dirOf(R.rightUpper.pivot,R.rightUpper.end);
   const elbow=plus(shoulder,local(R.rightUpper.pivot,R.rightUpper.end,a1));
   const a2=fa*deg-dirOf(R.rightForearm.pivot,R.rightForearm.end);
-  const wristPoint=plus(elbow,local(R.rightForearm.pivot,R.rightForearm.end,a2));
+  const wristPoint=plus(elbow,turn({x:Math.cos(fa*deg)*(lenOf(R.rightForearm.pivot,R.rightForearm.end)-R.wristOverlap/2),y:Math.sin(fa*deg)*(lenOf(R.rightForearm.pivot,R.rightForearm.end)-R.wristOverlap/2)},0));
   const handRest=ARM_REST.rod*deg-dirOf(R.rod.pivot,R.rod.tip);
   const a3=handRest+(fa-ARM_REST.forearm)*deg+wrist*deg;
   const grip=plus(wristPoint,local(R.rightHand.pivot,R.rightHand.grip,a3));
@@ -111,9 +128,10 @@ export function kingRightArmPose(frame:StageKingFrame,tool:KingToolAction|null=n
   return{shoulder,elbow,wrist:wristPoint,grip,a1,a2,a3,a4,angle:a4-handRest,
     tip:rodPoint(R.rod.lineExit),butt:rodPoint(R.rod.butt)};
 }
-/** Kept for callers that only need the line exit and the rod angle. */
+/** Line exit and rod angle of whichever arm is on screen. */
 export function kingRightRodPose(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
-  return kingRightArmPose(frame,tool,reduced);
+  if(kingCastChainActive(tool,reduced)){const p=kingRightArmPose(frame,tool,reduced);return{...p,chain:true as const};}
+  return{...kingSocketRodPose(frame,tool,reduced),chain:false as const};
 }
 
 /** Fixed bone lengths and one bend direction. A compact underarm wind-up
@@ -121,12 +139,20 @@ export function kingRightRodPose(frame:StageKingFrame,tool:KingToolAction|null=n
 export function kingLeftArmPose(frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
   const hip=kingHipShift(frame,reduced);
   const shoulder=plus(kingMeshPoint(KING_LEFT_ARM.shoulder.x,KING_LEFT_ARM.shoulder.y,frame),hip);
-  // The jointed rod arm holds the rod alone; the free left hand rests by the hip.
-  const wristTarget={x:shoulder.x+18,y:shoulder.y+186};
+  // At rest the left hand holds the v81 rod butt; it lets go to the hip while
+  // the jointed chain makes the extended cast (that rod butt sits by the fist).
+  const rod=kingSocketRodPose(frame,tool,reduced),restGrip=rod.butt;
+  const wristTarget={x:restGrip.x+24*Math.cos(rod.angle),y:restGrip.y+24*Math.sin(rod.angle)-3};
+  if(tool?.kind==='cast'&&!reduced){
+    const p=tool.progress,away=smooth((p-.17)/.10)*(1-smooth((p-.75)/.12));
+    wristTarget.x+=(shoulder.x+18-wristTarget.x)*away;wristTarget.y+=(shoulder.y+186-wristTarget.y)*away;
+  }
   if(!tool&&frame.reaction==='collect'&&!reduced){
-    // Hauls with the rod arm; the left fist pumps twice in time.
+    // Two small crank turns around the rod's lower grip.
     const p=frame.reactionProgress??1,effort=smooth((p-.10)/.12)*(1-smooth((p-.78)/.22));
-    wristTarget.y-=Math.abs(Math.sin(Math.PI*2*smooth((p-.10)/.78)))*26*effort;
+    const turn=Math.PI*4*smooth((p-.10)/.78);
+    wristTarget.x+=Math.sin(turn)*11*effort;
+    wristTarget.y+=(1-Math.cos(turn))*6*effort;
   }
   const dx=wristTarget.x-shoulder.x,dy=wristTarget.y-shoulder.y,d=Math.hypot(dx,dy);
   const l=KING_LEFT_ARM.upperLength,f=KING_LEFT_ARM.forearmLength;
@@ -163,14 +189,16 @@ function bone(ctx:CanvasRenderingContext2D,image:CanvasImageSource,start:Point,e
 /** Throw hand order: open backswing hand on the reach back, the existing grip as
  * it takes the stick, the lit-dynamite hand through the whip, the existing
  * release hand, then the grip again for the recovery. */
+/** Single-stick prop for the thrown dynamite (matches the stick in the lit-dynamite hand). */
+export const KING_DYNAMITE_STICK=`${KING_PARTS}dynamite-stick.webp`;
 export const KING_THROW_HANDS={reach:.04,backswing:.18,grip:.24,dynamite:KING_THROW_RELEASE,release:.85} as const;
 export function kingLeftHandDrawing(tool:KingToolAction|null,open=0,reduced=false):'backswing'|'grip'|'dynamite'|'release'{
   if(tool?.kind!=='throw'||reduced)return open>.5?'release':'grip';
   const p=tool.progress,h=KING_THROW_HANDS;
   return p<h.reach?'grip':p<h.backswing?'backswing':p<h.grip?'grip':p<h.dynamite?'dynamite':p<h.release?'release':'grip';
 }
-function part(ctx:CanvasRenderingContext2D,image:CanvasImageSource,at:Point,angle:number,pivot:V){
-  ctx.save();ctx.translate(at.x,at.y);ctx.rotate(angle);ctx.scale(.5,.5);ctx.drawImage(image,-pivot[0],-pivot[1]);ctx.restore();
+function part(ctx:CanvasRenderingContext2D,image:CanvasImageSource,at:Point,angle:number,pivot:V,scale=1){
+  ctx.save();ctx.translate(at.x,at.y);ctx.rotate(angle);ctx.scale(.5*scale,.5*scale);ctx.drawImage(image,-pivot[0],-pivot[1]);ctx.restore();
 }
 export function paintKingLeftArm(ctx:CanvasRenderingContext2D,images:KingArmImages,frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
   const pose=kingLeftArmPose(frame,tool,reduced);
@@ -179,39 +207,48 @@ export function paintKingLeftArm(ctx:CanvasRenderingContext2D,images:KingArmImag
   const handTip=offset(pose.wrist,pose.handAngle,58);
   const hand=kingLeftHandDrawing(tool,pose.open,reduced);
   // Registered drawing changes on beats; never two translucent sets of fingers.
-  if(hand==='backswing')part(ctx,images.backswingHand,pose.wrist,pose.handAngle-dirOf(KING_PARTS_RIG.backswingHand.pivot,KING_PARTS_RIG.backswingHand.palm),KING_PARTS_RIG.backswingHand.pivot);
+  if(hand==='backswing')part(ctx,images.backswingHand,pose.wrist,pose.handAngle-dirOf(KING_PARTS_RIG.backswingHand.pivot,KING_PARTS_RIG.backswingHand.palm),KING_PARTS_RIG.backswingHand.pivot,KING_PARTS_RIG.backswingHand.scale);
   else if(hand==='dynamite')part(ctx,images.dynamiteHand,pose.wrist,pose.handAngle-dirOf(KING_PARTS_RIG.dynamiteHand.pivot,KING_PARTS_RIG.dynamiteHand.grip),KING_PARTS_RIG.dynamiteHand.pivot);
   else if(hand==='release')bone(ctx,images.release,pose.wrist,handTip,{x:185,y:38},{x:171,y:454});
   else bone(ctx,images.grip,pose.wrist,handTip,{x:150,y:39},{x:135,y:399});
   return pose;
 }
 
-/** Jointed rod arm from the v88 parts: upper arm over the vest armhole,
- * forearm, rod (behind the fist), then the gripping hand. */
+/** Right arm. Rest/idle: the v81 socket drawing (sleeve, fist, rod) through a
+ * registered mask; the clean torso covers the shoulder seam. Extended cast
+ * frames: the jointed v88 chain over the torso, drawn forearm, upper arm (over
+ * the elbow cap), rod, then the fist over the wrist. */
 export function paintKingRightRod(ctx:CanvasRenderingContext2D,images:KingArmImages,frame:StageKingFrame,tool:KingToolAction|null=null,reduced=false){
-  const p=kingRightArmPose(frame,tool,reduced),R=KING_PARTS_RIG;
-  part(ctx,images.rightUpper,p.shoulder,p.a1,R.rightUpper.pivot);
-  part(ctx,images.rightForearm,p.elbow,p.a2,R.rightForearm.pivot);
-  part(ctx,images.rod,p.grip,p.a4,R.rod.pivot);
-  part(ctx,images.rightHand,p.wrist,p.a3,R.rightHand.pivot);
-  return p;
+  if(kingCastChainActive(tool,reduced)){
+    const p=kingRightArmPose(frame,tool,reduced),R=KING_PARTS_RIG;
+    part(ctx,images.rightForearm,p.elbow,p.a2,R.rightForearm.pivot);
+    part(ctx,images.rightUpper,p.shoulder,p.a1,R.rightUpper.pivot);
+    part(ctx,images.rod,p.grip,p.a4,R.rod.pivot);
+    part(ctx,images.rightHand,p.wrist,p.a3,R.rightHand.pivot);
+    return;
+  }
+  const p=kingSocketRodPose(frame,tool,reduced);
+  ctx.save();ctx.translate(p.shoulder.x,p.shoulder.y);ctx.rotate(p.angle);ctx.translate(-p.pivot.x,-p.pivot.y);
+  ctx.beginPath();[[0,0],[60,0],[210,180],[280,185],[303,215],[298,271],[290,310],[291,348],[235,348],[180,342],[145,316],[132,265],[167,232],[3,38]].forEach(([x,y],i)=>i?ctx.lineTo(x!,y!):ctx.moveTo(x!,y!));ctx.closePath();ctx.clip();
+  ctx.drawImage(images.rightRod,0,0,1024,1536,0,0,512,768);ctx.restore();
 }
 
 /** Hips and single-piece legs under the vest hem. The boots stay planted: each
  * leg turns about its hip joint and stretches a few percent along its own axis
  * so the ankle lands where it rests, which reads as a small knee give. */
 export function paintKingLowerBody(ctx:CanvasRenderingContext2D,images:KingArmImages,frame:StageKingFrame,reduced=false){
-  const R=KING_PARTS_RIG,hip=kingHipShift(frame,reduced);
+  const R=KING_PARTS_RIG,hip=kingHipShift(frame,reduced),restTilt=R.hipsTilt*deg;
   const restPelvis={x:R.pelvis[0]/2,y:R.pelvis[1]/2},pelvis=plus(restPelvis,hip);
-  const legs=[[images.leftLeg,R.leftLeg,R.hips.leftHip],[images.rightLeg,R.rightLeg,R.hips.rightHip]] as const;
-  for(const[image,leg,joint]of legs){
-    const restHip=plus(restPelvis,local(R.hips.pivot,joint,0)),at=plus(pelvis,local(R.hips.pivot,joint,hip.tilt));
-    const ankle=plus(restHip,local(leg.pivot,leg.ankle,0));
-    const axis=dirOf(leg.pivot,leg.ankle),rest=lenOf(leg.pivot,leg.ankle);
+  const legs=[[images.leftLeg,R.leftLeg,R.hips.leftHip,R.leftLegTurn],[images.rightLeg,R.rightLeg,R.hips.rightHip,R.rightLegTurn]] as const;
+  for(const[image,leg,joint,legTurn]of legs){
+    const restLeg=restTilt+legTurn*deg;
+    const restHip=plus(restPelvis,local(R.hips.pivot,joint,restTilt)),at=plus(pelvis,local(R.hips.pivot,joint,restTilt+hip.tilt));
+    const ankle=plus(restHip,local(leg.pivot,leg.ankle,restLeg));
+    const axis=dirOf(leg.pivot,leg.ankle)+restLeg,rest=lenOf(leg.pivot,leg.ankle);
     const now=Math.atan2(ankle.y-at.y,ankle.x-at.x),k=Math.hypot(ankle.x-at.x,ankle.y-at.y)/rest;
-    ctx.save();ctx.translate(at.x,at.y);ctx.rotate(now);ctx.scale(k,1);ctx.rotate(-axis);ctx.scale(.5,.5);
+    ctx.save();ctx.translate(at.x,at.y);ctx.rotate(now);ctx.scale(k,1);ctx.rotate(-axis+restLeg);ctx.scale(.5,.5);
     ctx.drawImage(image,-leg.pivot[0],-leg.pivot[1]);ctx.restore();
   }
-  part(ctx,images.hips,pelvis,hip.tilt,R.hips.pivot);
+  part(ctx,images.hips,pelvis,restTilt+hip.tilt,R.hips.pivot);
   return hip;
 }
