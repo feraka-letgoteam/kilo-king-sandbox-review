@@ -85,7 +85,7 @@ export interface SplashFree extends SplashDrop {
 
 export interface SplashScript {
   catalogueSeed?:number;
-  generation?:'experience-v83' | 'experience-v86';
+  generation?:'experience-v83' | 'experience-v86' | 'experience-p2';
   /** The selected bonus is committed before charging/presentation. */
   mystery?: { version: 'mystery-v86'; selected: MysteryFeature };
   version?: 3 | 4;
@@ -940,5 +940,9 @@ export function playSplash(stake:number,mode:SplashMode,rng:Rng=Math.random):Spl
   let low=0,high=catalogue.length/2-1;
   while(low<high){const mid=(low+high)>>>1;if(draw<catalogue[mid*2+1]!)high=mid;else low=mid+1;}
   const seed=catalogue[low*2]!;
-  return {...generateSplashCandidate(stake,mode,vsSeeded(seed),rng),catalogueSeed:seed,generation:mode === 'buy' ? 'experience-v83' : 'experience-v86'};
+  // Phase 2: a natural five-scatter round is one book entry with its own fixed
+  // Super VS seed. Nothing after the catalogue draw consumes the live RNG.
+  return {...generateSplashCandidate(stake,mode,vsSeeded(seed),vsSeeded(naturalSuperSeed(seed))),catalogueSeed:seed,generation:'experience-p2'};
 }
+/** Fixed Super VS seed paired with a natural five-scatter base seed. */
+export function naturalSuperSeed(seed:number):number{return (Math.imul(seed>>>0,0x9E3779B1)^0x5EED2501)>>>0;}

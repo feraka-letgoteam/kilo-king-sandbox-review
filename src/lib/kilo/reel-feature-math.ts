@@ -19,7 +19,7 @@ export type Cascade = {
   marksBefore: number[][]; marksAfter: number[][];
 };
 export type YachtReels = {
-  distribution?: 'pacing-v60' | 'progression-v82' | 'super-vs-v86';
+  distribution?: 'pacing-v60' | 'progression-v82' | 'progression-p2' | 'super-vs-v86';
   catalogueSeed?: number;
   /** Absent on historical additive-per-reel records; never infer from sides. */
   combining?: VsCombiningRule;
