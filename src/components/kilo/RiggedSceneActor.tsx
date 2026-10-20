@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createCharacterMotionLoop } from './character-motion-loop';
 import { STAGE_KING, STAGE_REACTIONS, paintStageKing, kingToolFrame, createStageKingPlayback, type StageKingFrame, type StageReaction } from './stage-character-life';
 import { KING_ARM_ASSETS, KING_STAGE_CANVAS, KING_THROW_RELEASE, kingLeftArmPose, kingRightRodPose, type KingArmImages, type KingToolAction, type KingToolEvent } from './stage-character-arm';
@@ -12,6 +12,22 @@ export function sceneActorBox(master:IntegratedMaster,portrait:boolean) {
     top:master.height*(portrait?.87:.817)-height*STAGE_KING.anchors.footBaseline/768,width,height};
 }
 
+/** Phone fit (presentation only): in portrait the planted King may run past the
+ * bottom of short screens. Limits are master units measured from the live page:
+ * `bottom` = viewport bottom, `top` = lowest point the hat may rise to (just over
+ * the control dock), `right` = viewport right. The whole 512x768 box (rod tip to
+ * boots) is scaled down about the boots and lifted so it stays fully in frame. */
+export type ActorFrameLimits={top:number;bottom:number;right:number};
+export function fitActorBox(box:ReturnType<typeof sceneActorBox>,limits:ActorFrameLimits|null){
+  if(!limits)return box;
+  const boxBottom=box.top+box.height,cx=STAGE_KING.anchors.bodyCenter.x/512;
+  if(boxBottom<=limits.bottom&&box.left+box.width<=limits.right)return box;
+  const k=Math.max(.45,Math.min(1,(limits.bottom-limits.top)/box.height));
+  const height=box.height*k,width=box.width*k,top=Math.min(boxBottom,limits.bottom)-height;
+  const left=Math.min(box.left+box.width*cx-width*cx,limits.right-width);
+  return {left,top,width,height};
+}
+
 export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=false,paused=false}:{
   master:IntegratedMaster;portrait:boolean;pose?:IntegratedCharacterPose;tick?:number;reduced?:boolean;paused?:boolean;
 }) {
@@ -19,7 +35,25 @@ export function RiggedSceneActor({master,portrait,pose='idle',tick=0,reduced=fal
   const settings=useRef({reduced,paused});
   const loop=useRef<ReturnType<typeof createCharacterMotionLoop>|null>(null);
   const draw=useRef<(delta:number)=>void>(()=>{});
-  const box=sceneActorBox(master,portrait);
+  const [limits,setLimits]=useState<ActorFrameLimits|null>(null);
+  const box=fitActorBox(sceneActorBox(master,portrait),portrait?limits:null);
+  useLayoutEffect(()=>{
+    if(!portrait){setLimits(null);return;}
+    const node=canvas.current,plane=node?.parentElement,shell=node?.closest('.kk-shell');
+    if(!node||!plane)return;
+    const measure=()=>{
+      const p=plane.getBoundingClientRect();if(!p.height)return;
+      // The game shell ends at the control dock; the frame is the viewport.
+      const s=p.height/master.height,dock=shell?.querySelector('.kk-modular-controls')?.getBoundingClientRect();
+      const bottom=innerHeight-4,right=innerWidth-2;
+      const top=dock?dock.bottom-34:bottom-p.height;
+      const next={top:(top-p.top)/s,bottom:(bottom-p.top)/s,right:(right-p.left)/s};
+      setLimits(old=>old&&Math.abs(old.top-next.top)<.5&&Math.abs(old.bottom-next.bottom)<.5&&Math.abs(old.right-next.right)<.5?old:next);
+    };
+    measure();const ro=new ResizeObserver(measure);ro.observe(plane);if(shell)ro.observe(shell);
+    addEventListener('resize',measure);
+    return()=>{ro.disconnect();removeEventListener('resize',measure);};
+  },[master,portrait]);
   useEffect(()=>{
     const node=canvas.current,ctx=node?.getContext('2d');if(!node||!ctx)return;
     let disposed=false,ready=false,lastFace='',tool:KingToolAction|null=null;
