@@ -13,6 +13,7 @@ import { STAGE_KING_URLS } from './stage-character-life';
 import { V79_ENTRY_ART } from './authored-surface-clips';
 import { ImpactPrint } from './ImpactPrint';
 import "./scene-screens.css";
+import { t } from "@/lib/kilo/copy";
 
 const amount = (value: number) => Math.round(value).toLocaleString("en-US");
 
@@ -228,7 +229,7 @@ export function CompletionScreenContent({
         </div>
         {purchaseCost !== null && (
           <p className="ks-completion-cost" data-testid="summary-cost">
-            Purchase cost <b>{amount(purchaseCost)}</b>
+            {t("label.purchaseCost")} <b>{amount(purchaseCost)}</b>
           </p>
         )}
         <button

@@ -783,7 +783,7 @@ export function KiloTable({
     setHud(null);
     sceneRef.current?.setFeatureState?.(null);
     sceneRef.current?.setMood('idle');
-    sceneRef.current?.finishPlate(active ? 'Max spins · 25,000× or nothing' : 'Place a bet');
+    sceneRef.current?.finishPlate(active ? 'Max spins · 25,000× or nothing' : t('plate.placeBet'));
   }
 
   async function play(playMode: SplashMode = mode) {
@@ -801,7 +801,7 @@ export function KiloTable({
       return;
     }
     if (!splashStakeOk(stake, playMode)) {
-      setNote("That charge is outside the stake rules.");
+      setNote(t("note.outsideStakeRules"));
       return;
     }
     const cost = splashCost(stake, playMode);
@@ -841,8 +841,8 @@ export function KiloTable({
       round.capped
         ? `Capped at ${money(round.payout)}`
         : round.payout > 0
-          ? `Paid ${money(round.payout)}`
-          : "No pay",
+          ? t("plate.paid")(money(round.payout))
+          : t("plate.noPay"),
     );
   }
 
@@ -1014,7 +1014,7 @@ export function KiloTable({
       ? "SPINNING"
       : mode === "ante"
         ? "ANTE ON"
-        : maxSpinMode ? "MAX SPINS" : "PLACE A BET";
+        : maxSpinMode ? "MAX SPINS" : t("plate.placeBetCaps");
   const modalOpen =
     help ||
     buyPanel ||
@@ -1360,7 +1360,7 @@ export function KiloTable({
                   : afford
                     ? "Insufficient balance"
                     : !busy && !splashStakeOk(stake, mode)
-                      ? "Bet unavailable"
+                      ? t("bet.unavailable")
                       : undefined,
                 minimumBet: stake === STAKES[0],
                 maximumBet: stake === STAKES.at(-1),
@@ -1512,7 +1512,7 @@ export function KiloTable({
           )}
         {betPanel && (
           <Dialog
-            label="Bet amount"
+            label={t("bet.panelTitle")}
             className="kk-dialog kk-bet-dialog"
             onClose={closeBet}
           >
@@ -1554,7 +1554,7 @@ export function KiloTable({
                     : controlsLocked
                       ? "Available after this round"
                       : !splashStakeOk(stake, mode)
-                        ? "Bet unavailable"
+                        ? t("bet.unavailable")
                         : undefined
               }
               onStart={() => {
@@ -1984,3 +1984,4 @@ function Dialog({
 // One final paint layer; geometry and control allocation remain in their canonical modules.
 import "./illustrated-surfaces.css";
 import "./presentation-finish.css";
+import { t } from "@/lib/kilo/copy";

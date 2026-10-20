@@ -3,6 +3,7 @@ import { FEATURE_NAMES, type FeatureEvent } from '@/lib/kilo/feature-math';
 import type { FeatureHud, PresentOpts, ReelScene } from './director';
 import { cue, bonusExit, whirStop } from '@/lib/kilo/sound';
 import { vsGroupsFor } from '@/lib/kilo/vs-groups';
+import { t } from '@/lib/kilo/copy';
 
 const money = (n: number) => Math.round(n).toLocaleString('en-US');
 export function reelFeatureNote(e: FeatureEvent) {
@@ -11,7 +12,7 @@ export function reelFeatureNote(e: FeatureEvent) {
   if (r.type === 'vs') return r.rules === 'pure-vs'
     ? `${r.after.length} sticky wild ${r.after.length === 1 ? 'reel' : 'reels'} · locked until the final spin`
     : `${r.after.length} sticky wild ${r.after.length === 1 ? 'reel' : 'reels'} · ${e.heldAfter.length} locked packages`;
-  return `${r.cascades.length ? `${r.cascades.length} cascades · ` : ''}Cash locked · board ×${r.globalAfter}`;
+  return `${r.cascades.length ? `${r.cascades.length} cascades · ` : ''}${t('hud.cashLockedBoard')} · board ×${r.globalAfter}`;
 }
 function featureHud(round: SplashScript, total: number, left: number, note: string, e?: FeatureEvent, entry = false): FeatureHud {
   const baseLine = round.base.lines.reduce((n, l) => n + l.pay, 0), scatter = round.base.scatterPay;

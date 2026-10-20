@@ -14,6 +14,7 @@ import { bonusExit, cue, whirStop } from "@/lib/kilo/sound";
 import type { FeatureEvent } from '@/lib/kilo/feature-math';
 import { presentCargoFeature, cargoFinalHud } from './feature-director.ts';
 import { presentReelFeature, reelFeatureFinalHud } from './reel-feature-director.ts';
+import { t } from "@/lib/kilo/copy";
 
 export type Mood = "idle" | "cast" | "cheer" | "slump";
 export type MeterFace = {
@@ -190,7 +191,7 @@ export async function presentScript(
     round.mode === "chopper"
       ? "Chopper"
       : round.mode === "buy"
-        ? "Bought feature"
+        ? t("hud.boughtFeature")
         : "Free spins";
   const publish = (
     note: string,
@@ -339,7 +340,7 @@ export async function presentScript(
     const note = round.capped
       ? `Maximum win · ${money(round.payout)}`
       : round.payout > 0
-        ? `Round pays ${money(round.payout)}`
+        ? t("plate.roundPays")(money(round.payout))
         : "No win this round";
     publish(note, false, null);
     // A small return below the charge is acknowledged, without a win celebration.
@@ -508,7 +509,7 @@ export function finalHud(round: SplashScript): FeatureHud {
     round.mode === "chopper"
       ? "Chopper"
       : round.mode === "buy"
-        ? "Bought feature"
+        ? t("hud.boughtFeature")
         : "Free spins";
   const note = round.capped
     ? `Maximum win · ${money(round.payout)}`
@@ -738,7 +739,7 @@ export async function presentEventPreview(
     round.mode === "chopper"
       ? "Chopper"
       : round.mode === "buy"
-        ? "Bought feature"
+        ? t("hud.boughtFeature")
         : "Free spins";
   scene.setStake(round.stake);
   scene.setPace(opts.turbo, opts.reduced, opts.speed);
@@ -986,7 +987,7 @@ export async function presentSettledCollection(
     round.mode === "chopper"
       ? "Chopper"
       : round.mode === "buy"
-        ? "Bought feature"
+        ? t("hud.boughtFeature")
         : "Free spins";
   scene.setStake(round.stake);
   scene.setPace(opts.turbo, opts.reduced, opts.speed);
@@ -1244,6 +1245,6 @@ export function spinControl(state: {
   if (state.busy) return { label: "SKIP", purchase: false };
   if (state.summary) return { label: "SPIN", purchase: false };
   if (isPurchaseMode(state.mode))
-    return { label: `BUY ${money(state.cost)}`, purchase: true };
+    return { label: t("spin.buy")(money(state.cost)), purchase: true };
   return { label: "SPIN", purchase: false };
 }

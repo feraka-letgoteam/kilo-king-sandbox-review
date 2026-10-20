@@ -30,6 +30,7 @@ import {
   controlBetInset,
 } from "./typography";
 import "./controls.css";
+import { t } from "@/lib/kilo/copy";
 
 export type ControlIcons = Partial<
   Record<
@@ -210,7 +211,7 @@ export function SlotControls({
         : key === "turbo"
           ? `Spin speed: ${speedName}. Change speed`
           : key === "buy"
-            ? "Buy feature"
+            ? t("label.buyFeature")
             : s.autoRemaining
               ? `Stop auto spins, ${s.autoRemaining} remaining`
               : "Auto spins: choose a finite count";
@@ -284,7 +285,7 @@ export function SlotControls({
         )}
         {key === "buy" && (
           <span className="sc-control-caption" aria-hidden="true">
-            Buy
+            {t("dock.buyCaption")}
           </span>
         )}
         {(key === "turbo" || foldedSpeed) && !restriction.disabled && (
@@ -457,7 +458,7 @@ export function SlotControls({
           className="sc-well sc-bet"
           data-module="bet"
           role="group"
-          aria-label="Bet controls"
+          aria-label={t("bet.controlsGroup")}
           style={place(d.bet)}
         >
           <button
@@ -466,14 +467,14 @@ export function SlotControls({
             style={{ ...place(d.betButton), paddingLeft: betInset }}
             disabled={s.locked}
             onClick={a.bet}
-            aria-label={`Change base bet, ${s.bet} ${s.currency}${s.ante ? ", Ante On" : ""}`}
+            aria-label={`${t("bet.changeAria")(s.bet, s.currency)}${s.ante ? ", Ante On" : ""}`}
             aria-haspopup="dialog"
           >
-            <span className="sc-label">Bet</span>
+            <span className="sc-label">{t("label.betShort")}</span>
             <strong
               className="sc-number sc-bet-number"
               data-testid="bet-readout"
-              title={`Base bet ${s.bet}${s.ante ? `. Ante On; per spin ${betValue}` : ""}`}
+              title={`${t("bet.readoutTitle")(s.bet)}${s.ante ? `. Ante On; per spin ${betValue}` : ""}`}
               style={{
                 ...controlReadoutTextStyle(
                   betValue,
@@ -495,7 +496,11 @@ export function SlotControls({
                   type="button"
                   className="sc-button sc-step"
                   style={place(d[key])}
-                  aria-label={`${key === "minus" ? "Decrease" : "Increase"} base bet`}
+                  aria-label={
+                    key === "minus"
+                      ? t("bet.decreaseBase")
+                      : t("bet.increaseBase")
+                  }
                   disabled={
                     s.locked || (key === "minus" ? s.minimumBet : s.maximumBet)
                   }

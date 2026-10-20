@@ -1,5 +1,6 @@
 import type { FeatureEvent } from "@/lib/kilo/feature-math";
 import { vsGroupsFor } from '@/lib/kilo/vs-groups';
+import { t } from '@/lib/kilo/copy';
 const money = (n: number) => Math.round(n).toLocaleString("en-US");
 /** Occupies the existing collector-track space; never changes reel geometry. */
 export function FeatureProgress({ event: e }: { event: FeatureEvent }) {
@@ -19,7 +20,7 @@ export function FeatureProgress({ event: e }: { event: FeatureEvent }) {
     return <div className="kk-feature-progress" data-kind={e.kind}>
       <span>{r.type === 'tumble' ? 'Chopper Route' : 'The Getaway'}</span>
       <strong>{r.type === 'tumble' ? `×${r.globalAfter}` : '1 spin'}</strong>
-      <small>{r.type === 'binary' ? 'Max win or nothing' : `${e.heldAfter.length} cash locked`}</small>
+      <small>{r.type === 'binary' ? 'Max win or nothing' : t('hud.cashLocked')(String(e.heldAfter.length))}</small>
     </div>;
   }
   const label =

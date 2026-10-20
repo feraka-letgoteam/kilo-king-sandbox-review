@@ -29,6 +29,7 @@ import {
   type FeatureGroup,
 } from "./feature-catalog";
 import "./feature-panel.css";
+import { t } from "@/lib/kilo/copy";
 
 type ArtworkStatus = "ready" | "error";
 const artworkStatus = new Map<string, ArtworkStatus>();
@@ -168,14 +169,14 @@ export function BetPanel({
   const index = STAKES.findIndex((n) => n === draft);
   return (
     <>
-      <PanelHeader title="Bet amount" onClose={onClose} />
+      <PanelHeader title={t("bet.panelTitle")} onClose={onClose} />
       <div className="kk-dialog-body kk-bet-panel">
-        <span className="kk-field-label">Base bet · LGC</span>
+        <span className="kk-field-label">{t("bet.baseLabel")}</span>
         <div className="kk-bet-adjust">
           <button
             type="button"
             className="kk-icon-button"
-            aria-label="Decrease bet"
+            aria-label={t("bet.decrease")}
             disabled={index <= 0}
             onClick={() => setDraft(STAKES[index - 1]!)}
           >
@@ -192,7 +193,7 @@ export function BetPanel({
           <button
             type="button"
             className="kk-icon-button"
-            aria-label="Increase bet"
+            aria-label={t("bet.increase")}
             disabled={index >= STAKES.length - 1}
             onClick={() => setDraft(STAKES[index + 1]!)}
           >
@@ -202,7 +203,7 @@ export function BetPanel({
         <div
           className="kk-denominations"
           role="group"
-          aria-label="Base bet amounts"
+          aria-label={t("bet.amounts")}
         >
           {STAKES.map((n) => (
             <button
@@ -229,7 +230,7 @@ export function BetPanel({
           className="kk-primary"
           onClick={() => onApply(draft)}
         >
-          Apply bet
+          {t("bet.apply")}
         </button>
       </div>
     </>
@@ -310,7 +311,7 @@ export function FeatureCard({
         <div className="kk-feature-card-head">
           <span className="kk-feature-kind">
             {feature.kind === "purchase"
-              ? "Bonus buy"
+              ? t("feature.kindBonusBuy")
               : feature.kind === "trigger"
                 ? "Scatter bonus"
                 : "In development"}
@@ -334,12 +335,15 @@ export function FeatureCard({
         <div className="kk-feature-offer" data-purchase={!!q}>
           {q ? (
             <>
-              <span className="kk-feature-price-label">Purchase price</span>
+              <span className="kk-feature-price-label">
+                {t("feature.purchasePrice")}
+              </span>
               <b>
                 {amount(q.cost)} <small>LGC</small>
               </b>
               <span>
-                {feature.kind === "purchase" ? feature.multiple : ""}× base bet
+                {feature.kind === "purchase" ? feature.multiple : ""}×{" "}
+                {t("unit.baseBet")}
               </span>
             </>
           ) : feature.kind === "trigger" ? (
@@ -362,7 +366,7 @@ export function FeatureCard({
             }
             aria-label={
               q
-                ? `Review ${feature.title} purchase for ${amount(q.cost)} LGC`
+                ? t("feature.reviewAria")(feature.title, amount(q.cost))
                 : `Preview ${feature.title}`
             }
             disabled={!!q && (locked || !q.allowed)}
@@ -371,7 +375,7 @@ export function FeatureCard({
             }
             onClick={() => onSelect(feature)}
           >
-            {q ? "Buy feature" : "View preview"}
+            {q ? t("label.buyFeature") : "View preview"}
             <ChevronRight size={17} />
           </button>
           <div
@@ -517,7 +521,7 @@ export function FeaturesPanel({
         title={
           choice
             ? choice.kind === "purchase"
-              ? "Confirm purchase"
+              ? t("label.confirmPurchase")
               : "Bonus preview"
             : "Features"
         }
@@ -543,13 +547,13 @@ export function FeaturesPanel({
               {choice.spins} free spins · Starts at ×{choice.multiplier}
             </p>
             <div className="kk-confirm-cost">
-              <span>Purchase cost</span>
+              <span>{t("label.purchaseCost")}</span>
               <strong>{amount(quote.cost)}</strong>
               <small>LGC</small>
             </div>
             <dl className="kk-confirm-wallet">
               <div>
-                <dt>Base bet</dt>
+                <dt>{t("label.baseBet")}</dt>
                 <dd>{amount(stake)} LGC</dd>
               </div>
               <div>
@@ -584,7 +588,7 @@ export function FeaturesPanel({
               <p>{choice.detail}</p>
               <p className="kk-preview-note">
                 <Eye size={17} aria-hidden="true" />
-                Preview only · No bet is placed.
+                {t("feature.previewNoBet")}
               </p>
             </div>
           </div>
@@ -755,9 +759,10 @@ export function FeaturesPanel({
                   data-active={ante ? "true" : undefined}
                 >
                   <div className="kk-ante-copy">
-                    <h2>Ante bet</h2>
+                    <h2>{t("label.anteBet")}</h2>
                     <p>
-                      1.5× base bet · {amount(splashCost(stake, "ante"))} LGC /
+                      1.5× {t("unit.baseBet")} ·{" "}
+                      {amount(splashCost(stake, "ante"))} LGC /
                       spin
                     </p>
                   </div>
@@ -766,7 +771,7 @@ export function FeaturesPanel({
                     className="kk-ante-action"
                     aria-pressed={ante}
                     aria-label={
-                      ante ? "Deactivate ante bet" : "Activate ante bet"
+                      ante ? t("feature.anteAriaOn") : t("feature.anteAriaOff")
                     }
                     disabled={locked || anteRestriction.disabled}
                     title={anteRestriction.reason}
@@ -788,12 +793,12 @@ export function FeaturesPanel({
                 </div>
                 <div
                   className="kk-feature-bet-control"
-                  aria-label="Feature base bet"
+                  aria-label={t("bet.featureGroup")}
                 >
                   <button
                     type="button"
                     className="kk-icon-button"
-                    aria-label="Decrease feature base bet"
+                    aria-label={t("bet.featureDecrease")}
                     disabled={locked || stake === STAKES[0]}
                     onClick={() =>
                       onStake(
@@ -811,7 +816,7 @@ export function FeaturesPanel({
                     onClick={onEditBet}
                     disabled={locked}
                   >
-                    <span>Base bet</span>
+                    <span>{t("label.baseBet")}</span>
                     <b>
                       {amount(stake)} <small>LGC</small>
                     </b>
@@ -819,7 +824,7 @@ export function FeaturesPanel({
                   <button
                     type="button"
                     className="kk-icon-button"
-                    aria-label="Increase feature base bet"
+                    aria-label={t("bet.featureIncrease")}
                     disabled={locked || stake === STAKES.at(-1)}
                     onClick={() =>
                       onStake(
@@ -839,8 +844,8 @@ export function FeaturesPanel({
             </div>
             <p className="kk-gallery-note">
               {anteOnly
-                ? "Ante changes the cost of each spin. Your next spin uses the selected wager."
-                : "Purchases require confirmation. Preview cards place no bet."}
+                ? t("feature.anteNote")
+                : t("feature.galleryNote")}
             </p>
           </>
         )}
@@ -866,7 +871,7 @@ export function FeaturesPanel({
                 onBuy(choice.mode);
               }}
             >
-              Buy · {amount(quote.cost)} LGC
+              {t("feature.confirmBuy")(amount(quote.cost))}
             </button>
           )}
         </div>
@@ -954,7 +959,7 @@ export function SettingsPanel({
         </fieldset>
         <button type="button" className="kk-menu-link" onClick={onRules}>
           <BookOpen size={20} />
-          <span>Rules & paytable</span>
+          <span>{t("menu.rules")}</span>
           <ChevronRight size={18} />
         </button>
       </div>

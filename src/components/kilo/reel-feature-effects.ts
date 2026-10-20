@@ -28,6 +28,7 @@ import { AUTHORED_CLIPS } from './authored-clips';
 import { authoredFrameAt } from './authored-animation';
 import { paintImpact, paintEventTicket, clamp01, impactStamp } from './impact-language';
 import { vsArenaAt, connectionClock } from './vs-choreography';
+import { t } from '@/lib/kilo/copy';
 
 type Geometry = { gx: number; gy: number; cell: number; gap: number };
 type Callbacks = { award: (value: number) => void; state: (e: FeatureEvent) => void; reelsSettled?: Promise<void> };
@@ -851,7 +852,7 @@ export function createReelFeatureEffects(a: Adapter) {
           await a.collect({ grid: r.collectGrid, mult: 1, got: r.collection.credited, wilds: r.collectors });
           if (!live()) return; callbacks.award(r.collection.credited);
         }
-        if (r.finalSources.length) { cargo = []; paintHeld(); await pop(r.finalSources, r.finalCash, 'FINAL CASH'); }
+        if (r.finalSources.length) { cargo = []; paintHeld(); await pop(r.finalSources, r.finalCash, t('effect.finalCash')); }
         if (!live()) return;
         a.show(r.finalGrid);
         if (r.lines.length) await a.highlight(r.lines, l => { if (live()) callbacks.award(l.pay); });
@@ -933,10 +934,10 @@ export function createReelFeatureEffects(a: Adapter) {
           const beforeCap = p.value * p.multiplier;
           const credited = Math.min(beforeCap, Math.max(0, r.finalCash.credited - shownCredit));
           shownCredit += credited;
-          await pop([p], { beforeCap, credited }, `CASH ×${p.multiplier}`, false);
+          await pop([p], { beforeCap, credited }, t('effect.cashMultiplier')(String(p.multiplier)), false);
           if (!live()) return;
         }
-        cargo = []; paintHeld(); await pop(r.finalSources, r.finalCash, 'FINAL CASH');
+        cargo = []; paintHeld(); await pop(r.finalSources, r.finalCash, t('effect.finalCash'));
       }
     } finally {
       if (mine === generation && !disposed) { clear(fx); repaint = () => {}; }

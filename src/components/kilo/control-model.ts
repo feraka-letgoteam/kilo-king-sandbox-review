@@ -4,6 +4,7 @@ import {
   SPLASH_COST_MAX,
   type SplashMode,
 } from "@/lib/kilo/engine";
+import { t } from "@/lib/kilo/copy";
 
 export const STAKES = [100, 500, 1000, 2500, 10000] as const;
 export type SpinSpeed = "normal" | "turbo" | "super";
@@ -75,10 +76,10 @@ export function purchaseQuote(
   balance: number,
 ) {
   const cost = splashCost(stake, mode);
-  const reason = mode === 'chopper' ? 'Requires five scatters · not available to buy' : !splashStakeOk(stake, mode)
+  const reason = mode === 'chopper' ? t('quote.notAvailable') : !splashStakeOk(stake, mode)
     ? cost > SPLASH_COST_MAX
-      ? `Above the ${SPLASH_COST_MAX.toLocaleString("en-US")} purchase limit`
-      : "Outside the bet limits"
+      ? t("quote.aboveLimit")(SPLASH_COST_MAX.toLocaleString("en-US"))
+      : t("quote.outsideLimits")
     : cost > balance
       ? "Insufficient balance"
       : null;

@@ -1,6 +1,7 @@
 import { PAY, PAYLINES } from "@/lib/kilo/engine";
 import { ART, ART_ROOT } from "./art-map";
 import { CONTRABAND_ROOT, PACKAGE_META, V8_ROOT, V8_META } from "./fish-art";
+import { t } from "@/lib/kilo/copy";
 
 export const PAY_SYMBOLS = [
   {
@@ -14,7 +15,7 @@ export const PAY_SYMBOLS = [
     image: V8_ROOT + V8_META["sym-reel-v8"].file,
   },
   { id: "cuffs", name: "Bobber", image: ART_ROOT + ART.cuffs },
-  { id: "keys", name: "Cash roll", image: ART_ROOT + ART.keys },
+  { id: "keys", name: t("symbol.cashRoll"), image: ART_ROOT + ART.keys },
   {
     id: "brick",
     name: "Dime bags & kilos",
@@ -34,9 +35,9 @@ export function Paytable({ stake }: { stake: number }) {
       className="kk-info-section"
       aria-labelledby="kk-info-paytable-title"
     >
-      <h2 id="kk-info-paytable-title">Pay table</h2>
+      <h2 id="kk-info-paytable-title">{t("paytable.title")}</h2>
       <p className="kk-info-intro">
-        All wins below are multiples of the base bet. Current base bet:{" "}
+        {t("paytable.intro")}{" "}
         <strong>{stake.toLocaleString("en-US")}</strong>.
       </p>
       <div className="kk-info-symbols">
@@ -54,7 +55,7 @@ export function Paytable({ stake }: { stake: number }) {
               decoding="async"
             />
             <figcaption>{symbol.name}</figcaption>
-            <dl className="kk-info-pays" aria-label={`${symbol.name} payouts`}>
+            <dl className="kk-info-pays" aria-label={t("paytable.symbolAria")(symbol.name)}>
               {([5, 4, 3] as const).map((count) => (
                 <div key={count} data-match={count}>
                   <dt>
@@ -113,16 +114,8 @@ export function Paylines() {
           Kilo King has 5 reels, 3 rows and 10 fixed paylines. All paylines are
           active on every spin.
         </p>
-        <p>
-          Three or more matching symbols pay on consecutive reels, starting from
-          the leftmost reel. Only the longest matching combination pays on each
-          line. Wins on different lines are added together.
-        </p>
-        <p>
-          Line wins and scatter wins are separate. Package line wins and
-          cash collections are also separate awards. Collection multipliers do
-          not multiply line wins.
-        </p>
+        <p>{t("paylines.howWinsPay")}</p>
+        <p>{t("paylines.separate")}</p>
       </div>
     </section>
   );

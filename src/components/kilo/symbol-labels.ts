@@ -1,3 +1,4 @@
+import { t } from "@/lib/kilo/copy";
 /** Presentation names only. Recorded symbol IDs and payout tables stay intact. */
 export const SYMBOL_LABELS = {
   "10": "10",
@@ -6,7 +7,7 @@ export const SYMBOL_LABELS = {
   K: "K",
   A: "A",
   cuffs: "Bobber",
-  keys: "Cash roll",
+  keys: t("symbol.cashRoll"),
   lamp: "Gold reel",
   duffel: "Tackle case",
   brick: "Contraband",

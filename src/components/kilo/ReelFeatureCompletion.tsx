@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { FEATURE_ART } from './feature-presentation';
 import { AuthoredArt } from './AuthoredArt';
 import { ImpactPrint } from './ImpactPrint';
+import { t } from '@/lib/kilo/copy';
 type Props = { name: string; feature?: string; payout: number; cost: number | null; maxed: boolean; reducedMotion?: boolean; onContinue: () => void };
 const money = (n: number) => Math.round(n).toLocaleString('en-US');
 /** A compact result rail inside the existing board, never a replacement scene. */
@@ -22,7 +23,7 @@ export function ReelFeatureCompletion({ name, feature, payout, cost, maxed, redu
   const emblem = FEATURE_ART[feature as keyof typeof FEATURE_ART] ?? FEATURE_ART.dock;
   return <section ref={ref} className="kk-reel-completion" data-reduced={reducedMotion} data-feature={feature} data-result={payout ? 'win' : 'loss'} style={position} role="dialog" aria-label={`${name} complete`} aria-modal="false" data-testid="feature-summary">
     {payout>=(cost??1)&&<ImpactPrint/>}
-    <div><p>{(feature==='yacht'||feature==='yacht25')?<AuthoredArt className="kk-completion-crest" clipKey="completion" fallback="/kilo-v79/surfaces/completion.webp" duration={640} reduced={reducedMotion} active={payout>=(cost??1)}/>:<img src={emblem} alt=""/>}{maxed ? 'Maximum win' : payout ? `${name} complete` : 'No win'}</p><strong>{money(payout)}</strong>{cost != null && <small>Purchase cost {money(cost)}</small>}</div>
+    <div><p>{(feature==='yacht'||feature==='yacht25')?<AuthoredArt className="kk-completion-crest" clipKey="completion" fallback="/kilo-v79/surfaces/completion.webp" duration={640} reduced={reducedMotion} active={payout>=(cost??1)}/>:<img src={emblem} alt=""/>}{maxed ? 'Maximum win' : payout ? `${name} complete` : 'No win'}</p><strong>{money(payout)}</strong>{cost != null && <small>{t('label.purchaseCost')} {money(cost)}</small>}</div>
     <button ref={button} onClick={onContinue}>Continue</button>
   </section>;
 }

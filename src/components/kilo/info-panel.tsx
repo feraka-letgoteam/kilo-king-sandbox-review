@@ -29,6 +29,7 @@ import { FEATURES } from "./feature-catalog";
 import { Paytable, Paylines } from "./paytable";
 import { FeatureMark } from "./StageSurround";
 import "./info-panel.css";
+import { t } from "@/lib/kilo/copy";
 
 const amount = (value: number) => value.toLocaleString("en-US");
 const MODES: { id: SplashMode; title: string; description: string }[] = [
@@ -40,19 +41,19 @@ const MODES: { id: SplashMode; title: string; description: string }[] = [
   },
   {
     id: "ante",
-    title: "Ante bet",
+    title: t("label.anteBet"),
     description:
-      "One spin with increased scatter frequency. Turn Ante On or Off on the Features page. Payouts still use the base bet.",
+      t("info.modeDesc.ante"),
   },
   {
     id: "buy",
-    title: "Dockside Catch buy",
+    title: t("info.modeTitle.buy"),
     description:
-      "Direct entry with 10 free spins, starting at ×1. No base-game line or scatter award is paid on entry.",
+      t("info.modeDesc.buy"),
   },
-  {id:"yacht",title:"Yacht Stash buy",description:"15 free spins. Every VS becomes a sticky wild reel. Its duel multiplier remains through the final spin. Wins use paylines only."},
-  {id:"mystery",title:"Mystery Bonus buy",description:"One purchase randomly awards Dockside Catch, Yacht Stash or Super Yacht Stash. Selection odds appear in the confirmation. Super Yacht opens with a guaranteed winning ×25 VS on reel one in spin one."},
-  {id:"getaway",title:"Max spins · The Getaway",description:"Activate the mode at no charge, then press Spin for each paid attempt. Each spin costs 1,000× the base bet and returns exactly 25,000× or zero. The giant speedboat advances left to right across five positions, pausing at each reached position. A partial boat pays zero and stays in place until the next spin; a full boat pays the max win. No free spins or partial prize. Exit the mode between spins."},
+  {id:"yacht",title:t("info.modeTitle.yacht"),description:"15 free spins. Every VS becomes a sticky wild reel. Its duel multiplier remains through the final spin. Wins use paylines only."},
+  {id:"mystery",title:t("info.modeTitle.mystery"),description:t("info.modeDesc.mystery")},
+  {id:"getaway",title:"Max spins · The Getaway",description:t("info.modeDesc.getaway")},
 ];
 
 function FeatureRow({
@@ -109,7 +110,7 @@ export function InfoPanel({
       <div
         className="kk-info-scroll"
         role="document"
-        aria-label="Kilo King paytable, features and game information"
+        aria-label={t("info.documentAria")}
         tabIndex={0}
       >
         <div className="kk-info-content">
@@ -121,42 +122,21 @@ export function InfoPanel({
           >
             <h2 id="kk-info-features-title">Features</h2>
             <FeatureRow title="Fisherman wild" image={ART_ROOT + ART.splash}>
-              <p>
-                In the base game and Dockside Catch, the fisherman substitutes for
-                every paying line symbol, but never for a KING scatter. A full
-                line of fishermen pays the tackle-case award.
-              </p>
-              <p>
-                In Dockside Catch, each fisherman collects every contraband package at the
-                current collection multiplier. Multiple fishermen collect the
-                same packages separately. A fisherman without a contraband package
-                pays no collection, but still advances the meter. In the base game, an occasional Dockside Deal adds a collector that gathers visible cargo at ×1. It does not advance the bonus meter.
-              </p>
-              <p>
-                On eligible non-winning base boards with at least two packages and no
-                scatters or fisherman, a Catch Respin can hold all existing packages
-                for one free respin of the other positions. New packages and fishermen
-                can land. Every fisherman collects all final packages once at ×1;
-                without a fisherman, packages do not pay. Only the final board is paid,
-                and the respin does not charge another bet or trigger free spins.
-              </p>
+              <p>{t("info.wild.substitutes")}</p>
+              <p>{t("info.wild.collects")}</p>
+              <p>{t("info.wild.respin")}</p>
             </FeatureRow>
             <FeatureRow
               title="Dime bags & kilos"
               image={CONTRABAND_ROOT + PACKAGE_META["package-trophy"].file}
             >
-              <p>
-                Dime bags and wrapped kilos show cash values based on your base
-                bet. Fishermen collect them during Dockside Catch and on eligible
-                base-game collector landings. They are not scatters. The separate Cash roll symbol pays
-                ordinary line wins.
-              </p>
+              <p>{t("info.packages.values")}</p>
               <p>
                 Obtainable values:{" "}
                 <span className="kk-info-numeric">
                   {MONEY_LADDER.map((value) => `${amount(value)}×`).join(", ")}
                 </span>{" "}
-                the base bet.
+                the {t("unit.baseBet")}.
               </p>
               <p>
                 Collection = total package value × number of fishermen × current
@@ -167,25 +147,16 @@ export function InfoPanel({
               title="KING scatter"
               image={CONTRABAND_ROOT + SCATTER_KING.file}
             >
-              <p>
-                The KING crown is the only scatter. Each reel can count once.
-                Scatter wins pay anywhere on the final base-game screen,
-                independently of paylines.
-              </p>
+              <p>{t("info.scatter.anywhere")}</p>
               <dl className="kk-info-scatter-awards">
                 {[2, 3, 4, 5].map((count) => (
                   <div key={count}>
                     <dt>{count} scatters</dt>
-                    <dd>{SCATTER_PAY[count]}× base bet</dd>
+                    <dd>{SCATTER_PAY[count]}× {t("unit.baseBet")}</dd>
                   </div>
                 ))}
               </dl>
-              <p>
-                Exactly two scatter reels lock while the other three reels
-                respin once. The final screen determines the line wins, scatter
-                award and any free spins. Purchased features do not pay scatter
-                awards.
-              </p>
+              <p>{t("info.scatter.respin")}</p>
             </FeatureRow>
             <FeatureRow
               title="Free spins"
@@ -206,9 +177,7 @@ export function InfoPanel({
                     ),
                 )}
               </div>
-              <p>
-                Features use the triggering base bet with no extra charge per spin. Three scatters start Dockside Catch (10 spins); four start Yacht Stash (15 spins); five start Super Yacht Stash (15 spins). The five-scatter feature guarantees a winning ×25 VS on reel one in spin one. Dockside Catch and Yacht Stash have direct buys; Super Yacht is available through five scatters or a Mystery Bonus buy. Yacht uses the existing ten paylines with sticky VS wilds. The Getaway has a single binary result.
-              </p>
+              <p>{t("info.freeSpins")}</p>
             </FeatureRow>
             <FeatureRow
               title="Collector meter & retriggers"
@@ -241,9 +210,9 @@ export function InfoPanel({
             </FeatureRow>
             {FEATURES.filter(feature=>feature.kind!=='preview'&&feature.id!=='scatter-3').map(feature=><FeatureRow key={feature.id} title={feature.title} image={feature.art}><p>{feature.detail}</p></FeatureRow>)}
             <FeatureRow title="VS progression & multipliers" image={CONTRABAND_ROOT + PACKAGE_META["package-king"].file}>
-              <p>Yacht starts with an opening ×2 VS in the first two spins. Super Yacht instead guarantees a winning ×25 VS on reel one in the very first spin; King or Cop can win it, and the ×25 stays sticky until completion. That ×25 is a wild multiplier, not a guaranteed 25× payout. Further recorded encounters develop during the middle and closing spins, unless the round has already reached its payout limit. Every winning ×2, ×3, ×4, ×5, ×6, ×8 or ×10 reel locks through the feature. King and Cop never combine. Adjacent same-side reels form one continuous wild: ×3 beside ×4 becomes ×12. Each group product is applied once to a winning connection; separate participating groups add together. This feature has no cash collection.</p>
-              <p>The Yacht purchase payout limit remains 18,000× base bet. A natural Yacht or Super Yacht stays inside its base or Ante round’s 25,000× total payout limit. Super Yacht from Mystery also has a 25,000× limit. Mystery-selected Dockside and Yacht retain their existing 25,000× and 18,000× limits respectively. The local candidate uses a weighted outcome catalogue with approximately 95.5% return against the 200× purchase price; it is not a certified or published Stake Engine return. All feature state resets at the end of the paid round.</p>
-              <p>The Getaway buys exactly one spin for 1,000× base bet. Its only payouts are 25,000× or zero; no second gamble is offered. In this local candidate distribution the max-win probability is 3.82% and loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Stake Engine return.</p>
+              <p>{t("info.vs.progression")}</p>
+              <p>{t("info.vs.limits")}</p>
+              <p>{t("info.vs.getaway")}</p>
             </FeatureRow>
             <FeatureRow title="Hook" image={ART_ROOT + TOOL_PIVOTS.hook.file}>
               <p>
@@ -263,7 +232,7 @@ export function InfoPanel({
                 <span className="kk-info-numeric">
                   2×, 5×, 10×, 15×, 20×, 25×, 50×, 100× or 200×
                 </span>{" "}
-                the base bet.
+                the {t("unit.baseBet")}.
               </p>
             </FeatureRow>
             <FeatureRow
@@ -282,19 +251,20 @@ export function InfoPanel({
             className="kk-info-section"
             aria-labelledby="kk-info-modes-title"
           >
-            <h2 id="kk-info-modes-title">Bet modes</h2>
+            <h2 id="kk-info-modes-title">{t("info.modes.title")}</h2>
             <div className="kk-info-modes">
               {MODES.map((mode) => (
                 <article key={mode.id} data-mode={mode.id}>
                   <h3>{mode.title}</h3>
                   <p className="kk-info-mode-cost">
-                    <strong>{splashCost(100, mode.id) / 100}×</strong> base bet
-                    · <strong>{amount(splashCost(stake, mode.id))}</strong> at
-                    this bet
+                    <strong>{splashCost(100, mode.id) / 100}×</strong>{" "}
+                    {t("unit.baseBet")} ·{" "}
+                    <strong>{amount(splashCost(stake, mode.id))}</strong>{" "}
+                    {t("info.modes.atThisBet")}
                   </p>
                   <p>{mode.description}</p>
                   <p className="kk-info-mode-limit">
-                    Maximum round payout at this bet:{" "}
+                    {t("info.modes.maxPayout")}{" "}
                     <strong>{amount(splashRoundCap(stake, mode.id))}</strong>.
                   </p>
                 </article>
@@ -302,14 +272,11 @@ export function InfoPanel({
             </div>
             <div className="kk-info-centered">
               <p>
-                Purchases require confirmation of the full charge. The maximum
-                single-round charge is{" "}
-                <strong>{amount(SPLASH_COST_MAX)}</strong>. A purchase above
-                that limit, or above your available balance, is unavailable.
+                {t("info.modes.confirm")}{" "}
+                <strong>{amount(SPLASH_COST_MAX)}</strong>
+                {t("info.modes.aboveLimit")}
               </p>
-              <p>
-                Mystery Bonus is an artwork preview in development and cannot currently be played or purchased. The Getaway is the playable Max spins mode. Activating it does not charge the balance; each press of Spin buys one attempt at the displayed cost.
-              </p>
+              <p>{t("info.modes.mysteryNote")}</p>
             </div>
           </section>
           <section
@@ -338,19 +305,24 @@ export function InfoPanel({
               <h3>Maximum win</h3>
               <p>
                 The overall maximum total round payout is{" "}
-                <strong>{amount(SPLASH_MAX_MULT)}× the base bet</strong>.
-                This is based on the base bet, not the feature purchase price.
+                <strong>
+                  {amount(SPLASH_MAX_MULT)}
+                  {t("info.max.theBaseBet")}
+                </strong>
+                . {t("info.max.basis")}
               </p>
               <dl className="kk-info-rtp">
                 {MODES.map((mode) => (
                   <div key={mode.id}>
                     <dt>{mode.title}</dt>
-                    <dd>{amount(SPLASH_MODE_MAX_MULT[mode.id])}× base bet</dd>
+                    <dd>
+                      {amount(SPLASH_MODE_MAX_MULT[mode.id])}× {t("unit.baseBet")}
+                    </dd>
                   </div>
                 ))}
               </dl>
               <p>
-                At your current base bet of <strong>{amount(stake)}</strong>,
+                {t("info.max.atCurrent")} <strong>{amount(stake)}</strong>,
                 the overall maximum total round payout is <strong>{amount(cap)}</strong>
                 . This includes all line wins, scatter wins and collections.
                 Reaching the mode's cap ends the round, including remaining free spins,
@@ -363,7 +335,7 @@ export function InfoPanel({
                   <dd>{amount(round.line)}</dd>
                 </div>
                 <div>
-                  <dt>Cash collections</dt>
+                  <dt>{t("label.cashCollections")}</dt>
                   <dd>{amount(round.collect)}</dd>
                 </div>
                 <div>
@@ -375,16 +347,14 @@ export function InfoPanel({
                 Cumulative figures for the displayed round.
               </p>
               <h3>Sandbox operation</h3>
-              <p>
-                This private preview uses a local test balance. No real-money
-                wallet or Stake Engine game server is connected. Animations and
-                spin-speed settings do not alter the recorded round result.
-              </p>
+              <p>{t("info.sandbox")}</p>
               <p>
                 The game display is illustrative, not a physical device. Invalid
                 or malfunctioning test rounds must not be treated as valid
                 awards.
               </p>
+              <h3>{t("info.disclaimerTitle")}</h3>
+              <p data-testid="general-disclaimer">{t("info.disclaimer")}</p>
             </div>
           </section>
           <section
@@ -398,32 +368,21 @@ export function InfoPanel({
                   <RotateCw aria-hidden="true" />
                   Spin / Spacebar
                 </dt>
-                <dd>
-                  Starts one round at the selected wager. During presentation,
-                  the same control can skip ahead without changing the result.
-                </dd>
+                <dd>{t("info.controls.spin")}</dd>
               </div>
               <div>
                 <dt>
                   <ChevronDown aria-hidden="true" />
-                  Bet
+                  {t("label.betShort")}
                 </dt>
-                <dd>
-                  Open the bet selector or use its steppers. The readout
-                  includes the Ante charge when enabled. Ante On / Off is on the
-                  Features page.
-                </dd>
+                <dd>{t("info.controls.bet")}</dd>
               </div>
               <div>
                 <dt>
                   <RefreshCw aria-hidden="true" />
                   Auto
                 </dt>
-                <dd>
-                  Choose a finite number of spins and confirm to start. Auto
-                  stops on a bonus or an unavailable next bet. Stop cancels the
-                  remaining queue; the current round completes.
-                </dd>
+                <dd>{t("info.controls.auto")}</dd>
               </div>
               <div>
                 <dt>
@@ -440,11 +399,7 @@ export function InfoPanel({
                   <FeatureMark />
                   Features
                 </dt>
-                <dd>
-                  The crown-and-hook control opens the feature catalogue and
-                  Ante setting. Review the price and confirm before buying a
-                  feature.
-                </dd>
+                <dd>{t("info.controls.features")}</dd>
               </div>
               <div>
                 <dt>
