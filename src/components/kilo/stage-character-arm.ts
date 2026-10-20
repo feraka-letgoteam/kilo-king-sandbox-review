@@ -27,6 +27,14 @@ export const KING_ARM_ASSETS = {
   headShouting: `${KING_PARTS}head-shouting.webp`,
   headLaughing: `${KING_PARTS}head-laughing.webp`,
 } as const;
+/** Which v88 part groups the painter uses. All off = the original King as at
+ * 94f4c98 (v82 body, v81 rod socket and left arm): Feraka judged the jointed
+ * cast arm and the pieced body worse than the original (v88 batch 4 arm check).
+ * To try redrawn parts later, overwrite the PNG/WebP files at the KING_ARM_ASSETS
+ * paths (pivots in KING_PARTS_RIG / pivots.json) and switch a group back on:
+ * body = hips/legs/torso + weight shift, castArm = jointed right arm during the
+ * extended cast frames, throwHands = backswing and lit-dynamite left hands. */
+export const KING_PARTS_USE:{body:boolean;castArm:boolean;throwHands:boolean}={body:false,castArm:false,throwHands:false};
 export type KingArmImages = Record<keyof typeof KING_ARM_ASSETS, CanvasImageSource>;
 export type KingToolAction = { kind:'cast'|'throw'; progress:number };
 export type KingToolEvent = KingToolAction & { hand?:Point;rodTip?:Point;releaseHand?:Point; handSize?:number };
@@ -76,7 +84,7 @@ const plus=(p:Point,v:Point)=>({x:p.x+v.x,y:p.y+v.y});
 /** Weight shift: hips and torso slide together over planted boots. Idle sway
  * is a few logical pixels; reactions borrow the existing brace channel. */
 export function kingHipShift(frame:StageKingFrame,reduced=false){
-  if(reduced)return{x:0,y:0,tilt:0};
+  if(reduced||!KING_PARTS_USE.body)return{x:0,y:0,tilt:0};
   const x=Math.max(-7,Math.min(7,frame.sway*4+frame.brace*.9));
   const y=Math.min(4,Math.abs(frame.brace)*.6);
   return{x,y,tilt:-x*.4*deg};
@@ -99,7 +107,7 @@ export function kingSocketRodPose(frame:StageKingFrame,tool:KingToolAction|null=
  * as the pull starts. Both swaps happen on fast motion, at similar rod angles. */
 export const KING_CAST_CHAIN={from:.27,to:.75} as const;
 export const kingCastChainActive=(tool:KingToolAction|null,reduced=false)=>
-  !reduced&&tool?.kind==='cast'&&tool.progress>=KING_CAST_CHAIN.from&&tool.progress<KING_CAST_CHAIN.to;
+  KING_PARTS_USE.castArm&&!reduced&&tool?.kind==='cast'&&tool.progress>=KING_CAST_CHAIN.from&&tool.progress<KING_CAST_CHAIN.to;
 /** Extended pose: forearm reaching forward-up, rod up-left. Angles are bone
  * directions in degrees (screen, y down); the beats are offsets from it. */
 const ARM_REST={upper:95,forearm:-142,rod:-122};
@@ -143,7 +151,7 @@ export function kingLeftArmPose(frame:StageKingFrame,tool:KingToolAction|null=nu
   // the jointed chain makes the extended cast (that rod butt sits by the fist).
   const rod=kingSocketRodPose(frame,tool,reduced),restGrip=rod.butt;
   const wristTarget={x:restGrip.x+24*Math.cos(rod.angle),y:restGrip.y+24*Math.sin(rod.angle)-3};
-  if(tool?.kind==='cast'&&!reduced){
+  if(KING_PARTS_USE.castArm&&tool?.kind==='cast'&&!reduced){
     const p=tool.progress,away=smooth((p-.17)/.10)*(1-smooth((p-.75)/.12));
     wristTarget.x+=(shoulder.x+18-wristTarget.x)*away;wristTarget.y+=(shoulder.y+186-wristTarget.y)*away;
   }
@@ -178,7 +186,7 @@ export function kingLeftArmPose(frame:StageKingFrame,tool:KingToolAction|null=nu
   }
   const elbow=offset(shoulder,upper,l),wrist=offset(elbow,lower,f),hand=offset(wrist,handAngle,KING_LEFT_ARM.handLength);
   return {shoulder,elbow,wrist,hand,upper,lower,handAngle,open,
-    holdingDynamite:kingLeftHandDrawing(tool,0,reduced)==='dynamite'};
+    holdingDynamite:KING_PARTS_USE.throwHands?kingLeftHandDrawing(tool,0,reduced)==='dynamite':tool?.kind==='throw'&&tool.progress<KING_THROW_RELEASE&&!reduced};
 }
 
 function bone(ctx:CanvasRenderingContext2D,image:CanvasImageSource,start:Point,end:Point,pivot:Point,tip:Point){
@@ -193,6 +201,7 @@ function bone(ctx:CanvasRenderingContext2D,image:CanvasImageSource,start:Point,e
 export const KING_DYNAMITE_STICK=`${KING_PARTS}dynamite-stick.webp`;
 export const KING_THROW_HANDS={reach:.04,backswing:.18,grip:.24,dynamite:KING_THROW_RELEASE,release:.85} as const;
 export function kingLeftHandDrawing(tool:KingToolAction|null,open=0,reduced=false):'backswing'|'grip'|'dynamite'|'release'{
+  if(!KING_PARTS_USE.throwHands)return tool?.kind==='throw'?(tool.progress>=KING_THROW_RELEASE&&tool.progress<.85?'release':'grip'):open>.5?'release':'grip';
   if(tool?.kind!=='throw'||reduced)return open>.5?'release':'grip';
   const p=tool.progress,h=KING_THROW_HANDS;
   return p<h.reach?'grip':p<h.backswing?'backswing':p<h.grip?'grip':p<h.dynamite?'dynamite':p<h.release?'release':'grip';

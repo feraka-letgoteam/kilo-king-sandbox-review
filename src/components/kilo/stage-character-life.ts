@@ -1,6 +1,6 @@
 import definition from '../../../public/kilo-v79/characters/king-stage.json';
 import { paintKingMesh, kingMeshPoint } from './stage-character-mesh';
-import { KING_ARM_ASSETS, KING_STAGE_CANVAS, curve as toolCurve, kingHipShift, paintKingLeftArm, paintKingLowerBody, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
+import { KING_ARM_ASSETS, KING_PARTS_USE, KING_STAGE_CANVAS, curve as toolCurve, kingHipShift, paintKingLeftArm, paintKingLowerBody, paintKingRightRod, type KingArmImages, type KingToolAction } from './stage-character-arm';
 
 export const STAGE_KING = definition;
 export const STAGE_KING_URLS = [definition.image, definition.blink.image, definition.reaction.image, ...Object.values(KING_ARM_ASSETS)] as const;
@@ -165,7 +165,7 @@ export function paintStageKing(ctx:CanvasRenderingContext2D,source:CanvasImageSo
   ctx.setTransform(1.5,0,0,1.5,padX*1.5,padY*1.5);ctx.clearRect(-padX,-padY,arms?KING_STAGE_CANVAS.width:512,arms?KING_STAGE_CANVAS.height:768);
   ctx.fillStyle='rgba(4,14,20,.25)';ctx.beginPath();ctx.ellipse(333,756,171,7,0,0,Math.PI*2);ctx.fill();
   const actual=kingToolFrame(frame,tool,still);
-  const jointed=!!arms?.torso;
+  const jointed=KING_PARTS_USE.body&&!!arms?.torso;
   const torso=jointed?arms!.torso:arms?.heads?arms.body:source;
   // v88: hips and legs are separate pieces; the torso drawing ends at the vest hem.
   const hip=jointed?paintKingLowerBody(ctx,arms!,actual,still):{x:0,y:0};
