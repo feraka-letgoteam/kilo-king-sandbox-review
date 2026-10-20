@@ -1,5 +1,5 @@
 import { Container, Graphics, Sprite, type Text, type Ticker } from 'pixi.js';
-import { createWinNumeral, connectedNumberScale } from './win-type';
+import { createWinNumeral, connectedNumberScale, WIN_TYPE } from './win-type';
 
 /**
  * Reel-feel presentation pass (w Bo). Pure presentation: nothing here reads
@@ -28,10 +28,21 @@ export const REEL_FEEL = {
   amountCell: 0.19,
   amountMinCss: 12,
   amountDrop: 0.33,
-  /** Dark outlined plate behind each amount (fill alpha, padding in ems). */
-  plateAlpha: 0.84,
-  platePadX: 0.32,
-  platePadY: 0.08,
+  /** Slim full-radius pill behind each amount: fill alpha, horizontal
+   * padding and total height in ems (0.7x the 0003 plate), a mint edge so it
+   * never reads as a gold-edged fish-value plaque, and the type colour. */
+  plateAlpha: 0.8,
+  platePadX: 0.36,
+  plateHeight: 0.81,
+  plateFill: 0x041a1d,
+  plateEdge: 0x3cf2c8,
+  plateEdgeAlpha: 0.95,
+  amountInk: 0xfffbea,
+  /** Smaller centre total (Kilo Win numeral, outlined, no plate) shown with
+   * the on-symbol amounts: size as a fraction of the cell and a CSS-px floor.
+   * Placed at whichever low/between-row slot covers the fewest winners. */
+  totalCell: 0.29,
+  totalMinCss: 14,
   /** Stamp-in length for the amounts (ms); static with reduced motion. */
   amountMs: 260,
 } as const;
@@ -60,6 +71,47 @@ export function amountSpots<L extends { pay: number }>(
     hit.value += line.pay; out.set(key, hit);
   }
   return [...out.values()];
+}
+
+type Box = { x: number; y: number; w: number; h: number };
+const overlap = (a: Box, b: Box) =>
+  Math.max(0, Math.min(a.x + a.w / 2, b.x + b.w / 2) - Math.max(a.x - a.w / 2, b.x - b.w / 2))
+  * Math.max(0, Math.min(a.y + a.h / 2, b.y + b.h / 2) - Math.max(a.y - a.h / 2, b.y - b.h / 2));
+
+/**
+ * Where the centre total sits: candidates on the grid's bottom edge and on
+ * the two row seams, at the grid centre, each reel gap and each reel centre.
+ * The chosen slot covers the least winning-symbol area (and none of the
+ * on-symbol amounts if it can), then the least symbol area overall, then
+ * stays nearest the low centre. Pure geometry; deterministic.
+ */
+export function totalSpot(
+  center: (reel: number, row: number) => { x: number; y: number },
+  cell: number,
+  winners: ReadonlySet<string>,
+  tags: readonly Box[],
+  w: number,
+  h: number,
+) {
+  const left = center(0, 0).x - cell / 2, right = center(4, 0).x + cell / 2, mid = (left + right) / 2;
+  const top = center(0, 0).y - cell / 2, bottom = center(0, 2).y + cell / 2;
+  const xs = [mid];
+  for (let r = 0; r < 5; r++) { xs.push(center(r, 0).x); if (r < 4) xs.push((center(r, 0).x + center(r + 1, 0).x) / 2); }
+  const ys = [bottom, (center(0, 1).y + center(0, 2).y) / 2, (center(0, 0).y + center(0, 1).y) / 2];
+  let best = { x: mid, y: bottom, score: Infinity, win: 0 };
+  ys.forEach((y0, yi) => xs.forEach((x0) => {
+    const x = Math.max(left + w / 2, Math.min(right - w / 2, x0));
+    const y = Math.max(top + h / 2, y0), me = { x, y, w, h };
+    let win = 0, any = 0, tag = 0;
+    for (let reel = 0; reel < 5; reel++) for (let row = 0; row < 3; row++) {
+      const c = center(reel, row), a = overlap(me, { x: c.x, y: c.y, w: cell, h: cell });
+      any += a; if (winners.has(`${reel}:${row}`)) win += a;
+    }
+    for (const t of tags) tag += overlap(me, t);
+    const score = (win + tag) * 50 + any + Math.abs(x - mid) * h * 0.02 + yi * w * h * 0.05;
+    if (score < best.score) best = { x, y, score, win };
+  }));
+  return { x: best.x, y: best.y, coversWinners: best.win > 1e-6 };
 }
 
 const unit = (n: number) => Math.max(0, Math.min(1, n));
@@ -140,26 +192,39 @@ export function createWinFeel(host: WinFeelHost) {
   let active: { winners: Set<string>; t0: number; popAt: number | null } | null = null;
   const touched = new Set<Container>();
   let tags: { root: Container; plate: Graphics; text: Text; reel: number; row: number; at: number }[] = [];
+  let total: { text: Text; at: number } | null = null;
   const paintTags = (now: number, reduced: boolean) => {
-    const cell = host.cell(), size = Math.max(REEL_FEEL.amountMinCss / Math.max(.01, host.cssScale()), cell * REEL_FEEL.amountCell);
+    const cell = host.cell(), css = Math.max(.01, host.cssScale());
+    const size = Math.max(REEL_FEEL.amountMinCss / css, cell * REEL_FEEL.amountCell);
     const { left, right } = host.gridX();
     for (const tag of tags) {
       const n = tag.text;
       if (n.destroyed || tag.root.destroyed) continue;
       if (n.style.fontSize !== size) {
         n.style.fontSize = size;
-        n.style.stroke = { color: 0x28130c, width: Math.max(2, size * .12), join: 'round' };
-        // A small dark plate keeps the amount readable over any drawing and
-        // stops it reading as part of the symbol (motion check items 6-7).
-        const w = n.width + size * REEL_FEEL.platePadX * 2, h = size * (1 + REEL_FEEL.platePadY * 2);
+        n.style.stroke = { color: 0x0b1f1f, width: Math.max(2, size * .1), join: 'round' };
+        // A slim mint-edged pill keeps the amount readable over any drawing
+        // and reads differently from the gold-edged fish-value plaque.
+        const w = n.width + size * REEL_FEEL.platePadX * 2, h = size * REEL_FEEL.plateHeight;
         tag.plate.clear().roundRect(-w / 2, -h / 2, w, h, h / 2)
-          .fill({ color: 0x07131a, alpha: REEL_FEEL.plateAlpha })
-          .stroke({ color: 0xe7c56a, alpha: 0.9, width: Math.max(1, size * .07) });
+          .fill({ color: REEL_FEEL.plateFill, alpha: REEL_FEEL.plateAlpha })
+          .stroke({ color: REEL_FEEL.plateEdge, alpha: REEL_FEEL.plateEdgeAlpha, width: Math.max(1, size * .07) });
       }
       const c = host.center(tag.reel, tag.row), half = tag.plate.width / 2 + 1;
       // Bottom of the winning cell, clamped inside the grid.
       tag.root.position.set(Math.max(left + half, Math.min(right - half, c.x)), c.y + cell * REEL_FEEL.amountDrop);
       tag.root.scale.set(reduced ? 1 : connectedNumberScale(unit((now - tag.at) / REEL_FEEL.amountMs)));
+    }
+    if (total && !total.text.destroyed && active) {
+      const n = total.text, tsize = Math.max(REEL_FEEL.totalMinCss / css, cell * REEL_FEEL.totalCell);
+      if (n.style.fontSize !== tsize) {
+        n.style.fontSize = tsize;
+        n.style.stroke = { color: WIN_TYPE.ink, width: Math.max(2, tsize * .07), join: 'round' };
+      }
+      const boxes = tags.filter(t => !t.root.destroyed).map(t => ({ x: t.root.x, y: t.root.y, w: t.plate.width, h: t.plate.height }));
+      const spot = totalSpot(host.center, cell, active.winners, boxes, n.width + 4, n.height * .8);
+      n.position.set(spot.x, spot.y);
+      n.scale.set(reduced ? 1 : connectedNumberScale(unit((now - total.at) / REEL_FEEL.amountMs)));
     }
   };
   const homes = new WeakMap<Container, Home>();
@@ -234,7 +299,7 @@ export function createWinFeel(host: WinFeelHost) {
       const parent = host.labels(), now = performance.now();
       for (const spot of spots) {
         const root = new Container(), plate = new Graphics();
-        const text = createWinNumeral(host.format(spot.value), 16, 0xfff1c6);
+        const text = createWinNumeral(host.format(spot.value), 16, REEL_FEEL.amountInk);
         text.style.dropShadow = false;
         root.label = 'kk-symbol-amount'; root.eventMode = 'none';
         root.addChild(plate, text); parent.addChild(root);
@@ -242,7 +307,19 @@ export function createWinFeel(host: WinFeelHost) {
       }
       paintTags(now, host.pace().reduced);
     },
+    /** Smaller centre total alongside the on-symbol amounts (team spec). */
+    total(value: number) {
+      if (!active) return;
+      if (total && !total.text.destroyed) total.text.destroy();
+      const text = createWinNumeral(host.format(value), 16);
+      text.label = 'kk-centre-total'; text.eventMode = 'none';
+      host.labels().addChild(text);
+      total = { text, at: performance.now() };
+      paintTags(total.at, host.pace().reduced);
+    },
     clear() {
+      if (total && !total.text.destroyed) total.text.destroy();
+      total = null;
       for (const tag of tags) if (!tag.root.destroyed) tag.root.destroy({ children: true });
       tags = [];
       if (active) host.ticker.remove(frame);

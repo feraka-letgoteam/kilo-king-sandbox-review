@@ -2113,8 +2113,10 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         const clock=connectionClock(lines.length,total>=stake*5);
         await tween(reduced?0:turbo?160:clock.trace,t=>{trace=t;paint();});
         if(stopped)return;trace=1;publish();winFeel.pop();
-        // Amounts sit on the winning symbols; the bar's WIN keeps the total.
+        // Amounts sit on the winning symbols, with a smaller centre total placed
+        // off the winners; the bar's WIN count-up is unchanged.
         winFeel.amounts(amountSpots(lines,winningCells,(r,row)=>board[r]?.[row]?.s));
+        winFeel.total(total);
         if(clock.read&&!reduced)await holdReadable(turbo?90:clock.read);
         if(stopped)return;
         await Promise.all([
