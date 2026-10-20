@@ -36,8 +36,7 @@ const MODES: { id: SplashMode; title: string; description: string }[] = [
   {
     id: "spin",
     title: "Base game",
-    description:
-      "One spin on all 10 paylines. Three, four or five KING scatters trigger free spins.",
+    description: t("info.modeDesc.base"),
   },
   {
     id: "ante",
@@ -51,7 +50,7 @@ const MODES: { id: SplashMode; title: string; description: string }[] = [
     description:
       t("info.modeDesc.buy"),
   },
-  {id:"yacht",title:t("info.modeTitle.yacht"),description:"15 free spins. Every VS becomes a sticky wild reel. Its duel multiplier remains through the final spin. Wins use paylines only."},
+  {id:"yacht",title:t("info.modeTitle.yacht"),description:t("info.modeDesc.yacht")},
   {id:"mystery",title:t("info.modeTitle.mystery"),description:t("info.modeDesc.mystery")},
   {id:"getaway",title:"Max spins · The Getaway",description:t("info.modeDesc.getaway")},
 ];
@@ -138,10 +137,7 @@ export function InfoPanel({
                 </span>{" "}
                 the {t("unit.baseBet")}.
               </p>
-              <p>
-                Collection = total package value × number of fishermen × current
-                collection multiplier. The round payout limit still applies.
-              </p>
+              <p>{t("info.collection.formula")}</p>
             </FeatureRow>
             <FeatureRow
               title="KING scatter"
