@@ -1227,7 +1227,10 @@ export function KiloTable({
             characterPaused={modalOpen || !booted}
             className={reelFeature ? 'kk-feature-quiet-environment' : ''}
           />
-          <GameBrand layout={layout} feature={Boolean(hud?.active)} />
+          {/* Portrait Max spins: the mode crest owns the header slot, so the
+              logo steps aside instead of covering "MAX SPINS" (presentation only). */}
+          {!(layout.mode === 'portrait' && (maxSpinMode || ((busy || reviewing) && visualRound && isMaxSpinRound(visualRound)))) &&
+            <GameBrand layout={layout} feature={Boolean(hud?.active)} />}
           <div className="kk-playfield">
             <div className="kk-crest">
               {maxSpinMode || ((busy || reviewing) && visualRound && isMaxSpinRound(visualRound)) ? (
