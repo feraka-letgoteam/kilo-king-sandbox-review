@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { ART, ART_ROOT } from './art-map';
+import { ART, artUrl } from './art-map';
 import {
   ArrowLeft,
   BookOpen,
@@ -243,7 +243,7 @@ function ScatterMarks({ count }: { count: number }) {
       {Array.from({ length: count }, (_, i) => (
         <img
           key={i}
-          src={ART_ROOT + ART.bars}
+          src={artUrl(ART.bars)}
           alt=""
           aria-hidden="true"
         />

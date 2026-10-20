@@ -21,7 +21,7 @@ import {
   splashRoundCap,
   type SplashMode,
 } from "@/lib/kilo/engine";
-import { ART, ART_ROOT, TOOL_PIVOTS } from "./art-map";
+import { ART, TOOL_PIVOTS, artUrl } from "./art-map";
 import { CONTRABAND_ROOT, PACKAGE_META, SCATTER_KING } from "./fish-art";
 import { PanelDismissContext } from "./control-panels";
 import { FEATURES } from "./feature-catalog";
@@ -121,7 +121,7 @@ export function InfoPanel({
             aria-labelledby="kk-info-features-title"
           >
             <h2 id="kk-info-features-title">Features</h2>
-            <FeatureRow title="Fisherman wild" image={ART_ROOT + ART.splash}>
+            <FeatureRow title="Fisherman wild" image={artUrl(ART.splash)}>
               <p>{t("info.wild.substitutes")}</p>
               <p>{t("info.wild.collects")}</p>
               <p>{t("info.wild.respin")}</p>
@@ -181,7 +181,7 @@ export function InfoPanel({
             </FeatureRow>
             <FeatureRow
               title="Collector meter & retriggers"
-              image={ART_ROOT + ART.splash}
+              image={artUrl(ART.splash)}
             >
               <p>
                 In Dockside Catch, every fisherman advances the meter after its spin. At 4, 8 and
@@ -214,7 +214,7 @@ export function InfoPanel({
               <p>{t("info.vs.limits")}</p>
               <p>{t("info.vs.getaway")}</p>
             </FeatureRow>
-            <FeatureRow title="Hook" image={ART_ROOT + TOOL_PIVOTS.hook.file}>
+            <FeatureRow title="Hook" image={artUrl(TOOL_PIVOTS.hook.file)}>
               <p>
                 During Dockside Catch, the hook may activate when packages land
                 without a fisherman. It shifts one reel up or down by one
@@ -224,7 +224,7 @@ export function InfoPanel({
             </FeatureRow>
             <FeatureRow
               title="Dynamite"
-              image={ART_ROOT + TOOL_PIVOTS.dynamite.file}
+              image={artUrl(TOOL_PIVOTS.dynamite.file)}
             >
               <p>
                 During Dockside Catch, when fishermen land with zero or one package, dynamite may add two or
@@ -237,7 +237,7 @@ export function InfoPanel({
             </FeatureRow>
             <FeatureRow
               title="Bazooka"
-              image={ART_ROOT + TOOL_PIVOTS.bazooka.file}
+              image={artUrl(TOOL_PIVOTS.bazooka.file)}
             >
               <p>
                 When fishermen land with zero or one package, the bazooka may keep the

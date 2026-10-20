@@ -1,5 +1,5 @@
 import { PAY, PAYLINES } from "@/lib/kilo/engine";
-import { ART, ART_ROOT } from "./art-map";
+import { ART, artUrl } from "./art-map";
 import { CONTRABAND_ROOT, PACKAGE_META, V8_ROOT, V8_META } from "./fish-art";
 import { t } from "@/lib/kilo/copy";
 
@@ -14,8 +14,8 @@ export const PAY_SYMBOLS = [
     name: "Gold reel",
     image: V8_ROOT + V8_META["sym-reel-v8"].file,
   },
-  { id: "cuffs", name: "Bobber", image: ART_ROOT + ART.cuffs },
-  { id: "keys", name: t("symbol.cashRoll"), image: ART_ROOT + ART.keys },
+  { id: "cuffs", name: "Bobber", image: artUrl(ART.cuffs) },
+  { id: "keys", name: t("symbol.cashRoll"), image: artUrl(ART.keys) },
   {
     id: "brick",
     name: "Dime bags & kilos",
@@ -24,7 +24,7 @@ export const PAY_SYMBOLS = [
   ...(["A", "K", "Q", "J", "10"] as const).map((id) => ({
     id,
     name: id,
-    image: ART_ROOT + ART[id],
+    image: artUrl(ART[id]),
   })),
 ];
 
