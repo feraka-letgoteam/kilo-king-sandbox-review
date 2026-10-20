@@ -46,7 +46,10 @@ export function connectionTraceIndices(hits:readonly AmountHit[]) {
 
 export function createConnectionAmounts(parent:Container,hits:readonly AmountHit[],enabled=true) {
   const root=new Container();root.label='connection-component-amounts';parent.addChild(root);
-  const groups=enabled&&hits.length>1?connectionAmountGroups(hits):[];
+  // Components only when they differ from the total: a single row (or a
+  // single line) would print the same amount twice ("10,000 / 10,000").
+  const rowGroups=enabled&&hits.length>1?connectionAmountGroups(hits):[];
+  const groups=rowGroups.length>1?rowGroups:[];
   const texts=groups.map(g=>{const n=createWinNumeral(g.value.toLocaleString('en-US'),20,0xfff1c6);
     n.label='connection-component-amount';root.addChild(n);return n;});
   return {

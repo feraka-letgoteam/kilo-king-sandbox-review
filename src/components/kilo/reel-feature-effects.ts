@@ -693,6 +693,13 @@ export function createReelFeatureEffects(a: Adapter) {
             const group=new Container();group.label='vs-winning-connection';fx.addChild(group);
             let key='',path:Graphics,contours:Graphics,source:Graphics,amount:Container,value:Text,components:ReturnType<typeof createConnectionAmounts>;
             let trace=0,reveal=0,amountAlpha=1,origin={x:0,y:0};
+            // Display-only maths from the recorded connections: shown only when
+            // every hit shares one multiplier and base × multiplier is exactly
+            // the credited amount (never for capped awards).
+            const multiples=[...new Set(connection.connections.map(hit=>hit.multiple))];
+            const baseSum=connection.connections.reduce((n,hit)=>n+hit.base,0);
+            const equation=multiples.length===1&&multiples[0]!>1&&connection.credited===connection.beforeCap&&
+              Math.round(baseSum*multiples[0]!)===connection.credited&&Number.isInteger(baseSum)?`${money(baseSum)} × ${multiples[0]}`:'';
             a.focus?.(connection.spots);
             const draw=()=>{
               if(!live())return;
@@ -705,9 +712,12 @@ export function createReelFeatureEffects(a: Adapter) {
                 const capped=connection.credited<connection.beforeCap;
                 components=createConnectionAmounts(group,connection.connections.map(hit=>({spots:hit.spots,pay:hit.credited})),!capped);
                 value=createWinNumeral(money(connection.credited),Math.max(24,g.cell*.50));value.label='vs-award-amount';
-                const pw=Math.min(w-12,Math.max(g.cell*1.1,value.width+12)),ph=Math.max(36,g.cell*.48);
+                // Reserve room for the win maths (e.g. "15,000 × 2") that turns
+                // into the total in place.
+                const totalW=value.width;if(equation){value.text=equation;}const mathW=value.width;value.text=money(connection.credited);
+                const pw=Math.min(w-12,Math.max(g.cell*1.1,Math.max(totalW,mathW)+12)),ph=Math.max(36,g.cell*.48);
                 const wildReels=new Set(connection.groups.flatMap(unit=>unit.reels));
-                origin=connectionAmountAnchor(g,connection.spots,Math.max(value.width+12,pw),ph,[...wildReels]);
+                origin=connectionAmountAnchor(g,connection.spots,pw,ph,[...wildReels]);
                 amount.position.set(origin.x,origin.y);amount.addChild(value);
                 if(capped){const limit=createWinNumeral('LIMIT',Math.max(10,g.cell*.12),0xe2d3a8);
                   limit.label='vs-limit-note';limit.position.set(0,ph*.53);amount.addChild(limit);}
@@ -746,7 +756,8 @@ export function createReelFeatureEffects(a: Adapter) {
               amount.position.y=origin.y+(a.pace().reduced?0:g.cell*.055*(1-ease(reveal)));
               // Full credited value stamps in. Counting changing digits here
               // obscured the link between the known hit and its earned award.
-              value.text=money(connection.credited);
+              // Win maths first, then the same number becomes the total in place.
+              value.text=equation&&!a.pace().reduced&&reveal<.5?equation:money(connection.credited);
               const stamped=impactStamp(reveal,a.pace().reduced);
               value.scale.set(stamped.x,stamped.y);value.rotation=stamped.turn*.5;
             };
