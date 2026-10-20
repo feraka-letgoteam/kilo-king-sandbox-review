@@ -446,7 +446,8 @@ export function createReelFeatureEffects(a: Adapter) {
         if(u>=0&&u<.45)impact.poly([cx-g.cell*.23,cy+g.cell*.08,cx+g.cell*.23,cy-g.cell*.08,cx+g.cell*.23,cy-g.cell*.05,cx-g.cell*.23,cy+g.cell*.11])
           .fill({color:0xfff2cb,alpha:1-u/.45});
       }
-      if(beat.lock>0&&beat.lock<1)for(const x of[p.x+3,p.x+g.cell-3])impact.moveTo(x,p.y+4).lineTo(x,p.y+4+(h-8)*beat.lock)
+      // Lock rails trace the outer edges of the (possibly joined) wild only.
+      if(beat.lock>0&&beat.lock<1)for(const x of[wx+3,wx+ww-3])impact.moveTo(x,p.y+4).lineTo(x,p.y+4+(h-8)*beat.lock)
         .stroke({color:duel.winner==='king'?0xffcb55:0x79f0da,width:3});
     });
     if(live()){a.host.dispatchEvent(new CustomEvent('kilo-stage-focus',{bubbles:true,detail:null}));clear(fx);repaint=()=>{};}
@@ -455,7 +456,7 @@ export function createReelFeatureEffects(a: Adapter) {
   async function mergeGroup(previous: VsGroup[], next: VsGroup,
     motion: (ms: number, draw: (t: number) => void) => Promise<void>, live: () => boolean) {
     const layer = new Container(); layer.label = 'vs-group-merge'; fx.addChild(layer);
-    let key = '', old: Container[] = [], incoming: Container, factors: Text[] = [], seams: Graphics, contact: Graphics;
+    let key = '', old: Container[] = [], incoming: Container, factors: Text[] = [], seams: Graphics, contact: Graphics, smoke: Graphics;
     const mergeCues=new Set<string>();
     mergingReels = new Set(next.reels); paintHeld();
     try {
@@ -473,6 +474,7 @@ export function createReelFeatureEffects(a: Adapter) {
           contact=new Graphics();contact.label='vs-merge-contact';layer.addChild(contact);
           factors=previous.map(unit=>{const factor=createVsMultiplierLabel(`×${unit.multiplier}`,g.cell*.38);
             factor.label='vs-merge-factor';layer.addChild(factor);return factor;});
+          smoke=new Graphics();smoke.label='vs-merge-opaque-burst';layer.addChild(smoke);
         }
         const beat = vsMergeAt(t, a.pace().reduced), center = x + width / 2;
         old.forEach((art, i) => {
@@ -480,31 +482,41 @@ export function createReelFeatureEffects(a: Adapter) {
           const unitCenter = home + (unit.width * g.cell + (unit.width - 1) * g.gap) / 2;
           const direction = Math.sign(center - unitCenter);
           art.position.set(home + direction * g.cell * (-.060 * beat.ready + .17 * beat.converge), g.gy);
-          art.alpha = beat.oldAlpha;
+          // The duel already cleared onto the joined wide art: old units stay hidden.
+          art.alpha = 0; art.visible = false; void beat.oldAlpha;
           performVsGroupArt(art,g,a.pace().reduced?undefined:{x:1+.025*beat.ready,y:1-.045*beat.ready,lift:.018*beat.ready,turn:-direction*.018*beat.ready});
           const number = art.children.find(node => node.label === 'vs-group-multiplier');
           if (number) number.alpha = t < .18 ? 1 : 0;
         });
-        incoming.alpha = beat.newAlpha;
-        incoming.position.set(x, g.gy + g.cell * .018 * beat.settle);
+        incoming.alpha = 1; void beat.newAlpha;
+        incoming.position.set(x, g.gy);
         performVsGroupArt(incoming,g,wildArtAt(Math.max(0,(t-.30)/.70),next.side,a.pace().reduced));
         const product = incoming.children.find(node => node.label === 'vs-group-multiplier');
-        if (product) { product.alpha = beat.productAlpha; product.scale.set(beat.productScale); }
+        // The product appears whole, static, under an opaque burst (.56-.74,
+        // swap at .66); the factors never overlap it, so no garbled digits.
+        const reducedMerge=a.pace().reduced,swapped=reducedMerge||t>=.66;
+        if (product) { product.alpha = swapped ? 1 : 0; product.scale.set(1); void beat.productScale; }
         // Each visible factor is physically drawn into the new product. It is
         // still a presentation of the immutable members, never another award.
         factors.forEach((factor,i)=>{
           const unit=previous[i]!,home=g.gx+unit.start*(g.cell+g.gap)+(unit.width*g.cell+(unit.width-1)*g.gap)/2;
-          const u=clamp01((t-.18)/.38),ease=u*u*(3-2*u);
-          factor.position.set(home+(center-home)*ease,g.gy+g.cell*2.565-g.cell*.20*Math.sin(Math.PI*u));
-          factor.scale.set(1-.25*ease);factor.alpha=beat.equationAlpha;
+          // Factors stay whole and still at their own reels; they never slide
+          // into each other, so no overlapping digits before the product.
+          const ease=0;void center;
+          factor.position.set(home,g.gy+g.cell*2.565);
+          factor.scale.set(1);factor.alpha=swapped?0:(t<.06?0:1);void ease;
         });
+        const band=g.cell*1.05;
+        paintSmokeBurst(smoke,x+2,g.gy+g.cell*3-band,x+width-2,g.gy+g.cell*3-2,
+          reducedMerge?0:clamp01((t-.56)/.05),reducedMerge?1:clamp01((t-.74)/.10),next.side==='king'?0xffcb55:0x79f0da);
         const tone=next.side==='king'?0xffcb55:0x79f0da;
         paintImpact(contact,center,g.gy+g.cell*2.52,width*.72,g.cell*.85,clamp01((t-.48)/.46),tone,Math.min(1.5,next.width*.32),a.pace().reduced);
         for(const [at,name] of [[.18,'vsPull'],[.48,'vsImpact'],[.70,'vsLock']] as const){
           if(t>=at&&!mergeCues.has(name)){mergeCues.add(name);a.cue?.(name);}
         }
         seams.clear();
-        if(beat.seam>.001){
+        // No seam lines: the joined composition is one painting.
+        if(false&&beat.seam>.001){
           const tone=next.side==='king'?GOLD:TEAL,h=g.cell*3;
           for(const unit of previous.slice(1)){
             const boundary=g.gx+unit.start*(g.cell+g.gap)-g.gap/2;
@@ -657,7 +669,11 @@ export function createReelFeatureEffects(a: Adapter) {
             const beforeGroups = activeGroups();
             incomingVsReels.add(conversion.reel); concealVs();
             a.focus?.([{reel:conversion.reel,row:0},{reel:conversion.reel,row:1},{reel:conversion.reel,row:2}]);
-            await duelReveal(conversion,motion,live);if(!live())return;
+            // Presentation lookahead only: the same group the recorded arrival
+            // forms below, so the duel's burst can clear onto the wide art.
+            wilds.push({reel:conversion.reel,multiplier:conversion.multiplier,duelist:conversion.duelist});
+            const joining=activeGroups().find(group=>group.reels.includes(conversion.reel));wilds.pop();
+            await duelReveal(conversion,motion,live,joining&&joining.width>1?joining:undefined);if(!live())return;
             wilds.push({reel:conversion.reel,multiplier:conversion.multiplier,duelist:conversion.duelist});
             incomingVsReels.delete(conversion.reel);
             const afterGroup = activeGroups().find(group => group.reels.includes(conversion.reel))!;
