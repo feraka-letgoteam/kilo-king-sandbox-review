@@ -38,7 +38,7 @@ export const COPY = {
   "label.baseBet": pair("Base bet", "Base play"),
   "label.betShort": pair("Bet", "Play"),
   "label.purchaseCost": pair("Purchase cost", "Feature price"),
-  "label.confirmPurchase": pair("Confirm purchase", "Confirm feature"),
+  "label.confirmPurchase": pair("Confirm", "Confirm"),
   "label.buyFeature": pair("Buy feature", "Get feature"),
   "label.anteBet": pair("Ante bet", "Ante play"),
   "label.cashCollections": pair("Cash collections", "Coin collections"),
@@ -264,7 +264,7 @@ export const COPY = {
     "The Getaway plays exactly one spin for 1,000× base play. Its only results are 25,000× or zero; no second chance is offered. In this local candidate distribution the max-win probability is 3.82% and loss probability is 96.18%. The exact candidate return is 95.5%; this is not a certified or published Engine return.",
   ),
   "info.modes.title": pair("Bet modes", "Play modes"),
-  "info.modes.atThisBet": pair("at this bet", "at this play amount"),
+  "info.modes.atThisBet": pair("at this bet", "at this play"),
   "info.modes.maxPayout": pair(
     "Maximum round payout at this bet:",
     "Maximum round win at this play amount:",
