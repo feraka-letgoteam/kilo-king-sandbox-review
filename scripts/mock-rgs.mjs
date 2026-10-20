@@ -5,7 +5,7 @@
  *
  *   node scripts/mock-rgs.mjs [--port 8105] [--math /workspace/kilo-math/phase2]
  *   game URL: /?sessionID=dev&rgs_url=http://localhost:8105
- *   replay:   /?replay=true&game=kilo&version=1&mode=BASE&event=2&rgs_url=http://localhost:8105&currency=USD&amount=1000000
+ *   replay:   /?replay=true&game=kilo&version=1&mode=base&event=2&rgs_url=http://localhost:8105&currency=USD&amount=1000000
  *
  * Books come from the math export (index.json + books_<mode>.jsonl[.zst] + lookUpTable_<mode>_0.csv)
  * when it exists; otherwise from a few built-in EXAMPLE books whose state is placeholder data only.
@@ -19,7 +19,8 @@
  *   expired     every call returns 401 ERR_IS
  *   paused | ratelimit | gle | gen   /wallet/play returns 423 | 429 ERR_ACT | 400 ERR_GLE | 500 ERR_GEN
  *   resume      authenticate returns an unfinished winning round
- *   force=<MODE>/<bookId>   play always returns that book
+ *   force=<mode>/<bookId>   (mode names as in index.json: base, ante, dockside, yacht, mystery, getaway)
+ *     play always returns that book
  */
 import http from "node:http";
 import fs from "node:fs";
@@ -31,21 +32,33 @@ const arg = (name, fallback) => {
   return i > -1 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
 };
 const PORT = Number(arg("port", process.env.MOCK_RGS_PORT || 8105));
-const MATH_DIR = arg("math", "/workspace/kilo-math/phase2");
+const MATH_DIR = arg("math", process.env.MOCK_RGS_MATH || "/workspace/kilo-math/phase2/out/books");
+// Node 20 has no zstd; fall back to the math venv's python-zstandard (Bot 3's exporter uses it too).
+const ZSTD_PY = process.env.KILO_ZSTD_PYTHON || "/workspace/kilo-math/phase2/.venv/bin/python";
 const MICRO = 1_000_000;
 
 // ---------- books ----------
 /** Built-in EXAMPLE books (not real math). payoutMultiplier is in hundredths, as in math-sdk books. */
 function exampleBooks() {
-  const book = (id, payoutMultiplier, note) => ({ id, payoutMultiplier, events: [{ index: 0, type: "example", note }] });
+  const STAKE = 1000;
+  const SPLASH = { base: "spin", ante: "ante", dockside: "buy", yacht: "yacht", mystery: "mystery", getaway: "getaway" };
+  const grid = Array.from({ length: 5 }, () => [{ s: "10" }, { s: "J" }, { s: "Q" }]);
+  const mk = (mode) => (id, payoutMultiplier, note) => ({
+    id, payoutMultiplier,
+    events: [{ index: 0, type: "kiloRound", key: { example: note }, record: {
+      version: 3, mode: SPLASH[mode], stake: STAKE, cost: STAKE, awarded: 0, banked: 0, mods: [],
+      payout: (payoutMultiplier * STAKE) / 100, capped: false,
+      base: { grid, lines: [], scatters: 0, scatterPay: 0 }, free: [], example: true,
+    } }],
+  });
   const modes = [
-    ["BASE", 1, [book(1, 0, "loss"), book(2, 150, "small win"), book(3, 2500, "big win"), book(4, 12000, "bonus trigger"), book(5, 2500000, "max win")]],
-    ["ANTE", 1.5, [book(1, 0, "loss"), book(2, 300, "small win"), book(3, 4000, "bonus trigger")]],
-    ["BONUS", 100, [book(1, 1500, "low bonus"), book(2, 9000, "average bonus"), book(3, 2500000, "max win")]],
-    ["YACHT", 200, [book(1, 3000, "low"), book(2, 21000, "average"), book(3, 1800000, "max win")]],
-    ["MYSTERY", 200, [book(1, 4000, "dock"), book(2, 22000, "yacht")]],
-    ["GETAWAY", 1000, [book(1, 0, "miss"), book(2, 2500000, "25,000x")]],
-  ];
+    ["base", 1, [[1, 0, "loss"], [2, 150, "small win"], [3, 2500, "big win"], [4, 12000, "bonus trigger"], [5, 2500000, "max win"]]],
+    ["ante", 1.5, [[1, 0, "loss"], [2, 300, "small win"], [3, 4000, "bonus trigger"]]],
+    ["dockside", 100, [[1, 1500, "low"], [2, 9000, "average"], [3, 2500000, "max win"]]],
+    ["yacht", 200, [[1, 3000, "low"], [2, 21000, "average"], [3, 1800000, "max win"]]],
+    ["mystery", 200, [[1, 4000, "dock"], [2, 22000, "yacht"]]],
+    ["getaway", 1000, [[1, 0, "miss"], [2, 2500000, "25,000x"]]],
+  ].map(([name, cost, rows]) => [name, cost, rows.map((r) => mk(name)(...r))]);
   return Object.fromEntries(
     modes.map(([name, cost, books]) => [name, { cost, books, weights: books.map((b) => [b.id, 1]), source: "example" }]),
   );
@@ -54,11 +67,16 @@ function exampleBooks() {
 function readMaybeZst(file) {
   if (fs.existsSync(file) && file.endsWith(".zst")) {
     try {
-      return execFileSync("zstd", ["-dc", file], { maxBuffer: 1 << 30 }).toString("utf8");
+      return execFileSync("zstd", ["-dc", file], { maxBuffer: 1 << 30, stdio: ["ignore", "pipe", "ignore"] }).toString("utf8");
     } catch {
-      const plain = file.replace(/\.zst$/, "");
-      if (fs.existsSync(plain)) return fs.readFileSync(plain, "utf8");
-      throw new Error(`${file}: needs the zstd CLI or an uncompressed ${path.basename(plain)} beside it`);
+      try {
+        const py = "import sys,zstandard;sys.stdout.buffer.write(zstandard.ZstdDecompressor().stream_reader(open(sys.argv[1],'rb')).read())";
+        return execFileSync(ZSTD_PY, ["-c", py, file], { maxBuffer: 1 << 30 }).toString("utf8");
+      } catch {
+        const plain = file.replace(/\.zst$/, "");
+        if (fs.existsSync(plain)) return fs.readFileSync(plain, "utf8");
+        throw new Error(`${file}: needs the zstd CLI, python-zstandard, or an uncompressed ${path.basename(plain)} beside it`);
+      }
     }
   }
   const plain = file.replace(/\.zst$/, "");
@@ -117,7 +135,7 @@ function session(id) {
     round: null, lastRound: null, events: [],
   };
   if (opts.has("resume")) {
-    const mode = MODES.BASE ? "BASE" : Object.keys(MODES)[0];
+    const mode = MODES.base ? "base" : Object.keys(MODES)[0];
     const book = MODES[mode].books.find((b) => b.payoutMultiplier > 0) ?? MODES[mode].books[0];
     s.round = roundFor(mode, book, 1_000_000 * scale);
   }

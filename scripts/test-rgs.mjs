@@ -19,7 +19,7 @@ for (const f of fs.readdirSync(src).filter((f) => f.endsWith(".ts"))) {
 }
 const r = spawnSync(process.execPath, ["--test", path.join(out, "rgs.test.js")], {
   stdio: "inherit",
-  env: { ...process.env, MOCK_RGS_PATH: path.join(root, "scripts/mock-rgs.mjs") },
+  env: { ...process.env, MOCK_RGS_PATH: path.join(root, "scripts/mock-rgs.mjs"), MOCK_RGS_MATH: "example" },
 });
 fs.rmSync(out, { recursive: true, force: true });
 process.exit(r.status ?? 1);

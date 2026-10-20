@@ -4,7 +4,7 @@ import { parseLaunch, normaliseRgsUrl, normaliseLang } from "./launch.ts";
 import { formatAmount, exactDecimals, glyphsNeeded } from "./currency.ts";
 import { createRgsClient, errorCodeFor, needsEndRound, RgsError, winFor, costFor } from "./client.ts";
 import { rulesFromConfig, playableLevels } from "./config.ts";
-import { roundStateToScript, BookAdapterNotReady, winMatchesServer } from "./book-adapter.ts";
+import { roundStateToScript, BookAdapterError, winMatchesServer, splashModeFor, scriptUnitsToMicro } from "./book-adapter.ts";
 
 const M = 1_000_000;
 
@@ -78,7 +78,6 @@ test("client: error mapping and helpers", () => {
   assert.equal(winFor(1_000_000, 2.5), 2_500_000);
   assert.equal(costFor(100_000, 1.5), 150_000);
   assert.ok(winMatchesServer(2_500_000, 1_000_000, 2.5));
-  assert.throws(() => roundStateToScript({}, 1, 1, 1), BookAdapterNotReady);
 });
 
 test("config: levels, mode costs and flags", () => {
@@ -107,20 +106,20 @@ test("client against the mock RGS", async (t) => {
   const port = (server.address() as { port: number }).port;
   const rgs = createRgsClient(`http://127.0.0.1:${port}`);
   try {
-    const id = `t${Date.now()}:force=BASE/3`;
+    const id = `t${Date.now()}:force=base/3`;
     const auth = await rgs.authenticate(id);
     assert.equal(auth.balance.currency, "USD");
     assert.equal(auth.balance.amount, 1000 * M);
-    const play = await rgs.play({ sessionID: id, amount: M, mode: "BASE" });
+    const play = await rgs.play({ sessionID: id, amount: M, mode: "base" });
     assert.equal(play.balance.amount, 999 * M);
     assert.equal(play.round.payoutMultiplier, 25);
     assert.ok(needsEndRound(play.round));
     const end = await rgs.endRound(id);
     assert.equal(end.balance.amount, 1024 * M);
 
-    const loss = `l${Date.now()}:force=BASE/1`;
+    const loss = `l${Date.now()}:force=base/1`;
     await rgs.authenticate(loss);
-    const lp = await rgs.play({ sessionID: loss, amount: M, mode: "BASE" });
+    const lp = await rgs.play({ sessionID: loss, amount: M, mode: "base" });
     assert.equal(needsEndRound(lp.round), false);
 
     const jpy = await rgs.authenticate(`j${Date.now()}:JPY`);
@@ -129,20 +128,48 @@ test("client against the mock RGS", async (t) => {
     for (const [opt, code] of [["broke", "ERR_IPB"], ["paused", "ERR_PAUSED"], ["ratelimit", "ERR_ACT"], ["gen", "ERR_GEN"]] as const) {
       const sid = `${opt}${Date.now()}:${opt}`;
       await rgs.authenticate(sid);
-      await assert.rejects(rgs.play({ sessionID: sid, amount: M, mode: "BASE" }), (e: RgsError) => e.code === code);
+      await assert.rejects(rgs.play({ sessionID: sid, amount: M, mode: "base" }), (e: RgsError) => e.code === code);
     }
     await assert.rejects(rgs.authenticate("x:expired"), (e: RgsError) => e.code === "ERR_IS");
     const resume = await rgs.authenticate(`r${Date.now()}:resume`);
     assert.ok(resume.round && needsEndRound(resume.round));
     await assert.rejects(rgs.event(id, "x".repeat(33)), (e: RgsError) => e.code === "ERR_VAL");
 
-    const rp = await rgs.replay("kilo", "1", "BONUS", "3");
+    const adapted = roundStateToScript(play.round.state, M, play.round.payoutMultiplier, "base");
+    assert.equal(adapted.win, 25 * M);
+    const rp = await rgs.replay("kilo", "1", "dockside", "3");
     assert.equal(rp.payoutMultiplier, 25000);
     assert.equal(rp.costMultiplier, 100);
-    await assert.rejects(rgs.replay("kilo", "1", "BASE", "999"), (e: RgsError) => e.code === "NOT_FOUND");
+    await assert.rejects(rgs.replay("kilo", "1", "base", "999"), (e: RgsError) => e.code === "NOT_FOUND");
   } finally {
     server.close();
   }
   const dead = createRgsClient("http://127.0.0.1:1", { timeoutMs: 2000 });
   await assert.rejects(dead.authenticate("x"), (e: RgsError) => e.code === "ERR_NETWORK");
+});
+
+// A real base-mode book line from Bot 3's export (books_base.jsonl.zst, id 2), trimmed to the record.
+const REAL_BOOK = {
+  id: 2, payoutMultiplier: 20,
+  events: [{ index: 0, type: "kiloRound", key: { seed: 83000002 }, record: {
+    version: 3, mode: "spin", stake: 1000, cost: 1000, awarded: 0, banked: 0, mods: [], payout: 200, capped: false,
+    base: { grid: [[{ s: "J" }, { s: "10" }, { s: "A" }], [{ s: "duffel" }, { s: "J" }, { s: "lamp" }], [{ s: "10" }, { s: "10" }, { s: "J" }], [{ s: "Q" }, { s: "lamp" }, { s: "K" }], [{ s: "keys" }, { s: "K" }, { s: "Q" }]],
+      lines: [{ i: 3, s: "J", n: 3, pay: 200 }], scatters: 0, scatterPay: 0 }, free: [] } }],
+};
+
+test("book adapter: real export book", () => {
+  const pm = REAL_BOOK.payoutMultiplier / 100; // RGS float
+  const r = roundStateToScript(REAL_BOOK.events, 1_000_000, pm, "base");
+  assert.equal(r.script.mode, "spin");
+  assert.equal(r.win, 200_000); // 0.2 × $1.00
+  assert.equal(formatAmount(scriptUnitsToMicro(r.script.base.lines![0]!.pay, r.unitScale), "USD"), "$0.20");
+  assert.equal(formatAmount(scriptUnitsToMicro(200, 10_000 / 1000), "USD"), "$0.002");
+  assert.deepEqual(r.key, { seed: 83000002 });
+  assert.ok(winMatchesServer(r.win, 1_000_000, pm));
+  assert.equal(splashModeFor("dockside"), "buy");
+  assert.equal(splashModeFor("buy"), null);
+  assert.throws(() => roundStateToScript(REAL_BOOK.events, 1_000_000, 0.3, "base"), (e: BookAdapterError) => e.reason === "payout-mismatch");
+  assert.throws(() => roundStateToScript(REAL_BOOK.events, 1_000_000, pm, "ante"), (e: BookAdapterError) => e.reason === "mode-mismatch");
+  assert.throws(() => roundStateToScript([], 1, 1), (e: BookAdapterError) => e.reason === "no-round-event");
+  assert.throws(() => roundStateToScript([{ type: "kiloRound", record: { mode: "spin" } }], 1, 1), (e: BookAdapterError) => e.reason === "bad-record");
 });
