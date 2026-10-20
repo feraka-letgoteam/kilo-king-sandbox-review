@@ -109,7 +109,9 @@ try {
   console.error(`mock-rgs: could not load ${MATH_DIR} (${e.message}); using example books`);
   MODES = exampleBooks();
 }
-const bookById = (mode, id) => MODES[mode]?.books.find((b) => String(b.id) === String(id));
+/** Mode names match case-insensitively, like the live RGS (docs show "BASE"). */
+const modeKey = (mode) => (typeof mode === "string" ? Object.keys(MODES).find((k) => k.toLowerCase() === mode.toLowerCase()) : undefined);
+const bookById = (mode, id) => MODES[modeKey(mode)]?.books.find((b) => String(b.id) === String(id));
 function pickBook(mode) {
   const { weights } = MODES[mode];
   const total = weights.reduce((s, [, w]) => s + w, 0);
@@ -143,10 +145,12 @@ function session(id) {
   return s;
 }
 
+let betSeq = 0;
+/** Same shape as the documented /wallet/play round: betID, amount, payout, payoutMultiplier, active, mode, state (+ event). */
 function roundFor(mode, book, amount) {
   const payoutMultiplier = book.payoutMultiplier / 100;
   return {
-    mode, amount, eventID: String(book.id),
+    betID: ++betSeq, mode: mode.toUpperCase(), amount, payout: Math.round(amount * payoutMultiplier), eventID: String(book.id),
     payoutMultiplier, costMultiplier: MODES[mode].cost,
     active: payoutMultiplier > 0, state: book.events,
   };
@@ -161,7 +165,8 @@ function config(s) {
     stepBet: 10_000 * s.scale,
     defaultBetLevel: 1_000_000 * s.scale,
     betLevels: USD_LEVELS.map((n) => n * s.scale),
-    betModes: Object.fromEntries(Object.entries(MODES).map(([k, m]) => [k, { costMultiplier: m.cost }])),
+    // Live RGS shape (stake-engine.com/docs/rgs/wallet, per Bot 3): an array, mode names uppercase like the docs.
+    gameModes: Object.entries(MODES).map(([k, m]) => ({ mode: k.toUpperCase(), costMultiplier: m.cost, maxBet: USD_LEVELS.at(-1) * s.scale })),
     jurisdiction: {
       socialCasino: s.opts.has("social") || ["XSC", "XGC"].includes(s.currency),
       disabledFullscreen: flags, disabledTurbo: flags, disabledSuperTurbo: flags, disabledAutoplay: flags,
@@ -182,7 +187,7 @@ function handle(method, url, body) {
     const [, , , mode, event] = replay.map(decodeURIComponent);
     const book = bookById(mode, event);
     if (!book) return fail(404, "NOT_FOUND", "Replay data not found.");
-    return { status: 200, body: { payoutMultiplier: book.payoutMultiplier / 100, costMultiplier: MODES[mode].cost, state: book.events } };
+    return { status: 200, body: { payoutMultiplier: book.payoutMultiplier / 100, costMultiplier: MODES[modeKey(mode)].cost, state: book.events } };
   }
   if (method !== "POST") return fail(404, "NOT_FOUND", "Unknown route.");
   if (!body || typeof body.sessionID !== "string" || !body.sessionID) return fail(401, "ERR_IS", "Invalid or expired sessionID.");
@@ -192,7 +197,8 @@ function handle(method, url, body) {
   switch (url.pathname) {
     case "/wallet/authenticate":
       s.authed = true;
-      return { status: 200, body: { balance: bal(s), round: s.round ?? s.lastRound, config: config(s), meta: null } };
+      // round is only present while a round is unfinished.
+      return { status: 200, body: { balance: bal(s), ...(s.round ? { round: { ...s.round, event: s.events.at(-1) } } : {}), config: config(s), meta: null } };
     case "/wallet/balance":
       if (!s.authed) return fail(401, "ERR_IS", "Authenticate first.");
       return { status: 200, body: { balance: bal(s) } };
@@ -202,12 +208,14 @@ function handle(method, url, body) {
       if (s.opts.has("ratelimit")) return fail(429, "ERR_ACT", "Too many requests.");
       if (s.opts.has("gle")) return fail(400, "ERR_GLE", "Limit exceeded.");
       if (s.opts.has("gen")) return fail(500, "ERR_GEN", "An unexpected error occurred.");
-      const { amount, mode } = body;
-      if (!MODES[mode]) return fail(400, "ERR_VAL", "Unknown mode.");
+      const { amount } = body;
+      const mode = modeKey(body.mode);
+      if (!mode) return fail(400, "ERR_VAL", "Unknown mode.");
       if (!config(s).betLevels.includes(amount)) return fail(400, "ERR_VAL", "Amount is not a bet level.");
       if (s.round?.active) return fail(400, "ERR_VAL", "A round is still active.");
       const cost = Math.round(amount * MODES[mode].cost);
       if (cost > s.balance) return fail(400, "ERR_IPB", "Insufficient player balance.");
+      s.events = [];
       const book = s.force && s.force[0] === mode ? bookById(mode, s.force[1]) ?? pickBook(mode) : pickBook(mode);
       s.balance -= cost;
       s.round = roundFor(mode, book, amount);

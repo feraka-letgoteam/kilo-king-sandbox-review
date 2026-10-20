@@ -4,7 +4,9 @@
  * Replay: ?replay=true&game&version&mode&event&rgs_url[&currency&amount&lang&device&social&demo]
  */
 
-export type Device = "desktop" | "mobile";
+/** Engine's live review prompt lists mobile, desktop and tablet; the docs repo and ts-client list desktop/mobile. */
+export type Device = "desktop" | "mobile" | "tablet";
+const DEVICES: ReadonlySet<string> = new Set(["desktop", "mobile", "tablet"]);
 
 type Common = {
   rgsUrl: string;
@@ -35,6 +37,7 @@ export type LaunchError = {
     | "missing-rgs-url"
     | "invalid-rgs-url"
     | "rgs-host-not-allowed"
+    | "rgs-hosts-unconfigured"
     | "invalid-device"
     | "replay-incomplete"
     | "invalid-amount";
@@ -55,26 +58,21 @@ function flag(raw: string | null): boolean {
 }
 
 /**
- * RGS hosts shown in Stake's own sources (verified 20 Oct 2026):
- * - rgs.stake-engine.com: every rgs_url example in engineio/docs (docs/reference/url-structure,
- *   docs/api/*, changelog/replay-mode) and engineio/ts-client src/client.ts.
- * - rgs-us.stake-engine.com: engineio/ts-client src/client.ts comment ("This URL could change
- *   based on the environment or Jurisdiction (e.g., rgs.stake-engine.com, rgs-us.stake-engine.com)").
- * The docs say rgs_url differs between staging, production and replay and give no complete list,
- * so production builds take the list from VITE_RGS_HOSTS at build time (see rgsHostsFrom()).
+ * RGS host allow-list. Nothing is hardcoded: production builds read VITE_RGS_HOSTS at build time
+ * (exact hosts and "*.suffix" patterns), and an empty or unset list rejects every rgs_url (fail closed).
+ * The real host gets filled in from Feraka's first Stake session. For reference only (not defaults):
+ * engineio/docs examples use rgs.stake-engine.com, and engineio/ts-client mentions rgs-us.stake-engine.com,
+ * but Engine's live AI review prompt now shows launch hosts on engine.io, so the docs examples may be stale.
  */
-export const DEFAULT_RGS_HOSTS: readonly string[] = Object.freeze(["rgs.stake-engine.com", "rgs-us.stake-engine.com"]);
-
 const HOST_PATTERN = /^(\*\.)?[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 
 /**
- * Parses a comma/space separated host list ("rgs.stake-engine.com, *.stake-engine.com").
+ * Parses a comma/space separated host list ("rgs.example.com, *.example.com").
  * Entries are exact hosts or "*.suffix" (any subdomain of suffix, not suffix itself).
- * Empty/missing input -> DEFAULT_RGS_HOSTS. Invalid entries throw, so a bad build config fails loudly.
+ * Empty/missing input -> [] (rejects everything). Invalid entries throw, so a bad build config fails loudly.
  */
 export function rgsHostsFrom(raw: string | null | undefined): readonly string[] {
   const list = (raw ?? "").split(/[\s,]+/).map((h) => h.trim().toLowerCase()).filter(Boolean);
-  if (!list.length) return DEFAULT_RGS_HOSTS;
   for (const h of list) if (!HOST_PATTERN.test(h)) throw new Error(`invalid RGS host pattern: ${h}`);
   return Object.freeze(list);
 }
@@ -122,9 +120,20 @@ function checkRgsUrl(
   if (url.protocol !== "https:" && !(allowLocalHttp && local && url.protocol === "http:")) return { url: null };
   if (url.username || url.password || url.search || url.hash) return { url: null };
   if (allowedHosts && !(allowLocalHttp && local) && !hostAllowed(url.hostname, allowedHosts)) {
+    // An empty list also lands here: no configured host means no RGS (fail closed).
     return { url: null, notAllowed: true };
   }
   return { url: `${url.origin}${url.pathname}`.replace(/\/+$/, "") };
+}
+
+/**
+ * Launch options for a build. Sandbox (local dev/review) builds: sandbox and localhost http allowed,
+ * no host check. Every other build: host allow-list from the build-time string, failing closed when empty.
+ * Boot code calls e.g. launchOptionsFor({ sandboxBuild: import.meta.env.DEV, rgsHosts: import.meta.env.VITE_RGS_HOSTS }).
+ */
+export function launchOptionsFor(build: { sandboxBuild: boolean; rgsHosts?: string | null }): LaunchOptions {
+  if (build.sandboxBuild) return { allowSandbox: true, allowLocalHttp: true };
+  return { allowedHosts: rgsHostsFrom(build.rgsHosts) };
 }
 
 export type LaunchOptions = {
@@ -133,8 +142,8 @@ export type LaunchOptions = {
   /** Dev only: http://localhost / 127.0.0.1 for the mock RGS. */
   allowLocalHttp?: boolean;
   /**
-   * Production: host allow-list for rgs_url, e.g. rgsHostsFrom(import.meta.env.VITE_RGS_HOSTS).
-   * Omitted = no host check (dev/review builds only). An empty list rejects every host.
+   * Production: host allow-list for rgs_url, from rgsHostsFrom(VITE_RGS_HOSTS) / launchOptionsFor().
+   * Omitted = no host check (sandbox dev/review builds only). An empty list rejects every host.
    */
   allowedHosts?: readonly string[];
 };
@@ -153,17 +162,18 @@ export function parseLaunch(
   }
   const checked = checkRgsUrl(rawUrl, !!opts.allowLocalHttp, opts.allowedHosts);
   if (!checked.url) {
-    return { kind: "error", reason: checked.notAllowed ? "rgs-host-not-allowed" : "invalid-rgs-url", detail: rawUrl };
+    const reason = !checked.notAllowed ? "invalid-rgs-url" : opts.allowedHosts?.length ? "rgs-host-not-allowed" : "rgs-hosts-unconfigured";
+    return { kind: "error", reason, detail: rawUrl };
   }
   const rgsUrl = checked.url;
 
-  // Missing device defaults to desktop (as the official ts-client does); anything else
-  // except desktop/mobile is rejected, matching ts-client's "Unsupported device type".
+  // Missing device defaults to desktop (as the official ts-client does); any value other than
+  // desktop/mobile/tablet is rejected, like ts-client's "Unsupported device type".
   const rawDevice = (q.get("device") ?? "").trim().toLowerCase();
-  if (rawDevice && rawDevice !== "desktop" && rawDevice !== "mobile") {
+  if (rawDevice && !DEVICES.has(rawDevice)) {
     return { kind: "error", reason: "invalid-device", detail: q.get("device") ?? "" };
   }
-  const device: Device = rawDevice === "mobile" ? "mobile" : "desktop";
+  const device: Device = (rawDevice || "desktop") as Device;
   const currency = q.get("currency")?.trim().toUpperCase() || undefined;
   const common: Common = {
     rgsUrl,

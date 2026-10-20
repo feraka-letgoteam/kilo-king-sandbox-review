@@ -3,11 +3,12 @@ import assert from "node:assert/strict";
 import { parseLaunch, normaliseRgsUrl, normaliseLang } from "./launch.ts";
 import { formatAmount, exactDecimals, glyphsNeeded } from "./currency.ts";
 import { createRgsClient, errorCodeFor, needsEndRound, RgsError, winFor, costFor } from "./client.ts";
-import { rulesFromConfig, playableLevels } from "./config.ts";
+import { rulesFromConfig, playableLevels, modeRule, missingModes } from "./config.ts";
+import { gameModesFrom } from "./client.ts";
 import {
   roundStateToScript, BookAdapterError, winMatchesServer, splashModeFor, scriptUnitsToMicro, animatedWinMicro, engineModeForRecord,
 } from "./book-adapter.ts";
-import { DEFAULT_RGS_HOSTS, rgsHostsFrom, hostAllowed } from "./launch.ts";
+import { rgsHostsFrom, hostAllowed, launchOptionsFor } from "./launch.ts";
 import { CurrencyError, resetCurrencyWarnings, isKnownCurrency } from "./currency.ts";
 import {
   controlsFromJurisdiction, toControlJurisdiction, spinShortcutAllowed, slamStopAllowed, superTurboAllowed, turboAllowed,
@@ -91,19 +92,21 @@ test("client: error mapping and helpers", () => {
 
 const cfg0 = {
   gameID: "g", minBet: 100_000, maxBet: 10_000_000, stepBet: 100_000, defaultBetLevel: 100_000,
-  betLevels: [100_000], betModes: {}, jurisdiction: {},
+  betLevels: [100_000], gameModes: [], jurisdiction: {},
 };
 
 test("config: levels, mode costs and flags", () => {
   const rules = rulesFromConfig({
     gameID: "g", minBet: 100_000, maxBet: 10_000_000, stepBet: 100_000, defaultBetLevel: 999,
     betLevels: [50_000, 100_000, 1_000_000, 10_000_000, 20_000_000],
-    betModes: { BASE: { costMultiplier: 1 }, BONUS: { costMultiplier: 100, maxBet: 1_000_000 } },
+    gameModes: [{ mode: "BASE", costMultiplier: 1 }, { mode: "BONUS", costMultiplier: 100, maxBet: 1_000_000 }],
     jurisdiction: { disabledAutoplay: true, minimumRoundDuration: 2500, socialCasino: true },
   });
   assert.deepEqual(rules.betLevels, [100_000, 1_000_000, 10_000_000]);
   assert.equal(rules.defaultBet, 100_000);
-  assert.equal(rules.modeCost.BONUS, 100);
+  assert.equal(rules.modeCost.bonus, 100);
+  assert.deepEqual(modeRule(rules, "bonus"), { mode: "BONUS", costMultiplier: 100, maxBet: 1_000_000 });
+  assert.deepEqual(modeRule(rules, "Base"), { mode: "BASE", costMultiplier: 1, maxBet: 10_000_000 });
   assert.equal(rules.controls.disabledAutoplay, true);
   assert.equal(rules.jurisdiction.minimumRoundDurationMs, 2500);
   assert.equal(rules.jurisdiction.disabledAutoplay, true);
@@ -129,10 +132,20 @@ test("client against the mock RGS", async (t) => {
     const auth = await rgs.authenticate(id);
     assert.equal(auth.balance.currency, "USD");
     assert.equal(auth.balance.amount, 1000 * M);
-    const play = await rgs.play({ sessionID: id, amount: M, mode: "base" });
+    assert.equal(auth.round, null); // no unfinished round -> no round
+    const mrules = rulesFromConfig(auth.config);
+    assert.equal(modeRule(mrules, "base")!.mode, "BASE");
+    assert.equal(modeRule(mrules, "dockside")!.costMultiplier, 100);
+    const play = await rgs.play({ sessionID: id, amount: M, mode: modeRule(mrules, "base")!.mode });
     assert.equal(play.balance.amount, 999 * M);
     assert.equal(play.round.payoutMultiplier, 25);
     assert.ok(needsEndRound(play.round));
+    assert.equal(play.round.payout, 25 * M);
+    assert.ok(play.round.betID != null);
+    await rgs.event(id, "fs:3");
+    const mid = await rgs.authenticate(id); // unfinished round comes back, play shape + last event
+    assert.equal(mid.round?.payoutMultiplier, 25);
+    assert.equal(mid.round?.event, "fs:3");
     const end = await rgs.endRound(id);
     assert.equal(end.balance.amount, 1024 * M);
 
@@ -140,6 +153,8 @@ test("client against the mock RGS", async (t) => {
     await rgs.authenticate(loss);
     const lp = await rgs.play({ sessionID: loss, amount: M, mode: "base" });
     assert.equal(needsEndRound(lp.round), false);
+    assert.equal((await rgs.authenticate(loss)).round, null);
+    await assert.rejects(rgs.play({ sessionID: loss, amount: M, mode: "nope" }), (e: RgsError) => e.code === "ERR_VAL");
 
     const jpy = await rgs.authenticate(`j${Date.now()}:JPY`);
     assert.equal(formatAmount(jpy.balance.amount, jpy.balance.currency), "¥100,000");
@@ -150,8 +165,11 @@ test("client against the mock RGS", async (t) => {
       await assert.rejects(rgs.play({ sessionID: sid, amount: M, mode: "base" }), (e: RgsError) => e.code === code);
     }
     await assert.rejects(rgs.authenticate("x:expired"), (e: RgsError) => e.code === "ERR_IS");
-    const resume = await rgs.authenticate(`r${Date.now()}:resume`);
+    const rid = `r${Date.now()}:resume`;
+    const resume = await rgs.authenticate(rid);
     assert.ok(resume.round && needsEndRound(resume.round));
+    await rgs.endRound(rid);
+    assert.equal((await rgs.authenticate(rid)).round, null); // finished -> no round on authenticate
     await assert.rejects(rgs.event(id, "x".repeat(33)), (e: RgsError) => e.code === "ERR_VAL");
 
     const adapted = roundStateToScript(play.round.state, M, play.round.payoutMultiplier, "base");
@@ -263,48 +281,68 @@ test("controls: session readouts, net position and timer", () => {
   assert.equal(formatSessionTime(-5), "0:00");
 });
 
-test("launch: RGS host allow-list", () => {
-  assert.deepEqual([...DEFAULT_RGS_HOSTS], ["rgs.stake-engine.com", "rgs-us.stake-engine.com"]);
-  assert.equal(rgsHostsFrom(undefined), DEFAULT_RGS_HOSTS);
-  assert.equal(rgsHostsFrom("  "), DEFAULT_RGS_HOSTS);
-  assert.deepEqual([...rgsHostsFrom("RGS.stake-engine.com, *.stake-engine.com")], ["rgs.stake-engine.com", "*.stake-engine.com"]);
+test("launch: RGS host allow-list (build-time config, fail closed)", () => {
+  assert.deepEqual([...rgsHostsFrom(undefined)], []);
+  assert.deepEqual([...rgsHostsFrom("  ")], []);
+  const hosts = rgsHostsFrom("RGS.stake-engine.com, *.engine.io");
+  assert.deepEqual([...hosts], ["rgs.stake-engine.com", "*.engine.io"]);
   assert.throws(() => rgsHostsFrom("https://rgs.stake-engine.com"));
   assert.throws(() => rgsHostsFrom("*"));
-  assert.ok(hostAllowed("rgs.stake-engine.com", DEFAULT_RGS_HOSTS));
-  assert.ok(hostAllowed("RGS-US.stake-engine.com", DEFAULT_RGS_HOSTS));
-  assert.equal(hostAllowed("rgs.stake-engine.com.evil.com", DEFAULT_RGS_HOSTS), false);
-  assert.equal(hostAllowed("evilrgs.stake-engine.com", DEFAULT_RGS_HOSTS), false);
-  const wild = ["*.stake-engine.com"];
-  assert.ok(hostAllowed("rgs-eu.stake-engine.com", wild));
-  assert.equal(hostAllowed("stake-engine.com", wild), false);
-  assert.equal(hostAllowed("evilstake-engine.com", wild), false);
+  assert.throws(() => rgsHostsFrom("*.com x"));
+  assert.ok(hostAllowed("rgs.stake-engine.com", hosts));
+  assert.ok(hostAllowed("RGS.stake-engine.com", hosts));
+  assert.equal(hostAllowed("rgs.stake-engine.com.evil.com", hosts), false);
+  assert.equal(hostAllowed("evilrgs.stake-engine.com", hosts), false);
+  assert.equal(hostAllowed("rgs-us.stake-engine.com", hosts), false);
+  assert.ok(hostAllowed("rgs.engine.io", hosts));
+  assert.equal(hostAllowed("engine.io", hosts), false);
+  assert.equal(hostAllowed("evilengine.io", hosts), false);
+  // Likely candidate from Engine's self-review prompt ({team}.live.engine.io), unconfirmed.
+  const liveEngine = rgsHostsFrom("*.live.engine.io");
+  assert.ok(hostAllowed("acme-games.live.engine.io", liveEngine));
+  assert.ok(hostAllowed("a.b.live.engine.io", liveEngine));
+  assert.equal(hostAllowed("live.engine.io", liveEngine), false);
+  assert.equal(hostAllowed("rgs.engine.io", liveEngine), false);
+  assert.equal(hostAllowed("acme.live.engine.io.evil.com", liveEngine), false);
+  assert.equal(hostAllowed("acmelive.engine.io", liveEngine), false);
+  assert.equal(parseLaunch("sessionID=a&rgs_url=acme.live.engine.io", launchOptionsFor({ sandboxBuild: false, rgsHosts: "*.live.engine.io" })).kind, "live");
 
-  const prod = { allowedHosts: DEFAULT_RGS_HOSTS };
+  const prod = launchOptionsFor({ sandboxBuild: false, rgsHosts: "rgs.stake-engine.com, *.engine.io" });
   assert.equal(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", prod).kind, "live");
-  assert.equal(parseLaunch("sessionID=a&rgs_url=https://rgs-us.stake-engine.com/", prod).kind, "live");
+  assert.equal(parseLaunch("sessionID=a&rgs_url=https://rgs.engine.io/", prod).kind, "live");
   assert.deepEqual(parseLaunch("sessionID=a&rgs_url=rgs.example.com", prod), {
     kind: "error", reason: "rgs-host-not-allowed", detail: "rgs.example.com",
   });
   assert.equal(parseLaunch("replay=true&game=g&version=1&mode=base&event=1&rgs_url=evil.com", prod).kind, "error");
   assert.equal((parseLaunch("sessionID=a&rgs_url=http://rgs.stake-engine.com", prod) as { reason?: string }).reason, "invalid-rgs-url");
-  assert.equal(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", { allowedHosts: [] }).kind, "error"); // fail closed
-  // Production never takes localhost; dev keeps http://localhost behind allowLocalHttp.
+  assert.equal(parseLaunch("", prod).kind, "error"); // no sandbox outside sandbox builds
+  // Unset / empty build config: every host is refused.
+  for (const rgsHosts of [undefined, "", "  "]) {
+    const closed = launchOptionsFor({ sandboxBuild: false, rgsHosts });
+    assert.deepEqual(parseLaunch("sessionID=a&rgs_url=rgs.stake-engine.com", closed), {
+      kind: "error", reason: "rgs-hosts-unconfigured", detail: "rgs.stake-engine.com",
+    });
+    assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", closed).kind, "error");
+  }
+  // Production never takes localhost; sandbox dev keeps http://localhost behind allowLocalHttp.
   assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", prod).kind, "error");
   assert.equal(parseLaunch("sessionID=a&rgs_url=https://localhost:8105", prod).kind, "error");
-  assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", { ...prod, allowLocalHttp: true }).kind, "live");
-  assert.equal(normaliseRgsUrl("rgs.example.com", false, DEFAULT_RGS_HOSTS), null);
-  assert.equal(normaliseRgsUrl("rgs.stake-engine.com", false, DEFAULT_RGS_HOSTS), "https://rgs.stake-engine.com");
-  // No list (dev/review builds): any https host, as before.
-  assert.equal(parseLaunch("sessionID=a&rgs_url=rgs.example.com").kind, "live");
+  const dev = launchOptionsFor({ sandboxBuild: true });
+  assert.deepEqual(dev, { allowSandbox: true, allowLocalHttp: true });
+  assert.equal(parseLaunch("sessionID=a&rgs_url=http://localhost:8105", dev).kind, "live");
+  assert.deepEqual(parseLaunch("", dev), { kind: "sandbox" });
+  assert.equal(normaliseRgsUrl("rgs.example.com", false, hosts), null);
+  assert.equal(normaliseRgsUrl("rgs.stake-engine.com", false, hosts), "https://rgs.stake-engine.com");
 });
 
 test("launch: device values", () => {
-  const dev = (q: string) => parseLaunch(`sessionID=a&rgs_url=rgs.stake-engine.com${q}`);
+  const dev = (q: string) => parseLaunch(`sessionID=a&rgs_url=rgs.example.com${q}`);
   assert.equal((dev("") as { device?: string }).device, "desktop");
   assert.equal((dev("&device=") as { device?: string }).device, "desktop");
   assert.equal((dev("&device=desktop") as { device?: string }).device, "desktop");
   assert.equal((dev("&device=Mobile") as { device?: string }).device, "mobile");
-  assert.deepEqual(dev("&device=tablet"), { kind: "error", reason: "invalid-device", detail: "tablet" });
+  assert.equal((dev("&device=tablet") as { device?: string }).device, "tablet");
+  assert.deepEqual(dev("&device=phone"), { kind: "error", reason: "invalid-device", detail: "phone" });
   assert.equal(dev("&device=mobile2").kind, "error");
   assert.equal(parseLaunch("replay=true&game=g&version=1&mode=base&event=1&rgs_url=x.com&device=tv").kind, "error");
 });
@@ -439,4 +477,30 @@ test("book adapter: mystery records", () => {
   bad({ landed: "dockside" }, "buy");
   bad({ feature: "dock" }, "buy");
   bad({ landed: "dockside" }, "dockside");
+});
+
+test("config: gameModes from the server (array, any case, legacy betModes, fail closed)", () => {
+  const live = gameModesFrom({ gameModes: [
+    { mode: "BASE", costMultiplier: 1, maxBet: 10_000_000 }, { mode: "Dockside", costMultiplier: 100 },
+    { mode: "ANTE", costMultiplier: 1.5 }, { mode: "base", costMultiplier: 9 }, { mode: "", costMultiplier: 1 },
+    { mode: "FREE", costMultiplier: 0 }, { mode: "NOCOST" }, null,
+  ] });
+  assert.deepEqual(live, [
+    { mode: "BASE", costMultiplier: 1, maxBet: 10_000_000 }, { mode: "Dockside", costMultiplier: 100 }, { mode: "ANTE", costMultiplier: 1.5 },
+  ]);
+  // Legacy map shape, only when gameModes is absent.
+  assert.deepEqual(gameModesFrom({ betModes: { BASE: { costMultiplier: 1 }, BONUS: { costMultiplier: 100, maxBet: 1_000_000 } } }),
+    [{ mode: "BASE", costMultiplier: 1 }, { mode: "BONUS", costMultiplier: 100, maxBet: 1_000_000 }]);
+  assert.deepEqual(gameModesFrom({ gameModes: [], betModes: { BASE: { costMultiplier: 1 } } }), []);
+  assert.deepEqual(gameModesFrom({}), []);
+
+  const rules = rulesFromConfig({ ...cfg0, maxBet: 100_000_000, betLevels: [100_000, 1_000_000, 100_000_000], gameModes: live });
+  assert.equal(modeRule(rules, "dockside")!.mode, "Dockside"); // play() gets the server spelling
+  assert.equal(modeRule(rules, "base")!.maxBet, 10_000_000);
+  assert.equal(modeRule(rules, "yacht"), null);
+  assert.deepEqual(missingModes(rules, ["base", "ante", "dockside", "yacht", "mystery", "getaway"]), ["yacht", "mystery", "getaway"]);
+  assert.deepEqual(playableLevels(rules, "yacht", 1e12), []); // not offered by the server: nothing playable
+  assert.deepEqual(playableLevels(rules, "BASE", 1e12), [100_000, 1_000_000]);
+  assert.deepEqual(playableLevels(rules, "ante", 1_500_000), [100_000, 1_000_000]);
+  assert.deepEqual(playableLevels(rules, "ante", 1_499_999), [100_000]);
 });

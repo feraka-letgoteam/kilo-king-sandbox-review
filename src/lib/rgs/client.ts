@@ -4,6 +4,7 @@
  * that, after Feraka's go-ahead). Amounts are integer micro-units.
  */
 import type {
+  RgsGameMode,
   AuthenticateResponse,
   BalanceResponse,
   PlayResponse,
@@ -83,9 +84,33 @@ function checkConfig(c: unknown): RgsConfig {
     stepBet: isInt(v.stepBet) ? v.stepBet : 0,
     defaultBetLevel: isInt(v.defaultBetLevel) ? v.defaultBetLevel : betLevels[0]!,
     betLevels,
-    betModes: v.betModes && typeof v.betModes === "object" ? v.betModes : {},
+    gameModes: gameModesFrom(v as { gameModes?: unknown; betModes?: unknown }),
     jurisdiction: v.jurisdiction && typeof v.jurisdiction === "object" ? v.jurisdiction : {},
   };
+}
+
+/**
+ * config.gameModes (array of {mode, costMultiplier, maxBet}) is the live shape. A legacy
+ * `betModes` map ({NAME: {costMultiplier, maxBet}}) is folded in only when gameModes is absent.
+ * Entries without a positive cost are dropped, so a mode we can't price is never offered.
+ */
+export function gameModesFrom(c: { gameModes?: unknown; betModes?: unknown }): RgsGameMode[] {
+  const raw: unknown[] = Array.isArray(c.gameModes)
+    ? c.gameModes
+    : c.betModes && typeof c.betModes === "object"
+      ? Object.entries(c.betModes as Record<string, unknown>).map(([mode, m]) => ({ ...(m as object), mode }))
+      : [];
+  const out: RgsGameMode[] = [];
+  const seen = new Set<string>();
+  for (const e of raw) {
+    const m = e as Partial<RgsGameMode> | null;
+    if (!m || typeof m.mode !== "string" || !m.mode.trim() || !isNum(m.costMultiplier) || m.costMultiplier <= 0) continue;
+    const key = m.mode.trim().toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ mode: m.mode.trim(), costMultiplier: m.costMultiplier, ...(isInt(m.maxBet) && m.maxBet > 0 ? { maxBet: m.maxBet } : {}) });
+  }
+  return out;
 }
 
 /** /bet/event payloads are limited to 32 bytes. */

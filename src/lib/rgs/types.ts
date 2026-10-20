@@ -24,6 +24,12 @@ export type RgsJurisdiction = {
   minimumRoundDuration?: number;
 };
 
+/**
+ * One entry of authenticate config.gameModes (live docs, stake-engine.com/docs/rgs/wallet, per Bot 3).
+ * `mode` is the server's spelling (docs show "BASE"); send /wallet/play `mode` exactly as given here.
+ */
+export type RgsGameMode = { mode: string; costMultiplier: number; maxBet?: number };
+/** Legacy map shape (engineio/docs repo, March 2026: `betModes: {}`). Read only as a fallback. */
 export type RgsBetMode = { costMultiplier?: number; maxBet?: number; [key: string]: unknown };
 
 export type RgsConfig = {
@@ -33,11 +39,21 @@ export type RgsConfig = {
   stepBet: number;
   defaultBetLevel: number;
   betLevels: number[];
-  betModes: Record<string, RgsBetMode>;
+  /** Server bet modes and costs. checkConfig() also folds a legacy `betModes` map in here. */
+  gameModes: RgsGameMode[];
   jurisdiction: RgsJurisdiction;
 };
 
+/**
+ * /wallet/play round. Authenticate returns the same shape, only while a round is unfinished
+ * (resume, then /wallet/end-round). `amount` is the base bet; the debit was amount × costMultiplier.
+ */
 export type RgsRound = {
+  betID?: number | string;
+  /** Win in micro-units, when the server sends it. */
+  payout?: number;
+  /** Last /bet/event value saved for this round (resume point). */
+  event?: string;
   /** Float multiple of the base amount, e.g. 2.5. */
   payoutMultiplier: number;
   costMultiplier: number;
@@ -52,6 +68,7 @@ export type RgsRound = {
 
 export type AuthenticateResponse = {
   balance: RgsBalance;
+  /** null when the response has no round (nothing to resume). */
   round: RgsRound | null;
   config: RgsConfig;
   meta?: unknown;
