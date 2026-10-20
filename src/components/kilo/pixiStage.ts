@@ -650,8 +650,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     const hasValue = decor && cell.s === "brick" && cell.v != null;
     if (hasValue && cell.v != null) {
       const text = money(printed ?? stake * cell.v);
-      const maxW = size * 0.84;
-      let fontSize = Math.max(8, Math.floor(size * 0.16));
+      const maxW = size * 0.9;
+      // Phone legibility: never below 12px (e.g. 66px cells at 360 wide).
+      let fontSize = Math.max(12, Math.floor(size * 0.16));
       const label = new Text({
         text,
         style: {
@@ -661,18 +662,20 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           fontWeight: "700",
         },
       });
-      while (label.width > maxW && fontSize > 7) {
+      while (label.width > maxW && fontSize > 12) {
         fontSize -= 1;
         label.style.fontSize = fontSize;
       }
       if (label.width > maxW) label.scale.set(maxW / label.width);
       const plaque = new Sprite(plaqueTex);
+      const plaqueH = Math.max(size * 0.2, fontSize + 4);
+      const plaqueY = Math.min(size * 0.76, size * 0.985 - plaqueH);
       plaque.anchor.set(0.5, 0);
-      plaque.width = size * 0.91;
-      plaque.height = size * 0.2;
-      plaque.position.set(size / 2, size * 0.76);
+      plaque.width = size * 0.94;
+      plaque.height = plaqueH;
+      plaque.position.set(size / 2, plaqueY);
       label.anchor.set(0.5);
-      label.position.set(size / 2, size * 0.86);
+      label.position.set(size / 2, plaqueY + plaqueH / 2);
       root.addChild(plaque, label);
     }
     if (decor && cell.s === "splash") {
@@ -867,7 +870,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     // Keep that footer clear; its WIN and the collector plaque retain values.
     const tiny = host.closest(".kk-shell")?.getAttribute("data-compact") === "true";
     readout.hidden = !readoutActive || tiny;
-    const b = stageReadoutLayout(geom);
+    const b = stageReadoutLayout(geom, readout.dataset.kind === 'summary' ? 'summary' : 'local');
     const scale = world.scale.x;
     Object.assign(readout.style, {
       left: `${world.x + b.x * scale}px`, top: `${world.y + b.y * scale}px`,
@@ -2385,7 +2388,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           let awardSpot: { x: number; y: number } | null = null;
           let showAward = true;
           repaint = () => {
-            const b = stageReadoutLayout(geom);
+            const b = stageReadoutLayout(geom, 'summary');
             awardSpot = { x: b.x + b.width / 2, y: b.y + b.height / 2 };
             if (showAward) showReadout(capped ? "MAX WIN REACHED" : "Collected", money(spin.got));
           };

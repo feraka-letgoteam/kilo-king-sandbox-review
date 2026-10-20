@@ -1,12 +1,19 @@
 /** Presentation only. Keeps equations out of the tiny collector portrait. */
 export function stageReadoutLayout(g: {
   gx: number; gy: number; cell: number; gap: number; dw: number; dh: number;
-}) {
+}, kind: 'local' | 'summary' = 'local') {
   const width = g.cell * 5 + g.gap * 4;
   // Short landscape has no dock gap underneath; its 12px stage inset must
   // also contain the lip. Keep the same compact readout as a portrait phone.
   const compact = g.cell < 110;
   const height = compact ? 22 : 30;
+  // On a phone the round's combined total (e.g. "Collected 48,000") sits on
+  // the board between rows 2 and 3, not squeezed onto the frame's lower rail.
+  if (compact && kind === 'summary') {
+    const tall = Math.max(34, Math.round(g.cell * .5));
+    return { x: g.gx + width * .16, y: g.gy + g.cell * 2 - tall / 2, width: width * .68, height: tall,
+      labelSize: 12, amountSize: Math.max(18, Math.round(g.cell * .3)) };
+  }
   return {
     x: g.gx, y: g.gy + g.cell * 3 + 2, width, height,
     labelSize: compact ? 12 : 14,
