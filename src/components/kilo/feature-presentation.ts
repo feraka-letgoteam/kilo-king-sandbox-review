@@ -13,7 +13,7 @@ export const PURCHASE_PRESENTATION: Record<Exclude<PurchaseMode, 'chopper'>, {
 }> = {
   buy: { art: FEATURE_ART.dock, kicker: '3 SCATTERS',
     summary: t('card.buy.dock'),
-    confirmation: 'One marked package stays for one extra spin. Collectors advance the ×1 / ×2 / ×3 / ×10 ladder.', accent: '#8ce3d0' },
+    confirmation: 'Fishermen collect every package. Collectors advance the ×1 / ×2 / ×3 / ×10 ladder.', accent: '#8ce3d0' },
   yacht: { art: FEATURE_ART.yacht, kicker: '4 SCATTERS · VS',
     summary: t('card.buy.yacht'),
     confirmation: t('takeover.yachtConfirmation'), accent: '#ffcb62' },

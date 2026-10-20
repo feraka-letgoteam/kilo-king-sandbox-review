@@ -39,7 +39,7 @@ export const FEATURES: readonly BonusFeature[] = [
     multiplier: 1,
     art: "/kilo-v79/surfaces/dock.webp",
     detail:
-      "10 free spins. Fishermen collect every package at the current multiplier. A marked package stays for exactly one additional spin. Collectors advance the ×1 / ×2 / ×3 / ×10 ladder.",
+      "10 free spins. Fishermen collect every package at the current multiplier. Collectors advance the ×1 / ×2 / ×3 / ×10 ladder.",
   },
   {
     id: "scatter-4",

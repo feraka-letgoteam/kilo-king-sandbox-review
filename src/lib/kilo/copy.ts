@@ -204,6 +204,15 @@ export const COPY = {
   "info.modeTitle.buy": pair("Dockside Catch", "Dockside Catch"),
   "info.modeTitle.yacht": pair("Yacht Stash", "Yacht Stash"),
   "info.modeTitle.mystery": pair("Mystery Bonus", "Mystery Bonus"),
+  // Dockside tools (Feraka, Oct 20): dynamite and bazooka fire only when fishermen land with no packages.
+  "info.dynamite.lead": pair(
+    "During Dockside Catch, when fishermen land with no packages, dynamite may add two or three contraband packages. Dynamite package values are",
+    "During Dockside Catch, when fishermen land with no packages, dynamite may add two or three contraband packages. Dynamite package values are",
+  ),
+  "info.bazooka": pair(
+    "During Dockside Catch, when fishermen land with no packages, the bazooka may keep the fishermen, then refill the other positions. Any resulting collection uses the current multiplier. Tools are not guaranteed to activate.",
+    "During Dockside Catch, when fishermen land with no packages, the bazooka may keep the fishermen, then refill the other positions. Any resulting collection uses the current multiplier. Tools are not guaranteed to activate.",
+  ),
   "info.collection.formula": pair(
     "Collection = total package value × number of fishermen × current collection multiplier. The round payout limit still applies.",
     "Collection = total package value × number of fishermen × current collection multiplier. The round win limit still applies.",

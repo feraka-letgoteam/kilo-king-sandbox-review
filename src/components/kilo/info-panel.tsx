@@ -196,9 +196,6 @@ export function InfoPanel({
             <FeatureRow title={t("info.upgrades.title")} image={artUrl(ART.splash)}>
               <p>{t("info.upgrades.body")}</p>
             </FeatureRow>
-            <FeatureRow title="Marked cargo" image={CONTRABAND_ROOT + PACKAGE_META["package-king"].file}>
-              <p>When a Dockside Catch spin has packages but no fisherman, the highest-value eligible package may be marked. Its position and printed value survive exactly one additional spin. A collector on that spin collects it normally; otherwise it expires. The same package cannot renew its hold; a different package may then be marked. The hook does not shift a reserved package.</p>
-            </FeatureRow>
             {FEATURES.filter(feature=>feature.kind!=='preview'&&feature.id!=='scatter-3').map(feature=><FeatureRow key={feature.id} title={feature.title} image={feature.art}><p>{feature.detail}</p></FeatureRow>)}
             <FeatureRow title="VS progression & multipliers" image={CONTRABAND_ROOT + PACKAGE_META["package-king"].file}>
               <p>{t("info.vs.progression")}</p>
@@ -218,8 +215,7 @@ export function InfoPanel({
               image={artUrl(TOOL_PIVOTS.dynamite.file)}
             >
               <p>
-                During Dockside Catch, when fishermen land with zero or one package, dynamite may add two or
-                three contraband packages. Dynamite package values are{" "}
+                {t("info.dynamite.lead")}{" "}
                 <span className="kk-info-numeric">
                   2×, 5×, 10×, 15×, 20×, 25×, 50×, 100× or 200×
                 </span>{" "}
@@ -230,12 +226,7 @@ export function InfoPanel({
               title="Bazooka"
               image={artUrl(TOOL_PIVOTS.bazooka.file)}
             >
-              <p>
-                When fishermen land with zero or one package, the bazooka may keep the
-                fishermen and existing package, then refill the other positions. Any resulting
-                collection uses the current multiplier. Tools are not guaranteed
-                to activate.
-              </p>
+              <p>{t("info.bazooka")}</p>
             </FeatureRow>
           </section>
           <section
