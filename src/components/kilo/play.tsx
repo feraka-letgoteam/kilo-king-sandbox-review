@@ -82,6 +82,7 @@ import {
 } from "./scene-system";
 import { fitGameLayout } from "./layout";
 import { SlotControls } from "../slot-controls/SlotControls";
+import { IllustratedWin } from './IllustratedWin';
 import { createControlLayout } from "../slot-controls/layout";
 import { FeatureTakeover } from "./feature-takeover";
 import {
@@ -1346,6 +1347,7 @@ export function KiloTable({
             <div className="kk-canvas-wrap" data-testid="reel-host">
               <ReelStage onReady={onReady} boatStage={environmentId === 'max-win'} />
               <StageSurround width={layout.reelWidth} height={layout.reelHeight} mode={layout.compact ? "mini" : layout.mode} />
+              <IllustratedWin stake={stake} reduced={reducedMotion}/>
             </div>
           </div>
           <div

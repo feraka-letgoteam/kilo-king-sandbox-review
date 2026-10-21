@@ -1,0 +1,3134 @@
+{
+  "schemaVersion": 1,
+  "coordinateSpace": "normalized-full-layer-canvas",
+  "alpha": "straight/unassociated",
+  "colorSpace": "sRGB",
+  "sourceMethod": "Built-in image generation; geometry/alpha/format export script included",
+  "orientations": {
+    "desktop": {
+      "masterSize": [
+        2560,
+        1440
+      ],
+      "runtimeSize": [
+        1536,
+        864
+      ],
+      "viewport": [
+        0.08333333333333333,
+        0,
+        0.8333333333333334,
+        1
+      ],
+      "safeAreas": {
+        "logo": [
+          0.04,
+          0.02,
+          0.3,
+          0.18
+        ],
+        "reels": [
+          0.12,
+          0.18,
+          0.66,
+          0.65
+        ],
+        "king": [
+          0.79,
+          0.12,
+          0.2,
+          0.76
+        ],
+        "controls": [
+          0.12,
+          0.83,
+          0.66,
+          0.13
+        ]
+      },
+      "layers": [
+        {
+          "id": "sky",
+          "png": "desktop/sky.png",
+          "webp": "desktop/sky.webp",
+          "runtimeWebp": "runtime/desktop-sky.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 0,
+          "tileX": true,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "242974d45043133d29f2af7aab54008b0bc2c03e3393d91364e2a20825cd9e84"
+        },
+        {
+          "id": "clouds",
+          "png": "desktop/clouds.png",
+          "webp": "desktop/clouds.webp",
+          "runtimeWebp": "runtime/desktop-clouds.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#344c7c",
+          "opacity": 0.25,
+          "depth": 1,
+          "tileX": true,
+          "motion": {
+            "type": "scroll",
+            "periodSeconds": 110,
+            "amplitudeX": 0.08,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "37bfd4cd4a8a3ab22c551e0dad9fad7fd9eee52a33873c90e9cab61d7f770f75"
+        },
+        {
+          "id": "far-skyline",
+          "png": "desktop/far-skyline.png",
+          "webp": "desktop/far-skyline.webp",
+          "runtimeWebp": "runtime/desktop-far-skyline.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 2,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "4818f2d57bf4eabf917589369bff4dd4da597c892e276002bdfa93b0525b25f2"
+        },
+        {
+          "id": "mid-buildings",
+          "png": "desktop/mid-buildings.png",
+          "webp": "desktop/mid-buildings.webp",
+          "runtimeWebp": "runtime/desktop-mid-buildings.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 3,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "fcbb2b8c18656fa9feb67b5dc63eec8a453282c7deb2c6bcd0fa3b76d0f476b8"
+        },
+        {
+          "id": "neon-signs",
+          "png": "desktop/neon-signs.png",
+          "webp": "desktop/neon-signs.webp",
+          "runtimeWebp": "runtime/desktop-neon-signs.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "add",
+          "tint": "#ff7eaa",
+          "opacity": 0.18,
+          "depth": 4,
+          "tileX": false,
+          "motion": {
+            "type": "light",
+            "periodSeconds": 11,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "66c6df31fd5e88e89c53b86d24bcec2cb8e0f5ee56e7b582a4e9b54bb3ad7b74"
+        },
+        {
+          "id": "water",
+          "png": "desktop/water.png",
+          "webp": "desktop/water.webp",
+          "runtimeWebp": "runtime/desktop-water.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 5,
+          "tileX": true,
+          "motion": {
+            "type": "water",
+            "periodSeconds": 24,
+            "amplitudeX": 0.006,
+            "amplitudeY": 0.0015,
+            "rotationDegrees": 0
+          },
+          "sha256": "237b4f1e1a06146a96282ddaa16b60afdbdf851e4795096776e0abe5b5655f8a"
+        },
+        {
+          "id": "water-reflections",
+          "png": "desktop/water-reflections.png",
+          "webp": "desktop/water-reflections.webp",
+          "runtimeWebp": "runtime/desktop-water-reflections.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "add",
+          "tint": "#f8b44d",
+          "opacity": 0.13,
+          "depth": 6,
+          "tileX": false,
+          "motion": {
+            "type": "reflect",
+            "periodSeconds": 8,
+            "amplitudeX": 0.003,
+            "amplitudeY": 0.001,
+            "rotationDegrees": 0
+          },
+          "sha256": "7085514b55387ac35d1854670e0dac583734fafd9f0d3f96936b6589e65be5b6"
+        },
+        {
+          "id": "yacht",
+          "png": "desktop/yacht.png",
+          "webp": "desktop/yacht.webp",
+          "runtimeWebp": "runtime/desktop-yacht.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.665234375,
+            0.5263055555555556
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 0.85,
+          "depth": 7,
+          "tileX": false,
+          "motion": {
+            "type": "boat",
+            "periodSeconds": 17,
+            "amplitudeX": 0.004,
+            "amplitudeY": 0.0015,
+            "rotationDegrees": 0.35
+          },
+          "sha256": "7da7807fc8e8a0d1a0d8de17cecbd6084ad26a5ec15782a08f318c47c4b5c5f0"
+        },
+        {
+          "id": "palms-left",
+          "png": "desktop/palms-left.png",
+          "webp": "desktop/palms-left.webp",
+          "runtimeWebp": "runtime/desktop-palms-left.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            -0.15986287444866454,
+            1.0
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 8,
+          "tileX": false,
+          "motion": {
+            "type": "wind",
+            "periodSeconds": 12,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0.38
+          },
+          "sha256": "cf4d6ecad2c2b00411957244321ed6480467f62fc22c1ff8626ad9728914d85f"
+        },
+        {
+          "id": "palms-right",
+          "png": "desktop/palms-right.png",
+          "webp": "desktop/palms-right.webp",
+          "runtimeWebp": "runtime/desktop-palms-right.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            1.1565300309890911,
+            1.0
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 9,
+          "tileX": false,
+          "motion": {
+            "type": "wind",
+            "periodSeconds": 14,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0.32
+          },
+          "sha256": "98c55250d6a2d5aa12fdd413b5fa25c4134318649b3e2515681cd6ecbca4af6d"
+        },
+        {
+          "id": "foreground-dock",
+          "png": "desktop/foreground-dock.png",
+          "webp": "desktop/foreground-dock.webp",
+          "runtimeWebp": "runtime/desktop-foreground-dock.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 10,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "2e99fb729849577f3f72d9a0c04382e8bbb11d13283326a7d4308e264b3565ea"
+        },
+        {
+          "id": "props-left",
+          "png": "desktop/props-left.png",
+          "webp": "desktop/props-left.webp",
+          "runtimeWebp": "runtime/desktop-props-left.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 11,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "6ce7d08d3b0f9f16f2406dc4392a62c2b136b1a51d65196f574423a731f30ad5"
+        },
+        {
+          "id": "props-right",
+          "png": "desktop/props-right.png",
+          "webp": "desktop/props-right.webp",
+          "runtimeWebp": "runtime/desktop-props-right.webp",
+          "size": [
+            2560,
+            1440
+          ],
+          "runtimeSize": [
+            1536,
+            864
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 12,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "8d0c8e054166ceaf59cad62ac5694c15317ce99bf77db64e97ba0618563cdb10"
+        }
+      ],
+      "compositeWebp": "runtime/desktop-base-composite.webp",
+      "modeComposites": {
+        "base": "runtime/desktop-base-composite.webp",
+        "scatter3": "runtime/desktop-scatter3-composite.webp",
+        "vs4": "runtime/desktop-vs4-composite.webp",
+        "vs5": "runtime/desktop-vs5-composite.webp",
+        "max": "runtime/desktop-max-composite.webp"
+      }
+    },
+    "phone": {
+      "masterSize": [
+        1440,
+        2560
+      ],
+      "runtimeSize": [
+        864,
+        1536
+      ],
+      "viewport": [
+        0.08333333333333333,
+        0,
+        0.8333333333333334,
+        1
+      ],
+      "safeAreas": {
+        "logo": [
+          0.025,
+          0.02,
+          0.57,
+          0.16
+        ],
+        "reels": [
+          0.01,
+          0.38,
+          0.72,
+          0.27
+        ],
+        "king": [
+          0.72,
+          0.24,
+          0.27,
+          0.4
+        ],
+        "controls": [
+          0.01,
+          0.65,
+          0.98,
+          0.08
+        ]
+      },
+      "layers": [
+        {
+          "id": "sky",
+          "png": "phone/sky.png",
+          "webp": "phone/sky.webp",
+          "runtimeWebp": "runtime/phone-sky.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 0,
+          "tileX": true,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "cbebe1c64b3d80c77ea5ca0a77f2d167dc5af919d957197c14346112c0cd3659"
+        },
+        {
+          "id": "clouds",
+          "png": "phone/clouds.png",
+          "webp": "phone/clouds.webp",
+          "runtimeWebp": "runtime/phone-clouds.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#344c7c",
+          "opacity": 0.25,
+          "depth": 1,
+          "tileX": true,
+          "motion": {
+            "type": "scroll",
+            "periodSeconds": 110,
+            "amplitudeX": 0.08,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "337451a3efa8b10906802b889a03684dc7f3f7ce143747115cbef04661dbe7d6"
+        },
+        {
+          "id": "far-skyline",
+          "png": "phone/far-skyline.png",
+          "webp": "phone/far-skyline.webp",
+          "runtimeWebp": "runtime/phone-far-skyline.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 2,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "ade5c361ce0ce99ea0f0c9e6f2025752c2a8415a8e484a23639852bef523bfca"
+        },
+        {
+          "id": "mid-buildings",
+          "png": "phone/mid-buildings.png",
+          "webp": "phone/mid-buildings.webp",
+          "runtimeWebp": "runtime/phone-mid-buildings.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 3,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "7bd66975cbd46048c21780b9dd84dddd2c06cc26fa6c4a1a274d6731e566adc7"
+        },
+        {
+          "id": "neon-signs",
+          "png": "phone/neon-signs.png",
+          "webp": "phone/neon-signs.webp",
+          "runtimeWebp": "runtime/phone-neon-signs.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "add",
+          "tint": "#ff7eaa",
+          "opacity": 0.18,
+          "depth": 4,
+          "tileX": false,
+          "motion": {
+            "type": "light",
+            "periodSeconds": 11,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "4d4924d27bdf448dfc57af343b4aa2ace788ef95c4b6e3987853caafafbca6e1"
+        },
+        {
+          "id": "water",
+          "png": "phone/water.png",
+          "webp": "phone/water.webp",
+          "runtimeWebp": "runtime/phone-water.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 5,
+          "tileX": true,
+          "motion": {
+            "type": "water",
+            "periodSeconds": 24,
+            "amplitudeX": 0.006,
+            "amplitudeY": 0.0015,
+            "rotationDegrees": 0
+          },
+          "sha256": "5577be47aefe6c1c5029640004d75c3d64b85a7286c4130dab86c5f6cfd2c37a"
+        },
+        {
+          "id": "water-reflections",
+          "png": "phone/water-reflections.png",
+          "webp": "phone/water-reflections.webp",
+          "runtimeWebp": "runtime/phone-water-reflections.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "add",
+          "tint": "#f8b44d",
+          "opacity": 0.13,
+          "depth": 6,
+          "tileX": false,
+          "motion": {
+            "type": "reflect",
+            "periodSeconds": 8,
+            "amplitudeX": 0.003,
+            "amplitudeY": 0.001,
+            "rotationDegrees": 0
+          },
+          "sha256": "27f7d33341876865c30873032ea9f134b8e6f9bcefe9483604bf540c6fd1693e"
+        },
+        {
+          "id": "yacht",
+          "png": "phone/yacht.png",
+          "webp": "phone/yacht.webp",
+          "runtimeWebp": "runtime/phone-yacht.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.3628472222222222,
+            0.5308437500000001
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 0.85,
+          "depth": 7,
+          "tileX": false,
+          "motion": {
+            "type": "boat",
+            "periodSeconds": 17,
+            "amplitudeX": 0.004,
+            "amplitudeY": 0.0015,
+            "rotationDegrees": 0.35
+          },
+          "sha256": "97b29445c1c22c00566da940bd66ecb664ab3f5b9c961a0d8122f6e46a494d1f"
+        },
+        {
+          "id": "palms-left",
+          "png": "phone/palms-left.png",
+          "webp": "phone/palms-left.webp",
+          "runtimeWebp": "runtime/phone-palms-left.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            -0.6289341358327207,
+            1.0
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 8,
+          "tileX": false,
+          "motion": {
+            "type": "wind",
+            "periodSeconds": 12,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0.38
+          },
+          "sha256": "8b1a9b990de7896a74b96b1bc61550bc127d2b26918a6837f06fd448cef82f00"
+        },
+        {
+          "id": "palms-right",
+          "png": "phone/palms-right.png",
+          "webp": "phone/palms-right.webp",
+          "runtimeWebp": "runtime/phone-palms-right.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            1.8356015455436534,
+            1.0
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 9,
+          "tileX": false,
+          "motion": {
+            "type": "wind",
+            "periodSeconds": 14,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0.32
+          },
+          "sha256": "7afea3a2307ded844f2b99cdb521f695fb1bed3016aa0ef8726fa921e12ecf85"
+        },
+        {
+          "id": "foreground-dock",
+          "png": "phone/foreground-dock.png",
+          "webp": "phone/foreground-dock.webp",
+          "runtimeWebp": "runtime/phone-foreground-dock.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 10,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "788e2b22715c12c2ac2930f38156a97878a619e29203f49b4f23a4ae87a659c0"
+        },
+        {
+          "id": "props-left",
+          "png": "phone/props-left.png",
+          "webp": "phone/props-left.webp",
+          "runtimeWebp": "runtime/phone-props-left.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 11,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "b1310da6c2e15bae86dae3b5991cc4bb47f0a616c1902544bc5a358edcc21648"
+        },
+        {
+          "id": "props-right",
+          "png": "phone/props-right.png",
+          "webp": "phone/props-right.webp",
+          "runtimeWebp": "runtime/phone-props-right.webp",
+          "size": [
+            1440,
+            2560
+          ],
+          "runtimeSize": [
+            864,
+            1536
+          ],
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "frameCount": 1,
+          "fps": 0,
+          "blendMode": "normal",
+          "tint": "#ffffff",
+          "opacity": 1,
+          "depth": 12,
+          "tileX": false,
+          "motion": {
+            "type": "fixed",
+            "periodSeconds": 0,
+            "amplitudeX": 0,
+            "amplitudeY": 0,
+            "rotationDegrees": 0
+          },
+          "sha256": "b9bea0f4fe7c6ad390a4e5db21c4c455056562655e4abe7a8897303f249ad454"
+        }
+      ],
+      "compositeWebp": "runtime/phone-base-composite.webp",
+      "modeComposites": {
+        "base": "runtime/phone-base-composite.webp",
+        "scatter3": "runtime/phone-scatter3-composite.webp",
+        "vs4": "runtime/phone-vs4-composite.webp",
+        "vs5": "runtime/phone-vs5-composite.webp",
+        "max": "runtime/phone-max-composite.webp"
+      }
+    }
+  },
+  "modes": {
+    "base": {
+      "label": "Marina base",
+      "tint": "#ffffff",
+      "layerOverrides": {}
+    },
+    "scatter3": {
+      "label": "Dockside Catch",
+      "tint": "#fff4e9",
+      "layerOverrides": {
+        "water-reflections": {
+          "tint": "#ffbe63",
+          "opacity": 0.17
+        },
+        "yacht": {
+          "opacity": 0.63
+        },
+        "neon-signs": {
+          "opacity": 0.12
+        }
+      }
+    },
+    "vs4": {
+      "label": "Yacht Stash",
+      "tint": "#e4eeff",
+      "layerOverrides": {
+        "yacht": {
+          "opacity": 1,
+          "translateX": -0.09
+        },
+        "water-reflections": {
+          "tint": "#b58cff",
+          "opacity": 0.16
+        },
+        "neon-signs": {
+          "tint": "#ff507d",
+          "opacity": 0.23
+        },
+        "props-left": {
+          "opacity": 0.65
+        }
+      }
+    },
+    "vs5": {
+      "label": "Yacht Stash \u2014 boostedVS",
+      "tint": "#e5f8ff",
+      "layerOverrides": {
+        "yacht": {
+          "opacity": 1,
+          "translateX": -0.16
+        },
+        "water-reflections": {
+          "tint": "#71dfef",
+          "opacity": 0.18
+        },
+        "neon-signs": {
+          "tint": "#dc8fff",
+          "opacity": 0.25
+        },
+        "mid-buildings": {
+          "opacity": 0.82
+        },
+        "props-left": {
+          "opacity": 0.5
+        }
+      }
+    },
+    "max": {
+      "label": "The Getaway",
+      "tint": "#e9edff",
+      "layerOverrides": {
+        "yacht": {
+          "opacity": 0.5,
+          "translateX": 0.08
+        },
+        "mid-buildings": {
+          "opacity": 0.65
+        },
+        "far-skyline": {
+          "opacity": 0.78
+        },
+        "water-reflections": {
+          "tint": "#c18dff",
+          "opacity": 0.14
+        },
+        "neon-signs": {
+          "opacity": 0.1
+        },
+        "props-left": {
+          "opacity": 0.4
+        },
+        "props-right": {
+          "opacity": 0.4
+        }
+      }
+    }
+  },
+  "limits": {
+    "targetFps": 30,
+    "maxCanvasPixels": 850000,
+    "maxDpr": 1.5,
+    "maxRuntimeTextureEdge": 2048,
+    "pauseWhenHidden": true,
+    "reducedMotion": "render one stable frame; no ambient oscillation or drift"
+  },
+  "notes": [
+    "Masters keep requested exactdimensions. Central5/6 width is the viewport; remaining1/6 gives20% horizontal overscan relative to the viewport.",
+    "Separate source drawings were generated then geometrically placed; phone components retain object aspect rather than stretching the wholelandscape.",
+    "Sky and water tile edges are matched with32px edgeconditioning; native ripple shapes arepreserved. Clouds use clear alpha at both edges.",
+    "Mode differences are coordinated lighting/placement routes over shared continuous environment layers, not five new flattenedpaintings.",
+    "Static composites are fallbacks and inspectionreferences, not the animation implementation.",
+    "Large transparent master canvases should not be uploaded as atlases; use providedruntime copies and trim-to-alpha subtextures ifdesired."
+  ],
+  "files": [
+    {
+      "file": "desktop/base-composite.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 4070726,
+      "sha256": "4bd681ebb40c9c286997617ede653c476c1606b9d327912cc5b2961c840f498c"
+    },
+    {
+      "file": "desktop/base-composite.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 2996298,
+      "sha256": "af57116097abd30a5d30053be19eb57a508f3f5d966698337fd76335a56e7282"
+    },
+    {
+      "file": "desktop/clouds.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 118774,
+      "sha256": "37bfd4cd4a8a3ab22c551e0dad9fad7fd9eee52a33873c90e9cab61d7f770f75"
+    },
+    {
+      "file": "desktop/clouds.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 57702,
+      "sha256": "7d3c9584767fd25516e917cb1bd5e4ba02194d5c2b2a2876fbbf1d90f390413b"
+    },
+    {
+      "file": "desktop/far-skyline.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 567793,
+      "sha256": "4818f2d57bf4eabf917589369bff4dd4da597c892e276002bdfa93b0525b25f2"
+    },
+    {
+      "file": "desktop/far-skyline.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 435846,
+      "sha256": "34b0e05018fe81a8dfe4038e9e289e3f2ee7b17ba431d8fefab8f64e59e20359"
+    },
+    {
+      "file": "desktop/foreground-dock.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 701406,
+      "sha256": "2e99fb729849577f3f72d9a0c04382e8bbb11d13283326a7d4308e264b3565ea"
+    },
+    {
+      "file": "desktop/foreground-dock.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 525718,
+      "sha256": "b9754c8a92ccc2a1901fe5f88440c045008308dc1f6d8192d5f5b3521bbb628b"
+    },
+    {
+      "file": "desktop/mid-buildings.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1229988,
+      "sha256": "fcbb2b8c18656fa9feb67b5dc63eec8a453282c7deb2c6bcd0fa3b76d0f476b8"
+    },
+    {
+      "file": "desktop/mid-buildings.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 970384,
+      "sha256": "fc20c6d6d39e334e10d3a0a24abb4b9f053643a107a9ef640e2c89561885a6b6"
+    },
+    {
+      "file": "desktop/neon-signs.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 38457,
+      "sha256": "66c6df31fd5e88e89c53b86d24bcec2cb8e0f5ee56e7b582a4e9b54bb3ad7b74"
+    },
+    {
+      "file": "desktop/neon-signs.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 13108,
+      "sha256": "77b1fc418325f9ca153698d92b09b5e3fdd26af2ff5e73e9882b29a9be10a0a2"
+    },
+    {
+      "file": "desktop/palms-left.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        -0.15986287444866454,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 382081,
+      "sha256": "cf4d6ecad2c2b00411957244321ed6480467f62fc22c1ff8626ad9728914d85f"
+    },
+    {
+      "file": "desktop/palms-left.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        -0.15986287444866454,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 271210,
+      "sha256": "1123b9cd3b1ec68fea347f9e145d47c953d2ca9a0af37aebe34a86db2d24fa40"
+    },
+    {
+      "file": "desktop/palms-right.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        1.1565300309890911,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 172628,
+      "sha256": "98c55250d6a2d5aa12fdd413b5fa25c4134318649b3e2515681cd6ecbca4af6d"
+    },
+    {
+      "file": "desktop/palms-right.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        1.1565300309890911,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 115684,
+      "sha256": "53756e200abdeabe790aece618b3f4a1e94f69844acbb5add44c8b63b9c6f070"
+    },
+    {
+      "file": "desktop/props-left.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 254109,
+      "sha256": "6ce7d08d3b0f9f16f2406dc4392a62c2b136b1a51d65196f574423a731f30ad5"
+    },
+    {
+      "file": "desktop/props-left.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 179382,
+      "sha256": "96d5286e6c14e8889e536801ded7567ad3c0ecb3c852cb1b300c7ccadcb5c855"
+    },
+    {
+      "file": "desktop/props-right.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 233931,
+      "sha256": "8d0c8e054166ceaf59cad62ac5694c15317ce99bf77db64e97ba0618563cdb10"
+    },
+    {
+      "file": "desktop/props-right.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 163638,
+      "sha256": "d624b564d3fcd9ab5ab375221c7dbf109748b8b5f7aaec79736cc177040abfb7"
+    },
+    {
+      "file": "desktop/sky.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1650486,
+      "sha256": "242974d45043133d29f2af7aab54008b0bc2c03e3393d91364e2a20825cd9e84"
+    },
+    {
+      "file": "desktop/sky.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1131280,
+      "sha256": "51fc8bb8d90aa84deb954ec88018ce51f95c2da55062f9028602b7bfa293d267"
+    },
+    {
+      "file": "desktop/water-reflections.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 536254,
+      "sha256": "7085514b55387ac35d1854670e0dac583734fafd9f0d3f96936b6589e65be5b6"
+    },
+    {
+      "file": "desktop/water-reflections.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 283536,
+      "sha256": "de72556c7d0533dc00cc016daca137b7537957c398a4da7627c51628c9d8f738"
+    },
+    {
+      "file": "desktop/water.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1122916,
+      "sha256": "237b4f1e1a06146a96282ddaa16b60afdbdf851e4795096776e0abe5b5655f8a"
+    },
+    {
+      "file": "desktop/water.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 777772,
+      "sha256": "eada7b72cd3ccc7561db0e5947857436e34527386d3e462155d5b4a208d31841"
+    },
+    {
+      "file": "desktop/yacht.png",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.665234375,
+        0.5263055555555556
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 115753,
+      "sha256": "7da7807fc8e8a0d1a0d8de17cecbd6084ad26a5ec15782a08f318c47c4b5c5f0"
+    },
+    {
+      "file": "desktop/yacht.webp",
+      "size": [
+        2560,
+        1440
+      ],
+      "pivot": [
+        0.665234375,
+        0.5263055555555556
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 80862,
+      "sha256": "d275c7daee2bdd5266482dbc2bfb488ca63f164ed37819d4a8d602de6d8e63db"
+    },
+    {
+      "file": "phone/base-composite.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 3700872,
+      "sha256": "b99090f274b659f5c07d7abdcdf9c924df668da7bc44d813a43d26680afdeee6"
+    },
+    {
+      "file": "phone/base-composite.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 2639510,
+      "sha256": "485e1695b97fb240582b70176471a78450bdb5cc38cf807ddb65b7e03a68aac2"
+    },
+    {
+      "file": "phone/clouds.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 123380,
+      "sha256": "337451a3efa8b10906802b889a03684dc7f3f7ce143747115cbef04661dbe7d6"
+    },
+    {
+      "file": "phone/clouds.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 62372,
+      "sha256": "b5ae92afb92ffb27ad70307e3df11e520ae3f59d0a6b9ec6592accd81063780a"
+    },
+    {
+      "file": "phone/far-skyline.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 505774,
+      "sha256": "ade5c361ce0ce99ea0f0c9e6f2025752c2a8415a8e484a23639852bef523bfca"
+    },
+    {
+      "file": "phone/far-skyline.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 381976,
+      "sha256": "429f73ecd44811ffe7a18e26eeea49bd4e4778dd44cbf3c76d14e2ec3de2771b"
+    },
+    {
+      "file": "phone/foreground-dock.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 860311,
+      "sha256": "788e2b22715c12c2ac2930f38156a97878a619e29203f49b4f23a4ae87a659c0"
+    },
+    {
+      "file": "phone/foreground-dock.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 583150,
+      "sha256": "8abfec0a3bbdd32dfe42238ee1506ad61dffc25329e9c65899a43c8081e4a971"
+    },
+    {
+      "file": "phone/mid-buildings.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 718082,
+      "sha256": "7bd66975cbd46048c21780b9dd84dddd2c06cc26fa6c4a1a274d6731e566adc7"
+    },
+    {
+      "file": "phone/mid-buildings.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 566466,
+      "sha256": "4e33a5513f38a7c3fa9da16e5bec23ef874da8b42631c428ff78595c45330c2a"
+    },
+    {
+      "file": "phone/neon-signs.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 28263,
+      "sha256": "4d4924d27bdf448dfc57af343b4aa2ace788ef95c4b6e3987853caafafbca6e1"
+    },
+    {
+      "file": "phone/neon-signs.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 8136,
+      "sha256": "30233950028bcc0a685a692ba63a037e9d9bcfc2321044a3b7e12d647801d10c"
+    },
+    {
+      "file": "phone/palms-left.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        -0.6289341358327207,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 698239,
+      "sha256": "8b1a9b990de7896a74b96b1bc61550bc127d2b26918a6837f06fd448cef82f00"
+    },
+    {
+      "file": "phone/palms-left.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        -0.6289341358327207,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 479482,
+      "sha256": "8843fbe29e4c235ef5cf02e8c72b4ae24fcc22a3fb68d722bdbf34ff9e5d8c11"
+    },
+    {
+      "file": "phone/palms-right.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        1.8356015455436534,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 128971,
+      "sha256": "7afea3a2307ded844f2b99cdb521f695fb1bed3016aa0ef8726fa921e12ecf85"
+    },
+    {
+      "file": "phone/palms-right.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        1.8356015455436534,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 79698,
+      "sha256": "23f18958644cdbbbe9eb75769ba05b442b139ed0bbb06ebc449d713a805715fa"
+    },
+    {
+      "file": "phone/props-left.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 487767,
+      "sha256": "b1310da6c2e15bae86dae3b5991cc4bb47f0a616c1902544bc5a358edcc21648"
+    },
+    {
+      "file": "phone/props-left.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 349190,
+      "sha256": "8e36ef68855480aa350cb7165e3e12a3f995e8f7569c0b7cc280c75e70df06a2"
+    },
+    {
+      "file": "phone/props-right.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 190205,
+      "sha256": "b9bea0f4fe7c6ad390a4e5db21c4c455056562655e4abe7a8897303f249ad454"
+    },
+    {
+      "file": "phone/props-right.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 131316,
+      "sha256": "4a38d5eb9c06a5ec88d72b6b76c24e9a238f9db3862023fdcfbb3e6187b37d8a"
+    },
+    {
+      "file": "phone/sky.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1448326,
+      "sha256": "cbebe1c64b3d80c77ea5ca0a77f2d167dc5af919d957197c14346112c0cd3659"
+    },
+    {
+      "file": "phone/sky.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 956582,
+      "sha256": "7da20676ce9a697d02d856f654577ec1baaa8b0e1d57cf49757dcdf1e5327be7"
+    },
+    {
+      "file": "phone/water-reflections.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 600479,
+      "sha256": "27f7d33341876865c30873032ea9f134b8e6f9bcefe9483604bf540c6fd1693e"
+    },
+    {
+      "file": "phone/water-reflections.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 295710,
+      "sha256": "78228657f49152e33dce5eb2aaacbaddbefb1db56d2cf5a16ded725f73c5567d"
+    },
+    {
+      "file": "phone/water.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1114933,
+      "sha256": "5577be47aefe6c1c5029640004d75c3d64b85a7286c4130dab86c5f6cfd2c37a"
+    },
+    {
+      "file": "phone/water.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 770638,
+      "sha256": "8c426241a606512eb3df930a7bb15ae45071c9b8fcbc522351dc89be64acfee8"
+    },
+    {
+      "file": "phone/yacht.png",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.3628472222222222,
+        0.5308437500000001
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 327224,
+      "sha256": "97b29445c1c22c00566da940bd66ecb664ab3f5b9c961a0d8122f6e46a494d1f"
+    },
+    {
+      "file": "phone/yacht.webp",
+      "size": [
+        1440,
+        2560
+      ],
+      "pivot": [
+        0.3628472222222222,
+        0.5308437500000001
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 244096,
+      "sha256": "4a7f10e0cf4f16c5a434f506cf2037ef00b67f223a3b1cd0d61921974de69661"
+    },
+    {
+      "file": "runtime/desktop-base-composite.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1816075,
+      "sha256": "8d471d667a46893918e54b6ad9ce4fc57d424adae8e0e82635f399919274ee2a"
+    },
+    {
+      "file": "runtime/desktop-base-composite.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1362382,
+      "sha256": "ff093052c83a19d4c6d167db6ad6a789fdf6907350e78f09703094d6413996b4"
+    },
+    {
+      "file": "runtime/desktop-clouds.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 54357,
+      "sha256": "831a4c0fad79bc003991cf0e2844d717c2409165f626581e3e1a4fb7dd9f8c01"
+    },
+    {
+      "file": "runtime/desktop-clouds.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 25904,
+      "sha256": "0f4edf01f493afe49eed15b412fc571541b2d5899d8671bfe4f026901a1889e6"
+    },
+    {
+      "file": "runtime/desktop-far-skyline.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 246514,
+      "sha256": "e62303f0a476ad851b77beba1da24f87812d65b9b3e357c563a04144782bc213"
+    },
+    {
+      "file": "runtime/desktop-far-skyline.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 198510,
+      "sha256": "ff901e1768149cf96932f859f499b91df81f931e359811193e1a6b7bb4923efd"
+    },
+    {
+      "file": "runtime/desktop-foreground-dock.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 282750,
+      "sha256": "9f889cb67e828ae8a9dac1fef8c9e8fb64bd2840ec0e88a1a2b554d62ffefc1d"
+    },
+    {
+      "file": "runtime/desktop-foreground-dock.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 213810,
+      "sha256": "2d2ec6b9fac031bc6d39a252bda53beb51bf2bb2398989d5bdacfcfebea05c6b"
+    },
+    {
+      "file": "runtime/desktop-max-composite.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1654787,
+      "sha256": "5fd4e081749f0f48b52559bcf40b283fce7e463b80e2690a8acaa287a3684970"
+    },
+    {
+      "file": "runtime/desktop-max-composite.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1222172,
+      "sha256": "912e7955df20573b73bd92e0dbf79abda8a3011cb1bf89409f8551912cc67260"
+    },
+    {
+      "file": "runtime/desktop-mid-buildings.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 510764,
+      "sha256": "ab10c11f220e197e8fd49be8084aa0caeb864499db68afeb416e18b56e936045"
+    },
+    {
+      "file": "runtime/desktop-mid-buildings.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 423274,
+      "sha256": "9df96f203168d5118527a0cb2e02e543ec8b24a867196551f10605c637807315"
+    },
+    {
+      "file": "runtime/desktop-neon-signs.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 115208,
+      "sha256": "ad79fa1c4838f0a5ad07b5c698d81092645c61e310f92b554da21c47ccf58e00"
+    },
+    {
+      "file": "runtime/desktop-neon-signs.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 42786,
+      "sha256": "e4218003831c3f6e610baceacf7f35a64471cc70e3feebf9047cc35a8aad9544"
+    },
+    {
+      "file": "runtime/desktop-palms-left.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        -0.15986287444866454,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 165355,
+      "sha256": "8044dbf34997d638f195c2863d02dfbb62403c099cf6f982b85d93b47f61bd4a"
+    },
+    {
+      "file": "runtime/desktop-palms-left.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        -0.15986287444866454,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 116160,
+      "sha256": "11e47a4de6e7b4a05cad0fe4e9520020fbe3f0d58cd8bd35b87b947ccd475691"
+    },
+    {
+      "file": "runtime/desktop-palms-right.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        1.1565300309890911,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 74354,
+      "sha256": "8990e84099cdad0c418df253b84b410e3c8cdddd34ce9689155934ae16dca547"
+    },
+    {
+      "file": "runtime/desktop-palms-right.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        1.1565300309890911,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 68170,
+      "sha256": "c6405ae5de867e8c12e0b06dda9630f1de2465d82d9769a688e3051a88385a1c"
+    },
+    {
+      "file": "runtime/desktop-props-left.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 101381,
+      "sha256": "c89680a298622bd2777def482939de682d6673d507b9d11725aba11f51d2c5e8"
+    },
+    {
+      "file": "runtime/desktop-props-left.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 73334,
+      "sha256": "8bfd977d8597881ced16cb1daa3e62c9a081ba45ff9a43710e8736bd189420e2"
+    },
+    {
+      "file": "runtime/desktop-props-right.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 96097,
+      "sha256": "8c5841389fd08ced5459fc10a73d08780a87b63d66df5ec1eedbb69808d2ff30"
+    },
+    {
+      "file": "runtime/desktop-props-right.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 67800,
+      "sha256": "269e117e97b12fbefef86390aab34fe4a85fe7d72a483c5d380be1db9d3c5d3d"
+    },
+    {
+      "file": "runtime/desktop-scatter3-composite.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1798193,
+      "sha256": "ae4bc155b3009f068a6f41d56c2fabf8e43c3983230d4d10bff04e9164e55d7f"
+    },
+    {
+      "file": "runtime/desktop-scatter3-composite.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1344560,
+      "sha256": "6678e95ae39a03ace5c9c469d0e22d6c79ced51e6affb02a5e308c3d805e6acd"
+    },
+    {
+      "file": "runtime/desktop-sky.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 900812,
+      "sha256": "c9d11909170cd88baff28e0fc08671f1c8b7d9efe8ab3b6ccf9825fdd05d4fe6"
+    },
+    {
+      "file": "runtime/desktop-sky.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 611016,
+      "sha256": "4d9bbf2e0bb1a47d3e7b3b1d13ea42a100c7925605db639941c0397da4df8b1e"
+    },
+    {
+      "file": "runtime/desktop-vs4-composite.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1731147,
+      "sha256": "9e79b8a67fe65d58d5c3528a552feefee380c204e635f8d9feef172605c06e94"
+    },
+    {
+      "file": "runtime/desktop-vs4-composite.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1281392,
+      "sha256": "c578a05f5d9040e6e9ae0a9ce42032e88a75e55580892ecd6bcf21925a319944"
+    },
+    {
+      "file": "runtime/desktop-vs5-composite.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1719650,
+      "sha256": "3881855a8d8b0ebf92865d2cc36845606dd59ff880d6166a6cb5d0c2a2367c9a"
+    },
+    {
+      "file": "runtime/desktop-vs5-composite.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1275192,
+      "sha256": "d291f92a65b531e6aed1dfb36ebd42823234aa6cce31c471466d0f7437707a26"
+    },
+    {
+      "file": "runtime/desktop-water-reflections.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 228223,
+      "sha256": "a394edb9c584b36d0f41c58c67196b72c3465ba7f7b5e19582b5645020a991f2"
+    },
+    {
+      "file": "runtime/desktop-water-reflections.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 122250,
+      "sha256": "a2792e2e4070992991373302c241d60f5736c9dbb90b7fb575d8c3cb5cfeaade"
+    },
+    {
+      "file": "runtime/desktop-water.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 591964,
+      "sha256": "74136d70351dd8550db495d65816a038e4fe2a203cd5371b647a69c514c451d8"
+    },
+    {
+      "file": "runtime/desktop-water.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 409416,
+      "sha256": "cdbff30d50c620fc98e8fc7cf0987375af0de599a3280beb84a45fe2afb74e3f"
+    },
+    {
+      "file": "runtime/desktop-yacht.png",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.665234375,
+        0.5263055555555556
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 49686,
+      "sha256": "2aec82ef2f1f9646771b3d5d6987c45b3edd301107242b0c1b0102baeb6c58db"
+    },
+    {
+      "file": "runtime/desktop-yacht.webp",
+      "size": [
+        1536,
+        864
+      ],
+      "pivot": [
+        0.665234375,
+        0.5263055555555556
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 34546,
+      "sha256": "3df514014a07191aabb87500cf3bf4ef1dd596645d30ccc93ca7391c94739ce6"
+    },
+    {
+      "file": "runtime/phone-base-composite.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1702205,
+      "sha256": "df162b1d16b3243059f2d39bfb8706d334224a38216f29ad02f9cab7bb50c652"
+    },
+    {
+      "file": "runtime/phone-base-composite.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1252204,
+      "sha256": "4fcd32a775bfc702c1a82ff93027d9d855139b008780bcada3ccccca85a04a2b"
+    },
+    {
+      "file": "runtime/phone-clouds.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 56086,
+      "sha256": "08717f49d9a6dacce41b3c70ec0c65bd7711bf74fb322c8212deea773fccf84b"
+    },
+    {
+      "file": "runtime/phone-clouds.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 28520,
+      "sha256": "c1cd98e3d17e7f17b3eab0a7af13cec122ef68b3a871c893014517beabeadcc1"
+    },
+    {
+      "file": "runtime/phone-far-skyline.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 226698,
+      "sha256": "fc8e4cce4bd4665c824c06a6a92c34ec630187e264d1c7180298b56062ddc292"
+    },
+    {
+      "file": "runtime/phone-far-skyline.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 177182,
+      "sha256": "6a0d63ba159448edcc65beef44eb0a1f72e00f32399ec105d880a4ae9962575d"
+    },
+    {
+      "file": "runtime/phone-foreground-dock.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 354917,
+      "sha256": "d7eba7bd286abcac51d0e84d45afde0f3208306f41034c1b4907e6ce846eaeda"
+    },
+    {
+      "file": "runtime/phone-foreground-dock.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 243864,
+      "sha256": "d4709c1446faec576f76a6074181d72f0ec1325bdb46cac6e101cbbf7bc31a6c"
+    },
+    {
+      "file": "runtime/phone-max-composite.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1570536,
+      "sha256": "ec3517d5e92edec12489465473bec264dd134cd29f5413bab55e8faada330901"
+    },
+    {
+      "file": "runtime/phone-max-composite.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1135518,
+      "sha256": "7e92b9a5e376782b6589533ea6f9ec6559c0ccf66f0f6b2496e1444aa9bcde42"
+    },
+    {
+      "file": "runtime/phone-mid-buildings.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 295101,
+      "sha256": "47390d3147a5e4fab696d05cfb217ca66a9a0f9da74e3d9110f285434ad65c81"
+    },
+    {
+      "file": "runtime/phone-mid-buildings.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 242876,
+      "sha256": "94ffd5ed7342b84e92350c3e3dedc5badab9052b91461d193b97ac723358e9c1"
+    },
+    {
+      "file": "runtime/phone-neon-signs.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 65302,
+      "sha256": "06ffe9cdd19e24266760ba12fe63e9d184311d3352d639ac5158778ab6b39844"
+    },
+    {
+      "file": "runtime/phone-neon-signs.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 24624,
+      "sha256": "a016dd0390743847b29210161721d26697de52286089b525de235f29cda46da7"
+    },
+    {
+      "file": "runtime/phone-palms-left.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        -0.6289341358327207,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 325654,
+      "sha256": "b631aebb2bdd45296fff3e52b09dd14447ba69e1ee590a5bc0c30121b4d693af"
+    },
+    {
+      "file": "runtime/phone-palms-left.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        -0.6289341358327207,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 236650,
+      "sha256": "97fa8e43059bd9492124a819a41ead04b8d37eac02303b4917d923837696dbd4"
+    },
+    {
+      "file": "runtime/phone-palms-right.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        1.8356015455436534,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 57757,
+      "sha256": "4bad26565cf8ed8ae6372696983d8c16a608cc849a820fb10e9b55a656c44504"
+    },
+    {
+      "file": "runtime/phone-palms-right.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        1.8356015455436534,
+        1.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 39456,
+      "sha256": "2da29bd56c930525b5c5fc074ff4574ec7c76ff90e4a0f58d1a68cc9edcf6c55"
+    },
+    {
+      "file": "runtime/phone-props-left.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 205406,
+      "sha256": "e549d3199f7860fd8ec3c3310b3a946956cbaefb9821f84342ee173f1c38d9e1"
+    },
+    {
+      "file": "runtime/phone-props-left.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 152486,
+      "sha256": "743aa13b4ef3f46a9f7a099cacaf9862886e1a767608e9abd2594c4ef3c8e4ad"
+    },
+    {
+      "file": "runtime/phone-props-right.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 79040,
+      "sha256": "0c1d9f6135c2f191c6c1971ce0bca94c1f4369b54c2d51ba1ef92746c788c66f"
+    },
+    {
+      "file": "runtime/phone-props-right.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 56218,
+      "sha256": "9f9c1d1051987fe692b7f2299c45ecab768af6335979e58d5b590f0509e1a589"
+    },
+    {
+      "file": "runtime/phone-scatter3-composite.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1682084,
+      "sha256": "149b7c71b2f6aa256afd1b071d35d1554856de2ed1aa53d157732bceb582aaee"
+    },
+    {
+      "file": "runtime/phone-scatter3-composite.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1235774,
+      "sha256": "678a347b8077fa100a8e80aab1a4cb757d4926a1577bce0f0de42fcf817467fc"
+    },
+    {
+      "file": "runtime/phone-sky.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 819633,
+      "sha256": "8c933dfc83b83f106fa52b6347bf9967369df126b104ef387e842518a0c6ac88"
+    },
+    {
+      "file": "runtime/phone-sky.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 550686,
+      "sha256": "b0f88df1a6b49f23e160d917fb249e71e723cf7979a3745cb5df1d734a209608"
+    },
+    {
+      "file": "runtime/phone-vs4-composite.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1623194,
+      "sha256": "05c8fa5756cf517f1172523842187710b7e3b7017989243977d1a58d6938ef41"
+    },
+    {
+      "file": "runtime/phone-vs4-composite.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1185940,
+      "sha256": "81c178bb4fc053ccc6cc9a0255a6dae163c0d20deabc78ab7ecc27d4c5a3df43"
+    },
+    {
+      "file": "runtime/phone-vs5-composite.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1611443,
+      "sha256": "544fd7fb5a26ae0557f0f960da3f5b6d95705f7e59a07a7093b2a98f44356247"
+    },
+    {
+      "file": "runtime/phone-vs5-composite.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 1171694,
+      "sha256": "5425a6fe0044d261721b9b5e688170f172856215ac5b790cad44cb05c92029fe"
+    },
+    {
+      "file": "runtime/phone-water-reflections.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 257521,
+      "sha256": "7642512f3628fad95ee68118d5bca9402ee2b1f05dbb88b5b6790280ede6c80f"
+    },
+    {
+      "file": "runtime/phone-water-reflections.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "add",
+      "bytes": 135730,
+      "sha256": "e594fedbd5f8df601441512794320a0edc6aaad541d80609ef4ee20299c919dd"
+    },
+    {
+      "file": "runtime/phone-water.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 585837,
+      "sha256": "a3c900daf8b313f595852e437556a9f89ef5ba8d63bfcabe05fc52bd1c3f5b82"
+    },
+    {
+      "file": "runtime/phone-water.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 399368,
+      "sha256": "75eff44b72e6fafffde6a155225d3152e65f6f4a74e1ef542a2ff1cc26d8eca4"
+    },
+    {
+      "file": "runtime/phone-yacht.png",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.3628472222222222,
+        0.5308437500000001
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 132994,
+      "sha256": "d3fb9431fc4f32c1840fd4dd19dba6c2e08e1c7a52c2790a5017c8537a7a2da5"
+    },
+    {
+      "file": "runtime/phone-yacht.webp",
+      "size": [
+        864,
+        1536
+      ],
+      "pivot": [
+        0.3628472222222222,
+        0.5308437500000001
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "bytes": 102646,
+      "sha256": "d8b388ac754bfb64e837da418bdfb93862f4bee5c7ce4bcf9e4fd2e542e1b4cb"
+    }
+  ]
+}

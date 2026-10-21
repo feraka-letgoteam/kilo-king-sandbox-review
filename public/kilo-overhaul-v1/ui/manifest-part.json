@@ -1,0 +1,1714 @@
+{
+  "category": "ui",
+  "version": 1,
+  "colorSpace": "sRGB",
+  "alphaMode": "straight",
+  "runtimeControlBarUnchanged": true,
+  "exportProfile": "existing matte portrait-solid base; existing native hover/press/disabled rules",
+  "assets": [
+    {
+      "file": "ui/controls/spin-idle.png",
+      "webp": "ui/controls/spin-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        128,
+        128
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "spin",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/spin-hover.png",
+      "webp": "ui/controls/spin-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        128,
+        128
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "spin",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/spin-pressed.png",
+      "webp": "ui/controls/spin-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        128,
+        128
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "spin",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/spin-disabled.png",
+      "webp": "ui/controls/spin-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        128,
+        128
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "spin",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/spin.png",
+      "webp": "ui/icons/spin.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "spin",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/buy-idle.png",
+      "webp": "ui/controls/buy-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "buy",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/buy-hover.png",
+      "webp": "ui/controls/buy-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "buy",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/buy-pressed.png",
+      "webp": "ui/controls/buy-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "buy",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/buy-disabled.png",
+      "webp": "ui/controls/buy-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "buy",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/buy.png",
+      "webp": "ui/icons/buy.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "buy",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/bet-up-idle.png",
+      "webp": "ui/controls/bet-up-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-up",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/bet-up-hover.png",
+      "webp": "ui/controls/bet-up-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-up",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/bet-up-pressed.png",
+      "webp": "ui/controls/bet-up-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-up",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/bet-up-disabled.png",
+      "webp": "ui/controls/bet-up-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-up",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/bet-up.png",
+      "webp": "ui/icons/bet-up.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "bet-up",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/bet-down-idle.png",
+      "webp": "ui/controls/bet-down-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-down",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/bet-down-hover.png",
+      "webp": "ui/controls/bet-down-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-down",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/bet-down-pressed.png",
+      "webp": "ui/controls/bet-down-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-down",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/bet-down-disabled.png",
+      "webp": "ui/controls/bet-down-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        44,
+        44
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "bet-down",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/bet-down.png",
+      "webp": "ui/icons/bet-down.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "bet-down",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/turbo-idle.png",
+      "webp": "ui/controls/turbo-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "turbo",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/turbo-hover.png",
+      "webp": "ui/controls/turbo-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "turbo",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/turbo-pressed.png",
+      "webp": "ui/controls/turbo-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "turbo",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/turbo-disabled.png",
+      "webp": "ui/controls/turbo-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "turbo",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/turbo.png",
+      "webp": "ui/icons/turbo.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "turbo",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/auto-idle.png",
+      "webp": "ui/controls/auto-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "auto",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/auto-hover.png",
+      "webp": "ui/controls/auto-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "auto",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/auto-pressed.png",
+      "webp": "ui/controls/auto-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "auto",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/auto-disabled.png",
+      "webp": "ui/controls/auto-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "auto",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/auto.png",
+      "webp": "ui/icons/auto.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "auto",
+      "tintable": true
+    },
+    {
+      "file": "ui/controls/menu-idle.png",
+      "webp": "ui/controls/menu-idle.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "menu",
+      "state": "idle",
+      "stateRules": "Existing solid portrait base."
+    },
+    {
+      "file": "ui/controls/menu-hover.png",
+      "webp": "ui/controls/menu-hover.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "menu",
+      "state": "hover",
+      "stateRules": "Rim changes to existing edgeLight; icon/geometry unchanged."
+    },
+    {
+      "file": "ui/controls/menu-pressed.png",
+      "webp": "ui/controls/menu-pressed.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "menu",
+      "state": "pressed",
+      "stateRules": "Target stationary; inset edge supplies feedback."
+    },
+    {
+      "file": "ui/controls/menu-disabled.png",
+      "webp": "ui/controls/menu-disabled.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "artRect": [
+        8,
+        8,
+        240,
+        240
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "button-state",
+      "control": "menu",
+      "state": "disabled",
+      "stateRules": "Full face/rim/icon opacity retained; native disabling is behavioral and must be enforced by host."
+    },
+    {
+      "file": "ui/icons/menu.png",
+      "webp": "ui/icons/menu.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "artRect": [
+        16,
+        16,
+        96,
+        96
+      ],
+      "nativeSize": [
+        64,
+        64
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "native-icon",
+      "control": "menu",
+      "tintable": true
+    },
+    {
+      "file": "ui/panels/readout-nine-slice.png",
+      "webp": "ui/panels/readout-nine-slice.webp",
+      "size": [
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        256
+      ],
+      "artRect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "nativeSize": [
+        256,
+        256
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-panel",
+      "nineSlice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      }
+    },
+    {
+      "file": "ui/panels/readout-slices/r0-c0.png",
+      "webp": "ui/panels/readout-slices/r0-c0.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "panel": "readout",
+      "row": 0,
+      "column": 0,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/readout-slices/r0-c1.png",
+      "webp": "ui/panels/readout-slices/r0-c1.webp",
+      "size": [
+        448,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        32
+      ],
+      "nativeSize": [
+        224,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        0,
+        448,
+        32
+      ],
+      "panel": "readout",
+      "row": 0,
+      "column": 1,
+      "stretch": "horizontal"
+    },
+    {
+      "file": "ui/panels/readout-slices/r0-c2.png",
+      "webp": "ui/panels/readout-slices/r0-c2.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        0,
+        32,
+        32
+      ],
+      "panel": "readout",
+      "row": 0,
+      "column": 2,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/readout-slices/r1-c0.png",
+      "webp": "ui/panels/readout-slices/r1-c0.webp",
+      "size": [
+        32,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        448
+      ],
+      "nativeSize": [
+        16,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        32,
+        32,
+        448
+      ],
+      "panel": "readout",
+      "row": 1,
+      "column": 0,
+      "stretch": "vertical"
+    },
+    {
+      "file": "ui/panels/readout-slices/r1-c1.png",
+      "webp": "ui/panels/readout-slices/r1-c1.webp",
+      "size": [
+        448,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        448
+      ],
+      "nativeSize": [
+        224,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        32,
+        448,
+        448
+      ],
+      "panel": "readout",
+      "row": 1,
+      "column": 1,
+      "stretch": "both"
+    },
+    {
+      "file": "ui/panels/readout-slices/r1-c2.png",
+      "webp": "ui/panels/readout-slices/r1-c2.webp",
+      "size": [
+        32,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        448
+      ],
+      "nativeSize": [
+        16,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        32,
+        32,
+        448
+      ],
+      "panel": "readout",
+      "row": 1,
+      "column": 2,
+      "stretch": "vertical"
+    },
+    {
+      "file": "ui/panels/readout-slices/r2-c0.png",
+      "webp": "ui/panels/readout-slices/r2-c0.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        480,
+        32,
+        32
+      ],
+      "panel": "readout",
+      "row": 2,
+      "column": 0,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/readout-slices/r2-c1.png",
+      "webp": "ui/panels/readout-slices/r2-c1.webp",
+      "size": [
+        448,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        32
+      ],
+      "nativeSize": [
+        224,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        480,
+        448,
+        32
+      ],
+      "panel": "readout",
+      "row": 2,
+      "column": 1,
+      "stretch": "horizontal"
+    },
+    {
+      "file": "ui/panels/readout-slices/r2-c2.png",
+      "webp": "ui/panels/readout-slices/r2-c2.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        480,
+        32,
+        32
+      ],
+      "panel": "readout",
+      "row": 2,
+      "column": 2,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/modal-nine-slice.png",
+      "webp": "ui/panels/modal-nine-slice.webp",
+      "size": [
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        256
+      ],
+      "artRect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "nativeSize": [
+        256,
+        256
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-panel",
+      "nineSlice": {
+        "left": 32,
+        "top": 32,
+        "right": 32,
+        "bottom": 32
+      }
+    },
+    {
+      "file": "ui/panels/modal-slices/r0-c0.png",
+      "webp": "ui/panels/modal-slices/r0-c0.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "panel": "modal",
+      "row": 0,
+      "column": 0,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/modal-slices/r0-c1.png",
+      "webp": "ui/panels/modal-slices/r0-c1.webp",
+      "size": [
+        448,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        32
+      ],
+      "nativeSize": [
+        224,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        0,
+        448,
+        32
+      ],
+      "panel": "modal",
+      "row": 0,
+      "column": 1,
+      "stretch": "horizontal"
+    },
+    {
+      "file": "ui/panels/modal-slices/r0-c2.png",
+      "webp": "ui/panels/modal-slices/r0-c2.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        0,
+        32,
+        32
+      ],
+      "panel": "modal",
+      "row": 0,
+      "column": 2,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/modal-slices/r1-c0.png",
+      "webp": "ui/panels/modal-slices/r1-c0.webp",
+      "size": [
+        32,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        448
+      ],
+      "nativeSize": [
+        16,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        32,
+        32,
+        448
+      ],
+      "panel": "modal",
+      "row": 1,
+      "column": 0,
+      "stretch": "vertical"
+    },
+    {
+      "file": "ui/panels/modal-slices/r1-c1.png",
+      "webp": "ui/panels/modal-slices/r1-c1.webp",
+      "size": [
+        448,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        448
+      ],
+      "nativeSize": [
+        224,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        32,
+        448,
+        448
+      ],
+      "panel": "modal",
+      "row": 1,
+      "column": 1,
+      "stretch": "both"
+    },
+    {
+      "file": "ui/panels/modal-slices/r1-c2.png",
+      "webp": "ui/panels/modal-slices/r1-c2.webp",
+      "size": [
+        32,
+        448
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        448
+      ],
+      "nativeSize": [
+        16,
+        224
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        32,
+        32,
+        448
+      ],
+      "panel": "modal",
+      "row": 1,
+      "column": 2,
+      "stretch": "vertical"
+    },
+    {
+      "file": "ui/panels/modal-slices/r2-c0.png",
+      "webp": "ui/panels/modal-slices/r2-c0.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        0,
+        480,
+        32,
+        32
+      ],
+      "panel": "modal",
+      "row": 2,
+      "column": 0,
+      "stretch": "none"
+    },
+    {
+      "file": "ui/panels/modal-slices/r2-c1.png",
+      "webp": "ui/panels/modal-slices/r2-c1.webp",
+      "size": [
+        448,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        448,
+        32
+      ],
+      "nativeSize": [
+        224,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        32,
+        480,
+        448,
+        32
+      ],
+      "panel": "modal",
+      "row": 2,
+      "column": 1,
+      "stretch": "horizontal"
+    },
+    {
+      "file": "ui/panels/modal-slices/r2-c2.png",
+      "webp": "ui/panels/modal-slices/r2-c2.webp",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "artRect": [
+        0,
+        0,
+        32,
+        32
+      ],
+      "nativeSize": [
+        16,
+        16
+      ],
+      "alphaMode": "straight",
+      "blendMode": "normal",
+      "kind": "nine-slice-piece",
+      "sourceRect": [
+        480,
+        480,
+        32,
+        32
+      ],
+      "panel": "modal",
+      "row": 2,
+      "column": 2,
+      "stretch": "none"
+    }
+  ],
+  "palette": {
+    "edge": "#b28c50",
+    "edgeLight": "#f0d39a",
+    "edgeShade": "#59412b",
+    "face": "#020c12",
+    "well": "#01070b",
+    "faceLight": "#203c40",
+    "accent": "#79cbb0",
+    "ink": "#ffffff"
+  },
+  "sourceChecksums": [
+    {
+      "file": "src/components/slot-controls/SlotControls.tsx",
+      "sha256": "5dca27342d493a57e86aebafd037979837d2cd3d2216b0245ac090c4b0092321"
+    },
+    {
+      "file": "src/components/slot-controls/controls.css",
+      "sha256": "923b61071a8df333c459b4a3cde543cb1c3dbda81c4b9d2cb79849ed3ecb133b"
+    },
+    {
+      "file": "src/components/slot-controls/tokens.ts",
+      "sha256": "d56ee098b3bb1c83addd96a628847dd66a705bcdd46f639d74d24701043b9c93"
+    },
+    {
+      "file": "src/components/kilo/control-theme.ts",
+      "sha256": "2a30f022c4f73a0213b2c1ce1fc21b0d742445c29e3ae1b42081a8c80a6bf857"
+    },
+    {
+      "file": "src/components/kilo/stage-art.ts",
+      "sha256": "e78afb65ddbffb110b13c52ee835e5dda9eeb44e71115ecafca1fc582384d526"
+    }
+  ],
+  "notes": [
+    "Exports are derived from current native SVG/Lucide icons and CSS theme without redesigning or editing the control bar.",
+    "No full runtime control layout is rasterised; export assets must be fitted to existing target rectangles if ever consumed.",
+    "Source-native rasterization with Skia is a build export, not a browser screenshot or live computed-CSS verification.",
+    "The existing desktop clearcoat is not baked into these solid portrait-base sprites. Runtime control source remains unchanged.",
+    "Four state textures intentionally retain full opacity; disabled enforcement and jurisdiction restrictions remain host behavior."
+  ]
+}

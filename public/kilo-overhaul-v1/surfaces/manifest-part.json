@@ -1,0 +1,1267 @@
+{
+  "schemaVersion": 1,
+  "publicRoot": "/kilo-overhaul-v1/surfaces/",
+  "assets": [
+    {
+      "id": "dock",
+      "png": "dock.png",
+      "webp": "dock.webp",
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        384.0,
+        256.0
+      ],
+      "alphaBounds": [
+        151,
+        0,
+        654,
+        500
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/dock-generated.png"
+    },
+    {
+      "id": "yacht",
+      "png": "yacht.png",
+      "webp": "yacht.webp",
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        384.0,
+        256.0
+      ],
+      "alphaBounds": [
+        10,
+        7,
+        757,
+        499
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/yacht-generated.png"
+    },
+    {
+      "id": "getaway",
+      "png": "getaway.png",
+      "webp": "getaway.webp",
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        384.0,
+        256.0
+      ],
+      "alphaBounds": [
+        7,
+        100,
+        763,
+        470
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/getaway-generated.png"
+    },
+    {
+      "id": "completion",
+      "png": "completion.png",
+      "webp": "completion.webp",
+      "size": [
+        768,
+        512
+      ],
+      "pivot": [
+        384.0,
+        256.0
+      ],
+      "alphaBounds": [
+        56,
+        3,
+        713,
+        483
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/completion-generated.png"
+    },
+    {
+      "id": "logo-wide",
+      "png": "logo-wide.png",
+      "webp": "logo-wide.webp",
+      "size": [
+        1200,
+        386
+      ],
+      "pivot": [
+        600.0,
+        193.0
+      ],
+      "alphaBounds": [
+        31,
+        15,
+        1172,
+        348
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/logo-wide-generated.png"
+    },
+    {
+      "id": "logo-stacked",
+      "png": "logo-stacked.png",
+      "webp": "logo-stacked.webp",
+      "size": [
+        640,
+        526
+      ],
+      "pivot": [
+        320.0,
+        263.0
+      ],
+      "alphaBounds": [
+        20,
+        23,
+        631,
+        526
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/logo-stacked-generated.png"
+    },
+    {
+      "id": "cabinet",
+      "png": "cabinet.png",
+      "webp": "cabinet.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "pivot": [
+        768.0,
+        512.0
+      ],
+      "alphaBounds": [
+        20,
+        12,
+        1519,
+        992
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/cabinet-generated.png",
+      "nineSlice": {
+        "left": 208,
+        "top": 208,
+        "right": 208,
+        "bottom": 208
+      },
+      "transparentCenter": [
+        208,
+        208,
+        1328,
+        816
+      ]
+    },
+    {
+      "id": "mystery",
+      "png": "mystery.png",
+      "webp": "mystery.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "pivot": [
+        768.0,
+        512.0
+      ],
+      "alphaBounds": [
+        0,
+        10,
+        1536,
+        1024
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/mystery-generated.png"
+    },
+    {
+      "id": "reel-well",
+      "png": "reel-well.png",
+      "webp": "reel-well.webp",
+      "size": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "alphaBounds": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/reel-well-generated.png"
+    },
+    {
+      "id": "modal-panel",
+      "png": "modal-panel.png",
+      "webp": "modal-panel.webp",
+      "size": [
+        900,
+        600
+      ],
+      "pivot": [
+        450.0,
+        300.0
+      ],
+      "alphaBounds": [
+        12,
+        42,
+        888,
+        543
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/modal-panel-generated.png",
+      "nineSlice": {
+        "left": 80,
+        "top": 80,
+        "right": 80,
+        "bottom": 80
+      }
+    },
+    {
+      "id": "banner",
+      "png": "banner.png",
+      "webp": "banner.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "pivot": [
+        600.0,
+        200.0
+      ],
+      "alphaBounds": [
+        30,
+        24,
+        1171,
+        361
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "colorSpace": "sRGB",
+      "alpha": "straight",
+      "style": "matte hand-inked cel illustration",
+      "source": "source/banner-generated.png"
+    },
+    {
+      "id": "dock-action",
+      "png": "runtime/dock-action.png",
+      "webp": "runtime/dock-action.webp",
+      "size": [
+        1536,
+        768
+      ],
+      "frameSize": [
+        384,
+        256
+      ],
+      "pivot": [
+        192,
+        128
+      ],
+      "frameCount": 12,
+      "fps": 30,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "motionAuthoring": "bounded local deformation of newly generated illustration; not separately hand-drawn poses"
+    },
+    {
+      "id": "yacht-action",
+      "png": "runtime/yacht-action.png",
+      "webp": "runtime/yacht-action.webp",
+      "size": [
+        1536,
+        768
+      ],
+      "frameSize": [
+        384,
+        256
+      ],
+      "pivot": [
+        192,
+        128
+      ],
+      "frameCount": 12,
+      "fps": 30,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "motionAuthoring": "bounded local deformation of newly generated illustration; not separately hand-drawn poses"
+    },
+    {
+      "id": "getaway-action",
+      "png": "runtime/getaway-action.png",
+      "webp": "runtime/getaway-action.webp",
+      "size": [
+        1536,
+        768
+      ],
+      "frameSize": [
+        384,
+        256
+      ],
+      "pivot": [
+        192,
+        128
+      ],
+      "frameCount": 12,
+      "fps": 30,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "motionAuthoring": "bounded local deformation of newly generated illustration; not separately hand-drawn poses"
+    },
+    {
+      "id": "completion-action",
+      "png": "runtime/completion-action.png",
+      "webp": "runtime/completion-action.webp",
+      "size": [
+        1536,
+        768
+      ],
+      "frameSize": [
+        384,
+        256
+      ],
+      "pivot": [
+        192,
+        128
+      ],
+      "frameCount": 12,
+      "fps": 30,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "motionAuthoring": "bounded local deformation of newly generated illustration; not separately hand-drawn poses"
+    },
+    {
+      "id": "result-max-win-composite",
+      "png": "results/max-win-title.png",
+      "webp": "results/max-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "purpose": "God Mode result title composite",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-fill",
+      "png": "results/max-win-fill.png",
+      "webp": "results/max-win-fill.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        135,
+        1991,
+        554
+      ],
+      "purpose": "God Mode result title fill",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-outline",
+      "png": "results/max-win-outline.png",
+      "webp": "results/max-win-outline.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "purpose": "God Mode result title outline",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-shine-mask",
+      "png": "results/max-win-shine-mask.png",
+      "webp": "results/max-win-shine-mask.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        135,
+        1991,
+        554
+      ],
+      "purpose": "God Mode result title shine-mask",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-no-win-composite",
+      "png": "results/no-win-title.png",
+      "webp": "results/no-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "purpose": "God Mode result title composite",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-fill",
+      "png": "results/no-win-fill.png",
+      "webp": "results/no-win-fill.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        89,
+        94,
+        1987,
+        594
+      ],
+      "purpose": "God Mode result title fill",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-outline",
+      "png": "results/no-win-outline.png",
+      "webp": "results/no-win-outline.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "purpose": "God Mode result title outline",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-shine-mask",
+      "png": "results/no-win-shine-mask.png",
+      "webp": "results/no-win-shine-mask.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        89,
+        94,
+        1987,
+        594
+      ],
+      "purpose": "God Mode result title shine-mask",
+      "text": "NO WIN"
+    }
+  ],
+  "clips": {
+    "dock": {
+      "url": "/kilo-overhaul-v1/surfaces/runtime/dock-action.webp",
+      "width": 1536,
+      "height": 768,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        }
+      ],
+      "bounds": [
+        75,
+        0,
+        327,
+        251
+      ],
+      "registrationBounds": [
+        75,
+        0,
+        327,
+        250
+      ],
+      "reference": {
+        "width": 768,
+        "height": 512,
+        "bounds": [
+          151,
+          0,
+          654,
+          500
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "durations": [
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336
+      ]
+    },
+    "yacht": {
+      "url": "/kilo-overhaul-v1/surfaces/runtime/yacht-action.webp",
+      "width": 1536,
+      "height": 768,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        }
+      ],
+      "bounds": [
+        5,
+        3,
+        379,
+        250
+      ],
+      "registrationBounds": [
+        5,
+        3,
+        379,
+        250
+      ],
+      "reference": {
+        "width": 768,
+        "height": 512,
+        "bounds": [
+          10,
+          7,
+          757,
+          499
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "durations": [
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336
+      ]
+    },
+    "getaway": {
+      "url": "/kilo-overhaul-v1/surfaces/runtime/getaway-action.webp",
+      "width": 1536,
+      "height": 768,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        }
+      ],
+      "bounds": [
+        2,
+        50,
+        382,
+        236
+      ],
+      "registrationBounds": [
+        3,
+        50,
+        382,
+        235
+      ],
+      "reference": {
+        "width": 768,
+        "height": 512,
+        "bounds": [
+          7,
+          100,
+          763,
+          470
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "durations": [
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336
+      ]
+    },
+    "completion": {
+      "url": "/kilo-overhaul-v1/surfaces/runtime/completion-action.webp",
+      "width": 1536,
+      "height": 768,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 0,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 256,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        },
+        {
+          "x": 1152,
+          "y": 512,
+          "w": 384,
+          "h": 256
+        }
+      ],
+      "bounds": [
+        28,
+        0,
+        357,
+        243
+      ],
+      "registrationBounds": [
+        28,
+        1,
+        357,
+        242
+      ],
+      "reference": {
+        "width": 768,
+        "height": 512,
+        "bounds": [
+          56,
+          3,
+          713,
+          483
+        ]
+      },
+      "sequence": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "durations": [
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336,
+        33.333333333333336
+      ]
+    }
+  },
+  "motionAuthoring": {
+    "dock": {
+      "method": "bounded local deformation of newly generated illustration; not separately hand-drawn poses",
+      "frameCount": 12,
+      "fps": 30,
+      "loop": false,
+      "sameCanvas": true,
+      "pivot": [
+        192,
+        128
+      ],
+      "maxDisplacementPixels": [
+        1.438,
+        1.853
+      ],
+      "firstLastIdentical": true,
+      "hostClock": "retain existing entry/retrigger/completion timing"
+    },
+    "yacht": {
+      "method": "bounded local deformation of newly generated illustration; not separately hand-drawn poses",
+      "frameCount": 12,
+      "fps": 30,
+      "loop": false,
+      "sameCanvas": true,
+      "pivot": [
+        192,
+        128
+      ],
+      "maxDisplacementPixels": [
+        2.741,
+        0.813
+      ],
+      "firstLastIdentical": true,
+      "hostClock": "retain existing entry/retrigger/completion timing"
+    },
+    "getaway": {
+      "method": "bounded local deformation of newly generated illustration; not separately hand-drawn poses",
+      "frameCount": 12,
+      "fps": 30,
+      "loop": false,
+      "sameCanvas": true,
+      "pivot": [
+        192,
+        128
+      ],
+      "maxDisplacementPixels": [
+        1.168,
+        3.056
+      ],
+      "firstLastIdentical": true,
+      "hostClock": "retain existing entry/retrigger/completion timing"
+    },
+    "completion": {
+      "method": "bounded local deformation of newly generated illustration; not separately hand-drawn poses",
+      "frameCount": 12,
+      "fps": 30,
+      "loop": false,
+      "sameCanvas": true,
+      "pivot": [
+        192,
+        128
+      ],
+      "maxDisplacementPixels": [
+        0.5,
+        2.944
+      ],
+      "firstLastIdentical": true,
+      "hostClock": "retain existing entry/retrigger/completion timing"
+    }
+  },
+  "protected": "Art assets only. Control bar layout/states, reel geometry, feature logic, math and wallet untouched.",
+  "limitations": [
+    "Entry and completion clips are bounded deformation, not a full articulated character rig or 12 independent action drawings.",
+    "No amount text baked into any art. Existing title and logo identities retained."
+  ],
+  "resultTitles": {
+    "maxTitle": {
+      "url": "/kilo-overhaul-v1/surfaces/results/max-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "inkRect": [
+        56,
+        129,
+        1938,
+        434
+      ],
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "source": "results/source/max-win-generated.png"
+    },
+    "lossTitle": {
+      "url": "/kilo-overhaul-v1/surfaces/results/no-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "inkRect": [
+        76,
+        87,
+        1915,
+        508
+      ],
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "source": "results/source/no-win-generated.png"
+    }
+  },
+  "resultInkFrames": {
+    "maxTitle": [
+      56,
+      129,
+      1938,
+      434
+    ],
+    "lossTitle": [
+      76,
+      87,
+      1915,
+      508
+    ]
+  }
+}

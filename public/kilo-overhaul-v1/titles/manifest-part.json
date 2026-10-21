@@ -1,0 +1,394 @@
+{
+  "category": "titles",
+  "version": 1,
+  "colorSpace": "sRGB",
+  "alphaMode": "straight",
+  "assets": [
+    {
+      "file": "titles/nice-catch/composite.png",
+      "webp": "titles/nice-catch/composite.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        111,
+        1488,
+        401
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "aed25738fe24f641ed5d1392eff136e53d31bf4014eb6dcc8c1f7bc4b17784df",
+      "kind": "win-title",
+      "title": "NICE CATCH",
+      "role": "composite",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/nice-catch/fill.png",
+      "webp": "titles/nice-catch/fill.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        51,
+        115,
+        1473,
+        385
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "1498f84738a59f692408b2a78a9398b1c4a3ed67b7bba169b90feab12b74b462",
+      "kind": "win-title",
+      "title": "NICE CATCH",
+      "role": "fill",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/nice-catch/outline.png",
+      "webp": "titles/nice-catch/outline.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        111,
+        1488,
+        401
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "2de19d8f180e53bd39514d1e6f3e22918cef3fcb9b4f8f7db2eac166d29ce020",
+      "kind": "win-title",
+      "title": "NICE CATCH",
+      "role": "outline",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/nice-catch/shine-mask.png",
+      "webp": "titles/nice-catch/shine-mask.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        91,
+        125,
+        1450,
+        310
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "eac85042ea337b7a53e7607cfec89b990091cb1945423ca5e013a4333aa51db3",
+      "kind": "win-title",
+      "title": "NICE CATCH",
+      "role": "shine-mask",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/big-haul/composite.png",
+      "webp": "titles/big-haul/composite.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        105,
+        1488,
+        407
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "64a5a0ca630631b5b00a4a7292c4602305f50152a5fe1419f79470cb08ecfded",
+      "kind": "win-title",
+      "title": "BIG HAUL",
+      "role": "composite",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/big-haul/fill.png",
+      "webp": "titles/big-haul/fill.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        61,
+        111,
+        1472,
+        391
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "62d70cd67777320dcb8a87b0fc2eb67960226b33e98f2b36712cd3803732699d",
+      "kind": "win-title",
+      "title": "BIG HAUL",
+      "role": "fill",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/big-haul/outline.png",
+      "webp": "titles/big-haul/outline.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        105,
+        1488,
+        407
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "be772902b48fedf9eee01f51e65d74840811dd57d0e264bd3e447e7927826b68",
+      "kind": "win-title",
+      "title": "BIG HAUL",
+      "role": "outline",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/big-haul/shine-mask.png",
+      "webp": "titles/big-haul/shine-mask.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        62,
+        118,
+        1458,
+        370
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "b00f06113ff999808330213f360ddf9db64c722cf0a14232fab91ef18f8871ff",
+      "kind": "win-title",
+      "title": "BIG HAUL",
+      "role": "shine-mask",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/king-size/composite.png",
+      "webp": "titles/king-size/composite.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        109,
+        1488,
+        403
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "954eb8d94bb0b45d9caea21b48e103214f2a405a8e7e2d0c4839cd0c5fa77581",
+      "kind": "win-title",
+      "title": "KING SIZE",
+      "role": "composite",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/king-size/fill.png",
+      "webp": "titles/king-size/fill.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        52,
+        116,
+        1475,
+        389
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "01d39aa4d8f6113bfe258b8acf5a57e0424b7b00276f97dbd7c2a738b157fc38",
+      "kind": "win-title",
+      "title": "KING SIZE",
+      "role": "fill",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/king-size/outline.png",
+      "webp": "titles/king-size/outline.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        48,
+        109,
+        1488,
+        403
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "55e805b01fe4397604b0eea8ffb5bf2445e5f5f120d51290bec295e31c94757a",
+      "kind": "win-title",
+      "title": "KING SIZE",
+      "role": "outline",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/king-size/shine-mask.png",
+      "webp": "titles/king-size/shine-mask.webp",
+      "size": [
+        1536,
+        512
+      ],
+      "pivot": [
+        768,
+        256
+      ],
+      "bounds": [
+        84,
+        130,
+        1451,
+        350
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "8f1aa70e98b88ec5fa2a7aad2f7185d84fe83c3f2362aca2dfaefbad794cef2a",
+      "kind": "win-title",
+      "title": "KING SIZE",
+      "role": "shine-mask",
+      "defaultTint": "#ffffff"
+    },
+    {
+      "file": "titles/burst-rays.png",
+      "webp": "titles/burst-rays.webp",
+      "size": [
+        1024,
+        512
+      ],
+      "pivot": [
+        512.0,
+        256.0
+      ],
+      "bounds": [
+        5,
+        15,
+        996,
+        507
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "dbeaae939f8bf65afd98e1728db6b2aa0c5d740b53a5274ccec32d8289d75c1e",
+      "kind": "title-support",
+      "defaultTint": "#ffd477",
+      "tintable": true
+    },
+    {
+      "file": "titles/impact-flash.png",
+      "webp": "titles/impact-flash.webp",
+      "size": [
+        512,
+        512
+      ],
+      "pivot": [
+        256.0,
+        256.0
+      ],
+      "bounds": [
+        146,
+        211,
+        368,
+        314
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "48b8c208cb909e999835e27e11d0a3133366fdb354547c2cb06a27cc5247f3d2",
+      "kind": "title-support",
+      "defaultTint": "#ffd477",
+      "tintable": true
+    }
+  ],
+  "sourceMasters": {
+    "nice-catch": "titles/source/nice-catch-master.png",
+    "big-haul": "titles/source/big-haul-master.png",
+    "king-size": "titles/source/king-size-master.png"
+  },
+  "notes": [
+    "Fill and outline composite at identical registration; shine-mask is independent and may be swept/masked at runtime.",
+    "Burst and impact flash derive from the existing native ImpactPrint vector language, not a new mismatched effect.",
+    "The title typography is authored matte yellow/amber cartoon; strong contour and controlled highlight planes."
+  ]
+}

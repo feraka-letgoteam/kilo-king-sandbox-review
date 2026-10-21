@@ -9,8 +9,8 @@ export const VS_ACTOR_FRAME_COUNT=64;
 export const VS_ACTOR_COLUMNS=8;
 export const VS_ACTOR_ROWS=8;
 export const VS_ACTOR_ATLASES={
-  king:{win:'/kilo-v87/vs/king-win.webp',loss:'/kilo-v87/vs/king-loss.webp'},
-  vice:{win:'/kilo-v87/vs/vice-win.webp',loss:'/kilo-v87/vs/vice-loss.webp'},
+  king:{win:'/kilo-overhaul-v1/features/vs/actors/king-win.webp',loss:'/kilo-overhaul-v1/features/vs/actors/king-loss.webp'},
+  vice:{win:'/kilo-overhaul-v1/features/vs/actors/vice-win.webp',loss:'/kilo-overhaul-v1/features/vs/actors/vice-loss.webp'},
 } as const;
 export const VS_ACTOR_URLS=Object.values(VS_ACTOR_ATLASES).flatMap(item=>Object.values(item));
 export function vsActorFrameIndex(progress:number,reduced=false){

@@ -9,15 +9,15 @@ import { paintImpact, clamp01 } from './impact-language';
 import { articulateArt, restoreArticulation } from './articulation';
 
 export const GOD_CARD_ASSETS = {
-  scene: '/kilo-v79/god/card-scene.webp',
-  hull: '/kilo-v79/god/boat-hull.webp',
-  rider: '/kilo-v79/god/boat-rider.webp',
-  wake: '/kilo-v79/god/wake.webp',
-  maxTitle: '/kilo-v79/god/max-win-title.webp',
-  lossTitle: '/kilo-v79/god/no-win-title.webp',
+  scene: '/kilo-overhaul-v1/features/god/runtime/card-scene.webp',
+  hull: '/kilo-overhaul-v1/features/god/runtime/boat-hull.webp',
+  rider: '/kilo-overhaul-v1/features/god/runtime/boat-rider.webp',
+  wake: '/kilo-overhaul-v1/features/god/runtime/wake.webp',
+  maxTitle: '/kilo-overhaul-v1/surfaces/results/max-win-title.webp',
+  lossTitle: '/kilo-overhaul-v1/surfaces/results/no-win-title.webp',
   // v62 driver sheet: calm / acceleration brace / braking brace, each
   // 512x405 at x = 0/512/1024, y = 128 (see max-boat-rig.ts registration).
-  riderPoses: '/kilo-v62/max/performance-parts.png',
+  riderPoses: '/kilo-overhaul-v1/features/god/runtime/rider-poses.webp',
 } as const;
 /** The three v62 whole-rider poses, re-registered onto the v79 card hull
  * (native 1585x992): seated in the cockpit behind the windshield, with the
@@ -46,8 +46,8 @@ export function godBoatBob(beat: GodCardBeat, progress: number, now: number, red
 }
 export type GodCardTextures = Partial<Record<keyof typeof GOD_CARD_ASSETS, Texture>>;
 export const GOD_RESULT_INK_FRAMES = {
-  maxTitle: [11, 129, 2052, 486],
-  lossTitle: [22, 104, 2140, 522],
+  maxTitle: [56, 129, 1938, 434],
+  lossTitle: [76, 87, 1915, 508],
 } as const;
 type Geometry = { gx: number; gy: number; cell: number; gap: number };
 type GodCardAdapter = {
@@ -98,7 +98,7 @@ export function createGodCardView(parent: Container, textures: GodCardTextures) 
   const contact = new Graphics(); contact.label = 'god-card-water-contact'; painting.addChild(contact);
   const wake = textures.wake ? new Sprite(textures.wake) : new Container();
   wake.label = 'god-card-responsive-wake'; painting.addChild(wake);
-  if (wake instanceof Sprite) wake.anchor.set(.95, .70);
+  if (wake instanceof Sprite) {wake.anchor.set(.95, .70);wake.tint=0x93e5dc;}
   const foam = new Graphics(); foam.label = 'god-card-thrust-foam'; painting.addChild(foam);
   const vessel = new Container(); vessel.label = 'god-card-vessel'; painting.addChild(vessel);
   const hull = new Container(); hull.label = 'god-card-pitching-hull'; vessel.addChild(hull);

@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { RiggedSceneActor } from './RiggedSceneActor';
+import { preloadOverhaulKing } from './overhaul-king';
 import {
   SCENE_PORTRAIT_MEDIA,
   type SceneId,
@@ -379,7 +380,7 @@ export function preloadIntegratedScene(
   scene: SceneId,
   { portrait = false }: { portrait?: boolean } = {},
 ): Promise<DecodedIntegratedScene> {
-  void preloadFeatureAtmosphere();
+  void preloadFeatureAtmosphere(portrait);
   const url = featureEnvironmentUrl(scene, portrait);
   const cached = decodedCache.get(url);
   if (cached) {
@@ -422,7 +423,7 @@ export function preloadIntegratedScene(
       };
       artwork.onerror = () => finish(new Error(`Scene loading failed: ${url}`));
       artwork.src = url;
-    }).catch((error: unknown) => {
+    }).then(async decoded => {await preloadOverhaulKing();return decoded as DecodedIntegratedScene;}).catch((error: unknown) => {
       // Failed loads must be retryable through the host's existing retry action.
       if (decodedCache.get(url) === pending) decodedCache.delete(url);
       throw error;
@@ -458,7 +459,7 @@ async function prepareIntegratedCharacter(current: DecodedIntegratedScene) {
 async function prepareIntegratedPresentation(current: DecodedIntegratedScene) {
   // The v79 world is a clean painting. The existing independent actor owns
   // its textures; never composite the v43 clean/sky plates over the new art.
-  if (current.url.startsWith('/kilo-v79/')) return { artwork: null, fitError: false, clouds: null };
+  if (current.url.startsWith('/kilo-v79/')||current.url.startsWith('/kilo-overhaul-v1/')) return { artwork: null, fitError: false, clouds: null };
   const character = await prepareIntegratedCharacter(current);
   const definition =
     INTEGRATED_SCENES[current.scene][

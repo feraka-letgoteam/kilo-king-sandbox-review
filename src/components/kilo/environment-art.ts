@@ -9,5 +9,5 @@ export const ENVIRONMENT_ART: Readonly<Record<SceneId, EnvironmentArtId>> = {
   'god-mode': 'max-win', 'max-win': 'max-win', completion: 'base',
 };
 export function environmentArtUrl(scene: SceneId, portrait = false) {
-  return `/kilo-v79/environment/${ENVIRONMENT_ART[scene]}${portrait ? '-portrait' : ''}.webp`;
+  return `/kilo-overhaul-v1/background/fallbacks/${ENVIRONMENT_ART[scene]}${portrait ? '-portrait' : ''}.webp`;
 }

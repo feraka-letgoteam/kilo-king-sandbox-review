@@ -2,20 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import type { SceneId } from './scene-system';
 import { paintFeatureEnvironment, compositeEnvironmentFrames, FEATURE_ENVIRONMENT_BLEND_MS } from './feature-environment-painter';
 import { type AtmosphereImages } from './feature-atmosphere';
-import { createEnvironmentAssetCache } from './environment-asset-cache';
+import { acquireOverhaulEnvironment, paintOverhaulEnvironment, type OverhaulEnvironment } from './overhaul-environment';
 
-const atmosphereCache=createEnvironmentAssetCache(url=>new Promise<HTMLImageElement|undefined>(resolve=>{
-  if(typeof Image==='undefined'){resolve(undefined);return;}
-  const image=new Image();image.decoding='async';
-  image.onload=()=>void(image.decode?.()??Promise.resolve()).then(()=>resolve(image),()=>resolve(image));
-  image.onerror=()=>resolve(undefined);image.src=url;
-}));
-export function preloadFeatureAtmosphere(): Promise<AtmosphereImages> {
-  return atmosphereCache.preloadShared();
+export function preloadFeatureAtmosphere(portrait=false): Promise<AtmosphereImages> {
+  const lease=acquireOverhaulEnvironment(portrait);
+  return lease.ready.then(()=>({})).finally(lease.release);
 }
 
 type Artwork = { image: HTMLImageElement; url: string };
-type Displayed = { art: Artwork; scene: SceneId; portrait: boolean; assets: AtmosphereImages; clock: number };
+type Displayed = { art: Artwork; scene: SceneId; portrait: boolean; assets: AtmosphereImages; pack: OverhaulEnvironment | null; clock: number };
 export const FEATURE_ENVIRONMENT_FRAME_MS = 1000 / 30;
 export const FEATURE_ENVIRONMENT_PIXEL_BUDGET = 850000;
 
@@ -33,7 +28,7 @@ export function FeatureEnvironmentCanvas({ scene, portrait, load, reduced, pause
     if(!node||!ctx)return;
     const incoming=document.createElement('canvas'),incomingContext=incoming.getContext('2d');
     if(!incomingContext)return;
-    let disposed=false,art:Artwork|null=null,assets:AtmosphereImages={},raf=0,last=0,painted=-Infinity,visible=true;
+    let disposed=false,art:Artwork|null=null,assets:AtmosphereImages={},pack:OverhaulEnvironment|null=null,raf=0,last=0,painted=-Infinity,visible=true;
     let outgoing:HTMLCanvasElement|null=null,blendElapsed=FEATURE_ENVIRONMENT_BLEND_MS;
     const dimensions=()=>{
       const rect=node.getBoundingClientRect();
@@ -43,14 +38,15 @@ export function FeatureEnvironmentCanvas({ scene, portrait, load, reduced, pause
     };
     const paint=()=>{
       if(disposed)return;
-      const previous=displayed.current,active=art?{art,scene,portrait,assets,clock:clock.current}:previous;
+      const previous=displayed.current,active=art?{art,scene,portrait,assets,pack,clock:clock.current}:previous;
       // Keep the decoded previous composition while a feature painting loads.
       // A failed load never exposes an empty canvas or flashes the base scene.
       if(!active)return;
       const {w,h}=dimensions();
       if(node.width!==w||node.height!==h){node.width=w;node.height=h;}
       if(incoming.width!==w||incoming.height!==h){incoming.width=w;incoming.height=h;}
-      paintFeatureEnvironment(incomingContext,active.art.image,active.scene,active.portrait,w,h,
+      if(active.pack)paintOverhaulEnvironment(incomingContext,active.pack,active.scene,w,h,active.clock,controls.current.reduced);
+      else paintFeatureEnvironment(incomingContext,active.art.image,active.scene,active.portrait,w,h,
         active.clock,controls.current.reduced,active.assets);
       const blend=compositeEnvironmentFrames(ctx,outgoing,incoming,w,h,blendElapsed,controls.current.reduced);
       if(blend>=1)outgoing=null;
@@ -76,13 +72,13 @@ export function FeatureEnvironmentCanvas({ scene, portrait, load, reduced, pause
     });
     intersection?.observe(node);document.addEventListener('visibilitychange',visibility);
     setStatus('loading');
-    const atmosphereLease=atmosphereCache.acquire(scene,portrait);
+    const atmosphereLease=acquireOverhaulEnvironment(portrait);
     // Decode scene and its registered planes atomically. The outgoing canvas
     // and displayed snapshot retain their own images until the incoming frame
     // is ready, including when a portrait/desktop resize interrupts loading.
     void Promise.all([load(scene,{portrait}),atmosphereLease.ready]).then(([decoded,loaded])=>{
       if(disposed)return;
-      assets=loaded;
+      pack=loaded;
       const previous=displayed.current;
       if(previous&&(previous.scene!==scene||previous.portrait!==portrait)&&!controls.current.reduced){
         // Freeze the currently visible composition once. Only the incoming
@@ -97,5 +93,5 @@ export function FeatureEnvironmentCanvas({ scene, portrait, load, reduced, pause
   },[scene,portrait,load]);
   useEffect(()=>{wake.current?.();},[reduced,paused]);
   return <canvas ref={canvas} data-feature-environment={scene} data-environment-status={status}
-    data-environment-fps="30" aria-hidden="true" style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>;
+    data-environment-fps="30" data-art-pack="kilo-overhaul-v1" aria-hidden="true" style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:1}}/>;
 }

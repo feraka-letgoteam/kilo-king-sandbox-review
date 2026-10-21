@@ -1,3 +1,4 @@
+import { OVERHAUL_SYMBOL_IDS, overhaulSymbol, overhaulSymbolUrl, overhaulGlowUrl } from './overhaul-symbols';
 import { MAX_RIG_URLS } from './max-boat-performance';
 import { setMaxStageVisibility } from './max-stage-visibility';
 import { paintMaxStageSurface } from './max-stage-surface';
@@ -83,8 +84,8 @@ const ART: Record<Sym, string> = {
   A: artUrl(ART_FILES.A),
   cuffs: artUrl(ART_FILES.cuffs),
   keys: artUrl(ART_FILES.keys),
-  lamp: V8_ROOT + V8_META["sym-reel-v8"].file,
-  duffel: V8_ROOT + V8_META["sym-case-v8"].file,
+  lamp: overhaulSymbolUrl("sym-reel-v8"),
+  duffel: overhaulSymbolUrl("sym-case-v8"),
   brick: artUrl(ART_FILES.brick),
   bars: artUrl(ART_FILES.bars),
   splash: artUrl(ART_FILES.splash),
@@ -223,7 +224,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const urls = [
     ...new Set([
       ...Object.entries(ART)
-        .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
+        .filter(([sym]) => sym !== "brick" && sym !== "bars")
         .map(([, url]) => url),
       "/kilo-v79/surfaces/reel-well.webp",
       "/kilo-v79/surfaces/modal-panel.webp",
@@ -232,7 +233,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       artUrl(TOOL_PIVOTS.bazooka.file),
       "/kilo-v79/fx/fx-burst.webp",
       "/kilo-v79/fx/fx-water-impact.webp",
-      MOTION_ROOT + collectorAtlas.image,
+      ...Object.values(OVERHAUL_SYMBOL_IDS).map(overhaulGlowUrl),
+      ...Object.keys(PACKAGE_META).map(overhaulGlowUrl),
       MOTION_ROOT + "retrigger-frame.svg",
       MOTION_ROOT + "value-plaque.svg",
       ...Object.values(PACKAGE_META).map((meta) => CONTRABAND_ROOT + meta.file),
@@ -269,7 +271,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   const tex = (file: string) => Assets.get<Texture>(artUrl(file));
   const textures = Object.fromEntries(
     Object.entries(ART)
-      .filter(([sym]) => sym !== "brick" && sym !== "splash" && sym !== "bars")
+      .filter(([sym]) => sym !== "brick" && sym !== "bars")
       .map(([sym, url]) => [sym, Assets.get<Texture>(url)]),
   ) as Record<Sym, Texture>;
   const wellTex = Assets.get<Texture>("/kilo-v79/surfaces/reel-well.webp");
@@ -297,7 +299,10 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         }),
     );
   };
-  const collectorFrames = framesFrom(collectorAtlas.image, collectorAtlas.frames);
+  const collectorBase=Assets.get<Texture>(ART.splash);
+  // Existing reaction indices and clocks remain valid; the new registered
+  // collector clip supplies the moving drawing, never the old expression art.
+  const collectorFrames = collectorAtlas.frames.map(()=>collectorBase);
   const packageTextures = Object.fromEntries(
     (Object.keys(PACKAGE_META) as PackageKey[]).map((key) => [
       key,
@@ -530,7 +535,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           !sprite.kkPlace?.asset.startsWith("package-")) return;
       if (clip && !reduced) paintAuthored(sprite, clip, phase);
       else applyPlace(sprite, fishReaction(phase * 420, reduced));
-      if (!reduced) articulateArt(sprite, 'brick', phase, 'haul', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
+      if (!reduced && !clip?.clip.url.includes('kilo-overhaul-v1')) articulateArt(sprite, 'brick', phase, 'haul', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
     };
     const ms = reduced ? 0 : turbo ? Math.round(420 * 0.45) : 420;
     reactionRefresh.add(paint);
@@ -613,7 +618,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         cell.s === "splash" ? collectorFrames[0] : textures[cell.s],
       );
       sprite.anchor.set(0.5);
-      const box = SYMBOL_ALPHA[cell.s];
+      const box = overhaulSymbol(OVERHAUL_SYMBOL_IDS[cell.s]!).runtimeAlphaBounds;
       const target =
         box &&
         (cell.s === "10" ||
@@ -624,19 +629,15 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
           ? 0.66
           : 0.78;
       if (cell.s === "splash") {
-        // Visible bust inside the 444 frame. Bottom of the cell stays open
-        // for the collector subtotal, so the face is not shrunk to make room.
-        const vx0 = 10;
-        const vy0 = 46;
-        const vx1 = 424;
-        const vy1 = 392;
+        // Same visible bust budget with the new transparent512 drawing.
+        const [vx0,vy0,vx1,vy1]=box;
         const fit = Math.min(
           (size * 0.98) / (vx1 - vx0),
           (size * 0.8) / (vy1 - vy0),
         );
         const bust = {
-          ax: (vx0 + vx1) / 2 / 444,
-          ay: (vy0 + vy1) / 2 / 444,
+          ax: (vx0 + vx1) / 2 / sprite.texture.width,
+          ay: (vy0 + vy1) / 2 / sprite.texture.height,
           scale: fit,
           x: size * 0.5,
           y: size * 0.425,
@@ -646,18 +647,19 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         sprite.position.set(bust.x, bust.y);
         (sprite as Sprite & { kkBust?: typeof bust }).kkBust = bust;
       } else {
-        const longer = box ? Math.max(box[2] - box[0], box[3] - box[1]) : 1024;
-        const display = size * target * (1024 / longer);
-        sprite.scale.set(
-          display / Math.max(sprite.texture.width, sprite.texture.height),
-        );
-        sprite.position.set(size / 2, size / 2);
-        if (box) {
-          sprite.x += (512 - (box[0] + box[2]) / 2) * sprite.scale.x;
-          sprite.y += (512 - (box[1] + box[3]) / 2) * sprite.scale.y;
-        }
+        const longer = box ? Math.max(box[2] - box[0], box[3] - box[1]) : sprite.texture.width;
+        sprite.scale.set(size*target/longer);
+        sprite.position.set(size/2,size/2);
+        if(box){sprite.anchor.set((box[0]+box[2])/2/sprite.texture.width,(box[1]+box[3])/2/sprite.texture.height);}
+
       }
       root.addChild(sprite);
+    }
+    const primary=root.children.find(child=>child instanceof Sprite) as Sprite|undefined;
+    const drawingId=cell.s==='brick'&&cell.v!=null?fishTier(cell.v).asset:OVERHAUL_SYMBOL_IDS[cell.s];
+    if(primary&&drawingId){
+      const glow=Assets.get<Texture>(overhaulGlowUrl(drawingId));
+      (primary as Sprite&{kkGlowTexture?:Texture}).kkGlowTexture=glow;
     }
     const hasValue = decor && cell.s === "brick" && cell.v != null;
     if (hasValue && cell.v != null) {
@@ -900,6 +902,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     placeReadout();
   }
   function clearPresentation() {
+    for(const cancel of landingCancels)cancel();
+    landingCancels.clear();
     readoutActive = false;
     readout.hidden = true;
     fx.clear();
@@ -998,6 +1002,28 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
     return keys[cell.s]??"";
   }
 
+  const landingCancels=new Set<()=>void>();
+  /** Twelve registered frames at30fps in ordinary play. This decorative job
+   * is never awaited by the director: it cannot delay a reel, bank or charge.
+   * A win/new spin cancels it, and resize rebinds the same recorded cell. */
+  function playLandingArt(view:Container,reel:number,row:number,cell:SplashCell){
+    const asset=authoredTextures.get(authoredSymbolKey(cell)+'-landing');
+    if(!asset||reduced||stopped)return false;
+    let sprite=view.children.find(child=>child instanceof Sprite) as Sprite|undefined,active=true,phase=0;
+    const mine=job;
+    const paint=()=>{
+      if(!active||mine!==job||stopped)return;
+      if(sprite?.destroyed)sprite=symbolSprite(reel,row)??undefined;
+      if(sprite&&!sprite.destroyed)paintAuthored(sprite,asset,phase);
+    };
+    const cancel=()=>{active=false;reactionRefresh.delete(paint);if(sprite&&!sprite.destroyed)restoreAuthored(sprite);};
+    landingCancels.add(cancel);reactionRefresh.add(paint);
+    void tween(speedMode==='super'?120:turbo?220:400,t=>{phase=t;paint();}).finally(()=>{
+      if(active)cancel();landingCancels.delete(cancel);
+    });
+    return true;
+  }
+
   function showReaction(sprite: Sprite, frames: Texture[], index: number) {
     const bust = (sprite as Sprite & {
       kkBust?: { ax: number; ay: number; scale: number; x: number; y: number };
@@ -1031,7 +1057,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       if (mine !== job || stopped || !sprite || sprite.destroyed) return;
       if (clip && !reduced) paintAuthored(sprite, clip, phase);
       else showReaction(sprite, frames, reactionIndex(sequence, frameMs, phase * total, reduced));
-      if (!reduced) articulateArt(sprite, 'splash', phase, 'collector', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
+      if (!reduced && !clip?.clip.url.includes('kilo-overhaul-v1')) articulateArt(sprite, 'splash', phase, 'collector', 1, clip?.clip.registrationBounds ?? clip?.clip.bounds);
     };
     const ms = reduced ? 0 : turbo ? Math.round(total * 0.45) : total;
     reactionRefresh.add(paint);
@@ -1622,7 +1648,9 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
       for (let row = 0; row < 3; row++) {
         const view = spin.strip.children[spin.pad + row] as Container | undefined;
         const sym = grid[spin.reel]?.[row]?.s;
-        if (view) void playLandAccent(view, sym, cell, sym === "bars" ? scatterTailMs : lockMs, tween);
+        const recorded=grid[spin.reel]?.[row];
+        if (view&&recorded&&!playLandingArt(view,spin.reel,row,recorded))
+          void playLandAccent(view, sym, cell, sym === "bars" ? scatterTailMs : lockMs, tween);
       }
     };
     const landBounce = (spin: Spin, now: number) =>
@@ -1845,6 +1873,8 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
   }
 
   async function burstWin(line: SplashLine, sound = true, extraLines: SplashLine[] = [], preloaded = false) {
+    for(const cancel of landingCancels)cancel();
+    landingCancels.clear();
     const cells = [...new Map([line,...extraLines].flatMap(winningCells).map(p=>[`${p.reel}:${p.row}`,p])).values()];
     const tier: 0 | 1 | 2 =
       line.pay >= stake * 15 ? 2 : line.pay >= stake * 4 ? 1 : 0;
@@ -1900,7 +1930,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
             item.sprite.scale.set(item.x * pose.scale, item.y * pose.scale);
             item.sprite.rotation = item.rotation + pose.rotation;
           }
-          articulateArt(item.sprite, item.sym, p, 'hit', 1 + tier * .1,
+          if(!item.authored?.clip.url.includes('kilo-overhaul-v1')) articulateArt(item.sprite, item.sym, p, 'hit', 1 + tier * .1,
             item.authored?.clip.registrationBounds ?? item.authored?.clip.bounds);
         }
       });
@@ -1943,7 +1973,7 @@ export async function mountScene(host: HTMLElement): Promise<ReelScene> {
         const home=featureResponseHomes.get(sprite)!,cell=board[spot.reel]?.[spot.row],authored=authoredTextures.get(authoredSymbolKey(cell));
         if (authored) paintAuthored(sprite,authored,progress);
         else { const pose=symbolWinPose(cell?.s??'',progress,1);sprite.scale.set(home.x*pose.scale,home.y*pose.scale);sprite.rotation=home.rotation+pose.rotation; }
-        articulateArt(sprite,cell?.s??'',progress,'hit',1.1,authored?.clip.registrationBounds??authored?.clip.bounds);
+        if(!authored?.clip.url.includes('kilo-overhaul-v1')) articulateArt(sprite,cell?.s??'',progress,'hit',1.1,authored?.clip.registrationBounds??authored?.clip.bounds);
       }
     },
     conceal: indices => {

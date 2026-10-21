@@ -1,0 +1,1 @@
+Kilo King overhaul v1 runtime artwork. The delivered asset ZIP contains the full PNG-32 masters, 540 full-size animation frames, layered parts, masks, pivot maps and per-file manifest. This browser subset contains the smaller WebP textures and the registrations used by the source. The current control bar is unchanged; UI exports are an optional matching asset set.
