@@ -1,18 +1,19 @@
-import { copyFileSync, cpSync, rmSync } from "node:fs";
+import { copyFileSync, cpSync, rmSync, readFileSync, readdirSync, existsSync } from "node:fs";
+import path from "node:path";
 // Preserve the standalone review build; package a root entry for Sites.
 rmSync("dist", { recursive: true, force: true });
 cpSync("dist-review", "dist", { recursive: true });
 copyFileSync("dist/review.html", "dist/index.html");
-// Archived control-layout proofs are source references, not runtime assets.
-// Keep them in the repository but outside the host's 256 MiB static bundle.
-// The standalone v18 motion proof has no incoming reference from the built
-// application or other shipped pages. Keep its originals in public/source,
-// while leaving room in the static bundle for the new feature artwork.
-// v79 replaces every exported v49 authored clip. The production JS, CSS and
-// shipped HTML contain no incoming v49 URL; original drawings stay in source.
-// v85 replaces the four v84 actor atlases. The v77 boat / wide-VS paintings
-// also have no incoming reference in source, public pages or built assets;
-// v79 owns those runtime illustrations. Retain both older packs in source.
-for (const directory of ["kilo-bar-v21", "kilo-modular-v23", "kilo-modular-v24", "kilo-modular-v25", "kilo-motion-v18", "kilo-animation-v49", "kilo-v77", "kilo-v84"]) {
-  rmSync(`dist/${directory}`, { recursive: true, force: true });
+// The reviewed Stake keep-list follows literal references and retains complete
+// folders for dynamic URLs. Use the same conservative list for the private
+// review build, rather than shipping every archived public art pack. Originals
+// remain in source; generated JS/CSS and HTML are never pruned here.
+const keep=new Set(readFileSync("stake/assets.txt","utf8").split(/\r?\n/).filter(line=>line&&!line.startsWith("#")));
+const walk=directory=>readdirSync(directory,{withFileTypes:true}).flatMap(entry=>{
+  const file=path.join(directory,entry.name);return entry.isDirectory()?walk(file):[file];
+});
+for(const file of walk("public")){
+  const relative=path.relative("public",file).split(path.sep).join("/");
+  if(!keep.has(relative))rmSync(path.join("dist",relative),{force:true});
 }
+for(const file of keep)if(!existsSync(path.join("dist",file)))throw new Error("Required static asset missing: "+file);
