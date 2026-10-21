@@ -1,4 +1,4 @@
-import { FEATURE_PROFILE, featureEvent, cargoAt, FEATURE_SPINS, type FeatureKind, type FeatureEvent, type Cargo } from './feature-math.ts';
+import { FEATURE_PROFILE, cargoAt, FEATURE_SPINS, type FeatureKind, type FeatureEvent, type Cargo } from './feature-math.ts';
 import { runReelFeature, REEL_FEATURE_SPINS } from './reel-feature-math.ts';
 import { vsSeeded } from './vs-progression.ts';
 import { EXPERIENCE_CATALOGUES, EXPERIENCE_WEIGHT_TOTAL } from './experience-outcome-catalogue.ts';
@@ -484,7 +484,7 @@ function cloneGrid(grid: SplashCell[][]): SplashCell[][] {
   return grid.map((col) => col.map((cell) => ({ ...cell })));
 }
 
-/** Dynamite and bazooka: Splash is in, bass are not. Hook: bass are in, Splash is not. A failed roll leaves the board alone. */
+/** Dynamite and bazooka: Splash is in and no bass at all. Hook: bass are in, Splash is not. A failed roll leaves the board alone. */
 function maybeTool(
   rng: Rng,
   grid: SplashCell[][],
@@ -496,7 +496,7 @@ function maybeTool(
   const wilds = countSym(grid, "splash");
   const fish = countAnchors(grid);
   const boost = mods.includes("moreTools") ? 1.8 : 1;
-  const chances=modern?{dynamite:.20,hook:.14,bazooka:.065}:TOOL_CHANCE;
+  const chances=modern?{dynamite:.20,hook:.07,bazooka:.065}:TOOL_CHANCE;
   const roll = (kind: SplashTool) => rng() < Math.min(0.62, chances[kind] * boost);
   const before = cloneGrid(grid);
   const commit = (work: (SplashCell | null)[][]) => {
@@ -507,14 +507,14 @@ function maybeTool(
     for (let reel = 0; reel < 5; reel++) for (let row = 0; row < 3; row++) grid[reel][row] = before[reel][row];
   };
 
-  if (wilds > 0 && fish <= (modern ? 1 : 0) && roll("bazooka")) {
+  if (wilds > 0 && fish === 0 && roll("bazooka")) {
     const work: (SplashCell | null)[][] = before.map((col) => col.map((cell) => (cell.s === "splash" || modern && cell.s === 'brick' ? { ...cell } : null)));
     fillOpen(rng, work, table, MONEY, true);
     commit(work);
-    if (countAnchors(grid) > (modern ? fish : 0) && countSym(grid, "splash") > 0) return { kind: "bazooka" };
+    if (countAnchors(grid) > 0 && countSym(grid, "splash") > 0) return { kind: "bazooka" };
     revert();
   }
-  if (wilds > 0 && fish <= (modern ? 1 : 0) && roll("dynamite")) {
+  if (wilds > 0 && fish === 0 && roll("dynamite")) {
     const work: (SplashCell | null)[][] = before.map((col) => col.map((cell) => ({ ...cell })));
     const cells = openCells(work);
     let id = nextFishId(before);
@@ -677,7 +677,6 @@ function runFeature(
   let total = 0;
   let capped = false;
   const free: SplashFree[] = [];
-  let carry:Cargo|undefined;
   while (left > 0 && free.length < 200) {
     if (total >= room) {
       capped = true;
@@ -685,14 +684,9 @@ function runFeature(
     }
     left -= 1;
     const grid = fillGrid(rng, table, money, true);
-    const held=carry;
-    if(modern){
-      for(const col of grid)for(const cell of col)if(cell.id!=null)cell.id+=free.length*100;
-      if(held)grid[held.reel]![held.row]={s:'brick',v:held.value/stake,id:held.id,w:1,h:1};
-      carry=undefined;
-    }
+    if(modern)for(const col of grid)for(const cell of col)if(cell.id!=null)cell.id+=free.length*100;
     const primed = cloneGrid(grid);
-    const saved = held&&!modern ? undefined : maybeTool(rng, grid, mods, table,modern,held);
+    const saved = maybeTool(rng, grid, mods, table,modern);
     const paid = linePays(stake, grid);
     const landed = countSym(grid, "splash");
     const mult = collectMult(wilds);
@@ -714,22 +708,9 @@ function runFeature(
       left += extra;
     }
     total += add;
-    let mechanic:FeatureEvent|undefined;
-    if(modern){
-      if(!landed&&left>0&&!capped&&rng()<.85){
-        const candidates=cargoAt(grid,stake).filter(p=>p.id!==held?.id);
-        // A visible rule: the largest newly landed package gets one more
-        // chance. The same package never extends itself indefinitely.
-        if(candidates.length)carry=[...candidates].sort((a,b)=>b.value-a.value||a.reel-b.reel||a.row-b.row)[0];
-      }
-      mechanic=featureEvent('dock',`dock:${free.length}`);
-      mechanic.action=held&&!landed?'expire':'carry';
-      mechanic.heldBefore=held?[held]:[];mechanic.heldAfter=carry?[carry]:[];
-      mechanic.sources=carry?[carry]:held?[held]:[];
-      mechanic.beforeCap=rawGot;mechanic.credited=got;mechanic.multiplier=mult;
-      mechanic.pendingBefore=held?.value??0;mechanic.pendingAfter=carry?.value??0;
-      mechanic.nextMultiplier=collectMult(wilds);mechanic.final=left===0;
-    }
+    // Phase 2 (M1): no marked cargo. Nothing is held between Dockside free spins, so a
+    // Dockside spin carries no feature mechanic (no carry/hold/expire event); the
+    // collection itself is the spin's wilds / mult / got, as for every collect spin.
     free.push({
       grid,
       lines: fitted.lines,
@@ -741,7 +722,6 @@ function runFeature(
       left,
       level: meterLevel(wilds),
       extra,
-      ...(mechanic?{mechanic}:{}),
       ...(saved ? { tool: saved.kind, primed, ...(saved.reel == null ? {} : { toolReel: saved.reel }), ...(saved.shift ? { toolShift: saved.shift } : {}) } : {}),
     });
     if (capped) break;
