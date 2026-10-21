@@ -1,0 +1,277 @@
+{
+  "assets": [
+    {
+      "id": "result-max-win-composite",
+      "png": "results/max-win-title.png",
+      "webp": "results/max-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "purpose": "God Mode result title composite",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-fill",
+      "png": "results/max-win-fill.png",
+      "webp": "results/max-win-fill.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        135,
+        1991,
+        554
+      ],
+      "purpose": "God Mode result title fill",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-outline",
+      "png": "results/max-win-outline.png",
+      "webp": "results/max-win-outline.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "purpose": "God Mode result title outline",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-max-win-shine-mask",
+      "png": "results/max-win-shine-mask.png",
+      "webp": "results/max-win-shine-mask.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        135,
+        1991,
+        554
+      ],
+      "purpose": "God Mode result title shine-mask",
+      "text": "MAX WIN"
+    },
+    {
+      "id": "result-no-win-composite",
+      "png": "results/no-win-title.png",
+      "webp": "results/no-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "purpose": "God Mode result title composite",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-fill",
+      "png": "results/no-win-fill.png",
+      "webp": "results/no-win-fill.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        89,
+        94,
+        1987,
+        594
+      ],
+      "purpose": "God Mode result title fill",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-outline",
+      "png": "results/no-win-outline.png",
+      "webp": "results/no-win-outline.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "purpose": "God Mode result title outline",
+      "text": "NO WIN"
+    },
+    {
+      "id": "result-no-win-shine-mask",
+      "png": "results/no-win-shine-mask.png",
+      "webp": "results/no-win-shine-mask.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alpha": "straight",
+      "colorSpace": "sRGB",
+      "alphaBounds": [
+        89,
+        94,
+        1987,
+        594
+      ],
+      "purpose": "God Mode result title shine-mask",
+      "text": "NO WIN"
+    }
+  ],
+  "resultTitles": {
+    "maxTitle": {
+      "url": "/kilo-overhaul-v1/surfaces/results/max-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "inkRect": [
+        56,
+        129,
+        1938,
+        434
+      ],
+      "alphaBounds": [
+        56,
+        129,
+        1994,
+        563
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "source": "results/source/max-win-generated.png"
+    },
+    "lossTitle": {
+      "url": "/kilo-overhaul-v1/surfaces/results/no-win-title.webp",
+      "size": [
+        2048,
+        704
+      ],
+      "inkRect": [
+        76,
+        87,
+        1915,
+        508
+      ],
+      "alphaBounds": [
+        76,
+        87,
+        1991,
+        595
+      ],
+      "pivot": [
+        1024,
+        352
+      ],
+      "source": "results/source/no-win-generated.png"
+    }
+  },
+  "resultInkFrames": {
+    "maxTitle": [
+      56,
+      129,
+      1938,
+      434
+    ],
+    "lossTitle": [
+      76,
+      87,
+      1915,
+      508
+    ]
+  },
+  "authoring": "New built-in image_gen matte hand-inked title drawings, matching NICE CATCH. Alpha-cleaned and downsampled to2048px; fill/ink/mask are registered pixel extractions. No runtime timing changes."
+}

@@ -8,9 +8,9 @@ import { articulateArt } from './articulation';
 export const VS_MULTIPLIER_FONT = WIN_TYPE.fontFamily;
 export const VS_FONT_URL = '/kilo-ui-v11/KiloDisplay.woff';
 export const VS_GROUP_ART_URLS = ['king', 'vice'].flatMap(side =>
-  Array.from({length: 5}, (_, index) => `/kilo-v79/vs/${side}-${index + 1}.webp`));
+  Array.from({length: 5}, (_, index) => `/kilo-overhaul-v1/features/vs/runtime/${side}-${index + 1}.webp`));
 export const vsGroupArtUrl = (group: Pick<VsGroup, 'side'|'width'>) =>
-  `/kilo-v79/vs/${group.side}-${group.width}.webp`;
+  `/kilo-overhaul-v1/features/vs/runtime/${group.side}-${group.width}.webp`;
 
 /** A clean open numeral, not a detached UI plaque. Never owns an award. */
 export function createVsMultiplierLabel(value: string, size: number, color: number = WIN_TYPE.face) {

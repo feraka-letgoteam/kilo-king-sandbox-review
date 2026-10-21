@@ -240,8 +240,10 @@ export function createWinFeel(host: WinFeelHost) {
       view.position.set(home.x + cell / 2 - home.px, home.y + cell / 2 - home.py);
       const source = art(view);
       if (source) {
-        const glow = new Sprite(source.texture);
+        const mask=(source as Sprite&{kkGlowTexture?:typeof source.texture}).kkGlowTexture;
+        const glow = new Sprite(mask??source.texture);
         glow.label = 'kk-win-glow'; glow.blendMode = 'add'; glow.alpha = 0; glow.eventMode = 'none';
+        if(mask)glow.tint=0x8be4ce;
         view.addChild(glow); home.glow = glow;
       }
     }
@@ -275,8 +277,13 @@ export function createWinFeel(host: WinFeelHost) {
       const source = art(view), glow = home.glow;
       if (glow && !glow.destroyed && source) {
         // Follow the drawing's current frame/pose (authored reactions swap it).
-        glow.texture = source.texture; glow.anchor.copyFrom(source.anchor);
-        glow.scale.copyFrom(source.scale); glow.position.copyFrom(source.position);
+        const mask=(source as Sprite&{kkGlowTexture?:typeof source.texture}).kkGlowTexture;
+        glow.texture = mask??source.texture; glow.anchor.copyFrom(source.anchor);
+        // A separate neutral mask stays tintable; never brighten the painted
+        // object itself or bake a glow into the symbol's transparent edge.
+        glow.scale.set(source.scale.x*source.texture.width/glow.texture.width,
+          source.scale.y*source.texture.height/glow.texture.height);
+        glow.position.copyFrom(source.position);
         glow.rotation = source.rotation; glow.alpha = REEL_FEEL.glowAlpha * pose.glow;
       }
     }

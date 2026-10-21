@@ -1,0 +1,2522 @@
+{
+  "category": "effects",
+  "version": 1,
+  "colorSpace": "sRGB",
+  "alphaMode": "straight",
+  "assets": [
+    {
+      "file": "effects/coin/frame-00.png",
+      "webp": "effects/coin/frame-00.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        17,
+        238,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "096bb3a06fd1bddd8538b3c2fe5f5ccec87f221ca530b8e139d5d9077383d81e",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 0,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-01.png",
+      "webp": "effects/coin/frame-01.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        38,
+        18,
+        218,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "a5bcbc0464535609e0415b93753ee1deb008975e0faf3e0f795a3dbb4af12aa4",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 1,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-02.png",
+      "webp": "effects/coin/frame-02.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        55,
+        18,
+        200,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "sha256": "8a9211d9610fad8a505f26c501bb4e67295f006cfc2ddeea4c08f8379b76aa37",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 2,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-03.png",
+      "webp": "effects/coin/frame-03.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        69,
+        17,
+        186,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "06d36f858daf28959c061d3ac09f3250cf1456607995b85d584d406a25167113",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 3,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-04.png",
+      "webp": "effects/coin/frame-04.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        99,
+        18,
+        157,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "bb1f8ad6c12078a3fac1783113cb40dcd228f3cb82804018665f5d0e738dc5df",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 4,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-05.png",
+      "webp": "effects/coin/frame-05.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        64,
+        17,
+        191,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "a28251ba3e7834c2de8a74be864cee67e4f1942ef6f8c9aad02bffef44f9592a",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 5,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-06.png",
+      "webp": "effects/coin/frame-06.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        48,
+        17,
+        208,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "323f318b165b1ebccf393fab3444ce139506fdd9bc8150c9c52a3772e90a6e0a",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 6,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-07.png",
+      "webp": "effects/coin/frame-07.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        32,
+        17,
+        224,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "836f2f7e75d8bfb00af7c8032d935a81b3a2a99fb6eeac751db2a523e67af4fd",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 7,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-08.png",
+      "webp": "effects/coin/frame-08.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        18,
+        237,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "27e59121bed8bf12691d2f7819b20add4713046cfec297b23eeaf9deb46a8475",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 8,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-09.png",
+      "webp": "effects/coin/frame-09.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        42,
+        18,
+        213,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "f41aa7a42dd18aa9dc2f23c34b835420f52eaf6e918bf2a5a093fcf8b8627d94",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 9,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-10.png",
+      "webp": "effects/coin/frame-10.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        51,
+        17,
+        205,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "6ee81153843e84f7032e3a591c7f06a8eff086b3474bf6433d0f27daa8ed1733",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 10,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-11.png",
+      "webp": "effects/coin/frame-11.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        57,
+        17,
+        197,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "2a2224e535465bff08011d62726d55f9b8a08ff5ee97076bc9fa3e02f3f83fa5",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 11,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-12.png",
+      "webp": "effects/coin/frame-12.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        100,
+        17,
+        156,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "sha256": "5f62ebb0d9c6fa920cc49d2fe008440f70478ce069bcd0b1335b334e0284a9f6",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 12,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-13.png",
+      "webp": "effects/coin/frame-13.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        53,
+        18,
+        202,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "fe40674af764a844155410f2fbac265ba9d74fff8a4adbbd2197ceac2c887069",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 13,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-14.png",
+      "webp": "effects/coin/frame-14.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        36,
+        18,
+        219,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "5f097cc1b888df1ab760c4879a740412598babff767492c575600f3519232156",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 14,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/frame-15.png",
+      "webp": "effects/coin/frame-15.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        17,
+        238,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "096bb3a06fd1bddd8538b3c2fe5f5ccec87f221ca530b8e139d5d9077383d81e",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "color",
+      "frame": 15,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin/atlas.png",
+      "webp": "effects/coin/atlas.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "bounds": [
+        17,
+        17,
+        1006,
+        1007
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "cc5ab089ca8ac4a773cffd1fa85d93ecd5efe193ede0b5d67ec087da8f7fd47f",
+      "kind": "atlas",
+      "variant": "color",
+      "sequence": "coin",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "fps": 30,
+      "defaultTint": "#ffffff",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-00.png",
+      "webp": "effects/coin-neutral/frame-00.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        17,
+        238,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "1f57b35c8ab06d36d96a1ce0f850581d8319a1bf719a1faf9a70b9c97c21db59",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 0,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-01.png",
+      "webp": "effects/coin-neutral/frame-01.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        38,
+        18,
+        218,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "70437152152181f84daef0306f35046b912d52bab949e43337057d21b51506c9",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 1,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-02.png",
+      "webp": "effects/coin-neutral/frame-02.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        55,
+        18,
+        200,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "sha256": "971beef7490733cfbdeff37cb940bbcb2bb2f99c4d53ad693347cb0842358b1f",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 2,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-03.png",
+      "webp": "effects/coin-neutral/frame-03.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        69,
+        17,
+        186,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "7b6961867619e154054745a286e36729928f19ea1599f1de7e5c830f592adbdc",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 3,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-04.png",
+      "webp": "effects/coin-neutral/frame-04.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        99,
+        18,
+        157,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "df4918033607a27fe2bfd10c379e60e2ef3e2b7d93e330e2b7685bd7a827884a",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 4,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-05.png",
+      "webp": "effects/coin-neutral/frame-05.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        64,
+        17,
+        191,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "877a20cb56e5c59edae7a45abefb4734a99603b5148172596a6005bcf1d267f3",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 5,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-06.png",
+      "webp": "effects/coin-neutral/frame-06.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        48,
+        17,
+        208,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "c437b91f7ba9dc5e23eccd3ddbcd52ba1bf9e44699ab7872356dfd29a9bf50b4",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 6,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-07.png",
+      "webp": "effects/coin-neutral/frame-07.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        32,
+        17,
+        224,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "c1030be9b3b024dc2e07db71bb52920daaba6c7285a211ae92b6ead7d9ca58b0",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 7,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-08.png",
+      "webp": "effects/coin-neutral/frame-08.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        18,
+        237,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "f3cb2059eafade363968a4bfed580349821f97fe58a5faa8f5dde19279993007",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 8,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-09.png",
+      "webp": "effects/coin-neutral/frame-09.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        42,
+        18,
+        213,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "5033be44dac71912fbf8286559e064a75235e406c18b3bf908919641c648e0c5",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 9,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-10.png",
+      "webp": "effects/coin-neutral/frame-10.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        51,
+        17,
+        205,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "fd16a99eedaf7b76908a1437d12e2dffbff7ced5e873ebf9bcdcaacd60e573da",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 10,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-11.png",
+      "webp": "effects/coin-neutral/frame-11.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        57,
+        17,
+        197,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "04e15125ce25e1dc83f788aff8344eb5ecce3163b66bbbbdc57859d767c3bb18",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 11,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-12.png",
+      "webp": "effects/coin-neutral/frame-12.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        100,
+        17,
+        156,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 254,
+      "sha256": "5cfe67a1067e7e5b8a9624ac77954c5548ecfcc0605d38bf0783fd51a79887ad",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 12,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-13.png",
+      "webp": "effects/coin-neutral/frame-13.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        53,
+        18,
+        202,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "d2cab8245ddc86ddef8ae162862d6a5f24fec5a730355c12563e57c4e94d03fa",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 13,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-14.png",
+      "webp": "effects/coin-neutral/frame-14.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        36,
+        18,
+        219,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "5e47626020b6e5dd0afc516e4587c06cf86bebde55cadb1734d0e837592c550f",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 14,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/frame-15.png",
+      "webp": "effects/coin-neutral/frame-15.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        17,
+        17,
+        238,
+        239
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "1f57b35c8ab06d36d96a1ce0f850581d8319a1bf719a1faf9a70b9c97c21db59",
+      "kind": "particle-frame",
+      "sequence": "coin",
+      "variant": "neutral",
+      "frame": 15,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/coin-neutral/atlas.png",
+      "webp": "effects/coin-neutral/atlas.webp",
+      "size": [
+        1024,
+        1024
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "bounds": [
+        17,
+        17,
+        1006,
+        1007
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "ddafb8770f734d60d258e6b3dbc327cdd0225b401ce1d56b4a146433b7de5fba",
+      "kind": "atlas",
+      "variant": "neutral",
+      "sequence": "coin",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "fps": 30,
+      "defaultTint": "#eac86b",
+      "previewColor": "#eac86b"
+    },
+    {
+      "file": "effects/cash/frame-00.png",
+      "webp": "effects/cash/frame-00.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        80,
+        233,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "c35e00a553ca24edf72894a70cca6b29a1ddabe68bbecf5dd8cca9bb2538a220",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 0,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-01.png",
+      "webp": "effects/cash/frame-01.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        76,
+        238,
+        180
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "e29179a4b6cce527ff6195a730f60333b411c554d8aff2def05243c3325ff53a",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 1,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-02.png",
+      "webp": "effects/cash/frame-02.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        20,
+        66,
+        236,
+        189
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "d7de469e6619ffbfe89d9e2f55eb30938f61ef46465e4d1228a5e6620a779fa7",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 2,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-03.png",
+      "webp": "effects/cash/frame-03.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        30,
+        67,
+        226,
+        189
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "5313a6a13a92416f233c663b714e54ae7961a8252a7ea816caf61e04cf09e7c0",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 3,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-04.png",
+      "webp": "effects/cash/frame-04.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        65,
+        234,
+        191
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "569da6e93b6156d7e5c49e56873fc8b5953cc7ce759334d1a23ef12cac159c94",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 4,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-05.png",
+      "webp": "effects/cash/frame-05.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        31,
+        51,
+        225,
+        206
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "b7b6bf49a9939f721485b419edefed0b14fcc323c12c12bff595ee4752906952",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 5,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-06.png",
+      "webp": "effects/cash/frame-06.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        78,
+        235,
+        177
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "17e345e8e82a6261eefcda0f300315d0edf907e2df48b51d3ff190571e524f39",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 6,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-07.png",
+      "webp": "effects/cash/frame-07.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        71,
+        236,
+        184
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "b541e8adb8b9ec834f607601b6db1d517ffe619d7abdf3c7decaea389d7b0d2d",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 7,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-08.png",
+      "webp": "effects/cash/frame-08.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        75,
+        237,
+        180
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "dca598b0c92cca5d31abfeaee936e92dfd17748000529231d229d2738ce79739",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 8,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-09.png",
+      "webp": "effects/cash/frame-09.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        16,
+        85,
+        240,
+        171
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "16bd9c41f430f0739df156d5a19ca8db31011c7836af6cdf69cda286928b7206",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 9,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-10.png",
+      "webp": "effects/cash/frame-10.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        18,
+        81,
+        237,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "7d2fbbd20bbdb7139cade97810fe1d0dcdc3181c9e24b47aa8946dd7591b8989",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 10,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/frame-11.png",
+      "webp": "effects/cash/frame-11.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        80,
+        233,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "c35e00a553ca24edf72894a70cca6b29a1ddabe68bbecf5dd8cca9bb2538a220",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "color",
+      "frame": 11,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash/atlas.png",
+      "webp": "effects/cash/atlas.webp",
+      "size": [
+        1024,
+        768
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "bounds": [
+        19,
+        66,
+        1004,
+        692
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "92d0bd41a1d97c4f8473da72b943371e80e51c5eaf2ecbbb3ab9303e569e6b08",
+      "kind": "atlas",
+      "variant": "color",
+      "sequence": "cash",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 3,
+      "frameCount": 12,
+      "fps": 30,
+      "defaultTint": "#ffffff",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-00.png",
+      "webp": "effects/cash-neutral/frame-00.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        80,
+        233,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "523a826d6be1f86ae290507197fd1fa11865d8fdd71c08269fb01f51258a0e06",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 0,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-01.png",
+      "webp": "effects/cash-neutral/frame-01.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        76,
+        238,
+        180
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "9e41f90d4d8b9ad95d70303b3f03966debc12e6b7154275f54c850725e52d3ab",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 1,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-02.png",
+      "webp": "effects/cash-neutral/frame-02.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        20,
+        66,
+        236,
+        189
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "a8c52340d88a3a02db8848c23feb1105906a9b697c13ef005c286175b952548f",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 2,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-03.png",
+      "webp": "effects/cash-neutral/frame-03.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        30,
+        67,
+        226,
+        189
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "1f7012f403352b13b1b4d6ba29f6e15ce232e89d49ccaea3296989901faadff5",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 3,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-04.png",
+      "webp": "effects/cash-neutral/frame-04.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        65,
+        234,
+        191
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "1dcf0f9da0acb94b658242c3adcaaec2e0b1bd6a28b5c3d13239ade0d87b4fc6",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 4,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-05.png",
+      "webp": "effects/cash-neutral/frame-05.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        31,
+        51,
+        225,
+        206
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "739c8542233dc3470af4a9627a818c339bca6469c35b0b1553e4a1fdbb80c8e9",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 5,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-06.png",
+      "webp": "effects/cash-neutral/frame-06.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        22,
+        78,
+        235,
+        177
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "fa61ebcd71dd4de76a208bc1bdef5019542af158a60ba1465ad0a5484670840e",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 6,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-07.png",
+      "webp": "effects/cash-neutral/frame-07.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        71,
+        236,
+        184
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "26a445e4267212844fd44cc35814f09ffb0ebef9d9435c4583782b2c90ab1d65",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 7,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-08.png",
+      "webp": "effects/cash-neutral/frame-08.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        19,
+        75,
+        237,
+        180
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "44eb1aa63d1c81071d24d0c6f4b67cd2ebc4f2efbc9ad95f29edabe121d6020a",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 8,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-09.png",
+      "webp": "effects/cash-neutral/frame-09.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        16,
+        85,
+        240,
+        171
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "bb29bce44cad1a69076b791e1521a432172142de083a882579149a30e0d93a75",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 9,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-10.png",
+      "webp": "effects/cash-neutral/frame-10.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        18,
+        81,
+        237,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "d8316e1bdb51a27a51569bdcc7178cfa2434a1c7d02f2826610e6a5f973aaacf",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 10,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/frame-11.png",
+      "webp": "effects/cash-neutral/frame-11.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "bounds": [
+        21,
+        80,
+        233,
+        175
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "523a826d6be1f86ae290507197fd1fa11865d8fdd71c08269fb01f51258a0e06",
+      "kind": "particle-frame",
+      "sequence": "cash",
+      "variant": "neutral",
+      "frame": 11,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/cash-neutral/atlas.png",
+      "webp": "effects/cash-neutral/atlas.webp",
+      "size": [
+        1024,
+        768
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "bounds": [
+        19,
+        66,
+        1004,
+        692
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "e502f0c0548a3c57d91658056f2e4e6ad3a184ac5d1f21bc65218a0f20e7550f",
+      "kind": "atlas",
+      "variant": "neutral",
+      "sequence": "cash",
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 4,
+      "rows": 3,
+      "frameCount": 12,
+      "fps": 30,
+      "defaultTint": "#78aa75",
+      "previewColor": "#78aa75"
+    },
+    {
+      "file": "effects/sprites/sparkle-128.png",
+      "webp": "effects/sprites/sparkle-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        17,
+        7,
+        111,
+        121
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "6df1ecc49e81a295c4941fddcd5896f0ea45ac9fc8a66e1c8b49aa2ce2db76c8",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/sparkle-256.png",
+      "webp": "effects/sprites/sparkle-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        28,
+        8,
+        227,
+        248
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "31320c37e37558710604354ae8f3ca83c575c922ca18417fac950dd4b3bd2686",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/star-128.png",
+      "webp": "effects/sprites/star-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        11,
+        7,
+        117,
+        121
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "0555fcbe993fd2edb5154c6582612918f401d70e4799c1bbbf15d2dd186a4b16",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/star-256.png",
+      "webp": "effects/sprites/star-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        15,
+        8,
+        241,
+        249
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "aebe20cfd430faafdf05a79a17063d7ffc10e5d665aae42a6a6c989c56b0694a",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/orb-128.png",
+      "webp": "effects/sprites/orb-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        22,
+        26,
+        108,
+        110
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "ce745b706863926bf3056a5aa51339e19264a131fca3a2d682c1cb3ac137a9ce",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": true,
+      "hazeRemoved": false
+    },
+    {
+      "file": "effects/sprites/orb-256.png",
+      "webp": "effects/sprites/orb-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        40,
+        48,
+        222,
+        224
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "492c4483e36f1461dd5fa25a57a722de88594429cc6b59e1eae0e644fd6c352d",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": true,
+      "hazeRemoved": false
+    },
+    {
+      "file": "effects/sprites/streak-128.png",
+      "webp": "effects/sprites/streak-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        6,
+        47,
+        122,
+        81
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "53263f7571f8291dd5e39e1e560f44e9ebd0fc1a7ab70092350d4b87a83184b9",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/streak-256.png",
+      "webp": "effects/sprites/streak-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        7,
+        93,
+        250,
+        162
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "add",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "2bc54ac4f479af4a6bf1fc575cd5a43ba97659f6844d3a6e539fbe037f58f770",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/smoke-128.png",
+      "webp": "effects/sprites/smoke-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        6,
+        11,
+        122,
+        117
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "ef33edbce32fe09a4df587b076d7f6cc80d2bbb6cb5b416b46fc74a46237ba0c",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/smoke-256.png",
+      "webp": "effects/sprites/smoke-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        6,
+        18,
+        249,
+        238
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "b0a9ef81e2958f8659741706d6b66c0e34dc834d69ad5e51c4e59557873cc5c6",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/splash-128.png",
+      "webp": "effects/sprites/splash-128.webp",
+      "size": [
+        128,
+        128
+      ],
+      "pivot": [
+        64.0,
+        64.0
+      ],
+      "bounds": [
+        12,
+        7,
+        116,
+        122
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "505500dc2a6f54677b7093b821b64e7899a0132ae91cbc1eb01426e2fed1c721",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    },
+    {
+      "file": "effects/sprites/splash-256.png",
+      "webp": "effects/sprites/splash-256.webp",
+      "size": [
+        256,
+        256
+      ],
+      "pivot": [
+        128.0,
+        128.0
+      ],
+      "bounds": [
+        20,
+        8,
+        236,
+        249
+      ],
+      "format": "PNG32/RGBA8+sRGB; lossless WebP",
+      "blendMode": "normal",
+      "alphaMin": 0,
+      "alphaMax": 255,
+      "sha256": "d4ccca9333af79bcf949dbed19251cdea1add5eba9540e517cebceefaf464aef",
+      "kind": "fx-sprite",
+      "defaultTint": "#ffffff",
+      "previewColor": "#e4d9b8",
+      "tintable": true,
+      "hasIntentionalSoftFalloff": false,
+      "hazeRemoved": true
+    }
+  ],
+  "sequences": {
+    "coin-neutral": {
+      "atlas": "effects/coin-neutral/atlas.png",
+      "frames": [
+        {
+          "file": "effects/coin-neutral/frame-00.png",
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-01.png",
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-02.png",
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-03.png",
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-04.png",
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-05.png",
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-06.png",
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-07.png",
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-08.png",
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-09.png",
+          "rect": [
+            256,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-10.png",
+          "rect": [
+            512,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-11.png",
+          "rect": [
+            768,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-12.png",
+          "rect": [
+            0,
+            768,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-13.png",
+          "rect": [
+            256,
+            768,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-14.png",
+          "rect": [
+            512,
+            768,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/coin-neutral/frame-15.png",
+          "rect": [
+            768,
+            768,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        }
+      ],
+      "fps": 30,
+      "frameCount": 16,
+      "loop": true,
+      "endpointDuplicate": true,
+      "notes": "First and last exported frames match exactly; all frames centered in a fixed canvas. Neutral variant is tintable; colored is the default illustrated object.",
+      "defaultTint": "#eac86b"
+    },
+    "cash-neutral": {
+      "atlas": "effects/cash-neutral/atlas.png",
+      "frames": [
+        {
+          "file": "effects/cash-neutral/frame-00.png",
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-01.png",
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-02.png",
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-03.png",
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-04.png",
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-05.png",
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-06.png",
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-07.png",
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-08.png",
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-09.png",
+          "rect": [
+            256,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-10.png",
+          "rect": [
+            512,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        },
+        {
+          "file": "effects/cash-neutral/frame-11.png",
+          "rect": [
+            768,
+            512,
+            256,
+            256
+          ],
+          "pivot": [
+            128,
+            128
+          ]
+        }
+      ],
+      "fps": 30,
+      "frameCount": 12,
+      "loop": true,
+      "endpointDuplicate": true,
+      "notes": "First and last exported frames match exactly; all frames centered in a fixed canvas. Neutral variant is tintable; colored is the default illustrated object.",
+      "defaultTint": "#78aa75"
+    }
+  },
+  "sourceMasters": {
+    "coin": "effects/source/coin-turn-master.png",
+    "cash": "effects/source/cash-flutter-master.png"
+  },
+  "fxMaster": "effects/source/fx-cleanup-master.png",
+  "notes": [
+    "Default coin/cash exports are colored with a multi-stop material palette that preserves source shading and drawn detail. Neutral variants are separate.",
+    "Diffuse haze was removed from every non-orb sprite by alpha-core extraction. Orb intentionally keeps smooth radial falloff.",
+    "Native transparent PNG32 and lossless WebP carry identical registrations."
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "sourceFingerprint": "6b786b21ef59afda5d2986e66c485b311f4898743d1d58f43b41e2c321bec66d",
+  "method": "Actual controller, displayed baked frame, parent matrices and finite prop segments. Not browser/GPU.",
+  "results": [
+    {
+      "winner": "vice",
+      "cell": 60,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 237.92908739514064,
+        "y": 116.75812114404397
+      },
+      "ink": {
+        "x": 237.92908739514064,
+        "y": 116.75812114404397
+      },
+      "distanceInCells": 0,
+      "u": 0.7413790188865917,
+      "v": 0.2384864435313095
+    },
+    {
+      "winner": "vice",
+      "cell": 130,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 498.0130226894715,
+        "y": 242.47592914542855
+      },
+      "ink": {
+        "x": 498.0130226894715,
+        "y": 242.47592914542855
+      },
+      "distanceInCells": 0,
+      "u": 0.7413790188865923,
+      "v": 0.23848644353130957
+    },
+    {
+      "winner": "king",
+      "cell": 60,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 237.92908739514064,
+        "y": 116.75812114404397
+      },
+      "ink": {
+        "x": 237.92908739514064,
+        "y": 116.75812114404397
+      },
+      "distanceInCells": 0,
+      "u": 0.7413790188865917,
+      "v": 0.2384864435313095
+    },
+    {
+      "winner": "king",
+      "cell": 130,
+      "phase": "vsImpact",
+      "intersection": {
+        "x": 498.0130226894715,
+        "y": 242.47592914542855
+      },
+      "ink": {
+        "x": 498.0130226894715,
+        "y": 242.47592914542855
+      },
+      "distanceInCells": 0,
+      "u": 0.7413790188865923,
+      "v": 0.23848644353130957
+    }
+  ]
+}

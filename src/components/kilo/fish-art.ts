@@ -1,3 +1,4 @@
+import { overhaulSymbol } from './overhaul-symbols';
 /** Symbol pass. Tier comes from the recorded cell value, never stake or payout.
  *  Cash packages and the KING scatter use the illustrated v79 delivery.
  *  New canvases are uniformly registered into the accepted symbol ink budgets.
@@ -7,7 +8,7 @@ export const FISH_LADDER = [
 ] as const;
 
 export const V8_ROOT = "/kilo-symbols-v8/";
-export const CONTRABAND_ROOT = "/kilo-v79/symbols/";
+export const CONTRABAND_ROOT = "/kilo-overhaul-v1/symbols/runtime/base/";
 
 export type V8Key =
   | "fish-small"
@@ -26,6 +27,7 @@ export type PackageKey =
 type Bounds = readonly [number, number, number, number];
 
 type ArtMeta = { file: string; width: number; height: number; bounds: Bounds };
+const drawingMeta=(id:string):ArtMeta=>({file:id+'.webp',width:512,height:512,bounds:overhaulSymbol(id).runtimeAlphaBounds as unknown as Bounds});
 
 export const V8_META: Record<V8Key, ArtMeta> = {
   "fish-small": {
@@ -52,46 +54,16 @@ export const V8_META: Record<V8Key, ArtMeta> = {
     height: 1254,
     bounds: [21, 152, 1237, 951],
   },
-  "sym-reel-v8": {
-    file: "../kilo-v79/symbols/sym-reel-v8.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [147, 245, 1110, 1077],
-  },
-  "sym-case-v8": {
-    file: "../kilo-v79/symbols/sym-case-v8.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [46, 98, 1232, 1167],
-  },
+  "sym-reel-v8": drawingMeta('sym-reel-v8'),
+  "sym-case-v8": drawingMeta('sym-case-v8'),
 };
 
 /** Measured from the delivered canvases. Placement only; the PNG alpha stays whole. */
 export const PACKAGE_META: Record<PackageKey, ArtMeta> = {
-  "package-small": {
-    file: "package-small.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [48, 355, 1221, 998],
-  },
-  "package-medium": {
-    file: "package-medium.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [17, 298, 1241, 1018],
-  },
-  "package-trophy": {
-    file: "package-trophy.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [16, 239, 1238, 1079],
-  },
-  "package-king": {
-    file: "package-king.webp",
-    width: 1254,
-    height: 1254,
-    bounds: [8, 231, 1243, 1013],
-  },
+  'package-small':drawingMeta('package-small'),
+  'package-medium':drawingMeta('package-medium'),
+  'package-trophy':drawingMeta('package-trophy'),
+  'package-king':drawingMeta('package-king'),
 };
 
 export const SCATTER_KING: ArtMeta & {
@@ -100,10 +72,7 @@ export const SCATTER_KING: ArtMeta & {
   cx: number;
   cy: number;
 } = {
-  file: "scatter-king.webp",
-  width: 1254,
-  height: 1254,
-  bounds: [32, 42, 1224, 1205],
+  ...drawingMeta('scatter-king'),
   boxW: 0.82,
   boxH: 0.82,
   cx: 0.5,

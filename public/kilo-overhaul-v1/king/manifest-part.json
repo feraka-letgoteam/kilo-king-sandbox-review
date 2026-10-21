@@ -1,0 +1,1892 @@
+{
+  "version": "kilo-overhaul-v1",
+  "canvas": [
+    1024,
+    1536
+  ],
+  "logicalCanvas": [
+    512,
+    768
+  ],
+  "runtimeScale": 0.5,
+  "coordinateNote": "pivot,childJoint,pivots use global native1024x1536 coordinates. offset,runtimeSize,runtimePivot use half-scale512x768 coordinates. runtimePivot is local within trimmed runtime texture.",
+  "pivots": {
+    "root": [
+      540,
+      789
+    ],
+    "neck": [
+      542,
+      281
+    ],
+    "shoulderR": [
+      385,
+      350
+    ],
+    "elbowR": [
+      283,
+      548
+    ],
+    "wristR": [
+      245,
+      744
+    ],
+    "shoulderL": [
+      712,
+      350
+    ],
+    "elbowL": [
+      814,
+      560
+    ],
+    "wristL": [
+      841,
+      757
+    ],
+    "hipR": [
+      435,
+      803
+    ],
+    "kneeR": [
+      381,
+      1008
+    ],
+    "ankleR": [
+      321,
+      1290
+    ],
+    "hipL": [
+      650,
+      803
+    ],
+    "kneeL": [
+      687,
+      1017
+    ],
+    "ankleL": [
+      727,
+      1290
+    ],
+    "footR": [
+      285,
+      1492
+    ],
+    "footL": [
+      758,
+      1484
+    ]
+  },
+  "parts": {
+    "hand-r-grip": {
+      "file": "king/parts/hand-r-grip.png",
+      "webpFile": "king/parts/hand-r-grip.webp",
+      "runtimeFile": "king/runtime/hand-r-grip.webp",
+      "runtimePng": "king/runtime/hand-r-grip.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        53,
+        60
+      ],
+      "offset": [
+        77.0,
+        317.0
+      ],
+      "pivot": [
+        245.0,
+        744.0
+      ],
+      "runtimePivot": [
+        45.5,
+        55.0
+      ],
+      "trimNative": [
+        154,
+        634,
+        106,
+        120
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "poseVariant": "hand-r-grip",
+      "parentJoint": "wristR",
+      "nativeHandSource": "rod-fist",
+      "registrationNote": "Repainted approved hand fitted to its native painted bounds; wrist and grip metadata retained after translation.",
+      "gripPivot": [
+        190.37557392102846,
+        654.8090534979424
+      ],
+      "gripAxis": [
+        -0.5222771152430395,
+        -0.8527758292150457
+      ],
+      "shaftAxis": [
+        -0.69265,
+        -0.721287
+      ]
+    },
+    "hand-l-grip": {
+      "file": "king/parts/hand-l-grip.png",
+      "webpFile": "king/parts/hand-l-grip.webp",
+      "runtimeFile": "king/runtime/hand-l-grip.webp",
+      "runtimePng": "king/runtime/hand-l-grip.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        60,
+        50
+      ],
+      "offset": [
+        364.0,
+        354.0
+      ],
+      "pivot": [
+        841.0,
+        757.0
+      ],
+      "runtimePivot": [
+        56.5,
+        24.5
+      ],
+      "trimNative": [
+        728,
+        708,
+        120,
+        100
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "poseVariant": "hand-l-grip",
+      "parentJoint": "wristL",
+      "nativeHandSource": "left-fist-rod-butt",
+      "registrationNote": "Repainted approved hand fitted to its native painted bounds; wrist and grip metadata retained after translation.",
+      "gripPivot": [
+        766.471327572663,
+        762.4230769230769
+      ],
+      "gripAxis": [
+        -0.9973630959538686,
+        0.0725730999015089
+      ],
+      "shaftAxis": [
+        -0.69265,
+        -0.721287
+      ]
+    },
+    "hand-l-open-throw": {
+      "file": "king/parts/hand-l-open-throw.png",
+      "webpFile": "king/parts/hand-l-open-throw.webp",
+      "runtimeFile": "king/runtime/hand-l-open-throw.webp",
+      "runtimePng": "king/runtime/hand-l-open-throw.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        52,
+        59
+      ],
+      "offset": [
+        393.0,
+        323.0
+      ],
+      "pivot": [
+        841.0,
+        757.0
+      ],
+      "runtimePivot": [
+        27.5,
+        55.5
+      ],
+      "trimNative": [
+        786,
+        646,
+        104,
+        118
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "poseVariant": "hand-l-open-throw",
+      "parentJoint": "wristL",
+      "nativeHandSource": "left-hand-open-throw",
+      "registrationNote": "Repainted approved hand fitted to its native painted bounds; wrist and grip metadata retained after translation.",
+      "releasePivot": [
+        835.0,
+        717.0
+      ],
+      "fingerReleasePivot": [
+        840.0,
+        691.0
+      ],
+      "releaseAxis": [
+        0,
+        -1
+      ]
+    },
+    "hand-l-dynamite-grip": {
+      "file": "king/parts/hand-l-dynamite-grip.png",
+      "webpFile": "king/parts/hand-l-dynamite-grip.webp",
+      "runtimeFile": "king/runtime/hand-l-dynamite-grip.webp",
+      "runtimePng": "king/runtime/hand-l-dynamite-grip.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        60,
+        50
+      ],
+      "offset": [
+        364.0,
+        354.0
+      ],
+      "pivot": [
+        841.0,
+        757.0
+      ],
+      "runtimePivot": [
+        56.5,
+        24.5
+      ],
+      "trimNative": [
+        728,
+        708,
+        120,
+        100
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "gripPivot": [
+        766.471327572663,
+        762.4230769230769
+      ],
+      "gripAxis": [
+        -0.9973630959538686,
+        0.0725730999015089
+      ],
+      "shaftAxis": [
+        -0.69265,
+        -0.721287
+      ],
+      "poseVariant": "left-dynamite-grip",
+      "attachmentNote": "Empty grip only. Attach separately rendered dynamite/fuse effect; no dynamite or glow is baked into the hand.",
+      "releasePivot": [
+        766.471327572663,
+        762.4230769230769
+      ]
+    },
+    "rod": {
+      "file": "king/parts/rod.png",
+      "webpFile": "king/parts/rod.webp",
+      "runtimeFile": "king/runtime/rod.webp",
+      "runtimePng": "king/runtime/rod.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        312,
+        349
+      ],
+      "offset": [
+        3.0,
+        0.0
+      ],
+      "pivot": [
+        494.444988014285,
+        537.5792524827554
+      ],
+      "runtimePivot": [
+        244.2224940071425,
+        268.7896262413777
+      ],
+      "trimNative": [
+        6,
+        0,
+        624,
+        698
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "gripPivot": [
+        494.444988014285,
+        537.5792524827554
+      ],
+      "supportGripPivot": [
+        576.4358397338682,
+        636.8454331979844
+      ],
+      "tipPivot": [
+        25.0,
+        20.0
+      ],
+      "tipPoint": [
+        25.0,
+        20.0
+      ],
+      "buttPivot": [
+        605.0,
+        680.0
+      ],
+      "shaftAxis": [
+        -0.6601146077286788,
+        -0.7511648984498759
+      ],
+      "sourceLandmarks": {
+        "tip": [
+          79,
+          52
+        ],
+        "butt": [
+          967,
+          1404
+        ],
+        "rightGrip": [
+          802,
+          1116
+        ],
+        "leftSupport": [
+          926,
+          1318
+        ]
+      },
+      "sourceToSharedAffine": [
+        0.5378895357369992,
+        -0.07570568954552123,
+        0.07570568954552123,
+        0.5378895357369992,
+        -21.42996917959004,
+        -1.9895063842277771
+      ]
+    },
+    "head-neutral": {
+      "file": "king/parts/head-neutral.png",
+      "webpFile": "king/parts/head-neutral.webp",
+      "runtimeFile": "king/runtime/head-neutral.webp",
+      "runtimePng": "king/runtime/head-neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        126,
+        126
+      ],
+      "offset": [
+        196.0,
+        31.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        75.0,
+        109.5
+      ],
+      "trimNative": [
+        392,
+        62,
+        252,
+        252
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "neutral"
+    },
+    "head-grin": {
+      "file": "king/parts/head-grin.png",
+      "webpFile": "king/parts/head-grin.webp",
+      "runtimeFile": "king/runtime/head-grin.webp",
+      "runtimePng": "king/runtime/head-grin.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        126,
+        126
+      ],
+      "offset": [
+        196.0,
+        31.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        75.0,
+        109.5
+      ],
+      "trimNative": [
+        392,
+        62,
+        252,
+        252
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "grin"
+    },
+    "head-shout": {
+      "file": "king/parts/head-shout.png",
+      "webpFile": "king/parts/head-shout.webp",
+      "runtimeFile": "king/runtime/head-shout.webp",
+      "runtimePng": "king/runtime/head-shout.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        126,
+        126
+      ],
+      "offset": [
+        196.0,
+        31.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        75.0,
+        109.5
+      ],
+      "trimNative": [
+        392,
+        62,
+        252,
+        252
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "shout"
+    },
+    "head-blink": {
+      "file": "king/parts/head-blink.png",
+      "webpFile": "king/parts/head-blink.webp",
+      "runtimeFile": "king/runtime/head-blink.webp",
+      "runtimePng": "king/runtime/head-blink.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        126,
+        126
+      ],
+      "offset": [
+        196.0,
+        31.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        75.0,
+        109.5
+      ],
+      "trimNative": [
+        392,
+        62,
+        252,
+        252
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "blink"
+    },
+    "eyes-neutral": {
+      "file": "king/parts/eyes-neutral.png",
+      "webpFile": "king/parts/eyes-neutral.webp",
+      "runtimeFile": "king/runtime/eyes-neutral.webp",
+      "runtimePng": "king/runtime/eyes-neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        61,
+        35
+      ],
+      "offset": [
+        212.0,
+        61.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        59.0,
+        79.5
+      ],
+      "trimNative": [
+        424,
+        122,
+        122,
+        70
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "neutral",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        426,
+        125,
+        118,
+        65
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "mouth-neutral": {
+      "file": "king/parts/mouth-neutral.png",
+      "webpFile": "king/parts/mouth-neutral.webp",
+      "runtimeFile": "king/runtime/mouth-neutral.webp",
+      "runtimePng": "king/runtime/mouth-neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        57,
+        45
+      ],
+      "offset": [
+        216.0,
+        85.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        55.0,
+        55.5
+      ],
+      "trimNative": [
+        432,
+        170,
+        114,
+        90
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "neutral",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        435,
+        173,
+        108,
+        85
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "eyes-grin": {
+      "file": "king/parts/eyes-grin.png",
+      "webpFile": "king/parts/eyes-grin.webp",
+      "runtimeFile": "king/runtime/eyes-grin.webp",
+      "runtimePng": "king/runtime/eyes-grin.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        61,
+        35
+      ],
+      "offset": [
+        212.0,
+        61.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        59.0,
+        79.5
+      ],
+      "trimNative": [
+        424,
+        122,
+        122,
+        70
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "grin",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        426,
+        125,
+        118,
+        65
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "mouth-grin": {
+      "file": "king/parts/mouth-grin.png",
+      "webpFile": "king/parts/mouth-grin.webp",
+      "runtimeFile": "king/runtime/mouth-grin.webp",
+      "runtimePng": "king/runtime/mouth-grin.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        57,
+        45
+      ],
+      "offset": [
+        216.0,
+        85.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        55.0,
+        55.5
+      ],
+      "trimNative": [
+        432,
+        170,
+        114,
+        90
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "grin",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        435,
+        173,
+        108,
+        85
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "eyes-shout": {
+      "file": "king/parts/eyes-shout.png",
+      "webpFile": "king/parts/eyes-shout.webp",
+      "runtimeFile": "king/runtime/eyes-shout.webp",
+      "runtimePng": "king/runtime/eyes-shout.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        61,
+        35
+      ],
+      "offset": [
+        212.0,
+        61.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        59.0,
+        79.5
+      ],
+      "trimNative": [
+        424,
+        122,
+        122,
+        70
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "shout",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        426,
+        125,
+        118,
+        65
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "mouth-shout": {
+      "file": "king/parts/mouth-shout.png",
+      "webpFile": "king/parts/mouth-shout.webp",
+      "runtimeFile": "king/runtime/mouth-shout.webp",
+      "runtimePng": "king/runtime/mouth-shout.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        57,
+        45
+      ],
+      "offset": [
+        216.0,
+        85.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        55.0,
+        55.5
+      ],
+      "trimNative": [
+        432,
+        170,
+        114,
+        90
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "shout",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        435,
+        173,
+        108,
+        85
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "eyes-blink": {
+      "file": "king/parts/eyes-blink.png",
+      "webpFile": "king/parts/eyes-blink.webp",
+      "runtimeFile": "king/runtime/eyes-blink.webp",
+      "runtimePng": "king/runtime/eyes-blink.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        61,
+        35
+      ],
+      "offset": [
+        212.0,
+        61.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        59.0,
+        79.5
+      ],
+      "trimNative": [
+        424,
+        122,
+        122,
+        70
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "blink",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        426,
+        125,
+        118,
+        65
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "mouth-blink": {
+      "file": "king/parts/mouth-blink.png",
+      "webpFile": "king/parts/mouth-blink.webp",
+      "runtimeFile": "king/runtime/mouth-blink.webp",
+      "runtimePng": "king/runtime/mouth-blink.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        57,
+        45
+      ],
+      "offset": [
+        216.0,
+        85.0
+      ],
+      "pivot": [
+        542.0,
+        281.0
+      ],
+      "runtimePivot": [
+        55.0,
+        55.5
+      ],
+      "trimNative": [
+        432,
+        170,
+        114,
+        90
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "expression": "blink",
+      "patchMode": "opaque-replacement-region",
+      "replaceRegion": [
+        435,
+        173,
+        108,
+        85
+      ],
+      "usage": "Use base head plus eyes/mouth OR complete expression head. Do not combine both approaches."
+    },
+    "head": {
+      "file": "king/parts/head.png",
+      "webpFile": "king/parts/head.webp",
+      "runtimeFile": "king/runtime/head.webp",
+      "runtimePng": "king/runtime/head.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        126,
+        126
+      ],
+      "offset": [
+        196.0,
+        31.0
+      ],
+      "pivot": [
+        542,
+        281
+      ],
+      "runtimePivot": [
+        75.0,
+        109.5
+      ],
+      "trimNative": [
+        392,
+        62,
+        252,
+        252
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          395,
+          65,
+          246,
+          246
+        ]
+      }
+    },
+    "hat": {
+      "file": "king/parts/hat.png",
+      "webpFile": "king/parts/hat.webp",
+      "runtimeFile": "king/runtime/hat.webp",
+      "runtimePng": "king/runtime/hat.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        124,
+        72
+      ],
+      "offset": [
+        198.0,
+        5.0
+      ],
+      "pivot": [
+        528,
+        114
+      ],
+      "runtimePivot": [
+        66.0,
+        52.0
+      ],
+      "trimNative": [
+        396,
+        10,
+        248,
+        144
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          398,
+          13,
+          244,
+          139
+        ]
+      }
+    },
+    "torso": {
+      "file": "king/parts/torso.png",
+      "webpFile": "king/parts/torso.webp",
+      "runtimeFile": "king/runtime/torso.webp",
+      "runtimePng": "king/runtime/torso.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        230,
+        266
+      ],
+      "offset": [
+        159.0,
+        118.0
+      ],
+      "pivot": [
+        538,
+        711
+      ],
+      "runtimePivot": [
+        110.0,
+        237.5
+      ],
+      "trimNative": [
+        318,
+        236,
+        460,
+        532
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          321,
+          238,
+          455,
+          528
+        ]
+      }
+    },
+    "pelvis": {
+      "file": "king/parts/pelvis.png",
+      "webpFile": "king/parts/pelvis.webp",
+      "runtimeFile": "king/runtime/pelvis.webp",
+      "runtimePng": "king/runtime/pelvis.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        217,
+        77
+      ],
+      "offset": [
+        162.0,
+        352.0
+      ],
+      "pivot": [
+        540,
+        789
+      ],
+      "runtimePivot": [
+        108.0,
+        42.5
+      ],
+      "trimNative": [
+        324,
+        704,
+        434,
+        154
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          326,
+          706,
+          430,
+          164
+        ],
+        "internalUnderlapFeather": {
+          "axis": "y",
+          "opaqueThrough": 812,
+          "transparentFrom": 858,
+          "purpose": "Hide crosswise cutout hem over painted thigh caps; not an exterior haze."
+        }
+      }
+    },
+    "upper-arm-r": {
+      "file": "king/parts/upper-arm-r.png",
+      "webpFile": "king/parts/upper-arm-r.webp",
+      "runtimeFile": "king/runtime/upper-arm-r.webp",
+      "runtimePng": "king/runtime/upper-arm-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        111,
+        146
+      ],
+      "offset": [
+        107.0,
+        150.0
+      ],
+      "pivot": [
+        385,
+        350
+      ],
+      "runtimePivot": [
+        85.5,
+        25.0
+      ],
+      "trimNative": [
+        214,
+        300,
+        222,
+        292
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          -0.384841697542578,
+          0.9229825934612996
+        ],
+        "source_pivot": [
+          767.7761166636678,
+          303.2518961310122
+        ],
+        "axis_scale": 0.20661271623049238,
+        "cross_scale": 0.25763983365928506,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.24780914397274156,
+          0.03821553920778184,
+          0.0008100225617223428,
+          0.21493404333918592,
+          194.4924168891095,
+          255.47986552512782
+        ]
+      },
+      "childJoint": [
+        283,
+        548
+      ]
+    },
+    "forearm-r": {
+      "file": "king/parts/forearm-r.png",
+      "webpFile": "king/parts/forearm-r.webp",
+      "runtimeFile": "king/runtime/forearm-r.webp",
+      "runtimePng": "king/runtime/forearm-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        81,
+        140
+      ],
+      "offset": [
+        92.0,
+        252.0
+      ],
+      "pivot": [
+        283,
+        548
+      ],
+      "runtimePivot": [
+        49.5,
+        22.0
+      ],
+      "trimNative": [
+        184,
+        504,
+        162,
+        280
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          -0.32122294348216246,
+          0.9470036011445022
+        ],
+        "source_pivot": [
+          695.1591419116895,
+          282.90174843919516
+        ],
+        "axis_scale": 0.19316622972638084,
+        "cross_scale": 0.22855714801189148,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.22429780934449747,
+          -0.019718530046143837,
+          0.037258170909854456,
+          0.19355893988799755,
+          116.53692562936322,
+          506.94935390628564
+        ]
+      },
+      "childJoint": [
+        245,
+        744
+      ]
+    },
+    "hand-r": {
+      "file": "king/parts/hand-r.png",
+      "webpFile": "king/parts/hand-r.webp",
+      "runtimeFile": "king/runtime/hand-r.webp",
+      "runtimePng": "king/runtime/hand-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        57,
+        77
+      ],
+      "offset": [
+        96.0,
+        361.0
+      ],
+      "pivot": [
+        245,
+        744
+      ],
+      "runtimePivot": [
+        26.5,
+        11.0
+      ],
+      "trimNative": [
+        192,
+        722,
+        114,
+        154
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          194,
+          724,
+          110,
+          149
+        ]
+      }
+    },
+    "upper-arm-l": {
+      "file": "king/parts/upper-arm-l.png",
+      "webpFile": "king/parts/upper-arm-l.webp",
+      "runtimeFile": "king/runtime/upper-arm-l.webp",
+      "runtimePng": "king/runtime/upper-arm-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        113,
+        154
+      ],
+      "offset": [
+        327.0,
+        151.0
+      ],
+      "pivot": [
+        712,
+        350
+      ],
+      "runtimePivot": [
+        29.0,
+        24.0
+      ],
+      "trimNative": [
+        654,
+        302,
+        226,
+        308
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          0.42856107687389494,
+          0.9035128130738862
+        ],
+        "source_pivot": [
+          277.3393300636543,
+          290.94476068274116
+        ],
+        "axis_scale": 0.21762571171498274,
+        "cross_scale": 0.2794459076992505,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.2678587261640706,
+          -0.026417358553302794,
+          -0.021817386547250697,
+          0.22919160839434397,
+          644.0598946416656,
+          290.6444748684394
+        ]
+      },
+      "childJoint": [
+        814,
+        560
+      ]
+    },
+    "forearm-l": {
+      "file": "king/parts/forearm-l.png",
+      "webpFile": "king/parts/forearm-l.webp",
+      "runtimeFile": "king/runtime/forearm-l.webp",
+      "runtimePng": "king/runtime/forearm-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        75,
+        140
+      ],
+      "offset": [
+        373.0,
+        259.0
+      ],
+      "pivot": [
+        814,
+        560
+      ],
+      "runtimePivot": [
+        34.0,
+        21.0
+      ],
+      "trimNative": [
+        746,
+        518,
+        150,
+        280
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          0.46305383866896016,
+          0.8863301543408871
+        ],
+        "source_pivot": [
+          314.70553876622904,
+          289.23797988420216
+        ],
+        "axis_scale": 0.1949050840976322,
+        "cross_scale": 0.24273725339515786,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.22540763565502142,
+          0.060201827554116565,
+          -0.08790223626481115,
+          0.1864127157683537,
+          768.4876338237025,
+          487.1365140913035
+        ]
+      },
+      "childJoint": [
+        841,
+        757
+      ]
+    },
+    "hand-l": {
+      "file": "king/parts/hand-l.png",
+      "webpFile": "king/parts/hand-l.webp",
+      "runtimeFile": "king/runtime/hand-l.webp",
+      "runtimePng": "king/runtime/hand-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        55,
+        78
+      ],
+      "offset": [
+        390.0,
+        367.0
+      ],
+      "pivot": [
+        841,
+        757
+      ],
+      "runtimePivot": [
+        30.5,
+        11.5
+      ],
+      "trimNative": [
+        780,
+        734,
+        110,
+        156
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          782,
+          737,
+          106,
+          151
+        ]
+      }
+    },
+    "thigh-r": {
+      "file": "king/parts/thigh-r.png",
+      "webpFile": "king/parts/thigh-r.webp",
+      "runtimeFile": "king/runtime/thigh-r.webp",
+      "runtimePng": "king/runtime/thigh-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        117,
+        149
+      ],
+      "offset": [
+        149.0,
+        379.0
+      ],
+      "pivot": [
+        435,
+        803
+      ],
+      "runtimePivot": [
+        68.5,
+        22.5
+      ],
+      "trimNative": [
+        298,
+        758,
+        234,
+        298
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          -0.29849541177488903,
+          0.9544110692722186
+        ],
+        "source_pivot": [
+          706.8062381170738,
+          199.16997797765777
+        ],
+        "axis_scale": 0.20919068794096948,
+        "cross_scale": 0.305236594429856,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.29761717689875217,
+          0.013824232858773065,
+          0.03724931945106379,
+          0.21627648346842607,
+          217.2233766624182,
+          750.1531635287445
+        ]
+      },
+      "childJoint": [
+        381,
+        1008
+      ]
+    },
+    "thigh-l": {
+      "file": "king/parts/thigh-l.png",
+      "webpFile": "king/parts/thigh-l.webp",
+      "runtimeFile": "king/runtime/thigh-l.webp",
+      "runtimePng": "king/runtime/thigh-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        114,
+        151
+      ],
+      "offset": [
+        275.0,
+        381.0
+      ],
+      "pivot": [
+        650,
+        803
+      ],
+      "runtimePivot": [
+        50.0,
+        20.5
+      ],
+      "trimNative": [
+        550,
+        762,
+        228,
+        302
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          0.2387186772306979,
+          0.9710887668700664
+        ],
+        "source_pivot": [
+          527.0409764477365,
+          222.6368452253256
+        ],
+        "axis_scale": 0.218767992817348,
+        "cross_scale": 0.31773661617098203,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.31293690543709624,
+          -0.0011070780267456726,
+          -0.038546933748098366,
+          0.2222597431597399,
+          493.6513955146861,
+          754.1002674465442
+        ]
+      },
+      "childJoint": [
+        687,
+        1017
+      ]
+    },
+    "shin-r": {
+      "file": "king/parts/shin-r.png",
+      "webpFile": "king/parts/shin-r.webp",
+      "runtimeFile": "king/runtime/shin-r.webp",
+      "runtimePng": "king/runtime/shin-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        111,
+        201
+      ],
+      "offset": [
+        124.0,
+        473.0
+      ],
+      "pivot": [
+        381,
+        1008
+      ],
+      "runtimePivot": [
+        66.5,
+        31.0
+      ],
+      "trimNative": [
+        248,
+        946,
+        222,
+        402
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          -0.09171788867250216,
+          0.99578503146887
+        ],
+        "source_pivot": [
+          585.2253158448004,
+          274.2748342902433
+        ],
+        "axis_scale": 0.28761632952985294,
+        "cross_scale": 0.3235883504955156,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.3206594197135912,
+          0.0412553618417712,
+          -0.030573819576396908,
+          0.28630987900069227,
+          201.72761911743922,
+          905.3287232172835
+        ]
+      },
+      "childJoint": [
+        321,
+        1290
+      ]
+    },
+    "shin-l": {
+      "file": "king/parts/shin-l.png",
+      "webpFile": "king/parts/shin-l.webp",
+      "runtimeFile": "king/runtime/shin-l.webp",
+      "runtimePng": "king/runtime/shin-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        104,
+        190
+      ],
+      "offset": [
+        300.0,
+        484.0
+      ],
+      "pivot": [
+        687,
+        1017
+      ],
+      "runtimePivot": [
+        43.5,
+        24.5
+      ],
+      "trimNative": [
+        600,
+        968,
+        208,
+        380
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_axis": [
+          0.13937444426563,
+          0.9902397509116906
+        ],
+        "source_pivot": [
+          460.2028792314478,
+          200.53669959005944
+        ],
+        "axis_scale": 0.2559276687937998,
+        "cross_scale": 0.32300159198932094,
+        "underlap_fraction": 0.13,
+        "source_to_shared_affine": [
+          0.3216411694595393,
+          -0.01107628572558799,
+          -0.007802297403965777,
+          0.25727883364223697,
+          540.5444547059614,
+          970.5034904091116
+        ]
+      },
+      "childJoint": [
+        727,
+        1290
+      ]
+    },
+    "boot-r": {
+      "file": "king/parts/boot-r.png",
+      "webpFile": "king/parts/boot-r.webp",
+      "runtimeFile": "king/runtime/boot-r.webp",
+      "runtimePng": "king/runtime/boot-r.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        142,
+        140
+      ],
+      "offset": [
+        73.0,
+        610.0
+      ],
+      "pivot": [
+        321,
+        1290
+      ],
+      "runtimePivot": [
+        87.5,
+        35.0
+      ],
+      "trimNative": [
+        146,
+        1220,
+        284,
+        280
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          148,
+          1223,
+          279,
+          274
+        ]
+      },
+      "footContact": [
+        285,
+        1492
+      ]
+    },
+    "boot-l": {
+      "file": "king/parts/boot-l.png",
+      "webpFile": "king/parts/boot-l.webp",
+      "runtimeFile": "king/runtime/boot-l.webp",
+      "runtimePng": "king/runtime/boot-l.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        145,
+        131
+      ],
+      "offset": [
+        308.0,
+        614.0
+      ],
+      "pivot": [
+        727,
+        1290
+      ],
+      "runtimePivot": [
+        55.5,
+        31.0
+      ],
+      "trimNative": [
+        616,
+        1228,
+        290,
+        262
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          618,
+          1231,
+          285,
+          256
+        ]
+      },
+      "footContact": [
+        758,
+        1484
+      ]
+    },
+    "pendant": {
+      "file": "king/parts/pendant.png",
+      "webpFile": "king/parts/pendant.webp",
+      "runtimeFile": "king/runtime/pendant.webp",
+      "runtimePng": "king/runtime/pendant.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        84,
+        54
+      ],
+      "offset": [
+        233.0,
+        132.0
+      ],
+      "pivot": [
+        545,
+        286
+      ],
+      "runtimePivot": [
+        39.5,
+        11.0
+      ],
+      "trimNative": [
+        466,
+        264,
+        168,
+        108
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "source_to_shared_rect": [
+          469,
+          267,
+          162,
+          103
+        ]
+      }
+    }
+  },
+  "skeleton": {
+    "torso": "pelvis",
+    "head": "torso",
+    "hat": "head",
+    "pendant": "torso",
+    "upper-arm-r": "torso",
+    "forearm-r": "upper-arm-r",
+    "hand-r": "forearm-r",
+    "upper-arm-l": "torso",
+    "forearm-l": "upper-arm-l",
+    "hand-l": "forearm-l",
+    "thigh-r": "pelvis",
+    "shin-r": "thigh-r",
+    "boot-r": "shin-r",
+    "thigh-l": "pelvis",
+    "shin-l": "thigh-l",
+    "boot-l": "shin-l"
+  },
+  "layerOrder": [
+    "boot-r",
+    "boot-l",
+    "shin-r",
+    "shin-l",
+    "thigh-r",
+    "thigh-l",
+    "pelvis",
+    "upper-arm-r",
+    "forearm-r",
+    "upper-arm-l",
+    "forearm-l",
+    "torso",
+    "hand-r",
+    "hand-l",
+    "pendant",
+    "head",
+    "hat"
+  ],
+  "ready": true,
+  "limitations": [
+    "Layered raster production cutouts, not a Spine project or fully authored skeletal animation file.",
+    "Runtime IK/toolhand fitting and animation anatomy require owner-renderer pose review.",
+    "Expression patches are opaque replacement regions; use either full expression heads OR neutral head with patches, never both.",
+    "The left dynamite hand is an empty gripping variant; dynamite and fuse attach as separate assets."
+  ],
+  "faceVariants": {
+    "neutral": {
+      "head": "head-neutral",
+      "eyes": "eyes-neutral",
+      "mouth": "mouth-neutral"
+    },
+    "grin": {
+      "head": "head-grin",
+      "eyes": "eyes-grin",
+      "mouth": "mouth-grin"
+    },
+    "shout": {
+      "head": "head-shout",
+      "eyes": "eyes-shout",
+      "mouth": "mouth-shout"
+    },
+    "blink": {
+      "head": "head-blink",
+      "eyes": "eyes-blink",
+      "mouth": "mouth-blink"
+    }
+  },
+  "status": "Final character production cutouts, variants, pivots and static registration QA complete.",
+  "guides": {
+    "pivotMap": "king/pivot-map.png",
+    "assembledRest": "king/assembled-rest.png",
+    "assembledRestTransparent": "king/assembled-rest-transparent.png",
+    "contactSheet": "king/contact-sheet.png",
+    "faceReplacementCheck": "king/face-replacement-check.png",
+    "verification": "king/metadata/verification.json"
+  }
+}

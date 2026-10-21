@@ -1,0 +1,1798 @@
+{
+  "version": "kilo-overhaul-v1",
+  "category": "features",
+  "colorSpace": "sRGB",
+  "alphaMode": "straight",
+  "coordinateSpace": "native texture pixels; actor-atlas pivots are per-frame",
+  "artDirection": "Matte inked Miami heist cartoon; warm top-left key and cool teal right rim.",
+  "assets": [
+    {
+      "id": "king-1",
+      "file": "vs/king-1.png",
+      "webp": "vs/king-1.webp",
+      "runtime": "vs/runtime/king-1.webp",
+      "size": [
+        724,
+        2172
+      ],
+      "runtimeSize": [
+        683,
+        2048
+      ],
+      "pivot": [
+        362.0,
+        1086.0
+      ],
+      "pivotPixels": [
+        362.0,
+        1086.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "a42b9018deaecf6b5914413334741eafa6f826b38f112c1092fef74afaf59cc8",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "King",
+      "width": 1,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        341.5,
+        1024.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "king-2",
+      "file": "vs/king-2.png",
+      "webp": "vs/king-2.webp",
+      "runtime": "vs/runtime/king-2.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        1024,
+        1536
+      ],
+      "pivot": [
+        512.0,
+        768.0
+      ],
+      "pivotPixels": [
+        512.0,
+        768.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "aefd537839552f7db2938291c1e40d5b0ce9a22f82d302e463153fe76f31673f",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "King",
+      "width": 2,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        512.0,
+        768.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "king-3",
+      "file": "vs/king-3.png",
+      "webp": "vs/king-3.webp",
+      "runtime": "vs/runtime/king-3.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "runtimeSize": [
+        1254,
+        1254
+      ],
+      "pivot": [
+        627.0,
+        627.0
+      ],
+      "pivotPixels": [
+        627.0,
+        627.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "f156f45d17a20cd14cac2013f03f3f0a9177b1b13a1024407baccb1ad44b8a50",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "King",
+      "width": 3,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        627.0,
+        627.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "king-4",
+      "file": "vs/king-4.png",
+      "webp": "vs/king-4.webp",
+      "runtime": "vs/runtime/king-4.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "runtimeSize": [
+        1448,
+        1086
+      ],
+      "pivot": [
+        724.0,
+        543.0
+      ],
+      "pivotPixels": [
+        724.0,
+        543.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "92d95b38ad41d04af5f6e56b8a2bd46c6f2b19243703da629c677924fde3f034",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "King",
+      "width": 4,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        724.0,
+        543.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "king-5",
+      "file": "vs/king-5.png",
+      "webp": "vs/king-5.webp",
+      "runtime": "vs/runtime/king-5.webp",
+      "size": [
+        1619,
+        971
+      ],
+      "runtimeSize": [
+        1619,
+        971
+      ],
+      "pivot": [
+        809.5,
+        485.5
+      ],
+      "pivotPixels": [
+        809.5,
+        485.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "54428cf6ebc3b194ea4aee870c232ec1c44cc8b9620d897fc8f2708d5356e892",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "King",
+      "width": 5,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        809.5,
+        485.5
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "vice-1",
+      "file": "vs/vice-1.png",
+      "webp": "vs/vice-1.webp",
+      "runtime": "vs/runtime/vice-1.webp",
+      "size": [
+        724,
+        2172
+      ],
+      "runtimeSize": [
+        683,
+        2048
+      ],
+      "pivot": [
+        362.0,
+        1086.0
+      ],
+      "pivotPixels": [
+        362.0,
+        1086.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "27b9a2c5dd95717914ffe43fad1b4c08537a7513c5f80bc50c56d9f3e77ed0b1",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "Cop",
+      "width": 1,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        341.5,
+        1024.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "vice-2",
+      "file": "vs/vice-2.png",
+      "webp": "vs/vice-2.webp",
+      "runtime": "vs/runtime/vice-2.webp",
+      "size": [
+        1024,
+        1536
+      ],
+      "runtimeSize": [
+        1024,
+        1536
+      ],
+      "pivot": [
+        512.0,
+        768.0
+      ],
+      "pivotPixels": [
+        512.0,
+        768.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "80c7f010483bbc9b400dd65d46ef17f694de1b8ef399f4b162263ba904276bff",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "Cop",
+      "width": 2,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        512.0,
+        768.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "vice-3",
+      "file": "vs/vice-3.png",
+      "webp": "vs/vice-3.webp",
+      "runtime": "vs/runtime/vice-3.webp",
+      "size": [
+        1254,
+        1254
+      ],
+      "runtimeSize": [
+        1254,
+        1254
+      ],
+      "pivot": [
+        627.0,
+        627.0
+      ],
+      "pivotPixels": [
+        627.0,
+        627.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "6f4827981ed8adb781db0f8816f5635a202bc7981390e918a4e3749da9da0417",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "Cop",
+      "width": 3,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        627.0,
+        627.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "vice-4",
+      "file": "vs/vice-4.png",
+      "webp": "vs/vice-4.webp",
+      "runtime": "vs/runtime/vice-4.webp",
+      "size": [
+        1448,
+        1086
+      ],
+      "runtimeSize": [
+        1448,
+        1086
+      ],
+      "pivot": [
+        724.0,
+        543.0
+      ],
+      "pivotPixels": [
+        724.0,
+        543.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "44915c8b54534bf21042345530c344d83c9498c2c6217e9851f674816cf8a973",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "Cop",
+      "width": 4,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        724.0,
+        543.0
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "vice-5",
+      "file": "vs/vice-5.png",
+      "webp": "vs/vice-5.webp",
+      "runtime": "vs/runtime/vice-5.webp",
+      "size": [
+        1619,
+        971
+      ],
+      "runtimeSize": [
+        1619,
+        971
+      ],
+      "pivot": [
+        809.5,
+        485.5
+      ],
+      "pivotPixels": [
+        809.5,
+        485.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sha256": "443d22211172211269041db6cf4d6e2b6e0bb826ffa9ed0b51cf305c9dbacc19",
+      "role": "Continuous VS group artwork; runtime multiplier remains separate.",
+      "side": "Cop",
+      "width": 5,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "runtimePivot": [
+        809.5,
+        485.5
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "continuousDedicatedComposition": true,
+        "bakedText": false,
+        "opaqueArtScene": true
+      }
+    },
+    {
+      "id": "king-torso",
+      "size": [
+        399,
+        315
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        399,
+        315
+      ],
+      "generatedTileBounds": [
+        46,
+        97,
+        476,
+        453
+      ],
+      "file": "vs/actor-parts/king-torso.png",
+      "webp": "vs/actor-parts/king-torso.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          399,
+          315
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        204.3659,
+        290.6757
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "torso",
+      "side": "King"
+    },
+    {
+      "id": "king-head-ready",
+      "size": [
+        326,
+        308
+      ],
+      "sourcePaintBounds": [
+        0,
+        1,
+        326,
+        308
+      ],
+      "generatedTileBounds": [
+        78,
+        102,
+        438,
+        442
+      ],
+      "file": "vs/actor-parts/king-head-ready.png",
+      "webp": "vs/actor-parts/king-head-ready.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          1,
+          326,
+          308
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        187.9127,
+        292.3871
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-ready",
+      "side": "King"
+    },
+    {
+      "id": "king-head-effort",
+      "size": [
+        326,
+        309
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        326,
+        309
+      ],
+      "generatedTileBounds": [
+        78,
+        102,
+        437,
+        442
+      ],
+      "file": "vs/actor-parts/king-head-effort.png",
+      "webp": "vs/actor-parts/king-head-effort.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          326,
+          309
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        187.9127,
+        293.3364
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-effort",
+      "side": "King"
+    },
+    {
+      "id": "king-head-win",
+      "size": [
+        336,
+        311
+      ],
+      "sourcePaintBounds": [
+        1,
+        0,
+        336,
+        310
+      ],
+      "generatedTileBounds": [
+        66,
+        105,
+        441,
+        452
+      ],
+      "file": "vs/actor-parts/king-head-win.png",
+      "webp": "vs/actor-parts/king-head-win.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          0,
+          336,
+          310
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        193.6769,
+        295.235
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-win",
+      "side": "King"
+    },
+    {
+      "id": "king-head-loss",
+      "size": [
+        323,
+        310
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        322,
+        309
+      ],
+      "generatedTileBounds": [
+        80,
+        106,
+        443,
+        452
+      ],
+      "file": "vs/actor-parts/king-head-loss.png",
+      "webp": "vs/actor-parts/king-head-loss.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          322,
+          309
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        186.1834,
+        294.2857
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-loss",
+      "side": "King"
+    },
+    {
+      "id": "king-upper",
+      "size": [
+        227,
+        327
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        227,
+        327
+      ],
+      "generatedTileBounds": [
+        131,
+        89,
+        397,
+        467
+      ],
+      "file": "vs/actor-parts/king-upper.png",
+      "webp": "vs/actor-parts/king-upper.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          227,
+          327
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        90,
+        43
+      ],
+      "childJoint": [
+        145,
+        277
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "upper",
+      "side": "King"
+    },
+    {
+      "id": "king-forearm-left",
+      "size": [
+        319,
+        307
+      ],
+      "sourcePaintBounds": [
+        1,
+        0,
+        319,
+        307
+      ],
+      "generatedTileBounds": [
+        82,
+        100,
+        424,
+        414
+      ],
+      "file": "vs/actor-parts/king-forearm-left.png",
+      "webp": "vs/actor-parts/king-forearm-left.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          0,
+          319,
+          307
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        65,
+        33
+      ],
+      "childJoint": [
+        240,
+        225
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "forearm-left",
+      "side": "King"
+    },
+    {
+      "id": "king-forearm-right",
+      "size": [
+        319,
+        307
+      ],
+      "sourcePaintBounds": [
+        0,
+        1,
+        318,
+        306
+      ],
+      "generatedTileBounds": [
+        93,
+        100,
+        426,
+        416
+      ],
+      "file": "vs/actor-parts/king-forearm-right.png",
+      "webp": "vs/actor-parts/king-forearm-right.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          1,
+          318,
+          306
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        253,
+        33
+      ],
+      "childJoint": [
+        81,
+        225
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "forearm-right",
+      "side": "King"
+    },
+    {
+      "id": "king-tool",
+      "size": [
+        438,
+        188
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        438,
+        188
+      ],
+      "generatedTileBounds": [
+        48,
+        168,
+        460,
+        355
+      ],
+      "file": "vs/actor-parts/king-tool.png",
+      "webp": "vs/actor-parts/king-tool.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          438,
+          188
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        219.0,
+        26.196721311475407
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "tool",
+      "side": "King"
+    },
+    {
+      "id": "vice-torso",
+      "size": [
+        446,
+        391
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        446,
+        391
+      ],
+      "generatedTileBounds": [
+        32,
+        79,
+        512,
+        505
+      ],
+      "file": "vs/actor-parts/vice-torso.png",
+      "webp": "vs/actor-parts/vice-torso.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          446,
+          391
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        226.8229,
+        301.9604
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "torso",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-head-ready",
+      "size": [
+        294,
+        327
+      ],
+      "sourcePaintBounds": [
+        1,
+        0,
+        294,
+        327
+      ],
+      "generatedTileBounds": [
+        80,
+        89,
+        436,
+        488
+      ],
+      "file": "vs/actor-parts/vice-head-ready.png",
+      "webp": "vs/actor-parts/vice-head-ready.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          0,
+          294,
+          327
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        156.3545,
+        277.8171
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-ready",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-head-effort",
+      "size": [
+        296,
+        329
+      ],
+      "sourcePaintBounds": [
+        1,
+        0,
+        296,
+        329
+      ],
+      "generatedTileBounds": [
+        73,
+        90,
+        429,
+        487
+      ],
+      "file": "vs/actor-parts/vice-head-effort.png",
+      "webp": "vs/actor-parts/vice-head-effort.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          0,
+          296,
+          329
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        157.4182,
+        279.5163
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-effort",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-head-win",
+      "size": [
+        295,
+        326
+      ],
+      "sourcePaintBounds": [
+        0,
+        1,
+        295,
+        326
+      ],
+      "generatedTileBounds": [
+        82,
+        83,
+        441,
+        479
+      ],
+      "file": "vs/actor-parts/vice-head-win.png",
+      "webp": "vs/actor-parts/vice-head-win.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          1,
+          295,
+          326
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        156.8864,
+        276.9675
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-win",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-head-loss",
+      "size": [
+        294,
+        326
+      ],
+      "sourcePaintBounds": [
+        1,
+        1,
+        294,
+        326
+      ],
+      "generatedTileBounds": [
+        87,
+        83,
+        447,
+        483
+      ],
+      "file": "vs/actor-parts/vice-head-loss.png",
+      "webp": "vs/actor-parts/vice-head-loss.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          1,
+          294,
+          326
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        156.3545,
+        276.9675
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "head-loss",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-upper",
+      "size": [
+        226,
+        321
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        226,
+        320
+      ],
+      "generatedTileBounds": [
+        123,
+        98,
+        409,
+        487
+      ],
+      "file": "vs/actor-parts/vice-upper.png",
+      "webp": "vs/actor-parts/vice-upper.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          226,
+          320
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        104,
+        44
+      ],
+      "childJoint": [
+        150,
+        269
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "upper",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-forearm-left",
+      "size": [
+        319,
+        307
+      ],
+      "sourcePaintBounds": [
+        1,
+        0,
+        319,
+        307
+      ],
+      "generatedTileBounds": [
+        82,
+        87,
+        452,
+        431
+      ],
+      "file": "vs/actor-parts/vice-forearm-left.png",
+      "webp": "vs/actor-parts/vice-forearm-left.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          1,
+          0,
+          319,
+          307
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        65,
+        33
+      ],
+      "childJoint": [
+        240,
+        225
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "forearm-left",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-forearm-right",
+      "size": [
+        319,
+        307
+      ],
+      "sourcePaintBounds": [
+        0,
+        1,
+        318,
+        306
+      ],
+      "generatedTileBounds": [
+        78,
+        87,
+        445,
+        433
+      ],
+      "file": "vs/actor-parts/vice-forearm-right.png",
+      "webp": "vs/actor-parts/vice-forearm-right.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          1,
+          318,
+          306
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        253,
+        33
+      ],
+      "childJoint": [
+        81,
+        225
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "forearm-right",
+      "side": "Cop"
+    },
+    {
+      "id": "vice-tool",
+      "size": [
+        433,
+        166
+      ],
+      "sourcePaintBounds": [
+        0,
+        0,
+        433,
+        166
+      ],
+      "generatedTileBounds": [
+        29,
+        187,
+        477,
+        370
+      ],
+      "file": "vs/actor-parts/vice-tool.png",
+      "webp": "vs/actor-parts/vice-tool.webp",
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "nativePaintBounds": [
+          0,
+          0,
+          433,
+          166
+        ],
+        "painter": "unchanged production paintVsActor",
+        "authoringCanvas": [
+          512,
+          512
+        ]
+      },
+      "pivot": [
+        216.5,
+        37.067961165048544
+      ],
+      "role": "VS encounter registered joint drawing",
+      "part": "tool",
+      "side": "Cop"
+    },
+    {
+      "id": "king-win",
+      "file": "vs/actors/king-win.png",
+      "webp": "vs/actors/king-win.webp",
+      "size": [
+        2048,
+        2048
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "frameCount": 64,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 8,
+      "rows": 8,
+      "fps": 60,
+      "playback": "normalized existing encounter clock; not independent wall time",
+      "blendMode": "normal",
+      "uniqueFrames": 52,
+      "registration": {
+        "pivotSpace": "frame-local pixels",
+        "poseClock": "i/63 for i=0..63",
+        "productionPainterUnchanged": true,
+        "durationOwnedByHost": true
+      },
+      "role": "Live VS encounter atlas",
+      "colorSpace": "sRGB",
+      "alphaMode": "straight"
+    },
+    {
+      "id": "king-loss",
+      "file": "vs/actors/king-loss.png",
+      "webp": "vs/actors/king-loss.webp",
+      "size": [
+        2048,
+        2048
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "frameCount": 64,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 8,
+      "rows": 8,
+      "fps": 60,
+      "playback": "normalized existing encounter clock; not independent wall time",
+      "blendMode": "normal",
+      "uniqueFrames": 52,
+      "registration": {
+        "pivotSpace": "frame-local pixels",
+        "poseClock": "i/63 for i=0..63",
+        "productionPainterUnchanged": true,
+        "durationOwnedByHost": true
+      },
+      "role": "Live VS encounter atlas",
+      "colorSpace": "sRGB",
+      "alphaMode": "straight"
+    },
+    {
+      "id": "vice-win",
+      "file": "vs/actors/vice-win.png",
+      "webp": "vs/actors/vice-win.webp",
+      "size": [
+        2048,
+        2048
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "frameCount": 64,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 8,
+      "rows": 8,
+      "fps": 60,
+      "playback": "normalized existing encounter clock; not independent wall time",
+      "blendMode": "normal",
+      "uniqueFrames": 52,
+      "registration": {
+        "pivotSpace": "frame-local pixels",
+        "poseClock": "i/63 for i=0..63",
+        "productionPainterUnchanged": true,
+        "durationOwnedByHost": true
+      },
+      "role": "Live VS encounter atlas",
+      "colorSpace": "sRGB",
+      "alphaMode": "straight"
+    },
+    {
+      "id": "vice-loss",
+      "file": "vs/actors/vice-loss.png",
+      "webp": "vs/actors/vice-loss.webp",
+      "size": [
+        2048,
+        2048
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "frameCount": 64,
+      "frameSize": [
+        256,
+        256
+      ],
+      "columns": 8,
+      "rows": 8,
+      "fps": 60,
+      "playback": "normalized existing encounter clock; not independent wall time",
+      "blendMode": "normal",
+      "uniqueFrames": 52,
+      "registration": {
+        "pivotSpace": "frame-local pixels",
+        "poseClock": "i/63 for i=0..63",
+        "productionPainterUnchanged": true,
+        "durationOwnedByHost": true
+      },
+      "role": "Live VS encounter atlas",
+      "colorSpace": "sRGB",
+      "alphaMode": "straight"
+    },
+    {
+      "id": "boat-hull",
+      "file": "god/boat-hull.png",
+      "webp": "god/boat-hull.webp",
+      "runtime": "god/runtime/boat-hull.webp",
+      "size": [
+        1585,
+        992
+      ],
+      "runtimeSize": [
+        1585,
+        992
+      ],
+      "pivot": [
+        824.2,
+        734.08
+      ],
+      "pivotPixels": [
+        792.5,
+        496.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sourceAlphaBounds": [
+        155,
+        178,
+        1473,
+        954
+      ],
+      "generatedAlphaBounds": [
+        75,
+        85,
+        1566,
+        971
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "cockpitOcclusionPreserved": true,
+        "riderPosePlacement": {
+          "x": 453,
+          "y": -9,
+          "width": 554,
+          "height": 439
+        },
+        "gunwaleMaskNormalized": [
+          [
+            0.2,
+            0.41
+          ],
+          [
+            0.66,
+            0.355
+          ],
+          [
+            0.75,
+            0.44
+          ],
+          [
+            0.99,
+            0.77
+          ],
+          [
+            0.99,
+            1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0.42
+          ]
+        ]
+      },
+      "runtimePivot": [
+        824.2,
+        734.08
+      ],
+      "role": "God Mode full-window boat-card asset"
+    },
+    {
+      "id": "boat-rider",
+      "file": "god/boat-rider.png",
+      "webp": "god/boat-rider.webp",
+      "runtime": "god/runtime/boat-rider.webp",
+      "size": [
+        1586,
+        992
+      ],
+      "runtimeSize": [
+        1586,
+        992
+      ],
+      "pivot": [
+        701.0120000000001,
+        399.776
+      ],
+      "pivotPixels": [
+        793.0,
+        496.0
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sourceAlphaBounds": [
+        373,
+        78,
+        1233,
+        688
+      ],
+      "generatedAlphaBounds": [
+        129,
+        44,
+        1484,
+        992
+      ],
+      "registration": {
+        "nativeCanvasPreserved": true,
+        "use": "Fallback only; live three-pose atlas preferred."
+      },
+      "runtimePivot": [
+        701.0120000000001,
+        399.776
+      ],
+      "role": "God Mode full-window boat-card asset"
+    },
+    {
+      "id": "wake",
+      "file": "god/wake.png",
+      "webp": "god/wake.webp",
+      "runtime": "god/runtime/wake.webp",
+      "size": [
+        1774,
+        887
+      ],
+      "runtimeSize": [
+        1774,
+        887
+      ],
+      "pivot": [
+        1685.3,
+        620.9
+      ],
+      "pivotPixels": [
+        1685.3,
+        620.9
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "sourceAlphaBounds": [
+        4,
+        259,
+        1771,
+        831
+      ],
+      "generatedAlphaBounds": [
+        5,
+        240,
+        1774,
+        835
+      ],
+      "registration": "Native significant-alpha bounds preserved. Existing cockpit/wake pivot coordinates unchanged.",
+      "tintable": true,
+      "defaultTint": "#c9f7f6",
+      "runtimePivot": [
+        1685.3,
+        620.9
+      ],
+      "role": "God Mode full-window boat-card asset"
+    },
+    {
+      "id": "card-scene",
+      "file": "god/card-scene.png",
+      "webp": "god/card-scene.webp",
+      "runtime": "god/runtime/card-scene.webp",
+      "size": [
+        1619,
+        971
+      ],
+      "runtimeSize": [
+        1619,
+        971
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotPixels": [
+        809.5,
+        485.5
+      ],
+      "frameCount": 1,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "runtimePivot": [
+        0,
+        0
+      ],
+      "role": "God Mode full-window boat-card asset"
+    },
+    {
+      "id": "rider-poses",
+      "file": "god/rider-poses.png",
+      "webp": "god/rider-poses.webp",
+      "runtime": "god/runtime/rider-poses.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "runtimeSize": [
+        1536,
+        1024
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "pivotPixels": [
+        768.0,
+        512.0
+      ],
+      "frameCount": 3,
+      "fps": 0,
+      "blendMode": "normal",
+      "alphaMode": "straight",
+      "colorSpace": "sRGB",
+      "frameSize": [
+        512,
+        405
+      ],
+      "frames": [
+        {
+          "frame": [
+            0,
+            128,
+            512,
+            405
+          ],
+          "oldPaintBounds": [
+            25,
+            21,
+            512,
+            389
+          ],
+          "newPaintBoundsBeforeRegistration": [
+            12,
+            21,
+            512,
+            405
+          ]
+        },
+        {
+          "frame": [
+            512,
+            128,
+            512,
+            405
+          ],
+          "oldPaintBounds": [
+            0,
+            42,
+            509,
+            390
+          ],
+          "newPaintBoundsBeforeRegistration": [
+            0,
+            44,
+            512,
+            405
+          ]
+        },
+        {
+          "frame": [
+            1024,
+            128,
+            512,
+            405
+          ],
+          "oldPaintBounds": [
+            16,
+            25,
+            497,
+            390
+          ],
+          "newPaintBoundsBeforeRegistration": [
+            0,
+            24,
+            508,
+            405
+          ]
+        }
+      ],
+      "playback": "Existing godRiderPose beat selection:calm,acceleration-brace,braking-brace",
+      "nativeHullPlacement": {
+        "x": 453,
+        "y": -9,
+        "width": 554,
+        "height": 439
+      },
+      "registration": "Each pose fits its original cell paint bounds; canvas1536x1024; unused regions transparent.",
+      "runtimePivot": [
+        0,
+        0
+      ],
+      "role": "God Mode full-window boat-card asset"
+    }
+  ],
+  "quality": {
+    "pngFormat": "PNG-32 RGBA",
+    "runtimeMaxEdge": 2048,
+    "groupMasterException": "Single-reel VS master is 724x2172; its runtime WebP is683x2048. All production runtime textures are at most2048 per edge.",
+    "text": "No multiplier or WILD labels baked into group art.",
+    "exportMethod": "In-memory encode, write-all loop, fsync, atomic rename, byte match and full decode."
+  },
+  "motionValidation": {
+    "samples": 4004,
+    "maxBoneError": 9.947598300641403e-14,
+    "maxGripError": 0,
+    "method": "Unchanged production vsActorPoseAt/paintVsActor. New matte source parts only. No browser verification or award-math claim."
+  },
+  "limitations": [
+    "The confrontation atlases preserve the existing fixed-joint performance, holds, encounter timing and host clock; they are not new frame-by-frame animation.",
+    "Max uses registered layered art and three seated rider poses, not a fully articulated boat rig.",
+    "This category does not provide new feature entry/completion illustrations or result-title lettering; those remain owned by the surfaces and titles categories.",
+    "Seated-rider proof is a native-registration composite; runtime and phone/browser verification are handled by integration."
+  ]
+}
